@@ -8,6 +8,8 @@ public:
     virtual float Volume() = 0;
     virtual void Volume(float vol) = 0;
 
+
+
     virtual bool Muted() = 0; 
     virtual void Muted(bool mute) = 0;
 	virtual void ToggleMute() {

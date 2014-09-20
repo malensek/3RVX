@@ -1,82 +1,27 @@
 #pragma once
 
-#include <atlbase.h>
-#include <atlsync.h>
-#include <Endpointvolume.h>
-#include <Mmdeviceapi.h>
-
+class CoreAudioNotify;
+class CoreAudioVolume;
 #include "IVolume.h"
 
-class CoreAudio : IAudioEndpointVolumeCallback, IMMNotificationClient, IVolume {
+class CoreAudio : public IVolume {
 public:
-    CoreAudio(HWND hWnd):
-		m_notifyHwnd(hWnd),
-		m_refCount(1) {};
+    CoreAudio() : m_notify(NULL), m_volume(NULL) {};
+    ~CoreAudio();
 
-    HRESULT Init();
+    virtual bool Init();
 
-    float Volume();
-    void Volume(float vol);
+    virtual float Volume();
+    virtual void SetVolume(float vol);
 
-    bool Muted(); 
-    void Muted(bool mute);
+    virtual bool Muted(); 
+    virtual void SetMute(bool mute);
+    virtual void ToggleMute();
 
-    void ReattachDefaultDevice();
+    virtual void SetNotifyWnd(HWND hWnd);
+    virtual void DeviceChanged();
 
-	void Dispose();
-	IFACEMETHODIMP_(ULONG) AddRef();
-	IFACEMETHODIMP_(ULONG) Release();
-
-private:
-	~CoreAudio() {};
-	long m_refCount;
-	CCriticalSection m_critSect;
-
-	CComPtr<IMMDeviceEnumerator> m_devEnumerator;
-	CComPtr<IMMDevice> m_device;
-	CComPtr<IAudioEndpointVolume> m_volumeControl;
-
-	bool m_registeredNotifications;
-
-	HWND m_notifyHwnd;
-
-	HRESULT AttachDefaultDevice();
-	void DetachCurrentDevice();
-
-	/* IAudioEndpointVolumeCallback */
-	IFACEMETHODIMP OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify);
-
-	/* IMMNotificationClient */
-	IFACEMETHODIMP OnDefaultDeviceChanged(EDataFlow flow, ERole role, LPCWSTR pwstrDefaultDeviceId);
-
-	IFACEMETHODIMP OnDeviceStateChanged(LPCWSTR pwstrDeviceId, DWORD dwNewState) {
-		return S_OK;
-	}
-
-	IFACEMETHODIMP OnPropertyValueChanged(LPCWSTR pwstrDeviceId, const PROPERTYKEY key) {
-		return S_OK;
-	}
-
-	IFACEMETHODIMP OnDeviceAdded(LPCWSTR pwstrDeviceId) {
-		return S_OK;
-	}
-
-	IFACEMETHODIMP OnDeviceRemoved(LPCWSTR pwstrDeviceId) {
-		return S_OK;
-	}
-
-	IFACEMETHODIMP OnDeviceQueryRemove() {
-		return S_OK;
-	}
-
-	IFACEMETHODIMP OnDeviceQueryRemoveFailed() {
-		return S_OK;
-	}
-
-	IFACEMETHODIMP OnDeviceRemovePending() {
-		return S_OK;
-	}
-
-	/* IUnknown */
-	IFACEMETHODIMP QueryInterface(const IID& iid, void** ppUnk);
+protected:
+    CoreAudioNotify *m_notify;
+    CoreAudioVolume *m_volume;
 };

@@ -2,10 +2,9 @@
 #include "Controllers\Volume\IVolume.h"
 #include "Controllers\Volume\CoreAudio.h"
 
-int APIENTRY 
-wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, 
-          LPTSTR lpCmdLine, int nCmdShow)
-{
+int APIENTRY
+wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+LPTSTR lpCmdLine, int nCmdShow) {
     using namespace Gdiplus;
 
     hInst = hInstance;
@@ -14,87 +13,83 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
     mainWnd = CreateMainWnd(hInstance);
-    if(mainWnd == NULL)
+    if (mainWnd == NULL)
         return EXIT_FAILURE;
 
     AllocConsole();
-	FILE *in, *out, *err;
-	freopen_s(&in, "CONIN$", "r", stdin);
-	freopen_s(&out, "CONOUT$", "w", stdout);
-	freopen_s(&err, "CONOUT$", "w", stderr);
+    FILE *in, *out, *err;
+    freopen_s(&in, "CONIN$", "r", stdin);
+    freopen_s(&out, "CONOUT$", "w", stdout);
+    freopen_s(&err, "CONOUT$", "w", stderr);
 
-	printf("Starting...\n");
+    printf("Starting...\n");
 
-    HRESULT hr = CoInitializeEx(NULL, 
+    HRESULT hr = CoInitializeEx(NULL,
         COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
     /* Tell the program to initialize */
     PostMessage(mainWnd, WM_3RVX_CONTROL, MSG_LOAD, NULL);
 
-	/* Start the event loop */
-	MSG msg;
-	while (GetMessage(&msg, NULL, 0, 0)) {
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
+    /* Start the event loop */
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
 
     GdiplusShutdown(gdiplusToken);
 
-	return (int) msg.wParam;
+    return (int)msg.wParam;
 }
 
-void Init()
-{
-	ca = new CoreAudio(mainWnd);
-	ca->Init();
+void Init() {
+    ca = new CoreAudio(mainWnd);
+    ca->Init();
 }
 
-HWND CreateMainWnd(HINSTANCE hInstance)
-{
-	WNDCLASSEX wcex;
+HWND CreateMainWnd(HINSTANCE hInstance) {
+    WNDCLASSEX wcex;
 
-	wcex.cbSize         = sizeof(WNDCLASSEX);
-	wcex.style			= NULL;
-	wcex.lpfnWndProc	= WndProc;
-	wcex.cbClsExtra		= NULL;
-	wcex.cbWndExtra		= NULL;
-	wcex.hInstance		= hInstance;
-	wcex.hIcon			= LoadIcon(NULL, IDI_APPLICATION);
-	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
-	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
-	wcex.lpszMenuName	= NULL;
-	wcex.lpszClassName	= L"3RVX";
-	wcex.hIconSm		= LoadIcon(NULL, IDI_APPLICATION);
+    wcex.cbSize = sizeof(WNDCLASSEX);
+    wcex.style = NULL;
+    wcex.lpfnWndProc = WndProc;
+    wcex.cbClsExtra = NULL;
+    wcex.cbWndExtra = NULL;
+    wcex.hInstance = hInstance;
+    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wcex.lpszMenuName = NULL;
+    wcex.lpszClassName = L"3RVX";
+    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
-	if(!RegisterClassEx(&wcex))
-	{
-		return NULL;
-	}
+    if (!RegisterClassEx(&wcex)) {
+        return NULL;
+    }
 
-	HWND hWnd = CreateWindowEx(
-		NULL,
-		L"3RVX", L"3RVX",
-		NULL, NULL, NULL, //your boat, gently down the stream
+    HWND hWnd = CreateWindowEx(
+        NULL,
+        L"3RVX", L"3RVX",
+        NULL, NULL, NULL, //your boat, gently down the stream
         NULL, NULL, HWND_MESSAGE, NULL, hInstance, NULL);
 
-	return hWnd;
+    return hWnd;
 }
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	if (message == MSG_VOLCHNG) {
-		printf("Volume level: %.0f\n", ca->Volume() * 100.0f);
-	}
+LRESULT CALLBACK WndProc(
+    HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
-	if (message == MSG_DEVCHNG) {
-		printf("Device change detected.\n");
-		ca->ReattachDefaultDevice();
-	}
+    if (message == MSG_VOLCHNG) {
+        printf("Volume level: %.0f\n", ca->Volume() * 100.0f);
+    }
 
-    if(message == WM_3RVX_CONTROL)
-    {
-        switch(wParam)
-        {
+    if (message == MSG_DEVCHNG) {
+        printf("Device change detected.\n");
+        ca->ReattachDefaultDevice();
+    }
+
+    if (message == WM_3RVX_CONTROL) {
+        switch (wParam) {
         case MSG_LOAD:
             Init();
             break;

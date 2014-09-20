@@ -1,6 +1,7 @@
 ﻿#include "3RVX.h"
 #include "Controllers\Volume\IVolume.h"
 #include "Controllers\Volume\CoreAudio.h"
+#include "LayeredWnd\LayeredWnd.h"
 
 int APIENTRY
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -45,6 +46,15 @@ LPTSTR lpCmdLine, int nCmdShow) {
 void Init() {
     ca = new CoreAudio(mainWnd);
     ca->Init();
+
+    /* Show a layered window */
+    LayeredWnd *lw = new LayeredWnd(hInst, L"testing", L"test test");
+    lw->Init();
+    std::wstring filename(L"m.gif");
+    Gdiplus::Bitmap *buff = Gdiplus::Bitmap::FromFile(filename.c_str(), false);
+    printf("Last status: %d\n", buff->GetLastStatus());
+    lw->Image(buff);
+    lw->Show();
 }
 
 HWND CreateMainWnd(HINSTANCE hInstance) {

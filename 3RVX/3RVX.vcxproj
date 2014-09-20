@@ -70,15 +70,11 @@
   <ItemGroup>
     <ClInclude Include="3RVX.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
-    <ClInclude Include="Controllers\Volume\CoreAudioNotify.h" />
-    <ClInclude Include="Controllers\Volume\CoreAudioVolume.h" />
     <ClInclude Include="Controllers\Volume\IVolume.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
-    <ClCompile Include="Controllers\Volume\CoreAudioNotify.cpp" />
-    <ClCompile Include="Controllers\Volume\CoreAudioVolume.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

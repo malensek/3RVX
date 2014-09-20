@@ -9,6 +9,8 @@
 #include <string>
 #include <hash_map>
 
+#include "Controllers\Volume\CoreAudio.h"
+
 struct HotkeyData
 {
     std::wstring handler;
@@ -31,6 +33,7 @@ HINSTANCE        hInst;
 HWND             mainWnd;
 ULONG_PTR        gdiplusToken;
 
+CoreAudio *ca;
 
 // Message-related ----------------
 static const UINT WM_3RVX_CONTROL = RegisterWindowMessage(L"WM_3RVX_CONTROL");

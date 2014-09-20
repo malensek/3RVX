@@ -1,4 +1,6 @@
 ﻿#include "3RVX.h"
+#include "Controllers\Volume\IVolume.h"
+#include "Controllers\Volume\CoreAudio.h"
 
 int APIENTRY 
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, 
@@ -21,7 +23,7 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	freopen_s(&out, "CONOUT$", "w", stdout);
 	freopen_s(&err, "CONOUT$", "w", stderr);
 
-	printf("Starting up");
+	printf("Starting...\n");
 
     HRESULT hr = CoInitializeEx(NULL, 
         COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -43,7 +45,8 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 void Init()
 {
-
+	ca = new CoreAudio(mainWnd);
+	ca->Init();
 }
 
 HWND CreateMainWnd(HINSTANCE hInstance)
@@ -79,6 +82,15 @@ HWND CreateMainWnd(HINSTANCE hInstance)
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	if (message == MSG_VOLCHNG) {
+		printf("Volume level: %.0f\n", ca->Volume() * 100.0f);
+	}
+
+	if (message == MSG_DEVCHNG) {
+		printf("Device change detected.\n");
+		ca->ReattachDefaultDevice();
+	}
+
     if(message == WM_3RVX_CONTROL)
     {
         switch(wParam)

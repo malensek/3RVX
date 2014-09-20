@@ -1,5 +1,4 @@
-#ifndef COREAUDIO_H
-#define COREAUDIO_H
+#pragma once
 
 class CoreAudioNotify;
 class CoreAudioVolume;
@@ -26,5 +25,3 @@ protected:
     CoreAudioNotify *m_notify;
     CoreAudioVolume *m_volume;
 };
-
-#endif /* COREAUDIO_H */

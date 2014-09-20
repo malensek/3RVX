@@ -1,5 +1,4 @@
-#ifndef IIIRVX_H
-#define IIIRVX_H
+#pragma once
 
 #include <windows.h>
 #include <gdiplus.h>
@@ -36,5 +35,3 @@ ULONG_PTR        gdiplusToken;
 // Message-related ----------------
 static const UINT WM_3RVX_CONTROL = RegisterWindowMessage(L"WM_3RVX_CONTROL");
 #define MSG_LOAD 100
-
-#endif

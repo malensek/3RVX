@@ -1,6 +1,4 @@
-#ifndef IVOLUME_H
-#define IVOLUME_H
-
+#pragma once
 #include "Windows.h"
 
 class IVolume {
@@ -15,5 +13,3 @@ public:
 
     virtual void SetNotifyWnd(HWND hWnd) = 0;
 };
-
-#endif /* IVOLUME_H */

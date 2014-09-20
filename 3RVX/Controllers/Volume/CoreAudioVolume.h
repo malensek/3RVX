@@ -1,6 +1,4 @@
-#ifndef COREAUDIOVOLUME_H
-#define COREAUDIOVOLUME_H
-
+#pragma once
 #include <EndpointVolume.h>
 
 class CoreAudioVolume {
@@ -18,5 +16,3 @@ public:
 private:
     IAudioEndpointVolume *m_epVol;
 };
-
-#endif /* COREAUDIOVOLUME_H */

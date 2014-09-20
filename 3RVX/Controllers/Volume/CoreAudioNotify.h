@@ -6,8 +6,7 @@
 // Based on sample code provided in the MS Windows SDK 7.0.
 // ------------------------------------------------------------------------- //
 
-#ifndef COREAUDIONOTIFY_H
-#define COREAUDIONOTIFY_H
+#pragma once
 
 #include <Endpointvolume.h>
 #include <Mmdeviceapi.h>
@@ -80,5 +79,3 @@ private:
     // IUnknown
     IFACEMETHODIMP QueryInterface(const IID& iid, void** ppUnk);
 };
-
-#endif /* COREAUDIONOTIFY_H */

@@ -24,12 +24,18 @@
     <ClInclude Include="3RVX.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LayeredWnd\LayeredWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="3RVX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LayeredWnd\LayeredWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

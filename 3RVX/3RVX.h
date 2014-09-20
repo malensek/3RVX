@@ -3,38 +3,22 @@
 #include <windows.h>
 #include <gdiplus.h>
 #pragma comment(lib, "gdiplus.lib")
-
-#include <iostream>
-#include <list>
 #include <string>
-#include <hash_map>
 
 #include "Controllers\Volume\CoreAudio.h"
 
-struct HotkeyData
-{
-    std::wstring handler;
-    int action;
-    std::wstring arg;
-};
+static const UINT WM_3RVX_CONTROL = RegisterWindowMessage(L"WM_3RVX_CONTROL");
+#define MSG_LOAD WM_APP + 100
 
-// Forward Declarations -----------
-void Init();
+HINSTANCE hInst;
+ULONG_PTR gdiplusToken;
 
+HWND mainWnd;
 HWND CreateMainWnd(HINSTANCE hInstance);
-HHOOK CreateCbtHook();
 
 LRESULT CALLBACK CbtProc(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-
-// Globals ------------------------
-HINSTANCE        hInst;
-HWND             mainWnd;
-ULONG_PTR        gdiplusToken;
-
 CoreAudio *ca;
 
-// Message-related ----------------
-static const UINT WM_3RVX_CONTROL = RegisterWindowMessage(L"WM_3RVX_CONTROL");
-#define MSG_LOAD 100
+void Init();

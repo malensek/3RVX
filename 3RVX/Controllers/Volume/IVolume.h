@@ -1,15 +1,16 @@
 #pragma once
-#include "Windows.h"
+
+#define MSG_VOLCHNG WM_APP + 1080
+#define MSG_DEVCHNG WM_APP + 1081
 
 class IVolume {
 public:
-    virtual bool Init() = 0;
     virtual float Volume() = 0;
-    virtual void SetVolume(float vol) = 0;
+    virtual void Volume(float vol) = 0;
 
     virtual bool Muted() = 0; 
-    virtual void SetMute(bool mute) = 0;
-    virtual void ToggleMute() = 0;
-
-    virtual void SetNotifyWnd(HWND hWnd) = 0;
+    virtual void Muted(bool mute) = 0;
+	virtual void ToggleMute() {
+		(Muted() == true) ? Muted(false) : Muted(true);
+	}
 };

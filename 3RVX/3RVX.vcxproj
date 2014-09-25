@@ -71,11 +71,13 @@
     <ClInclude Include="3RVX.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\IVolume.h" />
+    <ClInclude Include="HotkeyManager.h" />
     <ClInclude Include="LayeredWnd\LayeredWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
+    <ClCompile Include="HotkeyManager.cpp" />
     <ClCompile Include="LayeredWnd\LayeredWnd.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -55,6 +55,11 @@ void Init() {
     printf("Last status: %d\n", buff->GetLastStatus());
     lw->Image(buff);
     lw->Show();
+
+
+    HotkeyManager *hkManager = HotkeyManager::Instance();
+    hkManager->Register(mainWnd, HKM_MOD_WIN + VK_BACK);
+    hkManager->Register(mainWnd, HKM_MOD_CONTROL + HKM_MOUSE_WHEEL_UP);
 }
 
 HWND CreateMainWnd(HINSTANCE hInstance) {
@@ -108,6 +113,10 @@ LRESULT CALLBACK WndProc(
             printf("%x\n", lParam);
             break;
         }
+    }
+
+    if (message == WM_HOTKEY) {
+        printf("Hotkey: %d\n", (int) wParam);
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);

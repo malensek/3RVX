@@ -6,6 +6,7 @@
 #include <string>
 
 #include "Controllers\Volume\CoreAudio.h"
+#include "HotkeyManager.h"
 
 static const UINT WM_3RVX_CONTROL = RegisterWindowMessage(L"WM_3RVX_CONTROL");
 #define MSG_LOAD WM_APP + 100

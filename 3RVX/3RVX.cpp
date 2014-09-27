@@ -2,6 +2,7 @@
 #include "Controllers\Volume\IVolume.h"
 #include "Controllers\Volume\CoreAudio.h"
 #include "LayeredWnd\LayeredWnd.h"
+#include <Wtsapi32.h>
 
 int APIENTRY
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -56,10 +57,11 @@ void Init() {
     lw->Image(buff);
     lw->Show();
 
+    WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
 
     HotkeyManager *hkManager = HotkeyManager::Instance();
     hkManager->Register(mainWnd, HKM_MOD_WIN + VK_BACK);
-    hkManager->Register(mainWnd, HKM_MOD_CONTROL + HKM_MOUSE_WHEEL_UP);
+    hkManager->Register(mainWnd, HKM_MOD_WIN + HKM_MOUSE_WHUP);
 }
 
 HWND CreateMainWnd(HINSTANCE hInstance) {
@@ -117,6 +119,10 @@ LRESULT CALLBACK WndProc(
 
     if (message == WM_HOTKEY) {
         printf("Hotkey: %d\n", (int) wParam);
+    }
+
+    if (message == WM_WTSSESSION_CHANGE) {
+        printf("session change\n");
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);

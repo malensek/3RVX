@@ -74,12 +74,16 @@
     <ClInclude Include="Controllers\Volume\IVolume.h" />
     <ClInclude Include="HotkeyManager.h" />
     <ClInclude Include="LayeredWnd\LayeredWnd.h" />
+    <ClInclude Include="MeterWnd\Meter.h" />
+    <ClInclude Include="MeterWnd\Meters\HorizontalBar.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="HotkeyManager.cpp" />
     <ClCompile Include="LayeredWnd\LayeredWnd.cpp" />
+    <ClCompile Include="MeterWnd\Meter.cpp" />
+    <ClCompile Include="MeterWnd\Meters\HorizontalBar.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,6 +2,10 @@
 #include "Controllers\Volume\IVolume.h"
 #include "Controllers\Volume\CoreAudio.h"
 #include "LayeredWnd\LayeredWnd.h"
+#include "MeterWnd\Meters\HorizontalBar.h"
+#include "MeterWnd\Meters\HorizontalEndcap.h"
+#include "MeterWnd\MeterWnd.h"
+#include "MeterWnd\Meter.h"
 #include <Wtsapi32.h>
 
 int APIENTRY
@@ -40,7 +44,6 @@ LPTSTR lpCmdLine, int nCmdShow) {
     }
 
     GdiplusShutdown(gdiplusToken);
-
     return (int)msg.wParam;
 }
 
@@ -48,14 +51,19 @@ void Init() {
     ca = new CoreAudio(mainWnd);
     ca->Init();
 
-    /* Show a layered window */
-    LayeredWnd *lw = new LayeredWnd(hInst, L"testing", L"test test");
-    lw->Init();
-    std::wstring filename(L"m.gif");
-    Gdiplus::Bitmap *buff = Gdiplus::Bitmap::FromFile(filename.c_str(), false);
-    printf("Last status: %d\n", buff->GetLastStatus());
-    lw->Image(buff);
-    lw->Show();
+    Meter *m = new HorizontalEndcap();
+    std::wstring meterbmp(L"meter.png");
+    m->SetBitmap(Gdiplus::Bitmap::FromFile(meterbmp.c_str(), false));
+    m->Init();
+    m->SetLocation(71, 29);
+    m->SetUnits(28);
+    MeterWnd *mW = new MeterWnd(hInst, L"testtest", L"what what");
+    mW->AddMeter(m);
+    std::wstring bgbmp(L"bg.png");
+    mW->SetBackgroundImage(Gdiplus::Bitmap::FromFile(bgbmp.c_str(), true));
+    mW->SetMeters(0.35);
+    mW->Update();
+    mW->Show();
 
     WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
 

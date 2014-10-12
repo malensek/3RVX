@@ -125,7 +125,8 @@ void LayeredWnd::UpdateLocation() {
 
 
 LRESULT CALLBACK
-LayeredWnd::StaticWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+LayeredWnd::StaticWndProc(
+        HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     LayeredWnd* lWnd;
 
     if (message == WM_CREATE) {

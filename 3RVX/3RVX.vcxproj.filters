@@ -36,6 +36,12 @@
     <ClInclude Include="MeterWnd\Meters\HorizontalBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MeterWnd\MeterWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeterWnd\Meters\HorizontalEndcap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -54,6 +60,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\HorizontalBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeterWnd\MeterWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeterWnd\Meters\HorizontalEndcap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

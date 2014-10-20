@@ -1,4 +1,5 @@
 #include "CoreAudio.h"
+#include "Functiondiscoverykeys_devpkey.h"
 
 HRESULT CoreAudio::Init() {
     HRESULT hr;
@@ -78,6 +79,28 @@ HRESULT CoreAudio::OnDefaultDeviceChanged(
 void CoreAudio::ReattachDefaultDevice() {
     DetachCurrentDevice();
     AttachDefaultDevice();
+}
+
+std::wstring CoreAudio::DeviceName() {
+    HRESULT hr;
+    LPWSTR devId;
+
+    m_device->GetId(&devId);
+
+    IPropertyStore *props = NULL;
+    hr = m_device->OpenPropertyStore(STGM_READ, &props);
+    PROPVARIANT pvName;
+    PropVariantInit(&pvName);
+    props->GetValue(PKEY_Device_FriendlyName, &pvName);
+
+    std::wstring str(pvName.pwszVal);
+    //wprintf(L"Attaching to audio device: [%s]\n", pvName.pwszVal);
+    //wprintf(L"(%s)\n", devId);
+    CoTaskMemFree(devId);
+    PropVariantClear(&pvName);
+    props->Release();
+
+    return str;
 }
 
 float CoreAudio::Volume() {

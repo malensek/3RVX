@@ -4,6 +4,7 @@
 #include <atlsync.h>
 #include <Endpointvolume.h>
 #include <Mmdeviceapi.h>
+#include <string>
 
 #include "IVolume.h"
 
@@ -23,6 +24,7 @@ public:
     void Muted(bool mute);
 
     void ReattachDefaultDevice();
+    std::wstring DeviceName();
 
     void Dispose();
     IFACEMETHODIMP_(ULONG) AddRef();

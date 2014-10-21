@@ -24,8 +24,7 @@ public:
         (HINSTANCE hInstance, LPCWSTR className, LPCWSTR title);
 
 	void SetBackgroundImage(Gdiplus::Bitmap *backgroundImage);
-	void SetProperties();
-    void SetMeters(float value);
+    void MeterLevels(float value);
     void AddMeter(Meter *meter);
 
 protected:

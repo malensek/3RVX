@@ -100,19 +100,19 @@ void MeterWnd::Hide()
     */
     m_lWnd.Hide();
 }
+
 LRESULT MeterWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
     return DefWindowProc(m_hWnd, message, wParam, lParam);
 }
 
-
-// - SETTERS --------------------------------------------------------------- //
-
 void MeterWnd::SetBackgroundImage(Gdiplus::Bitmap *backgroundImage)
 {
 	using namespace Gdiplus;
 
-    if (m_wndImg) { delete m_wndImg; }
+    if (m_wndImg) {
+        delete m_wndImg;
+    }
 
 	m_bgImg = backgroundImage;
 	m_wndImg = new Bitmap(
@@ -121,9 +121,9 @@ void MeterWnd::SetBackgroundImage(Gdiplus::Bitmap *backgroundImage)
 		PixelFormat32bppARGB);
 }
 
-void MeterWnd::SetMeters(float value)
+void MeterWnd::MeterLevels(float value)
 {
     for (Meter *meter : m_meters) {
-        meter->SetValue(value);
+        meter->Value(value);
     }
 }

@@ -1,18 +1,19 @@
 #include "HorizontalBar.h"
 
 void HorizontalBar::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
-    int units = CalcUnits();
-    int pixelsPerUnit = Width() / m_units;
-    int width = pixelsPerUnit * units;
+    int currentUnits = CalcUnits();
+    int pixelsPerUnit = Width() / _units;
+    int width = pixelsPerUnit * currentUnits;
 
-    if (m_reversed)
+    if (_reversed) {
         width = Width() - width;
+    }
 
     Gdiplus::Rect drawRect(X(), Y(), width, Height());
 
-    graphics->DrawImage(m_meterBitmap, drawRect,
+    graphics->DrawImage(_bitmap, drawRect,
         0, 0, width, Height(), Gdiplus::UnitPixel);
 
-    m_lastValue = Value();
-    m_lastUnits = units;
+    _lastValue = Value();
+    _lastUnits = currentUnits;
 }

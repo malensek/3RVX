@@ -51,9 +51,6 @@
     <ClInclude Include="MeterWnd\Meters\MeterTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeterWnd\MeterGeometry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TinyXml2\tinyxml2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -84,9 +81,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MeterWnd\MeterGeometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VolumeOSD.cpp">

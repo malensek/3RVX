@@ -10,6 +10,7 @@ public:
     };
 
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics);
+
 private:
     bool _reversed = false;
 };

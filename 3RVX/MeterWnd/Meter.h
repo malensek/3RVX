@@ -6,7 +6,6 @@
 #include <string>
 
 #include "../Logger.h"
-#include "MeterGeometry.h"
 
 class Meter {
 public:

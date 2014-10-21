@@ -1,83 +1,48 @@
 #include "Meter.h"
 
-void Meter::Init() {}
-
 float Meter::Value() {
-    return m_meterValue;
+    return _value;
 }
 
-void Meter::SetValue(float value) {
+void Meter::Value(float value) {
     if (value > 1.0) { value = 1.0; }
     if (value < 0) { value = 0; }
 
-    m_meterValue = value;
-}
-
-void Meter::SetLocation(int x, int y) {
-    m_rect.X = x;
-    m_rect.Y = y;
-}
-
-void Meter::SetSize(int width, int height) {
-    m_rect.Width = width;
-    m_rect.Height = height;
-}
-
-void Meter::SetReverse(bool reversed) {
-    m_reversed = reversed;
-}
-
-bool Meter::Reversed() {
-    return m_reversed;
-}
-
-void Meter::SetUnits(int units) {
-    m_units = units;
+    _value = value;
 }
 
 int Meter::Units() {
-    return m_units;
+    return _units;
 }
 
-Gdiplus::Rect Meter::Rect() {
-    return m_rect;
+Gdiplus::Rect Meter::Rect() const {
+    return _rect;
 }
 
-int Meter::X() {
-    return m_rect.X;
+int Meter::X() const {
+    return _rect.X;
 }
 
-int Meter::Y() {
-    return m_rect.Y;
+int Meter::Y() const {
+    return _rect.Y;
 }
 
-int Meter::Width() {
-    return m_rect.Width;
+int Meter::Width() const {
+    return _rect.Width;
 }
 
-int Meter::Height() {
-    return m_rect.Height;
-}
-
-Gdiplus::Bitmap *Meter::Bitmap() {
-    return m_meterBitmap;
-}
-
-void Meter::SetBitmap(Gdiplus::Bitmap *meterBitmap) {
-    m_meterBitmap = meterBitmap;
-
-    m_rect.Width = meterBitmap->GetWidth();
-    m_rect.Height = meterBitmap->GetHeight();
+int Meter::Height() const {
+    return _rect.Height;
 }
 
 bool Meter::Dirty() {
     /* Not dirty if the meter's value is unchanged */
-    if (Value() == m_lastValue) {
+    if (Value() == _lastValue) {
         return false;
     }
 
     /* Not dirty if the change in value won't affect the meter graphically */
-    if (CalcUnits() == m_lastUnits) {
+    if (CalcUnits() == _lastUnits) {
         return false;
     }
 
@@ -85,5 +50,5 @@ bool Meter::Dirty() {
 }
 
 int Meter::CalcUnits() {
-    return (int) (m_meterValue * (float) m_units + 0.5);
+    return (int) (Value() * (float) _units + 0.5);
 }

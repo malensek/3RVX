@@ -7,6 +7,7 @@
 
 #include "Controllers\Volume\CoreAudio.h"
 #include "HotkeyManager.h"
+#include "MeterWnd\MeterWnd.h"
 
 static const UINT WM_3RVX_CONTROL = RegisterWindowMessage(L"WM_3RVX_CONTROL");
 #define MSG_LOAD WM_APP + 100
@@ -21,5 +22,6 @@ LRESULT CALLBACK CbtProc(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 CoreAudio *ca;
+MeterWnd *mW;
 
 void Init();

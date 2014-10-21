@@ -99,8 +99,6 @@ std::wstring CoreAudio::DeviceName() {
     props->GetValue(PKEY_Device_FriendlyName, &pvName);
 
     std::wstring str(pvName.pwszVal);
-    //wprintf(L"Attaching to audio device: [%s]\n", pvName.pwszVal);
-    //wprintf(L"(%s)\n", devId);
     CoTaskMemFree(devId);
     PropVariantClear(&pvName);
     props->Release();

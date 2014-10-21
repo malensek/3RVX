@@ -1,5 +1,6 @@
 #include "CoreAudio.h"
 #include "Functiondiscoverykeys_devpkey.h"
+#include "../../Logger.h"
 
 HRESULT CoreAudio::Init() {
     HRESULT hr;
@@ -32,14 +33,14 @@ HRESULT CoreAudio::AttachDefaultDevice() {
         hr = m_device->Activate(__uuidof(m_volumeControl),
             CLSCTX_INPROC_SERVER, NULL, (void**)&m_volumeControl);
 
-        wprintf(L"%d Attached to audio device: [%s]\n", __LINE__, DeviceName());
+        CLOG(L"Attached to audio device: [%s]", DeviceName().c_str());
 
         if (SUCCEEDED(hr)) {
             hr = m_volumeControl->RegisterControlChangeNotify(this);
             m_registeredNotifications = SUCCEEDED(hr);
         }
     } else {
-        wprintf(L"Failed to find default audio device!\n");
+        CLOG(L"Failed to find default audio device!");
     }
 
     m_critSect.Leave();

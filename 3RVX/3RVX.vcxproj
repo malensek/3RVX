@@ -79,6 +79,7 @@
     <ClInclude Include="MeterWnd\Meter.h" />
     <ClInclude Include="MeterWnd\Meters\HorizontalBar.h" />
     <ClInclude Include="MeterWnd\Meters\HorizontalEndcap.h" />
+    <ClInclude Include="MeterWnd\Meters\HorizontalTile.h" />
     <ClInclude Include="MeterWnd\Meters\MeterTypes.h" />
     <ClInclude Include="MeterWnd\MeterWnd.h" />
     <ClInclude Include="TinyXml2\tinyxml2.h" />
@@ -93,6 +94,7 @@
     <ClCompile Include="MeterWnd\Meter.cpp" />
     <ClCompile Include="MeterWnd\Meters\HorizontalBar.cpp" />
     <ClCompile Include="MeterWnd\Meters\HorizontalEndcap.cpp" />
+    <ClCompile Include="MeterWnd\Meters\HorizontalTile.cpp" />
     <ClCompile Include="MeterWnd\MeterWnd.cpp" />
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="VolumeOSD.cpp" />

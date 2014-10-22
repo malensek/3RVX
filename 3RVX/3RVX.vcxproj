@@ -82,6 +82,7 @@
     <ClInclude Include="MeterWnd\Meters\HorizontalTile.h" />
     <ClInclude Include="MeterWnd\Meters\MeterTypes.h" />
     <ClInclude Include="MeterWnd\MeterWnd.h" />
+    <ClInclude Include="Skin.h" />
     <ClInclude Include="TinyXml2\tinyxml2.h" />
     <ClInclude Include="VolumeOSD.h" />
   </ItemGroup>
@@ -96,11 +97,15 @@
     <ClCompile Include="MeterWnd\Meters\HorizontalEndcap.cpp" />
     <ClCompile Include="MeterWnd\Meters\HorizontalTile.cpp" />
     <ClCompile Include="MeterWnd\MeterWnd.cpp" />
+    <ClCompile Include="Skin.cpp" />
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="VolumeOSD.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="skin.xml" />
+    <Xml Include="skin.xml">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </DeploymentContent>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

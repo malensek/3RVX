@@ -19,7 +19,9 @@ LPTSTR lpCmdLine, int nCmdShow) {
     GdiplusStartupInput gdiplusStartupInput;
     GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
+#ifdef _DEBUG
     Logger::OpenConsole();
+#endif
 
     QCLOG(L"  _____ ______     ____  _______ ");
     QCLOG(L" |___ /|  _ \\ \\   / /\\ \\/ /___ / ");

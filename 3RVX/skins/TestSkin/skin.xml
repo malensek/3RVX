@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<skin>
+  <info>
+    <author>Schrödinger's Cat</author>
+    <website>www.test.com</website>
+  </info>
+
+  <osds>
+    <volume background="OSD.png">
+      <meter type="HorizontalEndcap" image="OSD/meter.png"
+             units="28" x="71" y="29"/>
+
+      <meter type="Text" format="[[PERC]]%" units="20"
+             font="Tahoma" size="13" style="Regular" color="FFFFFF"
+             alpha="180" align= "right" x="367" y="25"
+             boxWidth="40" boxHeight="23"/>
+
+      <meter type="bitstrip" image="OSD/vstrip.png" units="4" x="37" y="30"/>
+
+      <meter type="HorizontalTile" image="OSD/tile.png"
+             x="20" y="2" units="16"/>
+
+      <meter type="verticalTile" image="OSD/tile.png" x="0" y="0" units="5"/>      
+    </volume>
+
+    <mute background="OSD/mute.png"/>
+
+    <brightness background="OSD/brightness_back.png">
+      <meter type="HorizontalBar" image="OSD/meter.png" units="16"
+             x="33" y="165"/>
+    </brightness>
+  </osds>
+
+  <controller>
+    <slider type="vertical" x="26" y="20" width="17" height= "98" />
+    <muteButton x="5" y="5"/>
+  </controller>
+</skin>

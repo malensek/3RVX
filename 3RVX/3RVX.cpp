@@ -87,6 +87,7 @@ void Init() {
 
     Skin s(L"TestSkin");
     Gdiplus::Bitmap *bg = s.BackgroundImage("volume");
+    s.Meters("volume");
 
 }
 

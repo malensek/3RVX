@@ -9,6 +9,7 @@
 #include "VolumeOSD.h"
 #include <Wtsapi32.h>
 #include "Logger.h"
+#include "Skin.h"
 
 int APIENTRY
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -60,7 +61,7 @@ LPTSTR lpCmdLine, int nCmdShow) {
 }
 
 void Init() {
-    CLOG(L"Starting initialization.");
+    CLOG(L"Initializing...");
     ca = new CoreAudio(mainWnd);
     ca->Init();
     float v = ca->Volume();
@@ -74,14 +75,19 @@ void Init() {
     mW->Update();
     mW->Show();
 
-    VolumeOSD *vosd = new VolumeOSD(hInst);
-    vosd->LoadSkin();
+    //VolumeOSD *vosd = new VolumeOSD(hInst);
+    //vosd->LoadSkin();
 
     WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
 
     HotkeyManager *hkManager = HotkeyManager::Instance();
     hkManager->Register(mainWnd, HKM_MOD_WIN + VK_BACK);
     hkManager->Register(mainWnd, HKM_MOD_WIN + HKM_MOUSE_WHUP);
+
+
+    Skin s(L"TestSkin");
+    Gdiplus::Bitmap *bg = s.BackgroundImage("volume");
+
 }
 
 HWND CreateMainWnd(HINSTANCE hInstance) {

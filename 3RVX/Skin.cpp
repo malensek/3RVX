@@ -1,21 +1,46 @@
 #include "Skin.h"
 
-Gdiplus::Bitmap *Skin::BackgroundImage(char *osdName) {
-    tinyxml2::XMLElement *osd = OSDElement(osdName);
+#include <algorithm>
+#include "MeterWnd/Meters/MeterTypes.h"
+
+Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
+    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
     const char *bgFile = osd->Attribute("background");
     std::wstring wBgFile = _skinDir + L"\\" + Widen(bgFile);
     Gdiplus::Bitmap *bg = Gdiplus::Bitmap::FromFile(wBgFile.c_str());
-    CLOG(L"%d", bg->GetLastStatus());
     return bg;
 }
 
 void Skin::Meters(char *osdName) {
-    tinyxml2::XMLElement *osd = OSDElement(osdName);
-    osd->Attribute("background");
-    std::list<Meter> l();
+    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");
+    LoadMeter(meter);
+    const char *img = meter->Attribute("image");
+    printf("%s\n", img);
 }
 
-tinyxml2::XMLElement *Skin::OSDElement(char *osdName) {
+Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
+    std::string type(meterXMLElement->Attribute("type"));
+    std::transform(type.begin(), type.end(), type.begin(), ::tolower);
+    int x = meterXMLElement->IntAttribute("x");
+    int y = meterXMLElement->IntAttribute("y");
+    int units = meterXMLElement->IntAttribute("units");
+
+    Meter *m;
+    if (type == "horizontalendcap") {
+        m = new HorizontalEndcap(ImageName(meterXMLElement), x, y, units);
+    } else if (type == "horizontalbar") {
+        m = new HorizontalEndcap(ImageName(meterXMLElement), x, y, units);
+    } else if (type == "horizontaltile") {
+        m = new HorizontalTile(ImageName(meterXMLElement), x, y, units);
+    }
+}
+
+std::wstring Skin::ImageName(tinyxml2::XMLElement *meterXMLElement) {
+    return Widen(meterXMLElement->Attribute("image"));
+}
+
+tinyxml2::XMLElement *Skin::OSDXMLElement(char *osdName) {
     tinyxml2::XMLElement *osd = _xml.GetDocument()
         ->FirstChildElement("skin")
         ->FirstChildElement("osds")

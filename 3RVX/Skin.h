@@ -24,7 +24,7 @@ public:
         }
     }
 
-    Gdiplus::Bitmap *BackgroundImage(char *osdName);
+    Gdiplus::Bitmap *OSDBgImg(char *osdName);
     void Meters(char *osdName);
 
 private:
@@ -32,7 +32,11 @@ private:
     std::wstring _skinDir;
     tinyxml2::XMLDocument _xml;
 
-    tinyxml2::XMLElement *OSDElement(char *osdName);
+
+    tinyxml2::XMLElement *OSDXMLElement(char *osdName);
+    Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
+    std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
+
     std::wstring Widen(const char *str);
     std::wstring Widen(std::string &str);
     std::string Narrow(std::wstring &str);

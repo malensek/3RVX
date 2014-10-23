@@ -1,4 +1,5 @@
 #include "Meter.h"
+#include <math.h>
 #include <sstream>
 
 float Meter::Value() {
@@ -51,7 +52,9 @@ bool Meter::Dirty() {
 }
 
 int Meter::CalcUnits() {
-    return (int) (Value() * (float) _units + 0.5);
+    return (int) ceil(Value() * _units);
+}
+
 std::wstring Meter::ToString() {
     std::wstringstream ss;
     ss << L"Geometry: (" << X() << L", " << Y() << "); ";

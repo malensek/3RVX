@@ -66,17 +66,18 @@ void Init() {
     ca->Init();
     float v = ca->Volume();
 
-    Meter *m = new HorizontalEndcap(L"meter.png", 71, 29, 28);
-    mW = new MeterWnd(hInst, L"testtest", L"what what");
-    mW->AddMeter(m);
-    std::wstring bgbmp(L"bg.png");
-    mW->SetBackgroundImage(Gdiplus::Bitmap::FromFile(bgbmp.c_str(), true));
-    mW->MeterLevels(v);
-    mW->Update();
-    mW->Show();
+//    Meter *m = new HorizontalEndcap(L"meter.png", 71, 29, 28);
+//    mW = new MeterWnd(hInst, L"testtest", L"what what");
+//    mW->AddMeter(m);
+//    std::wstring bgbmp(L"bg.png");
+//    mW->SetBackgroundImage(Gdiplus::Bitmap::FromFile(bgbmp.c_str(), true));
+//    mW->MeterLevels(v);
+//    mW->Update();
+//    mW->Show();
 
-    //VolumeOSD *vosd = new VolumeOSD(hInst);
-    //vosd->LoadSkin();
+    vOsd = new VolumeOSD(hInst);
+    vOsd->LoadSkin(L"TestSkin");
+    vOsd->MeterLevels(v);
 
     WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
 
@@ -85,9 +86,9 @@ void Init() {
     hkManager->Register(mainWnd, HKM_MOD_WIN + HKM_MOUSE_WHUP);
 
 
-    Skin s(L"TestSkin");
-    Gdiplus::Bitmap *bg = s.BackgroundImage("volume");
-    s.Meters("volume");
+//    Skin s(L"TestSkin");
+//    Gdiplus::Bitmap *bg = s.OSDBgImg("volume");
+//    s.Meters("volume");
 
 }
 
@@ -126,8 +127,7 @@ LRESULT CALLBACK WndProc(
     if (message == MSG_VOLCHNG) {
         float v = ca->Volume();
         QCLOG(L"Volume level: %.0f", v * 100.0f);
-        mW->MeterLevels(v);
-        mW->Update();
+        vOsd->MeterLevels(v);
     }
 
     if (message == MSG_DEVCHNG) {

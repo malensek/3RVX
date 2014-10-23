@@ -37,6 +37,8 @@ private:
     Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
     std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
 
+    bool FileExists(std::wstring fileName);
+
     std::wstring Widen(const char *str);
     std::wstring Widen(std::string &str);
     std::string Narrow(std::wstring &str);

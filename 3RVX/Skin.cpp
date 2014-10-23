@@ -48,6 +48,13 @@ tinyxml2::XMLElement *Skin::OSDXMLElement(char *osdName) {
     return osd;
 }
 
+bool Skin::FileExists(std::wstring fileName) {
+    DWORD attr = GetFileAttributes(fileName.c_str());
+    return (attr != INVALID_FILE_ATTRIBUTES
+        && !(attr & FILE_ATTRIBUTE_DIRECTORY)
+        && GetLastError() != ERROR_FILE_NOT_FOUND);
+}
+
 std::wstring Skin::Widen(const char *str) {
     std::string sstr(str);
     return Widen(sstr);

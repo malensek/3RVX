@@ -6,8 +6,8 @@
   </info>
 
   <osds>
-    <volume background="OSD.png">
-      <meter type="HorizontalEndcap" image="OSD/meter.png"
+    <volume background="OSD/bg.png">
+      <meter type="HorizontalEndcap" image="OSD\meter.png"
              units="28" x="71" y="29"/>
 
       <meter type="Text" format="[[PERC]]%" units="20"

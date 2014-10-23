@@ -1,10 +1,5 @@
 #include "HorizontalEndcap.h"
 
-void HorizontalEndcap::Value(float value) {
-    Meter::Value(value);
-    _rect.Width = _lMargin + _unitWidth * CalcUnits() + _rMargin;
-}
-
 void
 HorizontalEndcap::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     int units = CalcUnits();
@@ -37,4 +32,9 @@ HorizontalEndcap::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
 
     _lastValue = Meter::Value();
     _lastUnits = units;
+}
+
+void HorizontalEndcap::Value(float value) {
+    Meter::Value(value);
+    _rect.Width = _lMargin + _unitWidth * CalcUnits() + _rMargin;
 }

@@ -42,10 +42,7 @@ public:
         _rMarginRect.Height = Height();
     };
 
-    void Init();
     void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics);
-
-    void SetBitmap(Gdiplus::Bitmap *meterBitmap);
     void Value(float value);
 
 protected:

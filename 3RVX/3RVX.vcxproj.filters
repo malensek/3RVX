@@ -60,6 +60,9 @@
     <ClInclude Include="Skin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MeterWnd\Meters\Bitstrip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Skin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeterWnd\Meters\Bitstrip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

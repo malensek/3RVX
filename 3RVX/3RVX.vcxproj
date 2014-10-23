@@ -77,6 +77,7 @@
     <ClInclude Include="LayeredWnd\LayeredWnd.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MeterWnd\Meter.h" />
+    <ClInclude Include="MeterWnd\Meters\Bitstrip.h" />
     <ClInclude Include="MeterWnd\Meters\HorizontalBar.h" />
     <ClInclude Include="MeterWnd\Meters\HorizontalEndcap.h" />
     <ClInclude Include="MeterWnd\Meters\HorizontalTile.h" />
@@ -93,6 +94,7 @@
     <ClCompile Include="LayeredWnd\LayeredWnd.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MeterWnd\Meter.cpp" />
+    <ClCompile Include="MeterWnd\Meters\Bitstrip.cpp" />
     <ClCompile Include="MeterWnd\Meters\HorizontalBar.cpp" />
     <ClCompile Include="MeterWnd\Meters\HorizontalEndcap.cpp" />
     <ClCompile Include="MeterWnd\Meters\HorizontalTile.cpp" />

@@ -39,6 +39,8 @@ public:
 
     virtual int Units();
 
+    virtual std::wstring ToString();
+
 protected:
     Gdiplus::Bitmap *_bitmap;
     float _value;

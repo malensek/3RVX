@@ -24,20 +24,51 @@ void Skin::Meters(char *osdName) {
 }
 
 Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
-    std::string type(meterXMLElement->Attribute("type"));
+    const char *meterType = meterXMLElement->Attribute("type");
+    if (meterType == NULL) {
+        /* If we dont' know the meter type, we can't proceed. */
+        CLOG(L"Unknown meter type!");
+        return NULL;
+    }
+
+    std::string type(meterType);
     std::transform(type.begin(), type.end(), type.begin(), ::tolower);
+
+    /* IntAttribute() returns 0 on error, the default position. */
     int x = meterXMLElement->IntAttribute("x");
     int y = meterXMLElement->IntAttribute("y");
-    int units = meterXMLElement->IntAttribute("units");
 
-    Meter *m;
-    if (type == "horizontalendcap") {
-        m = new HorizontalEndcap(ImageName(meterXMLElement), x, y, units);
-    } else if (type == "horizontalbar") {
-        m = new HorizontalEndcap(ImageName(meterXMLElement), x, y, units);
-    } else if (type == "horizontaltile") {
-        m = new HorizontalTile(ImageName(meterXMLElement), x, y, units);
+    int units = 10;
+    meterXMLElement->QueryIntAttribute("units", &units);
+
+    /* Check for meter background image. 'text' is the only meter
+     * that does not require an image. */
+    std::wstring img;
+    if (type != "text") {
+        img = ImageName(meterXMLElement);
+        if (FileExists(img) == false) {
+            CLOG(L"Could not find meter bitmap: %s", img.c_str());
+            return NULL;
+        }
     }
+
+    Meter *m = NULL;
+    if (type == "bitstrip") {
+        m = new Bitstrip(img, x, y, units);
+    } else if (type == "horizontalendcap") {
+        m = new HorizontalEndcap(img, x, y, units);
+    } else if (type == "horizontalbar") {
+        m = new HorizontalEndcap(img, x, y, units);
+    } else if (type == "horizontaltile") {
+        m = new HorizontalTile(img, x, y, units);
+    } else {
+        CLOG(L"Unknown meter type: %s", Widen(type).c_str());
+        return NULL;
+    }
+
+    CLOG(L"Created meter [%s]:\n%s", Widen(type).c_str(), m->ToString().c_str());
+
+    return m;
 }
 
 std::wstring Skin::ImageName(tinyxml2::XMLElement *meterXMLElement) {

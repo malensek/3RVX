@@ -1,5 +1,4 @@
 #include "Logger.h"
-#include <windows.h>
 #include <string>
 
 void Logger::OpenConsole() {

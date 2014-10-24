@@ -37,7 +37,11 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
 }
 
 std::wstring Skin::ImageName(tinyxml2::XMLElement *meterXMLElement) {
-    return Widen(meterXMLElement->Attribute("image"));
+    const char *imgName = meterXMLElement->Attribute("image");
+    if (imgName == NULL) {
+        return NULL;
+    }
+    return _skinDir + L"\\" + Widen(imgName);
 }
 
 tinyxml2::XMLElement *Skin::OSDXMLElement(char *osdName) {

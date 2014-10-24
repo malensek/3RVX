@@ -1,15 +1,9 @@
 ﻿#include "3RVX.h"
 #include "Controllers\Volume\IVolume.h"
 #include "Controllers\Volume\CoreAudio.h"
-#include "LayeredWnd\LayeredWnd.h"
-#include "MeterWnd\Meters\HorizontalBar.h"
-#include "MeterWnd\Meters\HorizontalEndcap.h"
-#include "MeterWnd\MeterWnd.h"
-#include "MeterWnd\Meter.h"
 #include "VolumeOSD.h"
 #include <Wtsapi32.h>
 #include "Logger.h"
-#include "Skin.h"
 
 int APIENTRY
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,

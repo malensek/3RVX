@@ -25,7 +25,7 @@ public:
     }
 
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
-    void Meters(char *osdName);
+    std::list<Meter*> Meters(char *osdName);
 
 private:
     std::wstring _skinFile;

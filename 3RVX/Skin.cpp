@@ -15,12 +15,19 @@ Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     return bg;
 }
 
-void Skin::Meters(char *osdName) {
+std::list<Meter*> Skin::Meters(char *osdName) {
+    std::list<Meter*> meters;
+
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
     tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");
-    LoadMeter(meter);
-    const char *img = meter->Attribute("image");
-    printf("%s\n", img);
+    for (; meter != NULL; meter = meter->NextSiblingElement()) {
+        Meter *m = LoadMeter(meter);
+        if (m != NULL) {
+            meters.push_back(m);
+        }
+    }
+
+    return meters;
 }
 
 Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {

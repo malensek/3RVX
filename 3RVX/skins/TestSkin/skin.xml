@@ -6,7 +6,7 @@
   </info>
 
   <osds>
-    <volume background="OSD/bg.png">
+    <volume background="OSD\background.png">
       <meter type="HorizontalEndcap" image="OSD\meter.png"
              units="28" x="71" y="29"/>
 
@@ -15,7 +15,7 @@
              alpha="180" align= "right" x="367" y="25"
              boxWidth="40" boxHeight="23"/>
 
-      <meter type="bitstrip" image="OSD/vstrip.png" units="4" x="37" y="30"/>
+      <meter type="bitstrip" image="OSD\bitstrip.png" units="4" x="37" y="30"/>
 
       <meter type="HorizontalTile" image="OSD/tile.png"
              x="20" y="2" units="16"/>

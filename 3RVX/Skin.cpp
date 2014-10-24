@@ -6,6 +6,10 @@
 Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
     const char *bgFile = osd->Attribute("background");
+    if (bgFile == NULL) {
+        CLOG(L"Could not load OSD background image.");
+        return NULL;
+    }
     std::wstring wBgFile = _skinDir + L"\\" + Widen(bgFile);
     Gdiplus::Bitmap *bg = Gdiplus::Bitmap::FromFile(wBgFile.c_str());
     return bg;

@@ -10,8 +10,9 @@ public:
         _mWnd(hInstance, L"3RVX-VolumeOSD", L"3RVX-VolumeOSD") {
     };
 
-    void MeterValues();
-    void MeterValues(float value);
+    void LoadSkin(std::wstring skinName);
+    void MeterLevels();
+    void MeterLevels(float value);
 
 private:
     MeterWnd _mWnd;

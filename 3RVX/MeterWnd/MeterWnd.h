@@ -33,7 +33,6 @@ protected:
     LPCWSTR m_title;
     HWND m_hWnd;
 
-    bool                  m_dirty;
     MeterWnd             *m_parent;
 	Gdiplus::Bitmap      *m_meterImg;
 	Gdiplus::Bitmap      *m_bgImg;

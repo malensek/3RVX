@@ -28,36 +28,35 @@ MeterWnd *MeterWnd::Clone(HINSTANCE hInstance, LPCWSTR className, LPCWSTR title)
 
 void MeterWnd::Update()
 {
+    CLOG(L"Updating meter window");
     using namespace Gdiplus;
 
-    printf("Updating meter window\n");
-
     if (m_wndImg == NULL || m_bgImg == NULL) {
+        CLOG(L"Window images have not been initialized");
         /* should return a flag */
         return;
     }
 
+    bool dirty = false;
     for (Meter *meter : m_meters) {
         if (meter->Dirty() == true) {
-            m_dirty = true;
+            dirty = true;
             break;
         }
     }
 
-    if (m_dirty) {
-        printf("dirty; redraw\n");
+    if (dirty) {
+        CLOG(L"Contents have changed; redrawing");
+
         delete m_wndImg;
         Rect bgRect(0, 0, m_bgImg->GetWidth(), m_bgImg->GetHeight());
         m_wndImg = m_bgImg->Clone(bgRect, PixelFormat32bppARGB);
-
         Graphics graphics(m_wndImg);
 
         for (Meter *meter : m_meters) {
-            printf("drawing meter\n");
+            CLOG(L"Drawing meter:\n%s", meter->ToString().c_str());
             meter->Draw(m_wndImg, &graphics);
         }
-
-        m_dirty = false;
     }
 
     m_lWnd.Image(m_wndImg);

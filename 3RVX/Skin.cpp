@@ -89,24 +89,23 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
 }
 
 Meter::TextAlignment Skin::Alignment(tinyxml2::XMLElement *meterXMLElement) {
-        const char *align = meterXMLElement->Attribute("align");
-        if (align == NULL) {
-            align = "left";
-        }
+    const char *align = meterXMLElement->Attribute("align");
+    if (align == NULL) {
+        align = "left";
+    }
 
-        std::string alignStr(align);
-        std::transform(alignStr.begin(), alignStr.end(),
-            alignStr.begin(), ::tolower);
+    std::string alignStr(align);
+    std::transform(alignStr.begin(), alignStr.end(),
+        alignStr.begin(), ::tolower);
 
+    Meter::TextAlignment alignment = NumberStrip::Left;
+    if (alignStr == "right") {
+        alignment = NumberStrip::Right;
+    } else if (alignStr == "center") {
+        alignment = NumberStrip::Center;
+    }
 
-        Meter::TextAlignment alignment = NumberStrip::Left;
-        if (alignStr == "right") {
-            alignment = NumberStrip::Right;
-        } else if (alignStr == "center") {
-            alignment = NumberStrip::Center;
-        }
-
-        return alignment;
+    return alignment;
 }
 
 std::wstring Skin::ImageName(tinyxml2::XMLElement *meterXMLElement) {

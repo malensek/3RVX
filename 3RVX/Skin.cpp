@@ -48,6 +48,13 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     int units = 10;
     meterXMLElement->QueryIntAttribute("units", &units);
 
+    if (units > 100) {
+        units = 100;
+    }
+    if (units < 1) {
+        units = 1;
+    }
+
     /* Check for meter background image. 'text' is the only meter
      * that does not require an image. */
     std::wstring img;

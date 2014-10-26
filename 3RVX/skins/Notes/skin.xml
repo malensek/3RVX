@@ -8,24 +8,19 @@
   <osds>
     <volume background="Volume/background.png">
       <meter
-        type      = "NumberStrip"
-        image     = "OSD/numbers.png"
-        size      = "13"
-        align     = "right"
-        columns   = "1"
-        units     = "20"
-        
-        x         = "50"
-        y         = "10"
-        boxWidth  = "40"
-        boxHeight = "23"
-      />
-      <meter
-        type ="HorizontalTile"
+        type="HorizontalTile"
         image="Volume/bars.png"
         x="129"
         y="26"
         units="23"
+      />
+      <meter
+        type="NumberStrip"
+        image="volume/numbers.png"
+        align="right"
+        units="100"
+        x="255"
+        y="29"
       />
     </volume>
 

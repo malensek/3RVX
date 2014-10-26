@@ -24,6 +24,8 @@ public:
         _bitmap = bmp;
     };
 
+    enum TextAlignment { Left, Right, Center };
+
     virtual bool Dirty();
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) = 0;
     virtual int CalcUnits();

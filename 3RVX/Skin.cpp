@@ -78,6 +78,27 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     return m;
 }
 
+Meter::TextAlignment Skin::Alignment(tinyxml2::XMLElement *meterXMLElement) {
+        const char *align = meterXMLElement->Attribute("align");
+        if (align == NULL) {
+            align = "left";
+        }
+
+        std::string alignStr(align);
+        std::transform(alignStr.begin(), alignStr.end(),
+            alignStr.begin(), ::tolower);
+
+
+        Meter::TextAlignment alignment = NumberStrip::Left;
+        if (alignStr == "right") {
+            alignment = NumberStrip::Right;
+        } else if (alignStr == "center") {
+            alignment = NumberStrip::Center;
+        }
+
+        return alignment;
+}
+
 std::wstring Skin::ImageName(tinyxml2::XMLElement *meterXMLElement) {
     const char *imgName = meterXMLElement->Attribute("image");
     if (imgName == NULL) {

@@ -1,27 +1,25 @@
-#ifndef NUMBERSTRIP_H
-#define NUMBERSTRIP_H
+#pragma once
 
-#include "../../StdAfx.h"
-#include "../Meter.h"
 #include <string>
 
-#define NUMBERSTRIP_ALIGN_LEFT   0x01
-#define NUMBERSTRIP_ALIGN_RIGHT  0x02
-#define NUMBERSTRIP_ALIGN_CENTER 0x03
+#include "../Meter.h"
 
 class NumberStrip : public Meter {
 public:
-    virtual void Init();
+
+    NumberStrip(std::wstring bitmapName, int x, int y, int units,
+        TextAlignment align):
+    Meter(bitmapName, x, y, units),
+    _align(align) {
+        _charWidth = _bitmap->GetWidth();
+
+        _rect.Width = _bitmap->GetWidth() * 3;
+        _rect.Height = _bitmap->GetHeight() / 10;
+    }
 
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics);
 
-    virtual void SetAlignment(const wchar_t *alignment);
-    virtual void SetColumns(byte cols);
-
 private:
-    byte m_align;
-    byte m_cols;
-    int  m_charHeight;
+    TextAlignment _align;
+    int _charWidth;
 };
-
-#endif

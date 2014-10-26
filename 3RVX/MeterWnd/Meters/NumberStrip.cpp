@@ -1,47 +1,40 @@
 #include "NumberStrip.h"
-#include <algorithm>
 
-void NumberStrip::Init()
-{
-    m_charHeight = Height() / 10; // 10 numbers 0-9
-
-}
-
-void NumberStrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics)
-{
+void NumberStrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     int units = CalcUnits();
-    int perc = units * (100 / m_units);
+    int perc = units * (100 / _units);
 
-    Gdiplus::Rect drawRect(X(), Y(), Width(), m_charHeight);
+    int digits[] = {
+        perc % 10,
+        (perc / 10) % 10,
+        perc / 100,
+    };
 
-    graphics->DrawImage(m_meterBitmap, drawRect,
-        0, 0, Width(), m_charHeight, Gdiplus::UnitPixel);
+    int dispChars = 1;
+    if (digits[1] > 0) {
+        dispChars = 2;
+    } else if (digits[2] > 0) {
+        dispChars = 3;
+    }
 
-    m_lastValue = Value();
-    m_lastUnits = units;
-}
+    int drawX = _charWidth * 2;
+    if (_align == Left) {
+        drawX = (dispChars - 1) * _charWidth;
+    } else if (_align == Center) {
+        drawX = (_charWidth * 2) - ((3 - dispChars) * (_charWidth / 2));
+    }
 
-void NumberStrip::SetAlignment(const wchar_t *alignment)
-{
-    std::wstring align(alignment);
-    std::transform(align.begin(), align.end(), 
-        align.begin(), (int(*)(int)) toupper);
+    for (int i = 0, x = drawX; i < dispChars; ++i, x -= _charWidth) {
+        int digit = digits[i];
+        CLOG(L"Drawing digit [%d]: (%d, %d); %dx%d", digit,
+            _rect.X + x, _rect.Y, _charWidth, _rect.Height);
 
-    if(align == L"LEFT")
-        m_align = NUMBERSTRIP_ALIGN_LEFT;
-    else if(align == L"RIGHT")
-        m_align = NUMBERSTRIP_ALIGN_RIGHT;
-    else
-        m_align = NUMBERSTRIP_ALIGN_CENTER;
-}
+        Gdiplus::Rect destRect(_rect.X + x, _rect.Y, _charWidth, _rect.Height);
+        graphics->DrawImage(_bitmap, destRect,
+            0, digit * _rect.Height, _charWidth, _rect.Height,
+            Gdiplus::UnitPixel, NULL, NULL, NULL);
+    }
 
-void NumberStrip::SetColumns(byte cols)
-{
-    if(cols > 3)
-        cols = 3;
-
-    if(cols < 1)
-        cols = 1;
-
-    m_cols = cols;
+    _lastValue = Value();
+    _lastUnits = units;
 }

@@ -75,6 +75,9 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
         m = new HorizontalEndcap(img, x, y, units);
     } else if (type == "horizontaltile") {
         m = new HorizontalTile(img, x, y, units);
+    } else if (type == "numberstrip") {
+        Meter::TextAlignment align = Alignment(meterXMLElement);
+        m = new NumberStrip(img, x, y, units, align);
     } else {
         CLOG(L"Unknown meter type: %s", Widen(type).c_str());
         return NULL;

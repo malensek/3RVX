@@ -6,17 +6,17 @@
   </info>
 
   <osds>
-    <volume background="Volume/background.png">
+    <volume background="OSD/background.png">
       <meter
         type="HorizontalTile"
-        image="Volume/bars.png"
+        image="OSD/bars.png"
         x="129"
         y="26"
         units="23"
       />
       <meter
         type="NumberStrip"
-        image="volume/numbers.png"
+        image="OSD/numbers.png"
         align="right"
         units="100"
         x="255"
@@ -24,9 +24,9 @@
       />
     </volume>
 
-    <mute background="Volume/mute.png"/>
+    <mute background="OSD/mute.png"/>
 
-    <brightness background="Brightness/background.png">
+    <brightness background="OSD/background.png">
       <meter 
         type  = "HorizontalBar"
         image = "OSD/meter.png"

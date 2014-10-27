@@ -20,6 +20,14 @@ public:
     virtual void Show();
     virtual void Hide();
 
+    int X() const;
+    int Y() const;
+    void X(int x);
+    void Y(int y);
+
+    int Width() const;
+    int Height() const;
+
     virtual MeterWnd *Clone
         (HINSTANCE hInstance, LPCWSTR className, LPCWSTR title);
 

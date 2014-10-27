@@ -126,3 +126,28 @@ void MeterWnd::MeterLevels(float value)
         meter->Value(value);
     }
 }
+
+int MeterWnd::X() const {
+    return m_lWnd.X();
+}
+
+void MeterWnd::X(int x) {
+    m_lWnd.X(x);
+}
+
+int MeterWnd::Y() const {
+    return m_lWnd.Y();
+}
+
+void MeterWnd::Y(int y) {
+    m_lWnd.Y(y);
+}
+
+int MeterWnd::Height() const {
+    return m_lWnd.Height();
+}
+
+int MeterWnd::Width() const {
+    return m_lWnd.Width();
+}
+

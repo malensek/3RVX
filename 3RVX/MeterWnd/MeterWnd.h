@@ -51,8 +51,6 @@ protected:
     void UpdateDirtyRect(Gdiplus::Rect &rect);
     void ResetDirtyRect();
 
-    virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
-
 private:
     LayeredWnd m_lWnd;
 };

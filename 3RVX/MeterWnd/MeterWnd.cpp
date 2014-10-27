@@ -100,11 +100,6 @@ void MeterWnd::Hide()
     m_lWnd.Hide();
 }
 
-LRESULT MeterWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam)
-{
-    return DefWindowProc(m_hWnd, message, wParam, lParam);
-}
-
 void MeterWnd::SetBackgroundImage(Gdiplus::Bitmap *backgroundImage)
 {
 	using namespace Gdiplus;
@@ -150,4 +145,3 @@ int MeterWnd::Height() const {
 int MeterWnd::Width() const {
     return m_lWnd.Width();
 }
-

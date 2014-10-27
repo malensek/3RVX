@@ -1,5 +1,7 @@
 #include "NumberStrip.h"
 
+#include <sstream>
+
 void NumberStrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     int units = CalcUnits();
     int perc = units * (100 / _units);
@@ -37,4 +39,11 @@ void NumberStrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
 
     _lastValue = Value();
     _lastUnits = units;
+}
+
+std::wstring NumberStrip::ToString() {
+    std::wstringstream ss;
+    ss << std::endl;
+    ss << "Text Alignment: " << _align;
+    return Meter::ToString() + ss.str();
 }

@@ -84,6 +84,8 @@
     <ClInclude Include="MeterWnd\Meters\MeterTypes.h" />
     <ClInclude Include="MeterWnd\Meters\NumberStrip.h" />
     <ClInclude Include="MeterWnd\MeterWnd.h" />
+    <ClInclude Include="Monitor.h" />
+    <ClInclude Include="NotificationIcon.h" />
     <ClInclude Include="Skin.h" />
     <ClInclude Include="TinyXml2\tinyxml2.h" />
     <ClInclude Include="VolumeOSD.h" />
@@ -101,6 +103,8 @@
     <ClCompile Include="MeterWnd\Meters\HorizontalTile.cpp" />
     <ClCompile Include="MeterWnd\Meters\NumberStrip.cpp" />
     <ClCompile Include="MeterWnd\MeterWnd.cpp" />
+    <ClCompile Include="Monitor.cpp" />
+    <ClCompile Include="NotificationIcon.cpp" />
     <ClCompile Include="Skin.cpp" />
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="VolumeOSD.cpp" />

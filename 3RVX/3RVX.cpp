@@ -70,7 +70,7 @@ void Init() {
 //    mW->Show();
 
     vOsd = new VolumeOSD(hInst);
-    vOsd->LoadSkin(L"TestSkin");
+    vOsd->LoadSkin(L"Ignition");
     vOsd->MeterLevels(v);
 
     WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
@@ -78,12 +78,6 @@ void Init() {
     HotkeyManager *hkManager = HotkeyManager::Instance();
     hkManager->Register(mainWnd, HKM_MOD_WIN + VK_BACK);
     hkManager->Register(mainWnd, HKM_MOD_WIN + HKM_MOUSE_WHUP);
-
-
-//    Skin s(L"TestSkin");
-//    Gdiplus::Bitmap *bg = s.OSDBgImg("volume");
-//    s.Meters("volume");
-
 }
 
 HWND CreateMainWnd(HINSTANCE hInstance) {

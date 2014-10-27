@@ -12,24 +12,23 @@ void NumberStrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
         perc / 100,
     };
 
-    int dispChars = 1;
+    int chars = 1;
     if (digits[1] > 0) {
-        dispChars = 2;
+        chars = 2;
     } else if (digits[2] > 0) {
-        dispChars = 3;
+        chars = 3;
     }
 
     int drawX = _charWidth * 2;
     if (_align == Left) {
-        drawX = (dispChars - 1) * _charWidth;
+        drawX = (chars - 1) * _charWidth;
     } else if (_align == Center) {
-        drawX = (_charWidth * 2) - ((3 - dispChars) * (_charWidth / 2));
+        drawX = (_charWidth * 2) - ((3 - chars) * (_charWidth / 2));
     }
 
-    for (int i = 0, x = drawX; i < dispChars; ++i, x -= _charWidth) {
+    for (int i = 0, x = drawX; i < chars; ++i, x -= _charWidth) {
         int digit = digits[i];
-        CLOG(L"Drawing digit [%d]: (%d, %d); %dx%d", digit,
-            _rect.X + x, _rect.Y, _charWidth, _rect.Height);
+        QCLOG(L"Drawing digit [%d]; x-offset: %d", digit, _rect.X + x);
 
         Gdiplus::Rect destRect(_rect.X + x, _rect.Y, _charWidth, _rect.Height);
         graphics->DrawImage(_bitmap, destRect,

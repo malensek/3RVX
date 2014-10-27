@@ -130,8 +130,8 @@ LayeredWnd::StaticWndProc(
     LayeredWnd* lWnd;
 
     if (message == WM_CREATE) {
-        lWnd = (LayeredWnd*)((LPCREATESTRUCT)lParam)->lpCreateParams;
-        SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)lWnd);
+        lWnd = (LayeredWnd*) ((LPCREATESTRUCT) lParam)->lpCreateParams;
+        SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR) lWnd);
     } else {
         lWnd = (LayeredWnd*) GetWindowLongPtr(hWnd, GWLP_USERDATA);
         if (!lWnd) {
@@ -143,7 +143,6 @@ LayeredWnd::StaticWndProc(
 }
 
 LRESULT LayeredWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
-
     return DefWindowProc(m_hWnd, message, wParam, lParam);
 }
 

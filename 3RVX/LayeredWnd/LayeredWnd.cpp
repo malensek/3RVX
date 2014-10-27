@@ -21,7 +21,8 @@ bool LayeredWnd::Init() {
     }
 
     m_hWnd = CreateWindowEx(
-        WS_EX_TOOLWINDOW | WS_EX_LAYERED | WS_EX_NOACTIVATE,
+        WS_EX_TOOLWINDOW | WS_EX_LAYERED | WS_EX_NOACTIVATE \
+            | WS_EX_TOPMOST | WS_EX_TRANSPARENT,
         m_className, m_title,
         WS_POPUP, CW_USEDEFAULT, CW_USEDEFAULT,
         1, 1,

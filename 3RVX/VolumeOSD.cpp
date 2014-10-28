@@ -5,6 +5,10 @@
 #include "Monitor.h"
 #include "Skin.h"
 
+#define TIMER_HIDE 100
+#define TIMER_ANIMIN 101
+#define TIMER_ANIMOUT 102
+
 void VolumeOSD::LoadSkin(std::wstring skinName) {
     Skin skin(skinName);
 
@@ -51,8 +55,19 @@ VolumeOSD::StaticWndProc(
 
 LRESULT VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == WM_TIMER) {
-        CLOG(L"------> timer");
-        KillTimer(_hWnd, 100);
+        switch (wParam) {
+        case TIMER_HIDE:
+            Hide();
+            KillTimer(_hWnd, TIMER_HIDE);
+            break;
+
+        case TIMER_ANIMIN:
+            break;
+
+        case TIMER_ANIMOUT:
+            AnimateOut();
+            break;
+        }
     }
     return DefWindowProc(hWnd, message, wParam, lParam);
 }

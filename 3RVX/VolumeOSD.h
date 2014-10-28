@@ -41,6 +41,10 @@ private:
     HWND _hWnd;
     MeterWnd _mWnd;
 
+    void Hide();
+    void AnimateIn();
+    void AnimateOut();
+
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
     LRESULT WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

@@ -29,10 +29,28 @@ void VolumeOSD::LoadSkin(std::wstring skinName) {
 }
 
 void VolumeOSD::MeterLevels(float level) {
+    KillTimer(_hWnd, TIMER_ANIMOUT);
     _mWnd.MeterLevels(level);
     _mWnd.Update();
+    _mWnd.Transparency(255);
     _mWnd.Show();
-    SetTimer(_hWnd, 100, 800, NULL);
+    SetTimer(_hWnd, TIMER_HIDE, 800, NULL);
+}
+
+void VolumeOSD::Hide() {
+    SetTimer(_hWnd, TIMER_ANIMOUT, 10, NULL);
+}
+
+void VolumeOSD::AnimateOut() {
+    byte current = _mWnd.Transparency();
+    int newTrans = current - 3;
+    if (newTrans < 0) {
+        newTrans = 0;
+        KillTimer(_hWnd, TIMER_ANIMOUT);
+        _mWnd.Hide();
+    }
+
+    _mWnd.Transparency((int) newTrans);
 }
 
 LRESULT CALLBACK

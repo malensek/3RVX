@@ -1,5 +1,4 @@
 #include "LayeredWnd.h"
-#include <iostream>
 
 bool LayeredWnd::Init() {
     WNDCLASSEX wcex;

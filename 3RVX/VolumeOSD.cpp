@@ -38,19 +38,16 @@ void VolumeOSD::MeterLevels(float level) {
 }
 
 void VolumeOSD::Hide() {
+    _fout.Reset();
     SetTimer(_hWnd, TIMER_ANIMOUT, 10, NULL);
 }
 
 void VolumeOSD::AnimateOut() {
-    byte current = _mWnd.Transparency();
-    int newTrans = current - 3;
-    if (newTrans < 0) {
-        newTrans = 0;
+    bool animOver = _fout.Animate();
+    if (animOver) {
         KillTimer(_hWnd, TIMER_ANIMOUT);
         _mWnd.Hide();
     }
-
-    _mWnd.Transparency((int) newTrans);
 }
 
 LRESULT CALLBACK

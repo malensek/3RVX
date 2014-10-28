@@ -1,13 +1,15 @@
 #pragma once
 
+#include "MeterWnd\Animations\FadeOut.h"
 #include "MeterWnd\Meters\MeterTypes.h"
 #include "MeterWnd\MeterWnd.h"
 #include "MeterWnd\Meter.h"
 
 class VolumeOSD {
 public:
-    VolumeOSD(HINSTANCE hInstance):
-        _mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD") {
+    VolumeOSD(HINSTANCE hInstance) :
+    _mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
+    _fout(_mWnd) {
 
         WNDCLASSEX wcex;
 
@@ -39,6 +41,7 @@ public:
 private:
     HWND _hWnd;
     MeterWnd _mWnd;
+    FadeOut _fout;
 
     void Hide();
     void AnimateIn();

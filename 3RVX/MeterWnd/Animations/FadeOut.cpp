@@ -2,7 +2,7 @@
 
 bool FadeOut::Animate() {
     byte current = _meterWnd.Transparency();
-    int newTrans = current - 3;
+    int newTrans = current - 5;
     if (newTrans < 0) {
         newTrans = 0;
         return true;

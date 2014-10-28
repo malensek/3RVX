@@ -39,7 +39,7 @@ void VolumeOSD::MeterLevels(float level) {
 
 void VolumeOSD::Hide() {
     _fout.Reset();
-    SetTimer(_hWnd, TIMER_ANIMOUT, 10, NULL);
+    SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
 }
 
 void VolumeOSD::AnimateOut() {

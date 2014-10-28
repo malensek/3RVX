@@ -30,7 +30,6 @@ public:
         _hWnd = CreateWindowEx(
             NULL, L"3RVX-VolumeDispatcher", L"3RVX-VolumeDispatcher",
             NULL, NULL, NULL, NULL, NULL, HWND_MESSAGE, NULL, hInstance, this);
-        CLOG(L"%d", _hWnd);
     };
 
     void LoadSkin(std::wstring skinName);

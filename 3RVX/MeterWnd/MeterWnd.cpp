@@ -1,44 +1,13 @@
 #include "MeterWnd.h"
 
-MeterWnd *MeterWnd::Clone(HINSTANCE hInstance, LPCWSTR className, LPCWSTR title)
-{
-/*    MeterWnd *newWnd = new MeterWnd(hInstance, className, title);
-
-    newWnd->m_parent = this;
-    newWnd->m_buffer = m_buffer;
-    newWnd->m_size = m_size;
-    newWnd->m_location = m_location;
-
-    if(m_showAnim)
-    {
-        newWnd->m_showAnim = m_showAnim->Clone();
-        newWnd->m_showAnim->SetLayeredWnd(newWnd);
-    }
-
-    if(m_hideAnim)
-    {
-        newWnd->m_hideAnim = m_hideAnim->Clone();
-        newWnd->m_hideAnim->SetLayeredWnd(newWnd);
-    }
-
-    return newWnd;
-    */
-    return NULL;
-}
-
 void MeterWnd::Update()
 {
     CLOG(L"Updating meter window");
     using namespace Gdiplus;
 
-    if (m_wndImg == NULL || m_bgImg == NULL) {
-        CLOG(L"Window images have not been initialized");
-        /* should return a flag */
-        return;
-    }
+    bool dirty = (_composite == NULL);
 
-    bool dirty = false;
-    for (Meter *meter : m_meters) {
+    for (Meter *meter : _meters) {
         if (meter->Dirty() == true) {
             dirty = true;
             break;
@@ -48,108 +17,171 @@ void MeterWnd::Update()
     if (dirty) {
         CLOG(L"Contents have changed; redrawing");
 
-        delete m_wndImg;
-        Rect bgRect(0, 0, m_bgImg->GetWidth(), m_bgImg->GetHeight());
-        m_wndImg = m_bgImg->Clone(bgRect, PixelFormat32bppARGB);
-        Graphics graphics(m_wndImg);
+        if (_composite) {
+            delete _composite;
+        }
 
-        for (Meter *meter : m_meters) {
+        Rect bgRect(0, 0, _background->GetWidth(), _background->GetHeight());
+        _composite = _background->Clone(bgRect, PixelFormat32bppARGB);
+        Graphics graphics(_composite);
+
+        for (Meter *meter : _meters) {
             CLOG(L"Drawing meter:\n%s", meter->ToString().c_str());
-            meter->Draw(m_wndImg, &graphics);
+            meter->Draw(_composite, &graphics);
         }
     }
 
-    m_lWnd.Image(m_wndImg);
+    UpdateLayeredWnd();
+}
+
+void MeterWnd::UpdateLayeredWnd() {
+    BLENDFUNCTION bFunc;
+    bFunc.AlphaFormat = AC_SRC_ALPHA;
+    bFunc.BlendFlags = 0;
+    bFunc.BlendOp = AC_SRC_OVER;
+    bFunc.SourceConstantAlpha = _transparency;
+
+    HDC screenDc = GetDC(GetDesktopWindow());
+    HDC sourceDc = CreateCompatibleDC(screenDc);
+
+    HBITMAP hBmp;
+    _composite->GetHBITMAP(Gdiplus::Color(0, 0, 0, 0), &hBmp);
+    HGDIOBJ hReplaced = SelectObject(sourceDc, hBmp);
+
+    POINT pt = { 0, 0 };
+    SIZE size = { _composite->GetWidth(), _composite->GetHeight() };
+
+    UPDATELAYEREDWINDOWINFO lwInfo;
+    lwInfo.cbSize = sizeof(UPDATELAYEREDWINDOWINFO);
+    lwInfo.crKey = 0;
+    lwInfo.dwFlags = ULW_ALPHA;
+    lwInfo.hdcDst = screenDc;
+    lwInfo.hdcSrc = sourceDc;
+    lwInfo.pblend = &bFunc;
+    lwInfo.pptDst = &_location;
+    lwInfo.pptSrc = &pt;
+    lwInfo.prcDirty = _dirtyRect;
+    lwInfo.psize = &size;
+
+    UpdateLayeredWindowIndirect(_hWnd, &lwInfo);
+
+    SelectObject(sourceDc, hReplaced);
+    DeleteDC(sourceDc);
+    DeleteObject(hBmp);
+    ReleaseDC(GetDesktopWindow(), screenDc);
+}
+
+void MeterWnd::UpdateTransparency() {
+    BLENDFUNCTION bFunc;
+    bFunc.AlphaFormat = AC_SRC_ALPHA;
+    bFunc.BlendFlags = 0;
+    bFunc.BlendOp = AC_SRC_OVER;
+    bFunc.SourceConstantAlpha = _transparency;
+
+    UPDATELAYEREDWINDOWINFO lwInfo;
+    lwInfo.cbSize = sizeof(UPDATELAYEREDWINDOWINFO);
+    lwInfo.crKey = 0;
+    lwInfo.dwFlags = ULW_ALPHA;
+    lwInfo.hdcDst = NULL;
+    lwInfo.hdcSrc = NULL;
+    lwInfo.pblend = &bFunc;
+    lwInfo.pptDst = NULL;
+    lwInfo.pptSrc = NULL;
+    lwInfo.prcDirty = NULL;
+    lwInfo.psize = NULL;
+
+    UpdateLayeredWindowIndirect(_hWnd, &lwInfo);
+}
+
+//
+// UpdateLocation()
+//
+// Uses MoveWindow() to set the window's X,Y coordinates its size.
+//
+void MeterWnd::UpdateLocation() {
+    MoveWindow(_hWnd, _location.x, _location.y, Width(), Height(), FALSE);
 }
 
 void MeterWnd::AddMeter(Meter *meter)
 {
-    m_meters.push_back(meter);
-}
-
-void MeterWnd::Show()
-{
-    /*
-    KillTimer(m_hWnd, TIMER_HIDEANIM);
-
-    if(m_showAnim)
-    {
-        StartAnimation(m_showAnim, TIMER_SHOWANIM);
-    }
-    else
-    {
-        LayeredWnd::Show();
-        SetTransparency(255);
-    }
-
-    SetTimer(m_hWnd, TIMER_DELAY, 600, NULL);
-    */
-    m_lWnd.Show();
-}
-
-void MeterWnd::Hide()
-{
-    /*
-    KillTimer(m_hWnd, TIMER_SHOWANIM);
-
-    if(m_hideAnim)
-        StartAnimation(m_hideAnim, TIMER_HIDEANIM);
-    else
-        LayeredWnd::Hide();
-    */
-    m_lWnd.Hide();
-}
-
-void MeterWnd::SetBackgroundImage(Gdiplus::Bitmap *backgroundImage)
-{
-	using namespace Gdiplus;
-
-    if (m_wndImg) {
-        delete m_wndImg;
-    }
-
-	m_bgImg = backgroundImage;
-	m_wndImg = new Bitmap(
-		m_bgImg->GetWidth(),
-		m_bgImg->GetHeight(), 
-		PixelFormat32bppARGB);
+    _meters.push_back(meter);
 }
 
 void MeterWnd::MeterLevels(float value)
 {
-    for (Meter *meter : m_meters) {
+    for (Meter *meter : _meters) {
         meter->Value(value);
     }
 }
 
+void MeterWnd::BackgroundImage(Gdiplus::Bitmap *background) {
+    _background = background;
+    _size.cx = background->GetWidth();
+    _size.cy = background->GetHeight();
+}
+
+void MeterWnd::Show() {
+    UpdateLocation();
+    ShowWindow(_hWnd, SW_SHOW);
+}
+
+void MeterWnd::Hide() {
+    ShowWindow(_hWnd, SW_HIDE);
+}
+
 int MeterWnd::X() const {
-    return m_lWnd.X();
+    return _location.x;
 }
 
 void MeterWnd::X(int x) {
-    m_lWnd.X(x);
+    _location.x = x;
 }
 
 int MeterWnd::Y() const {
-    return m_lWnd.Y();
+    return _location.y;
 }
 
 void MeterWnd::Y(int y) {
-    m_lWnd.Y(y);
-}
-
-int MeterWnd::Height() const {
-    return m_lWnd.Height();
+    _location.y = y;
 }
 
 int MeterWnd::Width() const {
-    return m_lWnd.Width();
+    return _size.cx;
+}
+
+int MeterWnd::Height() const {
+    return _size.cy;
 }
 
 byte MeterWnd::Transparency() const {
-    return m_lWnd.Transparency();
+    return _transparency;
 }
 
 void MeterWnd::Transparency(byte transparency) {
-    m_lWnd.Transparency(transparency);
+    _transparency = transparency;
+    UpdateTransparency();
 }
+
+LRESULT CALLBACK
+MeterWnd::StaticWndProc(
+        HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+    MeterWnd* wnd;
+
+    if (message == WM_CREATE) {
+        wnd = (MeterWnd*) ((LPCREATESTRUCT) lParam)->lpCreateParams;
+        SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR) wnd);
+    } else {
+        wnd = (MeterWnd*) GetWindowLongPtr(hWnd, GWLP_USERDATA);
+        if (!wnd) {
+            return DefWindowProc(hWnd, message, wParam, lParam);
+        }
+    }
+
+    return wnd->WndProc(message, wParam, lParam);
+}
+
+LRESULT MeterWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
+    /* Handle messages here */
+    return DefWindowProc(_hWnd, message, wParam, lParam);
+}
+

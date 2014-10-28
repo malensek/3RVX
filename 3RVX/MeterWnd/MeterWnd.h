@@ -2,7 +2,6 @@
 
 #include <list>
 #include "Meter.h"
-#include "../LayeredWnd/LayeredWnd.h"
 
 #define TIMER_SHOWANIM    0x01
 #define TIMER_HIDEANIM    0x02
@@ -10,9 +9,48 @@
 
 class MeterWnd {
 public:
-    MeterWnd(HINSTANCE hInstance, LPCWSTR className, LPCWSTR title)
-        : m_lWnd(hInstance, className, title) {
-        m_lWnd.Init();
+    MeterWnd(HINSTANCE hInstance, LPCWSTR className, LPCWSTR title):
+    _hInstance(hInstance),
+    _className(className),
+    _title(title) {
+        WNDCLASSEX wcex;
+        wcex.cbSize = sizeof(WNDCLASSEX);
+        wcex.style = 0;
+        wcex.lpfnWndProc = &MeterWnd::StaticWndProc;
+        wcex.cbClsExtra = 0;
+        wcex.cbWndExtra = 0;
+        wcex.hInstance = _hInstance;
+        wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+        wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+        wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
+        wcex.lpszMenuName = NULL;
+        wcex.lpszClassName = _className;
+        wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+
+        if (!RegisterClassEx(&wcex)) {
+            /* throw exception */
+        }
+
+        _location.x = 0;
+        _location.y = 0;
+        _size.cx = 1;
+        _size.cy = 1;
+        _transparency = 255;
+
+        _hWnd = CreateWindowEx(
+            WS_EX_TOOLWINDOW |
+            WS_EX_LAYERED |
+            WS_EX_NOACTIVATE |
+            WS_EX_TOPMOST |
+            WS_EX_TRANSPARENT,
+            _className, _title,
+            WS_POPUP, CW_USEDEFAULT, CW_USEDEFAULT,
+            _size.cx, _size.cy,
+            NULL, NULL, _hInstance, this);
+
+        if (_hWnd == NULL) {
+            /* throw exception */
+        }
     };
 
 	void Update();
@@ -31,29 +69,36 @@ public:
     byte Transparency() const;
     void Transparency(byte transparency);
 
-    virtual MeterWnd *Clone
-        (HINSTANCE hInstance, LPCWSTR className, LPCWSTR title);
-
-	void SetBackgroundImage(Gdiplus::Bitmap *backgroundImage);
-    void MeterLevels(float value);
     void AddMeter(Meter *meter);
+    void MeterLevels(float value);
+    float MeterLevels();
 
-protected:
-    HINSTANCE m_hInstance;
-    LPCWSTR m_className;
-    LPCWSTR m_title;
-    HWND m_hWnd;
+    void BackgroundImage(Gdiplus::Bitmap *background);
 
-    MeterWnd             *m_parent;
-	Gdiplus::Bitmap      *m_meterImg;
-	Gdiplus::Bitmap      *m_bgImg;
-	Gdiplus::Bitmap      *m_wndImg;
+private:
+    HINSTANCE _hInstance;
+    LPCWSTR _className;
+    LPCWSTR _title;
+    HWND _hWnd;
 
-    std::list<Meter*>     m_meters;
+    POINT _location;
+    SIZE _size;
+    byte _transparency;
+
+	Gdiplus::Bitmap *_background;
+	Gdiplus::Bitmap *_composite;
+    RECT *_dirtyRect;
+
+    std::list<Meter*> _meters;
 
     void UpdateDirtyRect(Gdiplus::Rect &rect);
     void ResetDirtyRect();
 
-private:
-    LayeredWnd m_lWnd;
+    void UpdateLayeredWnd();
+    void UpdateLocation();
+    void UpdateTransparency();
+
+    static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
+        WPARAM wParam, LPARAM lParam);
+    virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
 };

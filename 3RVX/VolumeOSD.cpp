@@ -13,7 +13,7 @@ void VolumeOSD::LoadSkin(std::wstring skinName) {
     Skin skin(skinName);
 
     Gdiplus::Bitmap *bg = skin.OSDBgImg("volume");
-    _mWnd.SetBackgroundImage(bg);
+    _mWnd.BackgroundImage(bg);
 
     std::list<Meter*> meters = skin.Meters("volume");
     for each (Meter *m in meters) {

@@ -1,7 +1,7 @@
+#include <Windows.h>
 #include <list>
-
-#include "Windows.h"
 #include "MeterWnd\Meter.h"
+#include "StringUtils.h"
 #include "TinyXml2\tinyxml2.h"
 
 #define SKINS_DIR L"Skins"
@@ -15,8 +15,7 @@ public:
 
         CLOG(L"Loading skin [%s]: %s", skinName.c_str(), _skinFile.c_str());
         
-        std::string u8FileName = Narrow(_skinFile);
-        printf("%s\n", u8FileName.c_str());
+        std::string u8FileName = StringUtils::Narrow(_skinFile);
         tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
         if (result != tinyxml2::XMLError::XML_SUCCESS) {
             CLOG(L"Failed to read XML file!");
@@ -39,8 +38,4 @@ private:
     std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
 
     bool FileExists(std::wstring fileName);
-
-    std::wstring Widen(const char *str);
-    std::wstring Widen(std::string &str);
-    std::string Narrow(std::wstring &str);
 };

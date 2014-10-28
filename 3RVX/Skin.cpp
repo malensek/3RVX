@@ -10,7 +10,7 @@ Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
         CLOG(L"Could not load OSD background image.");
         return NULL;
     }
-    std::wstring wBgFile = _skinDir + L"\\" + Widen(bgFile);
+    std::wstring wBgFile = _skinDir + L"\\" + StringUtils::Widen(bgFile);
     Gdiplus::Bitmap *bg = Gdiplus::Bitmap::FromFile(wBgFile.c_str());
     return bg;
 }
@@ -79,11 +79,12 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
         Meter::TextAlignment align = Alignment(meterXMLElement);
         m = new NumberStrip(img, x, y, units, align);
     } else {
-        CLOG(L"Unknown meter type: %s", Widen(type).c_str());
+        CLOG(L"Unknown meter type: %s", StringUtils::Widen(type).c_str());
         return NULL;
     }
 
-    CLOG(L"Created meter [%s]:\n%s", Widen(type).c_str(), m->ToString().c_str());
+    CLOG(L"Created meter [%s]:\n%s",
+        StringUtils::Widen(type).c_str(), m->ToString().c_str());
 
     return m;
 }
@@ -113,7 +114,7 @@ std::wstring Skin::ImageName(tinyxml2::XMLElement *meterXMLElement) {
     if (imgName == NULL) {
         return NULL;
     }
-    return _skinDir + L"\\" + Widen(imgName);
+    return _skinDir + L"\\" + StringUtils::Widen(imgName);
 }
 
 tinyxml2::XMLElement *Skin::OSDXMLElement(char *osdName) {
@@ -129,26 +130,4 @@ bool Skin::FileExists(std::wstring fileName) {
     return (attr != INVALID_FILE_ATTRIBUTES
         && !(attr & FILE_ATTRIBUTE_DIRECTORY)
         && GetLastError() != ERROR_FILE_NOT_FOUND);
-}
-
-std::wstring Skin::Widen(const char *str) {
-    std::string sstr(str);
-    return Widen(sstr);
-}
-
-std::wstring Skin::Widen(std::string &str) {
-    int size = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int) str.size(),
-        NULL, 0);
-    std::wstring buf(size, 0);
-    MultiByteToWideChar(CP_UTF8, 0, &str[0], (int) str.size(), &buf[0], size);
-    return buf;
-}
-
-std::string Skin::Narrow(std::wstring &str) {
-    int size = WideCharToMultiByte(CP_UTF8, 0, &str[0], (int) str.size(),
-        NULL, 0, NULL, NULL);
-    std::string buf(size, 0);
-    WideCharToMultiByte(CP_UTF8, 0, &str[0], (int) str.size(),
-        &buf[0], size, NULL, NULL);
-    return buf;
 }

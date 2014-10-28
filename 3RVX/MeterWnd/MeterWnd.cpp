@@ -145,3 +145,11 @@ int MeterWnd::Height() const {
 int MeterWnd::Width() const {
     return m_lWnd.Width();
 }
+
+byte MeterWnd::Transparency() const {
+    return m_lWnd.Transparency();
+}
+
+void MeterWnd::Transparency(byte transparency) {
+    m_lWnd.Transparency(transparency);
+}

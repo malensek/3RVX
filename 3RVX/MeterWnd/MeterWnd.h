@@ -28,6 +28,9 @@ public:
     int Width() const;
     int Height() const;
 
+    byte Transparency() const;
+    void Transparency(byte transparency);
+
     virtual MeterWnd *Clone
         (HINSTANCE hInstance, LPCWSTR className, LPCWSTR title);
 

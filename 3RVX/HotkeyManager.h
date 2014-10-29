@@ -15,8 +15,8 @@
 
 #pragma once
 
-#include <windows.h>
-#include <hash_map>
+#include <Windows.h>
+#include <unordered_set>
 
 #define HKM_MOD_ALT (MOD_ALT << 16)
 #define HKM_MOD_CTRL (MOD_CONTROL << 16)
@@ -31,40 +31,33 @@
 class HotkeyManager {  
 public:
     static HotkeyManager *Instance();
-    int Register(HWND parentWnd, int keyCombination);
+    static HotkeyManager *Instance(HWND notifyWnd);
 
-protected:
-    struct HotkeyInfo {
-        int hotkeyId;
-        int keys;
-        HWND parentWnd;
-    };
+    void Register(int keyCombination);
+    void Unregister(int keyCombination);
 
-    int      m_numKeys;
-    int      m_fixWin;
-    HHOOK    m_keyHook;
-    HHOOK    m_mouseHook;
-    stdext::hash_map<int, HotkeyInfo*> m_keyMap;
+private:
+    HotkeyManager() :
+        _fixWin(false) { }
 
+    HWND _notifyWnd;
+    int _fixWin;
+    std::unordered_set<int> _keyCombinations;
 
-    HotkeyManager(): m_numKeys(1), 
-                     m_fixWin(false) 
-    {};
+    HHOOK _keyHook;
+    HHOOK _mouseHook;
 
     bool Hook();
     bool Unhook();
-    int CalcModifiers();
+    int Modifiers();
 
-    virtual LRESULT CALLBACK
-        MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
+    LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
     static LRESULT CALLBACK 
         LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam);
 
-    virtual LRESULT CALLBACK
-        KeyProc(int nCode, WPARAM wParam, LPARAM lParam);
+    LRESULT CALLBACK KeyProc(int nCode, WPARAM wParam, LPARAM lParam);
     static LRESULT CALLBACK 
         LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 
-private:
-    static HotkeyManager* instance;
+    static HotkeyManager *instance;
 };

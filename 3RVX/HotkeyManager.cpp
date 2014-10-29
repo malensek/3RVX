@@ -1,43 +1,50 @@
 #include "HotkeyManager.h"
+#include "Logger.h"
 
-HotkeyManager* HotkeyManager::instance = NULL;
+HotkeyManager *HotkeyManager::instance = NULL;
 
-bool HotkeyManager::Hook() {
-
-    m_mouseHook = SetWindowsHookEx(WH_MOUSE_LL,
-        LowLevelMouseProc, NULL, NULL);
-
-    m_keyHook = SetWindowsHookEx(WH_KEYBOARD_LL,
-        LowLevelKeyboardProc, NULL, NULL);
-
-    return m_mouseHook && m_keyHook;
-}
-
-bool HotkeyManager::Unhook() {
-    BOOL unMouse = UnhookWindowsHookEx(m_mouseHook);
-    BOOL unKey = UnhookWindowsHookEx(m_keyHook);
-    return unMouse && unKey;
-}
-
-HotkeyManager* HotkeyManager::Instance() {
+HotkeyManager *HotkeyManager::Instance() {
     if (instance == NULL) {
-        instance = new HotkeyManager;
+        instance = new HotkeyManager();
         instance->Hook();
     }
-
     return instance;
 }
 
-int HotkeyManager::Register(HWND parentWnd, int keyCombination) {
-    HotkeyInfo *hkInfo = new HotkeyInfo;
-    hkInfo->hotkeyId = m_numKeys++;
-    hkInfo->keys = keyCombination;
-    hkInfo->parentWnd = parentWnd;
-
-    if (m_keyMap.find(keyCombination) == m_keyMap.end()) {
-        m_keyMap[keyCombination] = hkInfo;
+HotkeyManager *HotkeyManager::Instance(HWND notifyWnd) {
+    if (instance == NULL) {
+        instance = new HotkeyManager();
+        instance->Hook();
+        instance->_notifyWnd = notifyWnd;
+        return instance;
     } else {
         return NULL;
+    }
+}
+
+bool HotkeyManager::Hook() {
+
+    _mouseHook = SetWindowsHookEx(WH_MOUSE_LL,
+        LowLevelMouseProc, NULL, NULL);
+
+    _keyHook = SetWindowsHookEx(WH_KEYBOARD_LL,
+        LowLevelKeyboardProc, NULL, NULL);
+
+    return _mouseHook && _keyHook;
+}
+
+bool HotkeyManager::Unhook() {
+    BOOL unMouse = UnhookWindowsHookEx(_mouseHook);
+    BOOL unKey = UnhookWindowsHookEx(_keyHook);
+    return unMouse && unKey;
+}
+
+void HotkeyManager::Register(int keyCombination) {
+    if (_keyCombinations.count(keyCombination) > 0) {
+        CLOG(L"Hotkey combination [%d] already registered", keyCombination);
+        return;
+    } else {
+        _keyCombinations.insert(keyCombination);
     }
 
     /* get VK_* value; includes unused bits */
@@ -47,20 +54,42 @@ int HotkeyManager::Register(HWND parentWnd, int keyCombination) {
         || vk == VK_LBUTTON
         || vk == VK_RBUTTON
         || vk == VK_MBUTTON) {
+
         /* mouse-based hotkeys; we are done */
-        return hkInfo->hotkeyId;
+        CLOG(L"Registered new mouse-based hotkey: %d", keyCombination);
+        return;
     }
 
     /* keyboard-only hotkeys; use WinAPI */
     int mods = (0xF0000 & keyCombination) >> 16;
-    if (!RegisterHotKey(parentWnd, hkInfo->hotkeyId, mods, vk)) {
-        return NULL;
+    if (!RegisterHotKey(_notifyWnd, keyCombination, mods, vk)) {
+        CLOG(L"Failed to register hotkey combination: %d", keyCombination);
+        return;
     }
 
-    return hkInfo->hotkeyId;
+    CLOG(L"Registered new keyboard-based hotkey: %d", keyCombination);
 }
 
-int HotkeyManager::CalcModifiers() {
+void HotkeyManager::Unregister(int keyCombination) {
+    CLOG(L"Unregistering hotkey combination: %d", keyCombination);
+
+    if (_keyCombinations.count(keyCombination) <= 0) {
+        QCLOG(L"Hotkey combination [%d] was not previously registered",
+            keyCombination);
+        return;
+    }
+
+    _keyCombinations.erase(keyCombination);
+    if ((keyCombination >> 20) == 0) {
+        /* This hotkey isn't mouse-based; unregister with Windows */
+        if (!UnregisterHotKey(_notifyWnd, keyCombination)) {
+            CLOG(L"Failed to unregister hotkey: %d", keyCombination);
+            return;
+        }
+    }
+}
+
+int HotkeyManager::Modifiers() {
     int mods = 0;
     mods += (GetKeyState(VK_MENU) & 0x8000) << 1;
     mods += (GetKeyState(VK_CONTROL) & 0x8000) << 2;
@@ -74,9 +103,9 @@ LRESULT CALLBACK
 HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
         if (wParam == WM_KEYUP) {
-            KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT*)lParam;
+            KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT*) lParam;
             if ((kbInfo->vkCode == VK_LWIN || kbInfo->vkCode == VK_RWIN)
-                && m_fixWin) {
+                && _fixWin) {
                 /* WIN+Mouse combination used; we need to prevent the
                  * system from only seeing a WIN keypress (and usually
                  * popping up the start menu).  We simulate WIN+VK_NONAME. */
@@ -90,12 +119,14 @@ HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 input.ki.time = 1;
                 input.ki.dwExtraInfo = GetMessageExtraInfo();
 
-                SendInput(1, &input, sizeof(INPUT)); // key down
+                /* key down: */
+                SendInput(1, &input, sizeof(INPUT));
 
                 input.ki.dwFlags = KEYEVENTF_KEYUP;
-                SendInput(1, &input, sizeof(INPUT)); // key up
+                /* key up: */
+                SendInput(1, &input, sizeof(INPUT));
 
-                m_fixWin = false;
+                _fixWin = false;
             }
         }
     }
@@ -124,7 +155,7 @@ HotkeyManager::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 break;
 
             case WM_XBUTTONDOWN: {
-                msInfo = (MSLLHOOKSTRUCT*)lParam;
+                msInfo = (MSLLHOOKSTRUCT*) lParam;
 
                 int button = msInfo->mouseData >> 16 & 0xFFFF;
                 if (button == 1)
@@ -136,7 +167,7 @@ HotkeyManager::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
             }
 
             case WM_MOUSEWHEEL: {
-                msInfo = (MSLLHOOKSTRUCT*)lParam;
+                msInfo = (MSLLHOOKSTRUCT*) lParam;
 
                 if ((int) msInfo->mouseData > 0) {
                     mouseState += HKM_MOUSE_WHUP;
@@ -149,15 +180,14 @@ HotkeyManager::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         }
 
         if (mouseState > 0) {
-            mouseState += CalcModifiers();
+            mouseState += Modifiers();
 
-            HotkeyInfo *hkInfo = m_keyMap[mouseState];
-            if (hkInfo != NULL) {
-                PostMessage(hkInfo->parentWnd, WM_HOTKEY,
-                    hkInfo->hotkeyId, hkInfo->keys & 0xF0000);
+            if (_keyCombinations.count(mouseState) > 0) {
+                PostMessage(_notifyWnd, WM_HOTKEY,
+                    mouseState, mouseState & 0xF0000);
 
                 if (mouseState & HKM_MOD_WIN) {
-                    m_fixWin = true; /* enable fix right before WIN goes up */
+                    _fixWin = true; /* enable fix right before WIN goes up */
                 }
 
                 return 1; /* processed the message; eat it */

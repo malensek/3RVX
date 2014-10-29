@@ -57,7 +57,9 @@ void HotkeyManager::Register(int keyCombination) {
     /* keyboard-only hotkeys; use WinAPI */
     int mods = (0xF0000 & keyCombination) >> 16;
     if (!RegisterHotKey(_notifyWnd, keyCombination, mods, vk)) {
-        CLOG(L"Failed to register hotkey combination: %d", keyCombination);
+        CLOG(L"Failed to register hotkey [%d]\n"
+            L"Mods: %d, VK: %d", keyCombination, GetLastError(),
+            mods, vk);
         return;
     }
 

@@ -4,10 +4,6 @@
 HotkeyManager *HotkeyManager::instance = NULL;
 
 HotkeyManager *HotkeyManager::Instance() {
-    if (instance == NULL) {
-        instance = new HotkeyManager();
-        instance->Hook();
-    }
     return instance;
 }
 
@@ -16,14 +12,12 @@ HotkeyManager *HotkeyManager::Instance(HWND notifyWnd) {
         instance = new HotkeyManager();
         instance->Hook();
         instance->_notifyWnd = notifyWnd;
-        return instance;
-    } else {
-        return NULL;
     }
+
+    return instance;
 }
 
 bool HotkeyManager::Hook() {
-
     _mouseHook = SetWindowsHookEx(WH_MOUSE_LL,
         LowLevelMouseProc, NULL, NULL);
 

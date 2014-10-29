@@ -4,6 +4,7 @@
 #include "VolumeOSD.h"
 #include <Wtsapi32.h>
 #include "Logger.h"
+#include "Settings.h"
 
 int APIENTRY
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -69,8 +70,10 @@ void Init() {
 //    mW->Update();
 //    mW->Show();
 
+    Settings s(L"Settings.xml");
+
     vOsd = new VolumeOSD(hInst);
-    vOsd->LoadSkin(L"Ignition");
+    vOsd->LoadSkin(s.SkinName());
     vOsd->MeterLevels(v);
 
     WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
@@ -78,6 +81,8 @@ void Init() {
     HotkeyManager *hkManager = HotkeyManager::Instance();
     hkManager->Register(mainWnd, HKM_MOD_WIN + VK_BACK);
     hkManager->Register(mainWnd, HKM_MOD_WIN + HKM_MOUSE_WHUP);
+
+    CLOG(L"%d", HKM_MOD_WIN + VK_UP);
 }
 
 HWND CreateMainWnd(HINSTANCE hInstance) {
@@ -144,14 +149,6 @@ LRESULT CALLBACK WndProc(
             printf("%x\n", lParam);
             break;
         }
-    }
-
-    if (message == WM_HOTKEY) {
-        printf("Hotkey: %d\n", (int) wParam);
-    }
-
-    if (message == WM_WTSSESSION_CHANGE) {
-        printf("session change\n");
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);

@@ -45,6 +45,7 @@ void VolumeOSD::Hide() {
 void VolumeOSD::AnimateOut() {
     bool animOver = _fout.Animate();
     if (animOver) {
+        CLOG(L"Finished hiding window.");
         KillTimer(_hWnd, TIMER_ANIMOUT);
         _mWnd.Hide();
     }
@@ -72,6 +73,7 @@ LRESULT VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
     if (message == WM_TIMER) {
         switch (wParam) {
         case TIMER_HIDE:
+            CLOG(L"Display duration has elapsed. Hiding window.");
             Hide();
             KillTimer(_hWnd, TIMER_HIDE);
             break;

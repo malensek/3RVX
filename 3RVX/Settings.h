@@ -18,8 +18,6 @@ public:
         _root = _xml.GetDocument()->FirstChildElement("settings");
     }
 
-    void Load();
-
     std::wstring SkinName();
 
 private:

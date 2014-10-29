@@ -112,15 +112,26 @@ HWND CreateMainWnd(HINSTANCE hInstance) {
 LRESULT CALLBACK WndProc(
     HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
-    if (message == MSG_VOLCHNG) {
+    switch (message) {
+    case MSG_VOLCHNG: {
         float v = ca->Volume();
         QCLOG(L"Volume level: %.0f", v * 100.0f);
         vOsd->MeterLevels(v);
+        break;
     }
 
-    if (message == MSG_DEVCHNG) {
-        printf("Device change detected.\n");
+    case MSG_DEVCHNG:
+        CLOG(L"Device change detected.");
         ca->ReattachDefaultDevice();
+        break;
+
+    case WM_HOTKEY:
+        CLOG(L"Hotkey: %d", (int) wParam);
+        break;
+
+    case WM_WTSSESSION_CHANGE:
+        CLOG(L"Detected session change");
+        break;
     }
 
     if (message == WM_3RVX_CONTROL) {

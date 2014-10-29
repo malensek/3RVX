@@ -195,10 +195,10 @@ HotkeyManager::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
 LRESULT CALLBACK
 HotkeyManager::LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
-    return HotkeyManager::Instance()->MouseProc(nCode, wParam, lParam);
+    return HotkeyManager::instance->MouseProc(nCode, wParam, lParam);
 }
 
 LRESULT CALLBACK
 HotkeyManager::LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
-    return HotkeyManager::Instance()->KeyProc(nCode, wParam, lParam);
+    return HotkeyManager::instance->KeyProc(nCode, wParam, lParam);
 }

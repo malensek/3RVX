@@ -78,9 +78,11 @@ void Init() {
 
     WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
 
-    HotkeyManager *hkManager = HotkeyManager::Instance();
-    hkManager->Register(mainWnd, HKM_MOD_WIN + VK_BACK);
-    hkManager->Register(mainWnd, HKM_MOD_WIN + HKM_MOUSE_WHUP);
+    HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);
+    hkm->Register(HKM_MOD_WIN + VK_BACK);
+    hkm->Register(HKM_MOD_WIN + HKM_MOUSE_WHUP);
+    //hkm->Unregister(HKM_MOD_WIN + VK_BACK);
+    //hkm->Unregister(HKM_MOD_WIN + HKM_MOUSE_WHUP + 2);
 
     CLOG(L"%d", HKM_MOD_WIN + VK_UP);
 }

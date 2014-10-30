@@ -1,3 +1,7 @@
+#pragma once
+
+#include <unordered_map>
+
 #include "Logger.h"
 #include "StringUtils.h"
 #include "TinyXml2\tinyxml2.h"
@@ -19,6 +23,7 @@ public:
     }
 
     std::wstring SkinName();
+    std::unordered_map<int, int> Hotkeys();
 
 private:
     std::wstring _file;

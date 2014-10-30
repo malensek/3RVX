@@ -22,9 +22,20 @@ public:
         CLOG(L"Loading meter bitmap: %s\nStatus: %d",
             bitmapName.c_str(), bmp->GetLastStatus());
         _bitmap = bmp;
+    }
+
+    Meter(int x, int y, int units) :
+    _bitmap(NULL),
+    _value(0.0f),
+    _lastValue(-1.0f),
+    _units(units),
+    _lastUnits(-1) {
+        _rect.X = x;
+        _rect.Y = y;
     };
 
     enum TextAlignment { Left, Right, Center };
+    enum TextStyle { Bold = 1, Italic = 2, UnderLine = 4, Strike = 8 };
 
     virtual bool Dirty();
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) = 0;

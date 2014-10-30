@@ -9,7 +9,6 @@
   <osd position="Default"/>
 
   <hotkeys>
-    <hotkey action="VolumeUp">524326</hotkey>
-    <hotkey action="VolumeDown">80001</hotkey>
+    <hotkey action="100" combination="524296"/>
   </hotkeys>
 </settings>

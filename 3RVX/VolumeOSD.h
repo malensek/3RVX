@@ -4,6 +4,7 @@
 #include "MeterWnd\Meters\MeterTypes.h"
 #include "MeterWnd\MeterWnd.h"
 #include "MeterWnd\Meter.h"
+#include "Skin.h"
 
 class VolumeOSD {
 public:
@@ -34,7 +35,7 @@ public:
             NULL, NULL, NULL, NULL, NULL, HWND_MESSAGE, NULL, hInstance, this);
     };
 
-    void LoadSkin(std::wstring skinName);
+    void LoadSkin(Skin *skin);
     void MeterLevels();
     void MeterLevels(float value);
 

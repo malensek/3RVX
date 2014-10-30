@@ -9,13 +9,11 @@
 #define TIMER_ANIMIN 101
 #define TIMER_ANIMOUT 102
 
-void VolumeOSD::LoadSkin(std::wstring skinName) {
-    Skin skin(skinName);
-
-    Gdiplus::Bitmap *bg = skin.OSDBgImg("volume");
+void VolumeOSD::LoadSkin(Skin *skin) {
+    Gdiplus::Bitmap *bg = skin->OSDBgImg("volume");
     _mWnd.BackgroundImage(bg);
 
-    std::list<Meter*> meters = skin.Meters("volume");
+    std::list<Meter*> meters = skin->Meters("volume");
     for each (Meter *m in meters) {
         _mWnd.AddMeter(m);
     }

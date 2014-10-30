@@ -74,7 +74,7 @@
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="HotkeyManager.h" />
-    <ClInclude Include="Hotkeys.h" />
+    <ClInclude Include="HotkeyActions.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MeterWnd\Animation.h" />
     <ClInclude Include="MeterWnd\Animations\FadeOut.h" />

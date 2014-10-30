@@ -1,6 +1,6 @@
 #include "Settings.h"
 
-#include "Hotkeys.h"
+#include "HotkeyActions.h"
 
 std::wstring Settings::SkinName() {
     const char* skinName = _root->FirstChildElement("skin")->GetText();

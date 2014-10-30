@@ -78,13 +78,13 @@
     <ClInclude Include="StringUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hotkeys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Controllers\Volume\VolumeController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeterWnd\Meters\TextMeter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HotkeyActions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

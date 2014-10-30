@@ -1,6 +1,7 @@
 #include "Skin.h"
 
 #include <algorithm>
+
 #include "MeterWnd/Meters/MeterTypes.h"
 
 Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {

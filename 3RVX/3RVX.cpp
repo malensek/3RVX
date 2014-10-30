@@ -1,5 +1,4 @@
 ﻿#include "3RVX.h"
-#include "Controllers\Volume\IVolume.h"
 #include "Controllers\Volume\CoreAudio.h"
 #include "VolumeOSD.h"
 #include <Wtsapi32.h>
@@ -57,34 +56,27 @@ LPTSTR lpCmdLine, int nCmdShow) {
 
 void Init() {
     CLOG(L"Initializing...");
-    ca = new CoreAudio(mainWnd);
-    ca->Init();
-    float v = ca->Volume();
 
-//    Meter *m = new HorizontalEndcap(L"meter.png", 71, 29, 28);
-//    mW = new MeterWnd(hInst, L"testtest", L"what what");
-//    mW->AddMeter(m);
-//    std::wstring bgbmp(L"bg.png");
-//    mW->SetBackgroundImage(Gdiplus::Bitmap::FromFile(bgbmp.c_str(), true));
-//    mW->MeterLevels(v);
-//    mW->Update();
-//    mW->Show();
+    volCtrl = new CoreAudio(mainWnd);
+    volCtrl->Init();
+    float currentVolume = volCtrl->Volume();
 
-    Settings s(L"Settings.xml");
+    Settings settings(L"Settings.xml");
+
+    Skin skin(settings.SkinName());
 
     vOsd = new VolumeOSD(hInst);
-    vOsd->LoadSkin(s.SkinName());
-    vOsd->MeterLevels(v);
+    vOsd->LoadSkin(&skin);
+    vOsd->MeterLevels(currentVolume);
+
+    hotkeys = settings.Hotkeys();
+    HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);
+    for (auto it = hotkeys.begin(); it != hotkeys.end(); ++it) {
+        int combination = it->first;
+        hkm->Register(combination);
+    }
 
     WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
-
-    HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);
-    hkm->Register(HKM_MOD_WIN + VK_BACK);
-    hkm->Register(HKM_MOD_WIN + HKM_MOUSE_WHUP);
-    //hkm->Unregister(HKM_MOD_WIN + VK_BACK);
-    //hkm->Unregister(HKM_MOD_WIN + HKM_MOUSE_WHUP + 2);
-
-    CLOG(L"%d", HKM_MOD_WIN + VK_UP);
 }
 
 HWND CreateMainWnd(HINSTANCE hInstance) {
@@ -121,7 +113,7 @@ LRESULT CALLBACK WndProc(
 
     switch (message) {
     case MSG_VOLCHNG: {
-        float v = ca->Volume();
+        float v = volCtrl->Volume();
         QCLOG(L"Volume level: %.0f", v * 100.0f);
         vOsd->MeterLevels(v);
         break;
@@ -129,12 +121,18 @@ LRESULT CALLBACK WndProc(
 
     case MSG_DEVCHNG:
         CLOG(L"Device change detected.");
-        ca->ReattachDefaultDevice();
+        volCtrl->ReattachDefaultDevice();
         break;
 
-    case WM_HOTKEY:
+    case WM_HOTKEY: {
         CLOG(L"Hotkey: %d", (int) wParam);
+        int action = hotkeys[(int) wParam];
+        if (action == 100) {
+            float current = volCtrl->Volume();
+            volCtrl->Volume(current + .1f);
+        }
         break;
+    }
 
     case WM_WTSSESSION_CHANGE:
         CLOG(L"Detected session change");

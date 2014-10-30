@@ -12,7 +12,7 @@
 
       <meter type="Text" format="[[PERC]]%"
              font="Tahoma" size="13" style="Regular" color="FFFFFF"
-             alpha="180" align="right" x="367" y="25"
+             transparency="180" align="right" x="367" y="25"
              width="40" height="23"/>
 
       <meter type="bitstrip" image="OSD\bitstrip.png" units="4" x="37" y="30"/>

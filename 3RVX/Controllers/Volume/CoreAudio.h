@@ -6,9 +6,10 @@
 #include <Mmdeviceapi.h>
 #include <string>
 
-#include "IVolume.h"
+#include "VolumeController.h"
 
-class CoreAudio : IAudioEndpointVolumeCallback, IMMNotificationClient, IVolume {
+class CoreAudio : IAudioEndpointVolumeCallback, IMMNotificationClient,
+    public VolumeController {
 public:
     CoreAudio(HWND hWnd) :
         m_notifyHwnd(hWnd),

@@ -3,7 +3,7 @@
 #define MSG_VOLCHNG WM_APP + 1080
 #define MSG_DEVCHNG WM_APP + 1081
 
-class IVolume {
+class VolumeController {
 public:
     virtual float Volume() = 0;
     virtual void Volume(float vol) = 0;

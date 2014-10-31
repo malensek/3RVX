@@ -11,9 +11,9 @@
              units="28" x="71" y="29"/>
 
       <meter type="Text" format="[[PERC]]%"
-             font="Tahoma" size="13" style="Regular" color="FFFFFF"
-             transparency="180" align="right" x="367" y="25"
-             width="40" height="23"/>
+             font="Tahoma" size="11" style="Bold" color="FFFFFF"
+             transparency="200" align="right" x="362" y="29"
+             width="45" height="23"/>
 
       <meter type="bitstrip" image="OSD\bitstrip.png" units="4" x="37" y="30"/>
 

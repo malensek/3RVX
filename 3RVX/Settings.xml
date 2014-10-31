@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <settings>
-  <skin>Notes</skin>
+  <skin>TestSkin</skin>
   <language>English</language>
 
   <notifyicon>True</notifyicon>

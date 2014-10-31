@@ -100,11 +100,11 @@ Meter::TextAlignment Skin::Alignment(tinyxml2::XMLElement *meterXMLElement) {
     std::transform(alignStr.begin(), alignStr.end(),
         alignStr.begin(), ::tolower);
 
-    Meter::TextAlignment alignment = NumberStrip::Left;
+    Gdiplus::StringAlignment alignment = Gdiplus::StringAlignmentNear;
     if (alignStr == "right") {
-        alignment = NumberStrip::Right;
+        alignment = Gdiplus::StringAlignmentFar;
     } else if (alignStr == "center") {
-        alignment = NumberStrip::Center;
+        alignment = Gdiplus::StringAlignmentCenter;
     }
 
     return alignment;

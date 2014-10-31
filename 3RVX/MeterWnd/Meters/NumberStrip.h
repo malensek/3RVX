@@ -8,7 +8,7 @@ class NumberStrip : public Meter {
 public:
 
     NumberStrip(std::wstring bitmapName, int x, int y, int units,
-        TextAlignment align):
+        Gdiplus::StringAlignment align):
     Meter(bitmapName, x, y, units),
     _align(align) {
         _charWidth = _bitmap->GetWidth();
@@ -21,6 +21,6 @@ public:
     virtual std::wstring ToString();
 
 private:
-    TextAlignment _align;
+    Gdiplus::StringAlignment _align;
     int _charWidth;
 };

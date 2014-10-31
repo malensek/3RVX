@@ -20,9 +20,9 @@ void NumberStrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     }
 
     int drawX = _charWidth * 2;
-    if (_align == Left) {
+    if (_align == Gdiplus::StringAlignmentNear) {
         drawX = (chars - 1) * _charWidth;
-    } else if (_align == Center) {
+    } else if (_align == Gdiplus::StringAlignmentFar) {
         drawX = (_charWidth * 2) - ((3 - chars) * (_charWidth / 2));
     }
 

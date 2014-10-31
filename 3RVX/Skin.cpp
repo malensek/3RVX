@@ -90,7 +90,50 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     return m;
 }
 
-Meter::TextAlignment Skin::Alignment(tinyxml2::XMLElement *meterXMLElement) {
+Gdiplus::Font *Skin::Font(tinyxml2::XMLElement *meterXMLElement) {
+    const char *fontName = meterXMLElement->Attribute("font");
+    std::wstring name(L"Arial");
+    if (fontName != NULL) {
+        name = std::wstring(StringUtils::Widen(fontName));
+    }
+
+    float size = 10;
+    meterXMLElement->QueryFloatAttribute("size", &size);
+
+    int styleFlags = 0;
+    const char *fontStyle = meterXMLElement->Attribute("style");
+    if (fontStyle != NULL) {
+        std::wstring style(StringUtils::Widen(fontStyle));
+        std::transform(style.begin(), style.end(), style.begin(), ::tolower);
+
+        std::wstring::size_type sz;
+        sz = style.find(L"bold", 0);
+        if (sz != std::wstring::npos) {
+            styleFlags |= Gdiplus::FontStyleBold;
+        }
+
+        sz = style.find(L"italic", 0);
+        if (sz != std::wstring::npos) {
+            styleFlags |= Gdiplus::FontStyleItalic;
+        }
+
+        sz = style.find(L"underline", 0);
+        if (sz != std::wstring::npos) {
+            styleFlags |= Gdiplus::FontStyleUnderline;
+        }
+
+        sz = style.find(L"strike", 0);
+        if (sz != std::wstring::npos) {
+            styleFlags |= Gdiplus::FontStyleStrikeout;
+        }
+    }
+
+    Gdiplus::Font *font = new Gdiplus::Font(name.c_str(), size, styleFlags);
+    return font;
+}
+
+Gdiplus::StringAlignment
+Skin::Alignment(tinyxml2::XMLElement *meterXMLElement) {
     const char *align = meterXMLElement->Attribute("align");
     if (align == NULL) {
         align = "left";

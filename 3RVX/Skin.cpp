@@ -77,8 +77,35 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     } else if (type == "horizontaltile") {
         m = new HorizontalTile(img, x, y, units);
     } else if (type == "numberstrip") {
-        Meter::TextAlignment align = Alignment(meterXMLElement);
+        Gdiplus::StringAlignment align = Alignment(meterXMLElement);
         m = new NumberStrip(img, x, y, units, align);
+    } else if (type == "text") {
+        int width = meterXMLElement->IntAttribute("width");
+        int height = meterXMLElement->IntAttribute("height");
+
+        Gdiplus::Font *font = Font(meterXMLElement);
+        Gdiplus::StringAlignment align = Alignment(meterXMLElement);
+
+        const char *fontColor = meterXMLElement->Attribute("color");
+        std::wstring color(L"FFFFFF");
+        if (fontColor != NULL) {
+            color = std::wstring(StringUtils::Widen(fontColor));
+        }
+        int itrans = 255;
+        meterXMLElement->QueryIntAttribute("transparency", &itrans);
+        byte transparency = (byte) itrans;
+
+        const char* stringFormat = meterXMLElement->Attribute("format");
+        std::wstring format(L"[[PERC]]%");
+        if (stringFormat != NULL) {
+            format = std::wstring(StringUtils::Widen(stringFormat));
+        }
+
+        m = new Text(x, y, width, height, font, align, color,
+            transparency, format);
+
+        delete font;
+        
     } else {
         CLOG(L"Unknown meter type: %s", StringUtils::Widen(type).c_str());
         return NULL;

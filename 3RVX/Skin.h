@@ -35,7 +35,7 @@ private:
 
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);
     Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
-    Meter::TextAlignment Skin::Alignment(tinyxml2::XMLElement *meterXMLElement);
+    Gdiplus::Font *Font(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::StringAlignment Alignment(tinyxml2::XMLElement *meterXMLElement);
     std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
 

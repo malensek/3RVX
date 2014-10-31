@@ -81,10 +81,10 @@
     <ClInclude Include="Controllers\Volume\VolumeController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeterWnd\Meters\TextMeter.h">
+    <ClInclude Include="HotkeyActions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HotkeyActions.h">
+    <ClInclude Include="MeterWnd\Meters\Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -146,7 +146,7 @@
     <ClCompile Include="Settings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MeterWnd\Meters\TextMeter.cpp">
+    <ClCompile Include="MeterWnd\Meters\Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

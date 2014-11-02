@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <settings>
-  <skin>TestSkin</skin>
+  <skin>Ice</skin>
   <language>English</language>
 
-  <notifyicon>True</notifyicon>
-  <playsounds>True</playsounds>
+  <notifyicon>true</notifyicon>
+  <playsounds>true</playsounds>
 
   <osd position="Default"/>
 

@@ -1,2 +1,1 @@
-3RVX
-====
+![3RVX 3](Documentation/teaser.png)

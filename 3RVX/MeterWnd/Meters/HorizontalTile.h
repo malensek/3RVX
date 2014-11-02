@@ -4,8 +4,10 @@
 
 class HorizontalTile : public Meter {
 public:
-    HorizontalTile(std::wstring bitmapName, int x, int y, int units):
-    Meter(bitmapName, x, y, units) {
+    HorizontalTile(std::wstring bitmapName, int x, int y, int units,
+        bool reverse = false) :
+    Meter(bitmapName, x, y, units),
+    _reverse(reverse) {
         _rect.Width = _bitmap->GetWidth();
         _rect.Height = _bitmap->GetHeight();
 
@@ -21,4 +23,5 @@ public:
 protected:
     Gdiplus::TextureBrush *_texture;
     Gdiplus::Matrix *_shiftMat;
+    bool _reverse;
 };

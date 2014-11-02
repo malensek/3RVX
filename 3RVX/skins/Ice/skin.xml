@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<skin>
+  <info>
+    <author>Matthew Malensek</author>
+    <website>http://matthew.malensek.net</website>
+  </info>
+
+  <osds>
+    <volume background="OSD\background.png">
+      <meter type="HorizontalTile" image="OSD\meter.png"
+             x="166" y="36" units="14"/>
+      <meter type="HorizontalTile" image="OSD\meter.png"
+             x="40" y="36" units="14"/>
+    </volume>
+
+    <mute background="OSD/mute.png"/>
+
+    <brightness background="OSD/brightness_back.png">
+      <meter type="HorizontalBar" image="OSD/meter.png" units="16"
+             x="33" y="165"/>
+    </brightness>
+  </osds>
+
+  <controller>
+    <slider type="vertical" x="26" y="20" width="17" height= "98" />
+    <muteButton x="5" y="5"/>
+  </controller>
+</skin>

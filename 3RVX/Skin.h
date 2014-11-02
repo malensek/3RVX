@@ -20,7 +20,7 @@ public:
         std::string u8FileName = StringUtils::Narrow(_skinFile);
         tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
         if (result != tinyxml2::XMLError::XML_SUCCESS) {
-            CLOG(L"Failed to read XML file!");
+            CLOG(L"Failed to read XML file! Error %d", result);
             //TODO throw exception?
         }
     }

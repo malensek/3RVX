@@ -18,7 +18,7 @@ public:
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics);
     ~HorizontalTile();
 
-private:
+protected:
     Gdiplus::TextureBrush *_texture;
     Gdiplus::Matrix *_shiftMat;
 };

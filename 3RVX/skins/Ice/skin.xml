@@ -10,7 +10,7 @@
       <meter type="HorizontalTile" image="OSD\meter.png"
              x="166" y="36" units="14"/>
       <meter type="HorizontalTile" image="OSD\meter.png"
-             x="40" y="36" units="14"/>
+             x="40" y="36" units="14" inverted="true"/>
     </volume>
 
     <mute background="OSD/mute.png"/>

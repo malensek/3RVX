@@ -56,6 +56,11 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
         units = 1;
     }
 
+    /* Several of the meters can be inverted (flipped), so we check for this
+     * flag now. */
+    bool inverted = false;
+    meterXMLElement->QueryBoolAttribute("inverted", &inverted);
+
     /* Check for meter background image. 'text' is the only meter
      * that does not require an image. */
     std::wstring img;
@@ -75,7 +80,7 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     } else if (type == "horizontalbar") {
         m = new HorizontalEndcap(img, x, y, units);
     } else if (type == "horizontaltile") {
-        m = new HorizontalTile(img, x, y, units);
+        m = new HorizontalTile(img, x, y, units, inverted);
     } else if (type == "numberstrip") {
         Gdiplus::StringAlignment align = Alignment(meterXMLElement);
         m = new NumberStrip(img, x, y, units, align);

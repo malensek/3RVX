@@ -92,7 +92,7 @@ HWND CreateMainWnd(HINSTANCE hInstance) {
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = L"3RVX";
+    wcex.lpszClassName = CLASS_3RVX;
     wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
     if (!RegisterClassEx(&wcex)) {
@@ -101,7 +101,7 @@ HWND CreateMainWnd(HINSTANCE hInstance) {
 
     HWND hWnd = CreateWindowEx(
         NULL,
-        L"3RVX", L"3RVX",
+        CLASS_3RVX, CLASS_3RVX,
         NULL, NULL, NULL, //your boat, gently down the stream
         NULL, NULL, HWND_MESSAGE, NULL, hInstance, NULL);
 

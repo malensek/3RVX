@@ -11,6 +11,8 @@
 #include "HotkeyManager.h"
 #include "VolumeOSD.h"
 
+#define CLASS_3RVX L"3RVXv3"
+
 static const UINT WM_3RVX_CONTROL = RegisterWindowMessage(L"WM_3RVX_CONTROL");
 #define MSG_LOAD WM_APP + 100
 

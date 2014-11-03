@@ -4,15 +4,12 @@
 #include <Wtsapi32.h>
 #include "Logger.h"
 #include "Settings.h"
+#include <iostream>
 
 int APIENTRY
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 LPTSTR lpCmdLine, int nCmdShow) {
     hInst = hInstance;
-
-    using namespace Gdiplus;
-    GdiplusStartupInput gdiplusStartupInput;
-    GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
 #ifdef _DEBUG
     Logger::OpenConsole();
@@ -26,6 +23,29 @@ LPTSTR lpCmdLine, int nCmdShow) {
     QCLOG(L"");
 
     QCLOG(L"Starting up...");
+
+    mutex = CreateMutex(NULL, FALSE, L"Local\\3RVX");
+    if (GetLastError() == ERROR_ALREADY_EXISTS) {
+        if (mutex) {
+            ReleaseMutex(mutex);
+        }
+
+        HWND masterWnd = FindWindow(CLASS_3RVX, CLASS_3RVX);
+        CLOG(L"A previous instance of the program is already running.\n"
+            L"Requesting Settings dialog from window: %d", masterWnd);
+        SendMessage(masterWnd, WM_3RVX_CONTROL, MSG_SETTINGS, NULL);
+
+#ifdef _DEBUG
+        CLOG(L"Press [enter] to terminate");
+        std::cin.get();
+#endif
+
+        return EXIT_SUCCESS;
+    }
+
+    using namespace Gdiplus;
+    GdiplusStartupInput gdiplusStartupInput;
+    GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
     mainWnd = CreateMainWnd(hInstance);
     if (mainWnd == NULL) {
@@ -145,8 +165,9 @@ LRESULT CALLBACK WndProc(
             Init();
             break;
 
-        case 101:
-            printf("%x\n", lParam);
+        case MSG_SETTINGS:
+            CLOG(L"Launching settings editor");
+            /* TODO: launch! */
             break;
         }
     }

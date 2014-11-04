@@ -39,3 +39,10 @@ std::unordered_map<int, int> Settings::Hotkeys() {
 
     return keyMappings;
 }
+
+bool Settings::IsEnabled(std::string elementName) {
+    bool val = false;
+    _root->FirstChildElement(elementName.c_str())->QueryBoolText(&val);
+    return val;
+}
+

@@ -21,9 +21,6 @@
     <ClInclude Include="SettingsUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SettingsUIDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,9 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SettingsUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsUIDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">

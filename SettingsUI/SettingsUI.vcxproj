@@ -106,7 +106,6 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SettingsSheet.h" />
     <ClInclude Include="SettingsUI.h" />
-    <ClInclude Include="SettingsUIDlg.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -115,7 +114,6 @@
     <ClCompile Include="General.cpp" />
     <ClCompile Include="SettingsSheet.cpp" />
     <ClCompile Include="SettingsUI.cpp" />
-    <ClCompile Include="SettingsUIDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

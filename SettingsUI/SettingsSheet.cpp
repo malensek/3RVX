@@ -26,7 +26,6 @@ SettingsSheet::~SettingsSheet()
 {
 }
 
-
 BEGIN_MESSAGE_MAP(SettingsSheet, CPropertySheet)
 END_MESSAGE_MAP()
 

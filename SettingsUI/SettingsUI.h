@@ -1,32 +1,30 @@
-
-// SettingsUI.h : main header file for the PROJECT_NAME application
-//
-
 #pragma once
 
 #ifndef __AFXWIN_H__
-	#error "include 'stdafx.h' before including this file for PCH"
+#error "include 'stdafx.h' before including this file for PCH"
 #endif
 
 #include "resource.h"		// main symbols
 
+#include <string>
 
-// CSettingsUIApp:
-// See SettingsUI.cpp for the implementation of this class
-//
+#include "TinyXml2/tinyxml2.h"
 
-class CSettingsUIApp : public CWinApp
-{
+class CSettingsUIApp : public CWinApp {
 public:
-	CSettingsUIApp();
+    CSettingsUIApp();
+    virtual BOOL InitInstance();
 
-// Overrides
-public:
-	virtual BOOL InitInstance();
+    static void LoadCheckbox(
+        tinyxml2::XMLElement *xmlRoot, std::string elementName, CButton *check);
 
-// Implementation
+    DECLARE_MESSAGE_MAP()
 
-	DECLARE_MESSAGE_MAP()
+private:
+    tinyxml2::XMLDocument _xml;
+    tinyxml2::XMLElement *_root;
+
+    void LoadSettings();
 };
 
 extern CSettingsUIApp theApp;

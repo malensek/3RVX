@@ -46,3 +46,11 @@ bool Settings::IsEnabled(std::string elementName) {
     return val;
 }
 
+std::wstring Settings::GetText(std::string elementName) {
+    const char* str = _root->FirstChildElement(elementName.c_str())->GetText();
+    if (str == NULL) {
+        return NULL;
+    } else {
+        return StringUtils::Widen(str);
+    }
+}

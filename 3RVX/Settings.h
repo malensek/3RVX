@@ -25,6 +25,7 @@ public:
     std::wstring SkinName();
     std::unordered_map<int, int> Hotkeys();
     bool IsEnabled(std::string elementName);
+    std::wstring GetText(std::string elementName);
 
 private:
     std::wstring _file;

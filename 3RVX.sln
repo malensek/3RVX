@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3RVX", "3RVX\3RVX.vcxproj", "{CC4D05DB-E255-4F26-B71C-455CC100ED54}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SettingsUI", "SettingsUI\SettingsUI.vcxproj", "{A7FE6541-1A5A-44F5-80F9-7A2C19CAD7C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{CC4D05DB-E255-4F26-B71C-455CC100ED54}.Debug|Win32.Build.0 = Debug|Win32
 		{CC4D05DB-E255-4F26-B71C-455CC100ED54}.Release|Win32.ActiveCfg = Release|Win32
 		{CC4D05DB-E255-4F26-B71C-455CC100ED54}.Release|Win32.Build.0 = Release|Win32
+		{A7FE6541-1A5A-44F5-80F9-7A2C19CAD7C1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A7FE6541-1A5A-44F5-80F9-7A2C19CAD7C1}.Debug|Win32.Build.0 = Debug|Win32
+		{A7FE6541-1A5A-44F5-80F9-7A2C19CAD7C1}.Release|Win32.ActiveCfg = Release|Win32
+		{A7FE6541-1A5A-44F5-80F9-7A2C19CAD7C1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

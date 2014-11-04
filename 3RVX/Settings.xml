@@ -3,10 +3,18 @@
   <skin>Ice</skin>
   <language>English</language>
 
-  <notifyicon>true</notifyicon>
-  <playsounds>true</playsounds>
+  <notifyIcon>true</notifyIcon>
+  <soundEffects>true</soundEffects>
+  <onTop>true</onTop>
+  <hideFullscreen>true</hideFullscreen>
 
-  <osd position="Default"/>
+  <hideDelay>800</hideDelay>
+  <hideAnimation>Fade</hideAnimation>
+  <animationSpeed>765</animationSpeed>
+
+  <position>Bottom</position>
+  <positionX>0</positionX>
+  <positionY>0</positionY>
 
   <hotkeys>
     <hotkey action="100" combination="524296"/>

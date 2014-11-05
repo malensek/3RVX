@@ -69,7 +69,6 @@ BOOL CSettingsUIApp::InitInstance() {
     SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
     Settings s(L"../3RVX/Settings.xml");
-
     SettingsSheet settingsSheet(L"3RVX Settings");
 
     General g(&s);
@@ -79,35 +78,27 @@ BOOL CSettingsUIApp::InitInstance() {
     settingsSheet.AddPage(&d);
 
     /* Disable help for the PropertySheet and its pages */
-    settingsSheet.m_psh.dwFlags ^= PSH_HASHELP;
+    settingsSheet.m_psh.dwFlags &= ~(PSH_HASHELP);
     for (int i = 0; i < settingsSheet.GetPageCount(); ++i) {
         CPropertyPage *page = settingsSheet.GetPage(i);
-        page->m_psp.dwFlags ^= PSP_HASHELP;
+        page->m_psp.dwFlags &= ~(PSP_HASHELP);
     }
 
     m_pMainWnd = &settingsSheet;
-
-    //((CButton *) g.GetDlgItem(IDC_CHECK3))->SetCheck(BST_CHECKED);
-    //LoadCheckbox(3, "notifyicon", &g._notifyicon);
     INT_PTR nResponse = settingsSheet.DoModal();
-
     if (nResponse == IDOK) {
         // TODO: Place code here to handle when the dialog is
         //  dismissed with OK
-    } else if (nResponse == IDCANCEL) {
-        // TODO: Place code here to handle when the dialog is
-        //  dismissed with Cancel
     } else if (nResponse == -1) {
         TRACE(traceAppMsg, 0, "Warning: dialog creation failed, so application is terminating unexpectedly.\n");
         TRACE(traceAppMsg, 0, "Warning: if you are using MFC controls on the dialog, you cannot #define _AFX_NO_MFC_CONTROLS_IN_DIALOGS.\n");
     }
 
-    // Delete the shell manager created above.
     if (pShellManager != NULL) {
         delete pShellManager;
     }
 
-    // Since the dialog has been closed, return FALSE so that we exit the
-    //  application, rather than start the application's message pump.
-    return false;
+    /* Since the dialog has been closed, return FALSE so that we exit the
+     *  application, rather than start the application's message pump. */
+    return FALSE;
 }

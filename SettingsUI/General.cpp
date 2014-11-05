@@ -8,7 +8,6 @@ IMPLEMENT_DYNAMIC(General, CPropertyPage)
 General::General(Settings *settings) :
 CPropertyPage(General::IDD),
 _settings(settings) {
-
 }
 
 General::~General()
@@ -26,12 +25,24 @@ void General::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, GRP_BEHAVIOR, _behaviorGrp);
     DDX_Control(pDX, GRP_LANGUAGE, _languageGrp);
     DDX_Control(pDX, LBL_AUTHOR, _author);
+    DDX_Control(pDX, CMB_SKIN, _skins);
 }
 
 BOOL General::OnInitDialog() {
     CPropertyPage::OnInitDialog();
 
     LoadSettings();
+
+    std::list<CString> skins = FindSkins(L"../3RVX/Skins");
+    for each (CString skin in skins) {
+        _skins.AddString(skin);
+    }
+
+    std::wstring current = _settings->GetText("skin");
+    int idx = _skins.SelectString(0, current.c_str());
+    if (idx == CB_ERR) {
+        _skins.SelectString(0, L"Default");
+    }
 
     return TRUE;
 }
@@ -61,12 +72,10 @@ std::list<CString> General::FindSkins(CString dir) {
 
     return skins;
 }
+
 void General::LoadSettings() {
     _notify.SetCheck(_settings->IsEnabled("notifyIcon"));
     _sounds.SetCheck(_settings->IsEnabled("soundEffects"));
-
-    std::wstring w = _settings->GetText("skin");
-    _author.SetWindowTextW(w.c_str());
 }
 
 BEGIN_MESSAGE_MAP(General, CPropertyPage)

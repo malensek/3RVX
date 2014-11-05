@@ -29,11 +29,12 @@ private:
     CButton _notify;
     CButton _sounds;
     CComboBox _lang;
-
-    void LoadSettings();
     CStatic _skinGrp;
     CStatic _behaviorGrp;
     CStatic _languageGrp;
     CStatic _author;
+
+    void LoadSettings();
     std::list<CString> FindSkins(CString dir);
+    CComboBox _skins;
 };

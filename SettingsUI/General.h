@@ -35,4 +35,5 @@ private:
     CStatic _behaviorGrp;
     CStatic _languageGrp;
     CStatic _author;
+    std::list<CString> FindSkins(CString dir);
 };

@@ -36,6 +36,31 @@ BOOL General::OnInitDialog() {
     return TRUE;
 }
 
+std::list<CString> General::FindSkins(CString dir) {
+    std::list<CString> skins;
+
+    CFileFind ff;
+    dir += L"\\*";
+    BOOL result = ff.FindFile(dir);
+    while (result) {
+        result = ff.FindNextFile();
+        if (ff.IsDots()) {
+            continue;
+        }
+
+        if (ff.IsDirectory()) {
+            CFileFind inDir;
+            CString dirPath = ff.GetFilePath();
+            dirPath += L"\\skin.xml";
+            if (inDir.FindFile(dirPath)) {
+                /* We found a skin XML file; add the skin dir to our list. */
+                skins.push_back(ff.GetFileName());
+            }
+        }
+    }
+
+    return skins;
+}
 void General::LoadSettings() {
     _notify.SetCheck(_settings->IsEnabled("notifyIcon"));
     _sounds.SetCheck(_settings->IsEnabled("soundEffects"));

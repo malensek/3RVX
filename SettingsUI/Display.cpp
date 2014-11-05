@@ -11,10 +11,8 @@
 
 IMPLEMENT_DYNAMIC(Display, CPropertyPage)
 
-Display::Display()
-	: CPropertyPage(Display::IDD)
-{
-
+Display::Display() :
+CPropertyPage(Display::IDD) {
 }
 
 Display::~Display()

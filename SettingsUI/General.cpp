@@ -36,15 +36,31 @@ BOOL General::OnInitDialog() {
 
     LoadSettings();
 
+    /* Determine which skins are available */
     std::list<CString> skins = FindSkins(L"../3RVX/Skins");
     for each (CString skin in skins) {
         _skins.AddString(skin);
     }
 
+    /* Update the combo box with the current skin */
     std::wstring current = _settings->GetText("skin");
     int idx = _skins.SelectString(0, current.c_str());
     if (idx == CB_ERR) {
         _skins.SelectString(0, L"Default");
+    }
+
+    /* Are we set to run on startup in the registry? */
+    CRegKey rk;
+    int result = rk.Open(HKEY_CURRENT_USER, STARTUP_KEY, KEY_READ);
+    if (result == ERROR_SUCCESS) {
+        CString str;
+        ULONG bufLen = 1024;
+        LPTSTR buf = str.GetBufferSetLength(bufLen);
+
+        int queryResult = rk.QueryStringValue(KEY_NAME, buf, &bufLen);
+        if (queryResult == ERROR_SUCCESS) {
+            _startup.SetCheck(true);
+        }
     }
 
     return TRUE;

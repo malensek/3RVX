@@ -36,5 +36,6 @@ private:
 
     void LoadSettings();
     std::list<CString> FindSkins(CString dir);
+    void EnableRunOnStartup();
     CComboBox _skins;
 };

@@ -102,7 +102,9 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\3RVX\Logger.h" />
     <ClInclude Include="..\3RVX\Settings.h" />
+    <ClInclude Include="..\3RVX\SkinInfo.h" />
     <ClInclude Include="..\3RVX\StringUtils.h" />
     <ClInclude Include="..\3RVX\TinyXml2\tinyxml2.h" />
     <ClInclude Include="Display.h" />
@@ -114,7 +116,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\3RVX\Logger.cpp" />
     <ClCompile Include="..\3RVX\Settings.cpp" />
+    <ClCompile Include="..\3RVX\SkinInfo.cpp" />
     <ClCompile Include="..\3RVX\StringUtils.cpp" />
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="Display.cpp" />

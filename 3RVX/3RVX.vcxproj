@@ -44,10 +44,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <PrecompiledHeaderOutputFile />
+      <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -92,6 +93,7 @@
     <ClInclude Include="NotificationIcon.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Skin.h" />
+    <ClInclude Include="SkinInfo.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="TinyXml2\tinyxml2.h" />
     <ClInclude Include="VolumeOSD.h" />
@@ -115,6 +117,7 @@
     <ClCompile Include="NotificationIcon.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Skin.cpp" />
+    <ClCompile Include="SkinInfo.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="VolumeOSD.cpp" />

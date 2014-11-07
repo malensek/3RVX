@@ -90,6 +90,9 @@
     <ClInclude Include="MeterWnd\Meters\VerticalTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SkinInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -153,6 +156,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\VerticalTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

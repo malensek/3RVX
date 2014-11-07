@@ -15,11 +15,13 @@ public:
         std::string u8FileName = StringUtils::Narrow(file);
         tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
         if (result != tinyxml2::XMLError::XML_SUCCESS) {
-            CLOG(L"Failed to read XML file!");
-            //TODO throw exception?
+            throw std::runtime_error("Failed to parse XML file");
         }
 
         _root = _xml.GetDocument()->FirstChildElement("settings");
+        if (_root == NULL) {
+            throw std::runtime_error("Could not find root XML element");
+        }
     }
 
     std::wstring SkinName();

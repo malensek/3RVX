@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "MeterWnd/Meters/MeterTypes.h"
+#include "StringUtils.h"
 
 Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);

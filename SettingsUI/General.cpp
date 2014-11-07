@@ -3,6 +3,8 @@
 #include "General.h"
 #include "afxdialogex.h"
 
+#include "../3RVX/SkinInfo.h"
+
 #define KEY_NAME L"3RVXv3"
 #define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
@@ -29,6 +31,7 @@ void General::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, GRP_LANGUAGE, _languageGrp);
     DDX_Control(pDX, LBL_AUTHOR, _author);
     DDX_Control(pDX, CMB_SKIN, _skins);
+    DDX_Control(pDX, BTN_WEBSITE, _website);
 }
 
 BOOL General::OnInitDialog() {
@@ -46,7 +49,22 @@ BOOL General::OnInitDialog() {
     std::wstring current = _settings->GetText("skin");
     int idx = _skins.SelectString(0, current.c_str());
     if (idx == CB_ERR) {
+        current = L"Default";
         _skins.SelectString(0, L"Default");
+    }
+
+    std::wstring skinXML = L"../3RVX/" SKINS_DIR L"/" + current + L"/" SKIN_XML;
+    OutputDebugString(skinXML.c_str());
+    SkinInfo s(skinXML);
+
+    CString authorText(L"Author:");
+    authorText.Append(L" ");
+    authorText.Append(s.Author().c_str());
+    _author.SetWindowTextW(authorText);
+
+    _url = s.URL();
+    if (_url == L"") {
+        _website.EnableWindow(false);
     }
 
     /* Are we set to run on startup in the registry? */
@@ -112,7 +130,9 @@ void General::EnableRunOnStartup() {
 }
 
 BEGIN_MESSAGE_MAP(General, CPropertyPage)
+    ON_BN_CLICKED(BTN_WEBSITE, &General::OnBnClickedWebsite)
 END_MESSAGE_MAP()
+
 void General::OnBnClickedWebsite() {
     ShellExecute(NULL, L"open", _url.c_str(), NULL, NULL, SW_SHOWNORMAL);
 }

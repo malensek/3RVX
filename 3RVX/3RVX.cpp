@@ -5,6 +5,7 @@
 #include "Logger.h"
 #include "Settings.h"
 #include <iostream>
+#include "Skin.h"
 
 int APIENTRY
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -83,7 +84,9 @@ void Init() {
 
     Settings settings(L"Settings.xml");
 
-    Skin skin(settings.SkinName());
+    std::wstring skinName = settings.SkinName();
+    std::wstring skinXML = SKINS_DIR L"\\" + skinName + L"\\" SKIN_XML;
+    Skin skin(skinXML);
 
     vOsd = new VolumeOSD(hInst);
     vOsd->LoadSkin(&skin);

@@ -2,9 +2,6 @@
 #include "afxwin.h"
 #include "../3RVX/Settings.h"
 
-
-// General dialog
-
 class General : public CPropertyPage
 {
 	DECLARE_DYNAMIC(General)
@@ -13,18 +10,26 @@ public:
     General(Settings *settings);
 	virtual ~General();
 
-// Dialog Data
 	enum { IDD = IDD_GENERAL };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	virtual void DoDataExchange(CDataExchange* pDX);
     virtual BOOL OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()
 
 private:
     Settings *_settings;
+    std::wstring _url;
 
+    void LoadSettings();
+    std::list<CString> FindSkins(CString dir);
+    void EnableRunOnStartup();
+
+/* Auto-generated members follow*/
+public:
+    afx_msg void OnBnClickedWebsite();
+private:
     CButton _startup;
     CButton _notify;
     CButton _sounds;
@@ -33,9 +38,6 @@ private:
     CStatic _behaviorGrp;
     CStatic _languageGrp;
     CStatic _author;
-
-    void LoadSettings();
-    std::list<CString> FindSkins(CString dir);
-    void EnableRunOnStartup();
+    CButton _website;
     CComboBox _skins;
 };

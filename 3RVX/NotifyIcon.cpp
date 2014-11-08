@@ -5,37 +5,49 @@
 
 #include "Logger.h"
 
-bool NotifyIcon::Init(HWND hWnd)
-{
+int NotifyIcon::ids = 0;
+
+NotifyIcon::NotifyIcon(HWND hWnd, std::wstring caption,
+    std::list<std::wstring> icons) :
+    _level(-1),
+    _caption(caption) {
+
     using Gdiplus::Bitmap;
 
-    NOTIFYICONDATA nIcon;
-    //nIcon.cbSize = 
-    //nIcon.dwInfoFlags
-    //nIcon.dwState = 
-    nIcon.cbSize = sizeof(NOTIFYICONDATA);
-    nIcon.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP;
-    nIcon.uID = 1;
-    nIcon.uVersion = NOTIFYICON_VERSION;
+    _id = NotifyIcon::ids++;
+
+    _nid = {};
+    _nid.cbSize = { sizeof(_nid) };
+    _nid.hWnd = hWnd;
+    _nid.uID = _id;
+    _nid.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP;
+    _nid.uCallbackMessage = MSG_NOTIFYICON;
     HICON icon;
-    Bitmap *iconBmp = new Bitmap(L"c:\\icon.ico");
+    Bitmap *iconBmp = new Bitmap(L"Skins/Ignition/Notification Icons/0.ico");
     iconBmp->GetHICON(&icon);
-    nIcon.hIcon = icon;
+    _nid.hIcon = icon;
 
-    nIcon.uCallbackMessage = WM_APP + 12;
+    wcscpy_s(_nid.szTip, 128, L"3rVX");
 
-    nIcon.hWnd = hWnd;
+    Shell_NotifyIcon(NIM_ADD, &_nid);
 
-    Shell_NotifyIcon(NIM_ADD, &nIcon);
+//    _nid.uVersion = NOTIFYICON_VERSION_4;
+//    Shell_NotifyIcon(NIM_SETVERSION, &_nid);
 
-    NOTIFYICONIDENTIFIER nid;
-    nid.cbSize = sizeof(NOTIFYICONIDENTIFIER);
-    nid.hWnd = hWnd;
-    nid.uID = 1;
+    _nii = {};
+    _nii.cbSize = { sizeof(_nii) };
+    _nii.hWnd = hWnd;
+    _nii.uID = _id;
+}
 
-    RECT *iconLoc = NULL;
-    if (Shell_NotifyIconGetRect(&nid, iconLoc) == S_OK)
-        CLOG(L"%d %d", iconLoc->left, iconLoc->top);
+NotifyIcon::~NotifyIcon() {
+    Shell_NotifyIcon(NIM_DELETE, &_nid);
+}
 
-    return true;
+NOTIFYICONDATA NotifyIcon::IconData() {
+    return _nid;
+}
+
+NOTIFYICONIDENTIFIER NotifyIcon::IconID() {
+    return _nii;
 }

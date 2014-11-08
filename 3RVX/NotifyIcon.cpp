@@ -1,4 +1,4 @@
-#include "NotificationIcon.h"
+#include "NotifyIcon.h"
 
 #include <gdiplus.h>
 #pragma comment(lib, "gdiplus.lib")

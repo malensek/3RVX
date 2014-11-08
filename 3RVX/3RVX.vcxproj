@@ -90,7 +90,7 @@
     <ClInclude Include="MeterWnd\Meters\VerticalTile.h" />
     <ClInclude Include="MeterWnd\MeterWnd.h" />
     <ClInclude Include="Monitor.h" />
-    <ClInclude Include="NotificationIcon.h" />
+    <ClInclude Include="NotifyIcon.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Skin.h" />
     <ClInclude Include="SkinInfo.h" />
@@ -114,7 +114,7 @@
     <ClCompile Include="MeterWnd\Meters\VerticalTile.cpp" />
     <ClCompile Include="MeterWnd\MeterWnd.cpp" />
     <ClCompile Include="Monitor.cpp" />
-    <ClCompile Include="NotificationIcon.cpp" />
+    <ClCompile Include="NotifyIcon.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Skin.cpp" />
     <ClCompile Include="SkinInfo.cpp" />

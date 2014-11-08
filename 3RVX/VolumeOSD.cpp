@@ -34,6 +34,9 @@ _fout(_mWnd) {
     _hWnd = CreateWindowEx(
         NULL, L"3RVX-VolumeDispatcher", L"3RVX-VolumeDispatcher",
         NULL, NULL, NULL, NULL, NULL, HWND_MESSAGE, NULL, hInstance, this);
+
+    std::list<std::wstring> l;
+    _icon = new NotifyIcon(_hWnd, L"3RVX", l);
 }
 
 void VolumeOSD::LoadSkin(Skin *skin) {
@@ -110,6 +113,12 @@ LRESULT VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
             AnimateOut();
             break;
         }
+    } else if (message == MSG_NOTIFYICON) {
+        CLOG(L"NotifyIcon: %x %x", wParam, lParam);
+        NOTIFYICONIDENTIFIER nii = _icon->IconID();
+        RECT rect;
+        HRESULT res = Shell_NotifyIconGetRect(&nii, &rect);
+        CLOG(L"%x %d %d", res, rect.left, rect.top);
     }
     return DefWindowProc(hWnd, message, wParam, lParam);
 }

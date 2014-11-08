@@ -2,6 +2,7 @@
 
 #include "MeterWnd\Animations\FadeOut.h"
 #include "MeterWnd\MeterWnd.h"
+#include "NotifyIcon.h"
 
 class Skin;
 
@@ -16,6 +17,7 @@ private:
     HWND _hWnd;
     MeterWnd _mWnd;
     FadeOut _fout;
+    NotifyIcon *_icon;
 
     void Hide();
     void AnimateIn();

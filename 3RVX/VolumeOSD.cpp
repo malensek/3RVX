@@ -114,11 +114,29 @@ LRESULT VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
             break;
         }
     } else if (message == MSG_NOTIFYICON) {
-        CLOG(L"NotifyIcon: %x %x", wParam, lParam);
         NOTIFYICONIDENTIFIER nii = _icon->IconID();
         RECT rect;
         HRESULT res = Shell_NotifyIconGetRect(&nii, &rect);
-        CLOG(L"%x %d %d", res, rect.left, rect.top);
+        switch (lParam) {
+        case WM_RBUTTONUP:
+        case WM_CONTEXTMENU: {
+            HMENU menu = CreatePopupMenu();
+            InsertMenu(menu, -1, MF_BYPOSITION | MF_ENABLED, 1, L"Settings");
+            InsertMenu(menu, -1, MF_BYPOSITION | MF_ENABLED, 2, L"Mixer");
+            InsertMenu(menu, -1, MF_BYPOSITION | MF_ENABLED, 3, L"Exit");
+
+            UINT uFlags = TPM_RIGHTBUTTON;
+            if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
+                uFlags |= TPM_RIGHTALIGN;
+            } else {
+                uFlags |= TPM_LEFTALIGN;
+            }
+
+            SetForegroundWindow(hWnd);
+            TrackPopupMenuEx(menu, uFlags, 0, 0, _hWnd, NULL);
+        }
+
+        }
     }
     return DefWindowProc(hWnd, message, wParam, lParam);
 }

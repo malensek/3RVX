@@ -16,6 +16,7 @@ public:
 private:
     HWND _hWnd;
     MeterWnd _mWnd;
+    HWND _masterWnd;
     FadeOut _fout;
     NotifyIcon *_icon;
     HMENU _menu;

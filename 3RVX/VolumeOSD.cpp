@@ -39,6 +39,8 @@ _fout(_mWnd) {
         NULL, L"3RVX-VolumeDispatcher", L"3RVX-VolumeDispatcher",
         NULL, NULL, NULL, NULL, NULL, HWND_MESSAGE, NULL, hInstance, this);
 
+    _masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
+
     /* Load notification icons */
     std::list<std::wstring> l;
     _icon = new NotifyIcon(_hWnd, L"3RVX", l);
@@ -155,8 +157,8 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             break;
 
         case MENU_EXIT:
-            CLOG(L"Menu: Exit");
-
+            CLOG(L"Menu: Exit: %d", _masterWnd);
+            SendMessage(_masterWnd, WM_CLOSE, NULL, NULL);
             break;
         }
     }

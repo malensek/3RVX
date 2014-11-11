@@ -1,11 +1,33 @@
-﻿#include "3RVX.h"
-#include "Controllers\Volume\CoreAudio.h"
-#include "VolumeOSD.h"
+﻿#include <Windows.h>
+#include <gdiplus.h>
+#pragma comment(lib, "gdiplus.lib")
+#include <iostream>
+#include <string>
+#include <unordered_map>
 #include <Wtsapi32.h>
+
+#include "3RVX.h"
+#include "Controllers\Volume\CoreAudio.h"
+#include "Controllers\Volume\VolumeController.h"
+#include "HotkeyManager.h"
 #include "Logger.h"
 #include "Settings.h"
-#include <iostream>
 #include "Skin.h"
+#include "VolumeOSD.h"
+
+HANDLE mutex;
+HINSTANCE hInst;
+ULONG_PTR gdiplusToken;
+HWND mainWnd;
+
+CoreAudio *volCtrl;
+VolumeOSD *vOsd;
+std::unordered_map<int, int> hotkeys;
+
+void init();
+HWND CreateMainWnd(HINSTANCE hInstance);
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 
 int APIENTRY
 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -75,7 +97,7 @@ LPTSTR lpCmdLine, int nCmdShow) {
     return (int)msg.wParam;
 }
 
-void Init() {
+void init() {
     CLOG(L"Initializing...");
 
     volCtrl = new CoreAudio(mainWnd);
@@ -142,10 +164,11 @@ LRESULT CALLBACK WndProc(
         break;
     }
 
-    case MSG_DEVCHNG:
+    case MSG_DEVCHNG: {
         CLOG(L"Device change detected.");
         volCtrl->ReattachDefaultDevice();
         break;
+    }
 
     case WM_HOTKEY: {
         CLOG(L"Hotkey: %d", (int) wParam);
@@ -160,12 +183,24 @@ LRESULT CALLBACK WndProc(
     case WM_WTSSESSION_CHANGE:
         CLOG(L"Detected session change");
         break;
+
+    case WM_CLOSE:
+        CLOG(L"Shutting down");
+        HotkeyManager::Instance()->Shutdown();
+        vOsd->HideIcon();
+        DestroyWindow(mainWnd);
+        break;
+
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+
     }
 
     if (message == WM_3RVX_CONTROL) {
         switch (wParam) {
         case MSG_LOAD:
-            Init();
+            init();
             break;
 
         case MSG_SETTINGS:

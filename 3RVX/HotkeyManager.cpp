@@ -17,6 +17,24 @@ HotkeyManager *HotkeyManager::Instance(HWND notifyWnd) {
     return instance;
 }
 
+HotkeyManager::~HotkeyManager() {
+    while (true) {
+        auto i = _keyCombinations.begin();
+        if (_keyCombinations.size() > 0) {
+            Unregister(*i);
+        } else {
+            break;
+        }
+    }
+
+    Unhook();
+}
+
+void HotkeyManager::Shutdown() {
+    delete instance;
+    instance = NULL;
+}
+
 bool HotkeyManager::Hook() {
     _mouseHook = SetWindowsHookEx(WH_MOUSE_LL,
         LowLevelMouseProc, NULL, NULL);

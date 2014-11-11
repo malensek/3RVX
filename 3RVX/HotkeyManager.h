@@ -36,9 +36,12 @@ public:
     void Register(int keyCombination);
     bool Unregister(int keyCombination);
 
+    void Shutdown();
+
 private:
     HotkeyManager() :
         _fixWin(false) { }
+    ~HotkeyManager();
 
     HWND _notifyWnd;
     int _fixWin;

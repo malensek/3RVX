@@ -9,6 +9,10 @@
 #define TIMER_ANIMIN 101
 #define TIMER_ANIMOUT 102
 
+#define MENU_SETTINGS 0
+#define MENU_MIXER 1
+#define MENU_EXIT 2
+
 VolumeOSD::VolumeOSD(HINSTANCE hInstance) :
 _mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
 _fout(_mWnd) {
@@ -35,8 +39,24 @@ _fout(_mWnd) {
         NULL, L"3RVX-VolumeDispatcher", L"3RVX-VolumeDispatcher",
         NULL, NULL, NULL, NULL, NULL, HWND_MESSAGE, NULL, hInstance, this);
 
+    /* Load notification icons */
     std::list<std::wstring> l;
     _icon = new NotifyIcon(_hWnd, L"3RVX", l);
+
+    /* Set up context menu */
+    _menu = CreatePopupMenu();
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_SETTINGS, L"Settings");
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_MIXER, L"Mixer");
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_EXIT, L"Exit");
+
+    _menuFlags = TPM_RIGHTBUTTON;
+    if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
+        _menuFlags |= TPM_RIGHTALIGN;
+    } else {
+        _menuFlags |= TPM_LEFTALIGN;
+    }
+
+
 }
 
 void VolumeOSD::LoadSkin(Skin *skin) {
@@ -97,7 +117,8 @@ VolumeOSD::StaticWndProc(
     return vOsd->WndProc(hWnd, message, wParam, lParam);
 }
 
-LRESULT VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+LRESULT
+VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == WM_TIMER) {
         switch (wParam) {
         case TIMER_HIDE:
@@ -114,28 +135,29 @@ LRESULT VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
             break;
         }
     } else if (message == MSG_NOTIFYICON) {
-        NOTIFYICONIDENTIFIER nii = _icon->IconID();
-        RECT rect;
-        HRESULT res = Shell_NotifyIconGetRect(&nii, &rect);
-        switch (lParam) {
-        case WM_RBUTTONUP:
-        case WM_CONTEXTMENU: {
-            HMENU menu = CreatePopupMenu();
-            InsertMenu(menu, -1, MF_BYPOSITION | MF_ENABLED, 1, L"Settings");
-            InsertMenu(menu, -1, MF_BYPOSITION | MF_ENABLED, 2, L"Mixer");
-            InsertMenu(menu, -1, MF_BYPOSITION | MF_ENABLED, 3, L"Exit");
-
-            UINT uFlags = TPM_RIGHTBUTTON;
-            if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
-                uFlags |= TPM_RIGHTALIGN;
-            } else {
-                uFlags |= TPM_LEFTALIGN;
-            }
-
+        if (lParam == WM_LBUTTONUP || lParam == WM_RBUTTONUP) {
+            POINT p;
+            GetCursorPos(&p);
             SetForegroundWindow(hWnd);
-            TrackPopupMenuEx(menu, uFlags, 0, 0, _hWnd, NULL);
+            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y, _hWnd, NULL);
+            PostMessage(hWnd, WM_NULL, 0, 0);
         }
+    } else if (message == WM_COMMAND) {
+        switch (LOWORD(wParam)) {
+        case MENU_SETTINGS:
+            CLOG(L"Menu: Settings");
 
+            break;
+
+        case MENU_MIXER:
+            CLOG(L"Menu: Mixer");
+
+            break;
+
+        case MENU_EXIT:
+            CLOG(L"Menu: Exit");
+
+            break;
         }
     }
     return DefWindowProc(hWnd, message, wParam, lParam);

@@ -18,6 +18,8 @@ private:
     MeterWnd _mWnd;
     FadeOut _fout;
     NotifyIcon *_icon;
+    HMENU _menu;
+    UINT _menuFlags;
 
     void Hide();
     void AnimateIn();

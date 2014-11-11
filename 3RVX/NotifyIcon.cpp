@@ -27,7 +27,7 @@ NotifyIcon::NotifyIcon(HWND hWnd, std::wstring caption,
     iconBmp->GetHICON(&icon);
     _nid.hIcon = icon;
 
-    wcscpy_s(_nid.szTip, 128, L"3rVX");
+    wcscpy_s(_nid.szTip, 128, L"3RVX");
 
     Shell_NotifyIcon(NIM_ADD, &_nid);
 

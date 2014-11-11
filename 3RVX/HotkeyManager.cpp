@@ -66,13 +66,13 @@ void HotkeyManager::Register(int keyCombination) {
     CLOG(L"Registered new keyboard-based hotkey: %d", keyCombination);
 }
 
-void HotkeyManager::Unregister(int keyCombination) {
+bool HotkeyManager::Unregister(int keyCombination) {
     CLOG(L"Unregistering hotkey combination: %d", keyCombination);
 
     if (_keyCombinations.count(keyCombination) <= 0) {
         QCLOG(L"Hotkey combination [%d] was not previously registered",
             keyCombination);
-        return;
+        return false;
     }
 
     _keyCombinations.erase(keyCombination);
@@ -80,9 +80,10 @@ void HotkeyManager::Unregister(int keyCombination) {
         /* This hotkey isn't mouse-based; unregister with Windows */
         if (!UnregisterHotKey(_notifyWnd, keyCombination)) {
             CLOG(L"Failed to unregister hotkey: %d", keyCombination);
-            return;
+            return false;
         }
     }
+    return true;
 }
 
 int HotkeyManager::Modifiers() {

@@ -34,7 +34,7 @@ public:
     static HotkeyManager *Instance(HWND notifyWnd);
 
     void Register(int keyCombination);
-    void Unregister(int keyCombination);
+    bool Unregister(int keyCombination);
 
 private:
     HotkeyManager() :

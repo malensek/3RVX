@@ -101,6 +101,10 @@ void VolumeOSD::AnimateOut() {
     }
 }
 
+void VolumeOSD::HideIcon() {
+    delete _icon;
+}
+
 LRESULT CALLBACK
 VolumeOSD::StaticWndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {

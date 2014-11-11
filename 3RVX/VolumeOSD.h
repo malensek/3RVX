@@ -13,6 +13,8 @@ public:
     void MeterLevels();
     void MeterLevels(float value);
 
+    void HideIcon();
+
 private:
     HWND _hWnd;
     MeterWnd _mWnd;

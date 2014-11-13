@@ -23,6 +23,8 @@ private:
     NotifyIcon *_icon;
     HMENU _menu;
     UINT _menuFlags;
+    std::wstring _appDir;
+    std::wstring _settingsExe;
 
     void Hide();
     void AnimateIn();

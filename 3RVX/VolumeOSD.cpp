@@ -1,5 +1,6 @@
 #include "VolumeOSD.h"
 
+#include <Shlwapi.h>
 #include <string>
 
 #include "Monitor.h"
@@ -58,7 +59,12 @@ _fout(_mWnd) {
         _menuFlags |= TPM_LEFTALIGN;
     }
 
-
+    wchar_t path[MAX_PATH];
+    GetModuleFileName(NULL, path, MAX_PATH);
+    PathRemoveFileSpec(path);
+    _appDir = std::wstring(path);
+    _settingsExe = std::wstring(path) + L"\\SettingsUI.exe";
+    CLOG(L"App location: %s", _appDir);
 }
 
 void VolumeOSD::LoadSkin(Skin *skin) {

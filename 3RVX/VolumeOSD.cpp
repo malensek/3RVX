@@ -157,8 +157,8 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     } else if (message == WM_COMMAND) {
         switch (LOWORD(wParam)) {
         case MENU_SETTINGS:
-            CLOG(L"Menu: Settings");
-
+            CLOG(L"Opening Settings: %s", _settingsExe.c_str());
+            ShellExecute(NULL, L"open", _settingsExe.c_str(), NULL, NULL, 0);
             break;
 
         case MENU_MIXER:

@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Monitor.h"
+#include "Settings.h"
 #include "Skin.h"
 
 #define TIMER_HIDE 100
@@ -59,12 +60,7 @@ _fout(_mWnd) {
         _menuFlags |= TPM_LEFTALIGN;
     }
 
-    wchar_t path[MAX_PATH];
-    GetModuleFileName(NULL, path, MAX_PATH);
-    PathRemoveFileSpec(path);
-    _appDir = std::wstring(path);
-    _settingsExe = std::wstring(path) + L"\\SettingsUI.exe";
-    CLOG(L"App location: %s", _appDir);
+    _settingsExe = Settings::AppDir() + L"\\SettingsUI.exe";
 }
 
 void VolumeOSD::LoadSkin(Skin *skin) {

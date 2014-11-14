@@ -79,7 +79,7 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     } else if (type == "horizontalendcap") {
         m = new HorizontalEndcap(img, x, y, units);
     } else if (type == "horizontalbar") {
-        m = new HorizontalEndcap(img, x, y, units);
+        m = new HorizontalBar(img, x, y, units);
     } else if (type == "horizontaltile") {
         m = new HorizontalTile(img, x, y, units, inverted);
     } else if (type == "numberstrip") {

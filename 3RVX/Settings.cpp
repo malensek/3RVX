@@ -1,6 +1,26 @@
 #include "Settings.h"
 
 #include "HotkeyActions.h"
+#include "Logger.h"
+#include "StringUtils.h"
+
+std::wstring Settings::_appDir(L"");
+
+Settings::Settings(std::wstring file) :
+_file(file) {
+    CLOG(L"Loading settings file [%s]", file.c_str());
+
+    std::string u8FileName = StringUtils::Narrow(file);
+    tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
+    if (result != tinyxml2::XMLError::XML_SUCCESS) {
+        throw std::runtime_error("Failed to parse XML file");
+    }
+
+    _root = _xml.GetDocument()->FirstChildElement("settings");
+    if (_root == NULL) {
+        throw std::runtime_error("Could not find root XML element");
+    }
+}
 
 std::wstring Settings::SkinName() {
     const char* skinName = _root->FirstChildElement("skin")->GetText();

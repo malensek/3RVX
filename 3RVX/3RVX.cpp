@@ -66,6 +66,8 @@ LPTSTR lpCmdLine, int nCmdShow) {
         return EXIT_SUCCESS;
     }
 
+    CLOG(L"App directory: %s", Settings::AppDir().c_str());
+
     using namespace Gdiplus;
     GdiplusStartupInput gdiplusStartupInput;
     GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
@@ -107,7 +109,8 @@ void init() {
     Settings settings(L"Settings.xml");
 
     std::wstring skinName = settings.SkinName();
-    std::wstring skinXML = SKINS_DIR L"\\" + skinName + L"\\" SKIN_XML;
+    std::wstring skinXML = Settings::AppDir() + L"\\" + SKINS_DIR L"\\"
+        + skinName+ L"\\" SKIN_XML;
     Skin skin(skinXML);
 
     vOsd = new VolumeOSD(hInst);

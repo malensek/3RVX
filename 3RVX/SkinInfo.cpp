@@ -15,6 +15,11 @@ _skinFile(skinFile) {
     std::string u8FileName = StringUtils::Narrow(_skinFile);
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
+        if (result == tinyxml2::XMLError::XML_ERROR_FILE_NOT_FOUND) {
+            std::wstring info = L"Could not find skin:\n\n";
+            info += skinFile;
+            MessageBox(NULL, info.c_str(), L"Skin Error", MB_ICONERROR);
+        }
         throw std::logic_error("Failed to read XML file!");
     }
 

@@ -125,7 +125,7 @@ void CoreAudio::Volume(float vol) {
 }
 
 bool CoreAudio::Muted() {
-    BOOL muted;
+    BOOL muted = FALSE;
     m_volumeControl->GetMute(&muted);
 
     return (muted == TRUE) ? true : false;

@@ -1,5 +1,7 @@
 #include "Settings.h"
 
+#include <Shlwapi.h>
+
 #include "HotkeyActions.h"
 #include "Logger.h"
 #include "StringUtils.h"
@@ -20,6 +22,16 @@ _file(file) {
     if (_root == NULL) {
         throw std::runtime_error("Could not find root XML element");
     }
+}
+
+std::wstring Settings::AppDir() {
+    if (_appDir.empty()) {
+        wchar_t path[MAX_PATH];
+        GetModuleFileName(NULL, path, MAX_PATH);
+        PathRemoveFileSpec(path);
+        _appDir = std::wstring(path);
+    }
+    return _appDir;
 }
 
 std::wstring Settings::SkinName() {

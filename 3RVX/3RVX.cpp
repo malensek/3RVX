@@ -160,14 +160,14 @@ LRESULT CALLBACK WndProc(
     HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     switch (message) {
-    case MSG_VOLCHNG: {
+    case MSG_VOL_CHNG: {
         float v = volCtrl->Volume();
         QCLOG(L"Volume level: %.0f", v * 100.0f);
         vOsd->MeterLevels(v);
         break;
     }
 
-    case MSG_DEVCHNG: {
+    case MSG_VOL_DEVCHNG: {
         CLOG(L"Device change detected.");
         volCtrl->ReattachDefaultDevice();
         break;

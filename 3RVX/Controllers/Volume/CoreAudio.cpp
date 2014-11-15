@@ -68,14 +68,14 @@ void CoreAudio::DetachCurrentDevice() {
 }
 
 HRESULT CoreAudio::OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) {
-    PostMessage(m_notifyHwnd, MSG_VOLCHNG, 0, 0);
+    PostMessage(m_notifyHwnd, MSG_VOL_CHNG, 0, 0);
     return S_OK;
 }
 
 HRESULT CoreAudio::OnDefaultDeviceChanged(
     EDataFlow flow, ERole role, LPCWSTR pwstrDefaultDeviceId) {
     if (flow == eRender) {
-        PostMessage(m_notifyHwnd, MSG_DEVCHNG, 0, 0);
+        PostMessage(m_notifyHwnd, MSG_VOL_DEVCHNG, 0, 0);
     }
 
     return S_OK;

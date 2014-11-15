@@ -1,6 +1,7 @@
 ﻿#include <Windows.h>
 #include <gdiplus.h>
 #pragma comment(lib, "gdiplus.lib")
+#include <Dbt.h>
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -151,7 +152,7 @@ HWND CreateMainWnd(HINSTANCE hInstance) {
         NULL,
         CLASS_3RVX, CLASS_3RVX,
         NULL, NULL, NULL, //your boat, gently down the stream
-        NULL, NULL, HWND_MESSAGE, NULL, hInstance, NULL);
+        NULL, NULL, NULL, NULL, hInstance, NULL);
 
     return hWnd;
 }
@@ -173,6 +174,13 @@ LRESULT CALLBACK WndProc(
         break;
     }
 
+    case WM_DEVICECHANGE: {
+        if (wParam == DBT_DEVICEREMOVECOMPLETE) {
+            CLOG(L"Device removal notification received");
+        }
+        break;
+    }
+
     case WM_HOTKEY: {
         CLOG(L"Hotkey: %d", (int) wParam);
         int action = hotkeys[(int) wParam];
@@ -183,20 +191,24 @@ LRESULT CALLBACK WndProc(
         break;
     }
 
-    case WM_WTSSESSION_CHANGE:
+    case WM_WTSSESSION_CHANGE: {
         CLOG(L"Detected session change");
         break;
+    }
 
-    case WM_CLOSE:
+    case WM_CLOSE: {
         CLOG(L"Shutting down");
         HotkeyManager::Instance()->Shutdown();
         vOsd->HideIcon();
         DestroyWindow(mainWnd);
         break;
+    }
 
-    case WM_DESTROY:
+    case WM_DESTROY: {
         PostQuitMessage(0);
         break;
+    }
+
 
     }
 

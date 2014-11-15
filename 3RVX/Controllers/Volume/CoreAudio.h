@@ -13,8 +13,7 @@ class CoreAudio : IAudioEndpointVolumeCallback, IMMNotificationClient,
 public:
     CoreAudio(HWND hWnd) :
         m_notifyHwnd(hWnd),
-        m_refCount(1) {
-    };
+        m_refCount(1) { };
 
     HRESULT Init();
 

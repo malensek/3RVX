@@ -2,10 +2,8 @@
 
 Bitstrip::Bitstrip(std::wstring bitmapName, int x, int y, int units) :
 Meter(bitmapName, x, y, units) {
-    _rect.Width = _bitmap->GetWidth();
     _rect.Height = _bitmap->GetHeight() / _units;
 }
-
 
 void Bitstrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     int units = CalcUnits();

@@ -1,6 +1,7 @@
 ﻿#include <Windows.h>
 #include <gdiplus.h>
 #pragma comment(lib, "gdiplus.lib")
+#include <Dbt.h>
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -151,7 +152,7 @@ HWND CreateMainWnd(HINSTANCE hInstance) {
         NULL,
         CLASS_3RVX, CLASS_3RVX,
         NULL, NULL, NULL, //your boat, gently down the stream
-        NULL, NULL, HWND_MESSAGE, NULL, hInstance, NULL);
+        NULL, NULL, NULL, NULL, hInstance, NULL);
 
     return hWnd;
 }
@@ -160,16 +161,23 @@ LRESULT CALLBACK WndProc(
     HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     switch (message) {
-    case MSG_VOLCHNG: {
+    case MSG_VOL_CHNG: {
         float v = volCtrl->Volume();
         QCLOG(L"Volume level: %.0f", v * 100.0f);
         vOsd->MeterLevels(v);
         break;
     }
 
-    case MSG_DEVCHNG: {
+    case MSG_VOL_DEVCHNG: {
         CLOG(L"Device change detected.");
         volCtrl->ReattachDefaultDevice();
+        break;
+    }
+
+    case WM_DEVICECHANGE: {
+        if (wParam == DBT_DEVICEREMOVECOMPLETE) {
+            CLOG(L"Device removal notification received");
+        }
         break;
     }
 
@@ -183,20 +191,24 @@ LRESULT CALLBACK WndProc(
         break;
     }
 
-    case WM_WTSSESSION_CHANGE:
+    case WM_WTSSESSION_CHANGE: {
         CLOG(L"Detected session change");
         break;
+    }
 
-    case WM_CLOSE:
+    case WM_CLOSE: {
         CLOG(L"Shutting down");
         HotkeyManager::Instance()->Shutdown();
         vOsd->HideIcon();
         DestroyWindow(mainWnd);
         break;
+    }
 
-    case WM_DESTROY:
+    case WM_DESTROY: {
         PostQuitMessage(0);
         break;
+    }
+
 
     }
 

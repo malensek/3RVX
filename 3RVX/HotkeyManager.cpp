@@ -76,8 +76,7 @@ void HotkeyManager::Register(int keyCombination) {
     int mods = (0xF0000 & keyCombination) >> 16;
     if (!RegisterHotKey(_notifyWnd, keyCombination, mods, vk)) {
         CLOG(L"Failed to register hotkey [%d]\n"
-            L"Mods: %d, VK: %d", keyCombination, GetLastError(),
-            mods, vk);
+            L"Mods: %d, VK: %d", keyCombination, mods, vk);
         return;
     }
 

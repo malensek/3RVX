@@ -22,6 +22,9 @@ public:
         CLOG(L"Loading meter bitmap: %s\nStatus: %d",
             bitmapName.c_str(), bmp->GetLastStatus());
         _bitmap = bmp;
+
+        _rect.Width = bmp->GetWidth();
+        _rect.Height = bmp->GetHeight();
     }
 
     Meter(int x, int y, int units) :

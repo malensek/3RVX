@@ -30,7 +30,6 @@ public:
 
         /* 1 extra px for left margin line */
         _unitWidth = _rMargin - _lMargin - 1;
-        _rect.Height = _bitmap->GetHeight();
 
         _lMarginRect.X = X();
         _lMarginRect.Y = Y();

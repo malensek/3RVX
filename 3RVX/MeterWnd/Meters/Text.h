@@ -19,7 +19,4 @@ protected:
     Gdiplus::StringFormat _strFormat;
     std::wstring _formatString;
     int _replaceIndex; // index of [[PERC]] string
-
-private:
-    virtual void SetBitmap(Gdiplus::Bitmap *meterBitmap) {};
 };

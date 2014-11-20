@@ -5,12 +5,12 @@
 HRESULT CoreAudio::Init() {
     HRESULT hr;
 
-    hr = m_devEnumerator.CoCreateInstance(__uuidof(MMDeviceEnumerator));
+    hr = _devEnumerator.CoCreateInstance(__uuidof(MMDeviceEnumerator));
     if (SUCCEEDED(hr)) {
-        hr = m_devEnumerator->RegisterEndpointNotificationCallback(this);
+        hr = _devEnumerator->RegisterEndpointNotificationCallback(this);
 
         if (SUCCEEDED(hr)) {
-            hr = AttachDefaultDevice();
+            hr = AttachDevice();
         }
     }
 
@@ -19,81 +19,88 @@ HRESULT CoreAudio::Init() {
 
 void CoreAudio::Dispose() {
     DetachCurrentDevice();
-    m_devEnumerator->UnregisterEndpointNotificationCallback(this);
+    _devEnumerator->UnregisterEndpointNotificationCallback(this);
 }
 
-HRESULT CoreAudio::AttachDefaultDevice() {
-    m_critSect.Enter();
+HRESULT CoreAudio::AttachDevice() {
+    _critSect.Enter();
 
     HRESULT hr;
-    hr = m_devEnumerator->GetDefaultAudioEndpoint(eRender,
-        eMultimedia, &m_device);
+
+    if (_devId == NULL) {
+        /* Use default device */
+        hr = _devEnumerator->GetDefaultAudioEndpoint(eRender,
+            eMultimedia, &_device);
+    } else {
+        hr = _devEnumerator->GetDevice(_devId, &_device);
+    }
 
     if (SUCCEEDED(hr)) {
-        hr = m_device->Activate(__uuidof(m_volumeControl),
-            CLSCTX_INPROC_SERVER, NULL, (void**)&m_volumeControl);
+        hr = _device->Activate(__uuidof(_volumeControl),
+            CLSCTX_INPROC_SERVER, NULL, (void **) &_volumeControl);
 
         CLOG(L"Attached to audio device: [%s]", DeviceName().c_str());
 
         if (SUCCEEDED(hr)) {
-            hr = m_volumeControl->RegisterControlChangeNotify(this);
-            m_registeredNotifications = SUCCEEDED(hr);
+            hr = _volumeControl->RegisterControlChangeNotify(this);
+            _registeredNotifications = SUCCEEDED(hr);
         }
     } else {
-        CLOG(L"Failed to find default audio device!");
+        CLOG(L"Failed to find audio device!");
     }
 
-    m_critSect.Leave();
+    _critSect.Leave();
     return hr;
 }
 
 void CoreAudio::DetachCurrentDevice() {
-    m_critSect.Enter();
+    _critSect.Enter();
 
-    if (m_volumeControl != NULL) {
+    if (_volumeControl != NULL) {
 
-        if (m_registeredNotifications) {
-            m_volumeControl->UnregisterControlChangeNotify(this);
-            m_registeredNotifications = false;
+        if (_registeredNotifications) {
+            _volumeControl->UnregisterControlChangeNotify(this);
+            _registeredNotifications = false;
         }
 
-        m_volumeControl.Release();
+        _volumeControl.Release();
     }
 
-    if (m_device != NULL) {
-        m_device.Release();
+    if (_device != NULL) {
+        _device.Release();
     }
 
-    m_critSect.Leave();
+    _critSect.Leave();
 }
 
 HRESULT CoreAudio::OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) {
-    PostMessage(m_notifyHwnd, MSG_VOL_CHNG, 0, 0);
+    PostMessage(_notifyHwnd, MSG_VOL_CHNG, 0, 0);
     return S_OK;
 }
 
 HRESULT CoreAudio::OnDefaultDeviceChanged(
     EDataFlow flow, ERole role, LPCWSTR pwstrDefaultDeviceId) {
     if (flow == eRender) {
-        PostMessage(m_notifyHwnd, MSG_VOL_DEVCHNG, 0, 0);
+        PostMessage(_notifyHwnd, MSG_VOL_DEVCHNG, 0, 0);
     }
 
     return S_OK;
 }
 
-void CoreAudio::ReattachDefaultDevice() {
+void CoreAudio::ReattachDevice() {
     DetachCurrentDevice();
-    AttachDefaultDevice();
+    AttachDevice();
 }
 
 std::wstring CoreAudio::DeviceName() {
     HRESULT hr;
     LPWSTR devId;
 
-    m_device->GetId(&devId);
+    /* remove this? */
+    _device->GetId(&devId);
 
     IPropertyStore *props = NULL;
-    hr = m_device->OpenPropertyStore(STGM_READ, &props);
+    hr = _device->OpenPropertyStore(STGM_READ, &props);
     PROPVARIANT pvName;
     PropVariantInit(&pvName);
     props->GetValue(PKEY_Device_FriendlyName, &pvName);

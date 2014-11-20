@@ -15,6 +15,11 @@ public:
         _notifyHwnd(hWnd),
         _refCount(1) { }
 
+    CoreAudio(HWND hWnd, LPWSTR deviceId) :
+        _devId(deviceId),
+        _notifyHwnd(hWnd),
+        _refCount(1) { }
+
     HRESULT Init();
 
     float Volume();

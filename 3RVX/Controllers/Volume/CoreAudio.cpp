@@ -18,7 +18,7 @@ HRESULT CoreAudio::Init() {
 }
 
 void CoreAudio::Dispose() {
-    DetachCurrentDevice();
+    DetachDevice();
     _devEnumerator->UnregisterEndpointNotificationCallback(this);
 }
 
@@ -53,7 +53,7 @@ HRESULT CoreAudio::AttachDevice() {
     return hr;
 }
 
-void CoreAudio::DetachCurrentDevice() {
+void CoreAudio::DetachDevice() {
     _critSect.Enter();
 
     if (_volumeControl != NULL) {
@@ -88,7 +88,7 @@ HRESULT CoreAudio::OnDefaultDeviceChanged(
 }
 
 void CoreAudio::ReattachDevice() {
-    DetachCurrentDevice();
+    DetachDevice();
     AttachDevice();
 }
 

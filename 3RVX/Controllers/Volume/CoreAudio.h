@@ -49,7 +49,7 @@ private:
     ~CoreAudio() {};
 
     HRESULT AttachDevice();
-    void DetachCurrentDevice();
+    void DetachDevice();
 
     /* IAudioEndpointVolumeCallback */
     IFACEMETHODIMP OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify);

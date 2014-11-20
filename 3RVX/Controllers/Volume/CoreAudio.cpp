@@ -108,7 +108,7 @@ std::wstring CoreAudio::DeviceName() {
 
 float CoreAudio::Volume() {
     float vol = 0.0f;
-    m_volumeControl->GetMasterVolumeLevelScalar(&vol);
+    _volumeControl->GetMasterVolumeLevelScalar(&vol);
     return vol;
 }
 
@@ -121,33 +121,33 @@ void CoreAudio::Volume(float vol) {
         vol = 0.0f;
     }
 
-    m_volumeControl->SetMasterVolumeLevelScalar(vol, NULL);
+    _volumeControl->SetMasterVolumeLevelScalar(vol, NULL);
 }
 
 bool CoreAudio::Muted() {
     BOOL muted = FALSE;
-    m_volumeControl->GetMute(&muted);
+    _volumeControl->GetMute(&muted);
 
     return (muted == TRUE) ? true : false;
 }
 
 void CoreAudio::Muted(bool muted) {
-    m_volumeControl->SetMute(muted, NULL);
+    _volumeControl->SetMute(muted, NULL);
 }
 
 ULONG CoreAudio::AddRef() {
-    return InterlockedIncrement(&m_refCount);
+    return InterlockedIncrement(&_refCount);
 }
 
 ULONG CoreAudio::Release() {
-    long lRef = InterlockedDecrement(&m_refCount);
+    long lRef = InterlockedDecrement(&_refCount);
     if (lRef == 0) {
         delete this;
     }
     return lRef;
 }
 
-HRESULT CoreAudio::QueryInterface(REFIID iid, void** ppUnk) {
+HRESULT CoreAudio::QueryInterface(REFIID iid, void **ppUnk) {
     if ((iid == __uuidof(IUnknown)) ||
         (iid == __uuidof(IMMNotificationClient))) {
         *ppUnk = static_cast<IMMNotificationClient*>(this);

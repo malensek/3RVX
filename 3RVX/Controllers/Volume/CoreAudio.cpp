@@ -17,6 +17,11 @@ HRESULT CoreAudio::Init() {
     return hr;
 }
 
+HRESULT CoreAudio::Init(LPWSTR deviceId) {
+    _devId = deviceId;
+    Init();
+}
+
 void CoreAudio::Dispose() {
     DetachDevice();
     _devEnumerator->UnregisterEndpointNotificationCallback(this);

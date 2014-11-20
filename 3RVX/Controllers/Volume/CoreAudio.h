@@ -21,6 +21,7 @@ public:
         _refCount(1) { }
 
     HRESULT Init();
+    void Dispose();
 
     float Volume();
     void Volume(float vol);
@@ -28,27 +29,26 @@ public:
     bool Muted();
     void Muted(bool mute);
 
-    void ReattachDefaultDevice();
+    void ReattachDevice();
     std::wstring DeviceName();
 
-    void Dispose();
     IFACEMETHODIMP_(ULONG) AddRef();
     IFACEMETHODIMP_(ULONG) Release();
 
 private:
+    LPWSTR _devId;
+    CCriticalSection _critSect;
+    HWND _notifyHwnd;
+    long _refCount;
+    bool _registeredNotifications;
+
+    CComPtr<IMMDevice> _device;
+    CComPtr<IMMDeviceEnumerator> _devEnumerator;
+    CComPtr<IAudioEndpointVolume> _volumeControl;
+
     ~CoreAudio() {};
-    long m_refCount;
-    CCriticalSection m_critSect;
 
-    CComPtr<IMMDeviceEnumerator> m_devEnumerator;
-    CComPtr<IMMDevice> m_device;
-    CComPtr<IAudioEndpointVolume> m_volumeControl;
-
-    bool m_registeredNotifications;
-
-    HWND m_notifyHwnd;
-
-    HRESULT AttachDefaultDevice();
+    HRESULT AttachDevice();
     void DetachCurrentDevice();
 
     /* IAudioEndpointVolumeCallback */

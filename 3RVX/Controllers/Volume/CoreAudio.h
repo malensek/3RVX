@@ -16,7 +16,7 @@ public:
         _refCount(1) { }
 
     HRESULT Init();
-    HRESULT Init(LPWSTR deviceId);
+    HRESULT Init(std::wstring deviceId);
     void Dispose();
 
     float Volume();
@@ -25,14 +25,16 @@ public:
     bool Muted();
     void Muted(bool mute);
 
-    void ReattachDevice();
     std::wstring DeviceName();
+
+    HRESULT SelectDevice(std::wstring deviceId);
+    HRESULT SelectDefaultDevice();
 
     IFACEMETHODIMP_(ULONG) AddRef();
     IFACEMETHODIMP_(ULONG) Release();
 
 private:
-    LPWSTR _devId;
+    std::wstring _devId;
     CCriticalSection _critSect;
     HWND _notifyHwnd;
     long _refCount;

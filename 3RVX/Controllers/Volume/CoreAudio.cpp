@@ -17,9 +17,9 @@ HRESULT CoreAudio::Init() {
     return hr;
 }
 
-HRESULT CoreAudio::Init(LPWSTR deviceId) {
+HRESULT CoreAudio::Init(std::wstring deviceId) {
     _devId = deviceId;
-    Init();
+    return Init();
 }
 
 void CoreAudio::Dispose() {
@@ -32,12 +32,12 @@ HRESULT CoreAudio::AttachDevice() {
 
     HRESULT hr;
 
-    if (_devId == NULL) {
+    if (_devId.empty()) {
         /* Use default device */
         hr = _devEnumerator->GetDefaultAudioEndpoint(eRender,
             eMultimedia, &_device);
     } else {
-        hr = _devEnumerator->GetDevice(_devId, &_device);
+        hr = _devEnumerator->GetDevice(_devId.c_str(), &_device);
     }
 
     if (SUCCEEDED(hr)) {
@@ -92,9 +92,20 @@ HRESULT CoreAudio::OnDefaultDeviceChanged(
     return S_OK;
 }
 
-void CoreAudio::ReattachDevice() {
+HRESULT CoreAudio::SelectDevice(std::wstring deviceId) {
+    HRESULT hr;
+    _devId = deviceId;
     DetachDevice();
-    AttachDevice();
+    hr = AttachDevice();
+    return hr;
+}
+
+HRESULT CoreAudio::SelectDefaultDevice() {
+    HRESULT hr;
+    _devId = L"";
+    DetachDevice();
+    hr = AttachDevice();
+    return hr;
 }
 
 std::wstring CoreAudio::DeviceName() {

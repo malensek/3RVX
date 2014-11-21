@@ -170,7 +170,7 @@ LRESULT CALLBACK WndProc(
 
     case MSG_VOL_DEVCHNG: {
         CLOG(L"Device change detected.");
-        volCtrl->ReattachDefaultDevice();
+        volCtrl->SelectDefaultDevice();
         break;
     }
 

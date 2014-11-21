@@ -5,6 +5,11 @@
 
 class VolumeController {
 public:
+    struct DeviceInfo {
+        std::wstring name;
+        std::wstring id;
+    };
+
     virtual float Volume() = 0;
     virtual void Volume(float vol) = 0;
 

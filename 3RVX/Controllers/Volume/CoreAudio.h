@@ -3,6 +3,7 @@
 #include <atlbase.h>
 #include <atlsync.h>
 #include <Endpointvolume.h>
+#include <list>
 #include <Mmdeviceapi.h>
 #include <string>
 
@@ -26,6 +27,9 @@ public:
     void Muted(bool mute);
 
     std::wstring DeviceName();
+    std::wstring DeviceName(std::wstring deviceId);
+
+    std::list<DeviceInfo> ListDevices();
 
     HRESULT SelectDevice(std::wstring deviceId);
     HRESULT SelectDefaultDevice();
@@ -48,6 +52,8 @@ private:
 
     HRESULT AttachDevice();
     void DetachDevice();
+
+    std::wstring DeviceName(CComPtr<IMMDevice> device);
 
     /* IAudioEndpointVolumeCallback */
     IFACEMETHODIMP OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify);

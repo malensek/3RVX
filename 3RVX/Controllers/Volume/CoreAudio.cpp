@@ -108,21 +108,61 @@ HRESULT CoreAudio::SelectDefaultDevice() {
     return hr;
 }
 
-std::wstring CoreAudio::DeviceName() {
-    HRESULT hr;
+std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
+    _critSect.Enter();
+
+    CComPtr<IMMDeviceCollection> devices;
+    _devEnumerator->EnumAudioEndpoints(
+        eRender,
+        DEVICE_STATE_ACTIVE | DEVICE_STATE_UNPLUGGED,
+        &devices);
+
+    UINT numDevices = 0;
+    devices->GetCount(&numDevices);
+
+    CComPtr<IMMDevice> device;
     LPWSTR devId;
 
-    /* remove this? */
-    _device->GetId(&devId);
+    std::list<VolumeController::DeviceInfo> devList;
 
+    for (unsigned int i = 0; i < numDevices; ++i) {
+        devices->Item(i, &device);
+        device->GetId(&devId);
+
+        std::wstring idStr(devId);
+        VolumeController::DeviceInfo devInfo = {};
+        devInfo.id = idStr;
+        devInfo.name = DeviceName(idStr);
+        devList.push_back(devInfo);
+    }
+
+    return devList;
+    _critSect.Leave();
+}
+
+std::wstring CoreAudio::DeviceName() {
+    return DeviceName(_device);
+}
+
+std::wstring CoreAudio::DeviceName(std::wstring deviceId) {
+    CComPtr<IMMDevice> device;
+    _devEnumerator->GetDevice(deviceId.c_str(), &device);
+    return DeviceName(device);
+}
+
+std::wstring CoreAudio::DeviceName(CComPtr<IMMDevice> device) {
     IPropertyStore *props = NULL;
-    hr = _device->OpenPropertyStore(STGM_READ, &props);
+    HRESULT hr = _device->OpenPropertyStore(STGM_READ, &props);
+
+    if (FAILED(hr)) {
+        return L"";
+    }
+
     PROPVARIANT pvName;
     PropVariantInit(&pvName);
     props->GetValue(PKEY_Device_FriendlyName, &pvName);
 
     std::wstring str(pvName.pwszVal);
-    CoTaskMemFree(devId);
     PropVariantClear(&pvName);
     props->Release();
 

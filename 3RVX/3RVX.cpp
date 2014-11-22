@@ -8,8 +8,6 @@
 #include <Wtsapi32.h>
 
 #include "3RVX.h"
-#include "Controllers\Volume\CoreAudio.h"
-#include "Controllers\Volume\VolumeController.h"
 #include "HotkeyManager.h"
 #include "Logger.h"
 #include "Settings.h"
@@ -21,7 +19,6 @@ HINSTANCE hInst;
 ULONG_PTR gdiplusToken;
 HWND mainWnd;
 
-CoreAudio *volCtrl;
 VolumeOSD *vOsd;
 std::unordered_map<int, int> hotkeys;
 
@@ -103,10 +100,6 @@ LPTSTR lpCmdLine, int nCmdShow) {
 void init() {
     CLOG(L"Initializing...");
 
-    volCtrl = new CoreAudio(mainWnd);
-    volCtrl->Init();
-    float currentVolume = volCtrl->Volume();
-
     Settings settings(L"Settings.xml");
 
     std::wstring skinName = settings.SkinName();
@@ -116,7 +109,6 @@ void init() {
 
     vOsd = new VolumeOSD(hInst);
     vOsd->LoadSkin(&skin);
-    vOsd->MeterLevels(currentVolume);
 
     hotkeys = settings.Hotkeys();
     HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);
@@ -161,19 +153,6 @@ LRESULT CALLBACK WndProc(
     HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     switch (message) {
-    case MSG_VOL_CHNG: {
-        float v = volCtrl->Volume();
-        QCLOG(L"Volume level: %.0f", v * 100.0f);
-        vOsd->MeterLevels(v);
-        break;
-    }
-
-    case MSG_VOL_DEVCHNG: {
-        CLOG(L"Device change detected.");
-        volCtrl->SelectDefaultDevice();
-        break;
-    }
-
     case WM_DEVICECHANGE: {
         if (wParam == DBT_DEVICEREMOVECOMPLETE) {
             CLOG(L"Device removal notification received");
@@ -184,10 +163,6 @@ LRESULT CALLBACK WndProc(
     case WM_HOTKEY: {
         CLOG(L"Hotkey: %d", (int) wParam);
         int action = hotkeys[(int) wParam];
-        if (action == 100) {
-            float current = volCtrl->Volume();
-            volCtrl->Volume(current + .1f);
-        }
         break;
     }
 
@@ -208,8 +183,6 @@ LRESULT CALLBACK WndProc(
         PostQuitMessage(0);
         break;
     }
-
-
     }
 
     if (message == WM_3RVX_CONTROL) {

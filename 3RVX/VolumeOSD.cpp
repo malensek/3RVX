@@ -14,6 +14,7 @@
 #define MENU_SETTINGS 0
 #define MENU_MIXER 1
 #define MENU_EXIT 2
+#define MENU_DEVICE 0xF000
 
 VolumeOSD::VolumeOSD(HINSTANCE hInstance) :
 _mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
@@ -43,13 +44,20 @@ _fout(_mWnd) {
 
     _masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
 
+    /* Start the volume controller */
+    _volumeCtrl = new CoreAudio(_hWnd);
+    _volumeCtrl->Init();
+
     /* Load notification icons */
     std::list<std::wstring> l;
     _icon = new NotifyIcon(_hWnd, L"3RVX", l);
 
     /* Set up context menu */
     _menu = CreatePopupMenu();
+    _deviceMenu = CreatePopupMenu();
+
     InsertMenu(_menu, -1, MF_ENABLED, MENU_SETTINGS, L"Settings");
+    InsertMenu(_menu, -1, MF_POPUP, UINT(_deviceMenu), L"Audio Device");
     InsertMenu(_menu, -1, MF_ENABLED, MENU_MIXER, L"Mixer");
     InsertMenu(_menu, -1, MF_ENABLED, MENU_EXIT, L"Exit");
 
@@ -60,7 +68,12 @@ _fout(_mWnd) {
         _menuFlags |= TPM_LEFTALIGN;
     }
 
+    UpdateDeviceMenu();
+
     _settingsExe = Settings::AppDir() + L"\\SettingsUI.exe";
+
+    /* TODO: if set, we should update the volume level here to show the OSD
+     * on startup. */
 }
 
 void VolumeOSD::UpdateDeviceMenu() {
@@ -150,7 +163,21 @@ VolumeOSD::StaticWndProc(
 
 LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    if (message == WM_TIMER) {
+    if (message == MSG_VOL_CHNG) {
+        float v = _volumeCtrl->Volume();
+        QCLOG(L"Volume level: %.0f", v * 100.0f);
+        MeterLevels(v);
+    } else if (message == MSG_VOL_DEVCHNG) {
+        CLOG(L"Volume device change detected.");
+        if (_selectedDevice == L"") {
+            _volumeCtrl->SelectDefaultDevice();
+        } else {
+            HRESULT hr = _volumeCtrl->SelectDevice(_selectedDevice);
+            if (FAILED(hr)) {
+                _volumeCtrl->SelectDefaultDevice();
+            }
+        }
+    } else if (message == WM_TIMER) {
         switch (wParam) {
         case TIMER_HIDE:
             CLOG(L"Display duration has elapsed. Hiding window.");
@@ -174,7 +201,8 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             PostMessage(hWnd, WM_NULL, 0, 0);
         }
     } else if (message == WM_COMMAND) {
-        switch (LOWORD(wParam)) {
+        int menuItem = LOWORD(wParam);
+        switch (menuItem) {
         case MENU_SETTINGS:
             CLOG(L"Opening Settings: %s", _settingsExe.c_str());
             ShellExecute(NULL, L"open", _settingsExe.c_str(), NULL, NULL, 0);
@@ -189,6 +217,19 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             CLOG(L"Menu: Exit: %d", _masterWnd);
             SendMessage(_masterWnd, WM_CLOSE, NULL, NULL);
             break;
+        }
+
+        /* Device menu items */
+        if ((menuItem & MENU_DEVICE) > 0) {
+            int device = menuItem & 0x0FFF;
+            VolumeController::DeviceInfo selectedDev = _deviceList[device];
+            if (selectedDev.id != _volumeCtrl->DeviceId()) {
+                /* A different device has been selected */
+                CLOG(L"Changing to volume device: %s",
+                    selectedDev.name.c_str());
+                _volumeCtrl->SelectDevice(selectedDev.id);
+                UpdateDeviceMenu();
+            }
         }
     }
     return DefWindowProc(hWnd, message, wParam, lParam);

@@ -63,6 +63,29 @@ _fout(_mWnd) {
     _settingsExe = Settings::AppDir() + L"\\SettingsUI.exe";
 }
 
+void VolumeOSD::UpdateDeviceMenu() {
+    /* Remove any devices currently in the menu first */
+    for (unsigned int i = 0; i < _deviceList.size(); ++i) {
+        RemoveMenu(_deviceMenu, 0, MF_BYPOSITION);
+    }
+    _deviceList.clear();
+
+    std::list<VolumeController::DeviceInfo> devices
+        = _volumeCtrl->ListDevices();
+    std::wstring currentDeviceId = _volumeCtrl->DeviceId();
+
+    int menuItem = MENU_DEVICE;
+    for (VolumeController::DeviceInfo device : devices) {
+        unsigned int flags = MF_ENABLED;
+        if (currentDeviceId == device.id) {
+            flags |= MF_CHECKED;
+        }
+
+        InsertMenu(_deviceMenu, -1, flags, menuItem++, device.name.c_str());
+        _deviceList.push_back(device);
+    }
+}
+
 void VolumeOSD::LoadSkin(Skin *skin) {
     Gdiplus::Bitmap *bg = skin->OSDBgImg("volume");
     _mWnd.BackgroundImage(bg);

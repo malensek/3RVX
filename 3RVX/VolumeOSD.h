@@ -1,5 +1,9 @@
 #pragma once
 
+#include <vector>
+
+#include "Controllers\Volume\CoreAudio.h"
+#include "Controllers\Volume\VolumeController.h"
 #include "MeterWnd\Animations\FadeOut.h"
 #include "MeterWnd\MeterWnd.h"
 #include "NotifyIcon.h"
@@ -22,12 +26,18 @@ private:
     FadeOut _fout;
     NotifyIcon *_icon;
     HMENU _menu;
+    HMENU _deviceMenu;
     UINT _menuFlags;
     std::wstring _settingsExe;
+    CoreAudio *_volumeCtrl;
+    std::vector<VolumeController::DeviceInfo> _deviceList;
+    std::wstring _selectedDevice;
 
     void Hide();
     void AnimateIn();
     void AnimateOut();
+
+    void UpdateDeviceMenu();
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

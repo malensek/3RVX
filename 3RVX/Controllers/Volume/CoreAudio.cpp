@@ -140,6 +140,10 @@ std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
     _critSect.Leave();
 }
 
+std::wstring CoreAudio::DeviceId() {
+    return _devId;
+}
+
 std::wstring CoreAudio::DeviceName() {
     return DeviceName(_device);
 }

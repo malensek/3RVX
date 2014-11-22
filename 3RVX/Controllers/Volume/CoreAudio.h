@@ -26,6 +26,7 @@ public:
     bool Muted();
     void Muted(bool mute);
 
+    std::wstring DeviceId();
     std::wstring DeviceName();
     std::wstring DeviceName(std::wstring deviceId);
 

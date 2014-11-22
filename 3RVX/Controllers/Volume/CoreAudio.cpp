@@ -156,7 +156,7 @@ std::wstring CoreAudio::DeviceName(std::wstring deviceId) {
 
 std::wstring CoreAudio::DeviceName(CComPtr<IMMDevice> device) {
     IPropertyStore *props = NULL;
-    HRESULT hr = _device->OpenPropertyStore(STGM_READ, &props);
+    HRESULT hr = device->OpenPropertyStore(STGM_READ, &props);
 
     if (FAILED(hr)) {
         return L"";

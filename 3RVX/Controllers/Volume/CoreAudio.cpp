@@ -123,12 +123,12 @@ std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
     UINT numDevices = 0;
     devices->GetCount(&numDevices);
 
-    CComPtr<IMMDevice> device;
     LPWSTR devId;
 
     std::list<VolumeController::DeviceInfo> devList;
 
     for (unsigned int i = 0; i < numDevices; ++i) {
+        CComPtr<IMMDevice> device;
         devices->Item(i, &device);
         device->GetId(&devId);
 

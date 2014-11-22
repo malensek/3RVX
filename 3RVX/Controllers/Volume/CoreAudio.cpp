@@ -36,6 +36,9 @@ HRESULT CoreAudio::AttachDevice() {
         /* Use default device */
         hr = _devEnumerator->GetDefaultAudioEndpoint(eRender,
             eMultimedia, &_device);
+        LPWSTR id;
+        _device->GetId(&id);
+        _devId = std::wstring(id);
     } else {
         hr = _devEnumerator->GetDevice(_devId.c_str(), &_device);
     }

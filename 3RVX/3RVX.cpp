@@ -32,9 +32,9 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 LPTSTR lpCmdLine, int nCmdShow) {
     hInst = hInstance;
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
     Logger::OpenConsole();
-#endif
+//#endif
 
     QCLOG(L"  _____ ______     ____  _______ ");
     QCLOG(L" |___ /|  _ \\ \\   / /\\ \\/ /___ / ");
@@ -100,15 +100,12 @@ LPTSTR lpCmdLine, int nCmdShow) {
 void init() {
     CLOG(L"Initializing...");
 
+    if (vOsd) {
+        delete vOsd;
+    }
+
     Settings settings(L"Settings.xml");
-
-    std::wstring skinName = settings.SkinName();
-    std::wstring skinXML = Settings::AppDir() + L"\\" + SKINS_DIR L"\\"
-        + skinName+ L"\\" SKIN_XML;
-    Skin skin(skinXML);
-
-    vOsd = new VolumeOSD(hInst);
-    vOsd->LoadSkin(&skin);
+    vOsd = new VolumeOSD(hInst, settings);
 
     hotkeys = settings.Hotkeys();
     HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);

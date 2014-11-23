@@ -81,7 +81,7 @@ bool Settings::IsEnabled(std::string elementName) {
 std::wstring Settings::GetText(std::string elementName) {
     const char* str = _root->FirstChildElement(elementName.c_str())->GetText();
     if (str == NULL) {
-        return NULL;
+        return L"";
     } else {
         return StringUtils::Widen(str);
     }

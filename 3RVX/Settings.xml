@@ -3,6 +3,8 @@
   <skin>Ice</skin>
   <language>English</language>
 
+  <audioDevice></audioDevice>
+
   <notifyIcon>true</notifyIcon>
   <soundEffects>true</soundEffects>
   <onTop>true</onTop>

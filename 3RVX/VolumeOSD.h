@@ -7,19 +7,17 @@
 #include "MeterWnd\Animations\FadeOut.h"
 #include "MeterWnd\MeterWnd.h"
 #include "NotifyIcon.h"
+#include "Settings.h"
 
 class Skin;
 
 class VolumeOSD {
 public:
-    VolumeOSD(HINSTANCE hInstance);
-    void LoadSkin(Skin *skin);
-    void MeterLevels();
-    void MeterLevels(float value);
-
+    VolumeOSD(HINSTANCE hInstance, Settings &settings);
     void HideIcon();
 
 private:
+    Settings &_settings;
     HWND _hWnd;
     MeterWnd _mWnd;
     HWND _masterWnd;
@@ -28,15 +26,15 @@ private:
     HMENU _menu;
     HMENU _deviceMenu;
     UINT _menuFlags;
-    std::wstring _settingsExe;
     CoreAudio *_volumeCtrl;
     std::vector<VolumeController::DeviceInfo> _deviceList;
     std::wstring _selectedDevice;
 
-    void Hide();
     void AnimateIn();
     void AnimateOut();
-
+    void Hide();
+    void LoadSkin(std::wstring skinXML);
+    void MeterLevels(float value);
     void UpdateDeviceMenu();
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,

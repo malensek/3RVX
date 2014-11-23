@@ -16,8 +16,9 @@
 #define MENU_EXIT 2
 #define MENU_DEVICE 0xF000
 
-VolumeOSD::VolumeOSD(HINSTANCE hInstance) :
+VolumeOSD::VolumeOSD(HINSTANCE hInstance, Settings &settings) :
 _mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
+_settings(settings),
 _fout(_mWnd) {
 
     WNDCLASSEX wcex;
@@ -44,13 +45,13 @@ _fout(_mWnd) {
 
     _masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
 
+    std::wstring skinXML = settings.SkinXML();
+    LoadSkin(skinXML);
+
     /* Start the volume controller */
     _volumeCtrl = new CoreAudio(_hWnd);
-    _volumeCtrl->Init();
-
-    /* Load notification icons */
-    std::list<std::wstring> l;
-    _icon = new NotifyIcon(_hWnd, L"3RVX", l);
+    std::wstring device = settings.GetText("audioDevice");
+    _volumeCtrl->Init(device);
 
     /* Set up context menu */
     _menu = CreatePopupMenu();
@@ -69,8 +70,6 @@ _fout(_mWnd) {
     }
 
     UpdateDeviceMenu();
-
-    _settingsExe = Settings::AppDir() + L"\\SettingsUI.exe";
 
     /* TODO: if set, we should update the volume level here to show the OSD
      * on startup. */
@@ -99,11 +98,13 @@ void VolumeOSD::UpdateDeviceMenu() {
     }
 }
 
-void VolumeOSD::LoadSkin(Skin *skin) {
-    Gdiplus::Bitmap *bg = skin->OSDBgImg("volume");
+void VolumeOSD::LoadSkin(std::wstring skinXML) {
+    Skin skin(skinXML);
+
+    Gdiplus::Bitmap *bg = skin.OSDBgImg("volume");
     _mWnd.BackgroundImage(bg);
 
-    std::list<Meter*> meters = skin->Meters("volume");
+    std::list<Meter*> meters = skin.Meters("volume");
     for each (Meter *m in meters) {
         _mWnd.AddMeter(m);
     }
@@ -114,6 +115,10 @@ void VolumeOSD::LoadSkin(Skin *skin) {
     const int mHeight = Monitor::Height(monitor);
     _mWnd.X(mWidth / 2 - _mWnd.Width() / 2);
     _mWnd.Y(mHeight - _mWnd.Height() - 140);
+
+    /* Set up notification icon */
+    std::list<std::wstring> l;
+    _icon = new NotifyIcon(_hWnd, L"3RVX", l);
 }
 
 void VolumeOSD::MeterLevels(float level) {
@@ -204,8 +209,9 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         int menuItem = LOWORD(wParam);
         switch (menuItem) {
         case MENU_SETTINGS:
-            CLOG(L"Opening Settings: %s", _settingsExe.c_str());
-            ShellExecute(NULL, L"open", _settingsExe.c_str(), NULL, NULL, 0);
+            CLOG(L"Opening Settings App: %s", Settings::SettingsApp().c_str());
+            ShellExecute(NULL, L"open",
+                Settings::SettingsApp().c_str(), NULL, NULL, 0);
             break;
 
         case MENU_MIXER:

@@ -43,6 +43,12 @@ std::wstring Settings::SkinName() {
     }
 }
 
+std::wstring Settings::SkinXML() {
+    std::wstring skinXML = Settings::AppDir() + L"\\" + SKINS_DIR L"\\"
+        + SkinName() + L"\\" SKIN_XML;
+    return skinXML;
+}
+
 std::unordered_map<int, int> Settings::Hotkeys() {
     std::unordered_map<int, int> keyMappings;
 

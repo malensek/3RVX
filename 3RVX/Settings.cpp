@@ -4,6 +4,7 @@
 
 #include "HotkeyActions.h"
 #include "Logger.h"
+#include "Skin.h"
 #include "StringUtils.h"
 
 std::wstring Settings::_appDir(L"");
@@ -32,6 +33,10 @@ std::wstring Settings::AppDir() {
         _appDir = std::wstring(path);
     }
     return _appDir;
+}
+
+std::wstring Settings::SettingsApp() {
+    return Settings::AppDir() + L"\\" + SETTINGS_APP;
 }
 
 std::wstring Settings::SkinName() {

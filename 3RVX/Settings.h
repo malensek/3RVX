@@ -5,13 +5,18 @@
 
 #include "TinyXml2\tinyxml2.h"
 
+#define SETTINGS_APP L"SettingsUI.exe"
+
 class Settings {
 public:
     Settings(std::wstring file);
 
     static std::wstring AppDir();
+    static std::wstring SettingsApp();
 
     std::wstring SkinName();
+    std::wstring SkinXML();
+
     std::wstring GetText(std::string elementName);
     std::unordered_map<int, int> Hotkeys();
     bool IsEnabled(std::string elementName);

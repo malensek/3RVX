@@ -100,6 +100,7 @@
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="TinyXml2\tinyxml2.h" />
     <ClInclude Include="VolumeOSD.h" />
+    <ClInclude Include="VolumeSlider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
@@ -124,6 +125,7 @@
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="VolumeOSD.cpp" />
+    <ClCompile Include="VolumeSlider.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

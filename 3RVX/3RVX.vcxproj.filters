@@ -93,6 +93,9 @@
     <ClInclude Include="NotifyIcon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VolumeSlider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -159,6 +162,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NotifyIcon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VolumeSlider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

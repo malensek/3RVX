@@ -7,10 +7,9 @@
 
 int NotifyIcon::ids = 0;
 
-NotifyIcon::NotifyIcon(HWND hWnd, std::wstring caption,
-    std::list<std::wstring> icons) :
-    _level(-1),
-    _caption(caption) {
+NotifyIcon::NotifyIcon(HWND hWnd, std::wstring tip, Gdiplus::Bitmap *icon) :
+_icon(icon),
+_tip(tip) {
 
     using Gdiplus::Bitmap;
 
@@ -22,22 +21,24 @@ NotifyIcon::NotifyIcon(HWND hWnd, std::wstring caption,
     _nid.uID = _id;
     _nid.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP;
     _nid.uCallbackMessage = MSG_NOTIFYICON;
-    HICON icon;
-    Bitmap *iconBmp = new Bitmap(L"Skins/Ignition/Notification Icons/0.ico");
-    iconBmp->GetHICON(&icon);
-    _nid.hIcon = icon;
 
-    wcscpy_s(_nid.szTip, 128, L"3RVX");
+    HICON hIcon;
+    _icon->GetHICON(&hIcon);
+    _nid.hIcon = hIcon;
+
+    wcscpy_s(_nid.szTip, 128, tip.c_str());
 
     Shell_NotifyIcon(NIM_ADD, &_nid);
-
-//    _nid.uVersion = NOTIFYICON_VERSION_4;
-//    Shell_NotifyIcon(NIM_SETVERSION, &_nid);
 
     _nii = {};
     _nii.cbSize = { sizeof(_nii) };
     _nii.hWnd = hWnd;
     _nii.uID = _id;
+}
+
+void NotifyIcon::UpdateToolTip(std::wstring newTip) {
+    wcscpy_s(_nid.szTip, 128, newTip.c_str());
+    Shell_NotifyIcon(NIM_MODIFY, &_nid);
 }
 
 NotifyIcon::~NotifyIcon() {

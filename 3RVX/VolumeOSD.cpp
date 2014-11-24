@@ -117,8 +117,9 @@ void VolumeOSD::LoadSkin(std::wstring skinXML) {
     _mWnd.Y(mHeight - _mWnd.Height() - 140);
 
     /* Set up notification icon */
-    std::list<std::wstring> l;
-    _icon = new NotifyIcon(_hWnd, L"3RVX", l);
+    Gdiplus::Bitmap *icon = Gdiplus::Bitmap::FromFile(L"Skins/Ignition/OSD/Mute.png");
+    _icon = new NotifyIcon(_hWnd, L"3RVX", icon);
+    _icon->UpdateToolTip(L"testing");
 }
 
 void VolumeOSD::MeterLevels(float level) {

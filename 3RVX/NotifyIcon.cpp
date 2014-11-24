@@ -7,7 +7,7 @@
 
 int NotifyIcon::ids = 0;
 
-NotifyIcon::NotifyIcon(HWND hWnd, std::wstring tip, Gdiplus::Bitmap *icon) :
+NotifyIcon::NotifyIcon(HWND hWnd, std::wstring tip, HICON icon) :
 _icon(icon),
 _tip(tip) {
 
@@ -21,10 +21,7 @@ _tip(tip) {
     _nid.uID = _id;
     _nid.uFlags = NIF_MESSAGE | NIF_ICON | NIF_TIP;
     _nid.uCallbackMessage = MSG_NOTIFYICON;
-
-    HICON hIcon;
-    _icon->GetHICON(&hIcon);
-    _nid.hIcon = hIcon;
+    _nid.hIcon = _icon;
 
     wcscpy_s(_nid.szTip, 128, tip.c_str());
 
@@ -34,6 +31,11 @@ _tip(tip) {
     _nii.cbSize = { sizeof(_nii) };
     _nii.hWnd = hWnd;
     _nii.uID = _id;
+}
+
+void NotifyIcon::UpdateIcon(HICON icon) {
+    _nid.hIcon = icon;
+    Shell_NotifyIcon(NIM_MODIFY, &_nid);
 }
 
 void NotifyIcon::UpdateToolTip(std::wstring newTip) {

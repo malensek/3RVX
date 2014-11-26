@@ -96,6 +96,12 @@
     <ClInclude Include="VolumeSlider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EjectOSD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OSD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -165,6 +171,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VolumeSlider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EjectOSD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

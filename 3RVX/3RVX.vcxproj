@@ -77,6 +77,7 @@
     <ClInclude Include="3RVX.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
+    <ClInclude Include="EjectOSD.h" />
     <ClInclude Include="HotkeyManager.h" />
     <ClInclude Include="HotkeyActions.h" />
     <ClInclude Include="Logger.h" />
@@ -94,6 +95,7 @@
     <ClInclude Include="MeterWnd\MeterWnd.h" />
     <ClInclude Include="Monitor.h" />
     <ClInclude Include="NotifyIcon.h" />
+    <ClInclude Include="OSD.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Skin.h" />
     <ClInclude Include="SkinInfo.h" />
@@ -105,6 +107,7 @@
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
+    <ClCompile Include="EjectOSD.cpp" />
     <ClCompile Include="HotkeyManager.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MeterWnd\Animations\FadeOut.cpp" />
@@ -119,6 +122,7 @@
     <ClCompile Include="MeterWnd\MeterWnd.cpp" />
     <ClCompile Include="Monitor.cpp" />
     <ClCompile Include="NotifyIcon.cpp" />
+    <ClCompile Include="OSD.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Skin.cpp" />
     <ClCompile Include="SkinInfo.cpp" />

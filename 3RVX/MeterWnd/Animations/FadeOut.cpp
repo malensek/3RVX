@@ -1,17 +1,17 @@
 #include "FadeOut.h"
 
-bool FadeOut::Animate() {
-    byte current = _meterWnd.Transparency();
+bool FadeOut::Animate(MeterWnd &meterWnd) {
+    byte current = meterWnd.Transparency();
     int newTrans = current - 5;
     if (newTrans < 0) {
         newTrans = 0;
         return true;
     }
 
-    _meterWnd.Transparency(newTrans);
+    meterWnd.Transparency(newTrans);
     return false;
 }
 
-void FadeOut::Reset() {
-    _meterWnd.Transparency(255);
+void FadeOut::Reset(MeterWnd &meterWnd) {
+    meterWnd.Transparency(255);
 }

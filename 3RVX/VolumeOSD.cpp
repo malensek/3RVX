@@ -18,8 +18,7 @@
 
 VolumeOSD::VolumeOSD(HINSTANCE hInstance, Settings &settings) :
 _mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
-_settings(settings),
-_fout(_mWnd) {
+_settings(settings) {
 
     WNDCLASSEX wcex;
 
@@ -138,12 +137,12 @@ void VolumeOSD::MeterLevels(float level) {
 }
 
 void VolumeOSD::Hide() {
-    _fout.Reset();
+    _fout.Reset(_mWnd);
     SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
 }
 
 void VolumeOSD::AnimateOut() {
-    bool animOver = _fout.Animate();
+    bool animOver = _fout.Animate(_mWnd);
     if (animOver) {
         CLOG(L"Finished hiding window.");
         KillTimer(_hWnd, TIMER_ANIMOUT);

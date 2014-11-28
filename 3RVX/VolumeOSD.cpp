@@ -18,6 +18,7 @@
 
 VolumeOSD::VolumeOSD(HINSTANCE hInstance, Settings &settings) :
 _mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
+_muteWnd(hInstance, L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD"),
 _settings(settings) {
 
     WNDCLASSEX wcex;
@@ -115,6 +116,13 @@ void VolumeOSD::LoadSkin(std::wstring skinXML) {
     _mWnd.X(mWidth / 2 - _mWnd.Width() / 2);
     _mWnd.Y(mHeight - _mWnd.Height() - 140);
 
+    _muteBg = skin.OSDBgImg("mute");
+    _muteWnd.BackgroundImage(_muteBg);
+    _muteWnd.Update();
+    _muteWnd.X(mWidth / 2 - _muteWnd.Width() / 2);
+    _muteWnd.Y(mHeight - _muteWnd.Height() - 140);
+
+
     /* Set up notification icon */
     Gdiplus::Bitmap *iconBmp = Gdiplus::Bitmap::FromFile(L"Skins/Ignition/OSD/Mute.png");
     HICON icon;
@@ -176,8 +184,12 @@ LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == MSG_VOL_CHNG) {
         float v = _volumeCtrl->Volume();
-        QCLOG(L"Volume level: %.0f", v * 100.0f);
-        MeterLevels(v);
+        if (_volumeCtrl->Muted()) {
+            _muteWnd.Show();
+        } else {
+            QCLOG(L"Volume level: %.0f", v * 100.0f);
+            MeterLevels(v);
+        }
     } else if (message == MSG_VOL_DEVCHNG) {
         CLOG(L"Volume device change detected.");
         if (_selectedDevice == L"") {

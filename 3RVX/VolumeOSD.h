@@ -29,6 +29,8 @@ private:
     CoreAudio *_volumeCtrl;
     std::vector<VolumeController::DeviceInfo> _deviceList;
     std::wstring _selectedDevice;
+    MeterWnd _muteWnd;
+    Gdiplus::Bitmap *_muteBg;
 
     void AnimateIn();
     void AnimateOut();

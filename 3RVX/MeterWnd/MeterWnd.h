@@ -15,8 +15,8 @@ public:
 
 	void Update();
 
-    virtual void Show();
-    virtual void Hide();
+    void Show(bool animate = true);
+    void Hide(bool animate = true);
 
     int X() const;
     int Y() const;
@@ -60,5 +60,5 @@ private:
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
-    virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
+    LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
 };

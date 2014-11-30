@@ -236,7 +236,23 @@ MeterWnd::StaticWndProc(
 }
 
 LRESULT MeterWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
-    /* Handle messages here */
+    if (message == WM_TIMER) {
+        switch (wParam) {
+        case TIMER_HIDE:
+            CLOG(L"Display duration has elapsed. Hiding window.");
+            Hide();
+            KillTimer(_hWnd, TIMER_HIDE);
+            break;
+
+        case TIMER_ANIMIN:
+            break;
+
+        case TIMER_ANIMOUT:
+            AnimateOut();
+            break;
+        }
+    }
+
     return DefWindowProc(_hWnd, message, wParam, lParam);
 }
 

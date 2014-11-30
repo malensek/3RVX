@@ -32,8 +32,6 @@ private:
     MeterWnd _muteWnd;
     Gdiplus::Bitmap *_muteBg;
 
-    void AnimateIn();
-    void AnimateOut();
     void Hide();
     void LoadSkin(std::wstring skinXML);
     void MeterLevels(float value);

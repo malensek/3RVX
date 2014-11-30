@@ -17,8 +17,8 @@
 #define MENU_DEVICE 0xF000
 
 VolumeOSD::VolumeOSD(HINSTANCE hInstance, Settings &settings) :
-_mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
-_muteWnd(hInstance, L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD"),
+_mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD", NULL, NULL, 800),
+_muteWnd(hInstance, L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD", NULL, NULL, 800),
 _settings(settings) {
 
     WNDCLASSEX wcex;
@@ -70,6 +70,10 @@ _settings(settings) {
     }
 
     UpdateDeviceMenu();
+
+    FadeOut *fOut = new FadeOut();
+    _mWnd.HideAnimation(fOut);
+    _muteWnd.HideAnimation(fOut);
 
     /* TODO: if set, we should update the volume level here to show the OSD
      * on startup. */
@@ -136,26 +140,14 @@ void VolumeOSD::LoadSkin(std::wstring skinXML) {
 }
 
 void VolumeOSD::MeterLevels(float level) {
-    KillTimer(_hWnd, TIMER_ANIMOUT);
     _mWnd.MeterLevels(level);
     _mWnd.Update();
-    _mWnd.Transparency(255);
     _mWnd.Show();
-    SetTimer(_hWnd, TIMER_HIDE, 800, NULL);
 }
 
 void VolumeOSD::Hide() {
-    _fout.Reset(_mWnd);
-    SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
-}
-
-void VolumeOSD::AnimateOut() {
-    bool animOver = _fout.Animate(_mWnd);
-    if (animOver) {
-        CLOG(L"Finished hiding window.");
-        KillTimer(_hWnd, TIMER_ANIMOUT);
-        _mWnd.Hide();
-    }
+//    _fout.Reset(_mWnd);
+//    SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
 }
 
 void VolumeOSD::HideIcon() {
@@ -184,9 +176,11 @@ LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == MSG_VOL_CHNG) {
         float v = _volumeCtrl->Volume();
-        if (_volumeCtrl->Muted()) {
+        if (_volumeCtrl->Muted() || v == 0.0f) {
+            _mWnd.Hide(false);
             _muteWnd.Show();
         } else {
+            _muteWnd.Hide(false);
             QCLOG(L"Volume level: %.0f", v * 100.0f);
             MeterLevels(v);
         }
@@ -199,21 +193,6 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             if (FAILED(hr)) {
                 _volumeCtrl->SelectDefaultDevice();
             }
-        }
-    } else if (message == WM_TIMER) {
-        switch (wParam) {
-        case TIMER_HIDE:
-            CLOG(L"Display duration has elapsed. Hiding window.");
-            Hide();
-            KillTimer(_hWnd, TIMER_HIDE);
-            break;
-
-        case TIMER_ANIMIN:
-            break;
-
-        case TIMER_ANIMOUT:
-            AnimateOut();
-            break;
         }
     } else if (message == MSG_NOTIFYICON) {
         if (lParam == WM_LBUTTONUP || lParam == WM_RBUTTONUP) {

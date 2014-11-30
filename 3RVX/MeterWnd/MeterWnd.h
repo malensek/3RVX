@@ -33,6 +33,9 @@ public:
     void MeterLevels(float value);
     float MeterLevels();
 
+    void HideAnimation(Animation *anim);
+    void ShowAnimation(Animation *anim);
+
     void BackgroundImage(Gdiplus::Bitmap *background);
 
 private:

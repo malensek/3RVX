@@ -51,6 +51,10 @@ private:
 
     std::list<Meter*> _meters;
 
+    int _visibleDuration;
+    Animation *_hideAnimation;
+    Animation *_showAnimation;
+
     void UpdateDirtyRect(Gdiplus::Rect &rect);
     void ResetDirtyRect();
 

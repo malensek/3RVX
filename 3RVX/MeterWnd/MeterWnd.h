@@ -3,6 +3,8 @@
 #include <list>
 #include "Meter.h"
 
+class Animation;
+
 #define TIMER_SHOWANIM    0x01
 #define TIMER_HIDEANIM    0x02
 #define TIMER_DELAY       0x03
@@ -47,6 +49,7 @@ private:
     POINT _location;
     SIZE _size;
     byte _transparency;
+    bool _visible;
 
 	Gdiplus::Bitmap *_background;
 	Gdiplus::Bitmap *_composite;
@@ -64,6 +67,9 @@ private:
     void UpdateLayeredWnd();
     void UpdateLocation();
     void UpdateTransparency();
+
+    void AnimateOut();
+    void AnimateIn();
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

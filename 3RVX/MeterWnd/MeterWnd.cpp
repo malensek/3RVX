@@ -169,19 +169,56 @@ void MeterWnd::MeterLevels(float value)
     }
 }
 
+void MeterWnd::HideAnimation(Animation *anim) {
+    _hideAnimation = anim;
+}
+
 void MeterWnd::BackgroundImage(Gdiplus::Bitmap *background) {
     _background = background;
     _size.cx = background->GetWidth();
     _size.cy = background->GetHeight();
 }
 
-void MeterWnd::Show() {
-    UpdateLocation();
-    ShowWindow(_hWnd, SW_SHOW);
+void MeterWnd::Show(bool animate) {
+    //TODO: animation support
+    if (_visible == false) {
+        UpdateLocation();
+        ShowWindow(_hWnd, SW_SHOW);
+        _visible = true;
+    }
+
+    if (_visibleDuration > 0) {
+        CLOG(L"setting");
+        SetTimer(_hWnd, TIMER_HIDE, _visibleDuration, NULL);
+        KillTimer(_hWnd, TIMER_ANIMOUT);
+
+        if (_hideAnimation) {
+            _hideAnimation->Reset(this);
+        }
+    }
 }
 
-void MeterWnd::Hide() {
-    ShowWindow(_hWnd, SW_HIDE);
+void MeterWnd::Hide(bool animate) {
+    if (_visible == false) {
+        return;
+    }
+
+    if (animate && _hideAnimation) {
+        SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
+    } else {
+        ShowWindow(_hWnd, SW_HIDE);
+        _visible = false;
+    }
+}
+
+void MeterWnd::AnimateOut() {
+    bool animOver = _hideAnimation->Animate(this);
+    if (animOver) {
+        CLOG(L"Finished hide animation.");
+        KillTimer(_hWnd, TIMER_ANIMOUT);
+        ShowWindow(_hWnd, SW_HIDE);
+        _visible = false;
+    }
 }
 
 int MeterWnd::X() const {

@@ -2,7 +2,6 @@
 
 #include <Windows.h>
 
-#include "MeterWnd\Animations\FadeOut.h"
 #include "MeterWnd\MeterWnd.h"
 #include "Settings.h"
 
@@ -14,14 +13,9 @@ public:
     void Show();
 
 protected:
-    Animation *_animIn;
-    Animation *_animOut;
     HWND _hWnd;
     HWND _masterWnd;
     Settings &_settings;
-
-    void AnimateIn();
-    void AnimateOut();
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

@@ -1,9 +1,5 @@
 #include "OSD.h"
 
-#define TIMER_HIDE 100
-#define TIMER_ANIMIN 101
-#define TIMER_ANIMOUT 102
-
 OSD::OSD(HINSTANCE hInstance, std::wstring className, Settings &settings) :
 _settings(settings) {
 
@@ -37,15 +33,6 @@ void OSD::Hide() {
     //SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
 }
 
-void OSD::AnimateOut() {
-/*    bool animOver = _animOut.Animate(_mWnd);
-    if (animOver) {
-        CLOG(L"Finished hiding window.");
-        KillTimer(_hWnd, TIMER_ANIMOUT);
-        //_mWnd.Hide();
-    }*/
-}
-
 LRESULT CALLBACK
 OSD::StaticWndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -66,21 +53,5 @@ OSD::StaticWndProc(
 
 LRESULT
 OSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    if (message == WM_TIMER) {
-        switch (wParam) {
-        case TIMER_HIDE:
-            CLOG(L"Display duration has elapsed. Hiding window.");
-            Hide();
-            KillTimer(_hWnd, TIMER_HIDE);
-            break;
-
-        case TIMER_ANIMIN:
-            break;
-
-        case TIMER_ANIMOUT:
-            AnimateOut();
-            break;
-        }
-    }
     return DefWindowProc(hWnd, message, wParam, lParam);
 }

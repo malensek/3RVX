@@ -32,9 +32,9 @@ wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 LPTSTR lpCmdLine, int nCmdShow) {
     hInst = hInstance;
 
-//#ifdef _DEBUG
+#ifdef _DEBUG
     Logger::OpenConsole();
-//#endif
+#endif
 
     QCLOG(L"  _____ ______     ____  _______ ");
     QCLOG(L" |___ /|  _ \\ \\   / /\\ \\/ /___ / ");

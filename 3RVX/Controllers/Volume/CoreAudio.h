@@ -29,6 +29,8 @@ public:
     std::wstring DeviceId();
     std::wstring DeviceName();
     std::wstring DeviceName(std::wstring deviceId);
+    std::wstring DeviceDesc();
+    std::wstring DeviceDesc(std::wstring deviceId);
 
     std::list<DeviceInfo> ListDevices();
 
@@ -55,6 +57,7 @@ private:
     void DetachDevice();
 
     std::wstring DeviceName(CComPtr<IMMDevice> device);
+    std::wstring DeviceDesc(CComPtr<IMMDevice> device);
 
     /* IAudioEndpointVolumeCallback */
     IFACEMETHODIMP OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify);

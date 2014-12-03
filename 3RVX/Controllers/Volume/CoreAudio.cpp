@@ -151,7 +151,17 @@ std::wstring CoreAudio::DeviceName() {
     return DeviceName(_device);
 }
 
+std::wstring CoreAudio::DeviceDesc() {
+    return DeviceDesc(_device);
+}
+
 std::wstring CoreAudio::DeviceName(std::wstring deviceId) {
+    CComPtr<IMMDevice> device;
+    _devEnumerator->GetDevice(deviceId.c_str(), &device);
+    return DeviceName(device);
+}
+
+std::wstring CoreAudio::DeviceDesc(std::wstring deviceId) {
     CComPtr<IMMDevice> device;
     _devEnumerator->GetDevice(deviceId.c_str(), &device);
     return DeviceName(device);
@@ -171,6 +181,25 @@ std::wstring CoreAudio::DeviceName(CComPtr<IMMDevice> device) {
 
     std::wstring str(pvName.pwszVal);
     PropVariantClear(&pvName);
+    props->Release();
+
+    return str;
+}
+
+std::wstring CoreAudio::DeviceDesc(CComPtr<IMMDevice> device) {
+    IPropertyStore *props = NULL;
+    HRESULT hr = device->OpenPropertyStore(STGM_READ, &props);
+
+    if (FAILED(hr)) {
+        return L"";
+    }
+
+    PROPVARIANT pvDesc;
+    PropVariantInit(&pvDesc);
+    props->GetValue(PKEY_Device_DeviceDesc, &pvDesc);
+
+    std::wstring str(pvDesc.pwszVal);
+    PropVariantClear(&pvDesc);
     props->Release();
 
     return str;

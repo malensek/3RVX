@@ -52,6 +52,7 @@ _settings(settings) {
     _volumeCtrl = new CoreAudio(_hWnd);
     std::wstring device = settings.GetText("audioDevice");
     _volumeCtrl->Init(device);
+    _selectedDesc = _volumeCtrl->DeviceDesc();
 
     /* Set up context menu */
     _menu = CreatePopupMenu();
@@ -77,6 +78,7 @@ _settings(settings) {
 
     /* TODO: if set, we should update the volume level here to show the OSD
      * on startup. */
+    UpdateIconTip();
 }
 
 void VolumeOSD::UpdateDeviceMenu() {
@@ -154,6 +156,17 @@ void VolumeOSD::HideIcon() {
     delete _icon;
 }
 
+void VolumeOSD::UpdateIconTip() {
+    if (_volumeCtrl->Muted()) {
+        _icon->UpdateToolTip(_selectedDesc + L": Muted");
+    } else {
+        float v = _volumeCtrl->Volume();
+        std::wstring perc = std::to_wstring((int) (v * 100.0f));
+        std::wstring level = _selectedDesc + L": " + perc + L"%";
+        _icon->UpdateToolTip(level);
+    }
+}
+
 LRESULT CALLBACK
 VolumeOSD::StaticWndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -184,6 +197,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             QCLOG(L"Volume level: %.0f", v * 100.0f);
             MeterLevels(v);
         }
+        UpdateIconTip();
     } else if (message == MSG_VOL_DEVCHNG) {
         CLOG(L"Volume device change detected.");
         if (_selectedDevice == L"") {
@@ -194,6 +208,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 _volumeCtrl->SelectDefaultDevice();
             }
         }
+        _selectedDesc = _volumeCtrl->DeviceDesc();
     } else if (message == MSG_NOTIFYICON) {
         if (lParam == WM_LBUTTONUP || lParam == WM_RBUTTONUP) {
             POINT p;

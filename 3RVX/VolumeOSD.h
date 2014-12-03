@@ -21,7 +21,6 @@ private:
     HWND _hWnd;
     MeterWnd _mWnd;
     HWND _masterWnd;
-    FadeOut _fout;
     NotifyIcon *_icon;
     HMENU _menu;
     HMENU _deviceMenu;
@@ -29,12 +28,14 @@ private:
     CoreAudio *_volumeCtrl;
     std::vector<VolumeController::DeviceInfo> _deviceList;
     std::wstring _selectedDevice;
+    std::wstring _selectedDesc;
     MeterWnd _muteWnd;
     Gdiplus::Bitmap *_muteBg;
 
     void Hide();
     void LoadSkin(std::wstring skinXML);
     void MeterLevels(float value);
+    void UpdateIconTip();
     void UpdateDeviceMenu();
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,

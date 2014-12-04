@@ -6,12 +6,14 @@
   </info>
 
   <osds>
-    <volume background="OSD\background.png">
+    <volume background="OSD/background.png">
       <meter type="HorizontalTile" image="OSD\meter.png"
              x="28" y="118" units="13"/>
     </volume>
 
     <mute background="OSD/mute.png"/>
+
+    <eject background="OSD/eject.png"/>
 
     <brightness background="OSD/brightness_back.png">
       <meter type="HorizontalBar" image="OSD/meter.png" units="16"

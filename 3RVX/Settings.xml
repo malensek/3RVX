@@ -19,6 +19,8 @@
   <positionY>0</positionY>
 
   <hotkeys>
-    <hotkey action="100" combination="524296"/>
+    <hotkey combination="524296">
+      <action id="100"></action>
+    </hotkey>
   </hotkeys>
 </settings>

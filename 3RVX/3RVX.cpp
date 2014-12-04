@@ -94,7 +94,7 @@ LPTSTR lpCmdLine, int nCmdShow) {
     }
 
     GdiplusShutdown(gdiplusToken);
-    return (int)msg.wParam;
+    return (int) msg.wParam;
 }
 
 void init() {

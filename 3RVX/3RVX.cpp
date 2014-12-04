@@ -19,6 +19,7 @@ HINSTANCE hInst;
 ULONG_PTR gdiplusToken;
 HWND mainWnd;
 
+Settings *settings;
 VolumeOSD *vOsd;
 std::unordered_map<int, int> hotkeys;
 
@@ -104,10 +105,10 @@ void init() {
         delete vOsd;
     }
 
-    Settings settings(L"Settings.xml");
-    vOsd = new VolumeOSD(hInst, settings);
+    settings = new Settings(L"Settings.xml");
+    vOsd = new VolumeOSD(hInst, *settings);
 
-    hotkeys = settings.Hotkeys();
+    hotkeys = settings->Hotkeys();
     HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);
     for (auto it = hotkeys.begin(); it != hotkeys.end(); ++it) {
         int combination = it->first;

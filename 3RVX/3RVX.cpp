@@ -1,13 +1,13 @@
 ﻿#include <Windows.h>
 #include <gdiplus.h>
 #pragma comment(lib, "gdiplus.lib")
-#include <Dbt.h>
 #include <iostream>
 #include <string>
 #include <unordered_map>
 #include <Wtsapi32.h>
 
 #include "3RVX.h"
+#include "EjectOSD.h"
 #include "HotkeyManager.h"
 #include "Logger.h"
 #include "Settings.h"
@@ -20,7 +20,8 @@ ULONG_PTR gdiplusToken;
 HWND mainWnd;
 
 Settings *settings;
-VolumeOSD *vOsd;
+VolumeOSD *vOSD;
+EjectOSD *eOSD;
 std::unordered_map<int, int> hotkeys;
 
 void init();
@@ -101,12 +102,13 @@ LPTSTR lpCmdLine, int nCmdShow) {
 void init() {
     CLOG(L"Initializing...");
 
-    if (vOsd) {
-        delete vOsd;
+    if (vOSD) {
+        delete vOSD;
     }
 
     settings = new Settings(L"Settings.xml");
-    vOsd = new VolumeOSD(hInst, *settings);
+    vOSD = new VolumeOSD(hInst, *settings);
+    eOSD = new EjectOSD(hInst, *settings);
 
     hotkeys = settings->Hotkeys();
     HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);
@@ -151,13 +153,6 @@ LRESULT CALLBACK WndProc(
     HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     switch (message) {
-    case WM_DEVICECHANGE: {
-        if (wParam == DBT_DEVICEREMOVECOMPLETE) {
-            CLOG(L"Device removal notification received");
-        }
-        break;
-    }
-
     case WM_HOTKEY: {
         CLOG(L"Hotkey: %d", (int) wParam);
         int action = hotkeys[(int) wParam];
@@ -172,7 +167,7 @@ LRESULT CALLBACK WndProc(
     case WM_CLOSE: {
         CLOG(L"Shutting down");
         HotkeyManager::Instance()->Shutdown();
-        vOsd->HideIcon();
+        vOSD->HideIcon();
         DestroyWindow(mainWnd);
         break;
     }

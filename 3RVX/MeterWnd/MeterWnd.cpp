@@ -188,7 +188,6 @@ void MeterWnd::Show(bool animate) {
     }
 
     if (_visibleDuration > 0) {
-        CLOG(L"setting");
         SetTimer(_hWnd, TIMER_HIDE, _visibleDuration, NULL);
         KillTimer(_hWnd, TIMER_ANIMOUT);
 

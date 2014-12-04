@@ -8,4 +8,8 @@
 class EjectOSD : public OSD {
 public:
     EjectOSD(HINSTANCE hInstance, Settings &settings);
+
+private:
+    virtual LRESULT WndProc(HWND hWnd, UINT message,
+        WPARAM wParam, LPARAM lParam);
 };

@@ -9,13 +9,15 @@ class OSD {
 public:
     OSD(HINSTANCE hInstance, std::wstring className, Settings &settings);
 
-    void Hide();
-    void Show();
+    virtual void Hide();
+    virtual void Show();
 
 protected:
     HWND _hWnd;
     HWND _masterWnd;
     Settings &_settings;
+
+    void HideAll();
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

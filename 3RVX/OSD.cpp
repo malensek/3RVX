@@ -1,5 +1,7 @@
 #include "OSD.h"
 
+#include "3RVX.h"
+
 OSD::OSD(HINSTANCE hInstance, std::wstring className, Settings &settings) :
 _settings(settings) {
 
@@ -28,9 +30,8 @@ _settings(settings) {
     _masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
 }
 
-void OSD::Hide() {
-    //_animOut.Reset();
-    //SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
+void OSD::HideAll() {
+    SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEALL, NULL);
 }
 
 LRESULT CALLBACK

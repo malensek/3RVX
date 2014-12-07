@@ -17,34 +17,10 @@
 #define MENU_DEVICE 0xF000
 
 VolumeOSD::VolumeOSD(HINSTANCE hInstance, Settings &settings) :
+OSD(hInstance, L"3RVX-VolumeDispatcher", settings),
 _mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD", NULL, NULL, 800),
-_muteWnd(hInstance, L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD", NULL, NULL, 800),
-_settings(settings) {
-
-    WNDCLASSEX wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = NULL;
-    wcex.lpfnWndProc = &VolumeOSD::StaticWndProc;
-    wcex.cbClsExtra = NULL;
-    wcex.cbWndExtra = NULL;
-    wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = L"3RVX-VolumeDispatcher";
-    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-
-    RegisterClassEx(&wcex);
-    /* throw exception if failed? */
-
-    _hWnd = CreateWindowEx(
-        NULL, L"3RVX-VolumeDispatcher", L"3RVX-VolumeDispatcher",
-        NULL, NULL, NULL, NULL, NULL, HWND_MESSAGE, NULL, hInstance, this);
-
-    _masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
-
+_muteWnd(hInstance, L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD", NULL, NULL, 800)
+{
     std::wstring skinXML = settings.SkinXML();
     LoadSkin(skinXML);
 
@@ -148,6 +124,8 @@ void VolumeOSD::MeterLevels(float level) {
 }
 
 void VolumeOSD::Hide() {
+    _mWnd.Hide(false);
+    _muteWnd.Hide(false);
 //    _fout.Reset(_mWnd);
 //    SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
 }
@@ -165,24 +143,6 @@ void VolumeOSD::UpdateIconTip() {
         std::wstring level = _selectedDesc + L": " + perc + L"%";
         _icon->UpdateToolTip(level);
     }
-}
-
-LRESULT CALLBACK
-VolumeOSD::StaticWndProc(
-        HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    VolumeOSD* vOsd;
-
-    if (message == WM_CREATE) {
-        vOsd = (VolumeOSD*) ((LPCREATESTRUCT) lParam)->lpCreateParams;
-        SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR) vOsd);
-    } else {
-        vOsd = (VolumeOSD*) GetWindowLongPtr(hWnd, GWLP_USERDATA);
-        if (!vOsd) {
-            return DefWindowProc(hWnd, message, wParam, lParam);
-        }
-    }
-
-    return vOsd->WndProc(hWnd, message, wParam, lParam);
 }
 
 LRESULT

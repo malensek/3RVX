@@ -7,20 +7,20 @@
 #include "MeterWnd\Animations\FadeOut.h"
 #include "MeterWnd\MeterWnd.h"
 #include "NotifyIcon.h"
+#include "OSD.h"
 #include "Settings.h"
 
 class Skin;
 
-class VolumeOSD {
+class VolumeOSD : public OSD {
 public:
     VolumeOSD(HINSTANCE hInstance, Settings &settings);
+
+    void Hide();
     void HideIcon();
 
 private:
-    Settings &_settings;
-    HWND _hWnd;
     MeterWnd _mWnd;
-    HWND _masterWnd;
     NotifyIcon *_icon;
     HMENU _menu;
     HMENU _deviceMenu;
@@ -32,13 +32,11 @@ private:
     MeterWnd _muteWnd;
     Gdiplus::Bitmap *_muteBg;
 
-    void Hide();
     void LoadSkin(std::wstring skinXML);
     void MeterLevels(float value);
     void UpdateIconTip();
     void UpdateDeviceMenu();
 
-    static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
-        WPARAM wParam, LPARAM lParam);
-    LRESULT WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+    virtual LRESULT
+        WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

@@ -3,7 +3,6 @@
 #include <Windows.h>
 
 #include "OSD.h"
-#include "Settings.h"
 
 class EjectOSD : public OSD {
 public:

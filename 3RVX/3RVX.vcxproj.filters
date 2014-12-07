@@ -39,9 +39,6 @@
     <ClInclude Include="Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VolumeOSD.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeterWnd\Meters\MeterTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -96,10 +93,13 @@
     <ClInclude Include="VolumeSlider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EjectOSD.h">
+    <ClInclude Include="OSD\OSD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OSD.h">
+    <ClInclude Include="OSD\EjectOSD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OSD\VolumeOSD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -126,9 +126,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VolumeOSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TinyXml2\tinyxml2.cpp">
@@ -173,10 +170,13 @@
     <ClCompile Include="VolumeSlider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EjectOSD.cpp">
+    <ClCompile Include="OSD\OSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OSD.cpp">
+    <ClCompile Include="OSD\EjectOSD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OSD\VolumeOSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

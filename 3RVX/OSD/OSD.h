@@ -2,8 +2,8 @@
 
 #include <Windows.h>
 
-#include "MeterWnd\MeterWnd.h"
-#include "Settings.h"
+#include "..\MeterWnd\MeterWnd.h"
+#include "..\Settings.h"
 
 class OSD {
 public:
@@ -17,6 +17,7 @@ protected:
     Settings &_settings;
 
     void HideAll();
+    void HideOthers(long exception);
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

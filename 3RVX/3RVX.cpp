@@ -7,12 +7,12 @@
 #include <Wtsapi32.h>
 
 #include "3RVX.h"
-#include "EjectOSD.h"
+#include "OSD\EjectOSD.h"
+#include "OSD\VolumeOSD.h"
 #include "HotkeyManager.h"
 #include "Logger.h"
 #include "Settings.h"
 #include "Skin.h"
-#include "VolumeOSD.h"
 
 HANDLE mutex;
 HINSTANCE hInst;

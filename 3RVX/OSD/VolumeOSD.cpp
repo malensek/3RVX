@@ -3,9 +3,8 @@
 #include <Shlwapi.h>
 #include <string>
 
-#include "Monitor.h"
-#include "Settings.h"
-#include "Skin.h"
+#include "..\Monitor.h"
+#include "..\Skin.h"
 
 #define TIMER_HIDE 100
 #define TIMER_ANIMIN 101
@@ -118,6 +117,7 @@ void VolumeOSD::LoadSkin(std::wstring skinXML) {
 }
 
 void VolumeOSD::MeterLevels(float level) {
+    HideAll();
     _mWnd.MeterLevels(level);
     _mWnd.Update();
     _mWnd.Show();

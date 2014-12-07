@@ -2,13 +2,12 @@
 
 #include <vector>
 
-#include "Controllers\Volume\CoreAudio.h"
-#include "Controllers\Volume\VolumeController.h"
-#include "MeterWnd\Animations\FadeOut.h"
-#include "MeterWnd\MeterWnd.h"
-#include "NotifyIcon.h"
+#include "..\Controllers\Volume\CoreAudio.h"
+#include "..\Controllers\Volume\VolumeController.h"
+#include "..\MeterWnd\Animations\FadeOut.h"
+#include "..\MeterWnd\MeterWnd.h"
+#include "..\NotifyIcon.h"
 #include "OSD.h"
-#include "Settings.h"
 
 class Skin;
 

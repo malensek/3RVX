@@ -1,6 +1,6 @@
 #include "OSD.h"
 
-#include "3RVX.h"
+#include "..\3RVX.h"
 
 OSD::OSD(HINSTANCE hInstance, std::wstring className, Settings &settings) :
 _settings(settings) {
@@ -33,6 +33,11 @@ _settings(settings) {
 void OSD::HideAll() {
     SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEALL, NULL);
 }
+
+void OSD::HideOthers(long exception) {
+    SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEALL, exception);
+}
+
 
 LRESULT CALLBACK
 OSD::StaticWndProc(

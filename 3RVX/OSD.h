@@ -9,7 +9,7 @@ class OSD {
 public:
     OSD(HINSTANCE hInstance, std::wstring className, Settings &settings);
 
-    virtual void Hide();
+    virtual void Hide() = 0;
 
 protected:
     HWND _hWnd;

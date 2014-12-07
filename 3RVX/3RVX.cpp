@@ -189,9 +189,18 @@ LRESULT CALLBACK WndProc(
             /* TODO: launch! */
             break;
 
-        case MSG_HIDEALL:
-            vOSD->Hide();
-            eOSD->Hide();
+        case MSG_HIDEOSD:
+            int except = (OSDType) lParam;
+            switch (except) {
+            case Volume:
+                eOSD->Hide();
+                break;
+
+            case Eject:
+                vOSD->Hide();
+                break;
+            }
+
             break;
         }
     }

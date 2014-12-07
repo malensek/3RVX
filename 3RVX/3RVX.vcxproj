@@ -99,6 +99,7 @@
     <ClInclude Include="Monitor.h" />
     <ClInclude Include="NotifyIcon.h" />
     <ClInclude Include="OSD\OSD.h" />
+    <ClInclude Include="OSD\OSDType.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Skin.h" />
     <ClInclude Include="SkinInfo.h" />

@@ -30,14 +30,9 @@ _settings(settings) {
     _masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
 }
 
-void OSD::HideAll() {
-    SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEALL, NULL);
+void OSD::HideOthers(OSDType except = All) {
+    SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEOSD, except);
 }
-
-void OSD::HideOthers(long exception) {
-    SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEALL, exception);
-}
-
 
 LRESULT CALLBACK
 OSD::StaticWndProc(

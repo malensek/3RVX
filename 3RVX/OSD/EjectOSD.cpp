@@ -31,7 +31,7 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == WM_DEVICECHANGE) {
         if (wParam == DBT_DEVICEREMOVECOMPLETE) {
             CLOG(L"Device removal notification received");
-            HideAll();
+            HideOthers(Eject);
             _mWnd->Show();
         }
     }

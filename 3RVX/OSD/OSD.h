@@ -4,6 +4,7 @@
 
 #include "..\MeterWnd\MeterWnd.h"
 #include "..\Settings.h"
+#include "OSDType.h"
 
 class OSD {
 public:
@@ -16,8 +17,7 @@ protected:
     HWND _masterWnd;
     Settings &_settings;
 
-    void HideAll();
-    void HideOthers(long exception);
+    void HideOthers(OSDType except);
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

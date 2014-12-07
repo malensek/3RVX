@@ -117,10 +117,8 @@ void VolumeOSD::LoadSkin(std::wstring skinXML) {
 }
 
 void VolumeOSD::MeterLevels(float level) {
-    HideAll();
     _mWnd.MeterLevels(level);
     _mWnd.Update();
-    _mWnd.Show();
 }
 
 void VolumeOSD::Hide() {
@@ -148,6 +146,7 @@ void VolumeOSD::UpdateIconTip() {
 LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == MSG_VOL_CHNG) {
+        HideOthers(Volume);
         float v = _volumeCtrl->Volume();
         if (_volumeCtrl->Muted() || v == 0.0f) {
             _mWnd.Hide(false);
@@ -156,6 +155,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             _muteWnd.Hide(false);
             QCLOG(L"Volume level: %.0f", v * 100.0f);
             MeterLevels(v);
+            _mWnd.Show();
         }
         UpdateIconTip();
     } else if (message == MSG_VOL_DEVCHNG) {

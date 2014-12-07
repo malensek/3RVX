@@ -10,7 +10,6 @@ public:
     OSD(HINSTANCE hInstance, std::wstring className, Settings &settings);
 
     virtual void Hide();
-    virtual void Show();
 
 protected:
     HWND _hWnd;

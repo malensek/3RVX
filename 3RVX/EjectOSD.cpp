@@ -23,11 +23,7 @@ OSD(hInstance, L"3RVX-EjectDispatcher", settings) {
 }
 
 void EjectOSD::Hide() {
-
-}
-
-void EjectOSD::Show() {
-
+    _mWnd->Hide(false);
 }
 
 LRESULT

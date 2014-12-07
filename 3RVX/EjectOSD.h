@@ -10,7 +10,6 @@ public:
     EjectOSD(HINSTANCE hInstance, Settings &settings);
 
     virtual void Hide();
-    virtual void Show();
 
 private:
     MeterWnd *_mWnd;

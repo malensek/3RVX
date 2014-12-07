@@ -188,6 +188,11 @@ LRESULT CALLBACK WndProc(
             CLOG(L"Launching settings editor");
             /* TODO: launch! */
             break;
+
+        case MSG_HIDEALL:
+            vOSD->Hide();
+            eOSD->Hide();
+            break;
         }
     }
 

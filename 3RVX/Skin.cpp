@@ -26,6 +26,9 @@ std::list<HICON *> Skin::Iconset(char *osdName) {
         CLOG(L"Unknown iconset location");
         return iconset;
     }
+
+    std::wstring iconDir = _skinDir + L"\\" + StringUtils::Widen(loc);
+    CLOG(L"Reading icons from: %s", iconDir);
  
     return iconset;
 }

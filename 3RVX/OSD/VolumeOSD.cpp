@@ -6,10 +6,6 @@
 #include "..\Monitor.h"
 #include "..\Skin.h"
 
-#define TIMER_HIDE 100
-#define TIMER_ANIMIN 101
-#define TIMER_ANIMOUT 102
-
 #define MENU_SETTINGS 0
 #define MENU_MIXER 1
 #define MENU_EXIT 2
@@ -124,8 +120,6 @@ void VolumeOSD::MeterLevels(float level) {
 void VolumeOSD::Hide() {
     _mWnd.Hide(false);
     _muteWnd.Hide(false);
-//    _fout.Reset(_mWnd);
-//    SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
 }
 
 void VolumeOSD::HideIcon() {

@@ -9,6 +9,7 @@
     <volume background="OSD/background.png">
       <meter type="HorizontalTile" image="OSD\meter.png"
              x="28" y="118" units="13"/>
+      <iconset location="Icons/Volume"/>
     </volume>
 
     <mute background="OSD/mute.png"/>

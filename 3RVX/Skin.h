@@ -19,7 +19,8 @@ public:
     }
 
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
-    std::list<Meter*> Meters(char *osdName);
+    std::list<Meter *> Meters(char *osdName);
+    std::list<HICON *> Iconset(char *osdName);
 
 private:
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);

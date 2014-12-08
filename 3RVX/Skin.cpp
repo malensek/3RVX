@@ -17,7 +17,21 @@ Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     return bg;
 }
 
-std::list<Meter*> Skin::Meters(char *osdName) {
+std::list<HICON *> Skin::Iconset(char *osdName) {
+    std::list<HICON *> iconset;
+
+    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    const char *loc = osd->FirstChildElement("iconset")->Attribute("location");
+    if (loc == NULL) {
+        CLOG(L"Unknown iconset location");
+        return iconset;
+    }
+ 
+    return iconset;
+}
+
+
+std::list<Meter *> Skin::Meters(char *osdName) {
     std::list<Meter*> meters;
 
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);

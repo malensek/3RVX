@@ -9,33 +9,8 @@
 
 class Meter {
 public:
-    Meter(std::wstring bitmapName, int x, int y, int units) :
-        _value(0.0f),
-        _lastValue(-1.0f),
-        _units(units),
-        _lastUnits(-1) {
-        _rect.X = x;
-        _rect.Y = y;
-
-        Gdiplus::Bitmap *bmp = Gdiplus::Bitmap::FromFile(
-            bitmapName.c_str(), false);
-        CLOG(L"Loading meter bitmap: %s\nStatus: %d",
-            bitmapName.c_str(), bmp->GetLastStatus());
-        _bitmap = bmp;
-
-        _rect.Width = bmp->GetWidth();
-        _rect.Height = bmp->GetHeight();
-    }
-
-    Meter(int x, int y, int units) :
-    _bitmap(NULL),
-    _value(0.0f),
-    _lastValue(-1.0f),
-    _units(units),
-    _lastUnits(-1) {
-        _rect.X = x;
-        _rect.Y = y;
-    };
+    Meter(std::wstring bitmapName, int x, int y, int units);
+    Meter(int x, int y, int units);
 
     enum TextAlignment { Left, Right, Center };
     enum TextStyle { Bold = 1, Italic = 2, UnderLine = 4, Strike = 8 };

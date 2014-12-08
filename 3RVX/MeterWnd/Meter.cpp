@@ -2,6 +2,34 @@
 #include <math.h>
 #include <sstream>
 
+Meter::Meter(std::wstring bitmapName, int x, int y, int units) :
+_value(0.0f),
+_lastValue(-1.0f),
+_units(units),
+_lastUnits(-1) {
+    _rect.X = x;
+    _rect.Y = y;
+
+    Gdiplus::Bitmap *bmp = Gdiplus::Bitmap::FromFile(
+        bitmapName.c_str(), false);
+    CLOG(L"Loading meter bitmap: %s\nStatus: %d",
+        bitmapName.c_str(), bmp->GetLastStatus());
+    _bitmap = bmp;
+
+    _rect.Width = bmp->GetWidth();
+    _rect.Height = bmp->GetHeight();
+}
+
+Meter::Meter(int x, int y, int units) :
+_bitmap(NULL),
+_value(0.0f),
+_lastValue(-1.0f),
+_units(units),
+_lastUnits(-1) {
+    _rect.X = x;
+    _rect.Y = y;
+}
+
 float Meter::Value() {
     return _value;
 }

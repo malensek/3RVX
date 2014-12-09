@@ -106,6 +106,10 @@ void init() {
         delete vOSD;
     }
 
+    if (eOSD) {
+        delete eOSD;
+    }
+
     settings = new Settings(L"Settings.xml");
     vOSD = new VolumeOSD(hInst, *settings);
     eOSD = new EjectOSD(hInst, *settings);

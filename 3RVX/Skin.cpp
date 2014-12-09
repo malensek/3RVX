@@ -39,7 +39,7 @@ std::list<Meter *> Skin::Meters(char *osdName) {
 
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
     tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");
-    for (; meter != NULL; meter = meter->NextSiblingElement()) {
+    for (; meter != NULL; meter = meter->NextSiblingElement("meter")) {
         Meter *m = LoadMeter(meter);
         if (m != NULL) {
             meters.push_back(m);

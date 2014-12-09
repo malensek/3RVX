@@ -33,6 +33,8 @@ private:
 
     void LoadSkin(std::wstring const &skinXML);
     void MeterLevels(float value);
+    void UpdateIcon();
+    void UpdateIconImage();
     void UpdateIconTip();
     void UpdateDeviceMenu();
 

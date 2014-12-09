@@ -127,6 +127,28 @@ void VolumeOSD::HideIcon() {
     delete _icon;
 }
 
+void VolumeOSD::UpdateIcon() {
+    UpdateIconImage();
+    UpdateIconTip();
+}
+
+void VolumeOSD::UpdateIconImage() {
+    if (_icon == NULL) {
+        return;
+    }
+
+    int icon = 0;
+    if (_volumeCtrl->Muted() == false) {
+        int vUnits = _iconImages.size() - 1;
+        icon = (int) ceil(_volumeCtrl->Volume() * vUnits);
+    }
+
+    if (icon != _lastIcon) {
+        _icon->UpdateIcon(_iconImages[icon]);
+        _lastIcon = icon;
+    }
+}
+
 void VolumeOSD::UpdateIconTip() {
     if (_volumeCtrl->Muted()) {
         _icon->UpdateToolTip(_selectedDesc + L": Muted");

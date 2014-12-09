@@ -11,7 +11,7 @@ std::wstring Settings::_appDir(L"");
 
 Settings::Settings(std::wstring file) :
 _file(file) {
-    CLOG(L"Loading settings file [%s]", file.c_str());
+    CLOG(L"Loading settings file: %s", file.c_str());
 
     std::string u8FileName = StringUtils::Narrow(file);
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());

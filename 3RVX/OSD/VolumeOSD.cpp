@@ -75,7 +75,7 @@ void VolumeOSD::UpdateDeviceMenu() {
     }
 }
 
-void VolumeOSD::LoadSkin(std::wstring skinXML) {
+void VolumeOSD::LoadSkin(std::wstring const &skinXML) {
     Skin skin(skinXML);
 
     Gdiplus::Bitmap *bg = skin.OSDBgImg("volume");

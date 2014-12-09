@@ -31,7 +31,7 @@ private:
     MeterWnd _muteWnd;
     Gdiplus::Bitmap *_muteBg;
 
-    void LoadSkin(std::wstring skinXML);
+    void LoadSkin(std::wstring const &skinXML);
     void MeterLevels(float value);
     void UpdateIconTip();
     void UpdateDeviceMenu();

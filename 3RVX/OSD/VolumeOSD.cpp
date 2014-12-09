@@ -101,6 +101,7 @@ void VolumeOSD::LoadSkin(std::wstring skinXML) {
 
 
     /* Set up notification icon */
+    skin.Iconset("volume");
     Gdiplus::Bitmap *iconBmp = Gdiplus::Bitmap::FromFile(L"Skins/Ignition/OSD/Mute.png");
     HICON icon;
     iconBmp->GetHICON(&icon);

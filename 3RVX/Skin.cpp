@@ -27,8 +27,34 @@ std::list<HICON *> Skin::Iconset(char *osdName) {
         return iconset;
     }
 
-    std::wstring iconDir = _skinDir + L"\\" + StringUtils::Widen(loc);
+    std::wstring iconDir = _skinDir + L"\\" + StringUtils::Widen(loc) + L"\\*";
     CLOG(L"Reading icons from: %s", iconDir.c_str());
+
+    HANDLE hFind;
+    WIN32_FIND_DATA fd = {};
+    hFind = FindFirstFile(iconDir.c_str(), &fd);
+    if (hFind == INVALID_HANDLE_VALUE) {
+        CLOG(L"Could not read icon directory");
+        return iconset;
+    }
+
+    do {
+        std::wstring iconName(fd.cFileName);
+        if (iconName == L"." || iconName == L"..") {
+            continue;
+        }
+
+        CLOG(L"Loading icon: %s", fd.cFileName);
+        Gdiplus::Bitmap *iconBmp = Gdiplus::Bitmap::FromFile(fd.cFileName);
+        HICON *icon = NULL;
+        iconBmp->GetHICON(icon);
+
+        if (icon != NULL) {
+            iconset.push_back(icon);
+        }
+
+    } while (FindNextFile(hFind, &fd));
+    FindClose(hFind);
  
     return iconset;
 }

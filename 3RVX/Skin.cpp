@@ -8,9 +8,22 @@
 
 Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
-    const char *bgFile = osd->Attribute("background");
+    return BgImg(osd);
+}
+
+Gdiplus::Bitmap *Skin::ControllerBgImg(char *controllerName) {
+    tinyxml2::XMLHandle xmlHandle(_root);
+    tinyxml2::XMLElement *controller = xmlHandle
+        .FirstChildElement("controllers")
+        .FirstChildElement(controllerName)
+        .ToElement();
+    return BgImg(controller);
+}
+
+Gdiplus::Bitmap *Skin::BgImg(tinyxml2::XMLElement *element) {
+    const char *bgFile = element->Attribute("background");
     if (bgFile == NULL) {
-        CLOG(L"Could not load OSD background image.");
+        CLOG(L"Could not load background image.");
         return NULL;
     }
     std::wstring wBgFile = _skinDir + L"\\" + StringUtils::Widen(bgFile);
@@ -244,10 +257,11 @@ std::wstring Skin::ImageName(tinyxml2::XMLElement *meterXMLElement) {
 }
 
 tinyxml2::XMLElement *Skin::OSDXMLElement(char *osdName) {
-    tinyxml2::XMLElement *osd = _xml.GetDocument()
-        ->FirstChildElement("skin")
-        ->FirstChildElement("osds")
-        ->FirstChildElement(osdName);
+    tinyxml2::XMLHandle xmlHandle(_root);
+    tinyxml2::XMLElement *osd = xmlHandle
+        .FirstChildElement("osds")
+        .FirstChildElement(osdName)
+        .ToElement();
     return osd;
 }
 

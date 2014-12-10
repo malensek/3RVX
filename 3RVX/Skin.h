@@ -20,9 +20,13 @@ public:
     SkinInfo(skinName) {
     }
 
+    Gdiplus::Bitmap *BgImg(tinyxml2::XMLElement *element);
+
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     std::list<Meter *> Meters(char *osdName);
     std::vector<HICON> Iconset(char *osdName);
+
+    Gdiplus::Bitmap *ControllerBgImg(char *controllerName);
 
 private:
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);

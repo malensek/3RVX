@@ -1,6 +1,7 @@
 #include "Skin.h"
 
 #include <algorithm>
+#include <vector>
 
 #include "MeterWnd/Meters/MeterTypes.h"
 #include "StringUtils.h"
@@ -17,8 +18,8 @@ Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     return bg;
 }
 
-std::list<HICON *> Skin::Iconset(char *osdName) {
-    std::list<HICON *> iconset;
+std::vector<HICON> Skin::Iconset(char *osdName) {
+    std::vector<HICON> iconset;
 
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
     const char *loc = osd->FirstChildElement("iconset")->Attribute("location");
@@ -27,12 +28,12 @@ std::list<HICON *> Skin::Iconset(char *osdName) {
         return iconset;
     }
 
-    std::wstring iconDir = _skinDir + L"\\" + StringUtils::Widen(loc) + L"\\*";
+    std::wstring iconDir = _skinDir + L"\\" + StringUtils::Widen(loc) + L"\\";
     CLOG(L"Reading icons from: %s", iconDir.c_str());
 
     HANDLE hFind;
     WIN32_FIND_DATA fd = {};
-    hFind = FindFirstFile(iconDir.c_str(), &fd);
+    hFind = FindFirstFile((iconDir + L"*").c_str(), &fd);
     if (hFind == INVALID_HANDLE_VALUE) {
         CLOG(L"Could not read icon directory");
         return iconset;
@@ -44,14 +45,19 @@ std::list<HICON *> Skin::Iconset(char *osdName) {
             continue;
         }
 
-        CLOG(L"Loading icon: %s", fd.cFileName);
-        Gdiplus::Bitmap *iconBmp = Gdiplus::Bitmap::FromFile(fd.cFileName);
-        HICON *icon = NULL;
-        iconBmp->GetHICON(icon);
+        CLOG(L"Loading icon: %s", (iconDir + iconName).c_str());
+        Gdiplus::Bitmap *iconBmp = Gdiplus::Bitmap::FromFile(
+            (iconDir + iconName).c_str());
+        if (iconBmp == NULL) {
+            CLOG(L"Failed to load icon!");
+        }
 
-        if (icon != NULL) {
+        HICON icon;
+        if (iconBmp->GetHICON(&icon) == Gdiplus::Status::Ok) {
             iconset.push_back(icon);
         }
+
+        delete iconBmp;
 
     } while (FindNextFile(hFind, &fd));
     FindClose(hFind);

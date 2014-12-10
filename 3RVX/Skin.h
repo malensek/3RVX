@@ -4,6 +4,8 @@
 #include <gdiplus.h>
 #pragma comment(lib, "gdiplus.lib")
 #include <list>
+#include <vector>
+
 #include "SkinInfo.h"
 #include "TinyXml2\tinyxml2.h"
 
@@ -20,7 +22,7 @@ public:
 
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     std::list<Meter *> Meters(char *osdName);
-    std::list<HICON *> Iconset(char *osdName);
+    std::vector<HICON> Iconset(char *osdName);
 
 private:
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);

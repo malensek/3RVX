@@ -13,6 +13,7 @@
 #include "Logger.h"
 #include "Settings.h"
 #include "Skin.h"
+#include "VolumeSlider.h"
 
 HANDLE mutex;
 HINSTANCE hInst;
@@ -22,6 +23,8 @@ HWND mainWnd;
 Settings *settings;
 VolumeOSD *vOSD;
 EjectOSD *eOSD;
+VolumeSlider *vSlide;
+
 std::unordered_map<int, int> hotkeys;
 
 void init();
@@ -113,6 +116,7 @@ void init() {
     settings = new Settings(L"Settings.xml");
     vOSD = new VolumeOSD(hInst, *settings);
     eOSD = new EjectOSD(hInst, *settings);
+    vSlide = new VolumeSlider(hInst, *settings);
 
     hotkeys = settings->Hotkeys();
     HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);

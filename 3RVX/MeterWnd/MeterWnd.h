@@ -40,6 +40,8 @@ public:
 
     void BackgroundImage(Gdiplus::Bitmap *background);
 
+    HWND HWnd();
+
 private:
     HINSTANCE _hInstance;
     LPCWSTR _className;

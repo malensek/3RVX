@@ -49,7 +49,12 @@ _muteWnd(hInstance, L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD", NULL, NULL, 80
 
     /* TODO: if set, we should update the volume level here to show the OSD
      * on startup. */
-    UpdateIconTip();
+    UpdateIcon();
+}
+
+VolumeOSD::~VolumeOSD() {
+
+    /* DestroyIcon() */
 }
 
 void VolumeOSD::UpdateDeviceMenu() {
@@ -99,18 +104,11 @@ void VolumeOSD::LoadSkin(std::wstring const &skinXML) {
     _muteWnd.X(mWidth / 2 - _muteWnd.Width() / 2);
     _muteWnd.Y(mHeight - _muteWnd.Height() - 140);
 
-
     /* Set up notification icon */
-    skin.Iconset("volume");
-    Gdiplus::Bitmap *iconBmp = Gdiplus::Bitmap::FromFile(L"Skins/Ignition/OSD/Mute.png");
-    HICON icon;
-    iconBmp->GetHICON(&icon);
-    _icon = new NotifyIcon(_hWnd, L"3RVX", icon);
-    _icon->UpdateToolTip(L"testing");
-    DestroyIcon(icon);
-    Gdiplus::Bitmap *iconBmp2 = Gdiplus::Bitmap::FromFile(L"Skins/Ignition/OSD/Eject.png");
-    iconBmp2->GetHICON(&icon);
-    _icon->UpdateIcon(icon);
+    _iconImages = skin.Iconset("volume");
+    if (_iconImages.size() > 0) {
+        _icon = new NotifyIcon(_hWnd, L"3RVX", _iconImages[0]);
+    }
 }
 
 void VolumeOSD::MeterLevels(float level) {
@@ -174,7 +172,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             MeterLevels(v);
             _mWnd.Show();
         }
-        UpdateIconTip();
+        UpdateIcon();
     } else if (message == MSG_VOL_DEVCHNG) {
         CLOG(L"Volume device change detected.");
         if (_selectedDevice == L"") {
@@ -186,6 +184,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             }
         }
         _selectedDesc = _volumeCtrl->DeviceDesc();
+        UpdateDeviceMenu();
     } else if (message == MSG_NOTIFYICON) {
         if (lParam == WM_LBUTTONUP || lParam == WM_RBUTTONUP) {
             POINT p;

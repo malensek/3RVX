@@ -14,6 +14,7 @@ class Skin;
 class VolumeOSD : public OSD {
 public:
     VolumeOSD(HINSTANCE hInstance, Settings &settings);
+    ~VolumeOSD();
 
     void Hide();
     void HideIcon();
@@ -21,6 +22,8 @@ public:
 private:
     MeterWnd _mWnd;
     NotifyIcon *_icon;
+    std::vector<HICON> _iconImages;
+    int _lastIcon;
     HMENU _menu;
     HMENU _deviceMenu;
     UINT _menuFlags;

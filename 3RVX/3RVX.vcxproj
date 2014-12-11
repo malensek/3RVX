@@ -103,6 +103,7 @@
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Skin.h" />
     <ClInclude Include="SkinInfo.h" />
+    <ClInclude Include="SliderWnd.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="TinyXml2\tinyxml2.h" />
     <ClInclude Include="OSD\VolumeOSD.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Skin.cpp" />
     <ClCompile Include="SkinInfo.cpp" />
+    <ClCompile Include="SliderWnd.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="OSD\VolumeOSD.cpp" />

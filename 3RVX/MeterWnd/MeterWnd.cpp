@@ -6,6 +6,13 @@
 #define TIMER_ANIMIN 101
 #define TIMER_ANIMOUT 102
 
+MeterWnd::MeterWnd(LPCWSTR className, LPCWSTR title,
+    Animation *hideAnimation, Animation *showAnimation, int visibleDuration) :
+MeterWnd(GetModuleHandle(NULL), className, title,
+hideAnimation, showAnimation, visibleDuration) {
+
+}
+
 MeterWnd::MeterWnd(HINSTANCE hInstance, LPCWSTR className, LPCWSTR title,
     Animation *hideAnimation, Animation *showAnimation, int visibleDuration) :
 _hInstance(hInstance),

@@ -11,6 +11,10 @@ class Animation;
 
 class MeterWnd {
 public:
+    MeterWnd(LPCWSTR className, LPCWSTR title,
+        Animation *hideAnimation = NULL, Animation *showAnimation = NULL,
+        int visibleDuration = 0);
+
     MeterWnd(HINSTANCE hInstance, LPCWSTR className, LPCWSTR title,
         Animation *hideAnimation = NULL, Animation *showAnimation = NULL,
         int visibleDuration = 0);

@@ -8,4 +8,5 @@ public:
 
 private:
 
+    virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
 };

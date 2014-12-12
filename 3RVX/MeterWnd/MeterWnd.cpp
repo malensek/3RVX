@@ -251,6 +251,12 @@ int MeterWnd::Height() const {
     return _size.cy;
 }
 
+void MeterWnd::Move(int x, int y) {
+    _location.x = x;
+    _location.y = y;
+    UpdateLocation();
+}
+
 byte MeterWnd::Transparency() const {
     return _transparency;
 }

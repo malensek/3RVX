@@ -32,6 +32,8 @@ public:
     int Width() const;
     int Height() const;
 
+    void Move(int x, int y);
+
     byte Transparency() const;
     void Transparency(byte transparency);
 

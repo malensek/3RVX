@@ -1,7 +1,7 @@
 #pragma once
 
 #include "OSD\OSD.h"
-#include "MeterWnd\MeterWnd.h"
+#include "SliderWnd.h"
 
 class VolumeSlider : public OSD {
 public:
@@ -10,6 +10,6 @@ public:
     void Hide();
 
 private:
-    MeterWnd _mWnd;
+    SliderWnd _sWnd;
 
 };

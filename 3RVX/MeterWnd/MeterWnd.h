@@ -77,5 +77,5 @@ protected:
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
-    LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
+    virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
 };

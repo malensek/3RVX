@@ -44,8 +44,7 @@ public:
 
     void BackgroundImage(Gdiplus::Bitmap *background);
 
-
-private:
+protected:
     HINSTANCE _hInstance;
     LPCWSTR _className;
     LPCWSTR _title;

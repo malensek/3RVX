@@ -227,10 +227,6 @@ void MeterWnd::AnimateOut() {
     }
 }
 
-HWND MeterWnd::HWnd() {
-    return _hWnd;
-}
-
 int MeterWnd::X() const {
     return _location.x;
 }

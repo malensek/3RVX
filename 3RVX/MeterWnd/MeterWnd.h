@@ -21,8 +21,8 @@ public:
 
 	void Update();
 
-    void Show(bool animate = true);
-    void Hide(bool animate = true);
+    virtual void Show(bool animate = true);
+    virtual void Hide(bool animate = true);
 
     int X() const;
     int Y() const;

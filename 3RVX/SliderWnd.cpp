@@ -9,6 +9,14 @@ MeterWnd(hInstance, className, title) {
     SetWindowLongPtr(_hWnd, GWL_EXSTYLE, styles);
 }
 
+void SliderWnd::Show() {
+    POINT p;
+    GetCursorPos(&p);
+    Move(p.x, p.y);
+
+    MeterWnd::Show();
+}
+
 LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
     switch (message) {
     case WM_NCHITTEST:

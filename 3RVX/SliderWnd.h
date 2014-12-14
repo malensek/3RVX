@@ -9,5 +9,8 @@ public:
     virtual void Show();
 
 private:
+
+    void PositionWindow();
+
     virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
 };

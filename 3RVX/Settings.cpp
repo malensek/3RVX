@@ -36,6 +36,8 @@ void Settings::Reload() {
     if (_root == NULL) {
         throw std::runtime_error("Could not find root XML element");
     }
+
+    _skin = new Skin(SkinXML());
 }
 
 std::wstring Settings::AppDir() {
@@ -50,6 +52,10 @@ std::wstring Settings::AppDir() {
 
 std::wstring Settings::SettingsApp() {
     return Settings::AppDir() + L"\\" + SETTINGS_APP;
+}
+
+Skin *Settings::CurrentSkin() {
+    return _skin;
 }
 
 std::wstring Settings::SkinName() {

@@ -16,8 +16,7 @@ OSD(L"3RVX-VolumeDispatcher"),
 _mWnd(L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
 _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 {
-    std::wstring skinXML = _settings.SkinXML();
-    LoadSkin(skinXML);
+    LoadSkin();
 
     /* Start the volume controller */
     _volumeCtrl = new CoreAudio(_hWnd);
@@ -82,13 +81,13 @@ void VolumeOSD::UpdateDeviceMenu() {
     }
 }
 
-void VolumeOSD::LoadSkin(std::wstring const &skinXML) {
-    Skin skin(skinXML);
+void VolumeOSD::LoadSkin() {
+    Skin *skin = _settings.CurrentSkin();
 
-    Gdiplus::Bitmap *bg = skin.OSDBgImg("volume");
+    Gdiplus::Bitmap *bg = skin->OSDBgImg("volume");
     _mWnd.BackgroundImage(bg);
 
-    std::list<Meter*> meters = skin.Meters("volume");
+    std::list<Meter*> meters = skin->Meters("volume");
     for each (Meter *m in meters) {
         _mWnd.AddMeter(m);
     }
@@ -100,14 +99,14 @@ void VolumeOSD::LoadSkin(std::wstring const &skinXML) {
     _mWnd.X(mWidth / 2 - _mWnd.Width() / 2);
     _mWnd.Y(mHeight - _mWnd.Height() - 140);
 
-    _muteBg = skin.OSDBgImg("mute");
+    _muteBg = skin->OSDBgImg("mute");
     _muteWnd.BackgroundImage(_muteBg);
     _muteWnd.Update();
     _muteWnd.X(mWidth / 2 - _muteWnd.Width() / 2);
     _muteWnd.Y(mHeight - _muteWnd.Height() - 140);
 
     /* Set up notification icon */
-    _iconImages = skin.Iconset("volume");
+    _iconImages = skin->Iconset("volume");
     if (_iconImages.size() > 0) {
         _icon = new NotifyIcon(_hWnd, L"3RVX", _iconImages[0]);
     }

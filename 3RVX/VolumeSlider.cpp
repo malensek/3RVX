@@ -6,10 +6,9 @@ VolumeSlider::VolumeSlider() :
 OSD(L"3RVX-VolumeSlider"),
 _sWnd(L"3RVX-VolumeSliderWnd", L"3RVX Volume Slider") {
 
-    std::wstring skinXML = _settings.SkinXML();
-    Skin skin(skinXML);
+    Skin *skin = _settings.CurrentSkin();
 
-    Gdiplus::Bitmap *bg = skin.ControllerBgImg("volume");
+    Gdiplus::Bitmap *bg = skin->ControllerBgImg("volume");
     _sWnd.BackgroundImage(bg);
     _sWnd.Update();
     _sWnd.Show();

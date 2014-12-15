@@ -5,6 +5,8 @@
 
 #include "TinyXml2\tinyxml2.h"
 
+class Skin;
+
 #define SETTINGS_APP L"SettingsUI.exe"
 
 class Settings {
@@ -14,6 +16,7 @@ public:
     static std::wstring AppDir();
     static std::wstring SettingsApp();
 
+    Skin *CurrentSkin();
     std::wstring SkinName();
     std::wstring SkinXML();
 
@@ -30,6 +33,7 @@ private:
     std::wstring _file;
     tinyxml2::XMLDocument _xml;
     tinyxml2::XMLElement *_root;
+    Skin *_skin;
 
     Settings();
 };

@@ -8,7 +8,7 @@
 
 class OSD {
 public:
-    OSD(std::wstring className, Settings &settings, HINSTANCE hInstance = NULL);
+    OSD(std::wstring className, HINSTANCE hInstance = NULL);
 
     virtual void Hide() = 0;
 

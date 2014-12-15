@@ -2,8 +2,8 @@
 
 #include "..\3RVX.h"
 
-OSD::OSD(std::wstring className, Settings &settings, HINSTANCE hInstance) :
-_settings(settings) {
+OSD::OSD(std::wstring className, HINSTANCE hInstance) :
+_settings(*Settings::Instance()) {
 
     if (hInstance == NULL) {
         hInstance = (HINSTANCE) GetModuleHandle(NULL);

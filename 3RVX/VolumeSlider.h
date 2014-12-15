@@ -5,7 +5,7 @@
 
 class VolumeSlider : public OSD {
 public:
-    VolumeSlider(Settings &settings);
+    VolumeSlider();
 
     void Hide();
 

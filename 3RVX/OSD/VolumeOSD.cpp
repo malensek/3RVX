@@ -11,17 +11,17 @@
 #define MENU_EXIT 2
 #define MENU_DEVICE 0xF000
 
-VolumeOSD::VolumeOSD(Settings &settings) :
-OSD(L"3RVX-VolumeDispatcher", settings),
+VolumeOSD::VolumeOSD() :
+OSD(L"3RVX-VolumeDispatcher"),
 _mWnd(L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
 _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 {
-    std::wstring skinXML = settings.SkinXML();
+    std::wstring skinXML = _settings.SkinXML();
     LoadSkin(skinXML);
 
     /* Start the volume controller */
     _volumeCtrl = new CoreAudio(_hWnd);
-    std::wstring device = settings.GetText("audioDevice");
+    std::wstring device = _settings.GetText("audioDevice");
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
 

@@ -4,7 +4,7 @@
 
 class SliderWnd : public MeterWnd {
 public:
-    SliderWnd(HINSTANCE hInstance, LPCWSTR className, LPCWSTR title);
+    SliderWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL);
 
     virtual void Show();
 

@@ -114,9 +114,9 @@ void init() {
     }
 
     settings = new Settings(L"Settings.xml");
-    vOSD = new VolumeOSD(hInst, *settings);
-    eOSD = new EjectOSD(hInst, *settings);
-    vSlide = new VolumeSlider(hInst, *settings);
+    vOSD = new VolumeOSD(*settings);
+    eOSD = new EjectOSD(*settings);
+    vSlide = new VolumeSlider(*settings);
 
     hotkeys = settings->Hotkeys();
     HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);

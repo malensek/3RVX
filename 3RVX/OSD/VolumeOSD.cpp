@@ -11,10 +11,10 @@
 #define MENU_EXIT 2
 #define MENU_DEVICE 0xF000
 
-VolumeOSD::VolumeOSD(HINSTANCE hInstance, Settings &settings) :
-OSD(hInstance, L"3RVX-VolumeDispatcher", settings),
-_mWnd(hInstance, L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD", NULL, NULL, 800),
-_muteWnd(hInstance, L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD", NULL, NULL, 800)
+VolumeOSD::VolumeOSD(Settings &settings) :
+OSD(L"3RVX-VolumeDispatcher", settings),
+_mWnd(L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
+_muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 {
     std::wstring skinXML = settings.SkinXML();
     LoadSkin(skinXML);
@@ -45,7 +45,9 @@ _muteWnd(hInstance, L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD", NULL, NULL, 80
 
     FadeOut *fOut = new FadeOut();
     _mWnd.HideAnimation(fOut);
+    _mWnd.VisibleDuration(800);
     _muteWnd.HideAnimation(fOut);
+    _muteWnd.VisibleDuration(800);
 
     /* TODO: if set, we should update the volume level here to show the OSD
      * on startup. */

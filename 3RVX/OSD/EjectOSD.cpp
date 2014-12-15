@@ -5,15 +5,16 @@
 #include "..\Monitor.h"
 #include "..\Skin.h"
 
-EjectOSD::EjectOSD(HINSTANCE hInstance, Settings &settings) :
-OSD(hInstance, L"3RVX-EjectDispatcher", settings) {
-    _mWnd = new MeterWnd(hInstance, L"3RVX-EjectOSD", L"3RVX-EjectOSD",
-        NULL, NULL, 800);
+EjectOSD::EjectOSD(Settings &settings) :
+OSD(L"3RVX-EjectDispatcher", settings) {
+    _mWnd = new MeterWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD");
 
     Skin skin(_settings.SkinXML());
     Gdiplus::Bitmap *bg = skin.OSDBgImg("eject");
     _mWnd->BackgroundImage(bg);
     _mWnd->Update();
+
+    _mWnd->VisibleDuration(800);
 
     HMONITOR monitor = Monitor::Default();
     const int mWidth = Monitor::Width(monitor);

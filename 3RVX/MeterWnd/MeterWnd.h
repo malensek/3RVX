@@ -11,11 +11,7 @@ class Animation;
 
 class MeterWnd {
 public:
-    MeterWnd(LPCWSTR className, LPCWSTR title,
-        Animation *hideAnimation = NULL, Animation *showAnimation = NULL,
-        int visibleDuration = 0);
-
-    MeterWnd(HINSTANCE hInstance, LPCWSTR className, LPCWSTR title,
+    MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL,
         Animation *hideAnimation = NULL, Animation *showAnimation = NULL,
         int visibleDuration = 0);
 
@@ -43,6 +39,7 @@ public:
 
     void HideAnimation(Animation *anim);
     void ShowAnimation(Animation *anim);
+    void VisibleDuration(int duration);
 
     void BackgroundImage(Gdiplus::Bitmap *background);
 

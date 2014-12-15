@@ -2,8 +2,12 @@
 
 #include "..\3RVX.h"
 
-OSD::OSD(HINSTANCE hInstance, std::wstring className, Settings &settings) :
+OSD::OSD(std::wstring className, Settings &settings, HINSTANCE hInstance) :
 _settings(settings) {
+
+    if (hInstance == NULL) {
+        hInstance = (HINSTANCE) GetModuleHandle(NULL);
+    }
 
     WNDCLASSEX wcex;
 

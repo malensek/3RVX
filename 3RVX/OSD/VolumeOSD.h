@@ -13,7 +13,7 @@ class Skin;
 
 class VolumeOSD : public OSD {
 public:
-    VolumeOSD(HINSTANCE hInstance, Settings &settings);
+    VolumeOSD(Settings &settings);
     ~VolumeOSD();
 
     void Hide();

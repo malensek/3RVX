@@ -6,14 +6,7 @@
 #define TIMER_ANIMIN 101
 #define TIMER_ANIMOUT 102
 
-MeterWnd::MeterWnd(LPCWSTR className, LPCWSTR title,
-    Animation *hideAnimation, Animation *showAnimation, int visibleDuration) :
-MeterWnd(GetModuleHandle(NULL), className, title,
-hideAnimation, showAnimation, visibleDuration) {
-
-}
-
-MeterWnd::MeterWnd(HINSTANCE hInstance, LPCWSTR className, LPCWSTR title,
+MeterWnd::MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance,
     Animation *hideAnimation, Animation *showAnimation, int visibleDuration) :
 _hInstance(hInstance),
 _className(className),
@@ -22,6 +15,10 @@ _hideAnimation(hideAnimation),
 _showAnimation(showAnimation),
 _visibleDuration(visibleDuration),
 _visible(false) {
+    if (_hInstance == NULL) {
+        _hInstance = (HINSTANCE) GetModuleHandle(NULL);
+    }
+
     WNDCLASSEX wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = 0;
@@ -178,6 +175,10 @@ void MeterWnd::MeterLevels(float value)
 
 void MeterWnd::HideAnimation(Animation *anim) {
     _hideAnimation = anim;
+}
+
+void MeterWnd::VisibleDuration(int duration) {
+    _visibleDuration = duration;
 }
 
 void MeterWnd::BackgroundImage(Gdiplus::Bitmap *background) {

@@ -6,7 +6,7 @@
 
 class EjectOSD : public OSD {
 public:
-    EjectOSD(HINSTANCE hInstance, Settings &settings);
+    EjectOSD(Settings &settings);
 
     virtual void Hide();
 

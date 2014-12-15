@@ -5,7 +5,7 @@
 
 class VolumeSlider : public OSD {
 public:
-    VolumeSlider(HINSTANCE hInstance, Settings &settings);
+    VolumeSlider(Settings &settings);
 
     void Hide();
 

@@ -20,7 +20,6 @@ HINSTANCE hInst;
 ULONG_PTR gdiplusToken;
 HWND mainWnd;
 
-Settings *settings;
 VolumeOSD *vOSD;
 EjectOSD *eOSD;
 VolumeSlider *vSlide;
@@ -113,13 +112,11 @@ void init() {
         delete eOSD;
     }
 
-    settings = new Settings(L"Settings.xml");
-    settings = Settings::Instance();
-    vOSD = new VolumeOSD(*settings);
-    eOSD = new EjectOSD(*settings);
-    vSlide = new VolumeSlider(*settings);
+    vOSD = new VolumeOSD();
+    eOSD = new EjectOSD();
+    vSlide = new VolumeSlider();
 
-    hotkeys = settings->Hotkeys();
+    hotkeys = Settings::Instance()->Hotkeys();
     HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);
     for (auto it = hotkeys.begin(); it != hotkeys.end(); ++it) {
         int combination = it->first;

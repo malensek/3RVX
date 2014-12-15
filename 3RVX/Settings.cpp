@@ -8,9 +8,22 @@
 #include "StringUtils.h"
 
 std::wstring Settings::_appDir(L"");
+Settings *Settings::instance;
 
-Settings::Settings(std::wstring file) :
-_file(file) {
+Settings::Settings() {
+
+}
+
+Settings *Settings::Instance() {
+    if (instance == NULL) {
+        instance = new Settings();
+        instance->Reload();
+    }
+    return instance;
+}
+
+void Settings::Reload() {
+    std::wstring file = AppDir() + L"\\Settings.xml";
     CLOG(L"Loading settings file: %s", file.c_str());
 
     std::string u8FileName = StringUtils::Narrow(file);

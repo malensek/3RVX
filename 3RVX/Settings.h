@@ -9,7 +9,7 @@
 
 class Settings {
 public:
-    Settings(std::wstring file);
+    static Settings *Instance();
 
     static std::wstring AppDir();
     static std::wstring SettingsApp();
@@ -21,10 +21,15 @@ public:
     std::unordered_map<int, int> Hotkeys();
     bool IsEnabled(std::string elementName);
 
+    void Reload();
+
 private:
+    static Settings *instance;
     static std::wstring _appDir;
 
     std::wstring _file;
     tinyxml2::XMLDocument _xml;
     tinyxml2::XMLElement *_root;
+
+    Settings();
 };

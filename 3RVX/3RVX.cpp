@@ -114,6 +114,7 @@ void init() {
     }
 
     settings = new Settings(L"Settings.xml");
+    settings = Settings::Instance();
     vOSD = new VolumeOSD(*settings);
     eOSD = new EjectOSD(*settings);
     vSlide = new VolumeSlider(*settings);

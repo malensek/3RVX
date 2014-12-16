@@ -22,6 +22,7 @@ public:
 
     Gdiplus::Bitmap *BgImg(tinyxml2::XMLElement *element);
 
+    bool HasOSD(char *osdName);
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     std::list<Meter *> Meters(char *osdName);
     std::vector<HICON> Iconset(char *osdName);

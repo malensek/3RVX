@@ -3,11 +3,20 @@
 #include <algorithm>
 #include <vector>
 
+#include "Error.h"
 #include "MeterWnd/Meters/MeterTypes.h"
 #include "StringUtils.h"
 
+bool Skin::HasOSD(char *osdName) {
+    return (OSDXMLElement(osdName) != NULL);
+}
+
 Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    if (osd == NULL) {
+        Error::ErrorMessageDie(SKINERR_INVALID_OSD_BG,
+            StringUtils::Widen(osdName));
+    }
     return BgImg(osd);
 }
 
@@ -17,15 +26,26 @@ Gdiplus::Bitmap *Skin::ControllerBgImg(char *controllerName) {
         .FirstChildElement("controllers")
         .FirstChildElement(controllerName)
         .ToElement();
+
+    if (controller == NULL) {
+        Error::ErrorMessageDie(
+            SKINERR_INVALID_CONT_BG, StringUtils::Widen(controllerName));
+    }
     return BgImg(controller);
 }
 
 Gdiplus::Bitmap *Skin::BgImg(tinyxml2::XMLElement *element) {
+    if (element == NULL) {
+        CLOG(L"XML Element is NULL!");
+        return NULL;
+    }
+
     const char *bgFile = element->Attribute("background");
     if (bgFile == NULL) {
         CLOG(L"Could not load background image.");
         return NULL;
     }
+
     std::wstring wBgFile = _skinDir + L"\\" + StringUtils::Widen(bgFile);
     Gdiplus::Bitmap *bg = Gdiplus::Bitmap::FromFile(wBgFile.c_str());
     return bg;
@@ -35,7 +55,16 @@ std::vector<HICON> Skin::Iconset(char *osdName) {
     std::vector<HICON> iconset;
 
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
-    const char *loc = osd->FirstChildElement("iconset")->Attribute("location");
+    if (osd == NULL) {
+        Error::ErrorMessageDie(SKINERR_INVALID_OSD);
+    }
+
+    tinyxml2::XMLElement *set = osd->FirstChildElement("iconset");
+    if (set == NULL) {
+        return iconset;
+    }
+
+    const char *loc = set->Attribute("location");
     if (loc == NULL) {
         CLOG(L"Unknown iconset location");
         return iconset;
@@ -77,7 +106,6 @@ std::vector<HICON> Skin::Iconset(char *osdName) {
  
     return iconset;
 }
-
 
 std::list<Meter *> Skin::Meters(char *osdName) {
     std::list<Meter*> meters;

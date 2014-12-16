@@ -149,6 +149,10 @@ void VolumeOSD::UpdateIconImage() {
 }
 
 void VolumeOSD::UpdateIconTip() {
+    if (_icon == NULL) {
+        return;
+    }
+
     if (_volumeCtrl->Muted()) {
         _icon->UpdateToolTip(_selectedDesc + L": Muted");
     } else {

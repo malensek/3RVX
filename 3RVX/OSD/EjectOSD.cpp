@@ -10,6 +10,11 @@ OSD(L"3RVX-EjectDispatcher") {
     _mWnd = new MeterWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD");
 
     Skin *skin = _settings.CurrentSkin();
+
+    if (skin->HasOSD("eject") == false) {
+        return;
+    }
+
     Gdiplus::Bitmap *bg = skin->OSDBgImg("eject");
     _mWnd->BackgroundImage(bg);
     _mWnd->Update();

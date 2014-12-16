@@ -144,6 +144,8 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
         m = new HorizontalBar(img, x, y, units);
     } else if (type == "horizontaltile") {
         m = new HorizontalTile(img, x, y, units, inverted);
+    } else if (type == "image") {
+        m = new StaticImage(img, x, y);
     } else if (type == "numberstrip") {
         Gdiplus::StringAlignment align = Alignment(meterXMLElement);
         m = new NumberStrip(img, x, y, units, align);

@@ -90,9 +90,6 @@
     <ClInclude Include="NotifyIcon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VolumeSlider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OSD\OSD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -105,7 +102,19 @@
     <ClInclude Include="OSD\OSDType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SliderWnd.h">
+    <ClInclude Include="MeterWnd\Meters\StaticImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider\SliderWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider\VolumeSlider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider\SliderKnob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -173,9 +182,6 @@
     <ClCompile Include="NotifyIcon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VolumeSlider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="OSD\OSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -185,7 +191,16 @@
     <ClCompile Include="OSD\VolumeOSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SliderWnd.cpp">
+    <ClCompile Include="MeterWnd\Meters\StaticImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider\SliderWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider\VolumeSlider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider\SliderKnob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

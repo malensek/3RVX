@@ -80,6 +80,8 @@
     <ClInclude Include="3RVX.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
+    <ClInclude Include="Error.h" />
+    <ClInclude Include="MeterWnd\Meters\StaticImage.h" />
     <ClInclude Include="OSD\EjectOSD.h" />
     <ClInclude Include="HotkeyManager.h" />
     <ClInclude Include="HotkeyActions.h" />
@@ -103,15 +105,17 @@
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Skin.h" />
     <ClInclude Include="SkinInfo.h" />
-    <ClInclude Include="SliderWnd.h" />
+    <ClInclude Include="Slider\SliderKnob.h" />
+    <ClInclude Include="Slider\SliderWnd.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="TinyXml2\tinyxml2.h" />
     <ClInclude Include="OSD\VolumeOSD.h" />
-    <ClInclude Include="VolumeSlider.h" />
+    <ClInclude Include="Slider\VolumeSlider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
+    <ClCompile Include="MeterWnd\Meters\StaticImage.cpp" />
     <ClCompile Include="OSD\EjectOSD.cpp" />
     <ClCompile Include="HotkeyManager.cpp" />
     <ClCompile Include="Logger.cpp" />
@@ -131,11 +135,12 @@
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Skin.cpp" />
     <ClCompile Include="SkinInfo.cpp" />
-    <ClCompile Include="SliderWnd.cpp" />
+    <ClCompile Include="Slider\SliderKnob.cpp" />
+    <ClCompile Include="Slider\SliderWnd.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="OSD\VolumeOSD.cpp" />
-    <ClCompile Include="VolumeSlider.cpp" />
+    <ClCompile Include="Slider\VolumeSlider.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

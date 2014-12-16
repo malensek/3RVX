@@ -13,7 +13,7 @@
 #include "Logger.h"
 #include "Settings.h"
 #include "Skin.h"
-#include "VolumeSlider.h"
+#include "Slider\VolumeSlider.h"
 
 HANDLE mutex;
 HINSTANCE hInst;

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../Meter.h"
 
 class HorizontalBar : public Meter {

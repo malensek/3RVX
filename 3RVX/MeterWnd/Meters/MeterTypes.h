@@ -6,3 +6,4 @@
 #include "HorizontalTile.h"
 #include "NumberStrip.h"
 #include "Text.h"
+#include "StaticImage.h"

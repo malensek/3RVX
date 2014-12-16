@@ -1,7 +1,9 @@
 #pragma once
 
-#include "OSD\OSD.h"
+#include "..\OSD\OSD.h"
 #include "SliderWnd.h"
+
+class SliderKnob;
 
 class VolumeSlider : public OSD {
 public:
@@ -11,5 +13,5 @@ public:
 
 private:
     SliderWnd _sWnd;
-
+    SliderKnob *_knob;
 };

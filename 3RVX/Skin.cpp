@@ -138,10 +138,10 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     Meter *m = NULL;
     if (type == "bitstrip") {
         m = new Bitstrip(img, x, y, units);
-    } else if (type == "horizontalendcap") {
-        m = new HorizontalEndcap(img, x, y, units);
     } else if (type == "horizontalbar") {
         m = new HorizontalBar(img, x, y, units);
+    } else if (type == "horizontalendcap") {
+        m = new HorizontalEndcap(img, x, y, units);
     } else if (type == "horizontaltile") {
         m = new HorizontalTile(img, x, y, units, inverted);
     } else if (type == "image") {

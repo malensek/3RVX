@@ -1,5 +1,6 @@
 #include "SkinInfo.h"
 
+#include "Error.h"
 #include "Logger.h"
 #include "Settings.h"
 #include "StringUtils.h"
@@ -16,9 +17,7 @@ _skinFile(skinFile) {
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
         if (result == tinyxml2::XMLError::XML_ERROR_FILE_NOT_FOUND) {
-            std::wstring info = L"Could not find skin:\n\n";
-            info += skinFile;
-            MessageBox(NULL, info.c_str(), L"Skin Error", MB_ICONERROR);
+            Error::ErrorMessageDie(SKINERR_INVALID_SKIN);
         }
         throw std::logic_error("Failed to read XML file!");
     }

@@ -111,10 +111,10 @@
     <ClInclude Include="Slider\SliderWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Slider\VolumeSlider.h">
+    <ClInclude Include="Slider\SliderKnob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Slider\SliderKnob.h">
+    <ClInclude Include="Slider\VolumeSlider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

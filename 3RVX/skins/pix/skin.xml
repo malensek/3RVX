@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <skin>
   <info>
-    <author>Schrödinger's Cat</author>
-    <website>www.test.com</website>
+    <author>Matthew Malensek</author>
+    <website>http://matthew.malensek.net/</website>
   </info>
 
   <osds>
     <volume background="OSD/background.png">
-      <meter type="HorizontalTile" image="OSD\meter.png"
+      <meter type="HorizontalTile" image="OSD/meter.png"
              x="28" y="118" units="13"/>
       <iconset location="Icons/Volume"/>
     </volume>
@@ -24,8 +24,8 @@
 
   <controllers>
     <volume background="Control/back.png">
-      <slider type="horizontal" x="52" y="22" width="191" height="21" />
-      <muteButton x="5" y="5"/>
+      <slider type="horizontal" image="Control/knob.png"
+              x="52" y="22" width="191" height="21"/>
     </volume>
   </controllers>
 </skin>

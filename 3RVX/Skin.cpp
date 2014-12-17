@@ -6,6 +6,7 @@
 #include "Error.h"
 #include "MeterWnd/Meters/MeterTypes.h"
 #include "StringUtils.h"
+#include "Slider\SliderKnob.h"
 
 bool Skin::HasOSD(char *osdName) {
     return (OSDXMLElement(osdName) != NULL);
@@ -21,12 +22,7 @@ Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
 }
 
 Gdiplus::Bitmap *Skin::ControllerBgImg(char *controllerName) {
-    tinyxml2::XMLHandle xmlHandle(_root);
-    tinyxml2::XMLElement *controller = xmlHandle
-        .FirstChildElement("controllers")
-        .FirstChildElement(controllerName)
-        .ToElement();
-
+    tinyxml2::XMLElement *controller = ControllerXMLElement(controllerName);
     if (controller == NULL) {
         Error::ErrorMessageDie(
             SKINERR_INVALID_CONT_BG, StringUtils::Widen(controllerName));
@@ -158,8 +154,7 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     if (type != "text") {
         img = ImageName(meterXMLElement);
         if (FileExists(img) == false) {
-            CLOG(L"Could not find meter bitmap: %s", img.c_str());
-            return NULL;
+            Error::ErrorMessageDie(SKINERR_NOTFOUND, img);
         }
     }
 
@@ -293,6 +288,15 @@ tinyxml2::XMLElement *Skin::OSDXMLElement(char *osdName) {
         .FirstChildElement(osdName)
         .ToElement();
     return osd;
+}
+
+tinyxml2::XMLElement *Skin::ControllerXMLElement(char *controllerName) {
+    tinyxml2::XMLHandle xmlHandle(_root);
+    tinyxml2::XMLElement *controller = xmlHandle
+        .FirstChildElement("controllers")
+        .FirstChildElement(controllerName)
+        .ToElement();
+    return controller;
 }
 
 bool Skin::FileExists(std::wstring fileName) {

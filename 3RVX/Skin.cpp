@@ -273,6 +273,47 @@ Skin::Alignment(tinyxml2::XMLElement *meterXMLElement) {
     return alignment;
 }
 
+SliderKnob *Skin::Knob(char *controllerName) {
+    tinyxml2::XMLElement *controller = ControllerXMLElement(controllerName);
+    if (controller == NULL) {
+        Error::ErrorMessageDie(
+            SKINERR_INVALID_CONT_BG, StringUtils::Widen(controllerName));
+    }
+
+    tinyxml2::XMLElement *slider = controller->FirstChildElement("slider");
+    if (slider == NULL) {
+        /* TODO: die */
+    }
+
+    std::wstring img = ImageName(slider);
+    if (FileExists(img) == false) {
+        Error::ErrorMessageDie(SKINERR_NOTFOUND, img);
+    }
+
+    const char *type = slider->Attribute("type");
+    if (type == NULL) {
+        type = "vertical";
+    }
+
+    std::string typeStr(type);
+    std::transform(typeStr.begin(), typeStr.end(),
+        typeStr.begin(), ::tolower);
+
+    if (typeStr != "vertical" && typeStr != "horizontal") {
+        Error::ErrorMessageDie(
+            SKINERR_INVALID_SLIDERTYPE,
+            StringUtils::Widen(typeStr));
+    }
+
+    int x = slider->IntAttribute("x");
+    int y = slider->IntAttribute("y");
+    int w = slider->IntAttribute("width");
+    int h = slider->IntAttribute("height");
+
+    SliderKnob *knob = new SliderKnob(img, x, y, w, h);
+    return knob;
+}
+
 std::wstring Skin::ImageName(tinyxml2::XMLElement *meterXMLElement) {
     const char *imgName = meterXMLElement->Attribute("image");
     if (imgName == NULL) {

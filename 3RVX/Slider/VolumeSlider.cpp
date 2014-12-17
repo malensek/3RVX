@@ -19,7 +19,7 @@ _volCtrl(volCtrl) {
         _sWnd.AddMeter(m);
     }
 
-    _knob = new SliderKnob(L"skins/pix/control/knob.png", 52, 22, 191, 21);
+    _knob = skin->Knob("volume");
     _sWnd.Knob(_knob);
 
     _knob->Value(0.5f);

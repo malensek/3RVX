@@ -22,6 +22,8 @@ public:
     int TrackWidth() const;
     int TrackHeight() const;
 
+    void Value(float value);
+
 private:
     int _trackX;
     int _trackY;

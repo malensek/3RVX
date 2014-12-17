@@ -91,16 +91,20 @@ LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
         int x = GET_X_LPARAM(lParam);
         int y = GET_Y_LPARAM(lParam);
 
+        int newX;
         int knobMax = _knob->TrackX() + _knob->TrackWidth() - _knob->Width();
         if (x > knobMax) {
-            _knob->X(knobMax);
+            newX = knobMax;
         } else if (x - _dragOffset < _knob->TrackX()) {
-            _knob->X(_knob->TrackX());
+            newX = _knob->TrackX();
         } else {
-            _knob->X(x - _dragOffset);
+            newX = x - _dragOffset;
         }
 
-        Update();
+        if (_knob->X() != newX) {
+            _knob->X(newX);
+            Update();
+        }
     }
     break;
 

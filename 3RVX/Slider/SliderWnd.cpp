@@ -66,6 +66,36 @@ bool SliderWnd::MouseOverKnob(int x, int y) {
     }
 }
 
+bool SliderWnd::MouseOverTrack(int x, int y) {
+    if (x >= _knob->TrackX()
+        && x <= _knob->TrackX() + _knob->TrackWidth()
+        && y >= _knob->TrackY()
+        && y <= _knob->TrackY() + _knob->TrackHeight()) {
+
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void SliderWnd::UpdateKnob(int x, int y) {
+    int newX;
+    int knobMax = _knob->TrackX() + _knob->TrackWidth() - _knob->Width();
+
+    if (x > knobMax) {
+        newX = knobMax;
+    } else if (x - _dragOffset < _knob->TrackX()) {
+        newX = _knob->TrackX();
+    } else {
+        newX = x - _dragOffset;
+    }
+
+    if (_knob->X() != newX) {
+        _knob->X(newX);
+        Update();
+    }
+}
+
 /*    case WM_NCHITTEST: {
         LRESULT hit = DefWindowProc(_hWnd, message, wParam, lParam);
         /* Make the client area appear to be the window title bar:
@@ -83,30 +113,13 @@ LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
         //Hide();
         break;
 
-    case WM_MOUSEMOVE: {
-        if (_dragging == false) {
-            break;
+    case WM_MOUSEMOVE:
+        if (_dragging) {
+            int x = GET_X_LPARAM(lParam);
+            int y = GET_Y_LPARAM(lParam);
+            UpdateKnob(x, y);
         }
-
-        int x = GET_X_LPARAM(lParam);
-        int y = GET_Y_LPARAM(lParam);
-
-        int newX;
-        int knobMax = _knob->TrackX() + _knob->TrackWidth() - _knob->Width();
-        if (x > knobMax) {
-            newX = knobMax;
-        } else if (x - _dragOffset < _knob->TrackX()) {
-            newX = _knob->TrackX();
-        } else {
-            newX = x - _dragOffset;
-        }
-
-        if (_knob->X() != newX) {
-            _knob->X(newX);
-            Update();
-        }
-    }
-    break;
+        break;
 
     case WM_LBUTTONDOWN: {
         if (_knob == NULL) {
@@ -120,13 +133,18 @@ LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
             _dragging = true;
             _dragOffset = x - _knob->X();
             SetCapture(_hWnd);
+        } else if (MouseOverTrack(x, y)) {
+            /* Simulate the mouse dragging to the clicked location: */
+            UpdateKnob(x, y);
         }
+
+        break;
     }
-    break;
 
     case WM_LBUTTONUP:
         _dragging = false;
         ReleaseCapture();
+        break;
     }
 
     return MeterWnd::WndProc(message, wParam, lParam);

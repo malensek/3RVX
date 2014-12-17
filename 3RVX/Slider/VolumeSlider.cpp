@@ -14,7 +14,7 @@ _sWnd(L"3RVX-VolumeSliderWnd", L"3RVX Volume Slider") {
     _sWnd.BackgroundImage(bg);
 
     std::list<Meter*> meters = skin->Meters("volume");
-    for each (Meter *m in meters) {
+    for (Meter *m : meters) {
         _sWnd.AddMeter(m);
     }
 

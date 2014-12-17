@@ -92,7 +92,7 @@ void VolumeOSD::LoadSkin() {
     _mWnd.BackgroundImage(bg);
 
     std::list<Meter*> meters = skin->Meters("volume");
-    for each (Meter *m in meters) {
+    for (Meter *m : meters) {
         _mWnd.AddMeter(m);
     }
 

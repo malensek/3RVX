@@ -114,7 +114,6 @@ void init() {
 
     vOSD = new VolumeOSD();
     eOSD = new EjectOSD();
-    vSlide = new VolumeSlider();
 
     hotkeys = Settings::Instance()->Hotkeys();
     HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);

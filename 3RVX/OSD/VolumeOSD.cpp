@@ -3,6 +3,7 @@
 #include <Shlwapi.h>
 #include <string>
 
+#include "..\Slider\VolumeSlider.h"
 #include "..\Monitor.h"
 #include "..\Skin.h"
 
@@ -23,6 +24,9 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
     std::wstring device = _settings.GetText("audioDevice");
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
+
+    /* Create the slider */
+    VolumeSlider *vSlide = new VolumeSlider(*_volumeCtrl);
 
     /* Set up context menu */
     _menu = CreatePopupMenu();

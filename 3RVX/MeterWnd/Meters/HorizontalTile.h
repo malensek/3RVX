@@ -12,8 +12,9 @@ public:
         _rect.Height = _bitmap->GetHeight();
 
         _texture = new Gdiplus::TextureBrush(_bitmap, Gdiplus::WrapModeTile,
-            0, 0, Width(), Height());
-        _shiftMat = new Gdiplus::Matrix(1, 0, 0, 1, (float) X(), (float) Y());
+            0, 0, _rect.Width, _rect.Height);
+        _shiftMat = new Gdiplus::Matrix(1, 0, 0, 1,
+            (float) _rect.X, (float) _rect.Y);
         _texture->SetTransform(_shiftMat);
     }
 

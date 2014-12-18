@@ -8,16 +8,16 @@ HorizontalTile::~HorizontalTile()
 
 void HorizontalTile::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics)
 {
-    int currentUnits = CalcUnits();
-    int width = Width() * currentUnits;
+    int width = _rect.Width * CalcUnits();
 
     if (_reverse == false) {
-        graphics->FillRectangle(_texture, X(), Y(), width, Height());
+        graphics->FillRectangle(_texture,
+            _rect.X, _rect.Y, width, _rect.Height);
     } else {
-        int xShift = Width() * Units() - width;
-        graphics->FillRectangle(_texture, X() + xShift, Y(), width, Height());
+        int xShift = _rect.Width * Units() - width;
+        graphics->FillRectangle(_texture,
+            _rect.X + xShift, _rect.Y, width, _rect.Height);
     }
 
-    _lastValue = Value();
-    _lastUnits = currentUnits;
+    UpdateDrawnValues();
 }

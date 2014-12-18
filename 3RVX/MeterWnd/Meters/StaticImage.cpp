@@ -1,12 +1,13 @@
 #include "StaticImage.h"
 
 StaticImage::StaticImage(std::wstring bitmapName, int x, int y) :
-Meter(bitmapName, x, y, 1),
-_drawRect(X(), Y(), Width(), Height()) {
+Meter(bitmapName, x, y, 1) {
 
 }
 
 void StaticImage::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
-    graphics->DrawImage(_bitmap, _drawRect,
-        0, 0, Width(), Height(), Gdiplus::UnitPixel);
+    graphics->DrawImage(_bitmap, _rect,
+        0, 0, _rect.Width, _rect.Height, Gdiplus::UnitPixel);
+
+    UpdateDrawnValues();
 }

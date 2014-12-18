@@ -36,8 +36,7 @@ void NumberStrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
             Gdiplus::UnitPixel, NULL, NULL, NULL);
     }
 
-    _lastValue = Value();
-    _lastUnits = units;
+    UpdateDrawnValues();
 }
 
 std::wstring NumberStrip::ToString() {

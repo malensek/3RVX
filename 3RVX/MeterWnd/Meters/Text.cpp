@@ -35,8 +35,8 @@ void Text::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics)
 {
     int units = CalcUnits();
 
-    Gdiplus::RectF layoutRect((float)X(), (float)Y(), 
-        (float)Width(), (float)Height());
+    Gdiplus::RectF layoutRect((float) _rect.X, (float) _rect.Y, 
+        (float) _rect.Width, (float) _rect.Height);
 
     graphics->SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAlias);
 
@@ -48,6 +48,5 @@ void Text::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics)
     graphics->DrawString(str, -1, _font, layoutRect, 
         &_strFormat, _fontColor);
 
-    _lastValue = Value();
-    _lastUnits = units;
+    UpdateDrawnValues();
 }

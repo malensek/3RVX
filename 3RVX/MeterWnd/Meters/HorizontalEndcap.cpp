@@ -27,32 +27,31 @@ _rMargin(-1) {
     /* 1 extra px for left margin line */
     _unitWidth = _rMargin - _lMargin - 1;
 
-    _lMarginRect.X = X();
-    _lMarginRect.Y = Y();
+    _lMarginRect.X = _rect.X;
+    _lMarginRect.Y = _rect.Y;
     _lMarginRect.Width = _lMargin;
-    _lMarginRect.Height = Height();
+    _lMarginRect.Height = _rect.Height;
 
-    _rMarginRect.Y = Y();
+    _rMarginRect.Y = _rect.Y;
     _rMarginRect.Width = _bitmap->GetWidth() - _rMargin + 1;
-    _rMarginRect.Height = Height();
+    _rMarginRect.Height = _rect.Height;
 }
 
 void
 HorizontalEndcap::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
-    int units = CalcUnits();
 
-    Gdiplus::Rect destRect(X(), Y(), _lMarginRect.Width, Height());
+    Gdiplus::Rect destRect(_rect.X, _rect.Y, _lMarginRect.Width, _rect.Height);
 
     /* draw the left endcap */
     graphics->DrawImage(_bitmap, destRect,
-        0, 0, _lMargin, Height(), Gdiplus::UnitPixel);
+        0, 0, _lMargin, _rect.Height, Gdiplus::UnitPixel);
 
     /* draw the middle of the bar */
     destRect.X = destRect.X + _lMargin;
-    destRect.Width = _unitWidth * units;
+    destRect.Width = _unitWidth * CalcUnits();
 
     Gdiplus::TextureBrush tB(_bitmap, Gdiplus::WrapModeTile,
-        _lMargin + 1, 0, _rMargin - _lMargin - 1, Height());
+        _lMargin + 1, 0, _rMargin - _lMargin - 1, _rect.Height);
 
     /* translate the texture brush into position.
      * note, 1st param = how much X stretch, 4th = how much Y stretch */
@@ -65,10 +64,9 @@ HorizontalEndcap::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     destRect.X = destRect.X + destRect.Width;
     destRect.Width = _rMarginRect.Width;
     graphics->DrawImage(_bitmap, destRect,
-        _rMargin + 1, 0, _rMarginRect.Width, Height(), Gdiplus::UnitPixel);
+        _rMargin + 1, 0, _rMarginRect.Width, _rect.Height, Gdiplus::UnitPixel);
 
-    _lastValue = Meter::Value();
-    _lastUnits = units;
+    UpdateDrawnValues();
 }
 
 void HorizontalEndcap::Value(float value) {

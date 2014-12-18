@@ -16,6 +16,12 @@ void SliderKnob::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
         0, 0, _rect.Width, _track.Height, Gdiplus::UnitPixel);
 }
 
+float SliderKnob::Value() const {
+    int xPos = X() - TrackX();
+    int xMax = TrackWidth() - _rect.Width;
+    return (float) xPos / (float) xMax;
+}
+
 void SliderKnob::Value(float value) {
     Meter::Value(value);
     X(TrackX() + CalcUnits());

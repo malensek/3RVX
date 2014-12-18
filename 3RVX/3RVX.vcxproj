@@ -82,6 +82,7 @@
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="MeterWnd\Meters\StaticImage.h" />
+    <ClInclude Include="MeterWnd\Meters\VerticalBar.h" />
     <ClInclude Include="OSD\EjectOSD.h" />
     <ClInclude Include="HotkeyManager.h" />
     <ClInclude Include="HotkeyActions.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="MeterWnd\Meters\StaticImage.cpp" />
+    <ClCompile Include="MeterWnd\Meters\VerticalBar.cpp" />
     <ClCompile Include="OSD\EjectOSD.cpp" />
     <ClCompile Include="HotkeyManager.cpp" />
     <ClCompile Include="Logger.cpp" />

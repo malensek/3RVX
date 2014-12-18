@@ -33,6 +33,12 @@ void VolumeSlider::Hide() {
     _sWnd.Hide(false);
 }
 
+void VolumeSlider::Show() {
+    MeterWnd::MeterLevels(_level);
+    Update();
+    SliderWnd::Show();
+}
+
 bool VolumeSlider::Visible() {
     return _visible;
 }

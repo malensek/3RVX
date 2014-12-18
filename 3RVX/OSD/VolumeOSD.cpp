@@ -221,13 +221,15 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         case MENU_SETTINGS:
             CLOG(L"Opening Settings App: %s", Settings::SettingsApp().c_str());
             ShellExecute(NULL, L"open",
-                Settings::SettingsApp().c_str(), NULL, NULL, 0);
+                Settings::SettingsApp().c_str(), NULL, NULL, SW_SHOWNORMAL);
             break;
 
-        case MENU_MIXER:
+        case MENU_MIXER: {
             CLOG(L"Menu: Mixer");
-
+            HINSTANCE code = ShellExecute(NULL, L"open", L"sndvol",
+                NULL, NULL, SW_SHOWNORMAL);
             break;
+        }
 
         case MENU_EXIT:
             CLOG(L"Menu: Exit: %d", _masterWnd);

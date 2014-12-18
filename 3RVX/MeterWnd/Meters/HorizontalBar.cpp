@@ -1,8 +1,15 @@
 #include "HorizontalBar.h"
 
+HorizontalBar::HorizontalBar(std::wstring bitmapName, int x, int y,
+    int units, bool reversed) :
+Meter(bitmapName, x, y, units),
+_pixelsPerUnit(_rect.Width / _units),
+_reversed(reversed) {
+
+}
+
 void HorizontalBar::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
-    int pixelsPerUnit = _rect.Width / _units;
-    int width = pixelsPerUnit * CalcUnits();
+    int width = _pixelsPerUnit * CalcUnits();
 
     if (_reversed) {
         width = _rect.Width - width;

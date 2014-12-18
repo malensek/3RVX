@@ -1,23 +1,27 @@
 #pragma once
 
-#include "..\OSD\OSD.h"
 #include "SliderWnd.h"
 
 class CoreAudio;
+class Settings;
 class SliderKnob;
 
-class VolumeSlider : public OSD {
+class VolumeSlider : public SliderWnd {
 public:
-    VolumeSlider(CoreAudio &volCtrl);
+    VolumeSlider(CoreAudio &volumeCtrl);
 
     void Hide();
+    void Show();
     bool Visible();
 
     void MeterLevels(float level);
 
+protected:
+    void SliderChanged();
+
 private:
-    CoreAudio &_volCtrl;
-    SliderWnd _sWnd;
+    float _level;
+    Settings &_settings;
+    CoreAudio &_volumeCtrl;
     SliderKnob *_knob;
-    bool _visible;
 };

@@ -1,36 +1,45 @@
 #include "VolumeSlider.h"
 
+#include "..\Controllers\Volume\CoreAudio.h"
 #include "..\Error.h"
+#include "..\Settings.h"
 #include "..\Skin.h"
 #include "SliderKnob.h"
 
-VolumeSlider::VolumeSlider(CoreAudio &volCtrl) :
-OSD(L"3RVX-VolumeSlider"),
-_sWnd(L"3RVX-VolumeSliderWnd", L"3RVX Volume Slider"),
-_volCtrl(volCtrl) {
+VolumeSlider::VolumeSlider(CoreAudio &volumeCtrl) :
+SliderWnd(L"3RVX-VolumeSlider", L"3RVX Volume Slider", 0),
+_settings(*Settings::Instance()),
+_volumeCtrl(volumeCtrl) {
 
     Skin *skin = _settings.CurrentSkin();
 
     Gdiplus::Bitmap *bg = skin->ControllerBgImg("volume");
-    _sWnd.BackgroundImage(bg);
+    BackgroundImage(bg);
 
     std::list<Meter*> meters = skin->Meters("volume");
     for (Meter *m : meters) {
-        _sWnd.AddMeter(m);
+        AddMeter(m);
     }
 
     _knob = skin->Knob("volume");
-    _sWnd.Knob(_knob);
+    Knob(_knob);
+}
 
-    _knob->Value(0.5f);
+void VolumeSlider::SliderChanged() {
+    _volumeCtrl.Volume(_knob->Value());
+}
 
-    _sWnd.Update();
-    _sWnd.Show();
+void VolumeSlider::MeterLevels(float level) {
+    if (Visible() && _dragging == false) {
+        MeterWnd::MeterLevels(level);
+        Update();
+    }
+    _level = level;
 }
 
 void VolumeSlider::Hide() {
     _visible = false;
-    _sWnd.Hide(false);
+    SliderWnd::Hide(false);
 }
 
 void VolumeSlider::Show() {

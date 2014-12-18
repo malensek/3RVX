@@ -8,9 +8,11 @@
 
 class SliderKnob : public Meter {
 public:
-    SliderKnob(std::wstring bitmapName, int x, int y, int width, int height);
+    SliderKnob(std::wstring bitmapName,
+        int x, int y, int width, int height,
+        bool vertical);
+
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics);
-    Gdiplus::Rect Location();
 
     int X() const;
     int Y() const;
@@ -24,9 +26,12 @@ public:
     int TrackWidth() const;
     int TrackHeight() const;
 
+    bool Vertical() const;
+
     virtual float Value() const;
     virtual void Value(float value);
 
 private:
     Gdiplus::Rect _track;
+    bool _vertical;
 };

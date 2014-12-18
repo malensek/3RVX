@@ -79,19 +79,35 @@ bool SliderWnd::MouseOverTrack(int x, int y) {
 }
 
 void SliderWnd::UpdateKnob(int x, int y) {
-    int newX;
-    int knobMax = _knob->TrackX() + _knob->TrackWidth() - _knob->Width();
+    int oldLoc, newLoc, drag, knobMax, knobMin;
 
-    if (x > knobMax) {
-        newX = knobMax;
-    } else if (x - _dragOffset < _knob->TrackX()) {
-        newX = _knob->TrackX();
+    if (_vertical) {
+        oldLoc = _knob->Y();
+        drag = y;
+        knobMax = _knob->TrackY() + _knob->TrackHeight() - _knob->Height();
+        knobMin = _knob->TrackY();
     } else {
-        newX = x - _dragOffset;
+        oldLoc = _knob->X();
+        drag = x;
+        knobMax = _knob->TrackX() + _knob->TrackWidth() - _knob->Width();
+        knobMin = _knob->TrackX();
     }
 
-    if (_knob->X() != newX) {
-        _knob->X(newX);
+    if (drag - _dragOffset > knobMax) {
+        newLoc = knobMax;
+    } else if (drag - _dragOffset < knobMin) {
+        newLoc = knobMin;
+    } else {
+        newLoc = drag - _dragOffset;
+    }
+
+    if (oldLoc != newLoc) {
+        if (_vertical) {
+            _knob->Y(newLoc);
+        } else {
+            _knob->X(newLoc);
+        }
+
         SliderChanged();
         Update();
     }
@@ -132,7 +148,11 @@ LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
 
         if (MouseOverKnob(x, y)) {
             _dragging = true;
-            _dragOffset = x - _knob->X();
+            if (_vertical) {
+                _dragOffset = y - _knob->Y();
+            } else {
+                _dragOffset = x - _knob->X();
+            }
             SetCapture(_hWnd);
         } else if (MouseOverTrack(x, y)) {
             /* Simulate the mouse dragging to the clicked location: */

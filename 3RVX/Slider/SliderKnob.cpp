@@ -1,30 +1,43 @@
 #include "SliderKnob.h"
 
 SliderKnob::SliderKnob(std::wstring bitmapName,
-    int x, int y, int width, int height) :
+    int x, int y, int width, int height, bool vertical) :
 Meter(bitmapName, x, y, 1),
-_track(x, y, width, height) {
-    _units = _track.Width - _rect.Width;
-}
+_track(x, y, width, height),
+_vertical(vertical) {
 
-Gdiplus::Rect SliderKnob::Location() {
-    return _rect;
+    if (_vertical) {
+        _units = _track.Height - _rect.Height;
+    } else {
+        _units = _track.Width - _rect.Width;
+    }
+
 }
 
 void SliderKnob::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     graphics->DrawImage(_bitmap, _rect,
-        0, 0, _rect.Width, _track.Height, Gdiplus::UnitPixel);
+        0, 0, _rect.Width, _rect.Height, Gdiplus::UnitPixel);
 }
 
 float SliderKnob::Value() const {
-    int xPos = X() - TrackX();
-    int xMax = TrackWidth() - _rect.Width;
-    return (float) xPos / (float) xMax;
+    if (_vertical) {
+        int yPos = Y() - TrackY();
+        int yMax = TrackHeight() - _rect.Height;
+        return 1.0f - (float) yPos / (float) yMax;
+    } else {
+        int xPos = X() - TrackX();
+        int xMax = TrackWidth() - _rect.Width;
+        return (float) xPos / (float) xMax;
+    }
 }
 
 void SliderKnob::Value(float value) {
     Meter::Value(value);
-    X(TrackX() + CalcUnits());
+    if (_vertical) {
+        Y(TrackY() + _units - CalcUnits());
+    } else {
+        X(TrackX() + CalcUnits());
+    }
 }
 
 int SliderKnob::TrackX() const {
@@ -65,4 +78,8 @@ int SliderKnob::Width() const {
 
 int SliderKnob::Height() const {
     return _rect.Height;
+}
+
+bool SliderKnob::Vertical() const {
+    return _vertical;
 }

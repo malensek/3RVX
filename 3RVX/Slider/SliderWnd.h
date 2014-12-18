@@ -7,6 +7,7 @@ class SliderKnob;
 class SliderWnd : public MeterWnd {
 protected:
     bool _dragging;
+    bool _vertical;
 
     SliderWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL);
 

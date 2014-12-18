@@ -25,8 +25,5 @@ public:
     void Value(float value);
 
 private:
-    int _trackX;
-    int _trackY;
-    int _trackWidth;
-    int _trackHeight;
+    Gdiplus::Rect _track;
 };

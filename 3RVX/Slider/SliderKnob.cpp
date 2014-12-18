@@ -3,11 +3,8 @@
 SliderKnob::SliderKnob(std::wstring bitmapName,
     int x, int y, int width, int height) :
 Meter(bitmapName, x, y, 1),
-_trackX(x),
-_trackY(y),
-_trackWidth(width),
-_trackHeight(height) {
-    _units = _trackWidth - Width();
+_track(x, y, width, height) {
+    _units = _track.Width - _rect.Width;
 }
 
 Gdiplus::Rect SliderKnob::Location() {
@@ -16,7 +13,7 @@ Gdiplus::Rect SliderKnob::Location() {
 
 void SliderKnob::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     graphics->DrawImage(_bitmap, _rect,
-        0, 0, Width(), _trackHeight, Gdiplus::UnitPixel);
+        0, 0, _rect.Width, _track.Height, Gdiplus::UnitPixel);
 }
 
 void SliderKnob::Value(float value) {

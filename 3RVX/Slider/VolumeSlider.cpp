@@ -7,7 +7,7 @@
 #include "SliderKnob.h"
 
 VolumeSlider::VolumeSlider(CoreAudio &volumeCtrl) :
-SliderWnd(L"3RVX-VolumeSlider", L"3RVX Volume Slider", 0),
+SliderWnd(L"3RVX-VolumeSlider", L"3RVX Volume Slider"),
 _settings(*Settings::Instance()),
 _volumeCtrl(volumeCtrl) {
 
@@ -16,12 +16,14 @@ _volumeCtrl(volumeCtrl) {
     Gdiplus::Bitmap *bg = skin->ControllerBgImg("volume");
     BackgroundImage(bg);
 
+    _knob = skin->Knob("volume");
+    _vertical = _knob->Vertical();
+
     std::list<Meter*> meters = skin->Meters("volume");
     for (Meter *m : meters) {
         AddMeter(m);
     }
 
-    _knob = skin->Knob("volume");
     Knob(_knob);
 }
 

@@ -277,7 +277,7 @@ SliderKnob *Skin::Knob(char *controllerName) {
     tinyxml2::XMLElement *controller = ControllerXMLElement(controllerName);
     if (controller == NULL) {
         Error::ErrorMessageDie(
-            SKINERR_INVALID_CONT_BG, StringUtils::Widen(controllerName));
+            SKINERR_INVALID_CONT, StringUtils::Widen(controllerName));
     }
 
     tinyxml2::XMLElement *slider = controller->FirstChildElement("slider");
@@ -305,12 +305,17 @@ SliderKnob *Skin::Knob(char *controllerName) {
             StringUtils::Widen(typeStr));
     }
 
+    bool vertical = true;
+    if (typeStr == "horizontal") {
+        vertical = false;
+    }
+
     int x = slider->IntAttribute("x");
     int y = slider->IntAttribute("y");
     int w = slider->IntAttribute("width");
     int h = slider->IntAttribute("height");
 
-    SliderKnob *knob = new SliderKnob(img, x, y, w, h);
+    SliderKnob *knob = new SliderKnob(img, x, y, w, h, vertical);
     return knob;
 }
 

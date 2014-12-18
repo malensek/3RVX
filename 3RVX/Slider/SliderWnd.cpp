@@ -9,7 +9,7 @@ MeterWnd(className, title, hInstance),
 _dragging(false) {
     long styles = GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
     styles &= ~(WS_EX_NOACTIVATE | WS_EX_TRANSPARENT);
-    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, styles);
+    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, styles | WS_EX_TOPMOST);
 }
 
 void SliderWnd::Show() {

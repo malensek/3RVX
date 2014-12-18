@@ -10,6 +10,7 @@
 #include "OSD.h"
 
 class Skin;
+class VolumeSlider;
 
 class VolumeOSD : public OSD {
 public:
@@ -28,6 +29,7 @@ private:
     HMENU _deviceMenu;
     UINT _menuFlags;
     CoreAudio *_volumeCtrl;
+    VolumeSlider *_volumeSlider;
     std::vector<VolumeController::DeviceInfo> _deviceList;
     std::wstring _selectedDevice;
     std::wstring _selectedDesc;

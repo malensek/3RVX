@@ -26,7 +26,7 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
     _selectedDesc = _volumeCtrl->DeviceDesc();
 
     /* Create the slider */
-    VolumeSlider *vSlide = new VolumeSlider(*_volumeCtrl);
+    _volumeSlider = new VolumeSlider(*_volumeCtrl);
 
     /* Set up context menu */
     _menu = CreatePopupMenu();
@@ -54,7 +54,12 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 
     /* TODO: if set, we should update the volume level here to show the OSD
      * on startup. */
+
     UpdateIcon();
+    float v = _volumeCtrl->Volume();
+    MeterLevels(v);
+    _mWnd.Show();
+    _volumeSlider->MeterLevels(v);
 }
 
 VolumeOSD::~VolumeOSD() {
@@ -170,17 +175,22 @@ void VolumeOSD::UpdateIconTip() {
 LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == MSG_VOL_CHNG) {
-        HideOthers(Volume);
         float v = _volumeCtrl->Volume();
-        if (_volumeCtrl->Muted() || v == 0.0f) {
-            _mWnd.Hide(false);
-            _muteWnd.Show();
-        } else {
-            _muteWnd.Hide(false);
-            QCLOG(L"Volume level: %.0f", v * 100.0f);
-            MeterLevels(v);
-            _mWnd.Show();
+
+        _volumeSlider->MeterLevels(v);
+
+        if (_volumeSlider->Visible() == false) {
+            if (_volumeCtrl->Muted() || v == 0.0f) {
+                _muteWnd.Show();
+                _mWnd.Hide(false);
+            } else {
+                MeterLevels(v);
+                _mWnd.Show();
+                _muteWnd.Hide(false);
+            }
+            HideOthers(Volume);
         }
+
         UpdateIcon();
     } else if (message == MSG_VOL_DEVCHNG) {
         CLOG(L"Volume device change detected.");
@@ -195,7 +205,10 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         _selectedDesc = _volumeCtrl->DeviceDesc();
         UpdateDeviceMenu();
     } else if (message == MSG_NOTIFYICON) {
-        if (lParam == WM_LBUTTONUP || lParam == WM_RBUTTONUP) {
+        if (lParam == WM_LBUTTONUP) {
+            CLOG(L"wshowweoi");
+            _volumeSlider->Show();
+        } else if (lParam == WM_RBUTTONUP) {
             POINT p;
             GetCursorPos(&p);
             SetForegroundWindow(hWnd);
@@ -235,5 +248,6 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             }
         }
     }
+
     return DefWindowProc(hWnd, message, wParam, lParam);
 }

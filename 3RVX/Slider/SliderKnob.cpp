@@ -18,31 +18,31 @@ void SliderKnob::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
 
 void SliderKnob::Value(float value) {
     Meter::Value(value);
-    X(_trackX + CalcUnits());
+    X(TrackX() + CalcUnits());
 }
 
 int SliderKnob::TrackX() const {
-    return _trackX;
+    return _track.X;
 }
 
 int SliderKnob::TrackY() const {
-    return _trackY;
+    return _track.Y;
 }
 
 int SliderKnob::TrackWidth() const {
-    return _trackWidth;
+    return _track.Width;
 }
 
 int SliderKnob::TrackHeight() const {
-    return _trackHeight;
+    return _track.Height;
 }
 
 int SliderKnob::X() const {
-    return Meter::X();
+    return _rect.X;
 }
 
 int SliderKnob::Y() const {
-    return Meter::Y();
+    return _rect.Y;
 }
 
 void SliderKnob::X(int x) {
@@ -51,4 +51,12 @@ void SliderKnob::X(int x) {
 
 void SliderKnob::Y(int y) {
     _rect.Y = y;
+}
+
+int SliderKnob::Width() const {
+    return _rect.Width;
+}
+
+int SliderKnob::Height() const {
+    return _rect.Height;
 }

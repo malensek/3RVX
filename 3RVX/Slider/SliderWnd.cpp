@@ -92,6 +92,7 @@ void SliderWnd::UpdateKnob(int x, int y) {
 
     if (_knob->X() != newX) {
         _knob->X(newX);
+        SliderChanged();
         Update();
     }
 }

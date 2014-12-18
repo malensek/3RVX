@@ -5,5 +5,6 @@
 #include "HorizontalEndcap.h"
 #include "HorizontalTile.h"
 #include "NumberStrip.h"
-#include "Text.h"
 #include "StaticImage.h"
+#include "Text.h"
+#include "VerticalBar.h"

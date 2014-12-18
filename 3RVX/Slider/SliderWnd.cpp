@@ -110,7 +110,7 @@ void SliderWnd::UpdateKnob(int x, int y) {
 LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
     switch (message) {
     case WM_KILLFOCUS:
-        //Hide();
+        Hide();
         break;
 
     case WM_MOUSEMOVE:

@@ -15,28 +15,26 @@ public:
     enum TextAlignment { Left, Right, Center };
     enum TextStyle { Bold = 1, Italic = 2, UnderLine = 4, Strike = 8 };
 
-    virtual bool Dirty();
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) = 0;
-    virtual int CalcUnits();
+    virtual bool Dirty();
 
-    virtual float Value();
+    virtual float Value() const;
     virtual void Value(float value);
 
-    virtual Gdiplus::Rect Rect() const;
-    virtual int X() const;
-    virtual int Y() const;
-    virtual int Width() const;
-    virtual int Height() const;
-
-    virtual int Units();
+    virtual int Units() const;
 
     virtual std::wstring ToString();
 
 protected:
-    Gdiplus::Bitmap *_bitmap;
-    float _value;
-    float _lastValue;
     int _units;
-    int _lastUnits;
+    Gdiplus::Bitmap *_bitmap;
     Gdiplus::Rect _rect;
+
+    virtual int CalcUnits();
+    void UpdateDrawnValues();
+
+private:
+    int _drawnUnits;
+    float _value;
+    float _drawnValue;
 };

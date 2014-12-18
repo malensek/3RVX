@@ -4,9 +4,9 @@
 
 Meter::Meter(std::wstring bitmapName, int x, int y, int units) :
 _value(0.0f),
-_lastValue(-1.0f),
+_drawnValue(-1.0f),
 _units(units),
-_lastUnits(-1) {
+_drawnUnits(-1) {
     _rect.X = x;
     _rect.Y = y;
 
@@ -23,14 +23,14 @@ _lastUnits(-1) {
 Meter::Meter(int x, int y, int units) :
 _bitmap(NULL),
 _value(0.0f),
-_lastValue(-1.0f),
+_drawnValue(-1.0f),
 _units(units),
-_lastUnits(-1) {
+_drawnUnits(-1) {
     _rect.X = x;
     _rect.Y = y;
 }
 
-float Meter::Value() {
+float Meter::Value() const {
     return _value;
 }
 
@@ -41,38 +41,23 @@ void Meter::Value(float value) {
     _value = value;
 }
 
-int Meter::Units() {
+void Meter::UpdateDrawnValues() {
+    _drawnUnits = CalcUnits();
+    _drawnValue = _value;
+}
+
+int Meter::Units() const {
     return _units;
-}
-
-Gdiplus::Rect Meter::Rect() const {
-    return _rect;
-}
-
-int Meter::X() const {
-    return _rect.X;
-}
-
-int Meter::Y() const {
-    return _rect.Y;
-}
-
-int Meter::Width() const {
-    return _rect.Width;
-}
-
-int Meter::Height() const {
-    return _rect.Height;
 }
 
 bool Meter::Dirty() {
     /* Not dirty if the meter's value is unchanged */
-    if (Value() == _lastValue) {
+    if (Value() == _drawnValue) {
         return false;
     }
 
     /* Not dirty if the change in value won't affect the meter graphically */
-    if (CalcUnits() == _lastUnits) {
+    if (CalcUnits() == _drawnUnits) {
         return false;
     }
 
@@ -80,13 +65,13 @@ bool Meter::Dirty() {
 }
 
 int Meter::CalcUnits() {
-    return (int) ceil(Value() * _units);
+    return (int) ceil(_value * _units);
 }
 
 std::wstring Meter::ToString() {
     std::wstringstream ss;
-    ss << L"Geometry: (" << X() << L", " << Y() << "); ";
-    ss << Width() << L"x" << Height() << std::endl;
+    ss << L"Geometry: (" << _rect.X << L", " << _rect.Y << "); ";
+    ss << _rect.Width << L"x" << _rect.Height << std::endl;
     ss << L"Units: " << Units() << std::endl;
     ss << L"Current Value: " << Value() << L" (" << CalcUnits() << L" units)";
     return ss.str();

@@ -5,15 +5,17 @@
 class SliderKnob;
 
 class SliderWnd : public MeterWnd {
-public:
+protected:
+    bool _dragging;
+
     SliderWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL);
 
     virtual void Show();
     void Knob(SliderKnob *knob);
+    virtual void SliderChanged() = 0;
 
 private:
     SliderKnob *_knob;
-    bool _dragging;
     int _dragOffset;
 
     void PositionWindow();

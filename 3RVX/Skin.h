@@ -27,7 +27,7 @@ public:
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     Gdiplus::Bitmap *ControllerBgImg(char *controllerName);
 
-    std::list<Meter *> Meters(char *osdName);
+    std::list<Meter *> OSDMeters(char *osdName);
     std::vector<HICON> Iconset(char *osdName);
 
     SliderKnob *Knob(char *controllerName);

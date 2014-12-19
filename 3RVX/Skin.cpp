@@ -103,7 +103,7 @@ std::vector<HICON> Skin::Iconset(char *osdName) {
     return iconset;
 }
 
-std::list<Meter *> Skin::Meters(char *osdName) {
+std::list<Meter *> Skin::OSDMeters(char *osdName) {
     std::list<Meter*> meters;
 
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);

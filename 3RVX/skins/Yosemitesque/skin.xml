@@ -9,6 +9,7 @@
     <volume background="OSD\volumebg.png">
       <meter type="HorizontalBar" image="OSD\meter.png"
              x="21" y="172" units="16"/>
+      <iconset location="Icons/Volume"/>
     </volume>
 
     <mute background="OSD/mute.png"/>
@@ -19,8 +20,12 @@
     </brightness>
   </osds>
 
-  <controller>
-    <slider type="vertical" x="26" y="20" width="17" height= "98" />
-    <muteButton x="5" y="5"/>
-  </controller>
+  <sliders>
+    <volume background="Slider/bg.png">
+      <slider type="vertical" image="Slider/knob.png"
+              x="22" y="15" width="3" height="107"/>
+      <meter type="VerticalBar" image="Slider/meter.png"
+              x="22" y="16" units="21"/>
+    </volume>
+  </sliders>
 </skin>

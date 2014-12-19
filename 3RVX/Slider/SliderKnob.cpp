@@ -8,6 +8,7 @@ _vertical(vertical) {
 
     if (_vertical) {
         _units = _track.Height - _rect.Height;
+        _rect.X = _track.X + (_track.Width / 2) - (_rect.Width / 2);
     } else {
         _units = _track.Width - _rect.Width;
     }

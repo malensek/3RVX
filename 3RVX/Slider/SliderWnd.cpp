@@ -14,7 +14,7 @@ _dragging(false) {
 
 void SliderWnd::Show() {
     PositionWindow();
-    MeterWnd::Show();
+    MeterWnd::Show(false);
 }
 
 void SliderWnd::Knob(SliderKnob *knob) {

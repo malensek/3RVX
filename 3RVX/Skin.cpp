@@ -21,13 +21,13 @@ Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     return BgImg(osd);
 }
 
-Gdiplus::Bitmap *Skin::ControllerBgImg(char *controllerName) {
-    tinyxml2::XMLElement *controller = ControllerXMLElement(controllerName);
-    if (controller == NULL) {
+Gdiplus::Bitmap *Skin::SliderBgImg(char *controllerName) {
+    tinyxml2::XMLElement *sliderElement = SliderXMLElement(controllerName);
+    if (sliderElement == NULL) {
         Error::ErrorMessageDie(
             SKINERR_INVALID_CONT_BG, StringUtils::Widen(controllerName));
     }
-    return BgImg(controller);
+    return BgImg(sliderElement);
 }
 
 Gdiplus::Bitmap *Skin::BgImg(tinyxml2::XMLElement *element) {
@@ -107,6 +107,21 @@ std::list<Meter *> Skin::OSDMeters(char *osdName) {
     std::list<Meter*> meters;
 
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");
+    for (; meter != NULL; meter = meter->NextSiblingElement("meter")) {
+        Meter *m = LoadMeter(meter);
+        if (m != NULL) {
+            meters.push_back(m);
+        }
+    }
+
+    return meters;
+}
+
+std::list<Meter *> Skin::SliderMeters(char *osdName) {
+    std::list<Meter*> meters;
+
+    tinyxml2::XMLElement *osd = SliderXMLElement(osdName);
     tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");
     for (; meter != NULL; meter = meter->NextSiblingElement("meter")) {
         Meter *m = LoadMeter(meter);
@@ -198,7 +213,9 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
             transparency, format);
 
         delete font;
-        
+
+    } else if (type == "verticalbar") {
+        m = new VerticalBar(img, x, y, units, inverted);
     } else {
         CLOG(L"Unknown meter type: %s", StringUtils::Widen(type).c_str());
         return NULL;
@@ -274,7 +291,7 @@ Skin::Alignment(tinyxml2::XMLElement *meterXMLElement) {
 }
 
 SliderKnob *Skin::Knob(char *controllerName) {
-    tinyxml2::XMLElement *controller = ControllerXMLElement(controllerName);
+    tinyxml2::XMLElement *controller = SliderXMLElement(controllerName);
     if (controller == NULL) {
         Error::ErrorMessageDie(
             SKINERR_INVALID_CONT, StringUtils::Widen(controllerName));
@@ -336,10 +353,10 @@ tinyxml2::XMLElement *Skin::OSDXMLElement(char *osdName) {
     return osd;
 }
 
-tinyxml2::XMLElement *Skin::ControllerXMLElement(char *controllerName) {
+tinyxml2::XMLElement *Skin::SliderXMLElement(char *controllerName) {
     tinyxml2::XMLHandle xmlHandle(_root);
     tinyxml2::XMLElement *controller = xmlHandle
-        .FirstChildElement("controllers")
+        .FirstChildElement("sliders")
         .FirstChildElement(controllerName)
         .ToElement();
     return controller;

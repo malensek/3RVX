@@ -25,16 +25,17 @@ public:
 
     Gdiplus::Bitmap *BgImg(tinyxml2::XMLElement *element);
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
-    Gdiplus::Bitmap *ControllerBgImg(char *controllerName);
+    Gdiplus::Bitmap *SliderBgImg(char *controllerName);
 
     std::list<Meter *> OSDMeters(char *osdName);
+    std::list<Meter *> SliderMeters(char *osdName);
     std::vector<HICON> Iconset(char *osdName);
 
     SliderKnob *Knob(char *controllerName);
 
 private:
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);
-    tinyxml2::XMLElement *ControllerXMLElement(char *controllerName);
+    tinyxml2::XMLElement *SliderXMLElement(char *controllerName);
     Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::Font *Font(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::StringAlignment Alignment(tinyxml2::XMLElement *meterXMLElement);

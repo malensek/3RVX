@@ -206,7 +206,6 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         UpdateDeviceMenu();
     } else if (message == MSG_NOTIFYICON) {
         if (lParam == WM_LBUTTONUP) {
-            CLOG(L"wshowweoi");
             _volumeSlider->Show();
         } else if (lParam == WM_RBUTTONUP) {
             POINT p;

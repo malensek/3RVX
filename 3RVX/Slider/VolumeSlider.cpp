@@ -39,11 +39,6 @@ void VolumeSlider::MeterLevels(float level) {
     _level = level;
 }
 
-void VolumeSlider::Hide() {
-    _visible = false;
-    SliderWnd::Hide(false);
-}
-
 void VolumeSlider::Show() {
     MeterWnd::MeterLevels(_level);
     Update();

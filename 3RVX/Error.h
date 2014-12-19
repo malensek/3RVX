@@ -20,7 +20,7 @@ public:
         std::wstring msg(L"");
 
         msg = msg + L"Unknown error occurred: " + std::to_wstring(error);
-        if (detail != L"" == false) {
+        if (detail != L"") {
             msg = msg + L"\n" + detail;
         }
 

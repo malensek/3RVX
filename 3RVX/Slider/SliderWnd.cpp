@@ -108,6 +108,7 @@ void SliderWnd::UpdateKnob(int x, int y) {
             _knob->X(newLoc);
         }
 
+        MeterWnd::MeterLevels(_knob->Value());
         SliderChanged();
         Update();
     }

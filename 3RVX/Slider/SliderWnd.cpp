@@ -131,6 +131,13 @@ LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
         Hide();
         break;
 
+    case WM_ACTIVATEAPP:
+        if (wParam == 0) {
+            /* We're being deactivated */
+            Hide();
+        }
+        break;
+
     case WM_MOUSEMOVE:
         if (_dragging) {
             int x = GET_X_LPARAM(lParam);

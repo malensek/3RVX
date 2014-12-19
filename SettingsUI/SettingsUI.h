@@ -8,7 +8,7 @@
 
 #include <string>
 
-#include "TinyXml2/tinyxml2.h"
+#include "../3RVX/TinyXml2/tinyxml2.h"
 
 class CSettingsUIApp : public CWinApp {
 public:

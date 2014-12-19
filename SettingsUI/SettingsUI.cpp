@@ -68,10 +68,10 @@ BOOL CSettingsUIApp::InitInstance() {
     // such as the name of your company or organization
     SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-    Settings s(L"../3RVX/Settings.xml");
+    Settings *s = Settings::Instance();
     SettingsSheet settingsSheet(L"3RVX Settings");
 
-    General g(&s);
+    General g(s);
     Display d;
 
     settingsSheet.AddPage(&g);

@@ -12,6 +12,7 @@ protected:
     SliderWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL);
 
     virtual void Show();
+
     void Knob(SliderKnob *knob);
     virtual void SliderChanged() = 0;
 

@@ -10,8 +10,7 @@ class VolumeSlider : public SliderWnd {
 public:
     VolumeSlider(CoreAudio &volumeCtrl);
 
-    void Hide();
-    void Show();
+    virtual void Show();
     bool Visible();
 
     void MeterLevels(float level);

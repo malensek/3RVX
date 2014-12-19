@@ -13,13 +13,13 @@ _volumeCtrl(volumeCtrl) {
 
     Skin *skin = _settings.CurrentSkin();
 
-    Gdiplus::Bitmap *bg = skin->ControllerBgImg("volume");
+    Gdiplus::Bitmap *bg = skin->SliderBgImg("volume");
     BackgroundImage(bg);
 
     _knob = skin->Knob("volume");
     _vertical = _knob->Vertical();
 
-    std::list<Meter*> meters = skin->Meters("volume");
+    std::list<Meter*> meters = skin->SliderMeters("volume");
     for (Meter *m : meters) {
         AddMeter(m);
     }

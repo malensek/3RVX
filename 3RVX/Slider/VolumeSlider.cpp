@@ -43,6 +43,8 @@ void VolumeSlider::Show() {
     MeterWnd::MeterLevels(_level);
     Update();
     SliderWnd::Show();
+    SetActiveWindow(_hWnd);
+    SetForegroundWindow(_hWnd);
 }
 
 bool VolumeSlider::Visible() {

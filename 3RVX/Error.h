@@ -28,7 +28,7 @@ public:
     }
 
     static void ErrorMessageDie(unsigned int error, std::wstring detail = L"") {
-        ErrorMessage(error);
+        ErrorMessage(error, detail);
         exit(EXIT_FAILURE);
     }
 

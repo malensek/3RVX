@@ -73,7 +73,8 @@
       <AdditionalDependencies>Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>robocopy /MIR /XO /NP "$(ProjectDir)Skins" "$(TargetDir)\Skins" 2&gt;&amp;1 || exit /B 0</Command>
+      <Command>robocopy /MIR /XO /NP "$(ProjectDir)Skins" "$(TargetDir)\Skins" 2&gt;&amp;1 || exit /B 0
+xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

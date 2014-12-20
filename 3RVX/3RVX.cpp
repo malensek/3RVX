@@ -57,7 +57,7 @@ LPTSTR lpCmdLine, int nCmdShow) {
 
         HWND masterWnd = FindWindow(CLASS_3RVX, CLASS_3RVX);
         CLOG(L"A previous instance of the program is already running.\n"
-            L"Requesting Settings dialog from window: %d", masterWnd);
+            L"Requesting Settings dialog from window: %d", (int) masterWnd);
         SendMessage(masterWnd, WM_3RVX_CONTROL, MSG_SETTINGS, NULL);
 
 #ifdef _DEBUG

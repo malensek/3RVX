@@ -231,7 +231,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         }
 
         case MENU_EXIT:
-            CLOG(L"Menu: Exit: %d", _masterWnd);
+            CLOG(L"Menu: Exit: %d", (int) _masterWnd);
             SendMessage(_masterWnd, WM_CLOSE, NULL, NULL);
             break;
         }

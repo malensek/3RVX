@@ -52,7 +52,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Wtsapi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>robocopy /MIR /XO /NP "$(ProjectDir)Skins" "$(TargetDir)\Skins" 2&gt;&amp;1 || exit /B 0</Command>
@@ -70,7 +70,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Wtsapi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>robocopy /MIR /XO /NP "$(ProjectDir)Skins" "$(TargetDir)\Skins" 2&gt;&amp;1 || exit /B 0
@@ -109,6 +109,7 @@ xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
     <ClInclude Include="SkinInfo.h" />
     <ClInclude Include="Slider\SliderKnob.h" />
     <ClInclude Include="Slider\SliderWnd.h" />
+    <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="TinyXml2\tinyxml2.h" />
     <ClInclude Include="OSD\VolumeOSD.h" />
@@ -140,6 +141,7 @@ xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
     <ClCompile Include="SkinInfo.cpp" />
     <ClCompile Include="Slider\SliderKnob.cpp" />
     <ClCompile Include="Slider\SliderWnd.cpp" />
+    <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="OSD\VolumeOSD.cpp" />

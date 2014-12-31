@@ -41,7 +41,7 @@ BOOL General::OnInitDialog() {
 
     /* Determine which skins are available */
     std::list<CString> skins = FindSkins(L"../3RVX/Skins");
-    for each (CString skin in skins) {
+    for (CString skin : skins) {
         _skins.AddString(skin);
     }
 

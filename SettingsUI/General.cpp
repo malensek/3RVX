@@ -54,7 +54,6 @@ BOOL General::OnInitDialog() {
     }
 
     std::wstring skinXML = L"../3RVX/" SKINS_DIR L"/" + current + L"/" SKIN_XML;
-    OutputDebugString(skinXML.c_str());
     SkinInfo s(skinXML);
 
     CString authorText(L"Author:");

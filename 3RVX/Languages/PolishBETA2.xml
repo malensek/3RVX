@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- General Words -->
+  <word>
+    <key>Settings</key>
+    <translation>Ustawienia</translation>
+  </word>
+  <word>
+    <key>Exit</key>
+    <translation>Wyjście</translation>
+  </word>
+
+
+<!-- Settings Dialog Buttons -->
+  <word>
+    <key>Defaults</key>
+    <translation>Domyślne</translation>
+  </word>
+  <word>
+    <key>Cancel</key>
+    <translation>Anuluj</translation>
+  </word>
+  <word>
+    <key>Save</key>
+    <translation>Zapisz</translation>
+  </word>
+  <word>
+    <key>Select Key...</key>
+    <translation>Wybierz klawisz...</translation>
+  </word>
+
+
+<!-- Settings Tabs -->
+  <word>
+    <key>General</key>
+    <translation>Główne</translation>
+  </word>
+  <word>
+    <key>Display</key>
+    <translation>Wyświetlanie</translation>
+  </word>
+  <word>
+    <key>Hotkey Setup</key>
+    <translation>Ustawienia klawiszy</translation>
+  </word>
+  <word>
+    <key>Skin Chooser</key>
+    <translation>Skóry</translation>
+  </word>
+  <word>
+    <key>About</key>
+    <translation>Info</translation>
+  </word>
+
+
+<!-- General Tab -->
+  <word>
+    <key>Behavior</key>
+    <translation>Zachowanie</translation>
+  </word>
+  <word>
+    <key>Run on Windows startup</key>
+    <translation>Uruchom razem z Windows</translation>
+  </word>
+  <word>
+    <key>Play sounds</key>
+    <translation>Odgrywaj dźwięki</translation>
+  </word>
+  <word>
+    <key>Custom volume change amount:</key>
+    <translation>Stopień zmiany dźwięku:</translation>
+  </word>
+
+  <word>
+    <key>Mixer</key>
+    <translation>Mikser</translation>
+  </word>
+  <word>
+    <key>Control Wave instead of Master Volume</key>
+    <translation>Kontroluj Wave zamiast Master Volume</translation>
+  </word>
+  <word>
+    <key>Use custom mixer program on tray click</key>
+    <translation>Użyj innego miksera dźwięku</translation>
+  </word>
+  <word>
+    <key>Choose...</key>
+    <translation>Wybierz...</translation>
+  </word>
+  <word>
+    <key>Filename: </key>
+    <translation>Nazwa pliku: </translation>
+  </word>
+
+  <word>
+    <key>Language</key>
+    <translation>Język</translation>
+  </word>
+  <word>
+    <key>Load</key>
+    <translation>Ładuj</translation>
+  </word>
+
+
+<!-- Display Tab -->
+  <word>
+    <key>Visibility</key>
+    <translation>Widzialność</translation>
+  </word>
+  <word>
+    <key>Keep above other windows</key>
+    <translation>Zawsze na wierzchu</translation>
+  </word>
+  <word>
+    <key>Display icon in system tray</key>
+    <translation>Ikonka w zasobniku systemowym</translation>
+  </word>
+
+  <word>
+    <key>Position</key>
+    <translation>Pozycja</translation>
+  </word>
+  <word>
+    <key>Display on Monitor:</key>
+    <translation>Wyświetl na monitorze:</translation>
+  </word>
+  <word>
+    <key>Default</key>
+    <translation>Domyślne</translation>
+  </word>
+  <word>
+    <key>Centered</key>
+    <translation>Wyśrodkowane</translation>
+  </word>
+  <word>
+    <key>Custom Location:</key>
+    <translation>Inna pozycja:</translation>
+  </word>
+
+
+<!-- Hotkey tab -->
+  <word>
+    <key>Function</key>
+    <translation>Funkcja</translation>
+  </word>
+  <word>
+    <key>Keys</key>
+    <translation>Klawisze</translation>
+  </word>
+
+  <word>
+    <key>Add</key>
+    <translation>Dodaj</translation>
+  </word>
+  <word>
+    <key>Delete</key>
+    <translation>Usuń</translation>
+  </word>
+
+  <word>
+    <key>Action:</key>
+    <translation>Akcja:</translation>
+  </word>
+  <word>
+    <key>Volume Up</key>
+    <translation>Głośniej</translation>
+  </word>
+  <word>
+    <key>Volume Down</key>
+    <translation>Ciszej</translation>
+  </word>
+  <word>
+    <key>Mute</key>
+    <translation>Wycisz</translation>
+  </word>
+  <word>
+    <key>Eject</key>
+    <translation>Wysuń</translation>
+  </word>
+  <word>
+    <key>Settings Window</key>
+    <translation>Okno ustawień</translation>
+  </word>
+
+  <word>
+    <key>Drive:</key>
+    <translation>Napęd:</translation>
+  </word>
+  <word>
+    <key>Hotkey Chooser</key>
+    <translation>Wybór klawisza skrótu</translation>
+  </word>
+  <word>
+    <key>Key Combination:</key>
+    <translation>Kombinacja klawiszy:</translation>
+  </word>
+  <word>
+    <key>Press a key!</key>
+    <translation>Naciśnij klawisz!</translation>
+  </word>
+
+
+<!-- Skin tab -->
+  <word>
+    <key>Available Skins</key>
+    <translation>Dostępne skóry</translation>
+  </word>
+  <word>
+    <key>Open Skin Folder</key>
+    <translation>Otwórz folder ze skórami</translation>
+  </word>
+
+  <word>
+    <key>Skin Information</key>
+    <translation>Info o skórce</translation>
+  </word>
+  <word>
+    <key>Author:</key>
+    <translation>Autor:</translation>
+  </word>
+  <word>
+    <key>Version:</key>
+    <translation>Wersja:</translation>
+  </word>
+  <word>
+    <key>Skin Format Version:</key>
+    <translation>Wersja formatu skóry:</translation>
+  </word>
+  <word>
+    <key>Author's Webpage</key>
+    <translation>Strona autora:</translation>
+  </word>
+
+
+<!-- About tab -->
+  <word>
+    <key>Version</key>
+    <translation>Wersja</translation>
+  </word>
+  <word>
+    <key>lang_author</key>
+    <translation>PEPEi</translation>
+  </word>
+  <word>
+    <key>lang_module</key>
+    <translation>Polish language module loaded.</translation>
+  </word>
+
+
+<!-- Messages -->
+  <word>
+    <key>Load Defaults</key>
+    <translation>Załaduj domyślne</translation>
+  </word>
+  <word>
+    <key>All settings will be lost.  Continue?</key>
+    <translation>Wszystkie ustawienia zostaną utracone. Kontynuować?</translation>
+  </word>
+  <word>
+    <key>Skin Error</key>
+    <translation>Błąd skóry</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin.  Try loading the default skin?</key>
+    <translation>Nie można załadować skóry. Użyć domyślnej?</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin XML.  Check the file for syntax errors.</key>
+    <translation>Nie można wczytać pliku XML skóry. Sprawdź czy nie zawiera błędów.</translation>
+  </word>
+  <word>
+    <key>Settings will be applied next time 3RVX starts.</key>
+    <translation>Ustawienia zostaną zastosowane po ponownym uruchomieniu 3RVX.</translation>
+  </word>
+
+</ArrayOfWord>

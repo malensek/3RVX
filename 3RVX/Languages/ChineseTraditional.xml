@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- General Words -->
+  <word>
+    <key>Settings</key>
+    <translation>配置</translation>
+  </word>
+  <word>
+    <key>Exit</key>
+    <translation>關閉</translation>
+  </word>
+
+
+<!-- Settings Dialog Buttons -->
+  <word>
+    <key>Defaults</key>
+    <translation>默認值</translation>
+  </word>
+  <word>
+    <key>Cancel</key>
+    <translation>取消</translation>
+  </word>
+  <word>
+    <key>Save</key>
+    <translation>儲存</translation>
+  </word>
+  <word>
+    <key>Select Key...</key>
+    <translation>指定按鍵...</translation>
+  </word>
+
+
+<!-- Settings Tabs -->
+  <word>
+    <key>General</key>
+    <translation>常規</translation>
+  </word>
+  <word>
+    <key>Display</key>
+    <translation>顯示</translation>
+  </word>
+  <word>
+    <key>Hotkey Setup</key>
+    <translation>熱鍵設置</translation>
+  </word>
+  <word>
+    <key>Skin Chooser</key>
+    <translation>主題選擇</translation>
+  </word>
+  <word>
+    <key>About</key>
+    <translation>關於</translation>
+  </word>
+
+
+<!-- General Tab -->
+  <word>
+    <key>Behavior</key>
+    <translation>行爲</translation>
+  </word>
+  <word>
+    <key>Run on Windows startup</key>
+    <translation>登錄Windows時自動啓動</translation>
+  </word>
+  <word>
+    <key>Play sounds</key>
+    <translation>播放聲音</translation>
+  </word>
+  <word>
+    <key>Custom volume change amount:</key>
+    <translation>自定義聲音改變量</translation>
+  </word>
+
+  <word>
+    <key>Mixer</key>
+    <translation>調音器</translation>
+  </word>
+  <word>
+    <key>Control Wave instead of Master Volume</key>
+    <translation>波形控制替代主音量控制</translation>
+  </word>
+  <word>
+    <key>Use custom mixer program on tray click</key>
+    <translation>使用自定義調音器</translation>
+  </word>
+  <word>
+    <key>Choose...</key>
+    <translation>選擇...</translation>
+  </word>
+  <word>
+    <key>Filename: </key>
+    <translation>文件名:</translation>
+  </word>
+
+  <word>
+    <key>Language</key>
+    <translation>語言</translation>
+  </word>
+  <word>
+    <key>Load</key>
+    <translation>加載</translation>
+  </word>
+
+
+<!-- Display Tab -->
+  <word>
+    <key>Visibility</key>
+    <translation>可見性</translation>
+  </word>
+  <word>
+    <key>Keep above other windows</key>
+    <translation>前端顯示</translation>
+  </word>
+  <word>
+    <key>Display icon in system tray</key>
+    <translation>在系統托盤顯示圖標</translation>
+  </word>
+
+  <word>
+    <key>Position</key>
+    <translation>位置</translation>
+  </word>
+  <word>
+    <key>Display on Monitor:</key>
+    <translation>選擇顯示屏幕</translation>
+  </word>
+  <word>
+    <key>Default</key>
+    <translation>默認</translation>
+  </word>
+  <word>
+    <key>Centered</key>
+    <translation>居中</translation>
+  </word>
+  <word>
+    <key>Custom Location:</key>
+    <translation>自定義位置</translation>
+  </word>
+
+
+<!-- Hotkey tab -->
+  <word>
+    <key>Function</key>
+    <translation>功能</translation>
+  </word>
+  <word>
+    <key>Keys</key>
+    <translation>熱鍵</translation>
+  </word>
+
+  <word>
+    <key>Add</key>
+    <translation>添加</translation>
+  </word>
+  <word>
+    <key>Delete</key>
+    <translation>刪除</translation>
+  </word>
+
+  <word>
+    <key>Action:</key>
+    <translation>功能:</translation>
+  </word>
+  <word>
+    <key>Volume Up</key>
+    <translation>增大音量</translation>
+  </word>
+  <word>
+    <key>Volume Down</key>
+    <translation>減小音量</translation>
+  </word>
+  <word>
+    <key>Mute</key>
+    <translation>靜音</translation>
+  </word>
+  <word>
+    <key>Eject</key>
+    <translation>彈出光碟</translation>
+  </word>
+  <word>
+    <key>Settings Window</key>
+    <translation>程序設置</translation>
+  </word>
+
+  <word>
+    <key>Drive:</key>
+    <translation>驅動器</translation>
+  </word>
+  <word>
+    <key>Hotkey Chooser</key>
+    <translation>熱鍵選擇</translation>
+  </word>
+  <word>
+    <key>Key Combination:</key>
+    <translation>按鍵組合:</translation>
+  </word>
+  <word>
+    <key>Press a key!</key>
+    <translation>請按鍵 ...</translation>
+  </word>
+
+
+<!-- Skin tab -->
+  <word>
+    <key>Available Skins</key>
+    <translation>可用主題</translation>
+  </word>
+  <word>
+    <key>Open Skin Folder</key>
+    <translation>打開主題文件夾</translation>
+  </word>
+
+  <word>
+    <key>Skin Information</key>
+    <translation>主題信息</translation>
+  </word>
+  <word>
+    <key>Author:</key>
+    <translation>作者:</translation>
+  </word>
+  <word>
+    <key>Version:</key>
+    <translation>版本:</translation>
+  </word>
+  <word>
+    <key>Skin Format Version:</key>
+    <translation>格式版本:</translation>
+  </word>
+  <word>
+    <key>Author's Webpage</key>
+    <translation>作者網站</translation>
+  </word>
+
+
+<!-- About tab -->
+  <word>
+    <key>Version</key>
+    <translation>版本</translation>
+  </word>
+  <word>
+    <key>lang_author</key>
+    <translation>譯者: http://Aylwin.info</translation>
+  </word>
+  <word>
+    <key>lang_module</key>
+    <translation>已加載: 中文正體</translation>
+  </word>
+
+
+<!-- Messages -->
+  <word>
+    <key>Load Defaults</key>
+    <translation>恢復默認值</translation>
+  </word>
+  <word>
+    <key>All settings will be lost.  Continue?</key>
+    <translation>當前設置將被清除. 是否繼續?</translation>
+  </word>
+  <word>
+    <key>Skin Error</key>
+    <translation>文件錯誤</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin.  Try loading the default skin?</key>
+    <translation>所選主題加載失敗, 使用默認主題?</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin XML.  Check the file for syntax errors.</key>
+    <translation>無法讀取主題文件XML, 請檢查語法錯誤</translation>
+  </word>
+  <word>
+    <key>Settings will be applied next time 3RVX starts.</key>
+    <translation>變更的設置將在下次3RVX啓動時啓用</translation>
+  </word>
+
+</ArrayOfWord>

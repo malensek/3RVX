@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- General Words -->
+  <word>
+    <key>Settings</key>
+    <translation>Settin'z</translation>
+  </word>
+  <word>
+    <key>Exit</key>
+    <translation>NO MOAR!</translation>
+  </word>
+
+
+<!-- Settings Dialog Buttons -->
+  <word>
+    <key>Defaults</key>
+    <translation>deefaltz</translation>
+  </word>
+  <word>
+    <key>Cancel</key>
+    <translation>O NOES</translation>
+  </word>
+  <word>
+    <key>Save</key>
+    <translation>YA RLY</translation>
+  </word>
+  <word>
+    <key>Select Key...</key>
+    <translation>I CAN HAZ KEY??</translation>
+  </word>
+
+
+<!-- Settings Tabs -->
+  <word>
+    <key>General</key>
+    <translation>genrahl</translation>
+  </word>
+  <word>
+    <key>Display</key>
+    <translation>lookz</translation>
+  </word>
+  <word>
+    <key>Hotkey Setup</key>
+    <translation>keyz!</translation>
+  </word>
+  <word>
+    <key>Skin Chooser</key>
+    <translation>moar skin</translation>
+  </word>
+  <word>
+    <key>About</key>
+    <translation>WTF!</translation>
+  </word>
+
+
+<!-- General Tab -->
+  <word>
+    <key>Behavior</key>
+    <translation>beehaveurz</translation>
+  </word>
+  <word>
+    <key>Run on Windows startup</key>
+    <translation>run meh wit winderz</translation>
+  </word>
+  <word>
+    <key>Play sounds</key>
+    <translation>i has a sound</translation>
+  </word>
+  <word>
+    <key>Custom volume change amount:</key>
+    <translation>want dis much volume:</translation>
+  </word>
+
+  <word>
+    <key>Mixer</key>
+    <translation>mixin'</translation>
+  </word>
+  <word>
+    <key>Control Wave instead of Master Volume</key>
+    <translation>I CAN HAS WAVEZ!</translation>
+  </word>
+  <word>
+    <key>Use custom mixer program on tray click</key>
+    <translation>i use mah own mixxin' insteadz</translation>
+  </word>
+  <word>
+    <key>Choose...</key>
+    <translation>WANT...</translation>
+  </word>
+  <word>
+    <key>Filename: </key>
+    <translation>naem:</translation>
+  </word>
+
+  <word>
+    <key>Language</key>
+    <translation>langweege</translation>
+  </word>
+  <word>
+    <key>Load</key>
+    <translation>YAI!</translation>
+  </word>
+
+
+<!-- Display Tab -->
+  <word>
+    <key>Visibility</key>
+    <translation>you seez meh?</translation>
+  </word>
+  <word>
+    <key>Keep above other windows</key>
+    <translation>I R ON TOP</translation>
+  </word>
+  <word>
+    <key>Display icon in system tray</key>
+    <translation>im in ur system trayz, displayin' ur iconz</translation>
+  </word>
+  <word>
+    <key>Hide when other programs are fullscreen</key>
+    <translation>hied when dem big onez come out</translation>
+  </word>
+  <word>
+    <key>Fade Delay:</key>
+    <translation>faed deelai:</translation>
+  </word>
+  <word>
+    <key>Fade Speed:</key>
+    <translation>faed dis fast:</translation>
+  </word>
+
+  <word>
+    <key>Position</key>
+    <translation>WHERE I BE?</translation>
+  </word>
+  <word>
+    <key>Display on Monitor:</key>
+    <translation>dis monitor plz:</translation>
+  </word>
+  <word>
+    <key>Default</key>
+    <translation>normuhl</translation>
+  </word>
+  <word>
+    <key>Centered</key>
+    <translation>I IN DA MIDDLE</translation>
+  </word>
+  <word>
+    <key>Custom Location:</key>
+    <translation>U TELL ME:</translation>
+  </word>
+
+
+<!-- Hotkey tab -->
+  <word>
+    <key>Function</key>
+    <translation>funk-shun</translation>
+  </word>
+  <word>
+    <key>Keys</key>
+    <translation>keeeees</translation>
+  </word>
+
+  <word>
+    <key>Add</key>
+    <translation>MOAR!!</translation>
+  </word>
+  <word>
+    <key>Delete</key>
+    <translation>kthxbye</translation>
+  </word>
+
+  <word>
+    <key>Action:</key>
+    <translation>do dis:</translation>
+  </word>
+  <word>
+    <key>Volume Up</key>
+    <translation>MOAR LOUDERLY</translation>
+  </word>
+  <word>
+    <key>Volume Down</key>
+    <translation>qwiet pweeze</translation>
+  </word>
+  <word>
+    <key>Mute</key>
+    <translation>NO SOUNDZ</translation>
+  </word>
+  <word>
+    <key>Eject</key>
+    <translation>cupholder</translation>
+  </word>
+  <word>
+    <key>Settings Window</key>
+    <translation>open mah settins</translation>
+  </word>
+
+  <word>
+    <key>Drive:</key>
+    <translation>drivuh:</translation>
+  </word>
+  <word>
+    <key>Hotkey Chooser</key>
+    <translation>choosin' my lazer</translation>
+  </word>
+  <word>
+    <key>Key Combination:</key>
+    <translation>ccccommmmbo</translation>
+  </word>
+  <word>
+    <key>Press a key!</key>
+    <translation>I HAZ KEY PLZ KTHX!</translation>
+  </word>
+
+
+<!-- Skin tab -->
+  <word>
+    <key>Available Skins</key>
+    <translation>here r dem skinz</translation>
+  </word>
+  <word>
+    <key>Open Skin Folder</key>
+    <translation>bucket o' skinz</translation>
+  </word>
+
+  <word>
+    <key>Skin Information</key>
+    <translation>stuff</translation>
+  </word>
+  <word>
+    <key>Author:</key>
+    <translation>persun:</translation>
+  </word>
+  <word>
+    <key>Version:</key>
+    <translation>vershun:</translation>
+  </word>
+  <word>
+    <key>Skin Format Version:</key>
+    <translation>skinnin foremat:</translation>
+  </word>
+  <word>
+    <key>Author's Webpage</key>
+    <translation>i get porns</translation>
+  </word>
+
+
+<!-- About tab -->
+  <word>
+    <key>Version</key>
+    <translation>vershun:</translation>
+  </word>
+  <word>
+    <key>lang_author</key>
+    <translation>I MAED DIS</translation>
+  </word>
+  <word>
+    <key>lang_module</key>
+    <translation>IM IN UR LANGWEEGE, PWNIN DEM NEWBZ</translation>
+  </word>
+
+
+<!-- Messages -->
+  <word>
+    <key>Load Defaults</key>
+    <translation>deefaultz a-comin' </translation>
+  </word>
+  <word>
+    <key>All settings will be lost.  Continue?</key>
+    <translation>kthxbai settings, K?</translation>
+  </word>
+  <word>
+    <key>Skin Error</key>
+    <translation>ERRORZ IN UR SKIN</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin.  Try loading the default skin?</key>
+    <translation>SKIN NO LOADZ. U WANT DEEFALT?</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin XML.  Check the file for syntax errors.</key>
+    <translation>U SUCK AT MAEK SKIN!</translation>
+  </word>
+
+</ArrayOfWord>

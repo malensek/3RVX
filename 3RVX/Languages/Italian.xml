@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWord>
+<!-- General Words -->
+  <word>
+    <key>Settings</key>
+		<translation>Opzioni</translation>
+  </word>
+  <word>
+    <key>Exit</key>
+		<translation>Esci</translation>
+  </word>
+
+
+<!-- Settings Dialog Buttons -->
+  <word>
+    <key>Defaults</key>
+		<translation>Predefinito</translation>
+  </word>
+  <word>
+    <key>Cancel</key>
+		<translation>Cancella</translation>
+  </word>
+  <word>
+    <key>Save</key>
+		<translation>Salva</translation>
+  </word>
+  <word>
+    <key>Select Key...</key>
+		<translation>Seleziona tasto...</translation>
+  </word>
+
+
+<!-- Settings Tabs -->
+  <word>
+    <key>General</key>
+		<translation>Generale</translation>
+  </word>
+  <word>
+    <key>Display</key>
+		<translation>Mostra</translation>
+  </word>
+  <word>
+    <key>Hotkey Setup</key>
+		<translation>Modifica tasti veloci</translation>
+  </word>
+  <word>
+    <key>Skin Chooser</key>
+		<translation>Modifica Skin</translation>
+  </word>
+  <word>
+    <key>About</key>
+		<translation>Informazioni</translation>
+  </word>
+
+
+<!-- General Tab -->
+  <word>
+    <key>Behavior</key>
+		<translation>Azioni</translation>
+  </word>
+  <word>
+    <key>Run on Windows startup</key>
+		<translation>Carica all'avvio di Windows</translation>
+  </word>
+  <word>
+    <key>Play sounds</key>
+		<translation>Abilita effetti sonori</translation>
+  </word>
+  <word>
+    <key>Custom volume change amount:</key>
+		<translation>Personalizza l'ammontare della variazione di volume</translation>
+  </word>
+
+  <word>
+    <key>Mixer</key>
+		<translation>Mixer</translation>
+  </word>
+  <word>
+    <key>Control Wave instead of Master Volume</key>
+		<translation>Controlla solo il volume wave invece del volume generale</translation>
+  </word>
+  <word>
+    <key>Use custom mixer program on tray click</key>
+		<translation>Utilizza il mixer prescelto al click sx sull'icona nella systray</translation>
+  </word>
+  <word>
+    <key>Choose...</key>
+		<translation>Scegli...</translation>
+  </word>
+  <word>
+    <key>Filename: </key>
+		<translation>Nome del file:</translation>
+  </word>
+
+  <word>
+    <key>Language</key>
+		<translation>Lingua</translation>
+  </word>
+  <word>
+    <key>Load</key>
+		<translation>Carica</translation>
+  </word>
+
+
+<!-- Display Tab -->
+  <word>
+    <key>Visibility</key>
+		<translation>Apparenza</translation>
+  </word>
+  <word>
+    <key>Keep above other windows</key>
+		<translation>Mantieni sempre in primo piano</translation>
+  </word>
+  <word>
+    <key>Display icon in system tray</key>
+		<translation>Mostra icona sulla systray</translation>
+  </word>
+  <word>
+    <key>Hide when other programs are fullscreen</key>
+		<translation>Nascondi quando altri programmi sono a pieno schermo</translation>
+  </word>
+  <word>
+    <key>Fade Delay:</key>
+		<translation>Dissolvenza ritardata:</translation>
+  </word>
+  <word>
+    <key>Fade Speed:</key>
+		<translation>Dissolvenza veloce:</translation>
+  </word>
+
+  <word>
+    <key>Position</key>
+		<translation>Posizione</translation>
+  </word>
+  <word>
+    <key>Display on Monitor:</key>
+		<translation>Mostra sul monitor:</translation>
+  </word>
+  <word>
+    <key>Default</key>
+		<translation>Predefinito</translation>
+  </word>
+  <word>
+    <key>Centered</key>
+		<translation>Centrato</translation>
+  </word>
+  <word>
+    <key>Custom Location:</key>
+		<translation>Posizione personalizzata:</translation>
+  </word>
+
+
+<!-- Hotkey tab -->
+  <word>
+    <key>Function</key>
+		<translation>Funzione</translation>
+  </word>
+  <word>
+    <key>Keys</key>
+		<translation>Tasti</translation>
+  </word>
+
+  <word>
+    <key>Add</key>
+		<translation>Aggiungi</translation>
+  </word>
+  <word>
+    <key>Delete</key>
+		<translation>Cancella</translation>
+  </word>
+
+  <word>
+    <key>Action:</key>
+		<translation>Azione:</translation>
+  </word>
+  <word>
+    <key>Volume Up</key>
+		<translation>Volume alto</translation>
+  </word>
+  <word>
+    <key>Volume Down</key>
+		<translation>Volume basso</translation>
+  </word>
+  <word>
+    <key>Mute</key>
+		<translation>Muto</translation>
+  </word>
+  <word>
+    <key>Eject</key>
+		<translation>Espelli</translation>
+  </word>
+  <word>
+    <key>Settings Window</key>
+		<translation>Apri finestra Opzioni</translation>
+  </word>
+
+  <word>
+    <key>Drive:</key>
+		<translation>Disco:</translation>
+  </word>
+  <word>
+    <key>Hotkey Chooser</key>
+		<translation>Seleziona tasti veloci</translation>
+  </word>
+  <word>
+    <key>Key Combination:</key>
+		<translation>Combinazione tasti</translation>
+  </word>
+  <word>
+    <key>Press a key!</key>
+		<translation>Premi un tasto!</translation>
+  </word>
+
+
+<!-- Skin tab -->
+  <word>
+    <key>Available Skins</key>
+		<translation>Skin disponibile</translation>
+  </word>
+  <word>
+    <key>Open Skin Folder</key>
+		<translation>Apri la cartella Skin</translation>
+  </word>
+
+  <word>
+    <key>Skin Information</key>
+		<translation>Informazioni sulla Skin</translation>
+  </word>
+  <word>
+    <key>Author:</key>
+		<translation>Autore:</translation>
+  </word>
+  <word>
+    <key>Version:</key>
+		<translation>Versione:</translation>
+  </word>
+  <word>
+    <key>Skin Format Version:</key>
+		<translation>Versione del formato della Skin:</translation>
+  </word>
+  <word>
+    <key>Author's Webpage</key>
+		<translation>Homepage dell'autore</translation>
+  </word>
+
+
+<!-- About tab -->
+  <word>
+    <key>Version</key>
+		<translation>Versione</translation>
+  </word>
+  <word>
+    <key>lang_author</key>
+		<translation>Traduzione in italiano: Antonio La Rocca</translation>
+  </word>
+  <word>
+    <key>lang_module</key>
+		<translation>Modulo italiano caricato ~ 3RVX 2.0 beta ~ V2B4</translation>
+  </word>
+
+
+<!-- Messages -->
+  <word>
+    <key>Load Defaults</key>
+		<translation>Carica i settaggi predefiniti</translation>
+  </word>
+  <word>
+    <key>All settings will be lost.  Continue?</key>
+		<translation>Tutti i settaggi andranno persi. Continuare?</translation>
+  </word>
+  <word>
+    <key>Skin Error</key>
+		<translation>Errore Skin</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin. Try loading the default skin?</key>
+		<translation>Non posso caricare la skin. Provare a caricare la skin predefinita?</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin XML.  Check the file for syntax errors.</key>
+		<translation>Non posso caricare la skin xml. Controlla il file, possibili errori di sintassi</translation>
+  </word>
+
+</ArrayOfWord>

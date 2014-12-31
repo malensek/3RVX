@@ -80,6 +80,12 @@ BOOL General::OnInitDialog() {
         }
     }
 
+    /* Populate the language box */
+    std::list<CString> languages = FindLanguages(L"../3RVX/Languages");
+    for (CString language : languages) {
+        _lang.AddString(language);
+    }
+
     return TRUE;
 }
 
@@ -107,6 +113,29 @@ std::list<CString> General::FindSkins(CString dir) {
     }
 
     return skins;
+}
+
+std::list<CString> General::FindLanguages(CString dir) {
+    std::list<CString> languages;
+
+    CFileFind ff;
+    dir += L"\\*.xml";
+    BOOL result = ff.FindFile(dir);
+    while (result) {
+        result = ff.FindNextFile();
+        if (ff.IsDots() || ff.IsDirectory()) {
+            continue;
+        }
+
+        /* Even though we asked for *xml files, FindNextFile() will still
+         * return results that start with .xml (like .xmlblah) */
+        CString ext = ff.GetFileName().Right(3);
+        if (ext == L"xml") {
+            languages.push_back(ff.GetFileTitle());
+        }
+    }
+
+    return languages;
 }
 
 void General::LoadSettings() {

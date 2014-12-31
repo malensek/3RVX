@@ -114,6 +114,7 @@ xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
     <ClInclude Include="TinyXml2\tinyxml2.h" />
     <ClInclude Include="OSD\VolumeOSD.h" />
     <ClInclude Include="Slider\VolumeSlider.h" />
+    <ClInclude Include="Translator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
@@ -146,6 +147,7 @@ xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="OSD\VolumeOSD.cpp" />
     <ClCompile Include="Slider\VolumeSlider.cpp" />
+    <ClCompile Include="Translator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,6 +24,7 @@ private:
 
     void LoadSettings();
     std::list<CString> FindSkins(CString dir);
+    std::list<CString> FindLanguages(CString dir);
     void EnableRunOnStartup();
 
 /* Auto-generated members follow*/

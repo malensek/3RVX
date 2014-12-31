@@ -129,10 +129,10 @@ void General::EnableRunOnStartup() {
     }
 }
 
-BEGIN_MESSAGE_MAP(General, CPropertyPage)
-    ON_BN_CLICKED(BTN_WEBSITE, &General::OnBnClickedWebsite)
-END_MESSAGE_MAP()
-
 void General::OnBnClickedWebsite() {
     ShellExecute(NULL, L"open", _url.c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
+
+BEGIN_MESSAGE_MAP(General, CPropertyPage)
+    ON_BN_CLICKED(BTN_WEBSITE, &General::OnBnClickedWebsite)
+END_MESSAGE_MAP()

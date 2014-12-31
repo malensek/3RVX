@@ -17,6 +17,11 @@ HotkeyManager *HotkeyManager::Instance(HWND notifyWnd) {
     return instance;
 }
 
+HotkeyManager::HotkeyManager() :
+_fixWin(false) {
+
+}
+
 HotkeyManager::~HotkeyManager() {
     while (true) {
         auto i = _keyCombinations.begin();

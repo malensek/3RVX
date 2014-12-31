@@ -10,7 +10,7 @@
 //   |    |
 //   |    \--- bitfield: [win, shift, control, alt]
 //   |
-//   \--- xbutton2, xbutton1, wheelup, wheeldown + future?
+//   \--- xbutton2, xbutton1, wheelup, wheeldown
 //
 
 #pragma once
@@ -39,8 +39,7 @@ public:
     void Shutdown();
 
 private:
-    HotkeyManager() :
-        _fixWin(false) { }
+    HotkeyManager();
     ~HotkeyManager();
 
     HWND _notifyWnd;

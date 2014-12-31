@@ -103,9 +103,15 @@ std::unordered_map<int, int> Settings::Hotkeys() {
 }
 
 bool Settings::IsEnabled(std::string elementName) {
-    bool val = false;
-    _root->FirstChildElement(elementName.c_str())->QueryBoolText(&val);
-    return val;
+    tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
+    if (el == NULL) {
+        CLOG(L"Warning: XML element '%s' not found", elementName.c_str());
+        return false;
+    } else {
+        bool val = false;
+        el->QueryBoolText(&val);
+        return val;
+    }
 }
 
 std::wstring Settings::GetText(std::string elementName) {

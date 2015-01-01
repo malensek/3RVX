@@ -19,6 +19,7 @@ public:
     Skin *CurrentSkin();
     std::wstring SkinName();
     std::wstring SkinXML();
+    std::wstring SkinXML(std::wstring skinName);
 
     std::wstring GetText(std::string elementName);
     std::unordered_map<int, int> Hotkeys();

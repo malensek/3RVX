@@ -52,19 +52,7 @@ BOOL General::OnInitDialog() {
         current = L"Default";
         _skins.SelectString(0, L"Default");
     }
-
-    std::wstring skinXML = L"../3RVX/" SKINS_DIR L"/" + current + L"/" SKIN_XML;
-    SkinInfo s(skinXML);
-
-    CString authorText(L"Author:");
-    authorText.Append(L" ");
-    authorText.Append(s.Author().c_str());
-    _author.SetWindowTextW(authorText);
-
-    _url = s.URL();
-    if (_url == L"") {
-        _website.EnableWindow(false);
-    }
+    LoadSkinInfo();
 
     /* Are we set to run on startup in the registry? */
     CRegKey rk;
@@ -136,6 +124,23 @@ std::list<CString> General::FindLanguages(CString dir) {
     }
 
     return languages;
+}
+
+void General::LoadSkinInfo() {
+    CString selectedSkin;
+    int selIdx = _skins.GetCurSel();
+    _skins.GetLBText(selIdx, selectedSkin);
+
+    std::wstring skinXML = _settings->SkinXML((LPCWSTR) selectedSkin);
+    SkinInfo s(skinXML);
+
+    CString authorText(L"Author:");
+    authorText.Append(L" ");
+    authorText.Append(s.Author().c_str());
+    _author.SetWindowTextW(authorText);
+
+    _url = s.URL();
+    _website.EnableWindow((_url != L""));
 }
 
 void General::LoadSettings() {

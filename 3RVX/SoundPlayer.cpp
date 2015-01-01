@@ -18,7 +18,7 @@ SoundPlayer::SoundPlayer(std::wstring filePath) {
     std::streamsize chars = file.tellg();
     file.seekg(0, std::ios::beg);
 
-    _sound = new char[chars];
+    _sound = new char[(unsigned int) chars];
     file.read(_sound, chars);
     file.close();
 }

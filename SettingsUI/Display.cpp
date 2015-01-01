@@ -1,6 +1,3 @@
-// Display.cpp : implementation file
-//
-
 #include "stdafx.h"
 #include "SettingsUI.h"
 #include "Display.h"

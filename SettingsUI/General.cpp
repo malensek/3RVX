@@ -10,9 +10,10 @@
 
 IMPLEMENT_DYNAMIC(General, CPropertyPage)
 
-General::General(Settings *settings) :
+General::General() :
 CPropertyPage(General::IDD),
-_settings(settings) {
+_settings(Settings::Instance()) {
+
 }
 
 General::~General()
@@ -73,6 +74,8 @@ BOOL General::OnInitDialog() {
     for (CString language : languages) {
         _lang.AddString(language);
     }
+    std::wstring currentLang = _settings->GetText("language");
+    _lang.SelectString(0, currentLang.c_str());
 
     return TRUE;
 }
@@ -162,10 +165,16 @@ void General::EnableRunOnStartup() {
     }
 }
 
+BEGIN_MESSAGE_MAP(General, CPropertyPage)
+    ON_BN_CLICKED(BTN_WEBSITE, &General::OnBnClickedWebsite)
+    ON_CBN_SELCHANGE(CMB_SKIN, &General::OnCbnSelchangeSkin)
+END_MESSAGE_MAP()
+
 void General::OnBnClickedWebsite() {
+    SetModified(TRUE);
     ShellExecute(NULL, L"open", _url.c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 
-BEGIN_MESSAGE_MAP(General, CPropertyPage)
-    ON_BN_CLICKED(BTN_WEBSITE, &General::OnBnClickedWebsite)
-END_MESSAGE_MAP()
+void General::OnCbnSelchangeSkin() {
+    LoadSkinInfo();
+}

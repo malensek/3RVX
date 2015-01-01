@@ -7,7 +7,7 @@ class General : public CPropertyPage
 	DECLARE_DYNAMIC(General)
 
 public:
-    General(Settings *settings);
+    General();
 	virtual ~General();
 
 	enum { IDD = IDD_GENERAL };
@@ -42,4 +42,6 @@ private:
     CStatic _author;
     CButton _website;
     CComboBox _skins;
+public:
+    afx_msg void OnCbnSelchangeSkin();
 };

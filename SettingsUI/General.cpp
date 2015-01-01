@@ -152,10 +152,8 @@ void General::LoadSettings() {
 }
 
 void General::EnableRunOnStartup() {
-    wchar_t path[1024];
-    GetModuleFileName(NULL, path, 1024);
-    PathRemoveFileSpec(path);
-    CString exePath(path);
+    std::wstring path = Settings::AppDir();
+    CString exePath(path.c_str());
     exePath.Append(L"\\3RVX.exe");
 
     CRegKey rk;

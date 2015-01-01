@@ -34,11 +34,7 @@ CSettingsUIApp::CSettingsUIApp() {
 
 
 // The one and only CSettingsUIApp object
-
 CSettingsUIApp theApp;
-
-
-// CSettingsUIApp initialization
 
 BOOL CSettingsUIApp::InitInstance() {
     // InitCommonControlsEx() is required on Windows XP if an application
@@ -51,11 +47,12 @@ BOOL CSettingsUIApp::InitInstance() {
 
     CWinApp::InitInstance();
 
-    // Create the shell manager, in case the dialog contains
-    // any shell tree view or shell list view controls.
+    /* Create the shell manager, in case the dialog contains any shell tree
+     * view or shell list view controls. */
     CShellManager *pShellManager = new CShellManager;
 
-    // Activate "Windows Native" visual manager for enabling themes in MFC controls
+    /* Activate "Windows Native" visual manager for enabling themes in MFC
+     * controls */
     CMFCVisualManager::SetDefaultManager(
         RUNTIME_CLASS(CMFCVisualManagerWindows));
 
@@ -71,7 +68,7 @@ BOOL CSettingsUIApp::InitInstance() {
     Settings *s = Settings::Instance();
     SettingsSheet settingsSheet(L"3RVX Settings");
 
-    General g(s);
+    General g;
     Display d;
 
     settingsSheet.AddPage(&g);
@@ -90,8 +87,12 @@ BOOL CSettingsUIApp::InitInstance() {
         // TODO: Place code here to handle when the dialog is
         //  dismissed with OK
     } else if (nResponse == -1) {
-        TRACE(traceAppMsg, 0, "Warning: dialog creation failed, so application is terminating unexpectedly.\n");
-        TRACE(traceAppMsg, 0, "Warning: if you are using MFC controls on the dialog, you cannot #define _AFX_NO_MFC_CONTROLS_IN_DIALOGS.\n");
+        TRACE(traceAppMsg, 0,
+            "Warning: dialog creation failed, so application is terminating " \
+            "unexpectedly.\n");
+        TRACE(traceAppMsg, 0,
+            "Warning: if you are using MFC controls on the dialog, you cannot" \
+            " #define _AFX_NO_MFC_CONTROLS_IN_DIALOGS.\n");
     }
 
     if (pShellManager != NULL) {

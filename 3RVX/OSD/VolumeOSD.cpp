@@ -101,18 +101,15 @@ void VolumeOSD::LoadSkin() {
         _mWnd.AddMeter(m);
     }
 
-    _mWnd.Update();
     HMONITOR monitor = Monitor::Default();
-    const int mWidth = Monitor::Width(monitor);
-    const int mHeight = Monitor::Height(monitor);
-    _mWnd.X(mWidth / 2 - _mWnd.Width() / 2);
-    _mWnd.Y(mHeight - _mWnd.Height() - 140);
+
+    _mWnd.Update();
+    PositionWindow(monitor, _mWnd);
 
     _muteBg = skin->OSDBgImg("mute");
     _muteWnd.BackgroundImage(_muteBg);
     _muteWnd.Update();
-    _muteWnd.X(mWidth / 2 - _muteWnd.Width() / 2);
-    _muteWnd.Y(mHeight - _muteWnd.Height() - 140);
+    PositionWindow(monitor, _muteWnd);
 
     /* Set up notification icon */
     _iconImages = skin->Iconset("volume");

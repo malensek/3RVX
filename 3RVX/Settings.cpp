@@ -131,3 +131,14 @@ std::wstring Settings::GetText(std::string elementName) {
         return StringUtils::Widen(str);
     }
 }
+
+int Settings::GetInt(std::string elementName) {
+    tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
+    if (el == NULL) {
+        return 0;
+    }
+
+    int val = 0;
+    el->QueryIntText(&val);
+    return val;
+}

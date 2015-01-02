@@ -77,7 +77,6 @@ std::wstring Settings::SkinXML(std::wstring skinName) {
     return skinXML;
 }
 
-
 std::unordered_map<int, int> Settings::Hotkeys() {
     std::unordered_map<int, int> keyMappings;
 
@@ -105,6 +104,11 @@ std::unordered_map<int, int> Settings::Hotkeys() {
     }
 
     return keyMappings;
+}
+
+bool Settings::HasSetting(std::string elementName) {
+    tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
+    return (el != NULL);
 }
 
 bool Settings::IsEnabled(std::string elementName) {

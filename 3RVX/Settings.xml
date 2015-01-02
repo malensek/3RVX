@@ -15,6 +15,7 @@
   <animationSpeed>765</animationSpeed>
 
   <position>Bottom</position>
+  <positionOffset>140</positionOffset>
   <positionX>0</positionX>
   <positionY>0</positionY>
 

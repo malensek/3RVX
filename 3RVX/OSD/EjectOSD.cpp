@@ -22,10 +22,7 @@ OSD(L"3RVX-EjectDispatcher") {
     _mWnd->VisibleDuration(800);
 
     HMONITOR monitor = Monitor::Default();
-    const int mWidth = Monitor::Width(monitor);
-    const int mHeight = Monitor::Height(monitor);
-    _mWnd->X(mWidth / 2 - _mWnd->Width() / 2);
-    _mWnd->Y(mHeight - _mWnd->Height() - 140);
+    PositionWindow(monitor, *_mWnd);
 }
 
 void EjectOSD::Hide() {

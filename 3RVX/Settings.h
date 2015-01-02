@@ -21,9 +21,13 @@ public:
     std::wstring SkinXML();
     std::wstring SkinXML(std::wstring skinName);
 
-    std::wstring GetText(std::string elementName);
-    std::unordered_map<int, int> Hotkeys();
+    bool HasSetting(std::string elementName);
     bool IsEnabled(std::string elementName);
+
+    std::wstring GetText(std::string elementName);
+    int GetInt(std::string elementName);
+
+    std::unordered_map<int, int> Hotkeys();
 
     void Reload();
 

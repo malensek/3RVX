@@ -1,6 +1,11 @@
 #include "OSD.h"
 
+#include <algorithm>
+
 #include "..\3RVX.h"
+#include "..\Monitor.h"
+
+#define DISPLAY_EDGE_OFFSET 140
 
 OSD::OSD(std::wstring className, HINSTANCE hInstance) :
 _settings(*Settings::Instance()) {
@@ -36,6 +41,56 @@ _settings(*Settings::Instance()) {
 
 void OSD::HideOthers(OSDType except = All) {
     SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEOSD, except);
+}
+
+void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
+    std::wstring pos = _settings.GetText("position");
+    if (pos == L"") {
+        pos = L"bottom";
+    }
+    std::transform(pos.begin(), pos.end(), pos.begin(), ::tolower);
+
+    const int mWidth = Monitor::Width(monitor);
+    const int mHeight = Monitor::Height(monitor);
+
+    if (pos == L"custom") {
+        int customX = _settings.GetInt("positionX");
+        int customY = _settings.GetInt("positionY");
+        mWnd.X(customX);
+        mWnd.Y(customY);
+        return;
+    }
+
+    CenterWindowX(monitor, mWnd);
+    CenterWindowY(monitor, mWnd);
+    if (pos == L"center") {
+        return;
+    }
+
+    /* We're centered. Now adjust based on top, bottom, left, or right: */
+    int offset = DISPLAY_EDGE_OFFSET;
+    if (_settings.HasSetting("positionOffset")) {
+        offset = _settings.GetInt("positionOffset");
+    }
+    if (pos == L"top") {
+        mWnd.Y(offset);
+    } else if (pos == L"bottom") {
+        mWnd.Y(mHeight - mWnd.Height() - offset);
+    } else if (pos == L"left") {
+        mWnd.X(offset);
+    } else if (pos == L"right") {
+        mWnd.X(mWidth - mWnd.Width() - offset);
+    }
+}
+
+void OSD::CenterWindowX(HMONITOR monitor, MeterWnd &mWnd) {
+    const int mWidth = Monitor::Width(monitor);
+    mWnd.X(mWidth / 2 - mWnd.Width() / 2);
+}
+
+void OSD::CenterWindowY(HMONITOR monitor, MeterWnd &mWnd) {
+    const int mHeight = Monitor::Height(monitor);
+    mWnd.Y(mHeight / 2 - mWnd.Height() / 2);
 }
 
 LRESULT CALLBACK

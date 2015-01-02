@@ -18,6 +18,9 @@ protected:
     Settings &_settings;
 
     void HideOthers(OSDType except);
+    void PositionWindow(HMONITOR monitor, MeterWnd &mWnd);
+    void CenterWindowX(HMONITOR monitor, MeterWnd &mWnd);
+    void CenterWindowY(HMONITOR monitor, MeterWnd &mWnd);
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

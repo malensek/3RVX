@@ -129,11 +129,12 @@ Skin *Settings::CurrentSkin() {
 }
 
 std::wstring Settings::SkinName() {
-    const char* skinName = _root->FirstChildElement("skin")->GetText();
-    if (skinName == NULL) {
-        return L"Default";
+    std::wstring name = GetText("skin");
+
+    if (name == L"") {
+        return DEFAULT_SKIN;
     } else {
-        return StringUtils::Widen(skinName);
+        return name;
     }
 }
 
@@ -202,7 +203,13 @@ bool Settings::IsEnabled(std::string elementName) {
 }
 
 std::wstring Settings::GetText(std::string elementName) {
-    const char* str = _root->FirstChildElement(elementName.c_str())->GetText();
+    tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
+    if (el == NULL) {
+        CLOG(L"Warning: XML element '%s' not found", elementName.c_str());
+        return L"";
+    }
+
+    const char* str = el->GetText();
     if (str == NULL) {
         return L"";
     } else {
@@ -213,6 +220,7 @@ std::wstring Settings::GetText(std::string elementName) {
 int Settings::GetInt(std::string elementName) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
+        CLOG(L"Warning: XML element '%s' not found", elementName.c_str());
         return 0;
     }
 

@@ -173,7 +173,6 @@ BEGIN_MESSAGE_MAP(General, CPropertyPage)
 END_MESSAGE_MAP()
 
 void General::OnBnClickedWebsite() {
-    SetModified(TRUE);
     ShellExecute(NULL, L"open", _url.c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 

@@ -67,6 +67,12 @@ std::wstring Settings::SettingsApp() {
 std::wstring Settings::LanguagesDir() {
     return AppDir() + L"\\" + LANG_DIR;
 }
+
+
+std::wstring Settings::AudioDeviceID() {
+    return GetText(XML_AUDIODEV);
+}
+
 std::wstring Settings::LanguageName() {
     std::wstring lang = GetText(XML_LANGUAGE);
 

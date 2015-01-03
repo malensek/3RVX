@@ -23,8 +23,11 @@ public:
     static std::wstring AppDir();
     static std::wstring SettingsApp();
 
+    std::wstring AudioDeviceID();
+
     std::wstring LanguagesDir();
     std::wstring LanguageName();
+
     enum OSDPos { Top, Bottom, Left, Right, Center, Custom };
     OSDPos OSDPosition();
     int OSDEdgeOffset();

@@ -12,6 +12,7 @@ class Skin;
 class Settings {
 public:
     static Settings *Instance();
+    void Reload();
 
     static std::wstring AppDir();
     static std::wstring SettingsApp();
@@ -23,19 +24,14 @@ public:
     std::wstring SkinXML();
     std::wstring SkinXML(std::wstring skinName);
 
-    bool HasSetting(std::string elementName);
-    bool IsEnabled(std::string elementName);
-
-    std::wstring GetText(std::string elementName);
-    int GetInt(std::string elementName);
     bool NotifyIconEnabled();
     bool SoundEffectsEnabled();
 
     std::unordered_map<int, int> Hotkeys();
 
-    void Reload();
-
 private:
+    Settings();
+
     static Settings *instance;
     static std::wstring _appDir;
 
@@ -44,5 +40,9 @@ private:
     tinyxml2::XMLElement *_root;
     Skin *_skin;
 
-    Settings();
+    bool HasSetting(std::string elementName);
+    bool IsEnabled(std::string elementName);
+
+    std::wstring GetText(std::string elementName);
+    int GetInt(std::string elementName);
 };

@@ -35,10 +35,15 @@ void General::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, BTN_WEBSITE, _website);
 }
 
+BOOL General::OnApply() {
+    return CPropertyPage::OnApply();
+}
+
 BOOL General::OnCommand(WPARAM wParam, LPARAM lParam) {
     SetModified();
     return CPropertyPage::OnCommand(wParam, lParam);
 }
+
 BOOL General::OnInitDialog() {
     CPropertyPage::OnInitDialog();
 
@@ -51,11 +56,10 @@ BOOL General::OnInitDialog() {
     }
 
     /* Update the combo box with the current skin */
-    std::wstring current = _settings->GetText("skin");
+    std::wstring current = _settings->SkinName();
     int idx = _skins.SelectString(0, current.c_str());
     if (idx == CB_ERR) {
-        current = L"Default";
-        _skins.SelectString(0, L"Default");
+        _skins.SelectString(0, DEFAULT_SKIN);
     }
     LoadSkinInfo();
 

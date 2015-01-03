@@ -14,6 +14,7 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
+    virtual BOOL OnApply();
     virtual BOOL OnInitDialog();
     virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
 

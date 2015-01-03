@@ -8,6 +8,12 @@
 class Skin;
 
 #define SETTINGS_APP L"SettingsUI.exe"
+#define LANG_DIR L"Languages"
+
+#define DEFAULT_LANGUAGE L"English"
+#define DEFAULT_OSD_OFFSET 140
+#define DEFAULT_OSD_POS OSDPos::Bottom
+#define DEFAULT_SKIN L"Default"
 
 class Settings {
 public:
@@ -19,6 +25,12 @@ public:
 
     std::wstring LanguagesDir();
     std::wstring LanguageName();
+    enum OSDPos { Top, Bottom, Left, Right, Center, Custom };
+    OSDPos OSDPosition();
+    int OSDEdgeOffset();
+    int OSDX();
+    int OSDY();
+
     Skin *CurrentSkin();
     std::wstring SkinName();
     std::wstring SkinXML();

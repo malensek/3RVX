@@ -76,6 +76,48 @@ std::wstring Settings::LanguageName() {
         return lang;
     }
 }
+
+int Settings::OSDEdgeOffset() {
+    if (HasSetting(XML_OSD_OFFSET)) {
+        return GetInt(XML_OSD_OFFSET);
+    } else {
+        return DEFAULT_OSD_OFFSET;
+    }
+}
+
+Settings::OSDPos Settings::OSDPosition() {
+    std::wstring pos = GetText(XML_OSD_POS);
+    if (pos == L"") {
+        return DEFAULT_OSD_POS;
+    }
+
+    std::transform(pos.begin(), pos.end(), pos.begin(), ::tolower);
+    if (pos == L"top") {
+        return Top;
+    } else if (pos == L"bottom") {
+        return Bottom;
+    } else if (pos == L"left") {
+        return Left;
+    } else if (pos == L"right") {
+        return Right;
+    } else if (pos == L"center") {
+        return Center;
+    } else if (pos == L"custom") {
+        return Custom;
+    }
+
+    /* Default: */
+    return DEFAULT_OSD_POS;
+}
+
+int Settings::OSDX() {
+    return GetInt(XML_OSD_X);
+}
+
+int Settings::OSDY() {
+    return GetInt(XML_OSD_Y);
+}
+
 Skin *Settings::CurrentSkin() {
     return _skin;
 }

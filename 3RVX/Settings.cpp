@@ -116,6 +116,14 @@ std::unordered_map<int, int> Settings::Hotkeys() {
     return keyMappings;
 }
 
+bool Settings::NotifyIconEnabled() {
+    return IsEnabled(XML_NOTIFYICON);
+}
+
+bool Settings::SoundEffectsEnabled() {
+    return IsEnabled(XML_SOUNDS);
+}
+
 bool Settings::HasSetting(std::string elementName) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     return (el != NULL);

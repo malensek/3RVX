@@ -26,6 +26,8 @@ public:
 
     std::wstring GetText(std::string elementName);
     int GetInt(std::string elementName);
+    bool NotifyIconEnabled();
+    bool SoundEffectsEnabled();
 
     std::unordered_map<int, int> Hotkeys();
 

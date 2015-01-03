@@ -3,7 +3,7 @@
   <skin>Yosemitesque</skin>
   <language>English</language>
 
-  <audioDevice></audioDevice>
+  <audioDeviceID></audioDeviceID>
 
   <notifyIcon>true</notifyIcon>
   <soundEffects>true</soundEffects>
@@ -14,10 +14,10 @@
   <hideAnimation>Fade</hideAnimation>
   <animationSpeed>765</animationSpeed>
 
-  <position>Bottom</position>
-  <positionOffset>140</positionOffset>
-  <positionX>0</positionX>
-  <positionY>0</positionY>
+  <osdPosition>Bottom</osdPosition>
+  <osdEdgeOffset>140</osdEdgeOffset>
+  <osdX>0</osdX>
+  <osdY>0</osdY>
 
   <hotkeys>
     <hotkey combination="524296">

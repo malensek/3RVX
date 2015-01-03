@@ -1,11 +1,21 @@
 #include "Settings.h"
 
 #include <Shlwapi.h>
+#include <algorithm>
 
 #include "HotkeyActions.h"
 #include "Logger.h"
 #include "Skin.h"
 #include "StringUtils.h"
+
+#define XML_AUDIODEV "audioDeviceID"
+#define XML_LANGUAGE "language"
+#define XML_NOTIFYICON "notifyIcon"
+#define XML_OSD_OFFSET "osdEdgeOffset"
+#define XML_OSD_POS "osdPosition"
+#define XML_OSD_X "osdX"
+#define XML_OSD_Y "osdY"
+#define XML_SOUNDS "soundEffects"
 
 std::wstring Settings::_appDir(L"");
 Settings *Settings::instance;

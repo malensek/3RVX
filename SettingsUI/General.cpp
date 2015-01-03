@@ -151,8 +151,8 @@ void General::LoadSkinInfo() {
 }
 
 void General::LoadSettings() {
-    _notify.SetCheck(_settings->IsEnabled("notifyIcon"));
-    _sounds.SetCheck(_settings->IsEnabled("soundEffects"));
+    _notify.SetCheck(_settings->NotifyIconEnabled());
+    _sounds.SetCheck(_settings->SoundEffectsEnabled());
 }
 
 void General::EnableRunOnStartup() {

@@ -21,7 +21,7 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 
     /* Start the volume controller */
     _volumeCtrl = new CoreAudio(_hWnd);
-    std::wstring device = _settings.GetText("audioDevice");
+    std::wstring device = _settings.AudioDeviceID();
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
 

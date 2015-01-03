@@ -44,18 +44,11 @@ void OSD::HideOthers(OSDType except = All) {
 }
 
 void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
-    std::wstring pos = _settings.GetText("position");
-    if (pos == L"") {
-        pos = L"bottom";
-    }
-    std::transform(pos.begin(), pos.end(), pos.begin(), ::tolower);
+    Settings::OSDPos pos = _settings.OSDPosition();
 
-    const int mWidth = Monitor::Width(monitor);
-    const int mHeight = Monitor::Height(monitor);
-
-    if (pos == L"custom") {
-        int customX = _settings.GetInt("positionX");
-        int customY = _settings.GetInt("positionY");
+    if (pos == Settings::OSDPos::Custom) {
+        int customX = _settings.OSDX();
+        int customY = _settings.OSDY();
         mWnd.X(customX);
         mWnd.Y(customY);
         return;
@@ -63,23 +56,31 @@ void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
 
     CenterWindowX(monitor, mWnd);
     CenterWindowY(monitor, mWnd);
-    if (pos == L"center") {
+    if (pos == Settings::OSDPos::Center) {
         return;
     }
 
     /* We're centered. Now adjust based on top, bottom, left, or right: */
-    int offset = DISPLAY_EDGE_OFFSET;
-    if (_settings.HasSetting("positionOffset")) {
-        offset = _settings.GetInt("positionOffset");
-    }
-    if (pos == L"top") {
+    const int mWidth = Monitor::Width(monitor);
+    const int mHeight = Monitor::Height(monitor);
+    int offset = _settings.OSDEdgeOffset();
+
+    switch (pos) {
+    case Settings::Top:
         mWnd.Y(offset);
-    } else if (pos == L"bottom") {
+        break;
+
+    case Settings::Bottom:
         mWnd.Y(mHeight - mWnd.Height() - offset);
-    } else if (pos == L"left") {
+        break;
+
+    case Settings::Left:
         mWnd.X(offset);
-    } else if (pos == L"right") {
+        break;
+
+    case Settings::Right:
         mWnd.X(mWidth - mWnd.Width() - offset);
+        break;
     }
 }
 

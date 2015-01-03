@@ -16,6 +16,8 @@ public:
     static std::wstring AppDir();
     static std::wstring SettingsApp();
 
+    std::wstring LanguagesDir();
+    std::wstring LanguageName();
     Skin *CurrentSkin();
     std::wstring SkinName();
     std::wstring SkinXML();

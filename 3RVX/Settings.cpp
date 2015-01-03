@@ -64,6 +64,18 @@ std::wstring Settings::SettingsApp() {
     return Settings::AppDir() + L"\\" + SETTINGS_APP;
 }
 
+std::wstring Settings::LanguagesDir() {
+    return AppDir() + L"\\" + LANG_DIR;
+}
+std::wstring Settings::LanguageName() {
+    std::wstring lang = GetText(XML_LANGUAGE);
+
+    if (lang == L"") {
+        return DEFAULT_LANGUAGE;
+    } else {
+        return lang;
+    }
+}
 Skin *Settings::CurrentSkin() {
     return _skin;
 }

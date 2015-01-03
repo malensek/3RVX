@@ -16,8 +16,8 @@ _settings(Settings::Instance()) {
 
 }
 
-General::~General()
-{
+General::~General() {
+
 }
 
 void General::DoDataExchange(CDataExchange* pDX)
@@ -35,6 +35,10 @@ void General::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, BTN_WEBSITE, _website);
 }
 
+BOOL General::OnCommand(WPARAM wParam, LPARAM lParam) {
+    SetModified();
+    return CPropertyPage::OnCommand(wParam, lParam);
+}
 BOOL General::OnInitDialog() {
     CPropertyPage::OnInitDialog();
 

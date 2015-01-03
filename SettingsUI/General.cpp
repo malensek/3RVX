@@ -74,11 +74,12 @@ BOOL General::OnInitDialog() {
     }
 
     /* Populate the language box */
-    std::list<CString> languages = FindLanguages(L"../3RVX/Languages");
+    std::list<CString> languages = FindLanguages(
+        _settings->LanguagesDir().c_str());
     for (CString language : languages) {
         _lang.AddString(language);
     }
-    std::wstring currentLang = _settings->GetText("language");
+    std::wstring currentLang = _settings->LanguageName();
     _lang.SelectString(0, currentLang.c_str());
 
     return TRUE;

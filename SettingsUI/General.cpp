@@ -37,7 +37,12 @@ void General::DoDataExchange(CDataExchange* pDX)
 }
 
 BOOL General::OnApply() {
-    RunOnStartup(_startup.GetCheck() == 1);
+    Settings *settings = Settings::Instance();
+    RunOnStartup(CHECKED(_startup));
+    settings->NotifyIconEnabled(CHECKED(_notify));
+
+    int result = settings->Save();
+    OutputDebugString(std::to_wstring(result).c_str());
     return CPropertyPage::OnApply();
 }
 
@@ -59,7 +64,7 @@ void General::LoadSettings() {
     }
 
     /* Update the combo box with the current skin */
-    std::wstring current = Settings::Instance()->SkinName();
+    std::wstring current = settings->SkinName();
     int idx = _skins.SelectString(0, current.c_str());
     if (idx == CB_ERR) {
         _skins.SelectString(0, DEFAULT_SKIN);
@@ -68,13 +73,18 @@ void General::LoadSettings() {
 
     /* Populate the language box */
     std::list<CString> languages = FindLanguages(
-        Settings::Instance()->LanguagesDir().c_str());
+        settings->LanguagesDir().c_str());
+
     for (CString language : languages) {
         _lang.AddString(language);
     }
-    std::wstring currentLang = Settings::Instance()->LanguageName();
+    std::wstring currentLang = settings->LanguageName();
     _lang.SelectString(0, currentLang.c_str());
+}
 
+BOOL General::OnInitDialog() {
+    CPropertyPage::OnInitDialog();
+    LoadSettings();
     return TRUE;
 }
 

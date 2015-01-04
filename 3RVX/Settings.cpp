@@ -178,7 +178,7 @@ std::unordered_map<int, int> Settings::Hotkeys() {
 }
 
 bool Settings::NotifyIconEnabled() {
-    return IsEnabled(XML_NOTIFYICON);
+    return GetEnabled(XML_NOTIFYICON);
 }
 
 void Settings::NotifyIconEnabled(bool enable) {
@@ -186,7 +186,7 @@ void Settings::NotifyIconEnabled(bool enable) {
 }
 
 bool Settings::SoundEffectsEnabled() {
-    return IsEnabled(XML_SOUNDS);
+    return GetEnabled(XML_SOUNDS);
 }
 
 bool Settings::HasSetting(std::string elementName) {
@@ -194,7 +194,7 @@ bool Settings::HasSetting(std::string elementName) {
     return (el != NULL);
 }
 
-bool Settings::IsEnabled(std::string elementName) {
+bool Settings::GetEnabled(std::string elementName) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
         CLOG(L"Warning: XML element '%s' not found", elementName.c_str());

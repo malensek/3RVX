@@ -21,7 +21,7 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 
     /* Start the volume controller */
     _volumeCtrl = new CoreAudio(_hWnd);
-    std::wstring device = _settings.AudioDeviceID();
+    std::wstring device = Settings::Instance()->AudioDeviceID();
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
 
@@ -91,7 +91,7 @@ void VolumeOSD::UpdateDeviceMenu() {
 }
 
 void VolumeOSD::LoadSkin() {
-    Skin *skin = _settings.CurrentSkin();
+    Skin *skin = Settings::Instance()->CurrentSkin();
 
     Gdiplus::Bitmap *bg = skin->OSDBgImg("volume");
     _mWnd.BackgroundImage(bg);

@@ -7,8 +7,7 @@
 
 #define DISPLAY_EDGE_OFFSET 140
 
-OSD::OSD(std::wstring className, HINSTANCE hInstance) :
-_settings(*Settings::Instance()) {
+OSD::OSD(std::wstring className, HINSTANCE hInstance) {
 
     if (hInstance == NULL) {
         hInstance = (HINSTANCE) GetModuleHandle(NULL);
@@ -44,11 +43,11 @@ void OSD::HideOthers(OSDType except = All) {
 }
 
 void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
-    Settings::OSDPos pos = _settings.OSDPosition();
+    Settings::OSDPos pos = Settings::Instance()->OSDPosition();
 
     if (pos == Settings::OSDPos::Custom) {
-        int customX = _settings.OSDX();
-        int customY = _settings.OSDY();
+        int customX = Settings::Instance()->OSDX();
+        int customY = Settings::Instance()->OSDY();
         mWnd.X(customX);
         mWnd.Y(customY);
         return;
@@ -63,7 +62,7 @@ void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
     /* We're centered. Now adjust based on top, bottom, left, or right: */
     const int mWidth = Monitor::Width(monitor);
     const int mHeight = Monitor::Height(monitor);
-    int offset = _settings.OSDEdgeOffset();
+    int offset = Settings::Instance()->OSDEdgeOffset();
 
     switch (pos) {
     case Settings::Top:

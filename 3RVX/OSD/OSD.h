@@ -15,7 +15,6 @@ public:
 protected:
     HWND _hWnd;
     HWND _masterWnd;
-    Settings &_settings;
 
     void HideOthers(OSDType except);
     void PositionWindow(HMONITOR monitor, MeterWnd &mWnd);

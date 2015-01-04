@@ -9,7 +9,7 @@ EjectOSD::EjectOSD() :
 OSD(L"3RVX-EjectDispatcher") {
     _mWnd = new MeterWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD");
 
-    Skin *skin = _settings.CurrentSkin();
+    Skin *skin = Settings::Instance()->CurrentSkin();
 
     if (skin->HasOSD("eject") == false) {
         return;

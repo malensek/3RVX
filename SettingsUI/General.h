@@ -21,7 +21,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
-    Settings *_settings;
     std::wstring _url;
 
     void LoadSettings();

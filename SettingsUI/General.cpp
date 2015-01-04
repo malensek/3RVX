@@ -11,8 +11,7 @@
 IMPLEMENT_DYNAMIC(General, CPropertyPage)
 
 General::General() :
-CPropertyPage(General::IDD),
-_settings(Settings::Instance()) {
+CPropertyPage(General::IDD) {
 
 }
 
@@ -56,7 +55,7 @@ BOOL General::OnInitDialog() {
     }
 
     /* Update the combo box with the current skin */
-    std::wstring current = _settings->SkinName();
+    std::wstring current = Settings::Instance()->SkinName();
     int idx = _skins.SelectString(0, current.c_str());
     if (idx == CB_ERR) {
         _skins.SelectString(0, DEFAULT_SKIN);
@@ -79,11 +78,11 @@ BOOL General::OnInitDialog() {
 
     /* Populate the language box */
     std::list<CString> languages = FindLanguages(
-        _settings->LanguagesDir().c_str());
+        Settings::Instance()->LanguagesDir().c_str());
     for (CString language : languages) {
         _lang.AddString(language);
     }
-    std::wstring currentLang = _settings->LanguageName();
+    std::wstring currentLang = Settings::Instance()->LanguageName();
     _lang.SelectString(0, currentLang.c_str());
 
     return TRUE;
@@ -143,7 +142,8 @@ void General::LoadSkinInfo() {
     int selIdx = _skins.GetCurSel();
     _skins.GetLBText(selIdx, selectedSkin);
 
-    std::wstring skinXML = _settings->SkinXML((LPCWSTR) selectedSkin);
+    std::wstring skinXML
+        = Settings::Instance()->SkinXML((LPCWSTR) selectedSkin);
     SkinInfo s(skinXML);
 
     CString authorText(L"Author:");
@@ -156,8 +156,8 @@ void General::LoadSkinInfo() {
 }
 
 void General::LoadSettings() {
-    _notify.SetCheck(_settings->NotifyIconEnabled());
-    _sounds.SetCheck(_settings->SoundEffectsEnabled());
+    _notify.SetCheck(Settings::Instance()->NotifyIconEnabled());
+    _sounds.SetCheck(Settings::Instance()->SoundEffectsEnabled());
 }
 
 void General::EnableRunOnStartup() {

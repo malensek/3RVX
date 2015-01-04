@@ -44,10 +44,11 @@ BOOL General::OnCommand(WPARAM wParam, LPARAM lParam) {
     return CPropertyPage::OnCommand(wParam, lParam);
 }
 
-BOOL General::OnInitDialog() {
-    CPropertyPage::OnInitDialog();
-
-    LoadSettings();
+void General::LoadSettings() {
+    Settings *settings = Settings::Instance();
+    _startup.SetCheck(RunOnStartup());
+    _notify.SetCheck(settings->NotifyIconEnabled());
+    _sounds.SetCheck(settings->SoundEffectsEnabled());
 
     /* Determine which skins are available */
     std::list<CString> skins = FindSkins(L"../3RVX/Skins");
@@ -141,13 +142,6 @@ void General::LoadSkinInfo() {
     _url = s.URL();
     _website.EnableWindow((_url != L""));
 }
-
-void General::LoadSettings() {
-    _startup.SetCheck(RunOnStartup());
-    _notify.SetCheck(Settings::Instance()->NotifyIconEnabled());
-    _sounds.SetCheck(Settings::Instance()->SoundEffectsEnabled());
-}
-
 bool General::RunOnStartup() {
     CRegKey rk;
     int result = rk.Open(HKEY_CURRENT_USER, STARTUP_KEY, KEY_READ);

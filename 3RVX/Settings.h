@@ -40,6 +40,7 @@ public:
     std::wstring SkinXML(std::wstring skinName);
 
     bool NotifyIconEnabled();
+    void NotifyIconEnabled(bool enable);
     bool SoundEffectsEnabled();
 
     std::unordered_map<int, int> Hotkeys();

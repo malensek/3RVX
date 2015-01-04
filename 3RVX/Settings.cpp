@@ -181,6 +181,10 @@ bool Settings::NotifyIconEnabled() {
     return IsEnabled(XML_NOTIFYICON);
 }
 
+void Settings::NotifyIconEnabled(bool enable) {
+    SetEnabled(XML_NOTIFYICON, enable);
+}
+
 bool Settings::SoundEffectsEnabled() {
     return IsEnabled(XML_SOUNDS);
 }

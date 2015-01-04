@@ -58,8 +58,11 @@ private:
 
     bool HasSetting(std::string elementName);
     bool IsEnabled(std::string elementName);
+    void SetEnabled(std::string elementName, bool enabled);
 
     std::wstring GetText(std::string elementName);
+    void SetText(std::string elementName, std::string text);
     int GetInt(std::string elementName);
+    void SetInt(std::string elementName, int value);
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 };

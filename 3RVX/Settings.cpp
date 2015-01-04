@@ -206,6 +206,11 @@ bool Settings::IsEnabled(std::string elementName) {
     }
 }
 
+void Settings::SetEnabled(std::string elementName, bool enabled) {
+    tinyxml2::XMLElement *el = GetOrCreateElement(elementName);
+    el->SetText(enabled ? "true" : "false");
+}
+
 std::wstring Settings::GetText(std::string elementName) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
@@ -221,6 +226,11 @@ std::wstring Settings::GetText(std::string elementName) {
     }
 }
 
+void Settings::SetText(std::string elementName, std::string text) {
+    tinyxml2::XMLElement *el = GetOrCreateElement(elementName);
+    el->SetText(text.c_str());
+}
+
 int Settings::GetInt(std::string elementName) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
@@ -231,6 +241,11 @@ int Settings::GetInt(std::string elementName) {
     int val = 0;
     el->QueryIntText(&val);
     return val;
+}
+
+void Settings::SetInt(std::string elementName, int value) {
+    tinyxml2::XMLElement *el = GetOrCreateElement(elementName);
+    el->SetText(value);
 }
 
 tinyxml2::XMLElement *Settings::GetOrCreateElement(std::string elementName) {

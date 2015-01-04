@@ -232,3 +232,12 @@ int Settings::GetInt(std::string elementName) {
     el->QueryIntText(&val);
     return val;
 }
+
+tinyxml2::XMLElement *Settings::GetOrCreateElement(std::string elementName) {
+    tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
+    if (el == NULL) {
+        el = _xml.NewElement(elementName.c_str());
+        _root->InsertEndChild(el);
+    }
+    return el;
+}

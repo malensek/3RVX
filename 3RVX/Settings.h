@@ -61,4 +61,5 @@ private:
 
     std::wstring GetText(std::string elementName);
     int GetInt(std::string elementName);
+    tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 };

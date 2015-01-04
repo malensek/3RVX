@@ -5,7 +5,7 @@
 
 #include "../3RVX/SkinInfo.h"
 
-#define KEY_NAME L"3RVXv3"
+#define KEY_NAME L"3RVX"
 #define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
 IMPLEMENT_DYNAMIC(General, CPropertyPage)
@@ -35,6 +35,7 @@ void General::DoDataExchange(CDataExchange* pDX)
 }
 
 BOOL General::OnApply() {
+    RunOnStartup(_startup.GetCheck() == 1);
     return CPropertyPage::OnApply();
 }
 
@@ -61,20 +62,6 @@ BOOL General::OnInitDialog() {
         _skins.SelectString(0, DEFAULT_SKIN);
     }
     LoadSkinInfo();
-
-    /* Are we set to run on startup in the registry? */
-    CRegKey rk;
-    int result = rk.Open(HKEY_CURRENT_USER, STARTUP_KEY, KEY_READ);
-    if (result == ERROR_SUCCESS) {
-        CString str;
-        ULONG bufLen = 1024;
-        LPTSTR buf = str.GetBufferSetLength(bufLen);
-
-        int queryResult = rk.QueryStringValue(KEY_NAME, buf, &bufLen);
-        if (queryResult == ERROR_SUCCESS) {
-            _startup.SetCheck(true);
-        }
-    }
 
     /* Populate the language box */
     std::list<CString> languages = FindLanguages(
@@ -156,11 +143,28 @@ void General::LoadSkinInfo() {
 }
 
 void General::LoadSettings() {
+    _startup.SetCheck(RunOnStartup());
     _notify.SetCheck(Settings::Instance()->NotifyIconEnabled());
     _sounds.SetCheck(Settings::Instance()->SoundEffectsEnabled());
 }
 
-void General::EnableRunOnStartup() {
+bool General::RunOnStartup() {
+    CRegKey rk;
+    int result = rk.Open(HKEY_CURRENT_USER, STARTUP_KEY, KEY_READ);
+    if (result == ERROR_SUCCESS) {
+        CString str;
+        ULONG bufLen = 1024;
+        LPTSTR buf = str.GetBufferSetLength(bufLen);
+
+        int queryResult = rk.QueryStringValue(KEY_NAME, buf, &bufLen);
+        if (queryResult == ERROR_SUCCESS) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void General::RunOnStartup(bool enable) {
     std::wstring path = Settings::AppDir();
     CString exePath(path.c_str());
     exePath.Append(L"\\3RVX.exe");
@@ -168,7 +172,11 @@ void General::EnableRunOnStartup() {
     CRegKey rk;
     int result = rk.Open(HKEY_CURRENT_USER, STARTUP_KEY, KEY_WRITE);
     if (result == ERROR_SUCCESS) {
-        rk.SetStringValue(KEY_NAME, exePath, REG_SZ);
+        if (enable) {
+            rk.SetStringValue(KEY_NAME, exePath, REG_SZ);
+        } else {
+            rk.DeleteValue(KEY_NAME);
+        }
     }
 }
 

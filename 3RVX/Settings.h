@@ -19,6 +19,7 @@ class Settings {
 public:
     static Settings *Instance();
     void Reload();
+    int Save();
 
     static std::wstring AppDir();
     static std::wstring SettingsApp();

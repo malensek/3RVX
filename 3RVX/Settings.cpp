@@ -50,6 +50,18 @@ void Settings::Reload() {
     _skin = new Skin(SkinXML());
 }
 
+int Settings::Save() {
+    FILE *stream;
+    errno_t err = _wfopen_s(&stream, _file.c_str(), L"w");
+    if (err != 0) {
+        CLOG(L"Could not open settings file for writing!");
+        return 100 + err;
+    }
+    tinyxml2::XMLError result = _xml.SaveFile(stream);
+    fclose(stream);
+    return result;
+}
+
 std::wstring Settings::AppDir() {
     if (_appDir.empty()) {
         wchar_t path[MAX_PATH];

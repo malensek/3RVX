@@ -33,10 +33,10 @@ Settings *Settings::Instance() {
 }
 
 void Settings::Reload() {
-    std::wstring file = AppDir() + L"\\Settings.xml";
-    CLOG(L"Loading settings file: %s", file.c_str());
+    _file = AppDir() + L"\\Settings.xml";
+    CLOG(L"Loading settings file: %s", _file.c_str());
 
-    std::string u8FileName = StringUtils::Narrow(file);
+    std::string u8FileName = StringUtils::Narrow(_file);
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
         throw std::runtime_error("Failed to parse XML file");

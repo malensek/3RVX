@@ -5,8 +5,9 @@
 
 #include "Error.h"
 #include "MeterWnd/Meters/MeterTypes.h"
+#include "MiscUtils.h"
 #include "StringUtils.h"
-#include "Slider\SliderKnob.h"
+#include "Slider/SliderKnob.h"
 
 bool Skin::HasOSD(char *osdName) {
     return (OSDXMLElement(osdName) != NULL);
@@ -168,7 +169,7 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     std::wstring img;
     if (type != "text") {
         img = ImageName(meterXMLElement);
-        if (FileExists(img) == false) {
+        if (MiscUtils::FileExists(img) == false) {
             Error::ErrorMessageDie(SKINERR_NOTFOUND, img);
         }
     }
@@ -303,7 +304,7 @@ SliderKnob *Skin::Knob(char *controllerName) {
     }
 
     std::wstring img = ImageName(slider);
-    if (FileExists(img) == false) {
+    if (MiscUtils::FileExists(img) == false) {
         Error::ErrorMessageDie(SKINERR_NOTFOUND, img);
     }
 
@@ -360,11 +361,4 @@ tinyxml2::XMLElement *Skin::SliderXMLElement(char *controllerName) {
         .FirstChildElement(controllerName)
         .ToElement();
     return controller;
-}
-
-bool Skin::FileExists(std::wstring fileName) {
-    DWORD attr = GetFileAttributes(fileName.c_str());
-    return (attr != INVALID_FILE_ATTRIBUTES
-        && !(attr & FILE_ATTRIBUTE_DIRECTORY)
-        && GetLastError() != ERROR_FILE_NOT_FOUND);
 }

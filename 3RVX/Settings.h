@@ -36,6 +36,7 @@ public:
     int OSDY();
 
     Skin *CurrentSkin();
+    bool CurrentSkin(std::wstring skinName);
     std::wstring SkinName();
     std::wstring SkinXML();
     std::wstring SkinXML(std::wstring skinName);

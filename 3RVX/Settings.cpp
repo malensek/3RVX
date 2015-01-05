@@ -5,6 +5,7 @@
 
 #include "HotkeyActions.h"
 #include "Logger.h"
+#include "MiscUtils.h"
 #include "Skin.h"
 #include "StringUtils.h"
 
@@ -15,6 +16,7 @@
 #define XML_OSD_POS "osdPosition"
 #define XML_OSD_X "osdX"
 #define XML_OSD_Y "osdY"
+#define XML_SKIN "skin"
 #define XML_SOUNDS "soundEffects"
 
 std::wstring Settings::_appDir(L"");
@@ -80,7 +82,6 @@ std::wstring Settings::LanguagesDir() {
     return AppDir() + L"\\" + LANG_DIR;
 }
 
-
 std::wstring Settings::AudioDeviceID() {
     return GetText(XML_AUDIODEV);
 }
@@ -138,6 +139,17 @@ int Settings::OSDY() {
 
 Skin *Settings::CurrentSkin() {
     return _skin;
+}
+
+bool Settings::CurrentSkin(std::wstring skinName) {
+    std::string name = StringUtils::Narrow(skinName);
+    std::wstring xml = SkinXML(skinName);
+    if (MiscUtils::FileExists(xml) == false) {
+        return false;
+    }
+
+    SetText(XML_SKIN, name);
+    return true;
 }
 
 std::wstring Settings::SkinName() {

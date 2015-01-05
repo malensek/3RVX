@@ -51,6 +51,12 @@
     <ClInclude Include="..\3RVX\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\3RVX\MiscUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hotkeys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SettingsUI.cpp">
@@ -81,6 +87,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\3RVX\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3RVX\MiscUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hotkeys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

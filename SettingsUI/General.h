@@ -1,6 +1,7 @@
 #pragma once
 #include "afxwin.h"
-#include "../3RVX/Settings.h"
+
+#include <list>
 
 class General : public CPropertyPage
 {

@@ -3,7 +3,8 @@
 #include "General.h"
 #include "afxdialogex.h"
 
-#include "../3RVX/SkinInfo.h"
+#include "Settings.h"
+#include "SkinInfo.h"
 
 #define KEY_NAME L"3RVX"
 #define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"
@@ -40,6 +41,12 @@ BOOL General::OnApply() {
     Settings *settings = Settings::Instance();
     RunOnStartup(CHECKED(_startup));
     settings->NotifyIconEnabled(CHECKED(_notify));
+    settings->SoundEffectsEnabled(CHECKED(_sounds));
+
+    int skinIdx = _skins.GetCurSel();
+    CString skinName;
+    _skins.GetLBText(skinIdx, skinName);
+    settings->CurrentSkin((LPCWSTR) skinName);
 
     int result = settings->Save();
     OutputDebugString(std::to_wstring(result).c_str());

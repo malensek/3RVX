@@ -201,6 +201,10 @@ bool Settings::SoundEffectsEnabled() {
     return GetEnabled(XML_SOUNDS);
 }
 
+void Settings::SoundEffectsEnabled(bool enable) {
+    SetEnabled(XML_SOUNDS, enable);
+}
+
 bool Settings::HasSetting(std::string elementName) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     return (el != NULL);

@@ -43,6 +43,7 @@ public:
     bool NotifyIconEnabled();
     void NotifyIconEnabled(bool enable);
     bool SoundEffectsEnabled();
+    void SoundEffectsEnabled(bool enable);
 
     std::unordered_map<int, int> Hotkeys();
 

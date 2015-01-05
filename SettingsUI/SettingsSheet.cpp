@@ -7,6 +7,7 @@ IMPLEMENT_DYNAMIC(SettingsSheet, CPropertySheet)
 SettingsSheet::SettingsSheet(
     UINT nIDCaption, CWnd* pParentWnd, UINT iSelectPage) :
 CPropertySheet(nIDCaption, pParentWnd, iSelectPage) {
+
 }
 
 SettingsSheet::SettingsSheet(LPCTSTR pszCaption, CWnd* pParentWnd, UINT iSelectPage)
@@ -14,13 +15,11 @@ SettingsSheet::SettingsSheet(LPCTSTR pszCaption, CWnd* pParentWnd, UINT iSelectP
 
 }
 
-SettingsSheet::~SettingsSheet()
-{
+SettingsSheet::~SettingsSheet() {
 }
 
 BOOL SettingsSheet::OnInitDialog() {
     CPropertySheet::OnInitDialog();
-
     return TRUE;
 }
 

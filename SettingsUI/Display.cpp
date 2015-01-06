@@ -42,6 +42,18 @@ BOOL Display::OnInitDialog() {
 
 BEGIN_MESSAGE_MAP(Display, CPropertyPage)
 END_MESSAGE_MAP()void Display::OnCbnSelchangePosition() {
+void Display::OnDeltaposDelay(NMHDR *pNMHDR, LRESULT *pResult) {
+    LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+    pNMUpDown->iDelta *= 100;
+    *pResult = 0;
+}
+
+
+void Display::OnDeltaposSpeed(NMHDR *pNMHDR, LRESULT *pResult) {
+    LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+    pNMUpDown->iDelta *= 100;
+    *pResult = 0;
+}
     int selIdx = _position.GetCurSel();
     CString selected;
     _position.GetLBText(selIdx, selected);

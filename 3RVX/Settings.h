@@ -29,7 +29,7 @@ public:
     std::wstring LanguagesDir();
     std::wstring LanguageName();
 
-    enum OSDPos { Top, Bottom, Left, Right, Center, Custom };
+    enum OSDPos { Top, Left, Right, Bottom, Center, Custom };
     bool AlwaysOnTop();
     bool HideFullscreen();
     OSDPos OSDPosition();

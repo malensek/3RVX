@@ -37,6 +37,8 @@ public:
     int OSDX();
     int OSDY();
 
+    enum HideAnimation { None, Fade };
+    HideAnimation HideAnimation();
     int HideDelay();
     int HideSpeed();
 

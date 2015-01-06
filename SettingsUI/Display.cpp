@@ -27,10 +27,13 @@ void Display::DoDataExchange(CDataExchange* pDX) {
     DDX_Control(pDX, LBL_CUSTOMY, _lbY);
     DDX_Control(pDX, ED_CUSTOMX, _customX);
     DDX_Control(pDX, ED_CUSTOMY, _customY);
+    DDX_Control(pDX, ED_DELAY, _delay);
+    DDX_Control(pDX, ED_SPEED, _speed);
+    DDX_Control(pDX, CMB_ANIMATION, _animation);
+    DDX_Control(pDX, CMB_MONITOR, _monitor);
 }
 
 BOOL Display::OnApply() {
-    MessageBox(std::to_wstring(_spinDelay.GetPos32()).c_str());
     return CPropertyPage::OnApply();
 }
 

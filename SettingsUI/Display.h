@@ -20,9 +20,6 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
-public:
-    afx_msg void OnDeltaposDelay(NMHDR *pNMHDR, LRESULT *pResult);
-    afx_msg void OnDeltaposSpeed(NMHDR *pNMHDR, LRESULT *pResult);
 private:
     CButton _onTop;
     CButton _fullscreen;
@@ -33,6 +30,12 @@ private:
     CStatic _lbY;
     CEdit _customX;
     CEdit _customY;
-public:
+    CEdit _delay;
+    CEdit _speed;
+    CComboBox _animation;
+
+    afx_msg void OnDeltaposDelay(NMHDR *pNMHDR, LRESULT *pResult);
+    afx_msg void OnDeltaposSpeed(NMHDR *pNMHDR, LRESULT *pResult);
     afx_msg void OnCbnSelchangePosition();
+    CComboBox _monitor;
 };

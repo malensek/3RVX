@@ -12,6 +12,7 @@
 #define XML_AUDIODEV "audioDeviceID"
 #define XML_LANGUAGE "language"
 #define XML_NOTIFYICON "notifyIcon"
+#define XML_ONTOP "onTop"
 #define XML_OSD_OFFSET "osdEdgeOffset"
 #define XML_OSD_POS "osdPosition"
 #define XML_OSD_X "osdX"
@@ -96,6 +97,9 @@ std::wstring Settings::LanguageName() {
     }
 }
 
+bool Settings::AlwaysOnTop() {
+    return GetEnabled(XML_ONTOP);
+}
 int Settings::OSDEdgeOffset() {
     if (HasSetting(XML_OSD_OFFSET)) {
         return GetInt(XML_OSD_OFFSET);

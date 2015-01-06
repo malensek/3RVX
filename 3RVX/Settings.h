@@ -30,6 +30,7 @@ public:
     std::wstring LanguageName();
 
     enum OSDPos { Top, Bottom, Left, Right, Center, Custom };
+    bool AlwaysOnTop();
     OSDPos OSDPosition();
     int OSDEdgeOffset();
     int OSDX();

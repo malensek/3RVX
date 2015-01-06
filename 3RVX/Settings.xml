@@ -10,9 +10,9 @@
   <onTop>true</onTop>
   <hideFullscreen>true</hideFullscreen>
 
-  <hideDelay>800</hideDelay>
   <hideAnimation>Fade</hideAnimation>
-  <animationSpeed>765</animationSpeed>
+  <hideDelay>800</hideDelay>
+  <hideSpeed>765</hideSpeed>
 
   <osdPosition>Bottom</osdPosition>
   <osdEdgeOffset>140</osdEdgeOffset>

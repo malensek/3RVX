@@ -9,6 +9,7 @@
 #include <string>
 
 #include "../3RVX/TinyXml2/tinyxml2.h"
+#define CHECKED(checkbox) { (checkbox.GetCheck() == 1) ? true : false }
 
 class CSettingsUIApp : public CWinApp {
 public:

@@ -9,8 +9,6 @@
 #define KEY_NAME L"3RVX"
 #define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
-#define CHECKED(checkbox) { (checkbox.GetCheck() == 1) ? true : false }
-
 IMPLEMENT_DYNAMIC(General, CPropertyPage)
 
 General::General() :

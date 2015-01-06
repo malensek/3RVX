@@ -38,6 +38,8 @@ public:
     int OSDY();
 
     int HideDelay();
+    int HideSpeed();
+
     Skin *CurrentSkin();
     bool CurrentSkin(std::wstring skinName);
     std::wstring SkinName();

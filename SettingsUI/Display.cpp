@@ -3,6 +3,9 @@
 #include "Display.h"
 #include "afxdialogex.h"
 
+#define MIN_MS USER_TIMER_MINIMUM
+#define MAX_MS 60000
+
 IMPLEMENT_DYNAMIC(Display, CPropertyPage)
 
 Display::Display() :
@@ -27,6 +30,7 @@ void Display::DoDataExchange(CDataExchange* pDX) {
 }
 
 BOOL Display::OnApply() {
+    MessageBox(std::to_wstring(_spinDelay.GetPos32()).c_str());
     return CPropertyPage::OnApply();
 }
 
@@ -51,7 +55,11 @@ BOOL Display::OnInitDialog() {
 }
 
 BEGIN_MESSAGE_MAP(Display, CPropertyPage)
-END_MESSAGE_MAP()void Display::OnCbnSelchangePosition() {
+    ON_NOTIFY(UDN_DELTAPOS, SP_DELAY, &Display::OnDeltaposDelay)
+    ON_NOTIFY(UDN_DELTAPOS, SP_SPEED, &Display::OnDeltaposSpeed)
+    ON_CBN_SELCHANGE(CMB_POSITION, &Display::OnCbnSelchangePosition)
+END_MESSAGE_MAP()
+
 void Display::OnDeltaposDelay(NMHDR *pNMHDR, LRESULT *pResult) {
     LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
     pNMUpDown->iDelta *= 100;
@@ -64,6 +72,8 @@ void Display::OnDeltaposSpeed(NMHDR *pNMHDR, LRESULT *pResult) {
     pNMUpDown->iDelta *= 100;
     *pResult = 0;
 }
+
+void Display::OnCbnSelchangePosition() {
     int selIdx = _position.GetCurSel();
     CString selected;
     _position.GetLBText(selIdx, selected);

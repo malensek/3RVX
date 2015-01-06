@@ -31,6 +31,7 @@ public:
 
     enum OSDPos { Top, Bottom, Left, Right, Center, Custom };
     bool AlwaysOnTop();
+    bool HideFullscreen();
     OSDPos OSDPosition();
     int OSDEdgeOffset();
     int OSDX();

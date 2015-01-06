@@ -10,6 +10,7 @@
 #include "StringUtils.h"
 
 #define XML_AUDIODEV "audioDeviceID"
+#define XML_HIDEFULL "hideFullscreen"
 #define XML_LANGUAGE "language"
 #define XML_NOTIFYICON "notifyIcon"
 #define XML_ONTOP "onTop"
@@ -100,6 +101,11 @@ std::wstring Settings::LanguageName() {
 bool Settings::AlwaysOnTop() {
     return GetEnabled(XML_ONTOP);
 }
+
+bool Settings::HideFullscreen() {
+    return GetEnabled(XML_HIDEFULL);
+}
+
 int Settings::OSDEdgeOffset() {
     if (HasSetting(XML_OSD_OFFSET)) {
         return GetInt(XML_OSD_OFFSET);

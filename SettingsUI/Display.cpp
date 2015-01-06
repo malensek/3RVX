@@ -37,6 +37,16 @@ BOOL Display::OnCommand(WPARAM wParam, LPARAM lParam) {
 
 BOOL Display::OnInitDialog() {
     CPropertyPage::OnInitDialog();
+
+    _position.AddString(L"Top");
+    _position.AddString(L"Left");
+    _position.AddString(L"Right");
+    _position.AddString(L"Bottom");
+    _position.AddString(L"Center");
+    _position.AddString(L"Custom");
+
+    _spinDelay.SetRange32(MIN_MS, MAX_MS);
+    _spinSpeed.SetRange32(MIN_MS, MAX_MS);
     return TRUE;
 }
 

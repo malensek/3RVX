@@ -41,4 +41,13 @@ BOOL Display::OnInitDialog() {
 }
 
 BEGIN_MESSAGE_MAP(Display, CPropertyPage)
-END_MESSAGE_MAP()
+END_MESSAGE_MAP()void Display::OnCbnSelchangePosition() {
+    int selIdx = _position.GetCurSel();
+    CString selected;
+    _position.GetLBText(selIdx, selected);
+    BOOL isCustom = (selected == L"Custom");
+    _lbX.EnableWindow(isCustom);
+    _lbY.EnableWindow(isCustom);
+    _customX.EnableWindow(isCustom);
+    _customY.EnableWindow(isCustom);
+}

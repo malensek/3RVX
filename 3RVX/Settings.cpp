@@ -11,6 +11,7 @@
 
 #define XML_AUDIODEV "audioDeviceID"
 #define XML_HIDEFULL "hideFullscreen"
+#define XML_HIDETIME "hideDelay"
 #define XML_LANGUAGE "language"
 #define XML_NOTIFYICON "notifyIcon"
 #define XML_ONTOP "onTop"
@@ -151,6 +152,9 @@ Skin *Settings::CurrentSkin() {
     return _skin;
 }
 
+int Settings::HideDelay() {
+    return GetInt(XML_HIDETIME);
+}
 bool Settings::CurrentSkin(std::wstring skinName) {
     std::string name = StringUtils::Narrow(skinName);
     std::wstring xml = SkinXML(skinName);

@@ -24,8 +24,20 @@ RECT Monitor::Rect(HMONITOR monitor) {
 }
 
 MONITORINFO Monitor::Info(HMONITOR monitor) {
-    MONITORINFO mInfo;
+    MONITORINFO mInfo = {};
     mInfo.cbSize = sizeof(MONITORINFO);
     GetMonitorInfo(monitor, &mInfo);
     return mInfo;
+}
+
+std::list<DISPLAY_DEVICE> Monitor::ListAllDevices() {
+    std::list<DISPLAY_DEVICE> devs;
+    DISPLAY_DEVICE dev = {};
+    dev.cb = sizeof(DISPLAY_DEVICE);
+    for (int i = 0; EnumDisplayDevices(NULL, i, &dev, NULL) != 0; ++i) {
+        if ((dev.StateFlags & DISPLAY_DEVICE_ACTIVE) == DISPLAY_DEVICE_ACTIVE) {
+            devs.push_back(dev);
+        }
+    }
+    return devs;
 }

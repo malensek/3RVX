@@ -1,5 +1,6 @@
 #pragma once
 #include "afxwin.h"
+#include "afxcmn.h"
 
 class Display : public CPropertyPage
 {
@@ -19,6 +20,19 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
+public:
+    afx_msg void OnDeltaposDelay(NMHDR *pNMHDR, LRESULT *pResult);
+    afx_msg void OnDeltaposSpeed(NMHDR *pNMHDR, LRESULT *pResult);
 private:
     CButton _onTop;
+    CButton _fullscreen;
+    CSpinButtonCtrl _spinDelay;
+    CSpinButtonCtrl _spinSpeed;
+    CComboBox _position;
+    CStatic _lbX;
+    CStatic _lbY;
+    CEdit _customX;
+    CEdit _customY;
+public:
+    afx_msg void OnCbnSelchangePosition();
 };

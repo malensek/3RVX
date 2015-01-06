@@ -16,6 +16,14 @@ Display::~Display() {
 void Display::DoDataExchange(CDataExchange* pDX) {
     CPropertyPage::DoDataExchange(pDX);
     DDX_Control(pDX, CHK_ONTOP, _onTop);
+    DDX_Control(pDX, SP_DELAY, _spinDelay);
+    DDX_Control(pDX, SP_SPEED, _spinSpeed);
+    DDX_Control(pDX, CHK_FULLSCREEN, _fullscreen);
+    DDX_Control(pDX, CMB_POSITION, _position);
+    DDX_Control(pDX, LBL_CUSTOMX, _lbX);
+    DDX_Control(pDX, LBL_CUSTOMY, _lbY);
+    DDX_Control(pDX, ED_CUSTOMX, _customX);
+    DDX_Control(pDX, ED_CUSTOMY, _customY);
 }
 
 BOOL Display::OnApply() {

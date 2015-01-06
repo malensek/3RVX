@@ -3,6 +3,9 @@
 #include "Display.h"
 #include "afxdialogex.h"
 
+#include "Monitor.h"
+#include "Settings.h"
+
 #define MIN_MS USER_TIMER_MINIMUM
 #define MAX_MS 60000
 
@@ -45,15 +48,42 @@ BOOL Display::OnCommand(WPARAM wParam, LPARAM lParam) {
 BOOL Display::OnInitDialog() {
     CPropertyPage::OnInitDialog();
 
+    Settings *settings = Settings::Instance();
+
+    _onTop.SetCheck(settings->AlwaysOnTop());
+    _fullscreen.SetCheck(settings->HideFullscreen());
+
     _position.AddString(L"Top");
     _position.AddString(L"Left");
     _position.AddString(L"Right");
     _position.AddString(L"Bottom");
     _position.AddString(L"Center");
     _position.AddString(L"Custom");
+    Settings::OSDPos position = settings->OSDPosition();
+    _position.SetCurSel((int) position);
+
+    _customX.SetWindowText(std::to_wstring(settings->OSDX()).c_str());
+    _customY.SetWindowText(std::to_wstring(settings->OSDY()).c_str());
+
+    _monitor.AddString(L"Default");
+    std::list<DISPLAY_DEVICE> devices = Monitor::ListAll();
+    for (DISPLAY_DEVICE dev : devices) {
+        MessageBox(dev.DeviceString);
+    }
+
+    _animation.AddString(L"None");
+    _animation.AddString(L"Fade");
 
     _spinDelay.SetRange32(MIN_MS, MAX_MS);
+    int delay = settings->HideDelay();
+    std::wstring delayStr = std::to_wstring(delay);
+    _delay.SetWindowTextW(delayStr.c_str());
+
     _spinSpeed.SetRange32(MIN_MS, MAX_MS);
+    int speed = settings->HideSpeed();
+    std::wstring speedStr = std::to_wstring(speed);
+    _speed.SetWindowTextW(speedStr.c_str());
+
     return TRUE;
 }
 

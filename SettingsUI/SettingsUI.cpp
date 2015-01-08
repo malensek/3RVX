@@ -4,8 +4,9 @@
 #include "SettingsUI.h"
 #include "SettingsSheet.h"
 
-#include "General.h"
+#include "About.h"
 #include "Display.h"
+#include "General.h"
 #include "Hotkeys.h"
 
 #ifdef _DEBUG
@@ -48,10 +49,12 @@ BOOL CSettingsUIApp::InitInstance() {
     General g;
     Display d;
     Hotkeys h;
+    About a;
 
     settingsSheet.AddPage(&g);
     settingsSheet.AddPage(&d);
     settingsSheet.AddPage(&h);
+    settingsSheet.AddPage(&a);
 
     /* Disable help for the PropertySheet and its pages */
     settingsSheet.m_psh.dwFlags &= ~(PSH_HASHELP);

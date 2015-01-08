@@ -10,9 +10,10 @@ class Skin;
 #define SETTINGS_APP L"SettingsUI.exe"
 #define LANG_DIR L"Languages"
 
+#define DEFAULT_HIDE_ANIM Settings::HideAnim::Fade
 #define DEFAULT_LANGUAGE L"English"
 #define DEFAULT_OSD_OFFSET 140
-#define DEFAULT_OSD_POS OSDPos::Bottom
+#define DEFAULT_OSD_POS Settings::OSDPos::Bottom
 #define DEFAULT_SKIN L"Default"
 
 class Settings {

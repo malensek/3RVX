@@ -50,18 +50,18 @@ BOOL Display::OnInitDialog() {
 
     Settings *settings = Settings::Instance();
 
+    /* Visibility Settings */
     _onTop.SetCheck(settings->AlwaysOnTop());
     _fullscreen.SetCheck(settings->HideFullscreen());
 
-    _position.AddString(L"Top");
-    _position.AddString(L"Left");
-    _position.AddString(L"Right");
-    _position.AddString(L"Bottom");
-    _position.AddString(L"Center");
-    _position.AddString(L"Custom");
+    /* Position on Screen*/
+    for (std::wstring pos : settings->OSDPosNames) {
+        CString positionName = UIUtils::Capitalize(pos);
+        _position.AddString(positionName);
+    }
     Settings::OSDPos position = settings->OSDPosition();
     _position.SetCurSel((int) position);
-
+    OnCbnSelchangePosition();
     _customX.SetWindowText(std::to_wstring(settings->OSDX()).c_str());
     _customY.SetWindowText(std::to_wstring(settings->OSDY()).c_str());
 

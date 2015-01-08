@@ -109,10 +109,17 @@ bool Settings::AlwaysOnTop() {
     return GetEnabled(XML_ONTOP);
 }
 
+void Settings::AlwaysOnTop(bool enable) {
+    SetEnabled(XML_ONTOP, enable);
+}
+
 bool Settings::HideFullscreen() {
     return GetEnabled(XML_HIDE_WHENFULL);
 }
 
+void Settings::HideFullscreen(bool enable) {
+    SetEnabled(XML_HIDE_WHENFULL, enable);
+}
 int Settings::OSDEdgeOffset() {
     if (HasSetting(XML_OSD_OFFSET)) {
         return GetInt(XML_OSD_OFFSET);

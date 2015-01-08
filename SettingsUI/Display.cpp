@@ -6,6 +6,8 @@
 #include "Monitor.h"
 #include "Settings.h"
 
+#define MIN_EDGE -65535
+#define MAX_EDGE 65535
 #define MIN_MS USER_TIMER_MINIMUM
 #define MAX_MS 60000
 
@@ -118,11 +120,17 @@ BOOL Display::OnInitDialog() {
     Settings::OSDPos position = settings->OSDPosition();
     _position.SetCurSel((int) position);
     OnCbnSelchangePosition();
+    _customEdge.SetRange32(MIN_EDGE, MAX_EDGE);
     _customX.SetWindowText(std::to_wstring(settings->OSDX()).c_str());
     _customY.SetWindowText(std::to_wstring(settings->OSDY()).c_str());
 
     _monitor.AddString(L"Default");
     std::list<DISPLAY_DEVICE> devices = Monitor::ListAll();
+    _useCustomEdge.SetCheck(settings->OSDEdgeOffset() != DEFAULT_OSD_OFFSET);
+    int edge = settings->OSDEdgeOffset();
+    std::wstring edgeStr = std::to_wstring(edge);
+    _edgeEdit.SetWindowTextW(edgeStr.c_str());
+    OnBnClickedEdge();
     for (DISPLAY_DEVICE dev : devices) {
         MessageBox(dev.DeviceString);
     }
@@ -172,4 +180,9 @@ void Display::OnCbnSelchangePosition() {
     _lbY.EnableWindow(isCustom);
     _customX.EnableWindow(isCustom);
     _customY.EnableWindow(isCustom);
+}
+
+void Display::OnBnClickedEdge() {
+    _customEdge.EnableWindow(CHECKED(_useCustomEdge));
+    _edgeEdit.EnableWindow(CHECKED(_useCustomEdge));
 }

@@ -31,6 +31,7 @@ public:
     std::wstring LanguageName();
 
     enum OSDPos { Top, Left, Right, Bottom, Center, Custom };
+    static std::vector<std::wstring> OSDPosNames;
     bool AlwaysOnTop();
     bool HideFullscreen();
     OSDPos OSDPosition();

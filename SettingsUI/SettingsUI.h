@@ -6,7 +6,7 @@
 
 #include "resource.h"		// main symbols
 
-#define CHECKED(checkbox) { (checkbox.GetCheck() == 1) ? true : false }
+#include "UIUtils.h"
 
 class CSettingsUIApp : public CWinApp {
 public:

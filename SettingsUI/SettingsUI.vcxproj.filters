@@ -60,6 +60,9 @@
     <ClInclude Include="..\3RVX\Monitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UIUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SettingsUI.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\3RVX\Monitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

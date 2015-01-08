@@ -117,6 +117,7 @@
     <ClInclude Include="SettingsUI.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UIUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\Logger.cpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="SettingsSheet.cpp" />
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="UIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SettingsUI.rc" />

@@ -50,17 +50,8 @@ BOOL Display::OnApply() {
     Settings::OSDPos pos = (Settings::OSDPos) _position.GetCurSel();
     settings->OSDPosition(pos);
     if (pos == Settings::OSDPos::Custom) {
-        int x, y;
-
-        CString xText;
-        _customX.GetWindowTextW(xText);
-        std::wistringstream wistrx((LPCWSTR) xText);
-        wistrx >> x;
-
-        CString yText;
-        _customY.GetWindowTextW(yText);
-        std::wistringstream wistry((LPCWSTR) yText);
-        wistry >> y;
+        int x = UIUtils::TextToInt(_customX);
+        int y = UIUtils::TextToInt(_customY);
 
         settings->OSDX(x);
         settings->OSDY(y);

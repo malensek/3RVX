@@ -124,19 +124,34 @@ BOOL Display::OnInitDialog() {
     _customX.SetWindowText(std::to_wstring(settings->OSDX()).c_str());
     _customY.SetWindowText(std::to_wstring(settings->OSDY()).c_str());
 
-    _monitor.AddString(L"Default");
-    std::list<DISPLAY_DEVICE> devices = Monitor::ListAll();
     _useCustomEdge.SetCheck(settings->OSDEdgeOffset() != DEFAULT_OSD_OFFSET);
     int edge = settings->OSDEdgeOffset();
     std::wstring edgeStr = std::to_wstring(edge);
     _edgeEdit.SetWindowTextW(edgeStr.c_str());
     OnBnClickedEdge();
-    for (DISPLAY_DEVICE dev : devices) {
-        MessageBox(dev.DeviceString);
-    }
 
-    _animation.AddString(L"None");
-    _animation.AddString(L"Fade");
+    _monitor.AddString(L"Primary Monitor");
+    _monitor.AddString(L"All Monitors");
+    std::list<DISPLAY_DEVICE> devices = Monitor::ListAllDevices();
+    for (DISPLAY_DEVICE dev : devices) {
+        std::wstring devString(dev.DeviceName);
+        _monitor.AddString(devString.c_str());
+    }
+    std::wstring monitorName = settings->Monitor();
+    if (monitorName == L"") {
+        monitorName = L"Primary Monitor";
+    } else if (monitorName == L"*") {
+        monitorName = L"All Monitors";
+    }
+    _monitor.SelectString(0, monitorName.c_str());
+
+    /* Animation Settings */
+    for (std::wstring anim : settings->HideAnimNames) {
+        CString animName = UIUtils::Capitalize(anim);
+        _animation.AddString(animName);
+    }
+    Settings::HideAnim hAnim = settings->HideAnimation();
+    _animation.SetCurSel((int) hAnim);
 
     _spinDelay.SetRange32(MIN_MS, MAX_MS);
     int delay = settings->HideDelay();

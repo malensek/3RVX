@@ -38,4 +38,8 @@ private:
     afx_msg void OnDeltaposSpeed(NMHDR *pNMHDR, LRESULT *pResult);
     afx_msg void OnCbnSelchangePosition();
     CComboBox _monitor;
+    CSpinButtonCtrl _customEdge;
+    CButton _useCustomEdge;
+    CEdit _edgeEdit;
+    afx_msg void OnBnClickedEdge();
 };

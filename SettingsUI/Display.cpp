@@ -34,9 +34,65 @@ void Display::DoDataExchange(CDataExchange* pDX) {
     DDX_Control(pDX, ED_SPEED, _speed);
     DDX_Control(pDX, CMB_ANIMATION, _animation);
     DDX_Control(pDX, CMB_MONITOR, _monitor);
+    DDX_Control(pDX, SP_EDGE, _customEdge);
+    DDX_Control(pDX, CHK_EDGE, _useCustomEdge);
+    DDX_Control(pDX, ED_EDGE, _edgeEdit);
 }
 
 BOOL Display::OnApply() {
+    Settings *settings = Settings::Instance();
+
+    settings->AlwaysOnTop(CHECKED(_onTop));
+    settings->HideFullscreen(CHECKED(_fullscreen));
+
+    Settings::OSDPos pos = (Settings::OSDPos) _position.GetCurSel();
+    settings->OSDPosition(pos);
+    if (pos == Settings::OSDPos::Custom) {
+        int x, y;
+
+        CString xText;
+        _customX.GetWindowTextW(xText);
+        std::wistringstream wistrx((LPCWSTR) xText);
+        wistrx >> x;
+
+        CString yText;
+        _customY.GetWindowTextW(yText);
+        std::wistringstream wistry((LPCWSTR) yText);
+        wistry >> y;
+
+        settings->OSDX(x);
+        settings->OSDY(y);
+    }
+    
+    if (CHECKED(_useCustomEdge)) {
+        int edge = UIUtils::TextToInt(_edgeEdit);
+        settings->OSDEdgeOffset(edge);
+    } else {
+        /* We have to write the default here, just in case somebody unchecked
+         * the checkbox. */
+        settings->OSDEdgeOffset(DEFAULT_OSD_OFFSET);
+    }
+
+    int monitorIdx = _monitor.GetCurSel();
+    CString monitorStr;
+    _monitor.GetLBText(monitorIdx, monitorStr);
+    if (monitorIdx == 0) {
+        monitorStr = L"";
+    } else if (monitorIdx == 1) {
+        monitorStr = L"*";
+    }
+    settings->Monitor((LPCWSTR) monitorStr);
+
+    int hideAnimIdx = _animation.GetCurSel();
+    settings->HideAnimation((Settings::HideAnim) hideAnimIdx);
+
+    int hideDelay = UIUtils::TextToInt(_delay);
+    settings->HideDelay(hideDelay);
+
+    int hideSpeed = UIUtils::TextToInt(_speed);
+    settings->HideSpeed(hideSpeed);
+
+    settings->Save();
     return CPropertyPage::OnApply();
 }
 
@@ -91,6 +147,7 @@ BEGIN_MESSAGE_MAP(Display, CPropertyPage)
     ON_NOTIFY(UDN_DELTAPOS, SP_DELAY, &Display::OnDeltaposDelay)
     ON_NOTIFY(UDN_DELTAPOS, SP_SPEED, &Display::OnDeltaposSpeed)
     ON_CBN_SELCHANGE(CMB_POSITION, &Display::OnCbnSelchangePosition)
+    ON_BN_CLICKED(CHK_EDGE, &Display::OnBnClickedEdge)
 END_MESSAGE_MAP()
 
 void Display::OnDeltaposDelay(NMHDR *pNMHDR, LRESULT *pResult) {

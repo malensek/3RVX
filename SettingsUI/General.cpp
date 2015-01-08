@@ -46,8 +46,6 @@ BOOL General::OnApply() {
     _skins.GetLBText(skinIdx, skinName);
     settings->CurrentSkin((LPCWSTR) skinName);
 
-    int result = settings->Save();
-    OutputDebugString(std::to_wstring(result).c_str());
     return CPropertyPage::OnApply();
 }
 

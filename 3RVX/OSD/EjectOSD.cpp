@@ -21,7 +21,7 @@ OSD(L"3RVX-EjectDispatcher") {
 
     _mWnd->VisibleDuration(800);
 
-    HMONITOR monitor = Monitor::Default();
+    HMONITOR monitor = Monitor::Primary();
     PositionWindow(monitor, *_mWnd);
 }
 
@@ -31,11 +31,18 @@ void EjectOSD::Hide() {
 
 LRESULT
 EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    if (message == WM_DEVICECHANGE) {
-        if (wParam == DBT_DEVICEREMOVECOMPLETE) {
-            CLOG(L"Device removal notification received");
-            HideOthers(Eject);
-            _mWnd->Show();
+    if (message == WM_DEVICECHANGE
+        && wParam == DBT_DEVICEREMOVECOMPLETE) {
+
+        CLOG(L"Device removal notification received");
+        PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR) lParam;
+        if (lpdb->dbch_devicetype == DBT_DEVTYP_VOLUME) {
+            PDEV_BROADCAST_VOLUME lpdbv = (PDEV_BROADCAST_VOLUME) lpdb;
+            if (lpdbv->dbcv_flags & DBTF_MEDIA) {
+                CLOG(L"Media volume has been removed: eject notification");
+                HideOthers(Eject);
+                _mWnd->Show();
+            }
         }
     }
 

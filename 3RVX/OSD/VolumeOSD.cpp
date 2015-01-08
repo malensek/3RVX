@@ -101,7 +101,7 @@ void VolumeOSD::LoadSkin() {
         _mWnd.AddMeter(m);
     }
 
-    HMONITOR monitor = Monitor::Default();
+    HMONITOR monitor = Monitor::Primary();
 
     _mWnd.Update();
     PositionWindow(monitor, _mWnd);

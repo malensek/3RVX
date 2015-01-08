@@ -120,26 +120,14 @@ int Settings::OSDEdgeOffset() {
 
 Settings::OSDPos Settings::OSDPosition() {
     std::wstring pos = GetText(XML_OSD_POS);
-    if (pos == L"") {
-        return DEFAULT_OSD_POS;
-    }
-
     std::transform(pos.begin(), pos.end(), pos.begin(), ::tolower);
-    if (pos == L"top") {
-        return Top;
-    } else if (pos == L"bottom") {
-        return Bottom;
-    } else if (pos == L"left") {
-        return Left;
-    } else if (pos == L"right") {
-        return Right;
-    } else if (pos == L"center") {
-        return Center;
-    } else if (pos == L"custom") {
-        return Custom;
+
+    for (unsigned int i = 0; i < OSDPosNames.size(); ++i) {
+        if (pos == OSDPosNames[i]) {
+            return (Settings::OSDPos) i;
+        }
     }
 
-    /* Default: */
     return DEFAULT_OSD_POS;
 }
 

@@ -15,6 +15,7 @@
 #define XML_HIDETIME "hideDelay"
 #define XML_HIDESPEED "hideSpeed"
 #define XML_LANGUAGE "language"
+#define XML_MONITOR "monitor"
 #define XML_NOTIFYICON "notifyIcon"
 #define XML_ONTOP "onTop"
 #define XML_OSD_OFFSET "osdEdgeOffset"
@@ -120,6 +121,15 @@ bool Settings::HideFullscreen() {
 void Settings::HideFullscreen(bool enable) {
     SetEnabled(XML_HIDE_WHENFULL, enable);
 }
+
+std::wstring Settings::Monitor() {
+    return GetText(XML_MONITOR);
+}
+
+void Settings::Monitor(std::wstring monitorName) {
+    SetText(XML_MONITOR, StringUtils::Narrow(monitorName));
+}
+
 int Settings::OSDEdgeOffset() {
     if (HasSetting(XML_OSD_OFFSET)) {
         return GetInt(XML_OSD_OFFSET);

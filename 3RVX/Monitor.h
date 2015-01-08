@@ -3,7 +3,7 @@
 
 class Monitor {
 public:
-    static HMONITOR Default();
+    static HMONITOR Primary();
     static MONITORINFO Info(HMONITOR monitor);
     static const int Width(HMONITOR monitor);
     static const int Height(HMONITOR monitor);

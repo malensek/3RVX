@@ -1,7 +1,7 @@
 #include "Monitor.h"
 
-HMONITOR Monitor::Default() {
-    /* The Default or 'Main' monitor is at (0, 0). */
+HMONITOR Monitor::Primary() {
+    /* The Primary or 'Main' monitor is at (0, 0). */
     const POINT p = { 0, 0 };
     HMONITOR monitor = MonitorFromPoint(p, MONITOR_DEFAULTTOPRIMARY);
     return monitor;
@@ -35,7 +35,7 @@ std::list<DISPLAY_DEVICE> Monitor::ListAllDevices() {
     DISPLAY_DEVICE dev = {};
     dev.cb = sizeof(DISPLAY_DEVICE);
     for (int i = 0; EnumDisplayDevices(NULL, i, &dev, NULL) != 0; ++i) {
-        if ((dev.StateFlags & DISPLAY_DEVICE_ACTIVE) == DISPLAY_DEVICE_ACTIVE) {
+        if (dev.StateFlags & DISPLAY_DEVICE_ACTIVE) {
             devs.push_back(dev);
         }
     }

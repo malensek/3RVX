@@ -10,7 +10,7 @@
 #include "StringUtils.h"
 
 #define XML_AUDIODEV "audioDeviceID"
-#define XML_HIDEFULL "hideFullscreen"
+#define XML_HIDE_WHENFULL "hideFullscreen"
 #define XML_HIDETIME "hideDelay"
 #define XML_HIDESPEED "hideSpeed"
 #define XML_LANGUAGE "language"
@@ -105,7 +105,7 @@ bool Settings::AlwaysOnTop() {
 }
 
 bool Settings::HideFullscreen() {
-    return GetEnabled(XML_HIDEFULL);
+    return GetEnabled(XML_HIDE_WHENFULL);
 }
 
 int Settings::OSDEdgeOffset() {

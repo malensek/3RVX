@@ -39,14 +39,23 @@ public:
     std::wstring LanguagesDir();
     std::wstring LanguageName();
 
+    std::wstring Monitor();
+    void Monitor(std::wstring monitorName);
+
     enum OSDPos { Top, Left, Right, Bottom, Center, Custom };
     static std::vector<std::wstring> OSDPosNames;
     bool AlwaysOnTop();
+    void AlwaysOnTop(bool enable);
     bool HideFullscreen();
+    void HideFullscreen(bool enable);
     OSDPos OSDPosition();
+    void OSDPosition(OSDPos pos);
     int OSDEdgeOffset();
+    void OSDEdgeOffset(int offset);
     int OSDX();
+    void OSDX(int x);
     int OSDY();
+    void OSDY(int y);
 
     Skin *CurrentSkin();
     bool CurrentSkin(std::wstring skinName);

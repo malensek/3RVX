@@ -121,6 +121,10 @@ int Settings::OSDEdgeOffset() {
     }
 }
 
+void Settings::OSDEdgeOffset(int offset) {
+    SetInt(XML_OSD_OFFSET, offset);
+}
+
 Settings::OSDPos Settings::OSDPosition() {
     std::wstring pos = GetText(XML_OSD_POS);
     std::transform(pos.begin(), pos.end(), pos.begin(), ::tolower);
@@ -134,12 +138,25 @@ Settings::OSDPos Settings::OSDPosition() {
     return DEFAULT_OSD_POS;
 }
 
+void Settings::OSDPosition(OSDPos pos) {
+    std::wstring posStr = OSDPosNames[(int) pos];
+    SetText(XML_OSD_POS, StringUtils::Narrow(posStr));
+}
+
 int Settings::OSDX() {
     return GetInt(XML_OSD_X);
 }
 
+void Settings::OSDX(int x) {
+    SetInt(XML_OSD_X, x);
+}
+
 int Settings::OSDY() {
     return GetInt(XML_OSD_Y);
+}
+
+void Settings::OSDY(int y) {
+    SetInt(XML_OSD_Y, y);
 }
 
 Skin *Settings::CurrentSkin() {

@@ -11,6 +11,7 @@
 
 #define XML_AUDIODEV "audioDeviceID"
 #define XML_HIDE_WHENFULL "hideFullscreen"
+#define XML_HIDEANIM "hideAnimation"
 #define XML_HIDETIME "hideDelay"
 #define XML_HIDESPEED "hideSpeed"
 #define XML_LANGUAGE "language"
@@ -28,6 +29,8 @@ Settings *Settings::instance;
 
 std::vector<std::wstring> Settings::OSDPosNames
         = { L"top", L"left", L"right", L"bottom", L"center", L"custom" };
+std::vector<std::wstring> Settings::HideAnimNames = { L"none", L"fade" };
+
 Settings::Settings() {
 
 }
@@ -143,12 +146,38 @@ Skin *Settings::CurrentSkin() {
     return _skin;
 }
 
+Settings::HideAnim Settings::HideAnimation() {
+    std::wstring anim = GetText(XML_HIDEANIM);
+    std::transform(anim.begin(), anim.end(), anim.begin(), ::tolower);
+
+    for (unsigned int i = 0; i < HideAnimNames.size(); ++i) {
+        if (anim == HideAnimNames[i]) {
+            return (Settings::HideAnim) i;
+        }
+    }
+
+    return DEFAULT_HIDE_ANIM;
+}
+
+void Settings::HideAnimation(Settings::HideAnim anim) {
+    std::wstring hideStr = HideAnimNames[(int) anim];
+    SetText(XML_HIDEANIM, StringUtils::Narrow(hideStr));
+}
+
 int Settings::HideDelay() {
     return GetInt(XML_HIDETIME);
 }
 
+void Settings::HideDelay(int delay) {
+    SetInt(XML_HIDETIME, delay);
+}
+
 int Settings::HideSpeed() {
     return GetInt(XML_HIDESPEED);
+}
+
+void Settings::HideSpeed(int speed) {
+    SetInt(XML_HIDESPEED, speed);
 }
 
 bool Settings::CurrentSkin(std::wstring skinName) {

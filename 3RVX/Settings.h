@@ -27,6 +27,15 @@ public:
 
     std::wstring AudioDeviceID();
 
+    enum HideAnim { None, Fade };
+    static std::vector<std::wstring> HideAnimNames;
+    HideAnim HideAnimation();
+    void HideAnimation(HideAnim anim);
+    int HideDelay();
+    void HideDelay(int delay);
+    int HideSpeed();
+    void HideSpeed(int speed);
+
     std::wstring LanguagesDir();
     std::wstring LanguageName();
 
@@ -38,11 +47,6 @@ public:
     int OSDEdgeOffset();
     int OSDX();
     int OSDY();
-
-    enum HideAnimation { None, Fade };
-    HideAnimation HideAnimation();
-    int HideDelay();
-    int HideSpeed();
 
     Skin *CurrentSkin();
     bool CurrentSkin(std::wstring skinName);

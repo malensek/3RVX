@@ -40,6 +40,18 @@ BOOL Hotkeys::OnInitDialog() {
 
     return TRUE;
 }
+
+void Hotkeys::SelectItem(int idx) {
+    /* First unselect the selected item (not strictly necessary in our case) */
+    int sel = _list.GetSelectionMark();
+    _list.SetItemState(sel, ~LVIS_SELECTED, LVIS_SELECTED);
+
+    /* Select the item */
+    _list.SetItemState(idx, LVIS_SELECTED, LVIS_SELECTED);
+    _list.SetSelectionMark(idx);
+
+    /* Scroll down to the item, if necessary */
+    _list.EnsureVisible(idx, FALSE);
 }
 
 BEGIN_MESSAGE_MAP(Hotkeys, CPropertyPage)

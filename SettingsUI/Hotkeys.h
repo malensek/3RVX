@@ -1,5 +1,6 @@
 #pragma once
 #include "afxwin.h"
+#include "afxcmn.h"
 
 class Hotkeys : public CPropertyPage
 {
@@ -17,6 +18,11 @@ protected:
     virtual BOOL OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()
+
+private:
+    void SelectItem(int idx);
+
+private:
     CButton _keys;
     CListCtrl _list;
     afx_msg void OnBnClickedAdd();

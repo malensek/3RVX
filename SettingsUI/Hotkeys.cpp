@@ -39,4 +39,20 @@ BOOL Hotkeys::OnInitDialog() {
 }
 
 BEGIN_MESSAGE_MAP(Hotkeys, CPropertyPage)
+    ON_BN_CLICKED(BTN_ADD, &Hotkeys::OnBnClickedAdd)
 END_MESSAGE_MAP()
+void Hotkeys::OnBnClickedAdd() {
+    int items = _list.GetItemCount();
+    for (int i = 0; i < items; ++i) {
+        if (_list.GetItemText(i, 0) == L""
+            && _list.GetItemText(i, 1) == L"") {
+            /* We found a blank item already in the list */
+            SelectItem(i);
+            return;
+        }
+    }
+
+    int idx = _list.InsertItem(items, L"");
+    _list.SetItemText(idx, 1, L"");
+    SelectItem(idx);
+}

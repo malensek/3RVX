@@ -16,7 +16,11 @@ Hotkeys::~Hotkeys() {
 
 void Hotkeys::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
+    CPropertyPage::DoDataExchange(pDX);
+    DDX_Control(pDX, LST_KEYS, _list);
+    DDX_Control(pDX, BTN_KEYS, _keys);
+}
+
 BOOL Hotkeys::OnInitDialog() {
     CPropertyPage::OnInitDialog();
 
@@ -40,7 +44,10 @@ BOOL Hotkeys::OnInitDialog() {
 
 BEGIN_MESSAGE_MAP(Hotkeys, CPropertyPage)
     ON_BN_CLICKED(BTN_ADD, &Hotkeys::OnBnClickedAdd)
+    ON_BN_CLICKED(BTN_REMOVE, &Hotkeys::OnBnClickedRemove)
+    ON_NOTIFY(LVN_ITEMCHANGED, LST_KEYS, &Hotkeys::OnLvnItemchangedKeys)
 END_MESSAGE_MAP()
+
 void Hotkeys::OnBnClickedAdd() {
     int items = _list.GetItemCount();
     for (int i = 0; i < items; ++i) {
@@ -55,4 +62,14 @@ void Hotkeys::OnBnClickedAdd() {
     int idx = _list.InsertItem(items, L"");
     _list.SetItemText(idx, 1, L"");
     SelectItem(idx);
+}
+
+void Hotkeys::OnBnClickedRemove() {
+
+}
+
+void Hotkeys::OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult) {
+    LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+    // TODO: Add your control notification handler code here
+    *pResult = 0;
 }

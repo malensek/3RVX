@@ -82,6 +82,8 @@ xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="HotkeyInfo.h" />
+    <ClInclude Include="KeyGrabber.h" />
     <ClInclude Include="MeterWnd\Meters\StaticImage.h" />
     <ClInclude Include="MeterWnd\Meters\VerticalBar.h" />
     <ClInclude Include="MiscUtils.h" />
@@ -120,6 +122,8 @@ xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
+    <ClCompile Include="HotkeyInfo.cpp" />
+    <ClCompile Include="KeyGrabber.cpp" />
     <ClCompile Include="MeterWnd\Meters\StaticImage.cpp" />
     <ClCompile Include="MeterWnd\Meters\VerticalBar.cpp" />
     <ClCompile Include="MiscUtils.cpp" />

@@ -18,6 +18,21 @@ class Skin;
 
 class Settings {
 public:
+    enum HideAnim {
+        None,
+        Fade
+    };
+
+    enum OSDPos {
+        Top,
+        Left,
+        Right,
+        Bottom,
+        Center,
+        Custom
+    };
+
+public:
     static Settings *Instance();
     void Reload();
     int Save();
@@ -27,7 +42,6 @@ public:
 
     std::wstring AudioDeviceID();
 
-    enum HideAnim { None, Fade };
     static std::vector<std::wstring> HideAnimNames;
     HideAnim HideAnimation();
     void HideAnimation(HideAnim anim);
@@ -42,7 +56,6 @@ public:
     std::wstring Monitor();
     void Monitor(std::wstring monitorName);
 
-    enum OSDPos { Top, Left, Right, Bottom, Center, Custom };
     static std::vector<std::wstring> OSDPosNames;
     bool AlwaysOnTop();
     void AlwaysOnTop(bool enable);

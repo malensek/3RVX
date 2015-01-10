@@ -28,9 +28,19 @@
 std::wstring Settings::_appDir(L"");
 Settings *Settings::instance;
 
-std::vector<std::wstring> Settings::OSDPosNames
-        = { L"top", L"left", L"right", L"bottom", L"center", L"custom" };
-std::vector<std::wstring> Settings::HideAnimNames = { L"none", L"fade" };
+std::vector<std::wstring> Settings::OSDPosNames = {
+    L"top",
+    L"left",
+    L"right",
+    L"bottom",
+    L"center",
+    L"custom",
+};
+
+std::vector<std::wstring> Settings::HideAnimNames = {
+    L"none",
+    L"fade"
+};
 
 Settings::Settings() {
 

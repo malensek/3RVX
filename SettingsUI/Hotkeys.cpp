@@ -3,6 +3,8 @@
 #include "Hotkeys.h"
 #include "afxdialogex.h"
 
+#include "KeyGrabber.h"
+
 IMPLEMENT_DYNAMIC(Hotkeys, CPropertyPage)
 
 Hotkeys::Hotkeys() :
@@ -11,7 +13,6 @@ CPropertyPage(Hotkeys::IDD) {
 }
 
 Hotkeys::~Hotkeys() {
-
 }
 
 void Hotkeys::DoDataExchange(CDataExchange* pDX)
@@ -54,10 +55,23 @@ void Hotkeys::SelectItem(int idx) {
     _list.EnsureVisible(idx, FALSE);
 }
 
+BOOL Hotkeys::PreTranslateMessage(PMSG msg) {
+    /*
+    if (msg->message == WM_KEYDOWN) {
+        wchar_t buf[255];
+        GetKeyNameText(msg->lParam, buf, 255);
+        OutputDebugString(buf);
+    }
+
+    */
+    return CPropertyPage::PreTranslateMessage(msg);
+}
+
 BEGIN_MESSAGE_MAP(Hotkeys, CPropertyPage)
     ON_BN_CLICKED(BTN_ADD, &Hotkeys::OnBnClickedAdd)
     ON_BN_CLICKED(BTN_REMOVE, &Hotkeys::OnBnClickedRemove)
     ON_NOTIFY(LVN_ITEMCHANGED, LST_KEYS, &Hotkeys::OnLvnItemchangedKeys)
+    ON_BN_CLICKED(BTN_KEYS, &Hotkeys::OnBnClickedKeys)
 END_MESSAGE_MAP()
 
 void Hotkeys::OnBnClickedAdd() {
@@ -84,4 +98,8 @@ void Hotkeys::OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult) {
     LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
     // TODO: Add your control notification handler code here
     *pResult = 0;
+}
+
+void Hotkeys::OnBnClickedKeys() {
+    KeyGrabber::Instance()->Grab(_keys.m_hWnd);
 }

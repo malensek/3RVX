@@ -16,6 +16,7 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
     virtual BOOL OnInitDialog();
+    virtual BOOL PreTranslateMessage(PMSG msg);
 
 	DECLARE_MESSAGE_MAP()
 
@@ -28,4 +29,6 @@ private:
     afx_msg void OnBnClickedAdd();
     afx_msg void OnBnClickedRemove();
     afx_msg void OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult);
+public:
+    afx_msg void OnBnClickedKeys();
 };

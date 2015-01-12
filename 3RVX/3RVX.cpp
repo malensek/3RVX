@@ -14,8 +14,6 @@
 #include "Settings.h"
 #include "Skin.h"
 
-#include "KeyGrabber.h"
-
 HANDLE mutex;
 HINSTANCE hInst;
 ULONG_PTR gdiplusToken;
@@ -124,8 +122,6 @@ void init() {
     }
 
     WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
-
-    KeyGrabber::Instance()->Grab(mainWnd);
 }
 
 HWND CreateMainWnd(HINSTANCE hInstance) {

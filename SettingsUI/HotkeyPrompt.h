@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // HotkeyPrompt dialog
@@ -11,11 +12,11 @@ public:
 	HotkeyPrompt(CWnd* pParent = NULL);   // standard constructor
 	virtual ~HotkeyPrompt();
 
-// Dialog Data
 	enum { IDD = IDD_HOTKEYPROMPT };
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    virtual BOOL OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()
 

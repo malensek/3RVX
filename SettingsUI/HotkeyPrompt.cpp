@@ -21,9 +21,10 @@ HotkeyPrompt::~HotkeyPrompt()
 {
 }
 
-void HotkeyPrompt::DoDataExchange(CDataExchange* pDX)
-{
-	CDialog::DoDataExchange(pDX);
+BOOL HotkeyPrompt::OnInitDialog() {
+    CDialog::OnInitDialog();
+    KeyGrabber::Instance()->Grab(_keys.m_hWnd);
+    return TRUE;
 }
 
 

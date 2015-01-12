@@ -76,8 +76,7 @@ std::wstring KeyGrabber::ModString(int modifiers) {
         str += L"Win + ";
     }
 
-    /* Remove the last ' + ' string before returning */
-    return str.substr(0, str.length() - 3);
+    return str;
 }
 
 std::wstring KeyGrabber::VKToString(

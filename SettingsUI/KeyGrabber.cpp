@@ -127,14 +127,9 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
         wchar_t buf[256] = {};
         GetKeyNameText(newlParam, buf, 256);
-        //OutputDebugString(std::to_wstring(kbInfo->vkCode).c_str());
         int mods = Modifiers();
-        OutputDebugString(ModString(mods).c_str());
-        OutputDebugString(L"\n");
-        OutputDebugString(buf);
-        OutputDebugString(L"---\n");
-        _str += buf;
-        SetWindowText(_updateHwnd, _str.c_str());
+        std::wstring modStr = ModString(mods) + buf;
+        SetWindowText(_updateHwnd, modStr.c_str());
     }
 
     return CallNextHookEx(NULL, nCode, wParam, lParam);

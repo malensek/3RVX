@@ -3,6 +3,7 @@
 #include "Hotkeys.h"
 #include "afxdialogex.h"
 
+#include "HotkeyPrompt.h"
 #include "KeyGrabber.h"
 
 IMPLEMENT_DYNAMIC(Hotkeys, CPropertyPage)
@@ -101,5 +102,6 @@ void Hotkeys::OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult) {
 }
 
 void Hotkeys::OnBnClickedKeys() {
-    KeyGrabber::Instance()->Grab(_keys.m_hWnd);
+    HotkeyPrompt hkp;
+    hkp.DoModal();
 }

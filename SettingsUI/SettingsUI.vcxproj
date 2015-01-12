@@ -113,6 +113,7 @@
     <ClInclude Include="About.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="General.h" />
+    <ClInclude Include="HotkeyPrompt.h" />
     <ClInclude Include="Hotkeys.h" />
     <ClInclude Include="KeyGrabber.h" />
     <ClInclude Include="Resource.h" />
@@ -134,6 +135,7 @@
     <ClCompile Include="About.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="General.cpp" />
+    <ClCompile Include="HotkeyPrompt.cpp" />
     <ClCompile Include="Hotkeys.cpp" />
     <ClCompile Include="KeyGrabber.cpp" />
     <ClCompile Include="SettingsSheet.cpp" />

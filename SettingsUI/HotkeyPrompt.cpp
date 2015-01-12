@@ -1,24 +1,19 @@
-// HotkeyPrompt.cpp : implementation file
-//
-
 #include "stdafx.h"
 #include "SettingsUI.h"
 #include "HotkeyPrompt.h"
 #include "afxdialogex.h"
 
-
-// HotkeyPrompt dialog
+#include "KeyGrabber.h"
 
 IMPLEMENT_DYNAMIC(HotkeyPrompt, CDialog)
 
-HotkeyPrompt::HotkeyPrompt(CWnd* pParent /*=NULL*/)
-	: CDialog(HotkeyPrompt::IDD, pParent)
-{
+HotkeyPrompt::HotkeyPrompt(CWnd* pParent /*=NULL*/) :
+CDialog(HotkeyPrompt::IDD, pParent) {
 
 }
 
-HotkeyPrompt::~HotkeyPrompt()
-{
+HotkeyPrompt::~HotkeyPrompt() {
+
 }
 
 BOOL HotkeyPrompt::OnInitDialog() {
@@ -27,9 +22,12 @@ BOOL HotkeyPrompt::OnInitDialog() {
     return TRUE;
 }
 
+void HotkeyPrompt::DoDataExchange(CDataExchange* pDX) {
+    CDialog::DoDataExchange(pDX);
+    DDX_Control(pDX, LBL_KEYS, _keys);
+    DDX_Control(pDX, BTN_SAVE, _save);
+}
 
 BEGIN_MESSAGE_MAP(HotkeyPrompt, CDialog)
 END_MESSAGE_MAP()
 
-
-// HotkeyPrompt message handlers

@@ -53,11 +53,11 @@ bool KeyGrabber::IsModifier(DWORD vk) {
 
 int KeyGrabber::Modifiers() {
     int mods = 0;
-    mods += (GetKeyState(VK_MENU) & 0x8000) << 1;
-    mods += (GetKeyState(VK_CONTROL) & 0x8000) << 2;
-    mods += (GetKeyState(VK_SHIFT) & 0x8000) << 3;
-    mods += (GetKeyState(VK_LWIN) & 0x8000) << 4;
-    mods += (GetKeyState(VK_RWIN) & 0x8000) << 4;
+    mods += (GetAsyncKeyState(VK_MENU) & 0x8000) << 1;
+    mods += (GetAsyncKeyState(VK_CONTROL) & 0x8000) << 2;
+    mods += (GetAsyncKeyState(VK_SHIFT) & 0x8000) << 3;
+    mods += (GetAsyncKeyState(VK_LWIN) & 0x8000) << 4;
+    mods += (GetAsyncKeyState(VK_RWIN) & 0x8000) << 4;
     return mods;
 }
 

@@ -22,8 +22,7 @@ private:
     bool IsModifier(DWORD vk);
     int Modifiers();
     std::wstring ModString(int modifiers);
-    std::wstring VKToString(unsigned int vk,
-        bool extendedKey = false, bool distinguishLeftRight = false);
+    std::wstring VKToString(unsigned int vk, bool extendedKey = false);
 
     LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
     static LRESULT CALLBACK 

@@ -79,16 +79,12 @@ std::wstring KeyGrabber::ModString(int modifiers) {
     return str;
 }
 
-std::wstring KeyGrabber::VKToString(
-    unsigned int vk, bool extendedKey, bool distinguishLeftRight) {
-
-    BOOL dontCare = distinguishLeftRight ? FALSE : TRUE;
+std::wstring KeyGrabber::VKToString(unsigned int vk, bool extendedKey) {
     int extended = extendedKey ? 0x1 : 0x0;
 
     unsigned int scanCode = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
     scanCode = scanCode << 16;
     scanCode |= extended << 24;
-    scanCode |= dontCare << 25;
     wchar_t buf[256] = {};
     GetKeyNameText(scanCode, buf, 256);
     return std::wstring(buf);

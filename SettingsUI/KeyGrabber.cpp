@@ -130,6 +130,9 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
         int mods = Modifiers();
         std::wstring modStr = ModString(mods) + buf;
         SetWindowText(_updateHwnd, modStr.c_str());
+
+        /* Prevent other applications from receiving this event */
+        return (LRESULT) 1;
     }
 
     return CallNextHookEx(NULL, nCode, wParam, lParam);

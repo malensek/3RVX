@@ -100,7 +100,7 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     }
 
-    if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+    if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
         KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT*) lParam;
 
         DWORD vk = kbInfo->vkCode;

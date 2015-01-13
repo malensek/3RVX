@@ -31,4 +31,3 @@ void HotkeyPrompt::DoDataExchange(CDataExchange* pDX) {
 
 BEGIN_MESSAGE_MAP(HotkeyPrompt, CDialog)
 END_MESSAGE_MAP()
-

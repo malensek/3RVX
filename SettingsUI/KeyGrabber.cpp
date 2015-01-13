@@ -101,7 +101,7 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
     }
 
     if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
-        KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT*) lParam;
+        KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT *) lParam;
 
         DWORD vk = kbInfo->vkCode;
         if (IsModifier(kbInfo->vkCode)) {
@@ -150,6 +150,28 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     }
 
+    unsigned int vk = 0;
+    switch (wParam) {
+    case WM_LBUTTONDOWN:
+        vk = VK_LBUTTON;
+        break;
+
+    case WM_RBUTTONDOWN:
+        vk = VK_RBUTTON;
+        break;
+
+    case WM_XBUTTONDOWN:
+        MSLLHOOKSTRUCT *msInfo = (MSLLHOOKSTRUCT *) lParam;
+        int x = HIWORD(msInfo->mouseData);
+        if (x == 1) {
+            vk = VK_XBUTTON1;
+        } else if (x == 2) {
+            vk = VK_XBUTTON2;
+        }
+    }
+    LONG newlParam;
+    wchar_t buf[256] = {};
+    GetKeyNameText(newlParam, buf, 256);
     return CallNextHookEx(NULL, nCode, wParam, lParam);
 }
 

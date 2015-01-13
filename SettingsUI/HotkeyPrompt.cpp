@@ -18,6 +18,7 @@ HotkeyPrompt::~HotkeyPrompt() {
 
 BOOL HotkeyPrompt::OnInitDialog() {
     CDialog::OnInitDialog();
+    SetWindowPos(&wndTopMost, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
     KeyGrabber::Instance()->Grab(_keys.m_hWnd);
     return TRUE;
 }

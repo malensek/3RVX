@@ -129,6 +129,12 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
         GetKeyNameText(newlParam, buf, 256);
         int mods = Modifiers();
         std::wstring modStr = ModString(mods) + buf;
+
+        if (vk == VK_ESCAPE && mods == 0) {
+            /* Pass escape through to let the user cancel the operation */
+            return CallNextHookEx(NULL, nCode, wParam, lParam);
+        }
+
         SetWindowText(_updateHwnd, modStr.c_str());
 
         /* Prevent other applications from receiving this event */

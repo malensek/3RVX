@@ -147,6 +147,8 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     }
 
     unsigned int key = 0;
+    std::wstring keyStr;
+
     switch (wParam) {
     case WM_LBUTTONDOWN:
         key = VK_LBUTTON;
@@ -156,7 +158,11 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         key = VK_RBUTTON;
         break;
 
-    case WM_XBUTTONDOWN:
+    case WM_MBUTTONDOWN:
+        key = VK_MBUTTON;
+        break;
+
+    case WM_XBUTTONDOWN: {
         MSLLHOOKSTRUCT *msInfo = (MSLLHOOKSTRUCT *) lParam;
         int x = HIWORD(msInfo->mouseData);
         if (x == 1) {
@@ -164,11 +170,22 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         } else if (x == 2) {
             key = HKM_MOUSE_XB2;
         }
+        break;
     }
 
-//    int mods = Modifiers();
-//    std::wstring modStr = ModString(mods);
+    case WM_MOUSEWHEEL:
+        short zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+        if (zDelta > 0) {
+            key = HKM_MOUSE_WHUP;
+        } else if (zDelta < 0) {
+            key = HKM_MOUSE_WHDN;
+        }
 
+        break;
+    }
+
+    int mods = Modifiers();
+    std::wstring modStr = ModString(mods);
 
     SetWindowText(_updateHwnd, modStr.c_str());
     return CallNextHookEx(NULL, nCode, wParam, lParam);

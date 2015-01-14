@@ -53,6 +53,7 @@ private:
     bool Unhook();
 
     static int Modifiers();
+    static std::wstring VKToString(unsigned int vk, bool extendedKey = false);
 
     LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
     static LRESULT CALLBACK 

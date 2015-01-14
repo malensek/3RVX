@@ -118,6 +118,16 @@ int HotkeyManager::Modifiers() {
     return mods;
 }
 
+std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
+    int extended = extendedKey ? 0x1 : 0x0;
+
+    unsigned int scanCode = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
+    scanCode = scanCode << 16;
+    scanCode |= extended << 24;
+    wchar_t buf[256] = {};
+    GetKeyNameText(scanCode, buf, 256);
+    return std::wstring(buf);
+}
 LRESULT CALLBACK
 HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {

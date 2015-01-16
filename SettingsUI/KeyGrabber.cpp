@@ -184,10 +184,12 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         break;
     }
 
-    int mods = Modifiers();
-    std::wstring modStr = ModString(mods);
+    if (key > 0) {
+        int mods = Modifiers();
+        std::wstring modStr = ModString(mods);
+        SetWindowText(_updateHwnd, modStr.c_str());
+    }
 
-    SetWindowText(_updateHwnd, modStr.c_str());
     return CallNextHookEx(NULL, nCode, wParam, lParam);
 }
 

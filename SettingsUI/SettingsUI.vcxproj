@@ -116,6 +116,7 @@
     <ClInclude Include="HotkeyPrompt.h" />
     <ClInclude Include="Hotkeys.h" />
     <ClInclude Include="KeyGrabber.h" />
+    <ClInclude Include="KeyReceiver.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SettingsSheet.h" />
     <ClInclude Include="SettingsUI.h" />
@@ -138,6 +139,7 @@
     <ClCompile Include="HotkeyPrompt.cpp" />
     <ClCompile Include="Hotkeys.cpp" />
     <ClCompile Include="KeyGrabber.cpp" />
+    <ClCompile Include="KeyReceiver.cpp" />
     <ClCompile Include="SettingsSheet.cpp" />
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="stdafx.cpp" />

@@ -118,6 +118,16 @@ int HotkeyManager::Modifiers() {
     return mods;
 }
 
+int HotkeyManager::ModifiersAsync() {
+    int mods = 0;
+    mods += (GetAsyncKeyState(VK_MENU) & 0x8000) << 1;
+    mods += (GetAsyncKeyState(VK_CONTROL) & 0x8000) << 2;
+    mods += (GetAsyncKeyState(VK_SHIFT) & 0x8000) << 3;
+    mods += (GetAsyncKeyState(VK_LWIN) & 0x8000) << 4;
+    mods += (GetAsyncKeyState(VK_RWIN) & 0x8000) << 4;
+    return mods;
+}
+
 std::wstring HotkeyManager::HotkeysToModString(int combination,
     std::wstring separator) {
 

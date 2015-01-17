@@ -33,24 +33,6 @@ void KeyGrabber::Grab(HWND hwnd) {
     Hook();
 }
 
-bool KeyGrabber::IsModifier(DWORD vk) {
-    switch (vk) {
-    case VK_MENU:
-    case VK_LMENU:
-    case VK_RMENU:
-    case VK_CONTROL:
-    case VK_LCONTROL:
-    case VK_RCONTROL:
-    case VK_SHIFT:
-    case VK_LSHIFT:
-    case VK_RSHIFT:
-    case VK_LWIN:
-    case VK_RWIN:
-        return true;
-    }
-    return false;
-}
-
 std::wstring KeyGrabber::ModString(int modifiers) {
     std::wstring str = L"";
     if (modifiers & HKM_MOD_ALT) {
@@ -90,7 +72,7 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
         KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT *) lParam;
 
         DWORD vk = kbInfo->vkCode;
-        if (IsModifier(kbInfo->vkCode)) {
+        if (HotkeyManager::IsModifier(kbInfo->vkCode)) {
             /* Ignore modifier keys */
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }

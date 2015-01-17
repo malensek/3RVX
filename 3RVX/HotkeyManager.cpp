@@ -108,6 +108,24 @@ bool HotkeyManager::Unregister(int keyCombination) {
     return true;
 }
 
+bool HotkeyManager::IsModifier(DWORD vk) {
+    switch (vk) {
+    case VK_MENU:
+    case VK_LMENU:
+    case VK_RMENU:
+    case VK_CONTROL:
+    case VK_LCONTROL:
+    case VK_RCONTROL:
+    case VK_SHIFT:
+    case VK_LSHIFT:
+    case VK_RSHIFT:
+    case VK_LWIN:
+    case VK_RWIN:
+        return true;
+    }
+    return false;
+}
+
 int HotkeyManager::Modifiers() {
     int mods = 0;
     mods += (GetKeyState(VK_MENU) & 0x8000) << 1;

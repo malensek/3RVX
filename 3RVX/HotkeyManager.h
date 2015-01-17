@@ -39,6 +39,7 @@ public:
     void Shutdown();
 
 public:
+    static bool IsModifier(DWORD vk);
     static int Modifiers();
     static int ModifiersAsync();
     static std::wstring HotkeysToModString(int combination,

@@ -38,6 +38,15 @@ public:
 
     void Shutdown();
 
+public:
+    static int Modifiers();
+    static int ModifiersAsync();
+    static std::wstring HotkeysToModString(int combination,
+        std::wstring separator = L" + ");
+    static std::wstring HotkeysToString(int combination,
+        std::wstring separator = L" + ");
+    static std::wstring VKToString(unsigned int vk, bool extendedKey = false);
+
 private:
     HotkeyManager();
     ~HotkeyManager();
@@ -51,13 +60,6 @@ private:
 
     bool Hook();
     bool Unhook();
-
-    static int Modifiers();
-    static std::wstring HotkeysToModString(int combination,
-        std::wstring separator = L" + ");
-    static std::wstring HotkeysToString(int combination,
-        std::wstring separator = L" + ");
-    static std::wstring VKToString(unsigned int vk, bool extendedKey = false);
 
     LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
     static LRESULT CALLBACK 

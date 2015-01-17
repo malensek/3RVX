@@ -20,7 +20,6 @@ private:
     bool Unhook();
 
     bool IsModifier(DWORD vk);
-    int Modifiers();
     std::wstring ModString(int modifiers);
     std::wstring VKToString(unsigned int vk, bool extendedKey = false);
 

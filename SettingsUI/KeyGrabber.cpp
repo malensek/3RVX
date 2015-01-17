@@ -51,16 +51,6 @@ bool KeyGrabber::IsModifier(DWORD vk) {
     return false;
 }
 
-int KeyGrabber::Modifiers() {
-    int mods = 0;
-    mods += (GetAsyncKeyState(VK_MENU) & 0x8000) << 1;
-    mods += (GetAsyncKeyState(VK_CONTROL) & 0x8000) << 2;
-    mods += (GetAsyncKeyState(VK_SHIFT) & 0x8000) << 3;
-    mods += (GetAsyncKeyState(VK_LWIN) & 0x8000) << 4;
-    mods += (GetAsyncKeyState(VK_RWIN) & 0x8000) << 4;
-    return mods;
-}
-
 std::wstring KeyGrabber::ModString(int modifiers) {
     std::wstring str = L"";
     if (modifiers & HKM_MOD_ALT) {

@@ -147,11 +147,13 @@ std::wstring HotkeyManager::HotkeysToModString(int combination,
 
     return str;
 }
+
 std::wstring HotkeyManager::HotkeysToString(int combination,
     std::wstring separator) {
 
     std::wstring mods = HotkeysToModString(combination, separator);
-    std::wstring str;
+    int vk = combination & 0xFF;
+    std::wstring str = VKToString(vk);
 
     return mods + str;
 }

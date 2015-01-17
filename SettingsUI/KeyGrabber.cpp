@@ -123,7 +123,7 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
         wchar_t buf[256] = {};
         GetKeyNameText(newlParam, buf, 256);
-        int mods = Modifiers();
+        int mods = HotkeyManager::ModifiersAsync();
         std::wstring modStr = ModString(mods) + buf;
 
         if (vk == VK_ESCAPE && mods == 0) {
@@ -185,7 +185,7 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     }
 
     if (key > 0) {
-        int mods = Modifiers();
+        int mods = HotkeyManager::ModifiersAsync();
         std::wstring modStr = ModString(mods);
         SetWindowText(_updateHwnd, modStr.c_str());
     }

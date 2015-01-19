@@ -33,24 +33,6 @@ void KeyGrabber::Grab(HWND hwnd) {
     Hook();
 }
 
-std::wstring KeyGrabber::ModString(int modifiers) {
-    std::wstring str = L"";
-    if (modifiers & HKM_MOD_ALT) {
-        str += VKToString(VK_MENU) + L" + ";
-    }
-    if (modifiers & HKM_MOD_CTRL) {
-        str += VKToString(VK_CONTROL) + L" + ";
-    }
-    if (modifiers & HKM_MOD_SHF) {
-        str += VKToString(VK_SHIFT) + L" + ";
-    }
-    if (modifiers & HKM_MOD_WIN) {
-        str += L"Win + ";
-    }
-
-    return str;
-}
-
 std::wstring KeyGrabber::VKToString(unsigned int vk, bool extendedKey) {
     int extended = extendedKey ? 0x1 : 0x0;
 

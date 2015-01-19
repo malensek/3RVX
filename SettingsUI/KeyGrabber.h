@@ -19,8 +19,6 @@ private:
     bool Hook();
     bool Unhook();
 
-    bool IsModifier(DWORD vk);
-    std::wstring ModString(int modifiers);
     std::wstring VKToString(unsigned int vk, bool extendedKey = false);
 
     LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam);

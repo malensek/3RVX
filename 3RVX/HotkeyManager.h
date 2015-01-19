@@ -18,15 +18,18 @@
 #include <Windows.h>
 #include <unordered_set>
 
-#define HKM_MOD_ALT (MOD_ALT << 16)
-#define HKM_MOD_CTRL (MOD_CONTROL << 16)
-#define HKM_MOD_SHF (MOD_SHIFT << 16)
-#define HKM_MOD_WIN (MOD_WIN << 16)
+#define MOD_OFFSET 16
+#define MOUSE_OFFSET 20
 
-#define HKM_MOUSE_WHUP 0x100000
-#define HKM_MOUSE_WHDN 0x200000
-#define HKM_MOUSE_XB1 0x300000
-#define HKM_MOUSE_XB2 0x400000
+#define HKM_MOD_ALT (MOD_ALT << MOD_OFFSET)
+#define HKM_MOD_CTRL (MOD_CONTROL << MOD_OFFSET)
+#define HKM_MOD_SHF (MOD_SHIFT << MOD_OFFSET)
+#define HKM_MOD_WIN (MOD_WIN << MOD_OFFSET)
+
+#define HKM_MOUSE_WHUP (0x1 << MOUSE_OFFSET)
+#define HKM_MOUSE_WHDN (0x2 << MOUSE_OFFSET)
+#define HKM_MOUSE_XB1 (0x3 << MOUSE_OFFSET)
+#define HKM_MOUSE_XB2 (0x4 << MOUSE_OFFSET)
 
 class HotkeyManager {  
 public:

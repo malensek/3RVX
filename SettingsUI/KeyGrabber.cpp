@@ -124,14 +124,17 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     switch (wParam) {
     case WM_LBUTTONDOWN:
         key = VK_LBUTTON;
+        keyStr = L"Mouse 1";
         break;
 
     case WM_RBUTTONDOWN:
         key = VK_RBUTTON;
+        keyStr = L"Mouse 2";
         break;
 
     case WM_MBUTTONDOWN:
         key = VK_MBUTTON;
+        keyStr = L"Mouse 3";
         break;
 
     case WM_XBUTTONDOWN: {
@@ -139,8 +142,10 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         int x = HIWORD(msInfo->mouseData);
         if (x == 1) {
             key = HKM_MOUSE_XB1;
+            keyStr = L"Mouse 4";
         } else if (x == 2) {
             key = HKM_MOUSE_XB2;
+            keyStr = L"Mouse 5";
         }
         break;
     }
@@ -149,8 +154,10 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         short zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
         if (zDelta > 0) {
             key = HKM_MOUSE_WHUP;
+            keyStr = L"Mouse Wheel Up";
         } else if (zDelta < 0) {
             key = HKM_MOUSE_WHDN;
+            keyStr = L"Mouse Wheel Down";
         }
 
         break;

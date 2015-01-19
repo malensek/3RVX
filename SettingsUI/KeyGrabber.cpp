@@ -165,8 +165,8 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
     if (key > 0) {
         int mods = HotkeyManager::ModifiersAsync();
-        SetWindowText(_updateHwnd, modStr.c_str());
         std::wstring modStr = HotkeyManager::HotkeysToModString(mods);
+        SetWindowText(_updateHwnd, (modStr + keyStr).c_str());
     }
 
     return CallNextHookEx(NULL, nCode, wParam, lParam);

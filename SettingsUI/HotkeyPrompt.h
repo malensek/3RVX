@@ -1,16 +1,17 @@
 #pragma once
 #include "afxwin.h"
 
+#include "KeyReceiver.h"
 
-// HotkeyPrompt dialog
+class HotkeyPrompt : public CDialog, KeyReceiver {
 
-class HotkeyPrompt : public CDialog
-{
 	DECLARE_DYNAMIC(HotkeyPrompt)
 
 public:
 	HotkeyPrompt(CWnd* pParent = NULL);   // standard constructor
 	virtual ~HotkeyPrompt();
+
+    virtual void ReceiveKeys(int combination);
 
 	enum { IDD = IDD_HOTKEYPROMPT };
 

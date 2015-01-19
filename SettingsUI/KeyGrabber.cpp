@@ -28,8 +28,8 @@ bool KeyGrabber::Unhook() {
     return unMouse && unKey;
 }
 
-void KeyGrabber::Grab(HWND hwnd) {
-    _updateHwnd = hwnd;
+void KeyGrabber::Grab(KeyReceiver &receiver) {
+    _receiver = &receiver;
     Hook();
 }
 
@@ -85,7 +85,8 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
 
-        SetWindowText(_updateHwnd, modStr.c_str());
+        _receiver->ReceiveKeys(mods);
+        //SetWindowText(_updateHwnd, modStr.c_str());
 
         /* Prevent other applications from receiving this event */
         return (LRESULT) 1;
@@ -148,7 +149,8 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (key > 0) {
         int mods = HotkeyManager::ModifiersAsync();
         std::wstring modStr = HotkeyManager::HotkeysToModString(mods);
-        SetWindowText(_updateHwnd, (modStr + keyStr).c_str());
+        //SetWindowText(_updateHwnd, (modStr + keyStr).c_str());
+        _receiver->ReceiveKeys(mods);
     }
 
     return CallNextHookEx(NULL, nCode, wParam, lParam);

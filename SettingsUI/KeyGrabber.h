@@ -4,17 +4,18 @@
 #include <unordered_set>
 
 #include "HotkeyManager.h"
+#include "KeyReceiver.h"
 
 class KeyGrabber {
 public:
     static KeyGrabber *Instance();
-    void Grab(HWND hwnd);
+    void Grab(KeyReceiver &receiver);
 
 private:
     HHOOK _keyHook;
     HHOOK _mouseHook;
-    HWND _updateHwnd;
-    std::wstring _str;
+
+    KeyReceiver *_receiver;
 
     bool Hook();
     bool Unhook();

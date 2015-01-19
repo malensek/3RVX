@@ -16,10 +16,14 @@ HotkeyPrompt::~HotkeyPrompt() {
 
 }
 
+void HotkeyPrompt::ReceiveKeys(int combination) {
+    _keys.SetWindowText(std::to_wstring(combination).c_str());
+}
+
 BOOL HotkeyPrompt::OnInitDialog() {
     CDialog::OnInitDialog();
     SetWindowPos(&wndTopMost, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-    KeyGrabber::Instance()->Grab(_keys.m_hWnd);
+    KeyGrabber::Instance()->Grab(*this);
     return TRUE;
 }
 

@@ -56,18 +56,6 @@ void Hotkeys::SelectItem(int idx) {
     _list.EnsureVisible(idx, FALSE);
 }
 
-BOOL Hotkeys::PreTranslateMessage(PMSG msg) {
-    /*
-    if (msg->message == WM_KEYDOWN) {
-        wchar_t buf[255];
-        GetKeyNameText(msg->lParam, buf, 255);
-        OutputDebugString(buf);
-    }
-
-    */
-    return CPropertyPage::PreTranslateMessage(msg);
-}
-
 BEGIN_MESSAGE_MAP(Hotkeys, CPropertyPage)
     ON_BN_CLICKED(BTN_ADD, &Hotkeys::OnBnClickedAdd)
     ON_BN_CLICKED(BTN_REMOVE, &Hotkeys::OnBnClickedRemove)

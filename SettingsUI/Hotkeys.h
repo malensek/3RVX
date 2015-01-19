@@ -2,8 +2,7 @@
 #include "afxwin.h"
 #include "afxcmn.h"
 
-class Hotkeys : public CPropertyPage
-{
+class Hotkeys : public CPropertyPage {
 	DECLARE_DYNAMIC(Hotkeys)
 
 public:
@@ -16,8 +15,6 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
     virtual BOOL OnInitDialog();
-    virtual BOOL PreTranslateMessage(PMSG msg);
-
 	DECLARE_MESSAGE_MAP()
 
 private:

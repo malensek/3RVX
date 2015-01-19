@@ -133,7 +133,7 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     }
 
     case WM_MOUSEWHEEL:
-        short zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+        short zDelta = GET_WHEEL_DELTA_WPARAM(lParam);
         if (zDelta > 0) {
             key = HKM_MOUSE_WHUP;
             keyStr = L"Mouse Wheel Up";

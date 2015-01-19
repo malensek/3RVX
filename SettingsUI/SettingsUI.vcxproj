@@ -139,7 +139,6 @@
     <ClCompile Include="HotkeyPrompt.cpp" />
     <ClCompile Include="Hotkeys.cpp" />
     <ClCompile Include="KeyGrabber.cpp" />
-    <ClCompile Include="KeyReceiver.cpp" />
     <ClCompile Include="SettingsSheet.cpp" />
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="stdafx.cpp" />

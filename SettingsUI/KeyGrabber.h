@@ -10,6 +10,7 @@ class KeyGrabber {
 public:
     static KeyGrabber *Instance();
     void Grab(KeyReceiver &receiver);
+    void Stop();
 
 private:
     HHOOK _keyHook;

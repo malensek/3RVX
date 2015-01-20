@@ -23,6 +23,11 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
+    HHOOK _keyHook;
+    HHOOK _mouseHook;
+    void Hook();
+
+private:
     CStatic _keys;
     CButton _save;
 };

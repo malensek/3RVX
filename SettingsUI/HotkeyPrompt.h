@@ -10,6 +10,7 @@ class HotkeyPrompt : public CDialog, KeyReceiver {
 public:
 	HotkeyPrompt(CWnd* pParent = NULL);   // standard constructor
 	virtual ~HotkeyPrompt();
+    virtual BOOL OnClose();
 
     virtual void ReceiveKeys(int combination);
 

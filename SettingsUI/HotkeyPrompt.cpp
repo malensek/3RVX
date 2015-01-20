@@ -27,6 +27,12 @@ BOOL HotkeyPrompt::OnInitDialog() {
     return TRUE;
 }
 
+BOOL HotkeyPrompt::OnClose() {
+    CDialog::OnClose();
+    KeyGrabber::Instance()->Stop();
+    return TRUE;
+}
+
 void HotkeyPrompt::DoDataExchange(CDataExchange* pDX) {
     CDialog::DoDataExchange(pDX);
     DDX_Control(pDX, LBL_KEYS, _keys);

@@ -75,9 +75,6 @@
     <ClInclude Include="HotkeyPrompt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KeyReceiver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SettingsUI.cpp">

@@ -4,7 +4,6 @@
 #include <unordered_set>
 
 #include "HotkeyManager.h"
-#include "KeyReceiver.h"
 
 class KeyGrabber {
 public:
@@ -20,8 +19,6 @@ private:
     HHOOK _mouseHook;
     HWND _updateHwnd;
     int _keyCombination;
-
-    KeyReceiver *_receiver;
 
     bool Hook();
     bool Unhook();

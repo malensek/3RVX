@@ -116,7 +116,6 @@
     <ClInclude Include="HotkeyPrompt.h" />
     <ClInclude Include="Hotkeys.h" />
     <ClInclude Include="KeyGrabber.h" />
-    <ClInclude Include="KeyReceiver.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SettingsSheet.h" />
     <ClInclude Include="SettingsUI.h" />

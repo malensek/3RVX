@@ -1,7 +1,6 @@
 #pragma once
 
 #include "afxwin.h"
-#include "KeyReceiver.h"
 
 class HotkeyPrompt : public CDialog {
 

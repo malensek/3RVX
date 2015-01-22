@@ -9,12 +9,17 @@
 class KeyGrabber {
 public:
     static KeyGrabber *Instance();
-    void Grab(KeyReceiver &receiver);
+
+    void Grab();
     void Stop();
+    int KeyCombination();
+    void SetHwnd(HWND updateHwnd);
 
 private:
     HHOOK _keyHook;
     HHOOK _mouseHook;
+    HWND _updateHwnd;
+    int _keyCombination;
 
     KeyReceiver *_receiver;
 

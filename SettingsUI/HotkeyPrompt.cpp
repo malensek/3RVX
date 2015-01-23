@@ -24,12 +24,6 @@ BOOL HotkeyPrompt::OnInitDialog() {
     return TRUE;
 }
 
-BOOL HotkeyPrompt::OnClose() {
-    CDialog::OnClose();
-    KeyGrabber::Instance()->Stop();
-    return TRUE;
-}
-
 void HotkeyPrompt::DoDataExchange(CDataExchange* pDX) {
     CDialog::DoDataExchange(pDX);
     DDX_Control(pDX, LBL_KEYS, _keys);
@@ -39,8 +33,6 @@ void HotkeyPrompt::DoDataExchange(CDataExchange* pDX) {
 BEGIN_MESSAGE_MAP(HotkeyPrompt, CDialog)
     ON_BN_CLICKED(BTN_CANCEL, &HotkeyPrompt::OnBnClickedCancel)
 END_MESSAGE_MAP()
-
-
 
 void HotkeyPrompt::OnBnClickedCancel() {
     /* Close Window here */

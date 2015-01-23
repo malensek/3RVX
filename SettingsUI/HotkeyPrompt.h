@@ -9,7 +9,6 @@ class HotkeyPrompt : public CDialog {
 public:
 	HotkeyPrompt(CWnd* pParent = NULL);   // standard constructor
 	virtual ~HotkeyPrompt();
-    virtual BOOL OnClose();
 
 	enum { IDD = IDD_HOTKEYPROMPT };
 

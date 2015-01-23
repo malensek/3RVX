@@ -151,6 +151,10 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
     if (key > 0) {
         int mods = HotkeyManager::ModifiersAsync();
+        if (mods == 0 && key == VK_LBUTTON) {
+            return CallNextHookEx(NULL, nCode, wParam, lParam);
+        }
+
         std::wstring modStr = HotkeyManager::HotkeysToModString(mods);
         SetWindowText(_updateHwnd, (modStr + keyStr).c_str());
         _keyCombination = mods + key;

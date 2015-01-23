@@ -33,6 +33,7 @@ BOOL HotkeyPrompt::OnClose() {
 void HotkeyPrompt::DoDataExchange(CDataExchange* pDX) {
     CDialog::DoDataExchange(pDX);
     DDX_Control(pDX, LBL_KEYS, _keys);
+    DDX_Control(pDX, BTN_CANCEL, _cancel);
 }
 
 BEGIN_MESSAGE_MAP(HotkeyPrompt, CDialog)

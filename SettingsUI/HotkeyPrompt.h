@@ -20,7 +20,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
+    CButton _cancel;
     CStatic _keys;
-public:
     afx_msg void OnBnClickedCancel();
 };

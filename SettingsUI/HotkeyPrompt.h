@@ -21,5 +21,6 @@ protected:
 
 private:
     CStatic _keys;
-    CButton _save;
+public:
+    afx_msg void OnBnClickedCancel();
 };

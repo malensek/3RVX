@@ -90,6 +90,7 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
         SetWindowText(_updateHwnd, modStr.c_str());
         _keyCombination = mods + vk;
+        Unhook();
 
         /* Prevent other applications from receiving this event */
         return (LRESULT) 1;
@@ -158,6 +159,7 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         std::wstring modStr = HotkeyManager::HotkeysToModString(mods);
         SetWindowText(_updateHwnd, (modStr + keyStr).c_str());
         _keyCombination = mods + key;
+        Unhook();
     }
 
     return CallNextHookEx(NULL, nCode, wParam, lParam);

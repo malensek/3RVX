@@ -32,10 +32,6 @@ void KeyGrabber::Grab() {
     Hook();
 }
 
-void KeyGrabber::Stop() {
-    Unhook();
-}
-
 void KeyGrabber::SetHwnd(HWND updateHwnd) {
     _updateHwnd = updateHwnd;
 }

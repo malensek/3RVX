@@ -10,7 +10,6 @@ public:
     static KeyGrabber *Instance();
 
     void Grab();
-    void Stop();
     int KeyCombination();
     void SetHwnd(HWND updateHwnd);
 

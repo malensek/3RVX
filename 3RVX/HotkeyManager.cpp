@@ -210,8 +210,8 @@ HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 /* key down: */
                 SendInput(1, &input, sizeof(INPUT));
 
-                input.ki.dwFlags = KEYEVENTF_KEYUP;
                 /* key up: */
+                input.ki.dwFlags = KEYEVENTF_KEYUP;
                 SendInput(1, &input, sizeof(INPUT));
 
                 _fixWin = false;

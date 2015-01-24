@@ -1,8 +1,6 @@
 #pragma once
 
 #include <Windows.h>
-#include <unordered_set>
-
 #include "HotkeyManager.h"
 
 class KeyGrabber {
@@ -21,8 +19,6 @@ private:
 
     bool Hook();
     bool Unhook();
-
-    std::wstring VKToString(unsigned int vk, bool extendedKey = false);
 
     LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
     static LRESULT CALLBACK 

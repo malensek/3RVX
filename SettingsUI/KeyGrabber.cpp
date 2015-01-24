@@ -36,17 +36,6 @@ void KeyGrabber::SetHwnd(HWND updateHwnd) {
     _updateHwnd = updateHwnd;
 }
 
-std::wstring KeyGrabber::VKToString(unsigned int vk, bool extendedKey) {
-    int extended = extendedKey ? 0x1 : 0x0;
-
-    unsigned int scanCode = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
-    scanCode = scanCode << 16;
-    scanCode |= extended << 24;
-    wchar_t buf[256] = {};
-    GetKeyNameText(scanCode, buf, 256);
-    return std::wstring(buf);
-}
-
 LRESULT CALLBACK
 KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode < 0) {

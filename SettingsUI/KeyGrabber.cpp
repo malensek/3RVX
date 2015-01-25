@@ -36,6 +36,10 @@ void KeyGrabber::SetHwnd(HWND updateHwnd) {
     _updateHwnd = updateHwnd;
 }
 
+int KeyGrabber::KeyCombination() {
+    return _keyCombination;
+}
+
 LRESULT CALLBACK
 KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode < 0) {

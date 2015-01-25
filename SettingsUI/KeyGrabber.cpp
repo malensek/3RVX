@@ -33,7 +33,7 @@ void KeyGrabber::Grab() {
 }
 
 void KeyGrabber::SetHwnd(HWND updateHwnd) {
-    _updateHwnd = updateHwnd;
+    _hWnd = updateHwnd;
 }
 
 int KeyGrabber::KeyCombination() {
@@ -81,7 +81,8 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
 
-        SetWindowText(_updateHwnd, modStr.c_str());
+        //SetWindowText(_updateHwnd, modStr.c_str());
+        PostMessage(_hWnd, WM_CLOSE, NULL, NULL);
         _keyCombination = mods + vk;
         Unhook();
 
@@ -150,7 +151,8 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         }
 
         std::wstring modStr = HotkeyManager::HotkeysToModString(mods);
-        SetWindowText(_updateHwnd, (modStr + keyStr).c_str());
+        PostMessage(_hWnd, WM_CLOSE, NULL, NULL);
+        //SetWindowText(_updateHwnd, (modStr + keyStr).c_str());
         _keyCombination = mods + key;
         Unhook();
     }

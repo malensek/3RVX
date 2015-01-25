@@ -12,10 +12,10 @@ public:
     void SetHwnd(HWND updateHwnd);
 
 private:
+    HWND _hWnd;
+    int _keyCombination;
     HHOOK _keyHook;
     HHOOK _mouseHook;
-    HWND _updateHwnd;
-    int _keyCombination;
 
     bool Hook();
     bool Unhook();

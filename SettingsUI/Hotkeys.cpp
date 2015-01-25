@@ -92,4 +92,6 @@ void Hotkeys::OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult) {
 void Hotkeys::OnBnClickedKeys() {
     HotkeyPrompt hkp;
     hkp.DoModal();
+    int keyCombo = KeyGrabber::Instance()->KeyCombination();
+    MessageBox(std::to_wstring(keyCombo).c_str());
 }

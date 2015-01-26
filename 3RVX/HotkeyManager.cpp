@@ -108,85 +108,6 @@ bool HotkeyManager::Unregister(int keyCombination) {
     return true;
 }
 
-bool HotkeyManager::IsModifier(DWORD vk) {
-    switch (vk) {
-    case VK_MENU:
-    case VK_LMENU:
-    case VK_RMENU:
-    case VK_CONTROL:
-    case VK_LCONTROL:
-    case VK_RCONTROL:
-    case VK_SHIFT:
-    case VK_LSHIFT:
-    case VK_RSHIFT:
-    case VK_LWIN:
-    case VK_RWIN:
-        return true;
-    }
-    return false;
-}
-
-int HotkeyManager::Modifiers() {
-    int mods = 0;
-    mods += (GetKeyState(VK_MENU) & 0x8000) << 1;
-    mods += (GetKeyState(VK_CONTROL) & 0x8000) << 2;
-    mods += (GetKeyState(VK_SHIFT) & 0x8000) << 3;
-    mods += (GetKeyState(VK_LWIN) & 0x8000) << 4;
-    mods += (GetKeyState(VK_RWIN) & 0x8000) << 4;
-    return mods;
-}
-
-int HotkeyManager::ModifiersAsync() {
-    int mods = 0;
-    mods += (GetAsyncKeyState(VK_MENU) & 0x8000) << 1;
-    mods += (GetAsyncKeyState(VK_CONTROL) & 0x8000) << 2;
-    mods += (GetAsyncKeyState(VK_SHIFT) & 0x8000) << 3;
-    mods += (GetAsyncKeyState(VK_LWIN) & 0x8000) << 4;
-    mods += (GetAsyncKeyState(VK_RWIN) & 0x8000) << 4;
-    return mods;
-}
-
-std::wstring HotkeyManager::HotkeysToModString(int combination,
-    std::wstring separator) {
-
-    std::wstring str = L"";
-    if (combination & HKM_MOD_ALT) {
-        str += VKToString(VK_MENU) + separator;
-    }
-    if (combination & HKM_MOD_CTRL) {
-        str += VKToString(VK_CONTROL) + separator;
-    }
-    if (combination & HKM_MOD_SHF) {
-        str += VKToString(VK_SHIFT) + separator;
-    }
-    if (combination & HKM_MOD_WIN) {
-        str += L"Win" + separator;
-    }
-
-    return str;
-}
-
-std::wstring HotkeyManager::HotkeysToString(int combination,
-    std::wstring separator) {
-
-    std::wstring mods = HotkeysToModString(combination, separator);
-    int vk = combination & 0xFF;
-    std::wstring str = VKToString(vk);
-
-    return mods + str;
-}
-
-std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
-    int extended = extendedKey ? 0x1 : 0x0;
-
-    unsigned int scanCode = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
-    scanCode = scanCode << 16;
-    scanCode |= extended << 24;
-    wchar_t buf[256] = {};
-    GetKeyNameText(scanCode, buf, 256);
-    return std::wstring(buf);
-}
-
 LRESULT CALLBACK
 HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
@@ -294,3 +215,83 @@ LRESULT CALLBACK
 HotkeyManager::LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
     return HotkeyManager::instance->KeyProc(nCode, wParam, lParam);
 }
+
+bool HotkeyManager::IsModifier(DWORD vk) {
+    switch (vk) {
+    case VK_MENU:
+    case VK_LMENU:
+    case VK_RMENU:
+    case VK_CONTROL:
+    case VK_LCONTROL:
+    case VK_RCONTROL:
+    case VK_SHIFT:
+    case VK_LSHIFT:
+    case VK_RSHIFT:
+    case VK_LWIN:
+    case VK_RWIN:
+        return true;
+    }
+    return false;
+}
+
+int HotkeyManager::Modifiers() {
+    int mods = 0;
+    mods += (GetKeyState(VK_MENU) & 0x8000) << 1;
+    mods += (GetKeyState(VK_CONTROL) & 0x8000) << 2;
+    mods += (GetKeyState(VK_SHIFT) & 0x8000) << 3;
+    mods += (GetKeyState(VK_LWIN) & 0x8000) << 4;
+    mods += (GetKeyState(VK_RWIN) & 0x8000) << 4;
+    return mods;
+}
+
+int HotkeyManager::ModifiersAsync() {
+    int mods = 0;
+    mods += (GetAsyncKeyState(VK_MENU) & 0x8000) << 1;
+    mods += (GetAsyncKeyState(VK_CONTROL) & 0x8000) << 2;
+    mods += (GetAsyncKeyState(VK_SHIFT) & 0x8000) << 3;
+    mods += (GetAsyncKeyState(VK_LWIN) & 0x8000) << 4;
+    mods += (GetAsyncKeyState(VK_RWIN) & 0x8000) << 4;
+    return mods;
+}
+
+std::wstring HotkeyManager::HotkeysToModString(int combination,
+    std::wstring separator) {
+
+    std::wstring str = L"";
+    if (combination & HKM_MOD_ALT) {
+        str += VKToString(VK_MENU) + separator;
+    }
+    if (combination & HKM_MOD_CTRL) {
+        str += VKToString(VK_CONTROL) + separator;
+    }
+    if (combination & HKM_MOD_SHF) {
+        str += VKToString(VK_SHIFT) + separator;
+    }
+    if (combination & HKM_MOD_WIN) {
+        str += L"Win" + separator;
+    }
+
+    return str;
+}
+
+std::wstring HotkeyManager::HotkeysToString(int combination,
+    std::wstring separator) {
+
+    std::wstring mods = HotkeysToModString(combination, separator);
+    int vk = combination & 0xFF;
+    std::wstring str = VKToString(vk);
+
+    return mods + str;
+}
+
+std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
+    int extended = extendedKey ? 0x1 : 0x0;
+
+    unsigned int scanCode = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
+    scanCode = scanCode << 16;
+    scanCode |= extended << 24;
+    wchar_t buf[256] = {};
+    GetKeyNameText(scanCode, buf, 256);
+    return std::wstring(buf);
+}
+

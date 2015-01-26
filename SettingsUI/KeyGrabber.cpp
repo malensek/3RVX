@@ -82,8 +82,8 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
         }
 
         //SetWindowText(_updateHwnd, modStr.c_str());
-        PostMessage(_hWnd, WM_CLOSE, NULL, NULL);
         _keyCombination = mods + vk;
+        PostMessage(_hWnd, WM_CLOSE, NULL, NULL);
         Unhook();
 
         /* Prevent other applications from receiving this event */

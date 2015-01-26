@@ -79,7 +79,6 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
         GetKeyNameText(newlParam, buf, 256);
         std::wstring modStr = HotkeyManager::HotkeysToModString(mods) + buf;
 
-        //SetWindowText(_updateHwnd, modStr.c_str());
         _keyCombination = mods + vk;
         PostMessage(_hWnd, WM_CLOSE, NULL, NULL);
         Unhook();

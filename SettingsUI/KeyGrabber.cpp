@@ -99,34 +99,28 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     }
 
-    unsigned int key = 0;
-    std::wstring keyStr;
+    unsigned int keyCombo = 0;
 
     switch (wParam) {
     case WM_LBUTTONDOWN:
-        key = VK_LBUTTON;
-        keyStr = L"Mouse 1";
+        keyCombo = VK_LBUTTON;
         break;
 
     case WM_RBUTTONDOWN:
-        key = VK_RBUTTON;
-        keyStr = L"Mouse 2";
+        keyCombo = VK_RBUTTON;
         break;
 
     case WM_MBUTTONDOWN:
-        key = VK_MBUTTON;
-        keyStr = L"Mouse 3";
+        keyCombo = VK_MBUTTON;
         break;
 
     case WM_XBUTTONDOWN: {
         MSLLHOOKSTRUCT *msInfo = (MSLLHOOKSTRUCT *) lParam;
         int x = HIWORD(msInfo->mouseData);
         if (x == 1) {
-            key = HKM_MOUSE_XB1;
-            keyStr = L"Mouse 4";
+            keyCombo = HKM_MOUSE_XB1;
         } else if (x == 2) {
-            key = HKM_MOUSE_XB2;
-            keyStr = L"Mouse 5";
+            keyCombo = HKM_MOUSE_XB2;
         }
         break;
     }
@@ -134,26 +128,23 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     case WM_MOUSEWHEEL:
         short zDelta = GET_WHEEL_DELTA_WPARAM(lParam);
         if (zDelta > 0) {
-            key = HKM_MOUSE_WHUP;
-            keyStr = L"Mouse Wheel Up";
+            keyCombo = HKM_MOUSE_WHUP;
         } else if (zDelta < 0) {
-            key = HKM_MOUSE_WHDN;
-            keyStr = L"Mouse Wheel Down";
+            keyCombo = HKM_MOUSE_WHDN;
         }
 
         break;
     }
 
-    if (key > 0) {
+    if (keyCombo > 0) {
         int mods = HotkeyManager::ModifiersAsync();
-        if (mods == 0 && key == VK_LBUTTON) {
+        if (mods == 0 && keyCombo == VK_LBUTTON) {
+            /* We require at least one modifier key with the left button. */
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
 
-        std::wstring modStr = HotkeyManager::HotkeysToModString(mods);
+        _keyCombination = mods + keyCombo;
         PostMessage(_hWnd, WM_CLOSE, NULL, NULL);
-        //SetWindowText(_updateHwnd, (modStr + keyStr).c_str());
-        _keyCombination = mods + key;
         Unhook();
     }
 

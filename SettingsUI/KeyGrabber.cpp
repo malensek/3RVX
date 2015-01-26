@@ -50,8 +50,12 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
         KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT *) lParam;
 
         DWORD vk = kbInfo->vkCode;
-        if (HotkeyManager::IsModifier(kbInfo->vkCode)) {
-            /* Ignore modifier keys */
+        int mods = HotkeyManager::ModifiersAsync();
+        if (HotkeyManager::IsModifier(kbInfo->vkCode)
+            || (vk == VK_ESCAPE && mods == 0)) {
+            /* Ignore modifier keys (since we determine their state manually
+             * later) and pass Esc through to let the user cancel the
+             * operation. */
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
 

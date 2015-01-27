@@ -1,12 +1,12 @@
 //
 //  Key Storage Format (24 bits):
 //  
-//  0111 1111 0000 0000 1111 1111
+//  0111 1111 0000 0001 1111 1111
 //  ---- ---- --------- ---------
-//   |    |       |         |
-//   |    |       |         \--- MS Virtual Keys (VK_*)
-//   |    |       |
-//   |    |       \--- not used
+//   |    |           |     |
+//   |    |           |     \--- MS Virtual Keys (VK_*)
+//   |    |           |
+//   |    |           \--- Extended key bit (used for converting HKs to strings)
 //   |    |
 //   |    \--- bitfield: [win, shift, control, alt]
 //   |

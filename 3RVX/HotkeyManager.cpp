@@ -279,7 +279,8 @@ std::wstring HotkeyManager::HotkeysToString(int combination,
 
     std::wstring mods = HotkeysToModString(combination, separator);
     int vk = combination & 0xFF;
-    std::wstring str = VKToString(vk);
+    bool ext = (combination & 0x100);
+    std::wstring str = VKToString(vk, ext);
 
     return mods + str;
 }

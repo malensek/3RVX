@@ -279,18 +279,29 @@ std::wstring HotkeyManager::HotkeysToString(int combination,
 
     std::wstring mods = HotkeysToModString(combination, separator);
     int vk = combination & 0xFF;
-    bool ext = (combination & 0x100);
+    bool ext = (combination & 0x100) > 0;
     std::wstring str = VKToString(vk, ext);
 
     return mods + str;
 }
 
 std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
-    int extended = extendedKey ? 0x1 : 0x0;
-
+    /* GetKeyNameText expects the following:
+     * 16-23: scan code
+     *    24: extended key flag
+     *    25: 'do not care' bit (don't distinguish between L/R keys) */
     unsigned int scanCode = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
     scanCode = scanCode << 16;
+
+    if (vk == VK_RSHIFT) {
+        /* For some reason, the right shift key ends up having its extended
+         * key flag set and confuses GetKeyNameText. */
+        extendedKey = false;
+    }
+
+    int extended = extendedKey ? 0x1 : 0x0;
     scanCode |= extended << 24;
+
     wchar_t buf[256] = {};
     GetKeyNameText(scanCode, buf, 256);
     return std::wstring(buf);

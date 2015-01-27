@@ -53,33 +53,17 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
         int mods = HotkeyManager::ModifiersAsync();
         if (HotkeyManager::IsModifier(kbInfo->vkCode)
             || (vk == VK_ESCAPE && mods == 0)) {
+
             /* Ignore modifier keys (since we determine their state manually
              * later) and pass Esc through to let the user cancel the
              * operation. */
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
 
-        /* GetKeyNameText expects the following:
-         * 16-23: scan code
-         *    24: extended key flag
-         *    25: 'do not care' bit (don't distinguish between L/R keys) */
-        BOOL dontCare = TRUE;
-        LONG newlParam;
-        newlParam = (kbInfo->scanCode << 16);
-        newlParam |= (kbInfo->flags & 0x1) << 24;
-        newlParam |= dontCare << 25;
-        if (kbInfo->vkCode == VK_RSHIFT) {
-            /* For some reason, the right shift key ends up having its extended
-             * key flag set and then prints the wrong thing. This doesn't matter
-             * here, but we'll fix it in case we need this info later. */
-            newlParam ^= 0x1000000;
-        }
+        /* Is this an extended key? */
+        int ext = (kbInfo->flags & 0x1) << EXT_OFFSET;
 
-        wchar_t buf[256] = {};
-        GetKeyNameText(newlParam, buf, 256);
-        std::wstring modStr = HotkeyManager::HotkeysToModString(mods) + buf;
-
-        _keyCombination = mods + vk;
+        _keyCombination = (mods | ext | vk);
         PostMessage(_hWnd, WM_CLOSE, NULL, NULL);
         Unhook();
 

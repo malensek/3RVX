@@ -18,6 +18,7 @@
 #include <Windows.h>
 #include <unordered_set>
 
+#define EXT_OFFSET 8
 #define MOD_OFFSET 16
 #define MOUSE_OFFSET 20
 

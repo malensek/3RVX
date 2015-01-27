@@ -51,6 +51,7 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
         DWORD vk = kbInfo->vkCode;
         int mods = HotkeyManager::ModifiersAsync();
+
         if (HotkeyManager::IsModifier(kbInfo->vkCode)
             || (vk == VK_ESCAPE && mods == 0)) {
 
@@ -60,7 +61,7 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
 
-        /* Is this an extended key? */
+        /* Is this an extended key? (Used for converting VKs to strings) */
         int ext = (kbInfo->flags & 0x1) << EXT_OFFSET;
 
         _keyCombination = (mods | ext | vk);

@@ -299,6 +299,10 @@ std::wstring HotkeyManager::HotkeysToString(int combination,
 }
 
 std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
+    if (IsMouseKey(vk)) {
+        /* special mouse buttons to string handler */
+    }
+
     /* GetKeyNameText expects the following:
      * 16-23: scan code
      *    24: extended key flag

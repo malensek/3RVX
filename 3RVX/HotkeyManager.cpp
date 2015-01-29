@@ -216,7 +216,7 @@ HotkeyManager::LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
     return HotkeyManager::instance->KeyProc(nCode, wParam, lParam);
 }
 
-bool HotkeyManager::IsModifier(DWORD vk) {
+bool HotkeyManager::IsModifier(int vk) {
     switch (vk) {
     case VK_MENU:
     case VK_LMENU:

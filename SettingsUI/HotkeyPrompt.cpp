@@ -35,5 +35,5 @@ BEGIN_MESSAGE_MAP(HotkeyPrompt, CDialog)
 END_MESSAGE_MAP()
 
 void HotkeyPrompt::OnBnClickedCancel() {
-    /* Close Window here */
+    PostMessage(WM_CLOSE, NULL, NULL);
 }

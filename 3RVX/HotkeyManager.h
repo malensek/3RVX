@@ -44,6 +44,7 @@ public:
 
 public:
     static bool IsModifier(int vk);
+    static bool IsMouseKey(int vk);
     static int Modifiers();
     static int ModifiersAsync();
     static std::wstring HotkeysToModString(int combination,

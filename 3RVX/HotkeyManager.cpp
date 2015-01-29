@@ -234,6 +234,19 @@ bool HotkeyManager::IsModifier(int vk) {
     return false;
 }
 
+bool HotkeyManager::IsMouseKey(int vk) {
+    if (vk < 0x07 && vk != VK_CANCEL) {
+        return true;
+    }
+
+    if (vk & (0xF << MOUSE_OFFSET)) {
+        /* Has wheel or xbutton flags */
+        return true;
+    }
+
+    return false;
+}
+
 int HotkeyManager::Modifiers() {
     int mods = 0;
     mods += (GetKeyState(VK_MENU) & 0x8000) << 1;

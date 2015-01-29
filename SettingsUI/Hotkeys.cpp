@@ -93,6 +93,8 @@ void Hotkeys::OnBnClickedKeys() {
     HotkeyPrompt hkp;
     hkp.DoModal();
     int keyCombo = KeyGrabber::Instance()->KeyCombination();
-    std::wstring keyStr = HotkeyManager::HotkeysToString(keyCombo);
-    _keys.SetWindowText(keyStr.c_str());
+    if (keyCombo > 0) {
+        std::wstring keyStr = HotkeyManager::HotkeysToString(keyCombo);
+        _keys.SetWindowText(keyStr.c_str());
+    }
 }

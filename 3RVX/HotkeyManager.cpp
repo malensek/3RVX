@@ -292,17 +292,46 @@ std::wstring HotkeyManager::HotkeysToString(int combination,
 
     std::wstring mods = HotkeysToModString(combination, separator);
     int vk = combination & 0xFF;
-    bool ext = (combination & 0x100) > 0;
-    std::wstring str = VKToString(vk, ext);
+
+    std::wstring str;
+    if (IsMouseKey(vk)) {
+        str = MouseString(combination);
+    } else {
+        bool ext = (combination & 0x100) > 0;
+        str = VKToString(vk, ext);
+    }
 
     return mods + str;
 }
 
-std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
-    if (IsMouseKey(vk)) {
-        /* special mouse buttons to string handler */
+std::wstring HotkeyManager::MouseString(int combination) {
+    int vk = combination & 0xFF;
+    if (vk > 0) {
+        switch (vk) {
+        case VK_LBUTTON:
+            return L"Mouse 1";
+        case VK_RBUTTON:
+            return L"Mouse 2";
+        case VK_MBUTTON:
+            return L"Mouse 3";
+        }
     }
 
+    int flags = combination & (0xF << MOUSE_OFFSET);
+    if (flags == HKM_MOUSE_XB1) {
+        return L"Mouse 4";
+    } else if (flags == HKM_MOUSE_XB2) {
+        return L"Mouse 5";
+    } else if (flags == HKM_MOUSE_WHUP) {
+        return L"Mouse Wheel Up";
+    } else if (flags == HKM_MOUSE_WHDN) {
+        return L"Mouse Wheel Down";
+    }
+
+    return L"";
+}
+
+std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
     /* GetKeyNameText expects the following:
      * 16-23: scan code
      *    24: extended key flag
@@ -323,4 +352,3 @@ std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
     GetKeyNameText(scanCode, buf, 256);
     return std::wstring(buf);
 }
-

@@ -107,15 +107,15 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         break;
     }
 
-    case WM_MOUSEWHEEL:
-        short zDelta = GET_WHEEL_DELTA_WPARAM(lParam);
-        if (zDelta > 0) {
-            keyCombo = HKM_MOUSE_WHUP;
-        } else if (zDelta < 0) {
-            keyCombo = HKM_MOUSE_WHDN;
+    case WM_MOUSEWHEEL: {
+        MSLLHOOKSTRUCT *msInfo = (MSLLHOOKSTRUCT *) lParam;
+        if ((int) msInfo->mouseData > 0) {
+            keyCombo += HKM_MOUSE_WHUP;
+        } else {
+            keyCombo += HKM_MOUSE_WHDN;
         }
-
         break;
+    }
     }
 
     if (keyCombo > 0) {

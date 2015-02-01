@@ -112,7 +112,7 @@ LRESULT CALLBACK
 HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
         if (wParam == WM_KEYUP) {
-            KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT*) lParam;
+            KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT *) lParam;
             if ((kbInfo->vkCode == VK_LWIN || kbInfo->vkCode == VK_RWIN)
                 && _fixWin) {
                 /* WIN+Mouse combination used; we need to prevent the
@@ -164,7 +164,7 @@ HotkeyManager::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 break;
 
             case WM_XBUTTONDOWN: {
-                msInfo = (MSLLHOOKSTRUCT*) lParam;
+                msInfo = (MSLLHOOKSTRUCT *) lParam;
 
                 int button = msInfo->mouseData >> 16 & 0xFFFF;
                 if (button == 1)
@@ -176,7 +176,7 @@ HotkeyManager::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
             }
 
             case WM_MOUSEWHEEL: {
-                msInfo = (MSLLHOOKSTRUCT*) lParam;
+                msInfo = (MSLLHOOKSTRUCT *) lParam;
 
                 if ((int) msInfo->mouseData > 0) {
                     mouseState += HKM_MOUSE_WHUP;

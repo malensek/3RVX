@@ -3,6 +3,7 @@
 #include "Hotkeys.h"
 #include "afxdialogex.h"
 
+#include "HotkeyInfo.h"
 #include "HotkeyPrompt.h"
 #include "KeyGrabber.h"
 
@@ -21,6 +22,7 @@ void Hotkeys::DoDataExchange(CDataExchange* pDX)
     CPropertyPage::DoDataExchange(pDX);
     DDX_Control(pDX, LST_KEYS, _list);
     DDX_Control(pDX, BTN_KEYS, _keys);
+    DDX_Control(pDX, CMB_ACTION, _action);
 }
 
 BOOL Hotkeys::OnInitDialog() {
@@ -39,6 +41,10 @@ BOOL Hotkeys::OnInitDialog() {
 
     _list.InsertItem(0, L"CTRL+ALT+OemVolumeUp");
     _list.SetItemText(0, 1, L"Increase Volume 5% [Parallels Audio Controller]");
+
+    for (std::wstring action : HotkeyInfo::ActionNames) {
+        _action.AddString(action.c_str());
+    }
 
     return TRUE;
 }

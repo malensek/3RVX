@@ -22,6 +22,7 @@ public:
         None,
         Fade
     };
+    static std::vector<std::wstring> HideAnimNames;
 
     enum OSDPos {
         Top,
@@ -31,6 +32,7 @@ public:
         Center,
         Custom
     };
+    static std::vector<std::wstring> OSDPosNames;
 
 public:
     static Settings *Instance();
@@ -42,7 +44,6 @@ public:
 
     std::wstring AudioDeviceID();
 
-    static std::vector<std::wstring> HideAnimNames;
     HideAnim HideAnimation();
     void HideAnimation(HideAnim anim);
     int HideDelay();
@@ -56,7 +57,6 @@ public:
     std::wstring Monitor();
     void Monitor(std::wstring monitorName);
 
-    static std::vector<std::wstring> OSDPosNames;
     bool AlwaysOnTop();
     void AlwaysOnTop(bool enable);
     bool HideFullscreen();

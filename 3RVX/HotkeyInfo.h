@@ -2,19 +2,21 @@
 
 #include <vector>
 
-enum HotkeyActions {
-    IncreaseVolume,
-    DecreaseVolume,
-    SetVolume,
-    Mute,
-    VolumeSlider,
-    Settings,
-    Exit,
-};
-
 class HotkeyInfo {
 public:
-    //HotkeyInfo()
+    enum HotkeyActions {
+        IncreaseVolume,
+        DecreaseVolume,
+        SetVolume,
+        Mute,
+        VolumeSlider,
+        Settings,
+        Exit,
+    };
     static std::vector<std::wstring> ActionNames;
+
+
+public:
+    //HotkeyInfo()
 
 };

@@ -21,11 +21,11 @@ private:
     void SelectItem(int idx);
 
 private:
+    CComboBox _action;
     CButton _keys;
     CListCtrl _list;
     afx_msg void OnBnClickedAdd();
     afx_msg void OnBnClickedRemove();
     afx_msg void OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult);
-public:
     afx_msg void OnBnClickedKeys();
 };

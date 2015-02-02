@@ -10,6 +10,7 @@ public:
         SetVolume,
         Mute,
         VolumeSlider,
+        RunApp,
         Settings,
         Exit,
     };
@@ -17,6 +18,5 @@ public:
 
 
 public:
-    //HotkeyInfo()
 
 };

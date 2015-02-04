@@ -91,7 +91,15 @@ void Hotkeys::OnBnClickedRemove() {
 
 void Hotkeys::OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult) {
     LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
-    // TODO: Add your control notification handler code here
+
+    if (pNMLV->uChanged & LVIF_STATE) {
+        if (pNMLV->uNewState & LVIS_SELECTED) {
+            int sel = pNMLV->iItem;
+            OutputDebugString(std::to_wstring(sel).c_str());
+            OutputDebugString(L"\n");
+        }
+    }
+
     *pResult = 0;
 }
 

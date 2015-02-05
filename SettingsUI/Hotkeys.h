@@ -2,6 +2,10 @@
 #include "afxwin.h"
 #include "afxcmn.h"
 
+#include <vector>
+
+#include "HotkeyInfo.h"
+
 class Hotkeys : public CPropertyPage {
 	DECLARE_DYNAMIC(Hotkeys)
 
@@ -9,15 +13,15 @@ public:
 	Hotkeys();
 	virtual ~Hotkeys();
 
-// Dialog Data
 	enum { IDD = IDD_HOTKEYS };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	virtual void DoDataExchange(CDataExchange* pDX);
     virtual BOOL OnInitDialog();
 	DECLARE_MESSAGE_MAP()
 
 private:
+    std::vector<HotkeyInfo> _keyInfo;
     void SelectItem(int idx);
 
 private:

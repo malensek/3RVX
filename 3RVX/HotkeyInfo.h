@@ -16,7 +16,8 @@ public:
     };
     static std::vector<std::wstring> ActionNames;
 
-
 public:
+    int keyCombination;
+    int action;
 
 };

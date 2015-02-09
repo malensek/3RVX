@@ -142,3 +142,8 @@ void Hotkeys::OnBnClickedKeys() {
         _keys.SetWindowText(keyStr.c_str());
     }
 }
+
+void Hotkeys::OnCbnSelchangeAction() {
+    _keyInfo[_selIdx].action = _action.GetCurSel();
+    LoadSelection(_selIdx);
+}

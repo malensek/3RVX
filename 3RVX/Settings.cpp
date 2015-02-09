@@ -256,12 +256,15 @@ std::wstring Settings::SkinXML(std::wstring skinName) {
     return skinXML;
 }
 
-std::unordered_map<int, int> Settings::Hotkeys() {
-    std::unordered_map<int, int> keyMappings;
+std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
+    std::unordered_map<int, HotkeyInfo> keyMappings;
 
     tinyxml2::XMLElement *hotkeys = _root->FirstChildElement("hotkeys");
-    tinyxml2::XMLElement *hotkey = hotkeys->FirstChildElement("hotkey");
+    if (hotkeys == NULL) {
+        return keyMappings;
+    }
 
+    tinyxml2::XMLElement *hotkey = hotkeys->FirstChildElement("hotkey");
     for (; hotkey != NULL; hotkey = hotkey->NextSiblingElement()) {
         int action = -1;
         hotkey->QueryIntAttribute("action", &action);
@@ -276,10 +279,22 @@ std::unordered_map<int, int> Settings::Hotkeys() {
             CLOG(L"No key combination provided for hotkey; skipping");
             continue;
         }
+
+        HotkeyInfo hki;
+        hki.action = action;
+        hki.keyCombination = combination;
+
+        /* Does this hotkey action have any arguments? */
+        tinyxml2::XMLElement *arg = hotkey->FirstChildElement("arg");
+        for (; arg != NULL; arg = arg->NextSiblingElement()) {
+            const char *argStr = arg->GetText();
+            hki.args.push_back(StringUtils::Widen(argStr));
+        }
         
         /* Whew, we made it! */
         CLOG(L"Adding hotkey mapping: %d -> %d", combination, action);
-        keyMappings[combination] = action;
+        CLOG(L"%s", hki.ToString().c_str());
+        keyMappings[combination] = hki;
     }
 
     return keyMappings;

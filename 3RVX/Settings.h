@@ -82,7 +82,7 @@ public:
     bool SoundEffectsEnabled();
     void SoundEffectsEnabled(bool enable);
 
-    std::unordered_map<int, int> Hotkeys();
+    std::unordered_map<int, HotkeyInfo> Hotkeys();
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
 private:

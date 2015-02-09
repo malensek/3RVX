@@ -3,9 +3,12 @@
 #include "Hotkeys.h"
 #include "afxdialogex.h"
 
+#include <unordered_map>
+
 #include "HotkeyInfo.h"
 #include "HotkeyPrompt.h"
 #include "KeyGrabber.h"
+#include "Settings.h"
 
 IMPLEMENT_DYNAMIC(Hotkeys, CPropertyPage)
 
@@ -25,14 +28,30 @@ void Hotkeys::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, CMB_ACTION, _action);
 }
 
+BOOL Hotkeys::OnApply() {
+    OutputDebugString(L"-> Hotkeys\n");
+    Settings *settings = Settings::Instance();
+    settings->Hotkeys(_keyInfo);
+    UIUtils::SaveSettings(*this);
+    return CPropertyPage::OnApply();
+}
+
+
+BOOL Hotkeys::OnCommand(WPARAM wParam, LPARAM lParam) {
+    SetModified();
+    return CPropertyPage::OnCommand(wParam, lParam);
+}
+
 BOOL Hotkeys::OnInitDialog() {
     CPropertyPage::OnInitDialog();
+
+    Settings *settings = Settings::Instance();
 
     DWORD exStyle = _list.GetExtendedStyle();
     exStyle |= LVS_EX_FULLROWSELECT;
     _list.SetExtendedStyle(exStyle);
 
-    /* Set up listview */
+    /* Set up listview and editor area */
     RECT r;
     _list.GetWindowRect(&r);
     int width = r.right - r.left;
@@ -40,21 +59,21 @@ BOOL Hotkeys::OnInitDialog() {
     _list.InsertColumn(0, L"Hotkeys", NULL, (int) (width * .485));
     _list.InsertColumn(1, L"Action", NULL, (int) (width * .445));
 
-    /* Set up editor area */
     for (std::wstring action : HotkeyInfo::ActionNames) {
         _action.AddString(action.c_str());
     }
 
+    std::unordered_map<int, HotkeyInfo> hotkeys = settings->Hotkeys();
+    for (auto it = hotkeys.begin(); it != hotkeys.end(); ++it) {
+        _keyInfo.push_back(it->second);
+    }
 
-    HotkeyInfo hi;
-    hi.action = HotkeyInfo::DecreaseVolume;
-    hi.keyCombination = 3262;
-    _keyInfo.push_back(hi);
-
-    for (HotkeyInfo hi : _keyInfo) {
-        std::wstring hkStr = HotkeyManager::HotkeysToString(hi.keyCombination);
-        _list.InsertItem(0, hkStr.c_str());
-        _list.SetItemText(0, 1, HotkeyInfo::ActionNames[hi.action].c_str());
+    for (int i = 0; i < _keyInfo.size(); ++i) {
+        LoadSelection(i);
+        HotkeyInfo hki = _keyInfo[i];
+        std::wstring hkStr = HotkeyManager::HotkeysToString(hki.keyCombination);
+        _list.InsertItem(i, hkStr.c_str());
+        _list.SetItemText(i, 1, HotkeyInfo::ActionNames[hki.action].c_str());
     }
 
     SelectItem(0);
@@ -169,6 +188,7 @@ void Hotkeys::OnBnClickedKeys() {
 }
 
 void Hotkeys::OnCbnSelchangeAction() {
-    _keyInfo[_selIdx].action = _action.GetCurSel();
+    int sel = _action.GetCurSel();
+    _keyInfo[_selIdx].action = sel;
     LoadSelection(_selIdx);
 }

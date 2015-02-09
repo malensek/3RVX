@@ -51,10 +51,14 @@ BOOL CSettingsUIApp::InitInstance() {
     Hotkeys h;
     About a;
 
-    settingsSheet.AddPage(&g);
-    settingsSheet.AddPage(&d);
-    settingsSheet.AddPage(&h);
-    settingsSheet.AddPage(&a);
+    UIUtils::pages.push_back(&g);
+    UIUtils::pages.push_back(&d);
+    UIUtils::pages.push_back(&h);
+    UIUtils::pages.push_back(&a);
+
+    for (CPropertyPage *page : UIUtils::pages) {
+        settingsSheet.AddPage(page);
+    }
 
     /* Disable help for the PropertySheet and its pages */
     settingsSheet.m_psh.dwFlags &= ~(PSH_HASHELP);
@@ -65,6 +69,7 @@ BOOL CSettingsUIApp::InitInstance() {
 
     m_pMainWnd = &settingsSheet;
     INT_PTR nResponse = settingsSheet.DoModal();
+
     if (nResponse == -1) {
         TRACE(traceAppMsg, 0,
             "Warning: dialog creation failed, so application is terminating " \

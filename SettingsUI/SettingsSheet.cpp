@@ -12,7 +12,6 @@ CPropertySheet(nIDCaption, pParentWnd, iSelectPage) {
 
 SettingsSheet::SettingsSheet(LPCTSTR pszCaption, CWnd* pParentWnd, UINT iSelectPage)
     : CPropertySheet(pszCaption, pParentWnd, iSelectPage) {
-
 }
 
 SettingsSheet::~SettingsSheet() {

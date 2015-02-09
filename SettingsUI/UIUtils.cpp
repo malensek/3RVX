@@ -2,6 +2,10 @@
 
 #include <sstream>
 
+#include "Settings.h"
+
+std::vector<CPropertyPage *> UIUtils::pages = { };
+
 CString UIUtils::Capitalize(std::wstring in) {
     CString cstr(in.c_str());
     return UIUtils::Capitalize(cstr);

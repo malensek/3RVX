@@ -65,7 +65,18 @@ BOOL Hotkeys::OnInitDialog() {
 void Hotkeys::SelectItem(int idx) {
     /* First unselect the selected item (not strictly necessary in our case) */
     int sel = _list.GetSelectionMark();
-    _list.SetItemState(sel, ~LVIS_SELECTED, LVIS_SELECTED);
+    if (sel >= 0) {
+        _list.SetItemState(sel, ~LVIS_SELECTED, LVIS_SELECTED);
+    }
+
+    /* Make sure we're not selecting something out of range */
+    if (idx < 0) {
+        idx = 0;
+    }
+    int numItems = _list.GetItemCount();
+    if (idx > numItems - 1) {
+        idx = numItems - 1;
+    }
 
     /* Select the item */
     _list.SetItemState(idx, LVIS_SELECTED, LVIS_SELECTED);

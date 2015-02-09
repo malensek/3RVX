@@ -216,22 +216,29 @@ HotkeyManager::LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
     return HotkeyManager::instance->KeyProc(nCode, wParam, lParam);
 }
 
-bool HotkeyManager::IsModifier(int vk) {
+int HotkeyManager::IsModifier(int vk) {
     switch (vk) {
     case VK_MENU:
     case VK_LMENU:
     case VK_RMENU:
+        return HKM_MOD_ALT;
+
     case VK_CONTROL:
     case VK_LCONTROL:
     case VK_RCONTROL:
+        return HKM_MOD_CTRL;
+
     case VK_SHIFT:
     case VK_LSHIFT:
     case VK_RSHIFT:
+        return HKM_MOD_SHF;
+
     case VK_LWIN:
     case VK_RWIN:
-        return true;
+        return HKM_MOD_WIN;
     }
-    return false;
+
+    return 0;
 }
 
 bool HotkeyManager::IsMouseKey(int vk) {

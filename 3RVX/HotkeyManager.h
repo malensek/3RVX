@@ -43,7 +43,7 @@ public:
     void Shutdown();
 
 public:
-    static bool IsModifier(int vk);
+    static int IsModifier(int vk);
     static bool IsMouseKey(int vk);
     static int Modifiers();
     static int ModifiersAsync();

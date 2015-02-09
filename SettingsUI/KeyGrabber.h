@@ -10,15 +10,16 @@ public:
     void Grab();
     int KeyCombination();
     void SetHwnd(HWND updateHwnd);
+    bool Unhook();
 
 private:
     HWND _hWnd;
     int _keyCombination;
+    int _modifierState;
     HHOOK _keyHook;
     HHOOK _mouseHook;
 
     bool Hook();
-    bool Unhook();
 
     LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam);
     static LRESULT CALLBACK 

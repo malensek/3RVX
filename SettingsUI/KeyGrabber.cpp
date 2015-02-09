@@ -29,6 +29,8 @@ bool KeyGrabber::Unhook() {
 }
 
 void KeyGrabber::Grab() {
+    _keyCombination = 0;
+    _modifierState = 0;
     Hook();
 }
 
@@ -50,25 +52,32 @@ KeyGrabber::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
         KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT *) lParam;
 
         DWORD vk = kbInfo->vkCode;
-        int mods = HotkeyManager::ModifiersAsync();
+        int mods = HotkeyManager::IsModifier(vk);
 
-        if (HotkeyManager::IsModifier(kbInfo->vkCode)
-            || (vk == VK_ESCAPE && mods == 0)) {
+        if (mods) {
+            _modifierState |= mods;
+        }
 
-            /* Ignore modifier keys (since we determine their state manually
-             * later) and pass Esc through to let the user cancel the
-             * operation. */
+        if (mods || (vk == VK_ESCAPE && mods == 0)) {
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
 
         /* Is this an extended key? (Used for converting VKs to strings) */
         int ext = (kbInfo->flags & 0x1) << EXT_OFFSET;
 
-        _keyCombination = (mods | ext | vk);
+        _keyCombination = (_modifierState | ext | vk);
         PostMessage(_hWnd, WM_CLOSE, NULL, NULL);
-        Unhook();
 
         /* Prevent other applications from receiving this event */
+        return (LRESULT) 1;
+    }
+
+    if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+        KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT *) lParam;
+        int m = HotkeyManager::IsModifier(kbInfo->vkCode);
+        if (m) {
+            _modifierState ^= m;
+        }
         return (LRESULT) 1;
     }
 
@@ -119,15 +128,15 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     }
 
     if (keyCombo > 0) {
-        int mods = HotkeyManager::ModifiersAsync();
-        if (mods == 0 && keyCombo == VK_LBUTTON) {
+        if (_modifierState == 0 && keyCombo == VK_LBUTTON) {
             /* We require at least one modifier key with the left button. */
             return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
 
-        _keyCombination = mods + keyCombo;
+        _keyCombination = (_modifierState | keyCombo);
         PostMessage(_hWnd, WM_CLOSE, NULL, NULL);
-        Unhook();
+
+        return (LRESULT) 1;
     }
 
     return CallNextHookEx(NULL, nCode, wParam, lParam);

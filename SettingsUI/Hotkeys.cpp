@@ -104,6 +104,8 @@ void Hotkeys::OnBnClickedAdd() {
         }
     }
 
+    HotkeyInfo hi;
+    _keyInfo.push_back(hi);
     int idx = _list.InsertItem(items, L"");
     _list.SetItemText(idx, 1, L"");
     SelectItem(idx);

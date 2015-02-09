@@ -19,5 +19,6 @@ public:
 public:
     int keyCombination = 0;
     int action = -1;
+    std::vector<std::wstring> args;
 
 };

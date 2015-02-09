@@ -4,6 +4,7 @@
 #include <algorithm>
 
 #include "HotkeyActions.h"
+#include "HotkeyInfo.h"
 #include "Logger.h"
 #include "MiscUtils.h"
 #include "Skin.h"
@@ -282,6 +283,29 @@ std::unordered_map<int, int> Settings::Hotkeys() {
     }
 
     return keyMappings;
+}
+
+void Settings::Hotkeys(std::vector<HotkeyInfo> hotkeys) {
+    tinyxml2::XMLElement *hkElem = GetOrCreateElement("hotkeys");
+    hkElem->DeleteChildren();
+
+    for (HotkeyInfo hotkey : hotkeys) {
+        OutputDebugString(L"key");
+        tinyxml2::XMLElement *hk = _xml.NewElement("hotkey");
+
+        hk->SetAttribute("combination", hotkey.keyCombination);
+        hk->SetAttribute("action", hotkey.action);
+
+        if (hotkey.args.size() > 0) {
+            for (std::wstring arg : hotkey.args) {
+                tinyxml2::XMLElement *argElem = _xml.NewElement("arg");
+                argElem->SetText(StringUtils::Narrow(arg).c_str());
+                hk->InsertEndChild(argElem);
+            }
+        }
+
+        hkElem->InsertEndChild(hk);
+    }
 }
 
 bool Settings::NotifyIconEnabled() {

@@ -5,6 +5,7 @@
 
 #include "TinyXml2\tinyxml2.h"
 
+class HotkeyInfo;
 class Skin;
 
 #define SETTINGS_APP L"SettingsUI.exe"
@@ -82,6 +83,7 @@ public:
     void SoundEffectsEnabled(bool enable);
 
     std::unordered_map<int, int> Hotkeys();
+    void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
 private:
     Settings();

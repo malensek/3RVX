@@ -16,10 +16,7 @@ About::~About() {
 }
 
 BOOL About::OnApply() {
-    Settings *settings = Settings::Instance();
-
-    /* We're the last dialog to receive the apply, so save the settings. */
-    settings->Save();
+    UIUtils::SaveSettings(*this);
     return CPropertyPage::OnApply();
 }
 

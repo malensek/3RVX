@@ -85,6 +85,7 @@ BOOL Display::OnApply() {
     int hideSpeed = UIUtils::TextToInt(_speed);
     settings->HideSpeed(hideSpeed);
 
+    UIUtils::SaveSettings(*this);
     return CPropertyPage::OnApply();
 }
 

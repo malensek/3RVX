@@ -46,6 +46,7 @@ BOOL General::OnApply() {
     _skins.GetLBText(skinIdx, skinName);
     settings->CurrentSkin((LPCWSTR) skinName);
 
+    UIUtils::SaveSettings(*this);
     return CPropertyPage::OnApply();
 }
 

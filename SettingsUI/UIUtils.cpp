@@ -26,3 +26,18 @@ int UIUtils::TextToInt(CWnd &wnd) {
     wistr >> num;
     return num;
 }
+
+void UIUtils::SaveSettings(CPropertyPage &page) {
+    HWND hWnd = NULL;
+    for (CPropertyPage *page : pages) {
+        HWND test = page->m_hWnd;
+        if (IsWindow(test)) {
+            hWnd = test;
+        }
+    }
+
+    if (hWnd == page.m_hWnd) {
+        OutputDebugString(L"Saving Settings XML\n");
+        Settings::Instance()->Save();
+    }
+}

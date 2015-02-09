@@ -110,7 +110,11 @@ void Hotkeys::OnBnClickedAdd() {
 }
 
 void Hotkeys::OnBnClickedRemove() {
+    _keyInfo.erase(_keyInfo.begin() + _selIdx);
+    _list.DeleteItem(_selIdx);
 
+    /* Select the item closest to the previous selection: */
+    SelectItem(_selIdx);
 }
 
 void Hotkeys::OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult) {

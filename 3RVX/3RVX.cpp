@@ -9,6 +9,7 @@
 #include "3RVX.h"
 #include "OSD\EjectOSD.h"
 #include "OSD\VolumeOSD.h"
+#include "HotkeyInfo.h"
 #include "HotkeyManager.h"
 #include "Logger.h"
 #include "Settings.h"
@@ -23,7 +24,7 @@ VolumeOSD *vOSD;
 EjectOSD *eOSD;
 VolumeSlider *vSlide;
 
-std::unordered_map<int, int> hotkeys;
+std::unordered_map<int, HotkeyInfo> hotkeys;
 
 void init();
 HWND CreateMainWnd(HINSTANCE hInstance);
@@ -159,7 +160,7 @@ LRESULT CALLBACK WndProc(
     switch (message) {
     case WM_HOTKEY: {
         CLOG(L"Hotkey: %d", (int) wParam);
-        int action = hotkeys[(int) wParam];
+        HotkeyInfo hki = hotkeys[(int) wParam];
         break;
     }
 

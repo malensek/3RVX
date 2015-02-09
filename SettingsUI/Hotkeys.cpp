@@ -32,19 +32,32 @@ BOOL Hotkeys::OnInitDialog() {
     exStyle |= LVS_EX_FULLROWSELECT;
     _list.SetExtendedStyle(exStyle);
 
+    /* Set up listview */
     RECT r;
     _list.GetWindowRect(&r);
     int width = r.right - r.left;
 
-    _list.InsertColumn(0, L"Hotkeys", NULL, (int) (width * .465));
-    _list.InsertColumn(1, L"Action", NULL, (int) (width * .465));
+    _list.InsertColumn(0, L"Hotkeys", NULL, (int) (width * .485));
+    _list.InsertColumn(1, L"Action", NULL, (int) (width * .445));
 
-    _list.InsertItem(0, L"CTRL+ALT+OemVolumeUp");
-    _list.SetItemText(0, 1, L"Increase Volume 5% [Parallels Audio Controller]");
-
+    /* Set up editor area */
     for (std::wstring action : HotkeyInfo::ActionNames) {
         _action.AddString(action.c_str());
     }
+
+
+    HotkeyInfo hi;
+    hi.action = HotkeyInfo::DecreaseVolume;
+    hi.keyCombination = 3262;
+    _keyInfo.push_back(hi);
+
+    for (HotkeyInfo hi : _keyInfo) {
+        std::wstring hkStr = HotkeyManager::HotkeysToString(hi.keyCombination);
+        _list.InsertItem(0, hkStr.c_str());
+        _list.SetItemText(0, 1, HotkeyInfo::ActionNames[hi.action].c_str());
+    }
+
+    SelectItem(0);
 
     return TRUE;
 }

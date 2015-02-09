@@ -86,6 +86,24 @@ void Hotkeys::SelectItem(int idx) {
     _list.EnsureVisible(idx, FALSE);
 }
 
+void Hotkeys::LoadSelection(int idx) {
+    HotkeyInfo current = _keyInfo[_selIdx];
+
+    _keys.SetWindowText(L"");
+
+    if (current.keyCombination > 0) {
+        std::wstring keyStr
+            = HotkeyManager::HotkeysToString(current.keyCombination);
+        _keys.SetWindowText(keyStr.c_str());
+        _list.SetItemText(_selIdx, 0, keyStr.c_str());
+    }
+
+    if (current.action >= 0) {
+        _list.SetItemText(_selIdx, 1,
+            HotkeyInfo::ActionNames[current.action].c_str());
+    }
+    _action.SetCurSel(current.action);
+}
 BEGIN_MESSAGE_MAP(Hotkeys, CPropertyPage)
     ON_BN_CLICKED(BTN_ADD, &Hotkeys::OnBnClickedAdd)
     ON_BN_CLICKED(BTN_REMOVE, &Hotkeys::OnBnClickedRemove)

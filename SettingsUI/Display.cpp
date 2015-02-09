@@ -42,6 +42,7 @@ void Display::DoDataExchange(CDataExchange* pDX) {
 }
 
 BOOL Display::OnApply() {
+    OutputDebugString(L"-> Display\n");
     Settings *settings = Settings::Instance();
 
     settings->AlwaysOnTop(CHECKED(_onTop));

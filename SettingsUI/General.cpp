@@ -36,6 +36,7 @@ void General::DoDataExchange(CDataExchange* pDX)
 }
 
 BOOL General::OnApply() {
+    OutputDebugString(L"-> General\n");
     Settings *settings = Settings::Instance();
     RunOnStartup(CHECKED(_startup));
     settings->NotifyIconEnabled(CHECKED(_notify));

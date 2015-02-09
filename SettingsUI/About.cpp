@@ -16,6 +16,7 @@ About::~About() {
 }
 
 BOOL About::OnApply() {
+    OutputDebugString(L"-> About\n");
     UIUtils::SaveSettings(*this);
     return CPropertyPage::OnApply();
 }

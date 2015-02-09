@@ -104,11 +104,13 @@ void Hotkeys::LoadSelection(int idx) {
     }
     _action.SetCurSel(current.action);
 }
+
 BEGIN_MESSAGE_MAP(Hotkeys, CPropertyPage)
     ON_BN_CLICKED(BTN_ADD, &Hotkeys::OnBnClickedAdd)
     ON_BN_CLICKED(BTN_REMOVE, &Hotkeys::OnBnClickedRemove)
     ON_NOTIFY(LVN_ITEMCHANGED, LST_KEYS, &Hotkeys::OnLvnItemchangedKeys)
     ON_BN_CLICKED(BTN_KEYS, &Hotkeys::OnBnClickedKeys)
+    ON_CBN_SELCHANGE(CMB_ACTION, &Hotkeys::OnCbnSelchangeAction)
 END_MESSAGE_MAP()
 
 void Hotkeys::OnBnClickedAdd() {
@@ -143,8 +145,10 @@ void Hotkeys::OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult) {
     if (pNMLV->uChanged & LVIF_STATE) {
         if (pNMLV->uNewState & LVIS_SELECTED) {
             int sel = pNMLV->iItem;
+            _selIdx = sel;
             OutputDebugString(std::to_wstring(sel).c_str());
             OutputDebugString(L"\n");
+            LoadSelection(sel);
         }
     }
 
@@ -154,10 +158,13 @@ void Hotkeys::OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult) {
 void Hotkeys::OnBnClickedKeys() {
     HotkeyPrompt hkp;
     hkp.DoModal();
+    KeyGrabber::Instance()->Unhook();
     int keyCombo = KeyGrabber::Instance()->KeyCombination();
     if (keyCombo > 0) {
         std::wstring keyStr = HotkeyManager::HotkeysToString(keyCombo);
         _keys.SetWindowText(keyStr.c_str());
+        _keyInfo[_selIdx].keyCombination = keyCombo;
+        LoadSelection(_selIdx);
     }
 }
 

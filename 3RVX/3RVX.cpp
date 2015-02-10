@@ -154,6 +154,18 @@ HWND CreateMainWnd(HINSTANCE hInstance) {
     return hWnd;
 }
 
+void ProcessHotkeys(HotkeyInfo &hki) {
+    switch (hki.action) {
+    case HotkeyInfo::IncreaseVolume:
+    case HotkeyInfo::DecreaseVolume:
+    case HotkeyInfo::Mute:
+        vOSD->ProcessHotkeys(hki);
+        break;
+
+
+    }
+}
+
 LRESULT CALLBACK WndProc(
     HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
@@ -161,6 +173,7 @@ LRESULT CALLBACK WndProc(
     case WM_HOTKEY: {
         CLOG(L"Hotkey: %d", (int) wParam);
         HotkeyInfo hki = hotkeys[(int) wParam];
+        ProcessHotkeys(hki);
         break;
     }
 

@@ -20,6 +20,8 @@ public:
     void Hide();
     void HideIcon();
 
+    virtual void ProcessHotkeys(HotkeyInfo &hki);
+
 private:
     MeterWnd _mWnd;
     NotifyIcon *_icon;

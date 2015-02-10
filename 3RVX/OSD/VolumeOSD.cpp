@@ -3,9 +3,10 @@
 #include <Shlwapi.h>
 #include <string>
 
-#include "..\Slider\VolumeSlider.h"
+#include "..\HotkeyInfo.h"
 #include "..\Monitor.h"
 #include "..\Skin.h"
+#include "..\Slider\VolumeSlider.h"
 
 #define MENU_SETTINGS 0
 #define MENU_MIXER 1
@@ -166,6 +167,23 @@ void VolumeOSD::UpdateIconTip() {
         std::wstring perc = std::to_wstring((int) (v * 100.0f));
         std::wstring level = _selectedDesc + L": " + perc + L"%";
         _icon->UpdateToolTip(level);
+    }
+}
+
+void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
+    float currentVol = _volumeCtrl->Volume();
+    switch (hki.action) {
+    case HotkeyInfo::IncreaseVolume:
+        _volumeCtrl->Volume(currentVol + 0.05);
+        break;
+
+    case HotkeyInfo::DecreaseVolume:
+        _volumeCtrl->Volume(currentVol - 0.05);
+        break;
+
+    case HotkeyInfo::Mute:
+        _volumeCtrl->ToggleMute();
+        break;
     }
 }
 

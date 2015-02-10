@@ -11,6 +11,7 @@ public:
     OSD(std::wstring className, HINSTANCE hInstance = NULL);
 
     virtual void Hide() = 0;
+    virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 protected:
     HWND _hWnd;

@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "..\3RVX.h"
+#include "..\HotkeyInfo.h"
 #include "..\Monitor.h"
 
 #define DISPLAY_EDGE_OFFSET 140
@@ -91,6 +92,10 @@ void OSD::CenterWindowX(HMONITOR monitor, MeterWnd &mWnd) {
 void OSD::CenterWindowY(HMONITOR monitor, MeterWnd &mWnd) {
     const int mHeight = Monitor::Height(monitor);
     mWnd.Y(mHeight / 2 - mWnd.Height() / 2);
+}
+
+void OSD::ProcessHotkeys(HotkeyInfo &hki) {
+    
 }
 
 LRESULT CALLBACK

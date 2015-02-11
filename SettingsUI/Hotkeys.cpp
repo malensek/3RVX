@@ -68,7 +68,7 @@ BOOL Hotkeys::OnInitDialog() {
         _keyInfo.push_back(it->second);
     }
 
-    for (int i = 0; i < _keyInfo.size(); ++i) {
+    for (unsigned int i = 0; i < _keyInfo.size(); ++i) {
         LoadSelection(i);
         HotkeyInfo hki = _keyInfo[i];
         std::wstring hkStr = HotkeyManager::HotkeysToString(hki.keyCombination);

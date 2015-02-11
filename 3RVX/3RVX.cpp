@@ -167,6 +167,9 @@ void ProcessHotkeys(HotkeyInfo &hki) {
             Settings::SettingsApp().c_str(), NULL, NULL, SW_SHOWNORMAL);
         break;
 
+    case HotkeyInfo::Exit:
+        SendMessage(mainWnd, WM_CLOSE, NULL, NULL);
+        break;
     }
 }
 

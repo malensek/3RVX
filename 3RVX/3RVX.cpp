@@ -162,6 +162,10 @@ void ProcessHotkeys(HotkeyInfo &hki) {
         vOSD->ProcessHotkeys(hki);
         break;
 
+    case HotkeyInfo::Settings:
+        ShellExecute(NULL, L"open",
+            Settings::SettingsApp().c_str(), NULL, NULL, SW_SHOWNORMAL);
+        break;
 
     }
 }

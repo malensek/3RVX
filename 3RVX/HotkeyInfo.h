@@ -21,6 +21,8 @@ public:
     int action = -1;
     std::vector<std::wstring> args;
 
+    int ArgToInt(int argIdx);
+    double ArgToDouble(int argIdx);
     std::wstring ToString();
 
 };

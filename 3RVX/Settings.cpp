@@ -95,6 +95,11 @@ std::wstring Settings::AppDir() {
     return _appDir;
 }
 
+std::wstring Settings::SkinDir() {
+    return AppDir() + L"\\" + SKIN_DIR;
+}
+
+
 std::wstring Settings::SettingsApp() {
     return Settings::AppDir() + L"\\" + SETTINGS_APP;
 }

@@ -63,7 +63,7 @@ void General::LoadSettings() {
     _sounds.SetCheck(settings->SoundEffectsEnabled());
 
     /* Determine which skins are available */
-    std::list<CString> skins = FindSkins(L"../3RVX/Skins");
+    std::list<CString> skins = FindSkins(Settings::SkinDir().c_str());
     for (CString skin : skins) {
         _skins.AddString(skin);
     }

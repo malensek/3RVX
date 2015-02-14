@@ -13,6 +13,7 @@
 #define SKINERR_INVALID_CONT_BG    SKINERR + 6
 #define SKINERR_INVALID_SLIDERTYPE SKINERR + 7
 #define SKINERR_NOTFOUND           SKINERR + 8
+#define SKINERR_MISSING_XML        SKINERR + 9
 
 class Error {
 public:

@@ -73,8 +73,8 @@
       <AdditionalDependencies>Wtsapi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>robocopy /MIR /XO /NP "$(ProjectDir)Skins" "$(TargetDir)\Skins" 2&gt;&amp;1 || exit /B 0
-xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -85,7 +85,6 @@ xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
     <ClInclude Include="HotkeyInfo.h" />
     <ClInclude Include="MeterWnd\Meters\StaticImage.h" />
     <ClInclude Include="MeterWnd\Meters\VerticalBar.h" />
-    <ClInclude Include="MiscUtils.h" />
     <ClInclude Include="OSD\EjectOSD.h" />
     <ClInclude Include="HotkeyManager.h" />
     <ClInclude Include="HotkeyActions.h" />
@@ -124,7 +123,6 @@ xcopy /Y "$(ProjectDir)Settings.xml" "$(TargetDir)" || exit /B 0</Command>
     <ClCompile Include="HotkeyInfo.cpp" />
     <ClCompile Include="MeterWnd\Meters\StaticImage.cpp" />
     <ClCompile Include="MeterWnd\Meters\VerticalBar.cpp" />
-    <ClCompile Include="MiscUtils.cpp" />
     <ClCompile Include="OSD\EjectOSD.cpp" />
     <ClCompile Include="HotkeyManager.cpp" />
     <ClCompile Include="Logger.cpp" />

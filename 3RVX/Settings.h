@@ -10,6 +10,7 @@ class Skin;
 
 #define SETTINGS_APP L"SettingsUI.exe"
 #define LANG_DIR L"Languages"
+#define SKIN_DIR L"Skins"
 
 #define DEFAULT_HIDE_ANIM Settings::HideAnim::Fade
 #define DEFAULT_LANGUAGE L"English"
@@ -41,6 +42,7 @@ public:
     int Save();
 
     static std::wstring AppDir();
+    static std::wstring SkinDir();
     static std::wstring SettingsApp();
 
     std::wstring AudioDeviceID();

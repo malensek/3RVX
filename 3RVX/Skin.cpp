@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <vector>
+#include <Shlwapi.h>
 
 #include "Error.h"
 #include "MeterWnd/Meters/MeterTypes.h"
@@ -44,6 +45,10 @@ Gdiplus::Bitmap *Skin::BgImg(tinyxml2::XMLElement *element) {
     }
 
     std::wstring wBgFile = _skinDir + L"\\" + StringUtils::Widen(bgFile);
+    if (PathFileExists(wBgFile.c_str()) == FALSE) {
+        Error::ErrorMessageDie(SKINERR_NOTFOUND, wBgFile);
+    }
+
     Gdiplus::Bitmap *bg = Gdiplus::Bitmap::FromFile(wBgFile.c_str());
     return bg;
 }
@@ -169,7 +174,7 @@ Meter *Skin::LoadMeter(tinyxml2::XMLElement *meterXMLElement) {
     std::wstring img;
     if (type != "text") {
         img = ImageName(meterXMLElement);
-        if (MiscUtils::FileExists(img) == false) {
+        if (PathFileExists(img.c_str()) == FALSE) {
             Error::ErrorMessageDie(SKINERR_NOTFOUND, img);
         }
     }
@@ -300,11 +305,11 @@ SliderKnob *Skin::Knob(char *controllerName) {
 
     tinyxml2::XMLElement *slider = controller->FirstChildElement("slider");
     if (slider == NULL) {
-        /* TODO: die */
+        Error::ErrorMessageDie(SKINERR_MISSING_XML, L"<slider>");
     }
 
     std::wstring img = ImageName(slider);
-    if (MiscUtils::FileExists(img) == false) {
+    if (PathFileExists(img.c_str()) == FALSE) {
         Error::ErrorMessageDie(SKINERR_NOTFOUND, img);
     }
 

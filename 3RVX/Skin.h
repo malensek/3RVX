@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <gdiplus.h>
 #pragma comment(lib, "gdiplus.lib")
+
 #include <list>
 #include <vector>
 
@@ -14,10 +15,14 @@ class SliderKnob;
 
 #define SKINS_DIR L"Skins"
 #define SKIN_XML L"skin.xml"
+#define SKIN_DEFAULT_UNITS 10
 
 class Skin : SkinInfo {
 public:
-    Skin(std::wstring skinName);
+    Skin(std::wstring skinName) :
+        SkinInfo(skinName) {
+
+    }
 
     bool HasOSD(char *osdName);
 
@@ -25,16 +30,24 @@ public:
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     Gdiplus::Bitmap *SliderBgImg(char *controllerName);
 
-    std::list<Meter *> OSDMeters(char *osdName);
-    std::list<Meter *> SliderMeters(char *osdName);
+    std::list<Meter *> VolumeMeters();
+    std::list<Meter *> VolumeSliderMeters();
+    SliderKnob *Knob(char *controllerName);
     std::vector<HICON> Iconset(char *osdName);
 
-    SliderKnob *Knob(char *controllerName);
+    int DefaultVolumeUnits();
 
 private:
+    std::list<Meter *> _volumeMeters;
+    std::list<Meter *> _volumeSliderMeters;
+
+     std::list<Meter *> OSDMeters(char *osdName);
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);
-    tinyxml2::XMLElement *SliderXMLElement(char *controllerName);
     Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
+
+    std::list<Meter *> SliderMeters(char *osdName);   
+    tinyxml2::XMLElement *SliderXMLElement(char *controllerName);
+
     Gdiplus::Font *Font(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::StringAlignment Alignment(tinyxml2::XMLElement *meterXMLElement);
     std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);

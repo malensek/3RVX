@@ -9,9 +9,24 @@
 #include "StringUtils.h"
 #include "Slider/SliderKnob.h"
 
-Skin::Skin(std::wstring skinname) :
-SkinInfo(skinname) {
+std::list<Meter *> Skin::VolumeMeters() {
+    if (_volumeMeters.empty()) {
+        _volumeMeters = OSDMeters("volume");
+    }
 
+    return _volumeMeters;
+}
+
+std::list<Meter *> Skin::VolumeSliderMeters() {
+    if (_volumeSliderMeters.empty()) {
+        _volumeSliderMeters = SliderMeters("volume");
+    }
+
+    return _volumeSliderMeters;
+}
+
+int Skin::DefaultVolumeUnits() {
+    return DefaultOSDUnits("volume");
 }
 
 int Skin::DefaultOSDUnits(char *osdName) {

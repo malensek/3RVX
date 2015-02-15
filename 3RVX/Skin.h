@@ -17,9 +17,7 @@ class SliderKnob;
 
 class Skin : SkinInfo {
 public:
-    Skin(std::wstring skinName) :
-    SkinInfo(skinName) {
-    }
+    Skin(std::wstring skinName);
 
     bool HasOSD(char *osdName);
 

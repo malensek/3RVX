@@ -9,6 +9,12 @@
 #include "StringUtils.h"
 #include "Slider/SliderKnob.h"
 
+Skin::Skin(std::wstring skinname) :
+SkinInfo(skinname) {
+
+}
+
+
 bool Skin::HasOSD(char *osdName) {
     return (OSDXMLElement(osdName) != NULL);
 }

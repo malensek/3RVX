@@ -97,10 +97,13 @@ void VolumeOSD::LoadSkin() {
     Gdiplus::Bitmap *bg = skin->OSDBgImg("volume");
     _mWnd.BackgroundImage(bg);
 
-    std::list<Meter*> meters = skin->OSDMeters("volume");
+    std::list<Meter*> meters = skin->VolumeMeters();
     for (Meter *m : meters) {
         _mWnd.AddMeter(m);
     }
+
+    /* Default volume increment */
+    _defaultIncrement = (float) skin->DefaultVolumeUnits() / 100.0f;
 
     HMONITOR monitor = Monitor::Primary();
 
@@ -174,11 +177,11 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
     float currentVol = _volumeCtrl->Volume();
     switch (hki.action) {
     case HotkeyInfo::IncreaseVolume:
-        _volumeCtrl->Volume(currentVol + 0.05f);
+        _volumeCtrl->Volume(currentVol + _defaultIncrement);
         break;
 
     case HotkeyInfo::DecreaseVolume:
-        _volumeCtrl->Volume(currentVol - 0.05f);
+        _volumeCtrl->Volume(currentVol - _defaultIncrement);
         break;
 
     case HotkeyInfo::Mute:

@@ -37,6 +37,7 @@ private:
     std::wstring _selectedDesc;
     MeterWnd _muteWnd;
     Gdiplus::Bitmap *_muteBg;
+    float _defaultIncrement;
 
     void LoadSkin();
     void MeterLevels(float value);

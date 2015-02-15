@@ -19,7 +19,7 @@ _volumeCtrl(volumeCtrl) {
     _knob = skin->Knob("volume");
     _vertical = _knob->Vertical();
 
-    std::list<Meter*> meters = skin->SliderMeters("volume");
+    std::list<Meter*> meters = skin->VolumeSliderMeters();
     for (Meter *m : meters) {
         AddMeter(m);
     }

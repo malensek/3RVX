@@ -107,7 +107,6 @@
     <ClInclude Include="..\3RVX\HotkeyInfo.h" />
     <ClInclude Include="..\3RVX\HotkeyManager.h" />
     <ClInclude Include="..\3RVX\Logger.h" />
-    <ClInclude Include="..\3RVX\MiscUtils.h" />
     <ClInclude Include="..\3RVX\Monitor.h" />
     <ClInclude Include="..\3RVX\Settings.h" />
     <ClInclude Include="..\3RVX\SkinInfo.h" />
@@ -130,7 +129,6 @@
     <ClCompile Include="..\3RVX\HotkeyInfo.cpp" />
     <ClCompile Include="..\3RVX\HotkeyManager.cpp" />
     <ClCompile Include="..\3RVX\Logger.cpp" />
-    <ClCompile Include="..\3RVX\MiscUtils.cpp" />
     <ClCompile Include="..\3RVX\Monitor.cpp" />
     <ClCompile Include="..\3RVX\Settings.cpp" />
     <ClCompile Include="..\3RVX\SkinInfo.cpp" />

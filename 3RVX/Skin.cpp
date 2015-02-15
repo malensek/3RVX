@@ -14,6 +14,17 @@ SkinInfo(skinname) {
 
 }
 
+int Skin::DefaultOSDUnits(char *osdName) {
+    int defaultUnits = SKIN_DEFAULT_UNITS;
+
+    tinyxml2::XMLElement *osdElem = OSDXMLElement(osdName);
+    if (osdElem == NULL) {
+        return defaultUnits;
+    }
+
+    osdElem->QueryIntAttribute("defaultUnits", &defaultUnits);
+    return defaultUnits;
+}
 
 bool Skin::HasOSD(char *osdName) {
     return (OSDXMLElement(osdName) != NULL);

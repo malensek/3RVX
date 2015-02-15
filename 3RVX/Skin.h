@@ -38,4 +38,6 @@ private:
     Gdiplus::Font *Font(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::StringAlignment Alignment(tinyxml2::XMLElement *meterXMLElement);
     std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
+
+    int DefaultOSDUnits(char *osdName);
 };

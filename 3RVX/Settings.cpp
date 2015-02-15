@@ -6,7 +6,6 @@
 #include "HotkeyActions.h"
 #include "HotkeyInfo.h"
 #include "Logger.h"
-#include "MiscUtils.h"
 #include "Skin.h"
 #include "StringUtils.h"
 
@@ -233,7 +232,7 @@ void Settings::HideSpeed(int speed) {
 bool Settings::CurrentSkin(std::wstring skinName) {
     std::string name = StringUtils::Narrow(skinName);
     std::wstring xml = SkinXML(skinName);
-    if (MiscUtils::FileExists(xml) == false) {
+    if (PathFileExists(xml.c_str()) == FALSE) {
         return false;
     }
 

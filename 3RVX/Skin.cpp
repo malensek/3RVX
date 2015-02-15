@@ -6,7 +6,6 @@
 
 #include "Error.h"
 #include "MeterWnd/Meters/MeterTypes.h"
-#include "MiscUtils.h"
 #include "StringUtils.h"
 #include "Slider/SliderKnob.h"
 

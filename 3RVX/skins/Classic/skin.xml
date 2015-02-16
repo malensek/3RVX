@@ -13,11 +13,7 @@
     </volume>
 
     <mute background="OSD\mute.png"/>
-
-    <brightness background="OSD\brightness_back.png">
-      <meter type="HorizontalBar" image="OSD/meter.png" units="16"
-             x="33" y="165"/>
-    </brightness>
+    <eject background="OSD\eject.png"/>
   </osds>
 
   <sliders>

@@ -6,22 +6,20 @@
   </info>
 
   <osds>
-    <volume background="OSD/background.png">
-      <meter type="HorizontalTile" image="OSD/meter.png"
+    <volume background="OSD\volume_background.png" defaultUnits="13">
+      <meter type="HorizontalTile" image="OSD\meter.png"
              x="28" y="118" units="13"/>
-      <iconset location="Icons/Volume"/>
+      <iconset location="Icons\Volume"/>
     </volume>
 
-    <mute background="OSD/mute.png"/>
-
-    <eject background="OSD/eject.png"/>
-
+    <mute background="OSD\mute.png"/>
+    <eject background="OSD\eject.png"/>
   </osds>
 
-  <controllers>
-    <volume background="Control/back.png">
-      <slider type="horizontal" image="Control/knob.png"
+  <sliders>
+    <volume background="Slider\background.png">
+      <slider type="horizontal" image="Slider\knob.png"
               x="52" y="22" width="191" height="21"/>
     </volume>
-  </controllers>
+  </sliders>
 </skin>

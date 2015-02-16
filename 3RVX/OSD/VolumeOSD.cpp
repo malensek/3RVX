@@ -179,10 +179,12 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
     switch (hki.action) {
     case HotkeyInfo::IncreaseVolume:
         _volumeCtrl->Volume(currentVol + _defaultIncrement);
+        SendMessage(_hWnd, MSG_VOL_CHNG, NULL, NULL);
         break;
 
     case HotkeyInfo::DecreaseVolume:
         _volumeCtrl->Volume(currentVol - _defaultIncrement);
+        SendMessage(_hWnd, MSG_VOL_CHNG, NULL, NULL);
         break;
 
     case HotkeyInfo::Mute:

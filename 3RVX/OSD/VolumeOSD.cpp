@@ -103,7 +103,8 @@ void VolumeOSD::LoadSkin() {
     }
 
     /* Default volume increment */
-    _defaultIncrement = (float) skin->DefaultVolumeUnits() / 100.0f;
+    _defaultIncrement = 1.0f / (float) skin->DefaultVolumeUnits();
+    CLOG(L"Default volume increment: %f", _defaultIncrement);
 
     HMONITOR monitor = Monitor::Primary();
 

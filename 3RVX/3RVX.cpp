@@ -218,11 +218,15 @@ LRESULT CALLBACK WndProc(
             int except = (OSDType) lParam;
             switch (except) {
             case Volume:
-                eOSD->Hide();
+                if (eOSD) {
+                    eOSD->Hide();
+                }
                 break;
 
             case Eject:
-                vOSD->Hide();
+                if (vOSD) {
+                    vOSD->Hide();
+                }
                 break;
             }
 

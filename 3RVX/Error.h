@@ -5,6 +5,8 @@
 #define GENERR  (0x1 << 7)
 #define SKINERR (GENERR << 8)
 
+#define GENERR_NOTFOUND            GENERR + 1
+
 #define SKINERR_INVALID_SKIN       SKINERR + 1
 #define SKINERR_INVALID_OSD        SKINERR + 2
 #define SKINERR_INVALID_METER      SKINERR + 3

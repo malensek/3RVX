@@ -53,14 +53,14 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
     _muteWnd.HideAnimation(fOut);
     _muteWnd.VisibleDuration(800);
 
-    /* TODO: if set, we should update the volume level here to show the OSD
-     * on startup. */
-
     UpdateIcon();
     float v = _volumeCtrl->Volume();
     MeterLevels(v);
-    _mWnd.Show();
     _volumeSlider->MeterLevels(v);
+
+    /* TODO: check whether we should show the OSD on startup or not. If so, post
+     * a MSG_VOL_CHNG so that the volume level (or mute) is displayed: */
+    SendMessage(_hWnd, MSG_VOL_CHNG, NULL, NULL);
 }
 
 VolumeOSD::~VolumeOSD() {

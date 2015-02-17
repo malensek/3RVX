@@ -55,7 +55,7 @@
       <AdditionalDependencies>Wtsapi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>robocopy /MIR /XO /NP "$(ProjectDir)Skins" "$(TargetDir)\Skins" 2&gt;&amp;1 || exit /B 0</Command>
+      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)Skins" || exit /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,8 +73,7 @@
       <AdditionalDependencies>Wtsapi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)Skins" || exit /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

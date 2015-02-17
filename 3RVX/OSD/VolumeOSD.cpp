@@ -239,9 +239,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         int menuItem = LOWORD(wParam);
         switch (menuItem) {
         case MENU_SETTINGS:
-            CLOG(L"Opening Settings App: %s", Settings::SettingsApp().c_str());
-            ShellExecute(NULL, L"open",
-                Settings::SettingsApp().c_str(), NULL, NULL, SW_SHOWNORMAL);
+            Settings::LaunchSettingsApp();
             break;
 
         case MENU_MIXER: {

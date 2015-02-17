@@ -47,11 +47,12 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 
     UpdateDeviceMenu();
 
+    Settings *settings = Settings::Instance();
     FadeOut *fOut = new FadeOut();
     _mWnd.HideAnimation(fOut);
-    _mWnd.VisibleDuration(800);
+    _mWnd.VisibleDuration(settings->HideDelay());
     _muteWnd.HideAnimation(fOut);
-    _muteWnd.VisibleDuration(800);
+    _muteWnd.VisibleDuration(settings->HideDelay());
 
     UpdateIcon();
     float v = _volumeCtrl->Volume();

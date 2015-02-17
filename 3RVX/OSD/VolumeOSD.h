@@ -45,6 +45,7 @@ private:
     void UpdateIconImage();
     void UpdateIconTip();
     void UpdateDeviceMenu();
+    void UnMute();
 
     virtual LRESULT
         WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

@@ -175,21 +175,23 @@ void VolumeOSD::UpdateIconTip() {
     }
 }
 
+void VolumeOSD::UnMute() {
+    if (_volumeCtrl->Muted() == true) {
+        _volumeCtrl->Muted(false);
+    }
+}
+
 void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
     float currentVol = _volumeCtrl->Volume();
     switch (hki.action) {
     case HotkeyInfo::IncreaseVolume:
-        if (_volumeCtrl->Muted() == true) {
-            _volumeCtrl->Muted(false);
-        }
+        UnMute();
         _volumeCtrl->Volume(currentVol + _defaultIncrement);
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, NULL);
         break;
 
     case HotkeyInfo::DecreaseVolume:
-        if (_volumeCtrl->Muted() == true) {
-            _volumeCtrl->Muted(false);
-        }
+        UnMute();
         _volumeCtrl->Volume(currentVol - _defaultIncrement);
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, NULL);
         break;

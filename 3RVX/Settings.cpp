@@ -3,6 +3,7 @@
 #include <Shlwapi.h>
 #include <algorithm>
 
+#include "Error.h"
 #include "HotkeyActions.h"
 #include "HotkeyInfo.h"
 #include "Logger.h"
@@ -41,10 +42,6 @@ std::vector<std::wstring> Settings::HideAnimNames = {
     L"none",
     L"fade"
 };
-
-Settings::Settings() {
-
-}
 
 Settings *Settings::Instance() {
     if (instance == NULL) {
@@ -105,6 +102,18 @@ std::wstring Settings::SettingsApp() {
 
 std::wstring Settings::LanguagesDir() {
     return AppDir() + L"\\" + LANG_DIR;
+}
+
+void Settings::LaunchSettingsApp() {
+    std::wstring app = SettingsApp();
+
+    CLOG(L"Opening Settings App: %s", app.c_str());
+    int exec = (int) ShellExecute(
+        NULL, L"open", app.c_str(), NULL, NULL, SW_SHOWNORMAL);
+
+    if (exec <= 32) {
+        Error::ErrorMessage(GENERR_NOTFOUND, app);
+    }
 }
 
 std::wstring Settings::AudioDeviceID() {

@@ -192,7 +192,7 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
 
     case HotkeyInfo::DecreaseVolume:
         UnMute();
-        _volumeCtrl->Volume(currentVol - _defaultIncrement);
+        _volumeCtrl->Volume(currentVol - _defaultIncrement - 0.0001f);
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, NULL);
         break;
 

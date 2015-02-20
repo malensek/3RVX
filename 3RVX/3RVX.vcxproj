@@ -105,6 +105,7 @@
     <ClInclude Include="NotifyIcon.h" />
     <ClInclude Include="OSD\OSD.h" />
     <ClInclude Include="OSD\OSDType.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Skin.h" />
     <ClInclude Include="SkinInfo.h" />
@@ -150,6 +151,9 @@
     <ClCompile Include="OSD\VolumeOSD.cpp" />
     <ClCompile Include="Slider\VolumeSlider.cpp" />
     <ClCompile Include="Translator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="3RVX.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

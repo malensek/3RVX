@@ -18,8 +18,7 @@ OSD(L"3RVX-EjectDispatcher") {
     Gdiplus::Bitmap *bg = skin->OSDBgImg("eject");
     _mWnd->BackgroundImage(bg);
     _mWnd->Update();
-
-    _mWnd->VisibleDuration(800);
+    _mWnd->VisibleDuration(Settings::Instance()->HideDelay());
 
     HMONITOR monitor = Monitor::Primary();
     PositionWindow(monitor, *_mWnd);

@@ -47,11 +47,12 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 
     UpdateDeviceMenu();
 
+    Settings *settings = Settings::Instance();
     FadeOut *fOut = new FadeOut();
     _mWnd.HideAnimation(fOut);
-    _mWnd.VisibleDuration(800);
+    _mWnd.VisibleDuration(settings->HideDelay());
     _muteWnd.HideAnimation(fOut);
-    _muteWnd.VisibleDuration(800);
+    _muteWnd.VisibleDuration(settings->HideDelay());
 
     UpdateIcon();
     float v = _volumeCtrl->Volume();
@@ -174,16 +175,24 @@ void VolumeOSD::UpdateIconTip() {
     }
 }
 
+void VolumeOSD::UnMute() {
+    if (_volumeCtrl->Muted() == true) {
+        _volumeCtrl->Muted(false);
+    }
+}
+
 void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
     float currentVol = _volumeCtrl->Volume();
     switch (hki.action) {
     case HotkeyInfo::IncreaseVolume:
+        UnMute();
         _volumeCtrl->Volume(currentVol + _defaultIncrement);
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, NULL);
         break;
 
     case HotkeyInfo::DecreaseVolume:
-        _volumeCtrl->Volume(currentVol - _defaultIncrement);
+        UnMute();
+        _volumeCtrl->Volume(currentVol - _defaultIncrement - 0.0001f);
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, NULL);
         break;
 
@@ -239,9 +248,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         int menuItem = LOWORD(wParam);
         switch (menuItem) {
         case MENU_SETTINGS:
-            CLOG(L"Opening Settings App: %s", Settings::SettingsApp().c_str());
-            ShellExecute(NULL, L"open",
-                Settings::SettingsApp().c_str(), NULL, NULL, SW_SHOWNORMAL);
+            Settings::LaunchSettingsApp();
             break;
 
         case MENU_MIXER: {

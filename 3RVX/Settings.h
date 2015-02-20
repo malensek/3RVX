@@ -44,6 +44,7 @@ public:
     static std::wstring AppDir();
     static std::wstring SkinDir();
     static std::wstring SettingsApp();
+    static void LaunchSettingsApp();
 
     std::wstring AudioDeviceID();
 
@@ -88,7 +89,9 @@ public:
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
 private:
-    Settings();
+    Settings() {
+
+    }
 
     static Settings *instance;
     static std::wstring _appDir;

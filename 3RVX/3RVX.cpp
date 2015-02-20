@@ -210,8 +210,7 @@ LRESULT CALLBACK WndProc(
             break;
 
         case MSG_SETTINGS:
-            CLOG(L"Launching settings editor");
-            /* TODO: launch! */
+            Settings::LaunchSettingsApp();
             break;
 
         case MSG_HIDEOSD:

@@ -72,6 +72,10 @@ VolumeOSD::~VolumeOSD() {
 }
 
 void VolumeOSD::UpdateDeviceMenu() {
+    if (_menu == NULL || _deviceMenu == NULL) {
+        return;
+    }
+
     /* Remove any devices currently in the menu first */
     for (unsigned int i = 0; i < _deviceList.size(); ++i) {
         RemoveMenu(_deviceMenu, 0, MF_BYPOSITION);

@@ -76,7 +76,7 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)Skins" || exit /B 0</Command>
+      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || exit /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -106,7 +106,7 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)Skins" || exit /B 0</Command>
+      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || exit /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

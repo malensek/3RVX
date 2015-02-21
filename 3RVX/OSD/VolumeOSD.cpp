@@ -124,9 +124,11 @@ void VolumeOSD::LoadSkin() {
     PositionWindow(monitor, _muteWnd);
 
     /* Set up notification icon */
-    _iconImages = skin->Iconset("volume");
-    if (_iconImages.size() > 0) {
-        _icon = new NotifyIcon(_hWnd, L"3RVX", _iconImages[0]);
+    if (Settings::Instance()->NotifyIconEnabled()) {
+        _iconImages = skin->Iconset("volume");
+        if (_iconImages.size() > 0) {
+            _icon = new NotifyIcon(_hWnd, L"3RVX", _iconImages[0]);
+        }
     }
 }
 

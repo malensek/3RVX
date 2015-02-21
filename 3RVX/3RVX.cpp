@@ -104,13 +104,8 @@ LPTSTR lpCmdLine, int nCmdShow) {
 void init() {
     CLOG(L"Initializing...");
 
-    if (vOSD) {
-        delete vOSD;
-    }
-
-    if (eOSD) {
-        delete eOSD;
-    }
+    delete vOSD;
+    delete eOSD;
 
     vOSD = new VolumeOSD();
     eOSD = new EjectOSD();

@@ -31,24 +31,25 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
     _volumeSlider = new VolumeSlider(*_volumeCtrl);
 
     /* Set up context menu */
-    _menu = CreatePopupMenu();
-    _deviceMenu = CreatePopupMenu();
+    if (settings->NotifyIconEnabled()) {
+        _menu = CreatePopupMenu();
+        _deviceMenu = CreatePopupMenu();
 
-    InsertMenu(_menu, -1, MF_ENABLED, MENU_SETTINGS, L"Settings");
-    InsertMenu(_menu, -1, MF_POPUP, UINT(_deviceMenu), L"Audio Device");
-    InsertMenu(_menu, -1, MF_ENABLED, MENU_MIXER, L"Mixer");
-    InsertMenu(_menu, -1, MF_ENABLED, MENU_EXIT, L"Exit");
+        InsertMenu(_menu, -1, MF_ENABLED, MENU_SETTINGS, L"Settings");
+        InsertMenu(_menu, -1, MF_POPUP, UINT(_deviceMenu), L"Audio Device");
+        InsertMenu(_menu, -1, MF_ENABLED, MENU_MIXER, L"Mixer");
+        InsertMenu(_menu, -1, MF_ENABLED, MENU_EXIT, L"Exit");
 
-    _menuFlags = TPM_RIGHTBUTTON;
-    if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
-        _menuFlags |= TPM_RIGHTALIGN;
-    } else {
-        _menuFlags |= TPM_LEFTALIGN;
+        _menuFlags = TPM_RIGHTBUTTON;
+        if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
+            _menuFlags |= TPM_RIGHTALIGN;
+        } else {
+            _menuFlags |= TPM_LEFTALIGN;
+        }
+
+        UpdateDeviceMenu();
     }
 
-    UpdateDeviceMenu();
-
-    Settings *settings = Settings::Instance();
     FadeOut *fOut = new FadeOut();
     _mWnd.HideAnimation(fOut);
     _mWnd.VisibleDuration(settings->HideDelay());

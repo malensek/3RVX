@@ -38,6 +38,7 @@ private:
     MeterWnd _muteWnd;
     Gdiplus::Bitmap *_muteBg;
     float _defaultIncrement;
+    bool _sounds;
 
     void LoadSkin();
     void MeterLevels(float value);

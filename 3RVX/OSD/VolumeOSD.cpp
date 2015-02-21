@@ -27,6 +27,10 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
 
+    if (settings->SoundEffectsEnabled()) {
+        _sounds = true;
+    }
+
     /* Create the slider */
     _volumeSlider = new VolumeSlider(*_volumeCtrl);
 

@@ -8,11 +8,17 @@
 
 #include "UIUtils.h"
 
+static const UINT WM_3RVX_SETTINGSCTRL
+    = RegisterWindowMessage(L"WM_3RVX_SETTINGSCTRL");
+
 class CSettingsUIApp : public CWinApp {
 public:
     CSettingsUIApp();
     virtual BOOL InitInstance();
     DECLARE_MESSAGE_MAP()
+
+private:
+    HANDLE _mutex;
 };
 
 extern CSettingsUIApp theApp;

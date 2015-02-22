@@ -24,6 +24,17 @@ CSettingsUIApp::CSettingsUIApp() {
 CSettingsUIApp theApp;
 
 BOOL CSettingsUIApp::InitInstance() {
+    _mutex = CreateMutex(NULL, FALSE, L"Local\\3RVX-Settings");
+    if (GetLastError() == ERROR_ALREADY_EXISTS) {
+        if (_mutex) {
+            ReleaseMutex(_mutex);
+        }
+
+        SendMessage(HWND_BROADCAST, WM_3RVX_SETTINGSCTRL, NULL, NULL);
+        return FALSE;
+    }
+
+
     /* InitCommonControlsEx() is required on Windows XP if an application
      * manifest specifies use of ComCtl32.dll version 6 or later to enable
      * visual styles.  Otherwise, any window creation will fail. */

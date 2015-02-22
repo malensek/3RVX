@@ -11,5 +11,6 @@ public:
 
 protected:
     virtual BOOL OnInitDialog();
+    virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
     DECLARE_MESSAGE_MAP()
 };

@@ -2,6 +2,7 @@
 
 #include <sstream>
 
+#include "3RVX.h"
 #include "Settings.h"
 
 std::vector<CPropertyPage *> UIUtils::pages = { };
@@ -40,4 +41,8 @@ void UIUtils::SaveSettings(CPropertyPage &page) {
         OutputDebugString(L"Saving Settings XML\n");
         Settings::Instance()->Save();
     }
+
+
+    HWND masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
+    SendMessage(masterWnd, WM_3RVX_CONTROL, MSG_LOAD, NULL);
 }

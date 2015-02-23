@@ -5,11 +5,9 @@
 #endif
 
 #include "resource.h"		// main symbols
-
 #include "UIUtils.h"
 
-static const UINT WM_3RVX_SETTINGSCTRL
-    = RegisterWindowMessage(L"WM_3RVX_SETTINGSCTRL");
+#include "3RVX.h"
 
 class CSettingsUIApp : public CWinApp {
 public:

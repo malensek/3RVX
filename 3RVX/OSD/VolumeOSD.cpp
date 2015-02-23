@@ -71,8 +71,8 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 }
 
 VolumeOSD::~VolumeOSD() {
-    delete _deviceMenu;
-    delete _menu;
+    DestroyMenu(_deviceMenu);
+    DestroyMenu(_menu);
     delete _icon;
     delete _volumeSlider;
 }

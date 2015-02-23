@@ -28,6 +28,7 @@ std::unordered_map<int, HotkeyInfo> hotkeys;
 
 void init();
 HWND CreateMainWnd(HINSTANCE hInstance);
+void ProcessHotkeys(HotkeyInfo &hki);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 

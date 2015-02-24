@@ -59,6 +59,10 @@ _visible(false) {
     }
 }
 
+MeterWnd::~MeterWnd() {
+    DestroyWindow(_hWnd);
+}
+
 void MeterWnd::Update()
 {
     CLOG(L"Updating meter window");

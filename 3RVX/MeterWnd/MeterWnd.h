@@ -14,6 +14,7 @@ public:
     MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL,
         Animation *hideAnimation = NULL, Animation *showAnimation = NULL,
         int visibleDuration = 0);
+    ~MeterWnd();
 
 	void Update();
 

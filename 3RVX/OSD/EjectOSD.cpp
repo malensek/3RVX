@@ -6,8 +6,8 @@
 #include "..\Skin.h"
 
 EjectOSD::EjectOSD() :
-OSD(L"3RVX-EjectDispatcher") {
-    _mWnd = new MeterWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD");
+OSD(L"3RVX-EjectDispatcher"),
+_mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 
     Skin *skin = Settings::Instance()->CurrentSkin();
 
@@ -16,16 +16,19 @@ OSD(L"3RVX-EjectDispatcher") {
     }
 
     Gdiplus::Bitmap *bg = skin->OSDBgImg("eject");
-    _mWnd->BackgroundImage(bg);
-    _mWnd->Update();
-    _mWnd->VisibleDuration(Settings::Instance()->HideDelay());
+    _mWnd.BackgroundImage(bg);
+    _mWnd.Update();
+    _mWnd.VisibleDuration(Settings::Instance()->HideDelay());
 
     HMONITOR monitor = Monitor::Primary();
-    PositionWindow(monitor, *_mWnd);
+    PositionWindow(monitor, _mWnd);
+}
+
+EjectOSD::~EjectOSD() {
 }
 
 void EjectOSD::Hide() {
-    _mWnd->Hide(false);
+    _mWnd.Hide(false);
 }
 
 LRESULT
@@ -40,7 +43,7 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             if (lpdbv->dbcv_flags & DBTF_MEDIA) {
                 CLOG(L"Media volume has been removed: eject notification");
                 HideOthers(Eject);
-                _mWnd->Show();
+                _mWnd.Show();
             }
         }
     }

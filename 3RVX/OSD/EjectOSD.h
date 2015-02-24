@@ -7,11 +7,12 @@
 class EjectOSD : public OSD {
 public:
     EjectOSD();
+    ~EjectOSD();
 
     virtual void Hide();
 
 private:
-    MeterWnd *_mWnd;
+    MeterWnd _mWnd;
 
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

@@ -39,6 +39,10 @@ OSD::OSD(std::wstring className, HINSTANCE hInstance) {
     _masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
 }
 
+OSD::~OSD() {
+    DestroyWindow(_hWnd);
+}
+
 void OSD::HideOthers(OSDType except = All) {
     SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEOSD, except);
 }
@@ -101,13 +105,13 @@ void OSD::ProcessHotkeys(HotkeyInfo &hki) {
 LRESULT CALLBACK
 OSD::StaticWndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    OSD* osd;
+    OSD *osd;
 
     if (message == WM_CREATE) {
-        osd = (OSD*) ((LPCREATESTRUCT) lParam)->lpCreateParams;
+        osd = (OSD *) ((LPCREATESTRUCT) lParam)->lpCreateParams;
         SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR) osd);
     } else {
-        osd = (OSD*) GetWindowLongPtr(hWnd, GWLP_USERDATA);
+        osd = (OSD *) GetWindowLongPtr(hWnd, GWLP_USERDATA);
         if (!osd) {
             return DefWindowProc(hWnd, message, wParam, lParam);
         }

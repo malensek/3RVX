@@ -9,6 +9,7 @@
 class OSD {
 public:
     OSD(std::wstring className, HINSTANCE hInstance = NULL);
+    ~OSD();
 
     virtual void Hide() = 0;
     virtual void ProcessHotkeys(HotkeyInfo &hki);

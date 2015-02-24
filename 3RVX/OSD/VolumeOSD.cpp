@@ -75,6 +75,7 @@ VolumeOSD::~VolumeOSD() {
     DestroyMenu(_menu);
     delete _icon;
     delete _volumeSlider;
+    _volumeCtrl->Dispose();
 }
 
 void VolumeOSD::UpdateDeviceMenu() {

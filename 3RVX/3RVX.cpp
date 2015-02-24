@@ -109,8 +109,11 @@ void init() {
     delete vOSD;
     delete eOSD;
 
-    vOSD = new VolumeOSD();
+    Settings::Instance()->Reload();
+
     eOSD = new EjectOSD();
+    vOSD = new VolumeOSD();
+
     if (hkManager != NULL) {
         hkManager->Shutdown();
     }

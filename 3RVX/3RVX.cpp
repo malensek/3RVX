@@ -24,6 +24,7 @@ VolumeOSD *vOSD;
 EjectOSD *eOSD;
 VolumeSlider *vSlide;
 
+HotkeyManager *hkManager;
 std::unordered_map<int, HotkeyInfo> hotkeys;
 
 void init();
@@ -110,12 +111,15 @@ void init() {
 
     vOSD = new VolumeOSD();
     eOSD = new EjectOSD();
+    if (hkManager != NULL) {
+        hkManager->Shutdown();
+    }
+    hkManager = HotkeyManager::Instance(mainWnd);
 
     hotkeys = Settings::Instance()->Hotkeys();
-    HotkeyManager *hkm = HotkeyManager::Instance(mainWnd);
     for (auto it = hotkeys.begin(); it != hotkeys.end(); ++it) {
         int combination = it->first;
-        hkm->Register(combination);
+        hkManager->Register(combination);
     }
 
     WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);

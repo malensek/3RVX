@@ -6,13 +6,15 @@
 #include "..\Controllers\Volume\VolumeController.h"
 #include "..\MeterWnd\Animations\FadeOut.h"
 #include "..\MeterWnd\MeterWnd.h"
+#include "..\MeterWnd\MeterCallbackReceiver.h"
 #include "..\NotifyIcon.h"
+#include "..\SoundPlayer.h"
 #include "OSD.h"
 
 class Skin;
 class VolumeSlider;
 
-class VolumeOSD : public OSD {
+class VolumeOSD : public OSD, MeterCallbackReceiver {
 public:
     VolumeOSD();
     ~VolumeOSD();
@@ -39,9 +41,11 @@ private:
     Gdiplus::Bitmap *_muteBg;
     float _defaultIncrement;
     bool _sounds;
+    SoundPlayer *_soundPlayer;
 
     void LoadSkin();
     void MeterLevels(float value);
+    virtual void MeterChangeCallback(int units);
     void UpdateIcon();
     void UpdateIconImage();
     void UpdateIconTip();

@@ -4,6 +4,7 @@
 #include <string>
 
 #include "..\HotkeyInfo.h"
+#include "..\MeterWnd\Meters\CallbackMeter.h"
 #include "..\Monitor.h"
 #include "..\Skin.h"
 #include "..\Slider\VolumeSlider.h"
@@ -116,6 +117,11 @@ void VolumeOSD::LoadSkin() {
         _mWnd.AddMeter(m);
     }
 
+    /* Add a callback meter with the default volume increment for sounds */
+    CallbackMeter *callbackMeter = new CallbackMeter(
+        skin->DefaultVolumeUnits(), *this);
+    _mWnd.AddMeter(callbackMeter);
+
     /* Default volume increment */
     _defaultIncrement = (float) (10000 / skin->DefaultVolumeUnits()) / 10000.0f;
     CLOG(L"Default volume increment: %f", _defaultIncrement);
@@ -137,11 +143,20 @@ void VolumeOSD::LoadSkin() {
             _icon = new NotifyIcon(_hWnd, L"3RVX", _iconImages[0]);
         }
     }
+
+    /* Enable sound effects, if any */
+    if (settings->SoundEffectsEnabled()) {
+        _soundPlayer = new SoundPlayer();
+    }
 }
 
 void VolumeOSD::MeterLevels(float level) {
     _mWnd.MeterLevels(level);
     _mWnd.Update();
+}
+
+void VolumeOSD::MeterChangeCallback(int units) {
+    CLOG(L"got callback");
 }
 
 void VolumeOSD::Hide() {

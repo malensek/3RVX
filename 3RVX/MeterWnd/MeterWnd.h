@@ -71,6 +71,7 @@ protected:
     void UpdateLayeredWnd();
     void UpdateLocation();
     void UpdateTransparency();
+    void ApplyGlass(Gdiplus::Bitmap *glassMask);
 
     void AnimateOut();
     void AnimateIn();

@@ -64,8 +64,8 @@ void HotkeyManager::Register(int keyCombination) {
         _keyCombinations.insert(keyCombination);
     }
 
-    /* get VK_* value; includes unused bits */
-    int vk = 0xFFFF & keyCombination;
+    /* get VK_* value; */
+    int vk = 0xFF & keyCombination;
 
     if ((keyCombination >> 20) > 0 /* uses a HKM_MOUSE_* flag */
         || vk == VK_LBUTTON

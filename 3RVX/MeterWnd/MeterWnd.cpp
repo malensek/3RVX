@@ -1,4 +1,6 @@
 #include "MeterWnd.h"
+#include <dwmapi.h>
+#pragma comment(lib, "dwmapi.lib")
 
 #include "Animation.h"
 
@@ -154,6 +156,52 @@ void MeterWnd::UpdateTransparency() {
     lwInfo.psize = NULL;
 
     UpdateLayeredWindowIndirect(_hWnd, &lwInfo);
+}
+
+void MeterWnd::ApplyGlass(Gdiplus::Bitmap *glassMask) {
+    using namespace Gdiplus;
+    Color searchColor(0, 0, 0);
+    ARGB searchArgb = 0xFF000000;
+
+    unsigned int height = glassMask->GetHeight();
+    unsigned int width = glassMask->GetWidth();
+
+    Region reg;
+    reg.MakeEmpty();
+    bool match = false;
+    Rect rec(0, 0, 0, 1); //scan one row of pixels at a time
+
+    for (unsigned int y = 0; y < height; ++y) {
+        for (unsigned int x = 0; x < width; ++x) {
+            Color pixelColor;
+            glassMask->GetPixel(x, y, &pixelColor);
+            ARGB pixelArgb = pixelColor.GetValue();
+
+            if ((searchArgb & pixelArgb) == searchArgb && (x + 1 != width)) {
+                if (match) {
+                    continue;
+                }
+
+                match = true;
+                rec.X = x;
+                rec.Y = y;
+            } else if (match) {
+                match = false;
+                rec.Width = x - rec.X;
+                reg.Union(rec);
+            }
+        }
+    }
+
+    DWM_BLURBEHIND blurBehind = { 0 };
+    blurBehind.dwFlags = DWM_BB_ENABLE | DWM_BB_BLURREGION;
+    blurBehind.fEnable = true;
+
+    Graphics g(glassMask);
+    HRGN hReg = reg.GetHRGN(&g);
+    blurBehind.hRgnBlur = reg.GetHRGN(&g);
+
+    DwmEnableBlurBehindWindow(_hWnd, &blurBehind);
 }
 
 //

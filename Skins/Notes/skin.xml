@@ -6,17 +6,17 @@
   </info>
 
   <osds>
-    <volume background="OSD/background.png">
+    <volume background="OSD\volume_background.png">
       <meter
         type="HorizontalTile"
-        image="OSD/bars.png"
+        image="OSD\bars.png"
         x="129"
         y="26"
         units="23"
       />
       <meter
         type="NumberStrip"
-        image="OSD/numbers.png"
+        image="OSD\numbers.png"
         align="right"
         units="100"
         x="255"
@@ -24,31 +24,20 @@
       />
     </volume>
 
-    <mute background="OSD/mute.png"/>
-
-    <brightness background="OSD/background.png">
-      <meter 
-        type  = "HorizontalBar"
-        image = "OSD/meter.png"
-        units = "16" 
-        x     = "33" 
-        y     = "165" 
-      />
-    </brightness>
+    <mute background="OSD\mute.png"/>
+    <eject background="OSD\eject.png"/>
   </osds>
 
-  <controller>
-    <slider 
-      type  = "vertical"
-      x     = "26"
-      y     = "20"
-      width = "17"
-      height= "98"
-    />
-
-    <muteButton 
-      x     = "5"
-      y     = "5"
-    />
-  </controller>
+  <sliders>
+    <volume background="Slider\background.png">
+      <slider
+        type="vertical"
+        image="Slider\knob.png"
+        x="32"
+        y="20"
+        width="5"
+        height="98"
+      />
+    </volume>
+  </sliders>
 </skin>

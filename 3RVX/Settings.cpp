@@ -38,7 +38,7 @@ std::vector<std::wstring> Settings::OSDPosNames = {
 	L"bottomright",
 	L"topright",
 	L"bottomleft",
-	L"topleft"
+	L"topleft",
     L"custom"
 };
 

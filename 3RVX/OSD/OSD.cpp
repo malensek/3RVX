@@ -48,60 +48,64 @@ void OSD::HideOthers(OSDType except = All) {
 }
 
 void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
-	Settings::OSDPos pos = Settings::Instance()->OSDPosition();
+    Settings::OSDPos pos = Settings::Instance()->OSDPosition();
 
-	if (pos == Settings::OSDPos::Custom) {
-		int customX = Settings::Instance()->OSDX();
-		int customY = Settings::Instance()->OSDY();
-		mWnd.X(customX);
-		mWnd.Y(customY);
-		return;
-	}
+    if (pos == Settings::OSDPos::Custom) {
+        int customX = Settings::Instance()->OSDX();
+        int customY = Settings::Instance()->OSDY();
+        mWnd.X(customX);
+        mWnd.Y(customY);
+        return;
+    }
 
-	CenterWindowX(monitor, mWnd);
-	CenterWindowY(monitor, mWnd);
-	if (pos == Settings::OSDPos::Center) {
-		return;
-	}
+    CenterWindowX(monitor, mWnd);
+    CenterWindowY(monitor, mWnd);
+    if (pos == Settings::OSDPos::Center) {
+        return;
+    }
 
-	/* We're centered. Now adjust based on top, bottom, left, or right: */
-	const int mWidth = Monitor::Width(monitor);
-	const int mHeight = Monitor::Height(monitor);
-	int offset = Settings::Instance()->OSDEdgeOffset();
+    /* We're centered. Now adjust based on top, bottom, left, or right: */
+    const int mWidth = Monitor::Width(monitor);
+    const int mHeight = Monitor::Height(monitor);
+    int offset = Settings::Instance()->OSDEdgeOffset();
 
-	switch (pos) {
-	case Settings::Top:
-		mWnd.Y(offset);
-		break;
+    switch (pos) {
+    case Settings::Top:
+        mWnd.Y(offset);
+        break;
 
-	case Settings::Bottom:
-		mWnd.Y(mHeight - mWnd.Height() - offset);
-		break;
+    case Settings::Bottom:
+        mWnd.Y(mHeight - mWnd.Height() - offset);
+        break;
 
-	case Settings::Left:
-		mWnd.X(offset);
-		break;
+    case Settings::Left:
+        mWnd.X(offset);
+        break;
 
-	case Settings::Right:
-		mWnd.X(mWidth - mWnd.Width() - offset);
-		break;
-	case Settings::Bottomright:
-		mWnd.X(mWidth - mWnd.Width() - offset);
-		mWnd.Y(mHeight - mWnd.Height() - offset);
-		break;
-	case Settings::Bottomleft:
-		mWnd.X(offset);
-		mWnd.Y(mHeight - mWnd.Height() - offset);
-		break;
-	case Settings::Topright:
-		mWnd.X(mWidth - mWnd.Width() - offset);
-		mWnd.Y(offset);
-		break;
-	case Settings::Topleft:
-		mWnd.X(offset);
-		mWnd.Y(offset);
-		break;
-	}
+    case Settings::Right:
+        mWnd.X(mWidth - mWnd.Width() - offset);
+        break;
+
+    case Settings::TopLeft:
+        mWnd.X(offset);
+        mWnd.Y(offset);
+        break;
+
+    case Settings::TopRight:
+        mWnd.X(mWidth - mWnd.Width() - offset);
+        mWnd.Y(offset);
+        break;
+
+    case Settings::BottomLeft:
+        mWnd.X(offset);
+        mWnd.Y(mHeight - mWnd.Height() - offset);
+        break;
+
+    case Settings::BottomRight:
+        mWnd.X(mWidth - mWnd.Width() - offset);
+        mWnd.Y(mHeight - mWnd.Height() - offset);
+        break;
+    }
 }
 
 void OSD::CenterWindowX(HMONITOR monitor, MeterWnd &mWnd) {
@@ -115,12 +119,12 @@ void OSD::CenterWindowY(HMONITOR monitor, MeterWnd &mWnd) {
 }
 
 void OSD::ProcessHotkeys(HotkeyInfo &hki) {
-    
+
 }
 
 LRESULT CALLBACK
 OSD::StaticWndProc(
-        HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     OSD *osd;
 
     if (message == WM_CREATE) {

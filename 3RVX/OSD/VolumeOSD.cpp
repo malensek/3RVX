@@ -107,7 +107,8 @@ void VolumeOSD::UpdateDeviceMenu() {
 }
 
 void VolumeOSD::LoadSkin() {
-    Skin *skin = Settings::Instance()->CurrentSkin();
+    Settings *settings = Settings::Instance();
+    Skin *skin = settings->CurrentSkin();
 
     Gdiplus::Bitmap *bg = skin->OSDBgImg("volume");
     _mWnd.BackgroundImage(bg);
@@ -137,7 +138,7 @@ void VolumeOSD::LoadSkin() {
     PositionWindow(monitor, _muteWnd);
 
     /* Set up notification icon */
-    if (Settings::Instance()->NotifyIconEnabled()) {
+    if (settings->NotifyIconEnabled()) {
         _iconImages = skin->Iconset("volume");
         if (_iconImages.size() > 0) {
             _icon = new NotifyIcon(_hWnd, L"3RVX", _iconImages[0]);
@@ -146,7 +147,7 @@ void VolumeOSD::LoadSkin() {
 
     /* Enable sound effects, if any */
     if (settings->SoundEffectsEnabled()) {
-        _soundPlayer = new SoundPlayer();
+        //_soundPlayer = new SoundPlayer();
     }
 }
 

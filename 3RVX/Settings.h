@@ -32,6 +32,10 @@ public:
         Right,
         Bottom,
         Center,
+		Bottomright,
+		Topright,
+		Bottomleft,
+		Topleft,
         Custom
     };
     static std::vector<std::wstring> OSDPosNames;

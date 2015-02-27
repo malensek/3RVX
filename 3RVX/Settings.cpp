@@ -35,7 +35,11 @@ std::vector<std::wstring> Settings::OSDPosNames = {
     L"right",
     L"bottom",
     L"center",
-    L"custom",
+	L"bottomright",
+	L"topright",
+	L"bottomleft",
+	L"topleft"
+    L"custom"
 };
 
 std::vector<std::wstring> Settings::HideAnimNames = {

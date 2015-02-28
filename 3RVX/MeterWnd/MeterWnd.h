@@ -43,6 +43,7 @@ public:
     void VisibleDuration(int duration);
 
     void BackgroundImage(Gdiplus::Bitmap *background);
+    void GlassMask(Gdiplus::Bitmap *mask);
 
 protected:
     HINSTANCE _hInstance;
@@ -58,6 +59,7 @@ protected:
 	Gdiplus::Bitmap *_background;
 	Gdiplus::Bitmap *_composite;
     RECT *_dirtyRect;
+	Gdiplus::Bitmap *_glassMask;
 
     std::list<Meter*> _meters;
 
@@ -71,7 +73,7 @@ protected:
     void UpdateLayeredWnd();
     void UpdateLocation();
     void UpdateTransparency();
-    void ApplyGlass(Gdiplus::Bitmap *glassMask);
+    void ApplyGlass();
 
     void AnimateOut();
     void AnimateIn();

@@ -2,6 +2,11 @@
 #include "Functiondiscoverykeys_devpkey.h"
 #include "../../Logger.h"
 
+// {EC9CB649-7E84-4B42-B367-7FC39BE17806}
+static const GUID G3RVXCoreAudioEvent = { 0xec9cb649, 0x7e84, 0x4b42,
+    { 0xb3, 0x67, 0x7f, 0xc3, 0x9b, 0xe1, 0x78, 0x6 } };
+
+ 
 HRESULT CoreAudio::Init() {
     HRESULT hr;
 
@@ -84,7 +89,12 @@ void CoreAudio::DetachDevice() {
 }
 
 HRESULT CoreAudio::OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) {
-    PostMessage(_notifyHwnd, MSG_VOL_CHNG, 0, 0);
+    if (pNotify->guidEventContext == G3RVXCoreAudioEvent) {
+        PostMessage(_notifyHwnd, MSG_VOL_CHNG, (WPARAM) 1, NULL);
+    } else {
+        PostMessage(_notifyHwnd, MSG_VOL_CHNG, NULL, NULL);
+    }
+
     return S_OK;
 }
 
@@ -229,7 +239,7 @@ void CoreAudio::Volume(float vol) {
     }
 
     if (_volumeControl) {
-        _volumeControl->SetMasterVolumeLevelScalar(vol, NULL);
+        _volumeControl->SetMasterVolumeLevelScalar(vol, &G3RVXCoreAudioEvent);
     }
 }
 
@@ -246,7 +256,7 @@ bool CoreAudio::Muted() {
 
 void CoreAudio::Muted(bool muted) {
     if (_volumeControl) {
-        _volumeControl->SetMute(muted, NULL);
+        _volumeControl->SetMute(muted, &G3RVXCoreAudioEvent);
     }
 }
 

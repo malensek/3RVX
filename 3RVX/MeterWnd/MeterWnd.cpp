@@ -353,6 +353,8 @@ LRESULT MeterWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
             AnimateOut();
             break;
         }
+    } else if (message == WM_DWMCOMPOSITIONCHANGED) {
+        ApplyGlass();
     }
 
     return DefWindowProc(_hWnd, message, wParam, lParam);

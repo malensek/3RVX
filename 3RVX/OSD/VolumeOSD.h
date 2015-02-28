@@ -42,6 +42,7 @@ private:
     float _defaultIncrement;
     bool _sounds;
     SoundPlayer *_soundPlayer;
+    float _previousVolume;
 
     void LoadSkin();
     void MeterLevels(float value);

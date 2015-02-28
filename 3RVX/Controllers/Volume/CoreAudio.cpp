@@ -36,9 +36,11 @@ HRESULT CoreAudio::AttachDevice() {
         /* Use default device */
         hr = _devEnumerator->GetDefaultAudioEndpoint(eRender,
             eMultimedia, &_device);
-        LPWSTR id;
-        _device->GetId(&id);
-        _devId = std::wstring(id);
+        if (SUCCEEDED(hr)) {
+            LPWSTR id;
+            _device->GetId(&id);
+            _devId = std::wstring(id);
+        }
     } else {
         hr = _devEnumerator->GetDevice(_devId.c_str(), &_device);
     }
@@ -187,6 +189,10 @@ std::wstring CoreAudio::DeviceName(CComPtr<IMMDevice> device) {
 }
 
 std::wstring CoreAudio::DeviceDesc(CComPtr<IMMDevice> device) {
+    if (device == NULL) {
+        return L"";
+    }
+
     IPropertyStore *props = NULL;
     HRESULT hr = device->OpenPropertyStore(STGM_READ, &props);
 
@@ -207,7 +213,9 @@ std::wstring CoreAudio::DeviceDesc(CComPtr<IMMDevice> device) {
 
 float CoreAudio::Volume() {
     float vol = 0.0f;
-    _volumeControl->GetMasterVolumeLevelScalar(&vol);
+    if (_volumeControl) {
+        _volumeControl->GetMasterVolumeLevelScalar(&vol);
+    }
     return vol;
 }
 
@@ -220,10 +228,16 @@ void CoreAudio::Volume(float vol) {
         vol = 0.0f;
     }
 
-    _volumeControl->SetMasterVolumeLevelScalar(vol, NULL);
+    if (_volumeControl) {
+        _volumeControl->SetMasterVolumeLevelScalar(vol, NULL);
+    }
 }
 
 bool CoreAudio::Muted() {
+    if (_volumeControl == NULL) {
+        return true;
+    }
+
     BOOL muted = FALSE;
     _volumeControl->GetMute(&muted);
 
@@ -231,7 +245,9 @@ bool CoreAudio::Muted() {
 }
 
 void CoreAudio::Muted(bool muted) {
-    _volumeControl->SetMute(muted, NULL);
+    if (_volumeControl) {
+        _volumeControl->SetMute(muted, NULL);
+    }
 }
 
 ULONG CoreAudio::AddRef() {

@@ -158,13 +158,17 @@ void MeterWnd::UpdateTransparency() {
     UpdateLayeredWindowIndirect(_hWnd, &lwInfo);
 }
 
-void MeterWnd::ApplyGlass(Gdiplus::Bitmap *glassMask) {
+void MeterWnd::ApplyGlass() {
+    if (_glassMask == NULL) {
+        return;
+    }
+
     using namespace Gdiplus;
     Color searchColor(0, 0, 0);
     ARGB searchArgb = 0xFF000000;
 
-    unsigned int height = glassMask->GetHeight();
-    unsigned int width = glassMask->GetWidth();
+    unsigned int height = _glassMask->GetHeight();
+    unsigned int width = _glassMask->GetWidth();
 
     Region reg;
     reg.MakeEmpty();
@@ -174,7 +178,7 @@ void MeterWnd::ApplyGlass(Gdiplus::Bitmap *glassMask) {
     for (unsigned int y = 0; y < height; ++y) {
         for (unsigned int x = 0; x < width; ++x) {
             Color pixelColor;
-            glassMask->GetPixel(x, y, &pixelColor);
+            _glassMask->GetPixel(x, y, &pixelColor);
             ARGB pixelArgb = pixelColor.GetValue();
 
             if ((searchArgb & pixelArgb) == searchArgb && (x + 1 != width)) {
@@ -197,7 +201,7 @@ void MeterWnd::ApplyGlass(Gdiplus::Bitmap *glassMask) {
     blurBehind.dwFlags = DWM_BB_ENABLE | DWM_BB_BLURREGION;
     blurBehind.fEnable = true;
 
-    Graphics g(glassMask);
+    Graphics g(_glassMask);
     HRGN hReg = reg.GetHRGN(&g);
     blurBehind.hRgnBlur = reg.GetHRGN(&g);
 
@@ -237,6 +241,11 @@ void MeterWnd::BackgroundImage(Gdiplus::Bitmap *background) {
     _background = background;
     _size.cx = background->GetWidth();
     _size.cy = background->GetHeight();
+}
+
+void MeterWnd::GlassMask(Gdiplus::Bitmap *mask) {
+    _glassMask = mask;
+    ApplyGlass();
 }
 
 void MeterWnd::Show(bool animate) {

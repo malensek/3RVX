@@ -10,7 +10,12 @@ static const GUID G3RVXCoreAudioEvent = { 0xec9cb649, 0x7e84, 0x4b42,
 HRESULT CoreAudio::Init() {
     HRESULT hr;
 
-    hr = _devEnumerator.CoCreateInstance(__uuidof(MMDeviceEnumerator));
+    hr = CoCreateInstance(
+        __uuidof(MMDeviceEnumerator),
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_PPV_ARGS(&_devEnumerator));
+
     if (SUCCEEDED(hr)) {
         hr = _devEnumerator->RegisterEndpointNotificationCallback(this);
 
@@ -33,8 +38,6 @@ void CoreAudio::Dispose() {
 }
 
 HRESULT CoreAudio::AttachDevice() {
-    _critSect.Enter();
-
     HRESULT hr;
 
     if (_devId.empty()) {
@@ -64,13 +67,10 @@ HRESULT CoreAudio::AttachDevice() {
         CLOG(L"Failed to find audio device!");
     }
 
-    _critSect.Leave();
     return hr;
 }
 
 void CoreAudio::DetachDevice() {
-    _critSect.Enter();
-
     if (_volumeControl != NULL) {
 
         if (_registeredNotifications) {
@@ -78,14 +78,12 @@ void CoreAudio::DetachDevice() {
             _registeredNotifications = false;
         }
 
-        _volumeControl.Release();
+        _volumeControl->Release();
     }
 
     if (_device != NULL) {
-        _device.Release();
+        _device->Release();
     }
-
-    _critSect.Leave();
 }
 
 HRESULT CoreAudio::OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) {
@@ -124,35 +122,40 @@ HRESULT CoreAudio::SelectDefaultDevice() {
 }
 
 std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
-    _critSect.Enter();
+    std::list<VolumeController::DeviceInfo> devList;
+    IMMDeviceCollection *devices;
 
-    CComPtr<IMMDeviceCollection> devices;
-    _devEnumerator->EnumAudioEndpoints(
+    HRESULT hr = _devEnumerator->EnumAudioEndpoints(
         eRender,
         DEVICE_STATE_ACTIVE | DEVICE_STATE_UNPLUGGED,
         &devices);
 
+    if (FAILED(hr)) {
+        devices->Release();
+        return devList;
+    }
+
     UINT numDevices = 0;
     devices->GetCount(&numDevices);
-
     LPWSTR devId;
-
-    std::list<VolumeController::DeviceInfo> devList;
-
     for (unsigned int i = 0; i < numDevices; ++i) {
-        CComPtr<IMMDevice> device;
-        devices->Item(i, &device);
-        device->GetId(&devId);
+        IMMDevice *device;
+        HRESULT hr = devices->Item(i, &device);
+        if (FAILED(hr)) {
+            continue;
+        }
 
+        device->GetId(&devId);
         std::wstring idStr(devId);
         VolumeController::DeviceInfo devInfo = {};
         devInfo.id = idStr;
         devInfo.name = DeviceName(idStr);
         devList.push_back(devInfo);
+        device->Release();
     }
 
+    devices->Release();
     return devList;
-    _critSect.Leave();
 }
 
 std::wstring CoreAudio::DeviceId() {
@@ -168,21 +171,34 @@ std::wstring CoreAudio::DeviceDesc() {
 }
 
 std::wstring CoreAudio::DeviceName(std::wstring deviceId) {
-    CComPtr<IMMDevice> device;
-    _devEnumerator->GetDevice(deviceId.c_str(), &device);
-    return DeviceName(device);
+    IMMDevice *device;
+    HRESULT hr = _devEnumerator->GetDevice(deviceId.c_str(), &device);
+    if (FAILED(hr)) {
+        return L"";
+    }
+    std::wstring name = DeviceName(device);
+    device->Release();
+    return name;
 }
 
 std::wstring CoreAudio::DeviceDesc(std::wstring deviceId) {
-    CComPtr<IMMDevice> device;
-    _devEnumerator->GetDevice(deviceId.c_str(), &device);
-    return DeviceName(device);
+    IMMDevice *device;
+    HRESULT hr = _devEnumerator->GetDevice(deviceId.c_str(), &device);
+    if (FAILED(hr)) {
+        return L"";
+    }
+    std::wstring name = DeviceName(device);
+    device->Release();
+    return name;
 }
 
-std::wstring CoreAudio::DeviceName(CComPtr<IMMDevice> device) {
+std::wstring CoreAudio::DeviceName(IMMDevice *device) {
+    if (device == NULL) {
+        return L"";
+    }
+
     IPropertyStore *props = NULL;
     HRESULT hr = device->OpenPropertyStore(STGM_READ, &props);
-
     if (FAILED(hr)) {
         return L"";
     }
@@ -198,14 +214,13 @@ std::wstring CoreAudio::DeviceName(CComPtr<IMMDevice> device) {
     return str;
 }
 
-std::wstring CoreAudio::DeviceDesc(CComPtr<IMMDevice> device) {
+std::wstring CoreAudio::DeviceDesc(IMMDevice *device) {
     if (device == NULL) {
         return L"";
     }
 
     IPropertyStore *props = NULL;
     HRESULT hr = device->OpenPropertyStore(STGM_READ, &props);
-
     if (FAILED(hr)) {
         return L"";
     }

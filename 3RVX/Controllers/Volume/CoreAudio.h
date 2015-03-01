@@ -1,7 +1,5 @@
 #pragma once
 
-#include <atlbase.h>
-#include <atlsync.h>
 #include <Endpointvolume.h>
 #include <list>
 #include <Mmdeviceapi.h>
@@ -42,22 +40,21 @@ public:
 
 private:
     std::wstring _devId;
-    CCriticalSection _critSect;
     HWND _notifyHwnd;
     long _refCount;
     bool _registeredNotifications;
 
-    CComPtr<IMMDevice> _device;
-    CComPtr<IMMDeviceEnumerator> _devEnumerator;
-    CComPtr<IAudioEndpointVolume> _volumeControl;
+    IMMDevice *_device;
+    IMMDeviceEnumerator *_devEnumerator;
+    IAudioEndpointVolume *_volumeControl;
 
     ~CoreAudio() {};
 
     HRESULT AttachDevice();
     void DetachDevice();
 
-    std::wstring DeviceName(CComPtr<IMMDevice> device);
-    std::wstring DeviceDesc(CComPtr<IMMDevice> device);
+    std::wstring DeviceName(IMMDevice *device);
+    std::wstring DeviceDesc(IMMDevice *device);
 
     /* IAudioEndpointVolumeCallback */
     IFACEMETHODIMP OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify);

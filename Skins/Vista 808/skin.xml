@@ -6,15 +6,15 @@
   </info>
 
   <osds>
-    <volume background="OSD\back.png" glassMask="OSD\glass.png" defaultUnits="15">
+    <volume background="OSD\back.png" mask="OSD\glass.png" defaultUnits="15">
       <meter type="bitstrip" image="OSD\meter.png" units="15" x="14" y="16"/>
-      <iconset location="Icons/Volume"/>
+      <iconset location="Icons\Volume"/>
     </volume>
-    <mute background="OSD\mute.png"/>
+    <mute background="OSD\mute.png" mask="OSD\glass.png"/>
   </osds>
 
   <sliders>
-    <volume background="Slider\back.png" glassMask="OSD\glass.png">
+    <volume background="Slider\back.png" mask="OSD\glass.png">
       <slider type="horizontal" image="Slider\knob.png"
               x="17" y="9" width="115" height="6"/>
     </volume>

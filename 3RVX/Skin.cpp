@@ -51,7 +51,16 @@ Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
         Error::ErrorMessageDie(SKINERR_INVALID_OSD_BG,
             StringUtils::Widen(osdName));
     }
-    return BgImg(osd);
+    return Image(osd, "background");
+}
+
+Gdiplus::Bitmap *Skin::OSDMask(char *osdName) {
+    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    if (osd == NULL) {
+        return NULL;
+    }
+
+    return Image(osd, "mask");
 }
 
 Gdiplus::Bitmap *Skin::SliderBgImg(char *sliderName) {
@@ -60,27 +69,28 @@ Gdiplus::Bitmap *Skin::SliderBgImg(char *sliderName) {
         Error::ErrorMessageDie(
             SKINERR_INVALID_CONT_BG, StringUtils::Widen(sliderName));
     }
-    return BgImg(sliderElement);
+    return Image(sliderElement, "background");
 }
 
-Gdiplus::Bitmap *Skin::BgImg(tinyxml2::XMLElement *element) {
+Gdiplus::Bitmap *Skin::Image(tinyxml2::XMLElement *element, char *attName) {
+
     if (element == NULL) {
         CLOG(L"XML Element is NULL!");
         return NULL;
     }
 
-    const char *bgFile = element->Attribute("background");
-    if (bgFile == NULL) {
-        CLOG(L"Could not load background image.");
+    const char *imgFile = element->Attribute(attName);
+    if (imgFile == NULL) {
+        CLOG(L"Could not find XML attribute");
         return NULL;
     }
 
-    std::wstring wBgFile = _skinDir + L"\\" + StringUtils::Widen(bgFile);
-    if (PathFileExists(wBgFile.c_str()) == FALSE) {
-        Error::ErrorMessageDie(SKINERR_NOTFOUND, wBgFile);
+    std::wstring wImgFile = _skinDir + L"\\" + StringUtils::Widen(imgFile);
+    if (PathFileExists(wImgFile.c_str()) == FALSE) {
+        Error::ErrorMessageDie(SKINERR_NOTFOUND, wImgFile);
     }
 
-    Gdiplus::Bitmap *bg = Gdiplus::Bitmap::FromFile(wBgFile.c_str());
+    Gdiplus::Bitmap *bg = Gdiplus::Bitmap::FromFile(wImgFile.c_str());
     return bg;
 }
 

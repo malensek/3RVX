@@ -164,7 +164,6 @@ void MeterWnd::ApplyGlass() {
     }
 
     using namespace Gdiplus;
-    Color searchColor(0, 0, 0);
     ARGB searchArgb = 0xFF000000;
 
     unsigned int height = _glassMask->GetHeight();
@@ -173,7 +172,9 @@ void MeterWnd::ApplyGlass() {
     Region reg;
     reg.MakeEmpty();
     bool match = false;
-    Rect rec(0, 0, 0, 1); //scan one row of pixels at a time
+
+    /* One row of pixels is scanned at a time, so the height is 1. */
+    Rect rec(0, 0, 0, 1);
 
     for (unsigned int y = 0; y < height; ++y) {
         for (unsigned int x = 0; x < width; ++x) {
@@ -181,7 +182,7 @@ void MeterWnd::ApplyGlass() {
             _glassMask->GetPixel(x, y, &pixelColor);
             ARGB pixelArgb = pixelColor.GetValue();
 
-            if ((searchArgb & pixelArgb) == searchArgb && (x + 1 != width)) {
+            if (searchArgb == pixelArgb && (x + 1 != width)) {
                 if (match) {
                     continue;
                 }
@@ -190,6 +191,7 @@ void MeterWnd::ApplyGlass() {
                 rec.X = x;
                 rec.Y = y;
             } else if (match) {
+                /* Reached the end of a matching line */
                 match = false;
                 rec.Width = x - rec.X;
                 reg.Union(rec);
@@ -199,7 +201,7 @@ void MeterWnd::ApplyGlass() {
 
     DWM_BLURBEHIND blurBehind = { 0 };
     blurBehind.dwFlags = DWM_BB_ENABLE | DWM_BB_BLURREGION;
-    blurBehind.fEnable = true;
+    blurBehind.fEnable = TRUE;
 
     Graphics g(_glassMask);
     HRGN hReg = reg.GetHRGN(&g);

@@ -54,11 +54,11 @@ Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     return BgImg(osd);
 }
 
-Gdiplus::Bitmap *Skin::SliderBgImg(char *controllerName) {
-    tinyxml2::XMLElement *sliderElement = SliderXMLElement(controllerName);
+Gdiplus::Bitmap *Skin::SliderBgImg(char *sliderName) {
+    tinyxml2::XMLElement *sliderElement = SliderXMLElement(sliderName);
     if (sliderElement == NULL) {
         Error::ErrorMessageDie(
-            SKINERR_INVALID_CONT_BG, StringUtils::Widen(controllerName));
+            SKINERR_INVALID_CONT_BG, StringUtils::Widen(sliderName));
     }
     return BgImg(sliderElement);
 }
@@ -327,11 +327,11 @@ Skin::Alignment(tinyxml2::XMLElement *meterXMLElement) {
     return alignment;
 }
 
-SliderKnob *Skin::Knob(char *controllerName) {
-    tinyxml2::XMLElement *controller = SliderXMLElement(controllerName);
+SliderKnob *Skin::Knob(char *sliderName) {
+    tinyxml2::XMLElement *controller = SliderXMLElement(sliderName);
     if (controller == NULL) {
         Error::ErrorMessageDie(
-            SKINERR_INVALID_CONT, StringUtils::Widen(controllerName));
+            SKINERR_INVALID_CONT, StringUtils::Widen(sliderName));
     }
 
     tinyxml2::XMLElement *slider = controller->FirstChildElement("slider");
@@ -390,11 +390,11 @@ tinyxml2::XMLElement *Skin::OSDXMLElement(char *osdName) {
     return osd;
 }
 
-tinyxml2::XMLElement *Skin::SliderXMLElement(char *controllerName) {
+tinyxml2::XMLElement *Skin::SliderXMLElement(char *sliderName) {
     tinyxml2::XMLHandle xmlHandle(_root);
     tinyxml2::XMLElement *controller = xmlHandle
         .FirstChildElement("sliders")
-        .FirstChildElement(controllerName)
+        .FirstChildElement(sliderName)
         .ToElement();
     return controller;
 }

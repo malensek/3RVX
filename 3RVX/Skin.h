@@ -28,11 +28,14 @@ public:
 
     Gdiplus::Bitmap *BgImg(tinyxml2::XMLElement *element);
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
-    Gdiplus::Bitmap *SliderBgImg(char *controllerName);
+    Gdiplus::Bitmap *SliderBgImg(char *sliderName);
+
+    Gdiplus::Bitmap *VolumeGlass();
+    Gdiplus::Bitmap *VolumeSliderGlass();
 
     std::list<Meter *> VolumeMeters();
     std::list<Meter *> VolumeSliderMeters();
-    SliderKnob *Knob(char *controllerName);
+    SliderKnob *Knob(char *sliderName);
     std::vector<HICON> Iconset(char *osdName);
 
     int DefaultVolumeUnits();
@@ -41,12 +44,12 @@ private:
     std::list<Meter *> _volumeMeters;
     std::list<Meter *> _volumeSliderMeters;
 
-     std::list<Meter *> OSDMeters(char *osdName);
+    std::list<Meter *> OSDMeters(char *osdName);
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);
     Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
 
     std::list<Meter *> SliderMeters(char *osdName);   
-    tinyxml2::XMLElement *SliderXMLElement(char *controllerName);
+    tinyxml2::XMLElement *SliderXMLElement(char *sliderName);
 
     Gdiplus::Font *Font(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::StringAlignment Alignment(tinyxml2::XMLElement *meterXMLElement);

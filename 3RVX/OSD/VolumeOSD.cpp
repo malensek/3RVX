@@ -113,6 +113,12 @@ void VolumeOSD::LoadSkin() {
     Gdiplus::Bitmap *bg = skin->OSDBgImg("volume");
     _mWnd.BackgroundImage(bg);
 
+    Gdiplus::Bitmap *mask = skin->OSDMask("volume");
+    if (mask != NULL) {
+        CLOG(L"Applying glass");
+        _mWnd.GlassMask(mask);
+    }
+
     std::list<Meter*> meters = skin->VolumeMeters();
     for (Meter *m : meters) {
         _mWnd.AddMeter(m);

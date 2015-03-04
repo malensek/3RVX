@@ -26,12 +26,11 @@ public:
 
     bool HasOSD(char *osdName);
 
-    Gdiplus::Bitmap *BgImg(tinyxml2::XMLElement *element);
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     Gdiplus::Bitmap *SliderBgImg(char *sliderName);
 
-    Gdiplus::Bitmap *VolumeGlass();
-    Gdiplus::Bitmap *VolumeSliderGlass();
+    Gdiplus::Bitmap *OSDMask();
+    Gdiplus::Bitmap *SliderMask();
 
     std::list<Meter *> VolumeMeters();
     std::list<Meter *> VolumeSliderMeters();
@@ -43,6 +42,8 @@ public:
 private:
     std::list<Meter *> _volumeMeters;
     std::list<Meter *> _volumeSliderMeters;
+
+    Gdiplus::Bitmap *BgImg(tinyxml2::XMLElement *element);
 
     std::list<Meter *> OSDMeters(char *osdName);
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);

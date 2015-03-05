@@ -113,10 +113,10 @@ void VolumeOSD::LoadSkin() {
     Gdiplus::Bitmap *bg = skin->OSDBgImg("volume");
     _mWnd.BackgroundImage(bg);
 
-    Gdiplus::Bitmap *mask = skin->OSDMask("volume");
-    if (mask != NULL) {
-        CLOG(L"Applying glass");
-        _mWnd.GlassMask(mask);
+    Gdiplus::Bitmap *volMask = skin->OSDMask("volume");
+    if (volMask != NULL) {
+        CLOG(L"Applying glass to volume OSD");
+        _mWnd.GlassMask(volMask);
     }
 
     std::list<Meter*> meters = skin->VolumeMeters();
@@ -139,6 +139,11 @@ void VolumeOSD::LoadSkin() {
     PositionWindow(monitor, _mWnd);
 
     _muteBg = skin->OSDBgImg("mute");
+    Gdiplus::Bitmap *muteMask = skin->OSDMask("mute");
+    if (muteMask != NULL) {
+        CLOG(L"Applying glass to mute OSD");
+        _muteWnd.GlassMask(muteMask);
+    }
     _muteWnd.BackgroundImage(_muteBg);
     _muteWnd.Update();
     PositionWindow(monitor, _muteWnd);

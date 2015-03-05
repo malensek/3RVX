@@ -72,6 +72,15 @@ Gdiplus::Bitmap *Skin::SliderBgImg(char *sliderName) {
     return Image(sliderElement, "background");
 }
 
+Gdiplus::Bitmap *Skin::SliderMask(char *sliderName) {
+    tinyxml2::XMLElement *slider = SliderXMLElement(sliderName);
+    if (slider == NULL) {
+        return NULL;
+    }
+
+    return Image(slider, "mask");
+}
+
 Gdiplus::Bitmap *Skin::Image(tinyxml2::XMLElement *element, char *attName) {
 
     if (element == NULL) {

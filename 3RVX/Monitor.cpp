@@ -1,5 +1,7 @@
 #include "Monitor.h"
 
+static std::unordered_map<std::wstring, HMONITOR> monitorMap;
+
 HMONITOR Monitor::Primary() {
     /* The Primary or 'Main' monitor is at (0, 0). */
     const POINT p = { 0, 0 };
@@ -40,4 +42,28 @@ std::list<DISPLAY_DEVICE> Monitor::ListAllDevices() {
         }
     }
     return devs;
+}
+
+std::unordered_map<std::wstring, HMONITOR> Monitor::MonitorMap() {
+    return monitorMap;
+}
+
+void Monitor::UpdateMonitorMap() {
+    EnumDisplayMonitors(NULL, NULL, &MonitorEnumProc, NULL);
+}
+
+BOOL CALLBACK Monitor::MonitorEnumProc(
+    HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData) {
+
+    monitorMap.clear();
+
+    MONITORINFOEX mInfo = {};
+    mInfo.cbSize = sizeof(MONITORINFOEX);
+    GetMonitorInfo(hMonitor, &mInfo);
+
+    std::wstring monitorName = std::wstring(mInfo.szDevice);
+    monitorMap[monitorName] = hMonitor;
+    OutputDebugString(L"getting monitor");
+
+    return TRUE;
 }

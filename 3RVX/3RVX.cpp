@@ -12,6 +12,7 @@
 #include "HotkeyInfo.h"
 #include "HotkeyManager.h"
 #include "Logger.h"
+#include "Monitor.h"
 #include "Settings.h"
 #include "Skin.h"
 
@@ -111,9 +112,14 @@ void init() {
 
     Settings::Instance()->Reload();
 
+    /* TODO: Detect monitor changes, update this map, and reload/reorg OSDs */
+    Monitor::UpdateMonitorMap();
+
+    /* OSDs */
     eOSD = new EjectOSD();
     vOSD = new VolumeOSD();
 
+    /* Hotkey setup */
     if (hkManager != NULL) {
         hkManager->Shutdown();
     }

@@ -7,6 +7,7 @@
 #include "HotkeyActions.h"
 #include "HotkeyInfo.h"
 #include "Logger.h"
+#include "Monitor.h"
 #include "Skin.h"
 #include "StringUtils.h"
 
@@ -152,6 +153,35 @@ void Settings::HideFullscreen(bool enable) {
 
 std::wstring Settings::Monitor() {
     return GetText(XML_MONITOR);
+}
+
+std::vector<HMONITOR> Settings::MonitorHandles() {
+    std::vector<HMONITOR> monitors;
+    std::wstring monitorStr = Monitor();
+
+    if (monitorStr == L"") {
+        /* Primary Monitor */
+        monitors.push_back(Monitor::Primary());
+        return monitors;
+    }
+    
+    if (monitorStr == L"*") {
+        /* All Monitors */
+        std::unordered_map<std::wstring, HMONITOR> map = Monitor::MonitorMap();
+        for (auto it = map.begin(); it != map.end(); ++it) {
+            monitors.push_back(it->second);
+        }
+        return monitors;
+    }
+
+    /* Specific Monitor */
+    std::unordered_map<std::wstring, HMONITOR> map = Monitor::MonitorMap();
+    for (auto it = map.begin(); it != map.end(); ++it) {
+        if (monitorStr == it->first) {
+            monitors.push_back(it->second);
+        }
+    }
+    return monitors;
 }
 
 void Settings::Monitor(std::wstring monitorName) {

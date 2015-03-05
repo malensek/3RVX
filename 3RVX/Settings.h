@@ -63,6 +63,7 @@ public:
     std::wstring LanguageName();
 
     std::wstring Monitor();
+    std::vector<HMONITOR> MonitorHandles();
     void Monitor(std::wstring monitorName);
 
     bool AlwaysOnTop();

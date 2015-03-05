@@ -16,6 +16,12 @@ _volumeCtrl(volumeCtrl) {
     Gdiplus::Bitmap *bg = skin->SliderBgImg("volume");
     BackgroundImage(bg);
 
+    Gdiplus::Bitmap *mask = skin->SliderMask("volume");
+    if (mask != NULL) {
+        CLOG(L"Applying glass to eject OSD");
+        GlassMask(mask);
+    }
+
     _knob = skin->Knob("volume");
     _vertical = _knob->Vertical();
 

@@ -14,7 +14,7 @@
   </osds>
 
   <sliders>
-    <volume background="Slider\back.png" mask="OSD\glass.png">
+    <volume background="Slider\back.png" mask="Slider\glass.png">
       <slider type="horizontal" image="Slider\knob.png"
               x="17" y="9" width="115" height="6"/>
     </volume>

@@ -351,7 +351,6 @@ void Settings::Hotkeys(std::vector<HotkeyInfo> hotkeys) {
     hkElem->DeleteChildren();
 
     for (HotkeyInfo hotkey : hotkeys) {
-        OutputDebugString(L"key");
         tinyxml2::XMLElement *hk = _xml.NewElement("hotkey");
 
         hk->SetAttribute("combination", hotkey.keyCombination);

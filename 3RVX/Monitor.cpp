@@ -63,7 +63,6 @@ BOOL CALLBACK Monitor::MonitorEnumProc(
 
     std::wstring monitorName = std::wstring(mInfo.szDevice);
     monitorMap[monitorName] = hMonitor;
-    OutputDebugString(L"getting monitor");
 
     return TRUE;
 }

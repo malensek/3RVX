@@ -19,6 +19,8 @@ protected:
     HWND _masterWnd;
 
     void HideOthers(OSDType except);
+
+    virtual void UpdateWindowPositions(std::vector<HMONITOR> monitors) = 0;
     std::vector<HMONITOR> MonitorHandles();
     void PositionWindow(HMONITOR monitor, MeterWnd &mWnd);
     void CenterWindowX(HMONITOR monitor, MeterWnd &mWnd);

@@ -27,8 +27,7 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     _mWnd.Update();
     _mWnd.VisibleDuration(Settings::Instance()->HideDelay());
 
-    HMONITOR monitor = Monitor::Primary();
-    PositionWindow(monitor, _mWnd);
+    UpdateWindowPositions(MonitorHandles());
 }
 
 EjectOSD::~EjectOSD() {
@@ -36,6 +35,10 @@ EjectOSD::~EjectOSD() {
 
 void EjectOSD::Hide() {
     _mWnd.Hide(false);
+}
+
+void EjectOSD::UpdateWindowPositions(std::vector<HMONITOR> monitors) {
+    PositionWindow(monitors[0], _mWnd);
 }
 
 LRESULT

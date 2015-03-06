@@ -133,10 +133,7 @@ void VolumeOSD::LoadSkin() {
     _defaultIncrement = (float) (10000 / skin->DefaultVolumeUnits()) / 10000.0f;
     CLOG(L"Default volume increment: %f", _defaultIncrement);
 
-    HMONITOR monitor = Monitor::Primary();
-
     _mWnd.Update();
-    PositionWindow(monitor, _mWnd);
 
     _muteBg = skin->OSDBgImg("mute");
     Gdiplus::Bitmap *muteMask = skin->OSDMask("mute");
@@ -146,7 +143,8 @@ void VolumeOSD::LoadSkin() {
     }
     _muteWnd.BackgroundImage(_muteBg);
     _muteWnd.Update();
-    PositionWindow(monitor, _muteWnd);
+
+    UpdateWindowPositions(MonitorHandles());
 
     /* Set up notification icon */
     if (settings->NotifyIconEnabled()) {
@@ -243,6 +241,11 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
         break;
     }
+}
+
+void VolumeOSD::UpdateWindowPositions(std::vector<HMONITOR> monitors) {
+    PositionWindow(monitors[0], _mWnd);
+    PositionWindow(monitors[0], _muteWnd);
 }
 
 LRESULT

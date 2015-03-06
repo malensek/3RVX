@@ -47,6 +47,37 @@ void OSD::HideOthers(OSDType except = All) {
     SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEOSD, except);
 }
 
+std::vector<HMONITOR> OSD::MonitorHandles() {
+    std::vector<HMONITOR> monitors;
+    std::wstring monitorStr = Settings::Instance()->Monitor();
+
+    if (monitorStr == L"") {
+        /* Primary Monitor */
+        monitors.push_back(Monitor::Primary());
+        CLOG(L"Monitor: (Primary)");
+
+    } else if (monitorStr == L"*") {
+        /* All Monitors */
+        std::unordered_map<std::wstring, HMONITOR> map = Monitor::MonitorMap();
+        for (auto it = map.begin(); it != map.end(); ++it) {
+            CLOG(L"Monitor: %s", it->first.c_str());
+            monitors.push_back(it->second);
+        }
+    } else {
+        /* Specific Monitor */
+        std::unordered_map<std::wstring, HMONITOR> map = Monitor::MonitorMap();
+        for (auto it = map.begin(); it != map.end(); ++it) {
+            if (monitorStr == it->first) {
+                CLOG(L"Monitor: %s", it->first.c_str());
+                monitors.push_back(it->second);
+                break;
+            }
+        }
+    }
+
+    return monitors;
+}
+
 void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
     Settings::OSDPos pos = Settings::Instance()->OSDPosition();
 

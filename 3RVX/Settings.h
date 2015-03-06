@@ -42,7 +42,7 @@ public:
 
 public:
     static Settings *Instance();
-    void Reload();
+    void Load();
     int Save();
 
     static std::wstring AppDir();

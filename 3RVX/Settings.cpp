@@ -51,12 +51,11 @@ std::vector<std::wstring> Settings::HideAnimNames = {
 Settings *Settings::Instance() {
     if (instance == NULL) {
         instance = new Settings();
-        instance->Reload();
     }
     return instance;
 }
 
-void Settings::Reload() {
+void Settings::Load() {
     _file = AppDir() + L"\\Settings.xml";
     CLOG(L"Loading settings file: %s", _file.c_str());
 

@@ -110,7 +110,7 @@ void init() {
     delete vOSD;
     delete eOSD;
 
-    Settings::Instance()->Reload();
+    Settings::Instance()->Load();
 
     /* TODO: Detect monitor changes, update this map, and reload/reorg OSDs */
     Monitor::UpdateMonitorMap();

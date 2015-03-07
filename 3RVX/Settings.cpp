@@ -88,7 +88,7 @@ int Settings::Save() {
 
 std::wstring Settings::AppDir() {
     if (_appDir.empty()) {
-        wchar_t path[MAX_PATH];
+        wchar_t path[MAX_PATH] = { 0 };
         GetModuleFileName(NULL, path, MAX_PATH);
         PathRemoveFileSpec(path);
         _appDir = std::wstring(path);

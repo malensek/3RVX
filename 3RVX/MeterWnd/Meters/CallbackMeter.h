@@ -12,6 +12,7 @@ public:
     }
 
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics);
+    virtual std::wstring ToString();
 
 private:
     MeterCallbackReceiver &_receiver;

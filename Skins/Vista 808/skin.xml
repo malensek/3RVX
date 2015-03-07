@@ -11,6 +11,7 @@
       <iconset location="Icons\Volume"/>
     </volume>
     <mute background="OSD\mute.png" mask="OSD\glass.png"/>
+    <eject background="OSD\eject.png" mask="OSD\glass.png"/>
   </osds>
 
   <sliders>

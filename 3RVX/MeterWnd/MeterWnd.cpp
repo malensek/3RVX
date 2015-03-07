@@ -207,7 +207,10 @@ void MeterWnd::ApplyGlass() {
     HRGN hReg = reg.GetHRGN(&g);
     blurBehind.hRgnBlur = reg.GetHRGN(&g);
 
-    DwmEnableBlurBehindWindow(_hWnd, &blurBehind);
+    HRESULT hr = DwmEnableBlurBehindWindow(_hWnd, &blurBehind);
+    if (SUCCEEDED(hr)) {
+        CLOG(L"Applied glass mask");
+    }
 }
 
 //

@@ -57,7 +57,7 @@ Settings *Settings::Instance() {
 
 void Settings::Load() {
     _file = AppDir() + L"\\Settings.xml";
-    CLOG(L"Loading settings file: %s", _file.c_str());
+    CLOG(L"Loading settings: %s", _file.c_str());
 
     std::string u8FileName = StringUtils::Narrow(_file);
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
@@ -309,7 +309,6 @@ std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
         }
         
         /* Whew, we made it! */
-        CLOG(L"Adding hotkey mapping: %d -> %d", combination, action);
         CLOG(L"%s", hki.ToString().c_str());
         keyMappings[combination] = hki;
     }

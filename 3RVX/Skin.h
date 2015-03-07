@@ -28,16 +28,13 @@ public:
     ~Skin();
 
     bool HasOSD(char *osdName);
-
-    SliderKnob *Knob(char *sliderName);
-    std::vector<HICON> Iconset(char *osdName);
-
     int DefaultVolumeUnits();
 
 public:
     Gdiplus::Bitmap *volumeBackground;
     Gdiplus::Bitmap *volumeMask;
     std::list<Meter *> volumeMeters;
+    std::vector<HICON> volumeIconset;
 
     Gdiplus::Bitmap *muteBackground;
     Gdiplus::Bitmap *muteMask;
@@ -57,10 +54,13 @@ private:
     std::list<Meter *> OSDMeters(char *osdName);
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);
 
+    std::vector<HICON> Iconset(char *osdName);
+
     Gdiplus::Bitmap *SliderBgImg(char *sliderName);
     Gdiplus::Bitmap *SliderMask(char *sliderName);
     std::list<Meter *> SliderMeters(char *osdName);   
     tinyxml2::XMLElement *SliderXMLElement(char *sliderName);
+    SliderKnob *Knob(char *sliderName);
 
     Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
 

@@ -14,6 +14,7 @@ void Skin::Load() {
     volumeBackground = OSDBgImg("volume");
     volumeMask = OSDMask("volume");
     volumeMeters = OSDMeters("volume");
+    volumeIconset = Iconset("volume");
 
     muteBackground = OSDBgImg("mute");
     muteMask = OSDMask("mute");

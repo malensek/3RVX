@@ -11,6 +11,7 @@ class Meter {
 public:
     Meter(std::wstring bitmapName, int x, int y, int units);
     Meter(int x, int y, int units);
+    ~Meter();
 
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) = 0;
     virtual bool Dirty();

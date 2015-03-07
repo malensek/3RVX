@@ -30,6 +30,10 @@ _drawnUnits(-1) {
     _rect.Y = y;
 }
 
+Meter::~Meter() {
+    delete _bitmap;
+}
+
 float Meter::Value() const {
     return _value;
 }

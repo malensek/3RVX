@@ -24,37 +24,50 @@ public:
 
     }
 
+    void Load();
+    ~Skin();
+
     bool HasOSD(char *osdName);
 
-    Gdiplus::Bitmap *OSDBgImg(char *osdName);
-    Gdiplus::Bitmap *SliderBgImg(char *sliderName);
-
-    Gdiplus::Bitmap *OSDMask(char *osdName);
-    Gdiplus::Bitmap *SliderMask(char *sliderName);
-
-    std::list<Meter *> VolumeMeters();
-    std::list<Meter *> VolumeSliderMeters();
     SliderKnob *Knob(char *sliderName);
     std::vector<HICON> Iconset(char *osdName);
 
     int DefaultVolumeUnits();
 
+public:
+    Gdiplus::Bitmap *volumeBackground;
+    Gdiplus::Bitmap *volumeMask;
+    std::list<Meter *> volumeMeters;
+
+    Gdiplus::Bitmap *muteBackground;
+    Gdiplus::Bitmap *muteMask;
+
+    Gdiplus::Bitmap *ejectBackground;
+    Gdiplus::Bitmap *ejectMask;
+
+    Gdiplus::Bitmap *volumeSliderBackground;
+    Gdiplus::Bitmap *volumeSliderMask;
+    std::list<Meter *> volumeSliderMeters;
+    SliderKnob *volumeSliderKnob;
+
 private:
-    std::list<Meter *> _volumeMeters;
-    std::list<Meter *> _volumeSliderMeters;
 
-    Gdiplus::Bitmap *Image(tinyxml2::XMLElement *element, char *attrName);
-
+    Gdiplus::Bitmap *OSDBgImg(char *osdName);
+    Gdiplus::Bitmap *OSDMask(char *osdName);
     std::list<Meter *> OSDMeters(char *osdName);
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);
-    Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
 
+    Gdiplus::Bitmap *SliderBgImg(char *sliderName);
+    Gdiplus::Bitmap *SliderMask(char *sliderName);
     std::list<Meter *> SliderMeters(char *osdName);   
     tinyxml2::XMLElement *SliderXMLElement(char *sliderName);
 
+    Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
+
+    Gdiplus::Bitmap *Image(tinyxml2::XMLElement *element, char *attrName);
+    std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::Font *Font(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::StringAlignment Alignment(tinyxml2::XMLElement *meterXMLElement);
-    std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
 
     int DefaultOSDUnits(char *osdName);
 };

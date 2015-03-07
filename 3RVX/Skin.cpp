@@ -1,6 +1,7 @@
 #include "Skin.h"
 
 #include <algorithm>
+#include <memory>
 #include <vector>
 #include <Shlwapi.h>
 
@@ -9,20 +10,38 @@
 #include "StringUtils.h"
 #include "Slider/SliderKnob.h"
 
-std::list<Meter *> Skin::VolumeMeters() {
-    if (_volumeMeters.empty()) {
-        _volumeMeters = OSDMeters("volume");
-    }
+void Skin::Load() {
+    volumeBackground = OSDBgImg("volume");
+    volumeMask = OSDMask("volume");
+    volumeMeters = OSDMeters("volume");
 
-    return _volumeMeters;
+    muteBackground = OSDBgImg("mute");
+    muteMask = OSDMask("mute");
+
+    ejectBackground = OSDBgImg("eject");
+    ejectMask = OSDMask("eject");
+
+    volumeSliderBackground = SliderBgImg("volume");
+    volumeSliderMask = SliderMask("volume");
+    volumeSliderMeters = SliderMeters("volume");
+    volumeSliderKnob = Knob("volume");
 }
 
-std::list<Meter *> Skin::VolumeSliderMeters() {
-    if (_volumeSliderMeters.empty()) {
-        _volumeSliderMeters = SliderMeters("volume");
+Skin::~Skin() {
+    delete volumeBackground;
+    delete volumeMask;
+    for (Meter *meter : volumeMeters) {
+        delete meter;
     }
 
-    return _volumeSliderMeters;
+    delete muteBackground;
+    delete muteMask;
+
+    delete ejectBackground;
+    delete ejectMask;
+
+    delete volumeSliderBackground;
+    delete volumeSliderMask;
 }
 
 int Skin::DefaultVolumeUnits() {
@@ -90,7 +109,8 @@ Gdiplus::Bitmap *Skin::Image(tinyxml2::XMLElement *element, char *attName) {
 
     const char *imgFile = element->Attribute(attName);
     if (imgFile == NULL) {
-        CLOG(L"Could not find XML attribute");
+        std::wstring aName = StringUtils::Widen(attName);
+        CLOG(L"Could not find XML attribute: %s", aName.c_str());
         return NULL;
     }
 
@@ -139,7 +159,7 @@ std::vector<HICON> Skin::Iconset(char *osdName) {
             continue;
         }
 
-        CLOG(L"Loading icon: %s", (iconDir + iconName).c_str());
+        QCLOG(L"%s", (iconDir + iconName).c_str());
         Gdiplus::Bitmap *iconBmp = Gdiplus::Bitmap::FromFile(
             (iconDir + iconName).c_str());
         if (iconBmp == NULL) {
@@ -175,7 +195,7 @@ std::list<Meter *> Skin::OSDMeters(char *osdName) {
 }
 
 std::list<Meter *> Skin::SliderMeters(char *osdName) {
-    std::list<Meter*> meters;
+    std::list<Meter *> meters;
 
     tinyxml2::XMLElement *osd = SliderXMLElement(osdName);
     tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");

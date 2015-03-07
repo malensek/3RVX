@@ -34,6 +34,9 @@ Skin::~Skin() {
     for (Meter *meter : volumeMeters) {
         delete meter;
     }
+    for (HICON icon : volumeIconset) {
+        DestroyIcon(icon);
+    }
 
     delete muteBackground;
     delete muteMask;
@@ -43,6 +46,10 @@ Skin::~Skin() {
 
     delete volumeSliderBackground;
     delete volumeSliderMask;
+    for (Meter *meter : volumeSliderMeters) {
+        delete meter;
+    }
+    delete volumeSliderKnob;
 }
 
 int Skin::DefaultVolumeUnits() {

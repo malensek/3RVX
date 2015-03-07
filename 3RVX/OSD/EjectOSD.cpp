@@ -15,13 +15,11 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
         return;
     }
 
-    Gdiplus::Bitmap *bg = skin->OSDBgImg("eject");
-    _mWnd.BackgroundImage(bg);
+    /* TODO: NULL check*/
+    _mWnd.BackgroundImage(skin->ejectBackground);
 
-    Gdiplus::Bitmap *mask = skin->OSDMask("eject");
-    if (mask != NULL) {
-        CLOG(L"Applying glass to eject OSD");
-        _mWnd.GlassMask(mask);
+    if (skin->ejectMask != NULL) {
+        _mWnd.GlassMask(skin->ejectMask);
     }
 
     _mWnd.Update();

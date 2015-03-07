@@ -114,17 +114,6 @@ void SliderWnd::UpdateKnob(int x, int y) {
     }
 }
 
-/*    case WM_NCHITTEST: {
-        LRESULT hit = DefWindowProc(_hWnd, message, wParam, lParam);
-        /* Make the client area appear to be the window title bar:
-        if (hit == HTCLIENT) {
-            hit = HTCAPTION;
-        }
-        return hit;
-    }
-*/
-
-
 LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
     switch (message) {
     case WM_KILLFOCUS:

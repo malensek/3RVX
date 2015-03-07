@@ -8,25 +8,22 @@
 
 VolumeSlider::VolumeSlider(CoreAudio &volumeCtrl) :
 SliderWnd(L"3RVX-VolumeSlider", L"3RVX Volume Slider"),
-_settings(*Settings::Instance()),
 _volumeCtrl(volumeCtrl) {
 
-    Skin *skin = _settings.CurrentSkin();
+    Skin *skin = Settings::Instance()->CurrentSkin();
 
-    Gdiplus::Bitmap *bg = skin->SliderBgImg("volume");
-    BackgroundImage(bg);
+    /* TODO NULL check */
+    BackgroundImage(skin->volumeSliderBackground);
 
-    Gdiplus::Bitmap *mask = skin->SliderMask("volume");
-    if (mask != NULL) {
-        CLOG(L"Applying glass to eject OSD");
-        GlassMask(mask);
+    if (skin->volumeSliderMask != NULL) {
+        GlassMask(skin->volumeSliderMask);
     }
 
-    _knob = skin->Knob("volume");
+    /* TODO NULL check */
+    _knob = skin->volumeSliderKnob;
     _vertical = _knob->Vertical();
 
-    std::list<Meter*> meters = skin->VolumeSliderMeters();
-    for (Meter *m : meters) {
+    for (Meter *m : skin->volumeSliderMeters) {
         AddMeter(m);
     }
 

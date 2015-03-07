@@ -38,7 +38,6 @@ private:
     std::wstring _selectedDevice;
     std::wstring _selectedDesc;
     MeterWnd _muteWnd;
-    Gdiplus::Bitmap *_muteBg;
     float _defaultIncrement;
     bool _sounds;
     SoundPlayer *_soundPlayer;

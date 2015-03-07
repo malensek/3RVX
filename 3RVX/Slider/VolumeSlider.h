@@ -12,15 +12,13 @@ public:
 
     virtual void Show();
     bool Visible();
-
     void MeterLevels(float level);
 
 protected:
     void SliderChanged();
 
 private:
-    float _level;
-    Settings &_settings;
-    CoreAudio &_volumeCtrl;
     SliderKnob *_knob;
+    float _level;
+    CoreAudio &_volumeCtrl;
 };

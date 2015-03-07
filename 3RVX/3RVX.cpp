@@ -111,6 +111,7 @@ void init() {
     delete eOSD;
 
     Settings::Instance()->Load();
+    Settings::Instance()->CurrentSkin()->Load();
 
     /* TODO: Detect monitor changes, update this map, and reload/reorg OSDs */
     Monitor::UpdateMonitorMap();

@@ -77,7 +77,7 @@ void Settings::Load() {
 int Settings::Save() {
     FILE *stream;
     errno_t err = _wfopen_s(&stream, _file.c_str(), L"w");
-    if (err != 0) {
+    if (err != 0 || stream == NULL) {
         CLOG(L"Could not open settings file for writing!");
         return 100 + err;
     }

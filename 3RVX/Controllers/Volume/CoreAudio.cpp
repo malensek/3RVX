@@ -45,9 +45,12 @@ HRESULT CoreAudio::AttachDevice() {
         hr = _devEnumerator->GetDefaultAudioEndpoint(eRender,
             eMultimedia, &_device);
         if (SUCCEEDED(hr)) {
-            LPWSTR id;
+            LPWSTR id = NULL;
             _device->GetId(&id);
-            _devId = std::wstring(id);
+            if (id) {
+                _devId = std::wstring(id);
+                CoTaskMemFree(id);
+            }
         }
     } else {
         hr = _devEnumerator->GetDevice(_devId.c_str(), &_device);
@@ -123,7 +126,7 @@ HRESULT CoreAudio::SelectDefaultDevice() {
 
 std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
     std::list<VolumeController::DeviceInfo> devList;
-    IMMDeviceCollection *devices;
+    IMMDeviceCollection *devices = NULL;
 
     HRESULT hr = _devEnumerator->EnumAudioEndpoints(
         eRender,
@@ -131,7 +134,9 @@ std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
         &devices);
 
     if (FAILED(hr)) {
-        devices->Release();
+        if (devices) {
+            devices->Release();
+        }
         return devList;
     }
 
@@ -139,14 +144,24 @@ std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
     devices->GetCount(&numDevices);
     LPWSTR devId;
     for (unsigned int i = 0; i < numDevices; ++i) {
-        IMMDevice *device;
+        IMMDevice *device = NULL;
         HRESULT hr = devices->Item(i, &device);
         if (FAILED(hr)) {
+            if (device) {
+                device->Release();
+            }
+
             continue;
         }
 
         device->GetId(&devId);
-        std::wstring idStr(devId);
+        std::wstring idStr;
+        if (devId) {
+            idStr = std::wstring(devId);
+            CoTaskMemFree(devId);
+        } else {
+            continue;
+        }
         VolumeController::DeviceInfo devInfo = {};
         devInfo.id = idStr;
         devInfo.name = DeviceName(idStr);

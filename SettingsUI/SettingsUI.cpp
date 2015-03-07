@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 
+#include "Settings.h"
 #include "SettingsUI.h"
 #include "SettingsSheet.h"
 
@@ -55,6 +56,8 @@ BOOL CSettingsUIApp::InitInstance() {
         RUNTIME_CLASS(CMFCVisualManagerWindows));
 
     SetRegistryKey(_T("3RVX Settings Editor"));
+
+    Settings::Instance()->Load();
 
     SettingsSheet settingsSheet(L"3RVX Settings");
     General g;

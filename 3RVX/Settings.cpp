@@ -70,6 +70,7 @@ void Settings::Load() {
         throw std::runtime_error("Could not find root XML element");
     }
 
+    delete _skin;
     _skin = new Skin(SkinXML());
 }
 

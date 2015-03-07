@@ -7,6 +7,7 @@ Beta 4
 * Ki Shodar's Vista 808 skin has been ported to v3 (uses glass functionality)
 * Allow selection of the display device (previously hardcoded to Primary display)
 * Fix several memory leaks and minor bugs
+* Include required DLLs in distribution
 
 Beta 3
 ------

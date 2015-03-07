@@ -23,7 +23,6 @@ HWND mainWnd;
 
 VolumeOSD *vOSD;
 EjectOSD *eOSD;
-VolumeSlider *vSlide;
 
 HotkeyManager *hkManager;
 std::unordered_map<int, HotkeyInfo> hotkeys;

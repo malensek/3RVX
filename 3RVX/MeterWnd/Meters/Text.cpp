@@ -22,13 +22,8 @@ _formatString(formatString) {
 
 Text::~Text()
 {
-    if (_font) {
-        delete _font;
-    }
-
-    if (_fontColor) {
-        delete _fontColor;
-    }
+    delete _font;
+    delete _fontColor;
 }
 
 void Text::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics)

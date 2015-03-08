@@ -42,6 +42,7 @@ public:
 
 public:
     static Settings *Instance();
+
     void Load();
     int Save();
 
@@ -78,9 +79,8 @@ public:
     int OSDY();
     void OSDY(int y);
 
-    Skin *CurrentSkin();
+    std::wstring CurrentSkin();
     bool CurrentSkin(std::wstring skinName);
-    std::wstring SkinName();
     std::wstring SkinXML();
     std::wstring SkinXML(std::wstring skinName);
 
@@ -103,7 +103,6 @@ private:
     std::wstring _file;
     tinyxml2::XMLDocument _xml;
     tinyxml2::XMLElement *_root;
-    Skin *_skin;
 
     bool HasSetting(std::string elementName);
     bool GetEnabled(std::string elementName);

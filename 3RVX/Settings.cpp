@@ -69,9 +69,6 @@ void Settings::Load() {
     if (_root == NULL) {
         throw std::runtime_error("Could not find root XML element");
     }
-
-    delete _skin;
-    _skin = new Skin(SkinXML());
 }
 
 int Settings::Save() {
@@ -205,10 +202,6 @@ void Settings::OSDY(int y) {
     SetInt(XML_OSD_Y, y);
 }
 
-Skin *Settings::CurrentSkin() {
-    return _skin;
-}
-
 Settings::HideAnim Settings::HideAnimation() {
     std::wstring anim = GetText(XML_HIDEANIM);
     std::transform(anim.begin(), anim.end(), anim.begin(), ::tolower);
@@ -254,7 +247,7 @@ bool Settings::CurrentSkin(std::wstring skinName) {
     return true;
 }
 
-std::wstring Settings::SkinName() {
+std::wstring Settings::CurrentSkin() {
     std::wstring name = GetText("skin");
 
     if (name == L"") {
@@ -265,7 +258,7 @@ std::wstring Settings::SkinName() {
 }
 
 std::wstring Settings::SkinXML() {
-    return SkinXML(SkinName());
+    return SkinXML(CurrentSkin());
 }
 
 std::wstring Settings::SkinXML(std::wstring skinName) {

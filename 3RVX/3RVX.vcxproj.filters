@@ -138,6 +138,9 @@
     <ClInclude Include="MeterWnd\MeterCallbackReceiver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SkinManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -237,6 +240,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\CallbackMeter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

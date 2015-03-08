@@ -14,7 +14,7 @@
 #include "Logger.h"
 #include "Monitor.h"
 #include "Settings.h"
-#include "Skin.h"
+#include "SkinManager.h"
 
 HANDLE mutex;
 HINSTANCE hInst;
@@ -111,8 +111,10 @@ void init() {
     delete vOSD;
     delete eOSD;
 
-    Settings::Instance()->Load();
-    Settings::Instance()->CurrentSkin()->Load();
+    Settings *settings = Settings::Instance();
+    settings->Load();
+
+    SkinManager::Instance()->LoadSkin(settings->SkinXML());
 
     /* TODO: Detect monitor changes, update this map, and reload/reorg OSDs */
     Monitor::UpdateMonitorMap();

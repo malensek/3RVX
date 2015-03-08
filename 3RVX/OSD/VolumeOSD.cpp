@@ -7,6 +7,7 @@
 #include "..\MeterWnd\Meters\CallbackMeter.h"
 #include "..\Monitor.h"
 #include "..\Skin.h"
+#include "..\SkinManager.h"
 #include "..\Slider\VolumeSlider.h"
 
 #define MENU_SETTINGS 0
@@ -108,7 +109,7 @@ void VolumeOSD::UpdateDeviceMenu() {
 
 void VolumeOSD::LoadSkin() {
     Settings *settings = Settings::Instance();
-    Skin *skin = settings->CurrentSkin();
+    Skin *skin = SkinManager::Instance()->CurrentSkin();
 
     /* Volume OSD */
     /* TODO: should make sure this isn't NULL! */

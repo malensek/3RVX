@@ -4,12 +4,13 @@
 
 #include "..\Monitor.h"
 #include "..\Skin.h"
+#include "..\SkinManager.h"
 
 EjectOSD::EjectOSD() :
 OSD(L"3RVX-EjectDispatcher"),
 _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 
-    Skin *skin = Settings::Instance()->CurrentSkin();
+    Skin *skin = SkinManager::Instance()->CurrentSkin();
 
     if (skin->HasOSD("eject") == false) {
         return;

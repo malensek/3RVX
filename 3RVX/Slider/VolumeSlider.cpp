@@ -4,13 +4,14 @@
 #include "..\Error.h"
 #include "..\Settings.h"
 #include "..\Skin.h"
+#include "..\SkinManager.h"
 #include "SliderKnob.h"
 
 VolumeSlider::VolumeSlider(CoreAudio &volumeCtrl) :
 SliderWnd(L"3RVX-VolumeSlider", L"3RVX Volume Slider"),
 _volumeCtrl(volumeCtrl) {
 
-    Skin *skin = Settings::Instance()->CurrentSkin();
+    Skin *skin = SkinManager::Instance()->CurrentSkin();
 
     /* TODO NULL check */
     BackgroundImage(skin->volumeSliderBackground);

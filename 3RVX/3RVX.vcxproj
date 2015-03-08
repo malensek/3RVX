@@ -111,6 +111,7 @@
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Skin.h" />
     <ClInclude Include="SkinInfo.h" />
+    <ClInclude Include="SkinManager.h" />
     <ClInclude Include="Slider\SliderKnob.h" />
     <ClInclude Include="Slider\SliderWnd.h" />
     <ClInclude Include="SoundPlayer.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Skin.cpp" />
     <ClCompile Include="SkinInfo.cpp" />
+    <ClCompile Include="SkinManager.cpp" />
     <ClCompile Include="Slider\SliderKnob.cpp" />
     <ClCompile Include="Slider\SliderWnd.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />

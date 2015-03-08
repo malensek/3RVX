@@ -69,7 +69,7 @@ void General::LoadSettings() {
     }
 
     /* Update the combo box with the current skin */
-    std::wstring current = settings->SkinName();
+    std::wstring current = settings->CurrentSkin();
     int idx = _skins.SelectString(0, current.c_str());
     if (idx == CB_ERR) {
         _skins.SelectString(0, DEFAULT_SKIN);

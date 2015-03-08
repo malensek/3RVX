@@ -10,7 +10,8 @@
 #include "StringUtils.h"
 #include "Slider/SliderKnob.h"
 
-void Skin::Load() {
+Skin::Skin(std::wstring skinXML) :
+SkinInfo(skinXML) {
     volumeBackground = OSDBgImg("volume");
     volumeMask = OSDMask("volume");
     volumeMeters = OSDMeters("volume");

@@ -3,7 +3,7 @@
 #include "Display.h"
 #include "afxdialogex.h"
 
-#include "Monitor.h"
+#include "DisplayManager.h"
 #include "Settings.h"
 
 #define MIN_EDGE -65535
@@ -124,7 +124,7 @@ BOOL Display::OnInitDialog() {
 
     _monitor.AddString(L"Primary Monitor");
     _monitor.AddString(L"All Monitors");
-    std::list<DISPLAY_DEVICE> devices = Monitor::ListAllDevices();
+    std::list<DISPLAY_DEVICE> devices = DisplayManager::ListAllDevices();
     for (DISPLAY_DEVICE dev : devices) {
         std::wstring devString(dev.DeviceName);
         _monitor.AddString(devString.c_str());

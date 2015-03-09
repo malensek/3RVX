@@ -143,7 +143,7 @@ void VolumeOSD::LoadSkin() {
     }
     _muteWnd.Update();
 
-    UpdateWindowPositions(MonitorHandles());
+    UpdateWindowPositions(ActiveMonitors());
 
     /* Set up notification icon */
     if (settings->NotifyIconEnabled()) {
@@ -242,7 +242,7 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
     }
 }
 
-void VolumeOSD::UpdateWindowPositions(std::vector<HMONITOR> monitors) {
+void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> monitors) {
     PositionWindow(monitors[0], _mWnd);
     PositionWindow(monitors[0], _muteWnd);
 }

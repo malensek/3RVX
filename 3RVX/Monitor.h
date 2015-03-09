@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Windows.h>
 #include <list>
 #include <string>
@@ -5,17 +7,48 @@
 
 class Monitor {
 public:
-    static HMONITOR Primary();
-    static MONITORINFO Info(HMONITOR monitor);
-    static const int Width(HMONITOR monitor);
-    static const int Height(HMONITOR monitor);
-    static RECT Rect(HMONITOR monitor);
-    static std::list<DISPLAY_DEVICE> ListAllDevices();
+    Monitor() {
 
-    static void UpdateMonitorMap();
-    static std::unordered_map<std::wstring, HMONITOR> MonitorMap();
+    }
+
+    Monitor(std::wstring name, int x, int y, int width, int height) :
+    _name(name),
+    _x(x),
+    _y(y),
+    _width(width),
+    _height(height) {
+
+    }
+
+    Monitor(std::wstring name, RECT rect) :
+    _name(name),
+    _x(rect.left),
+    _y(rect.top),
+    _width(rect.right - rect.left),
+    _height(rect.bottom - rect.top) {
+
+    }
+
+    int X() {
+        return _x;
+    }
+
+    int Y() {
+        return _y;
+    }
+
+    int Width() {
+        return _width;
+    }
+
+    int Height() {
+        return _height;
+    }
 
 private:
-    static BOOL CALLBACK MonitorEnumProc(
-        HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData);
+    std::wstring _name;
+    int _x;
+    int _y;
+    int _width;
+    int _height;
 };

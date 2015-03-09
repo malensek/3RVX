@@ -1,38 +1,48 @@
-#include "Monitor.h"
+#include "DisplayManager.h"
 
-static std::unordered_map<std::wstring, HMONITOR> monitorMap;
+static std::unordered_map<std::wstring, Monitor> monitorMap;
 
-HMONITOR Monitor::Primary() {
+std::unordered_map<std::wstring, Monitor> &DisplayManager::MonitorMap() {
+    return monitorMap;
+}
+
+void DisplayManager::UpdateMonitorMap() {
+    monitorMap.clear();
+    EnumDisplayMonitors(NULL, NULL, &MonitorEnumProc, NULL);
+}
+
+Monitor DisplayManager::Primary() {
     /* The Primary or 'Main' monitor is at (0, 0). */
     const POINT p = { 0, 0 };
     HMONITOR monitor = MonitorFromPoint(p, MONITOR_DEFAULTTOPRIMARY);
-    return monitor;
+    MONITORINFO mInfo = Info(monitor);
+    return Monitor(L"Primary", mInfo.rcMonitor);
 }
 
-const int Monitor::Width(HMONITOR monitor) {
+const int DisplayManager::Width(HMONITOR monitor) {
     MONITORINFO mInfo = Info(monitor);
     RECT mDims = mInfo.rcMonitor;
     return mDims.right - mDims.left;
 }
 
-const int Monitor::Height(HMONITOR monitor) {
+const int DisplayManager::Height(HMONITOR monitor) {
     MONITORINFO mInfo = Info(monitor);
     RECT mDims = mInfo.rcMonitor;
     return mDims.bottom - mDims.top;
 }
 
-RECT Monitor::Rect(HMONITOR monitor) {
+RECT DisplayManager::Rect(HMONITOR monitor) {
     return Info(monitor).rcMonitor;
 }
 
-MONITORINFO Monitor::Info(HMONITOR monitor) {
+MONITORINFO DisplayManager::Info(HMONITOR monitor) {
     MONITORINFO mInfo = {};
     mInfo.cbSize = sizeof(MONITORINFO);
     GetMonitorInfo(monitor, &mInfo);
     return mInfo;
 }
 
-std::list<DISPLAY_DEVICE> Monitor::ListAllDevices() {
+std::list<DISPLAY_DEVICE> DisplayManager::ListAllDevices() {
     std::list<DISPLAY_DEVICE> devs;
     DISPLAY_DEVICE dev = {};
     dev.cb = sizeof(DISPLAY_DEVICE);
@@ -44,25 +54,16 @@ std::list<DISPLAY_DEVICE> Monitor::ListAllDevices() {
     return devs;
 }
 
-std::unordered_map<std::wstring, HMONITOR> Monitor::MonitorMap() {
-    return monitorMap;
-}
-
-void Monitor::UpdateMonitorMap() {
-    EnumDisplayMonitors(NULL, NULL, &MonitorEnumProc, NULL);
-}
-
-BOOL CALLBACK Monitor::MonitorEnumProc(
+BOOL CALLBACK DisplayManager::MonitorEnumProc(
     HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData) {
-
-    monitorMap.clear();
 
     MONITORINFOEX mInfo = {};
     mInfo.cbSize = sizeof(MONITORINFOEX);
     GetMonitorInfo(hMonitor, &mInfo);
 
     std::wstring monitorName = std::wstring(mInfo.szDevice);
-    monitorMap[monitorName] = hMonitor;
+    Monitor mon(monitorName, mInfo.rcMonitor);
+    monitorMap[monitorName] = mon;
 
     return TRUE;
 }

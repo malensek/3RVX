@@ -81,6 +81,7 @@
     <ClInclude Include="3RVX.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
+    <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="HotkeyInfo.h" />
     <ClInclude Include="MeterWnd\Meters\CallbackMeter.h" />
@@ -124,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
+    <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="HotkeyInfo.cpp" />
     <ClCompile Include="MeterWnd\Meters\CallbackMeter.cpp" />
     <ClCompile Include="MeterWnd\Meters\StaticImage.cpp" />
@@ -141,7 +143,6 @@
     <ClCompile Include="MeterWnd\Meters\Text.cpp" />
     <ClCompile Include="MeterWnd\Meters\VerticalTile.cpp" />
     <ClCompile Include="MeterWnd\MeterWnd.cpp" />
-    <ClCompile Include="Monitor.cpp" />
     <ClCompile Include="NotifyIcon.cpp" />
     <ClCompile Include="OSD\OSD.cpp" />
     <ClCompile Include="Settings.cpp" />

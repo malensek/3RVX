@@ -78,6 +78,9 @@
     <ClInclude Include="..\3RVX\3RVX.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\3RVX\DisplayManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SettingsUI.cpp">
@@ -113,9 +116,6 @@
     <ClCompile Include="Hotkeys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\3RVX\Monitor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UIUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -132,6 +132,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\3RVX\HotkeyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3RVX\DisplayManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

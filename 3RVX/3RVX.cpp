@@ -7,12 +7,12 @@
 #include <Wtsapi32.h>
 
 #include "3RVX.h"
-#include "OSD\EjectOSD.h"
-#include "OSD\VolumeOSD.h"
+#include "DisplayManager.h"
 #include "HotkeyInfo.h"
 #include "HotkeyManager.h"
 #include "Logger.h"
-#include "Monitor.h"
+#include "OSD\EjectOSD.h"
+#include "OSD\VolumeOSD.h"
 #include "Settings.h"
 #include "SkinManager.h"
 
@@ -117,7 +117,7 @@ void init() {
     SkinManager::Instance()->LoadSkin(settings->SkinXML());
 
     /* TODO: Detect monitor changes, update this map, and reload/reorg OSDs */
-    Monitor::UpdateMonitorMap();
+    DisplayManager::UpdateMonitorMap();
 
     /* OSDs */
     eOSD = new EjectOSD();

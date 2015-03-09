@@ -6,6 +6,8 @@
 #include "..\Settings.h"
 #include "OSDType.h"
 
+class Monitor;
+
 class OSD {
 public:
     OSD(std::wstring className, HINSTANCE hInstance = NULL);
@@ -20,11 +22,11 @@ protected:
 
     void HideOthers(OSDType except);
 
-    virtual void UpdateWindowPositions(std::vector<HMONITOR> monitors) = 0;
-    std::vector<HMONITOR> MonitorHandles();
-    void PositionWindow(HMONITOR monitor, MeterWnd &mWnd);
-    void CenterWindowX(HMONITOR monitor, MeterWnd &mWnd);
-    void CenterWindowY(HMONITOR monitor, MeterWnd &mWnd);
+    virtual void UpdateWindowPositions(std::vector<Monitor> monitors) = 0;
+    std::vector<Monitor> ActiveMonitors();
+    void PositionWindow(Monitor monitor, MeterWnd &mWnd);
+    void CenterWindowX(Monitor monitor, MeterWnd &mWnd);
+    void CenterWindowY(Monitor monitor, MeterWnd &mWnd);
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

@@ -141,6 +141,9 @@
     <ClInclude Include="SkinManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DisplayManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -180,9 +183,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\NumberStrip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Monitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Animations\FadeOut.cpp">
@@ -243,6 +243,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SkinManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

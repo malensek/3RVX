@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "..\3RVX.h"
+#include "..\DisplayManager.h"
 #include "..\HotkeyInfo.h"
 #include "..\Monitor.h"
 
@@ -47,25 +48,29 @@ void OSD::HideOthers(OSDType except = All) {
     SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEOSD, except);
 }
 
-std::vector<HMONITOR> OSD::MonitorHandles() {
-    std::vector<HMONITOR> monitors;
+std::vector<Monitor> OSD::ActiveMonitors() {
+    std::vector<Monitor> monitors;
     std::wstring monitorStr = Settings::Instance()->Monitor();
 
     if (monitorStr == L"") {
         /* Primary Monitor */
-        monitors.push_back(Monitor::Primary());
+        monitors.push_back(DisplayManager::Primary());
         CLOG(L"Monitor: (Primary)");
 
     } else if (monitorStr == L"*") {
         /* All Monitors */
-        std::unordered_map<std::wstring, HMONITOR> map = Monitor::MonitorMap();
+        std::unordered_map<std::wstring, Monitor> map
+            = DisplayManager::MonitorMap();
+
         for (auto it = map.begin(); it != map.end(); ++it) {
             CLOG(L"Monitor: %s", it->first.c_str());
             monitors.push_back(it->second);
         }
     } else {
         /* Specific Monitor */
-        std::unordered_map<std::wstring, HMONITOR> map = Monitor::MonitorMap();
+        std::unordered_map<std::wstring, Monitor> map 
+            = DisplayManager::MonitorMap();
+
         for (auto it = map.begin(); it != map.end(); ++it) {
             if (monitorStr == it->first) {
                 CLOG(L"Monitor: %s", it->first.c_str());
@@ -78,7 +83,7 @@ std::vector<HMONITOR> OSD::MonitorHandles() {
     return monitors;
 }
 
-void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
+void OSD::PositionWindow(Monitor monitor, MeterWnd &mWnd) {
     Settings::OSDPos pos = Settings::Instance()->OSDPosition();
 
     if (pos == Settings::OSDPos::Custom) {
@@ -89,6 +94,32 @@ void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
         return;
     }
 
+    int offset = Settings::Instance()->OSDEdgeOffset();
+
+    /* Edge cases ;-) */
+    switch (pos) {
+    case Settings::TopLeft:
+        mWnd.X(monitor.X() + offset);
+        mWnd.Y(monitor.Y() + offset);
+        return;
+
+    case Settings::TopRight:
+        mWnd.X(monitor.X() + monitor.Width() - mWnd.Width() - offset);
+        mWnd.Y(monitor.Y() + offset);
+        return;
+
+    case Settings::BottomLeft:
+        mWnd.X(monitor.X() + offset);
+        mWnd.Y(monitor.Y() + monitor.Height() - mWnd.Height() - offset);
+        return;
+
+    case Settings::BottomRight:
+        mWnd.X(monitor.X() + monitor.Width() - mWnd.Width() - offset);
+        mWnd.Y(monitor.Y() + monitor.Height() - mWnd.Height() - offset);
+        return;
+    }
+
+    /* Center */
     CenterWindowX(monitor, mWnd);
     CenterWindowY(monitor, mWnd);
     if (pos == Settings::OSDPos::Center) {
@@ -96,57 +127,32 @@ void OSD::PositionWindow(HMONITOR monitor, MeterWnd &mWnd) {
     }
 
     /* We're centered. Now adjust based on top, bottom, left, or right: */
-    const int mWidth = Monitor::Width(monitor);
-    const int mHeight = Monitor::Height(monitor);
-    int offset = Settings::Instance()->OSDEdgeOffset();
 
     switch (pos) {
     case Settings::Top:
-        mWnd.Y(offset);
-        break;
+        mWnd.Y(monitor.Y() + offset);
+        return;
 
     case Settings::Bottom:
-        mWnd.Y(mHeight - mWnd.Height() - offset);
-        break;
+        mWnd.Y(monitor.Y() + monitor.Height() - mWnd.Height() - offset);
+        return;
 
     case Settings::Left:
-        mWnd.X(offset);
-        break;
+        mWnd.X(monitor.X() + offset);
+        return;
 
     case Settings::Right:
-        mWnd.X(mWidth - mWnd.Width() - offset);
-        break;
-
-    case Settings::TopLeft:
-        mWnd.X(offset);
-        mWnd.Y(offset);
-        break;
-
-    case Settings::TopRight:
-        mWnd.X(mWidth - mWnd.Width() - offset);
-        mWnd.Y(offset);
-        break;
-
-    case Settings::BottomLeft:
-        mWnd.X(offset);
-        mWnd.Y(mHeight - mWnd.Height() - offset);
-        break;
-
-    case Settings::BottomRight:
-        mWnd.X(mWidth - mWnd.Width() - offset);
-        mWnd.Y(mHeight - mWnd.Height() - offset);
-        break;
+        mWnd.X(monitor.X() + monitor.Width() - mWnd.Width() - offset);
+        return;
     }
 }
 
-void OSD::CenterWindowX(HMONITOR monitor, MeterWnd &mWnd) {
-    const int mWidth = Monitor::Width(monitor);
-    mWnd.X(mWidth / 2 - mWnd.Width() / 2);
+void OSD::CenterWindowX(Monitor monitor, MeterWnd &mWnd) {
+    mWnd.X(monitor.X() + monitor.Width() / 2 - mWnd.Width() / 2);
 }
 
-void OSD::CenterWindowY(HMONITOR monitor, MeterWnd &mWnd) {
-    const int mHeight = Monitor::Height(monitor);
-    mWnd.Y(mHeight / 2 - mWnd.Height() / 2);
+void OSD::CenterWindowY(Monitor monitor, MeterWnd &mWnd) {
+    mWnd.Y(monitor.Y() + monitor.Height() / 2 - mWnd.Height() / 2);
 }
 
 void OSD::ProcessHotkeys(HotkeyInfo &hki) {

@@ -10,6 +10,7 @@ public:
         SetVolume,
         Mute,
         VolumeSlider,
+        EjectDrive,
         RunApp,
         Settings,
         Exit,

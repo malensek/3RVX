@@ -44,13 +44,18 @@ void EjectOSD::EjectDrive(std::wstring driveLetter) {
         return;
     }
 
-    DWORD bytes = 0;
-    DeviceIoControl(dev,
-        FSCTL_LOCK_VOLUME, NULL, NULL, NULL, NULL, &bytes, NULL);
-    DeviceIoControl(dev,
-        FSCTL_DISMOUNT_VOLUME, NULL, NULL, NULL, NULL, &bytes, NULL);
-    DeviceIoControl(dev,
-        IOCTL_STORAGE_EJECT_MEDIA, NULL, NULL, NULL, NULL, &bytes, NULL);
+    DWORD bytesReturned = 0;
+    bool success = DeviceIoControl(dev, FSCTL_LOCK_VOLUME,
+        NULL, NULL, NULL, NULL, &bytesReturned, NULL)
+    && DeviceIoControl(dev, FSCTL_DISMOUNT_VOLUME,
+        NULL, NULL, NULL, NULL, &bytesReturned, NULL)
+    && DeviceIoControl(dev, IOCTL_STORAGE_EJECT_MEDIA,
+        NULL, NULL, NULL, NULL, &bytesReturned, NULL);
+
+    if (success) {
+        HideOthers(Eject);
+        _mWnd.Show();
+    }
 
     CloseHandle(dev);
 }

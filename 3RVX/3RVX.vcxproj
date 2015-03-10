@@ -90,7 +90,6 @@
     <ClInclude Include="MeterWnd\Meters\VerticalBar.h" />
     <ClInclude Include="OSD\EjectOSD.h" />
     <ClInclude Include="HotkeyManager.h" />
-    <ClInclude Include="HotkeyActions.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MeterWnd\Animation.h" />
     <ClInclude Include="MeterWnd\Animations\FadeOut.h" />

@@ -4,7 +4,6 @@
 #include <algorithm>
 
 #include "Error.h"
-#include "HotkeyActions.h"
 #include "HotkeyInfo.h"
 #include "Logger.h"
 #include "Monitor.h"

@@ -75,9 +75,6 @@
     <ClInclude Include="Controllers\Volume\VolumeController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HotkeyActions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeterWnd\Meters\Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>

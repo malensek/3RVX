@@ -83,16 +83,13 @@ LRESULT
 EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == WM_DEVICECHANGE
         && wParam == DBT_DEVICEREMOVECOMPLETE) {
-
-        CLOG(L"Device removal notification received");
         PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR) lParam;
         if (lpdb->dbch_devicetype == DBT_DEVTYP_VOLUME) {
             PDEV_BROADCAST_VOLUME lpdbv = (PDEV_BROADCAST_VOLUME) lpdb;
-            if (lpdbv->dbcv_flags & DBTF_MEDIA) {
-                CLOG(L"Media volume has been removed: eject notification");
-                HideOthers(Eject);
-                _mWnd.Show();
-            }
+            wchar_t driveLetter = (wchar_t) (log2(lpdbv->dbcv_unitmask) + 65);
+            CLOG(L"Eject notification received for drive %c:", driveLetter);
+            HideOthers(Eject);
+            _mWnd.Show();
         }
     }
 

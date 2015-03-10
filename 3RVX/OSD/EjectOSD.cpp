@@ -33,6 +33,26 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 EjectOSD::~EjectOSD() {
 }
 
+void EjectOSD::EjectDrive(std::wstring driveLetter) {
+    std::wstring name = L"\\\\.\\" + driveLetter + L":";
+    HANDLE dev = CreateFile(name.c_str(),
+        GENERIC_READ, FILE_SHARE_WRITE, NULL, OPEN_EXISTING, NULL, NULL);
+    if (dev == INVALID_HANDLE_VALUE) {
+        CLOG(L"Failed to get device handle");
+        return;
+    }
+
+    DWORD bytes = 0;
+    DeviceIoControl(dev,
+        FSCTL_LOCK_VOLUME, NULL, NULL, NULL, NULL, &bytes, NULL);
+    DeviceIoControl(dev,
+        FSCTL_DISMOUNT_VOLUME, NULL, NULL, NULL, NULL, &bytes, NULL);
+    DeviceIoControl(dev,
+        IOCTL_STORAGE_EJECT_MEDIA, NULL, NULL, NULL, NULL, &bytes, NULL);
+
+    CloseHandle(dev);
+}
+
 void EjectOSD::Hide() {
     _mWnd.Hide(false);
 }

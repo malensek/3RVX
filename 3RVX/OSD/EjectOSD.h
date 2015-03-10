@@ -15,6 +15,7 @@ public:
 private:
     MeterWnd _mWnd;
 
+    void EjectDrive(std::wstring driveLetter);
     virtual void UpdateWindowPositions(std::vector<Monitor> monitors);
 
     virtual LRESULT WndProc(HWND hWnd, UINT message,

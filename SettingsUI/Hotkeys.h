@@ -37,4 +37,8 @@ private:
     afx_msg void OnBnClickedRemove();
     afx_msg void OnCbnSelchangeAction();
     afx_msg void OnLvnItemchangedKeys(NMHDR *pNMHDR, LRESULT *pResult);
+    CStatic _argument;
+    CComboBox _argCombo;
+public:
+    afx_msg void OnCbnSelchangeArg();
 };

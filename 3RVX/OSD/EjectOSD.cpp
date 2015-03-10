@@ -2,6 +2,7 @@
 
 #include <Dbt.h>
 
+#include "..\HotkeyInfo.h"
 #include "..\Monitor.h"
 #include "..\Skin.h"
 #include "..\SkinManager.h"
@@ -34,6 +35,20 @@ EjectOSD::~EjectOSD() {
 
 void EjectOSD::Hide() {
     _mWnd.Hide(false);
+}
+
+void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
+    switch (hki.action) {
+    case HotkeyInfo::EjectDrive:
+        if (hki.args.size() > 0) {
+            CLOG(L"Ejecting drive %s", hki.args[0].c_str());
+            EjectDrive(hki.args[0]);
+        } else {
+            CLOG(L"No drive letter argument provided!");
+        }
+        break;
+
+    }
 }
 
 void EjectOSD::UpdateWindowPositions(std::vector<Monitor> monitors) {

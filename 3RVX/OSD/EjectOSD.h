@@ -10,6 +10,7 @@ public:
     ~EjectOSD();
 
     virtual void Hide();
+    virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 private:
     MeterWnd _mWnd;

@@ -35,6 +35,8 @@ EjectOSD::~EjectOSD() {
 
 void EjectOSD::EjectDrive(std::wstring driveLetter) {
     std::wstring name = L"\\\\.\\" + driveLetter + L":";
+    CLOG(L"Ejecting %s", name.c_str());
+
     HANDLE dev = CreateFile(name.c_str(),
         GENERIC_READ, FILE_SHARE_WRITE, NULL, OPEN_EXISTING, NULL, NULL);
     if (dev == INVALID_HANDLE_VALUE) {
@@ -61,10 +63,7 @@ void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
     switch (hki.action) {
     case HotkeyInfo::EjectDrive:
         if (hki.args.size() > 0) {
-            CLOG(L"Ejecting drive %s", hki.args[0].c_str());
             EjectDrive(hki.args[0]);
-        } else {
-            CLOG(L"No drive letter argument provided!");
         }
         break;
 

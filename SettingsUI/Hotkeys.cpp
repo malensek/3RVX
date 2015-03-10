@@ -26,6 +26,8 @@ void Hotkeys::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, LST_KEYS, _list);
     DDX_Control(pDX, BTN_KEYS, _keys);
     DDX_Control(pDX, CMB_ACTION, _action);
+    DDX_Control(pDX, LBL_ARG, _argument);
+    DDX_Control(pDX, CMB_DRIVE, _argCombo);
 }
 
 BOOL Hotkeys::OnApply() {
@@ -120,7 +122,33 @@ void Hotkeys::LoadSelection(int idx) {
     if (current.action >= 0) {
         _list.SetItemText(_selIdx, 1,
             HotkeyInfo::ActionNames[current.action].c_str());
+
+        switch ((HotkeyInfo::HotkeyActions) current.action) {
+        case HotkeyInfo::EjectDrive:
+            _argument.SetWindowTextW(L"Drive:");
+            _argCombo.ResetContent();
+            for (int i = 0; i < 26; ++i) {
+                wchar_t ch = (wchar_t) i + 65;
+                _argCombo.InsertString(i, CString(ch));
+            }
+            if (current.args.size() > 0) {
+                _argCombo.SelectString(0, current.args[0].c_str());
+            }
+
+            _argument.ShowWindow(SW_SHOW);
+            _argCombo.ShowWindow(SW_SHOW);
+            break;
+
+        default:
+            _argument.ShowWindow(SW_HIDE);
+            _argCombo.ShowWindow(SW_HIDE);
+        }
+    } else {
+        /* TODO fix these nasty repeated hides */
+        _argument.ShowWindow(SW_HIDE);
+        _argCombo.ShowWindow(SW_HIDE);
     }
+
     _action.SetCurSel(current.action);
 }
 
@@ -130,6 +158,7 @@ BEGIN_MESSAGE_MAP(Hotkeys, CPropertyPage)
     ON_NOTIFY(LVN_ITEMCHANGED, LST_KEYS, &Hotkeys::OnLvnItemchangedKeys)
     ON_BN_CLICKED(BTN_KEYS, &Hotkeys::OnBnClickedKeys)
     ON_CBN_SELCHANGE(CMB_ACTION, &Hotkeys::OnCbnSelchangeAction)
+    ON_CBN_SELCHANGE(CMB_ARG, &Hotkeys::OnCbnSelchangeArg)
 END_MESSAGE_MAP()
 
 void Hotkeys::OnBnClickedAdd() {
@@ -190,5 +219,24 @@ void Hotkeys::OnBnClickedKeys() {
 void Hotkeys::OnCbnSelchangeAction() {
     int sel = _action.GetCurSel();
     _keyInfo[_selIdx].action = sel;
+    LoadSelection(_selIdx);
+}
+
+void Hotkeys::OnCbnSelchangeArg() {
+    HotkeyInfo *current = &_keyInfo[_selIdx];
+
+    HotkeyInfo::HotkeyActions action 
+        = (HotkeyInfo::HotkeyActions) _action.GetCurSel();
+
+    switch (action) {
+    case HotkeyInfo::EjectDrive:
+        wchar_t buf[2];
+        _argCombo.GetWindowText(buf, 2);
+        if (current->args.size() <= 0) {
+            current->args.resize(1);
+        }
+        current->args[0] = buf;
+        break;
+    }
     LoadSelection(_selIdx);
 }

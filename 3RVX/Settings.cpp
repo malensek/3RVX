@@ -42,11 +42,6 @@ std::vector<std::wstring> Settings::OSDPosNames = {
     L"custom"
 };
 
-std::vector<std::wstring> Settings::HideAnimNames = {
-    L"none",
-    L"fade"
-};
-
 Settings *Settings::Instance() {
     if (instance == NULL) {
         instance = new Settings();
@@ -201,21 +196,24 @@ void Settings::OSDY(int y) {
     SetInt(XML_OSD_Y, y);
 }
 
-Settings::HideAnim Settings::HideAnimation() {
+AnimationTypes::HideAnimation Settings::HideAnim() {
     std::wstring anim = GetText(XML_HIDEANIM);
+    CLOG(L"looking for anim: %s", anim.c_str());
     std::transform(anim.begin(), anim.end(), anim.begin(), ::tolower);
 
-    for (unsigned int i = 0; i < HideAnimNames.size(); ++i) {
-        if (anim == HideAnimNames[i]) {
-            return (Settings::HideAnim) i;
+    std::vector<std::wstring> *names = &AnimationTypes::HideAnimationNames;
+    for (unsigned int i = 0; i < names->size(); ++i) {
+        if (anim == (*names)[i]) {
+            CLOG(L"found %d", i);
+            return (AnimationTypes::HideAnimation) i;
         }
     }
 
     return DEFAULT_HIDE_ANIM;
 }
 
-void Settings::HideAnimation(Settings::HideAnim anim) {
-    std::wstring hideStr = HideAnimNames[(int) anim];
+void Settings::HideAnim(AnimationTypes::HideAnimation anim) {
+    std::wstring hideStr = AnimationTypes::HideAnimationNames[(int) anim];
     SetText(XML_HIDEANIM, StringUtils::Narrow(hideStr));
 }
 

@@ -4,6 +4,7 @@
 #include <string>
 
 #include "TinyXml2\tinyxml2.h"
+#include "MeterWnd\Animations\AnimationTypes.h"
 
 class HotkeyInfo;
 class Skin;
@@ -12,7 +13,7 @@ class Skin;
 #define LANG_DIR L"Languages"
 #define SKIN_DIR L"Skins"
 
-#define DEFAULT_HIDE_ANIM Settings::HideAnim::Fade
+#define DEFAULT_HIDE_ANIM AnimationTypes::HideAnimation::Fade
 #define DEFAULT_LANGUAGE L"English"
 #define DEFAULT_OSD_OFFSET 140
 #define DEFAULT_OSD_POS Settings::OSDPos::Bottom
@@ -20,12 +21,6 @@ class Skin;
 
 class Settings {
 public:
-    enum HideAnim {
-        None,
-        Fade
-    };
-    static std::vector<std::wstring> HideAnimNames;
-
     enum OSDPos {
         Top,
         Left,
@@ -53,8 +48,8 @@ public:
 
     std::wstring AudioDeviceID();
 
-    HideAnim HideAnimation();
-    void HideAnimation(HideAnim anim);
+    AnimationTypes::HideAnimation HideAnim();
+    void HideAnim(AnimationTypes::HideAnimation anim);
     int HideDelay();
     void HideDelay(int delay);
     int HideSpeed();

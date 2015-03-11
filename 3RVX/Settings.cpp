@@ -198,13 +198,11 @@ void Settings::OSDY(int y) {
 
 AnimationTypes::HideAnimation Settings::HideAnim() {
     std::wstring anim = GetText(XML_HIDEANIM);
-    CLOG(L"looking for anim: %s", anim.c_str());
     std::transform(anim.begin(), anim.end(), anim.begin(), ::tolower);
 
     std::vector<std::wstring> *names = &AnimationTypes::HideAnimationNames;
     for (unsigned int i = 0; i < names->size(); ++i) {
         if (anim == (*names)[i]) {
-            CLOG(L"found %d", i);
             return (AnimationTypes::HideAnimation) i;
         }
     }

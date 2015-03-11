@@ -53,6 +53,12 @@ void EjectOSD::EjectDrive(std::wstring driveLetter) {
         NULL, NULL, NULL, NULL, &bytesReturned, NULL);
 
     if (success) {
+        std::wstring rootPath = driveLetter + L":\\";
+        if (GetDriveType(rootPath.c_str()) != DRIVE_CDROM) {
+            int driveBit = (int) pow(2, (driveLetter.at(0) - 65));
+            _ignoreDrives |= driveBit;
+            CLOG(L"Added drive bit %d to ignore list", driveBit);
+        }
         HideOthers(Eject);
         _mWnd.Show();
     }
@@ -86,10 +92,18 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR) lParam;
         if (lpdb->dbch_devicetype == DBT_DEVTYP_VOLUME) {
             PDEV_BROADCAST_VOLUME lpdbv = (PDEV_BROADCAST_VOLUME) lpdb;
-            wchar_t driveLetter = (wchar_t) (log2(lpdbv->dbcv_unitmask) + 65);
+
+            DWORD driveMask = lpdbv->dbcv_unitmask;
+            wchar_t driveLetter = (wchar_t) (log2(driveMask) + 65);
             CLOG(L"Eject notification received for drive %c:", driveLetter);
-            HideOthers(Eject);
-            _mWnd.Show();
+
+            if (driveMask & _ignoreDrives) {
+                CLOG(L"Drive already ejected by a hotkey; not displaying OSD.");
+                _ignoreDrives ^= driveMask;
+            } else {
+                HideOthers(Eject);
+                _mWnd.Show();
+            }
         }
     }
 

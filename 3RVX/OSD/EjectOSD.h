@@ -13,6 +13,7 @@ public:
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 private:
+    DWORD _ignoreDrives;
     MeterWnd _mWnd;
 
     void EjectDrive(std::wstring driveLetter);

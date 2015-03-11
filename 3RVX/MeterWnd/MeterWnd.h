@@ -1,6 +1,8 @@
 #pragma once
 
 #include <list>
+
+#include "Animations\AnimationTypes.h"
 #include "Meter.h"
 
 class Animation;
@@ -12,7 +14,7 @@ class Animation;
 class MeterWnd {
 public:
     MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL,
-        Animation *hideAnimation = NULL, Animation *showAnimation = NULL,
+        AnimationTypes::HideAnimation hideAnim = AnimationTypes::None, 
         int visibleDuration = 0);
     ~MeterWnd();
 
@@ -38,8 +40,7 @@ public:
     void MeterLevels(float value);
     float MeterLevels();
 
-    void HideAnimation(Animation *anim);
-    void ShowAnimation(Animation *anim);
+    void HideAnimation(AnimationTypes::HideAnimation anim);
     void VisibleDuration(int duration);
 
     void BackgroundImage(Gdiplus::Bitmap *background);
@@ -65,7 +66,6 @@ protected:
 
     int _visibleDuration;
     Animation *_hideAnimation;
-    Animation *_showAnimation;
 
     void UpdateDirtyRect(Gdiplus::Rect &rect);
     void ResetDirtyRect();

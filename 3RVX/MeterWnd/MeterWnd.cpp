@@ -3,18 +3,17 @@
 #pragma comment(lib, "dwmapi.lib")
 
 #include "Animation.h"
+#include "AnimationFactory.h"
 
 #define TIMER_HIDE 100
 #define TIMER_ANIMIN 101
 #define TIMER_ANIMOUT 102
 
 MeterWnd::MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance,
-    Animation *hideAnimation, Animation *showAnimation, int visibleDuration) :
+    AnimationTypes::HideAnimation hideAnim, int visibleDuration) :
 _hInstance(hInstance),
 _className(className),
 _title(title),
-_hideAnimation(hideAnimation),
-_showAnimation(showAnimation),
 _visibleDuration(visibleDuration),
 _visible(false) {
     if (_hInstance == NULL) {
@@ -59,9 +58,12 @@ _visible(false) {
     if (_hWnd == NULL) {
         /* throw exception */
     }
+
+    HideAnimation(hideAnim);
 }
 
 MeterWnd::~MeterWnd() {
+    delete _hideAnimation;
     DestroyWindow(_hWnd);
 }
 
@@ -234,8 +236,9 @@ void MeterWnd::MeterLevels(float value)
     }
 }
 
-void MeterWnd::HideAnimation(Animation *anim) {
-    _hideAnimation = anim;
+void MeterWnd::HideAnimation(AnimationTypes::HideAnimation anim) {
+    delete _hideAnimation;
+    _hideAnimation = AnimationFactory::Create(anim);
 }
 
 void MeterWnd::VisibleDuration(int duration) {

@@ -165,6 +165,18 @@ void MeterWnd::ApplyGlass() {
         return;
     }
 
+    /* Disable for Windows 8+ */
+    if (IsWindows8OrGreater()) {
+        CLOG(L"Glass disabled: Windows 8+ client detected");
+        return;
+    }
+
+    /* Disable for Windows XP */
+    if (IsWindowsXPOrGreater() == true && IsWindowsVistaOrGreater() == false) {
+        CLOG(L"Glass disabled: Windows XP client detected");
+        return;
+    }
+
     using namespace Gdiplus;
     ARGB searchArgb = 0xFF000000;
 

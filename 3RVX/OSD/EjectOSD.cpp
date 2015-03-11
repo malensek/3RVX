@@ -25,8 +25,10 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     }
 
     _mWnd.Update();
-    _mWnd.HideAnimation(Settings::Instance()->HideAnim());
-    _mWnd.VisibleDuration(Settings::Instance()->HideDelay());
+
+    Settings *settings = Settings::Instance();
+    _mWnd.HideAnimation(settings->HideAnim(), settings->HideSpeed());
+    _mWnd.VisibleDuration(settings->HideDelay());
 
     UpdateWindowPositions(ActiveMonitors());
 }

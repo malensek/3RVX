@@ -5,5 +5,5 @@ class Animation;
 
 class AnimationFactory {
 public:
-    static Animation *Create(AnimationTypes::HideAnimation anim);
+    static Animation *Create(AnimationTypes::HideAnimation anim, int speed);
 };

@@ -56,10 +56,10 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
         UpdateDeviceMenu();
     }
 
-    _mWnd.HideAnimation(settings->HideAnim());
+    _mWnd.HideAnimation(settings->HideAnim(), settings->HideSpeed());
     _mWnd.VisibleDuration(settings->HideDelay());
 
-    _muteWnd.HideAnimation(settings->HideAnim());
+    _muteWnd.HideAnimation(settings->HideAnim(), settings->HideSpeed());
     _muteWnd.VisibleDuration(settings->HideDelay());
 
     UpdateIcon();

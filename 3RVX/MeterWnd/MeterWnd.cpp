@@ -1,6 +1,7 @@
 #include "MeterWnd.h"
 #include <dwmapi.h>
 #pragma comment(lib, "dwmapi.lib")
+#include <VersionHelpers.h>
 
 #include "Animation.h"
 #include "AnimationFactory.h"
@@ -59,7 +60,7 @@ _visible(false) {
         /* throw exception */
     }
 
-    HideAnimation(hideAnim);
+    HideAnimation(hideAnim, 800);
 }
 
 MeterWnd::~MeterWnd() {
@@ -248,9 +249,9 @@ void MeterWnd::MeterLevels(float value)
     }
 }
 
-void MeterWnd::HideAnimation(AnimationTypes::HideAnimation anim) {
+void MeterWnd::HideAnimation(AnimationTypes::HideAnimation anim, int speed) {
     delete _hideAnimation;
-    _hideAnimation = AnimationFactory::Create(anim);
+    _hideAnimation = AnimationFactory::Create(anim, speed);
 }
 
 void MeterWnd::VisibleDuration(int duration) {
@@ -292,7 +293,7 @@ void MeterWnd::Hide(bool animate) {
     }
 
     if (animate && _hideAnimation) {
-        SetTimer(_hWnd, TIMER_ANIMOUT, 15, NULL);
+        SetTimer(_hWnd, TIMER_ANIMOUT, _hideAnimation->UpdateInterval(), NULL);
     } else {
         ShowWindow(_hWnd, SW_HIDE);
         _visible = false;

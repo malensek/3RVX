@@ -1,5 +1,7 @@
 #include "FadeOut.h"
 
+#include "..\MeterWnd.h"
+
 bool FadeOut::Animate(MeterWnd *meterWnd) {
     byte current = meterWnd->Transparency();
     int newTrans = current - 5;

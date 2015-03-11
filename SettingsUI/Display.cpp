@@ -3,6 +3,7 @@
 #include "Display.h"
 #include "afxdialogex.h"
 
+#include "../3RVX/MeterWnd/Animations/AnimationTypes.h"
 #include "DisplayManager.h"
 #include "Settings.h"
 
@@ -78,7 +79,7 @@ BOOL Display::OnApply() {
     settings->Monitor((LPCWSTR) monitorStr);
 
     int hideAnimIdx = _animation.GetCurSel();
-    settings->HideAnimation((Settings::HideAnim) hideAnimIdx);
+    settings->HideAnim((AnimationTypes::HideAnimation) hideAnimIdx);
 
     int hideDelay = UIUtils::TextToInt(_delay);
     settings->HideDelay(hideDelay);
@@ -138,11 +139,11 @@ BOOL Display::OnInitDialog() {
     _monitor.SelectString(0, monitorName.c_str());
 
     /* Animation Settings */
-    for (std::wstring anim : settings->HideAnimNames) {
+    for (std::wstring anim : AnimationTypes::HideAnimationNames) {
         CString animName = UIUtils::Capitalize(anim);
         _animation.AddString(animName);
     }
-    Settings::HideAnim hAnim = settings->HideAnimation();
+    AnimationTypes::HideAnimation hAnim = settings->HideAnim();
     _animation.SetCurSel((int) hAnim);
 
     _spinDelay.SetRange32(MIN_MS, MAX_MS);

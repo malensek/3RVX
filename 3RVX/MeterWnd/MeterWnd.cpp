@@ -216,7 +216,7 @@ void MeterWnd::ApplyGlass() {
 //
 // UpdateLocation()
 //
-// Uses MoveWindow() to set the window's X,Y coordinates its size.
+// Uses MoveWindow() to set the window's X,Y coordinates and its size.
 //
 void MeterWnd::UpdateLocation() {
     MoveWindow(_hWnd, _location.x, _location.y, Width(), Height(), FALSE);

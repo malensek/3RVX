@@ -12,6 +12,7 @@
 
 class Meter;
 class SliderKnob;
+class SoundPlayer;
 
 #define SKINS_DIR L"Skins"
 #define SKIN_XML L"skin.xml"
@@ -30,6 +31,7 @@ public:
     Gdiplus::Bitmap *volumeMask;
     std::list<Meter *> volumeMeters;
     std::vector<HICON> volumeIconset;
+    SoundPlayer *volumeSound;
 
     Gdiplus::Bitmap *muteBackground;
     Gdiplus::Bitmap *muteMask;
@@ -43,11 +45,11 @@ public:
     SliderKnob *volumeSliderKnob;
 
 private:
-
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     Gdiplus::Bitmap *OSDMask(char *osdName);
     std::list<Meter *> OSDMeters(char *osdName);
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);
+    SoundPlayer *OSDSound(char *osdName);
 
     std::vector<HICON> Iconset(char *osdName);
 

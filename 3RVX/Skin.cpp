@@ -9,6 +9,7 @@
 #include "MeterWnd/Meters/MeterTypes.h"
 #include "StringUtils.h"
 #include "Slider/SliderKnob.h"
+#include "SoundPlayer.h"
 
 Skin::Skin(std::wstring skinXML) :
 SkinInfo(skinXML) {
@@ -16,6 +17,7 @@ SkinInfo(skinXML) {
     volumeMask = OSDMask("volume");
     volumeMeters = OSDMeters("volume");
     volumeIconset = Iconset("volume");
+    volumeSound = OSDSound("volume");
 
     muteBackground = OSDBgImg("mute");
     muteMask = OSDMask("mute");
@@ -76,7 +78,7 @@ bool Skin::HasOSD(char *osdName) {
 Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
     if (osd == NULL) {
-        Error::ErrorMessageDie(SKINERR_INVALID_OSD_BG,
+        Error::ErrorMessageDie(SKINERR_INVALID_OSD,
             StringUtils::Widen(osdName));
     }
     return Image(osd, "background");
@@ -95,7 +97,7 @@ Gdiplus::Bitmap *Skin::SliderBgImg(char *sliderName) {
     tinyxml2::XMLElement *sliderElement = SliderXMLElement(sliderName);
     if (sliderElement == NULL) {
         Error::ErrorMessageDie(
-            SKINERR_INVALID_CONT_BG, StringUtils::Widen(sliderName));
+            SKINERR_INVALID_BG, StringUtils::Widen(sliderName));
     }
     return Image(sliderElement, "background");
 }
@@ -186,6 +188,39 @@ std::vector<HICON> Skin::Iconset(char *osdName) {
     FindClose(hFind);
  
     return iconset;
+}
+
+SoundPlayer *Skin::OSDSound(char *osdName) {
+    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    if (osd == NULL) {
+        Error::ErrorMessageDie(SKINERR_INVALID_OSD,
+            StringUtils::Widen(osdName));
+    }
+
+    tinyxml2::XMLElement *sound = osd->FirstChildElement("sound");
+    if (sound == NULL) {
+        return NULL;
+    }
+
+    const char *fileName = sound->Attribute("file");
+    if (fileName == NULL) {
+        CLOG(L"OSD has <sound> tag but no file specified");
+        return NULL;
+    }
+
+    std::wstring wFileName = _skinDir + L"\\" + StringUtils::Widen(fileName);
+    if (PathFileExists(wFileName.c_str()) == FALSE) {
+        Error::ErrorMessage(SKINERR_NOTFOUND, wFileName);
+    }
+
+    SoundPlayer *player = NULL;
+    try {
+        player = new SoundPlayer(wFileName);
+    } catch (std::runtime_error e) {
+        Error::ErrorMessage(SKINERR_READERR, wFileName);
+    }
+
+    return player;
 }
 
 std::list<Meter *> Skin::OSDMeters(char *osdName) {
@@ -379,7 +414,7 @@ SliderKnob *Skin::Knob(char *sliderName) {
     tinyxml2::XMLElement *controller = SliderXMLElement(sliderName);
     if (controller == NULL) {
         Error::ErrorMessageDie(
-            SKINERR_INVALID_CONT, StringUtils::Widen(sliderName));
+            SKINERR_INVALID_SLIDER, StringUtils::Widen(sliderName));
     }
 
     tinyxml2::XMLElement *slider = controller->FirstChildElement("slider");

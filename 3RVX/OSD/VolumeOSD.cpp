@@ -155,7 +155,9 @@ void VolumeOSD::LoadSkin() {
 
     /* Enable sound effects, if any */
     if (settings->SoundEffectsEnabled()) {
-        //_soundPlayer = new SoundPlayer();
+        if (skin->volumeSound) {
+            _soundPlayer = skin->volumeSound;
+        }
     }
 }
 

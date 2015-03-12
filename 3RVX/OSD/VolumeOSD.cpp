@@ -167,7 +167,9 @@ void VolumeOSD::MeterLevels(float level) {
 }
 
 void VolumeOSD::MeterChangeCallback(int units) {
-    CLOG(L"got callback");
+    if (_soundPlayer) {
+        _soundPlayer->Play();
+    }
 }
 
 void VolumeOSD::Hide() {

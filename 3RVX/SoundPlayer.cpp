@@ -1,53 +1,61 @@
 #include "SoundPlayer.h"
 
-#include <Windows.h>
+#include <dshow.h>
+#include <objbase.h>
 #include <chrono>
-#include <mmsystem.h>
 #include <mutex>
-#include <fstream>
+#include <uuids.h>
 
 #define PLAY_SYNC SND_MEMORY
 #define PLAY_ASYNC (SND_ASYNC | SND_MEMORY)
 
 SoundPlayer::SoundPlayer(std::wstring filePath) {
-    std::ifstream file(filePath, std::ios::binary);
-    if (file.rdstate() & std::ios::failbit) {
-        /* Open failed */
-        throw std::runtime_error("Audio file not found");
+
+    HRESULT hr;
+
+    hr = CoCreateInstance(
+        CLSID_FilterGraph,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IGraphBuilder,
+        (void **) &_graphBuilder);
+
+    if (FAILED(hr)) {
+
     }
 
-    file.seekg(0, std::ios::end);
-    std::streamsize chars = file.tellg();
-    file.seekg(0, std::ios::beg);
+    hr = _graphBuilder->QueryInterface(IID_IMediaControl, (void **) _mediaCtrl);
+    hr = _graphBuilder->QueryInterface(IID_IMediaEventEx, (void **) _mediaEv);
+    hr = _graphBuilder->QueryInterface(IID_IMediaSeeking, (void **) _mediaSeek);
+    hr = _graphBuilder->RenderFile(filePath.c_str(), NULL);
 
-    _sound = new char[(unsigned int) chars];
-    file.read(_sound, chars);
-    file.close();
-
-    //_thread = std::thread(&SoundPlayer::PlayerThread, this);
+    _thread = std::thread(&SoundPlayer::PlayerThread, this);
 }
 
 SoundPlayer::~SoundPlayer() {
     /* Since we're using SND_MEMORY and SND_ASYNC, we need to stop playback
      * before freeing any memory: */
-    PlaySound(NULL, 0, 0);
-    delete[] _sound;
+    //PlaySound(NULL, 0, 0);
+    //delete[] _sound;
 }
 
 void SoundPlayer::Play(bool async) {
-    //_cv.notify_all();
-    PlaySound(NULL, 0, 0);
-    PlaySound((LPCWSTR) _sound, NULL, SND_MEMORY | SND_NOSTOP);
+    _cv.notify_all();
 }
 
 void SoundPlayer::PlayerThread() {
     std::mutex mutex;
     std::unique_lock<std::mutex> lock(mutex);
+    long evCode;
+    REFERENCE_TIME start = 0;
+
     while (true) {
         _cv.wait(lock);
-        //PlaySound(NULL, 0, 0);
-        PlaySound((LPCWSTR) _sound, NULL, SND_MEMORY | SND_NOSTOP);
-        std::this_thread::sleep_for(std::chrono::milliseconds(75));
-    }
 
+        _mediaCtrl->Run();
+        _mediaEv->WaitForCompletion(INFINITE, &evCode);
+        _mediaSeek->SetPositions(
+            &start, AM_SEEKING_AbsolutePositioning,
+            NULL, AM_SEEKING_NoPositioning);
+    }
 }

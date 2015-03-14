@@ -21,12 +21,12 @@ SoundPlayer::SoundPlayer(std::wstring filePath) {
         (void **) &_graphBuilder);
 
     if (FAILED(hr)) {
-
+        OutputDebugString(L"gb failed");
     }
-
-    hr = _graphBuilder->QueryInterface(IID_IMediaControl, (void **) _mediaCtrl);
-    hr = _graphBuilder->QueryInterface(IID_IMediaEventEx, (void **) _mediaEv);
-    hr = _graphBuilder->QueryInterface(IID_IMediaSeeking, (void **) _mediaSeek);
+    
+    hr = _graphBuilder->QueryInterface(IID_IMediaControl, (void **) &_mediaCtrl);
+    hr = _graphBuilder->QueryInterface(IID_IMediaEventEx, (void **) &_mediaEv);
+    hr = _graphBuilder->QueryInterface(IID_IMediaSeeking, (void **) &_mediaSeek);
     hr = _graphBuilder->RenderFile(filePath.c_str(), NULL);
 
     _thread = std::thread(&SoundPlayer::PlayerThread, this);

@@ -8,10 +8,10 @@
 #include "..\MeterWnd\MeterWnd.h"
 #include "..\MeterWnd\MeterCallbackReceiver.h"
 #include "..\NotifyIcon.h"
-#include "..\SoundPlayer.h"
 #include "OSD.h"
 
 class Skin;
+class SoundPlayer;
 class VolumeSlider;
 
 class VolumeOSD : public OSD, MeterCallbackReceiver {

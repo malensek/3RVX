@@ -1,6 +1,7 @@
 #include "VolumeOSD.h"
 
-#include <Shlwapi.h>
+#include "..\SoundPlayer.h"
+
 #include <string>
 
 #include "..\HotkeyInfo.h"

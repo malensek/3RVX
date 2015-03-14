@@ -33,10 +33,10 @@ SoundPlayer::SoundPlayer(std::wstring filePath) {
 }
 
 SoundPlayer::~SoundPlayer() {
-    /* Since we're using SND_MEMORY and SND_ASYNC, we need to stop playback
-     * before freeing any memory: */
-    //PlaySound(NULL, 0, 0);
-    //delete[] _sound;
+    _mediaSeek->Release();
+    _mediaEv->Release();
+    _mediaCtrl->Release();
+    _graphBuilder->Release();
 }
 
 void SoundPlayer::Play(bool async) {

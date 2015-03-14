@@ -1,13 +1,8 @@
 #include "SoundPlayer.h"
 
+#include <Windows.h>
 #include <dshow.h>
-#include <objbase.h>
-#include <chrono>
-#include <mutex>
-#include <uuids.h>
-
-#define PLAY_SYNC SND_MEMORY
-#define PLAY_ASYNC (SND_ASYNC | SND_MEMORY)
+#pragma comment(lib, "Strmiids.lib") 
 
 SoundPlayer::SoundPlayer(std::wstring filePath) {
 
@@ -39,23 +34,37 @@ SoundPlayer::~SoundPlayer() {
     _graphBuilder->Release();
 }
 
-void SoundPlayer::Play(bool async) {
+bool SoundPlayer::Play() {
+    if (_playing) {
+        return false;
+    }
+
+    _mutex.lock();
+    _playing = true;
     _cv.notify_all();
+    _mutex.unlock();
+    return true;
 }
 
 void SoundPlayer::PlayerThread() {
-    std::mutex mutex;
-    std::unique_lock<std::mutex> lock(mutex);
     long evCode;
     REFERENCE_TIME start = 0;
+    std::unique_lock<std::mutex> lock(_mutex);
 
     while (true) {
         _cv.wait(lock);
 
+        if (!_playing) {
+            continue;
+        }
+
         _mediaCtrl->Run();
         _mediaEv->WaitForCompletion(INFINITE, &evCode);
+        _mediaCtrl->Pause();
         _mediaSeek->SetPositions(
             &start, AM_SEEKING_AbsolutePositioning,
             NULL, AM_SEEKING_NoPositioning);
+
+        _playing = false;
     }
 }

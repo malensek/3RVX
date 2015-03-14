@@ -1,31 +1,33 @@
 #pragma once
 
-#include <winioctl.h>
-#include <dshow.h>
-#include <ks.h>
-#include <ksmedia.h>
-
 #include <condition_variable>
+#include <mutex>
 #include <string>
 #include <thread>
 
+struct IGraphBuilder;
+struct IMediaControl;
+struct IMediaEventEx;
+struct IMediaSeeking;
 
 class SoundPlayer {
 public:
     SoundPlayer(std::wstring filePath);
     ~SoundPlayer();
 
-    void Play(bool async = true);
+    bool Play();
 
 private:
     IGraphBuilder *_graphBuilder;
     IMediaControl *_mediaCtrl;
-    IMediaEvent *_mediaEv;
+    IMediaEventEx *_mediaEv;
     IMediaSeeking *_mediaSeek;
 
-    std::condition_variable _cv;
-    char *_sound;
+    bool _playing;
+
     std::thread _thread;
+    std::condition_variable _cv;
+    std::mutex _mutex;
 
     void PlayerThread();
 };

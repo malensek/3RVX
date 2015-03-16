@@ -6,6 +6,8 @@
 #define SKINERR (GENERR << 8)
 
 #define GENERR_NOTFOUND            GENERR + 1
+#define GENERR_SETTINGSFILE        GENERR + 2
+#define GENERR_MISSING_XML         GENERR + 3
 
 #define SKINERR_INVALID_SKIN       SKINERR + 1
 #define SKINERR_INVALID_OSD        SKINERR + 2

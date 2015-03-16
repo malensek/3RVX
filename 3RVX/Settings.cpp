@@ -56,12 +56,12 @@ void Settings::Load() {
     std::string u8FileName = StringUtils::Narrow(_file);
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
-        throw std::runtime_error("Failed to parse XML file");
+        Error::ErrorMessageDie(GENERR_SETTINGSFILE, _file);
     }
 
     _root = _xml.GetDocument()->FirstChildElement("settings");
     if (_root == NULL) {
-        throw std::runtime_error("Could not find root XML element");
+        Error::ErrorMessageDie(GENERR_MISSING_XML, L"<settings>");
     }
 }
 

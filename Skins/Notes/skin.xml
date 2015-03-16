@@ -6,7 +6,7 @@
   </info>
 
   <osds>
-    <volume background="OSD\volume_background.png">
+    <volume background="OSD\volbg.png" defaultUnits="23">
       <meter
         type="HorizontalTile"
         image="OSD\bars.png"
@@ -22,6 +22,7 @@
         x="255"
         y="29"
       />
+      <iconset location="Icons\Volume"/>
     </volume>
 
     <mute background="OSD\mute.png"/>

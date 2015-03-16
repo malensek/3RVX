@@ -35,15 +35,15 @@ SoundPlayer::~SoundPlayer() {
 }
 
 bool SoundPlayer::Play() {
-    if (_playing) {
-        return false;
-    }
+    bool alreadyPlaying;
 
     _mutex.lock();
+    alreadyPlaying = _playing;
     _playing = true;
-    _cv.notify_all();
     _mutex.unlock();
-    return true;
+
+    _cv.notify_all();
+    return alreadyPlaying;
 }
 
 void SoundPlayer::PlayerThread() {

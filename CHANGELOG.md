@@ -8,6 +8,8 @@ Beta 5
 * Respects animation setting (None, Fade)
 * Respects animation speed setting
 * Loads and applies skin sound effects
+* Uses DirectShow for sound effects (reduces latency, improves responsiveness)
+* Error messages while loading settings are more helpful
 
 Beta 4
 ------

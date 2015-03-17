@@ -172,6 +172,7 @@ void ProcessHotkeys(HotkeyInfo &hki) {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
     case HotkeyInfo::Mute:
+    case HotkeyInfo::VolumeSlider:
         vOSD->ProcessHotkeys(hki);
         break;
 

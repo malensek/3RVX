@@ -244,6 +244,15 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
         _volumeCtrl->ToggleMute();
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
         break;
+
+    case HotkeyInfo::VolumeSlider:
+        if (_volumeSlider->Visible()) {
+            /* If the slider is already visible, user must want to close it. */
+            _volumeSlider->Hide();
+        } else {
+            SendMessage(_hWnd, MSG_NOTIFYICON, NULL, WM_LBUTTONUP);
+        }
+        break;
     }
 }
 

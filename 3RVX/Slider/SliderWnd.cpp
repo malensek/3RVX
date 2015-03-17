@@ -4,6 +4,9 @@
 
 #include "SliderKnob.h"
 
+#define TIMER_IGNORE_INPUT 50
+#define IGNORE_DURATION 100
+
 SliderWnd::SliderWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance) :
 MeterWnd(className, title, hInstance),
 _dragging(false) {
@@ -15,6 +18,8 @@ _dragging(false) {
 void SliderWnd::Show() {
     PositionWindow();
     MeterWnd::Show(false);
+    _ignoreInput = true;
+    SetTimer(_hWnd, TIMER_IGNORE_INPUT, IGNORE_DURATION, NULL);
 }
 
 void SliderWnd::Knob(SliderKnob *knob) {
@@ -116,6 +121,13 @@ void SliderWnd::UpdateKnob(int x, int y) {
 
 LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
     switch (message) {
+    case WM_TIMER:
+        if (wParam == TIMER_IGNORE_INPUT) {
+            KillTimer(_hWnd, TIMER_IGNORE_INPUT);
+            _ignoreInput = false;
+        }
+        break;
+
     case WM_KILLFOCUS:
         Hide();
         break;
@@ -157,12 +169,43 @@ LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
         }
 
         break;
-    }
+        }
 
     case WM_LBUTTONUP:
         _dragging = false;
         ReleaseCapture();
         break;
+    }
+
+    /* Input events: arrow keys, right or middle mouse buttons, scrolling */
+    if (_ignoreInput == false) {
+        switch (message) {
+        case WM_MBUTTONUP:
+            KeyPress(VK_MBUTTON);
+            break;
+
+        case WM_RBUTTONDOWN:
+            KeyPress(VK_RBUTTON);
+            break;
+
+        case WM_MOUSEWHEEL: {
+            if (_ignoreInput) {
+                break;
+            }
+
+            short scroll = GET_WHEEL_DELTA_WPARAM(wParam);
+            if (scroll > 0) {
+                ScrollUp();
+            } else if (scroll < 0) {
+                ScrollDown();
+            }
+            break;
+        }
+
+        case WM_KEYUP:
+            KeyPress(wParam);
+            break;
+        }
     }
 
     return MeterWnd::WndProc(message, wParam, lParam);

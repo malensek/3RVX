@@ -16,6 +16,13 @@ public:
 
 protected:
     void SliderChanged();
+    void ScrollUp();
+    void ScrollDown();
+    void KeyPress(unsigned int vk);
+
+    void IncreaseVolume();
+    void DecreaseVolume();
+    void Mute();
 
 private:
     SliderKnob *_knob;

@@ -15,8 +15,12 @@ protected:
 
     void Knob(SliderKnob *knob);
     virtual void SliderChanged() = 0;
+    virtual void ScrollUp() = 0;
+    virtual void ScrollDown() = 0;
+    virtual void KeyPress(unsigned int vk) = 0;
 
 private:
+    bool _ignoreInput;
     SliderKnob *_knob;
     int _dragOffset;
 

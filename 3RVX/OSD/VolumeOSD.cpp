@@ -257,6 +257,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == MSG_VOL_CHNG) {
         float v = _volumeCtrl->Volume();
         _volumeSlider->MeterLevels(v);
+        UpdateIcon();
 
         if (wParam > 0) {
             /* We manually post a MSG_VOL_CHNG when modifying the volume with
@@ -288,7 +289,6 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             HideOthers(Volume);
         }
 
-        UpdateIcon();
     } else if (message == MSG_VOL_DEVCHNG) {
         CLOG(L"Volume device change detected.");
         if (_selectedDevice == L"") {
@@ -301,6 +301,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         }
         _selectedDesc = _volumeCtrl->DeviceDesc();
         UpdateDeviceMenu();
+
     } else if (message == MSG_NOTIFYICON) {
         if (lParam == WM_LBUTTONUP) {
             _volumeSlider->MeterLevels(_volumeCtrl->Volume());
@@ -312,6 +313,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y, _hWnd, NULL);
             PostMessage(hWnd, WM_NULL, 0, 0);
         }
+
     } else if (message == WM_COMMAND) {
         int menuItem = LOWORD(wParam);
         switch (menuItem) {

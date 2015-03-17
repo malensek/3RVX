@@ -4,6 +4,8 @@
 Beta 6
 ------
 * Adds a new eject hotkey that ejects the most recently inserted drive
+* Implements the 'Show Volume Slider' hotkey
+* New slider controls: arrow keys and mouse wheel to change volume
 
 Beta 5
 ------

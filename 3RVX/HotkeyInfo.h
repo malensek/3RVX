@@ -11,6 +11,7 @@ public:
         Mute,
         VolumeSlider,
         EjectDrive,
+        EjectLatestDrive,
         RunApp,
         Settings,
         Exit,

@@ -115,6 +115,10 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 HideOthers(Eject);
                 _mWnd.Show();
             }
+
+            if (_latestDrive == driveMask) {
+                _latestDrive = 0;
+            }
         }
     }
 

@@ -176,6 +176,7 @@ void ProcessHotkeys(HotkeyInfo &hki) {
         break;
 
     case HotkeyInfo::EjectDrive:
+    case HotkeyInfo::EjectLatestDrive:
         eOSD->ProcessHotkeys(hki);
         break;
 

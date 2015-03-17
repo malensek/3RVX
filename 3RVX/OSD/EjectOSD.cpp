@@ -81,6 +81,15 @@ void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
         }
         break;
 
+    case HotkeyInfo::EjectLatestDrive:
+        if (_latestDrive != 0) {
+            wchar_t letter = MaskToDriveLetter(_latestDrive);
+            std::wstring lStr(1, letter);
+            EjectDrive(lStr);
+            _latestDrive = 0;
+        }
+
+        break;
     }
 }
 
@@ -90,15 +99,14 @@ void EjectOSD::UpdateWindowPositions(std::vector<Monitor> monitors) {
 
 LRESULT
 EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    if (message == WM_DEVICECHANGE
-        && wParam == DBT_DEVICEREMOVECOMPLETE) {
+    if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEREMOVECOMPLETE) {
         PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR) lParam;
         if (lpdb->dbch_devicetype == DBT_DEVTYP_VOLUME) {
             PDEV_BROADCAST_VOLUME lpdbv = (PDEV_BROADCAST_VOLUME) lpdb;
 
             DWORD driveMask = lpdbv->dbcv_unitmask;
-            wchar_t driveLetter = (wchar_t) (log2(driveMask) + 65);
-            CLOG(L"Eject notification received for drive %c:", driveLetter);
+            CLOG(L"Eject notification received for drive %c:",
+                MaskToDriveLetter(driveMask));
 
             if (driveMask & _ignoreDrives) {
                 CLOG(L"Drive already ejected by a hotkey; not displaying OSD.");
@@ -110,5 +118,27 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         }
     }
 
+    if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEARRIVAL) {
+        PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR) lParam;
+        if (lpdb->dbch_devicetype == DBT_DEVTYP_VOLUME) {
+            PDEV_BROADCAST_VOLUME lpdbv = (PDEV_BROADCAST_VOLUME) lpdb;
+
+            if (lpdbv->dbcv_flags != DBTF_NET) {
+                _latestDrive = lpdbv->dbcv_unitmask;
+
+                CLOG(L"Media inserted in drive %c:",
+                    MaskToDriveLetter(_latestDrive));
+            }
+        }
+    }
+
     return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+DWORD EjectOSD::DriveLetterToMask(wchar_t letter) {
+    return (DWORD) pow(2, (letter - 65));
+}
+
+wchar_t EjectOSD::MaskToDriveLetter(DWORD mask) {
+    return (wchar_t) (log2(mask) + 65);
 }

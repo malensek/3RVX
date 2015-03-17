@@ -1,6 +1,10 @@
 3RVX3 Changelog
 ===============
 
+Beta 6
+------
+* Adds a new eject hotkey that ejects the most recently inserted drive
+
 Beta 5
 ------
 * Implements eject notification and hotkey functionality

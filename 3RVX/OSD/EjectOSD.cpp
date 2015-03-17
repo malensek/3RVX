@@ -140,6 +140,10 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 }
 
 DWORD EjectOSD::DriveLetterToMask(wchar_t letter) {
+    if (letter < 65 || letter > 90) {
+        return 0;
+    }
+
     return (DWORD) pow(2, (letter - 65));
 }
 

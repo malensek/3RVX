@@ -117,6 +117,8 @@ KeyGrabber::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     }
 
     case WM_MOUSEWHEEL: {
+        /* Note: WM_MOUSEWHEEL on a hook is a little different, so we
+         * need to grab the wheel delta info from the lParam. */
         MSLLHOOKSTRUCT *msInfo = (MSLLHOOKSTRUCT *) lParam;
         if ((int) msInfo->mouseData > 0) {
             keyCombo += HKM_MOUSE_WHUP;

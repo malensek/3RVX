@@ -19,8 +19,8 @@
 VolumeOSD::VolumeOSD() :
 OSD(L"3RVX-VolumeDispatcher"),
 _mWnd(L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
-_muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
-{
+_muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD") {
+
     LoadSkin();
     Settings *settings = Settings::Instance();
 
@@ -29,6 +29,10 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
     std::wstring device = settings->AudioDeviceID();
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
+
+    /* Set up volume state variables */
+    _lastVolume = _volumeCtrl->Volume();
+    _muted = _volumeCtrl->Muted();
 
     if (settings->SoundEffectsEnabled()) {
         _sounds = true;
@@ -70,7 +74,7 @@ _muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD")
 
     /* TODO: check whether we should show the OSD on startup or not. If so, post
      * a MSG_VOL_CHNG so that the volume level (or mute) is displayed: */
-    SendMessage(_hWnd, MSG_VOL_CHNG, NULL, NULL);
+    SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
 }
 
 VolumeOSD::~VolumeOSD() {
@@ -78,6 +82,7 @@ VolumeOSD::~VolumeOSD() {
     DestroyMenu(_menu);
     delete _icon;
     delete _volumeSlider;
+    delete _callbackMeter;
     _volumeCtrl->Dispose();
 }
 
@@ -125,9 +130,9 @@ void VolumeOSD::LoadSkin() {
     }
 
     /* Add a callback meter with the default volume increment for sounds */
-    CallbackMeter *callbackMeter = new CallbackMeter(
+    _callbackMeter = new CallbackMeter(
         skin->DefaultVolumeUnits(), *this);
-    _mWnd.AddMeter(callbackMeter);
+    _mWnd.AddMeter(_callbackMeter);
 
     /* Default volume increment */
     _defaultIncrement = (float) (10000 / skin->DefaultVolumeUnits()) / 10000.0f;
@@ -226,17 +231,20 @@ void VolumeOSD::UnMute() {
 }
 
 void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
-    float currentVol = _volumeCtrl->Volume();
+    int currentUnit = _callbackMeter->CalcUnits();
+    if (_volumeCtrl->Volume() == 0.0000f) {
+        currentUnit = 0;
+    }
     switch (hki.action) {
     case HotkeyInfo::IncreaseVolume:
         UnMute();
-        _volumeCtrl->Volume(currentVol + _defaultIncrement + 0.0001f);
+        _volumeCtrl->Volume((float) (currentUnit + 1) * _defaultIncrement);
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
         break;
 
     case HotkeyInfo::DecreaseVolume:
         UnMute();
-        _volumeCtrl->Volume(currentVol - _defaultIncrement - 0.0001f);
+        _volumeCtrl->Volume((float) (currentUnit - 1) * _defaultIncrement);
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
         break;
 
@@ -265,6 +273,8 @@ LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == MSG_VOL_CHNG) {
         float v = _volumeCtrl->Volume();
+        bool muteState = _volumeCtrl->Muted();
+
         _volumeSlider->MeterLevels(v);
         UpdateIcon();
 
@@ -277,14 +287,15 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         }
 
         CLOG(L"Volume change notification:\nNew level: %f\nPrevious: %f",
-            v, _previousVolume);
-        if (lParam == 0) {
-            if (abs(v - _previousVolume) < 0.0001f) {
+            v, _lastVolume);
+        if (lParam == 0 && (muteState == _muted)) {
+            if (abs(v - _lastVolume) < 0.0001f) {
                 CLOG(L"No change in volume detected; ignoring event.");
                 return DefWindowProc(hWnd, message, wParam, lParam);
             }
         }
-        _previousVolume = v;
+        _lastVolume = v;
+        _muted = muteState;
 
         if (_volumeSlider->Visible() == false) {
             if (_volumeCtrl->Muted() || v == 0.0f) {

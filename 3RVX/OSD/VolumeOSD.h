@@ -5,11 +5,12 @@
 #include "..\Controllers\Volume\CoreAudio.h"
 #include "..\Controllers\Volume\VolumeController.h"
 #include "..\MeterWnd\Animations\FadeOut.h"
-#include "..\MeterWnd\MeterWnd.h"
 #include "..\MeterWnd\MeterCallbackReceiver.h"
+#include "..\MeterWnd\MeterWnd.h"
 #include "..\NotifyIcon.h"
 #include "OSD.h"
 
+class CallbackMeter;
 class Skin;
 class SoundPlayer;
 class VolumeSlider;
@@ -25,23 +26,29 @@ public:
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 private:
+    CoreAudio *_volumeCtrl;
+    float _defaultIncrement;
+    float _lastVolume;
+    bool _muted;
+
     MeterWnd _mWnd;
+    CallbackMeter *_callbackMeter;
+    MeterWnd _muteWnd;
+    VolumeSlider *_volumeSlider;
+
     NotifyIcon *_icon;
     std::vector<HICON> _iconImages;
     int _lastIcon;
+
     HMENU _menu;
     HMENU _deviceMenu;
     UINT _menuFlags;
-    CoreAudio *_volumeCtrl;
-    VolumeSlider *_volumeSlider;
     std::vector<VolumeController::DeviceInfo> _deviceList;
     std::wstring _selectedDevice;
     std::wstring _selectedDesc;
-    MeterWnd _muteWnd;
-    float _defaultIncrement;
+
     bool _sounds;
     SoundPlayer *_soundPlayer;
-    float _previousVolume;
 
     void LoadSkin();
     void MeterLevels(float value);

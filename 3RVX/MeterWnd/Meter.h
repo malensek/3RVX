@@ -20,6 +20,7 @@ public:
     virtual void Value(float value);
 
     virtual int Units() const;
+    virtual int CalcUnits();
 
     virtual std::wstring ToString();
 
@@ -28,7 +29,6 @@ protected:
     Gdiplus::Bitmap *_bitmap;
     Gdiplus::Rect _rect;
 
-    virtual int CalcUnits();
     void UpdateDrawnValues();
 
 private:

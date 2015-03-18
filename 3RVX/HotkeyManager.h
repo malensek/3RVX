@@ -61,6 +61,8 @@ private:
     HWND _notifyWnd;
     int _fixWin;
     std::unordered_set<int> _keyCombinations;
+    std::unordered_set<int> _hookCombinations;
+    int _modifiers;
 
     HHOOK _keyHook;
     HHOOK _mouseHook;

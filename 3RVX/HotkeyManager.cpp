@@ -31,6 +31,7 @@ HotkeyManager::~HotkeyManager() {
             break;
         }
     }
+    _hookCombinations.clear();
 
     Unhook();
 }
@@ -81,7 +82,9 @@ void HotkeyManager::Register(int keyCombination) {
     int mods = (0xF0000 & keyCombination) >> 16;
     if (!RegisterHotKey(_notifyWnd, keyCombination, mods, vk)) {
         CLOG(L"Failed to register hotkey [%d]\n"
-            L"Mods: %d, VK: %d", keyCombination, mods, vk);
+            L"Mods: %d, VK: %d\n"
+            L"Placing in hook list", keyCombination, mods, vk);
+        _hookCombinations.insert(keyCombination);
         return;
     }
 
@@ -136,7 +139,42 @@ HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 SendInput(1, &input, sizeof(INPUT));
 
                 _fixWin = false;
+                return CallNextHookEx(NULL, nCode, wParam, lParam);
             }
+        }
+
+        if (_hookCombinations.size() <= 0) {
+            return CallNextHookEx(NULL, nCode, wParam, lParam);
+        }
+
+        if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+            KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT *) lParam;
+
+            DWORD vk = kbInfo->vkCode;
+            int mods = HotkeyManager::IsModifier(vk);
+
+            if (mods) {
+                _modifiers |= mods;
+                return CallNextHookEx(NULL, nCode, wParam, lParam);
+            } else {
+                /* Is this an extended key? */
+                int ext = (kbInfo->flags & 0x1) << EXT_OFFSET;
+                int keys = _modifiers | ext | vk;
+                if (_hookCombinations.count(keys) > 0) {
+                    SendMessage(_notifyWnd, WM_HOTKEY,
+                        keys, _modifiers >> MOD_OFFSET);
+                    return (LRESULT) 1;
+                }
+            }
+        }
+
+        if (wParam == WM_KEYUP || wParam == WM_SYSKEYUP) {
+            KBDLLHOOKSTRUCT *kbInfo = (KBDLLHOOKSTRUCT *) lParam;
+            int m = HotkeyManager::IsModifier(kbInfo->vkCode);
+            if (m) {
+                _modifiers ^= m;
+            }
+            return CallNextHookEx(NULL, nCode, wParam, lParam);
         }
     }
 

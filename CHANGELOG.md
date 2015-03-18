@@ -6,6 +6,8 @@ Beta 6
 * Adds a new eject hotkey that ejects the most recently inserted drive
 * Implements the 'Show Volume Slider' hotkey
 * New slider controls: arrow keys and mouse wheel to change volume
+* 'Natural' volume increment and decrement based on skin units
+* Fix mute bug (external mute events did not show OSD)
 
 Beta 5
 ------

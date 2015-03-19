@@ -271,6 +271,7 @@ void MeterWnd::BackgroundImage(Gdiplus::Bitmap *background) {
 void MeterWnd::GlassMask(Gdiplus::Bitmap *mask) {
     _glassMask = mask;
     ApplyGlass();
+    ApplyClonesGlass();
 }
 
 void MeterWnd::Show(bool animate) {
@@ -369,6 +370,8 @@ MeterWndClone *MeterWnd::Clone() {
         cloneTitle.str().c_str(),
         _hInstance);
 
+    ApplyClonesGlass();
+
     _clones.push_back(mwc);
     CLOG(L"Created meter window clone: %s/%s",
         cloneClass.str().c_str(), cloneTitle.str().c_str());
@@ -407,6 +410,18 @@ void MeterWnd::HideClones() {
     if (_clones.size() > 0) {
         for (MeterWndClone *mwc : _clones) {
             mwc->Hide();
+        }
+    }
+}
+
+void MeterWnd::ApplyClonesGlass(Gdiplus::Bitmap *mask) {
+    if (_glassMask == NULL) {
+        return;
+    }
+
+    if (_clones.size() > 0) {
+        for (MeterWndClone *mwc : _clones) {
+            mwc->GlassMask(_glassMask);
         }
     }
 }

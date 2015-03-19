@@ -2,9 +2,11 @@
 #include <dwmapi.h>
 #pragma comment(lib, "dwmapi.lib")
 #include <VersionHelpers.h>
+#include <sstream>
 
 #include "Animation.h"
 #include "AnimationFactory.h"
+#include "MeterWndClone.h"
 
 #define TIMER_HIDE 100
 #define TIMER_ANIMIN 101
@@ -65,6 +67,7 @@ _visible(false) {
 
 MeterWnd::~MeterWnd() {
     delete _hideAnimation;
+    delete _composite;
     DestroyWindow(_hWnd);
 }
 
@@ -100,6 +103,7 @@ void MeterWnd::Update()
     }
 
     UpdateLayeredWnd();
+    UpdateClones();
 }
 
 void MeterWnd::UpdateLayeredWnd() {
@@ -270,12 +274,13 @@ void MeterWnd::GlassMask(Gdiplus::Bitmap *mask) {
 }
 
 void MeterWnd::Show(bool animate) {
-    //TODO: animation support
     if (_visible == false) {
         UpdateLocation();
         ShowWindow(_hWnd, SW_SHOW);
         _visible = true;
     }
+
+    ShowClones();
 
     if (_visibleDuration > 0) {
         SetTimer(_hWnd, TIMER_HIDE, _visibleDuration, NULL);
@@ -297,6 +302,7 @@ void MeterWnd::Hide(bool animate) {
     } else {
         ShowWindow(_hWnd, SW_HIDE);
         _visible = false;
+        HideClones();
     }
 }
 
@@ -307,6 +313,7 @@ void MeterWnd::AnimateOut() {
         KillTimer(_hWnd, TIMER_ANIMOUT);
         ShowWindow(_hWnd, SW_HIDE);
         _visible = false;
+        HideClones();
     }
 }
 
@@ -347,7 +354,59 @@ byte MeterWnd::Transparency() const {
 void MeterWnd::Transparency(byte transparency) {
     _transparency = transparency;
     UpdateTransparency();
+    UpdateClonesTransparency(transparency);
 }
+
+MeterWndClone *MeterWnd::Clone() {
+    int numClones = _clones.size() + 1;
+    std::wstringstream cloneClass;
+    cloneClass << _className << L":" << numClones;
+    std::wstringstream cloneTitle;
+    cloneTitle << _title << L":" << numClones;
+
+    MeterWndClone *mwc = new MeterWndClone(
+        cloneClass.str().c_str(),
+        cloneTitle.str().c_str(),
+        _hInstance);
+
+    _clones.push_back(mwc);
+    CLOG(L"Created meter window clone: %s/%s",
+        cloneClass.str().c_str(), cloneTitle.str().c_str());
+    return mwc;
+}
+
+void MeterWnd::UpdateClones() {
+    if (_clones.size() > 0) {
+        for (MeterWndClone *mwc : _clones) {
+            mwc->Update(_composite);
+        }
+    }
+}
+
+void MeterWnd::UpdateClonesTransparency(byte transparency) {
+    if (_clones.size() > 0) {
+        for (MeterWndClone *mwc : _clones) {
+            mwc->Transparency(transparency);
+        }
+    }
+}
+
+void MeterWnd::ShowClones() {
+    if (_clones.size() > 0) {
+        for (MeterWndClone *mwc : _clones) {
+            mwc->Show();
+        }
+    }
+}
+
+void MeterWnd::HideClones() {
+    if (_clones.size() > 0) {
+        for (MeterWndClone *mwc : _clones) {
+            mwc->Hide();
+        }
+    }
+}
+
 
 LRESULT CALLBACK
 MeterWnd::StaticWndProc(

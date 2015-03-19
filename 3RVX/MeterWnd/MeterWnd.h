@@ -6,12 +6,15 @@
 #include "Meter.h"
 
 class Animation;
+class MeterWndClone;
 
 #define TIMER_SHOWANIM    0x01
 #define TIMER_HIDEANIM    0x02
 #define TIMER_DELAY       0x03
 
 class MeterWnd {
+    friend class MeterWndClone;
+
 public:
     MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL,
         AnimationTypes::HideAnimation hideAnim = AnimationTypes::None, 
@@ -19,6 +22,8 @@ public:
     ~MeterWnd();
 
 	void Update();
+
+    MeterWndClone *Clone();
 
     virtual void Show(bool animate = true);
     virtual void Hide(bool animate = true);
@@ -64,6 +69,8 @@ protected:
 
     std::list<Meter*> _meters;
 
+    std::vector<MeterWndClone *> _clones;
+
     int _visibleDuration;
     Animation *_hideAnimation;
 
@@ -77,6 +84,11 @@ protected:
 
     void AnimateOut();
     void AnimateIn();
+
+    void UpdateClones();
+    void UpdateClonesTransparency(byte transparency);
+    void ShowClones();
+    void HideClones();
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

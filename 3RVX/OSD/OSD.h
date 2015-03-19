@@ -22,7 +22,7 @@ protected:
 
     void HideOthers(OSDType except);
 
-    virtual void UpdateWindowPositions(std::vector<Monitor> monitors) = 0;
+    virtual void UpdateWindowPositions(std::vector<Monitor> &monitors) = 0;
     std::vector<Monitor> ActiveMonitors();
     void PositionWindow(Monitor monitor, MeterWnd &mWnd);
     void CenterWindowX(Monitor monitor, MeterWnd &mWnd);

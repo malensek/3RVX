@@ -59,7 +59,7 @@ private:
     void UpdateDeviceMenu();
     void UnMute();
 
-    virtual void UpdateWindowPositions(std::vector<Monitor> monitors);
+    virtual void UpdateWindowPositions(std::vector<Monitor> &monitors);
 
     virtual LRESULT
         WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

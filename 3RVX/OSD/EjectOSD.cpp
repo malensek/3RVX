@@ -93,7 +93,7 @@ void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
     }
 }
 
-void EjectOSD::UpdateWindowPositions(std::vector<Monitor> monitors) {
+void EjectOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
     PositionWindow(monitors[0], _mWnd);
 }
 

@@ -375,6 +375,10 @@ MeterWndClone *MeterWnd::Clone() {
     return mwc;
 }
 
+std::vector<MeterWndClone *> MeterWnd::Clones() {
+    return _clones;
+}
+
 void MeterWnd::UpdateClones() {
     if (_clones.size() > 0) {
         for (MeterWndClone *mwc : _clones) {
@@ -406,7 +410,6 @@ void MeterWnd::HideClones() {
         }
     }
 }
-
 
 LRESULT CALLBACK
 MeterWnd::StaticWndProc(

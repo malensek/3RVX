@@ -24,6 +24,7 @@ public:
 	void Update();
 
     MeterWndClone *Clone();
+    std::vector<MeterWndClone *> Clones();
 
     virtual void Show(bool animate = true);
     virtual void Hide(bool animate = true);

@@ -83,6 +83,7 @@
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="FakeKeyboard.h" />
     <ClInclude Include="HotkeyInfo.h" />
     <ClInclude Include="MeterWnd\AnimationFactory.h" />
     <ClInclude Include="MeterWnd\Animations\AnimationTypes.h" />

@@ -29,3 +29,7 @@ void MeterWndClone::Transparency(byte transparency) {
 void MeterWndClone::GlassMask(Gdiplus::Bitmap *mask) {
     _mWnd.GlassMask(mask);
 }
+
+MeterWnd &MeterWndClone::MeterWindow() {
+    return _mWnd;
+}

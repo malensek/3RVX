@@ -13,6 +13,8 @@ public:
     void Transparency(byte transparency);
     void GlassMask(Gdiplus::Bitmap *mask);
 
+    MeterWnd &MeterWindow();
+
 private:
     MeterWnd _mWnd;
 };

@@ -6,6 +6,7 @@
 
 #include "..\HotkeyInfo.h"
 #include "..\MeterWnd\Meters\CallbackMeter.h"
+#include "..\MeterWnd\MeterWndClone.h"
 #include "..\Monitor.h"
 #include "..\Skin.h"
 #include "..\SkinManager.h"
@@ -149,7 +150,12 @@ void VolumeOSD::LoadSkin() {
     }
     _muteWnd.Update();
 
-    UpdateWindowPositions(ActiveMonitors());
+    std::vector<Monitor> monitors = ActiveMonitors();
+    for (unsigned int i = 1; i < monitors.size(); ++i) {
+        _mWnd.Clone();
+        _muteWnd.Clone();
+    }
+    UpdateWindowPositions(monitors);
 
     /* Set up notification icon */
     if (settings->NotifyIconEnabled()) {
@@ -264,9 +270,16 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
     }
 }
 
-void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> monitors) {
+void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
     PositionWindow(monitors[0], _mWnd);
     PositionWindow(monitors[0], _muteWnd);
+
+    std::vector<MeterWndClone *> meterClones = _mWnd.Clones();
+    std::vector<MeterWndClone *> muteClones = _muteWnd.Clones();
+    for (unsigned int i = 1; i < monitors.size(); ++i) {
+        PositionWindow(monitors[i], meterClones[i]->MeterWindow());
+        PositionWindow(monitors[i], muteClones[i]->MeterWindow());
+    }
 }
 
 LRESULT

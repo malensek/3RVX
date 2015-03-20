@@ -6,11 +6,11 @@
 
 #include "..\HotkeyInfo.h"
 #include "..\MeterWnd\Meters\CallbackMeter.h"
-#include "..\MeterWnd\MeterWndClone.h"
 #include "..\Monitor.h"
 #include "..\Skin.h"
 #include "..\SkinManager.h"
 #include "..\Slider\VolumeSlider.h"
+#include "..\MeterWnd\LayeredWnd.h"
 
 #define MENU_SETTINGS 0
 #define MENU_MIXER 1
@@ -275,11 +275,11 @@ void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
     PositionWindow(monitors[0], _mWnd);
     PositionWindow(monitors[0], _muteWnd);
 
-    std::vector<MeterWndClone *> meterClones = _mWnd.Clones();
-    std::vector<MeterWndClone *> muteClones = _muteWnd.Clones();
+    std::vector<LayeredWnd *> meterClones = _mWnd.Clones();
+    std::vector<LayeredWnd *> muteClones = _muteWnd.Clones();
     for (unsigned int i = 1; i < monitors.size(); ++i) {
-        PositionWindow(monitors[i], meterClones[i - 1]->MeterWindow());
-        PositionWindow(monitors[i], muteClones[i - 1]->MeterWindow());
+        PositionWindow(monitors[i], *meterClones[i - 1]);
+        PositionWindow(monitors[i], *muteClones[i - 1]);
     }
 }
 

@@ -5,6 +5,7 @@
 class MeterWndClone {
 public:
     MeterWndClone(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL);
+    ~MeterWndClone();
 
     void Show();
     void Hide();

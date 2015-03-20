@@ -59,7 +59,7 @@ void SliderWnd::PositionWindow() {
         loc.x = mRect.right - _size.cx;
     }
 
-    Move(loc.x, loc.y);
+    Position(loc.x, loc.y);
 }
 
 bool SliderWnd::MouseOverKnob(int x, int y) {

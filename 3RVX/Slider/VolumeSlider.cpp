@@ -19,7 +19,7 @@ _volumeCtrl(volumeCtrl) {
     BackgroundImage(skin->volumeSliderBackground);
 
     if (skin->volumeSliderMask != NULL) {
-        GlassMask(skin->volumeSliderMask);
+        EnableGlass(skin->volumeSliderMask);
     }
 
     /* TODO NULL check */

@@ -21,7 +21,7 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     _mWnd.BackgroundImage(skin->ejectBackground);
 
     if (skin->ejectMask != NULL) {
-        _mWnd.GlassMask(skin->ejectMask);
+        _mWnd.EnableGlass(skin->ejectMask);
     }
 
     _mWnd.Update();
@@ -34,6 +34,7 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 }
 
 EjectOSD::~EjectOSD() {
+
 }
 
 void EjectOSD::EjectDrive(std::wstring driveLetter) {

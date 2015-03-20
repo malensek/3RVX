@@ -123,7 +123,7 @@ void VolumeOSD::LoadSkin() {
     _mWnd.BackgroundImage(skin->volumeBackground);
 
     if (skin->volumeMask != NULL) {
-        _mWnd.GlassMask(skin->volumeMask);
+        _mWnd.EnableGlass(skin->volumeMask);
     }
 
     for (Meter *m : skin->volumeMeters) {
@@ -146,7 +146,7 @@ void VolumeOSD::LoadSkin() {
     _muteWnd.BackgroundImage(skin->muteBackground);
 
     if (skin->muteMask != NULL) {
-        _muteWnd.GlassMask(skin->muteMask);
+        _muteWnd.EnableGlass(skin->muteMask);
     }
     _muteWnd.Update();
 

@@ -83,14 +83,14 @@ std::vector<Monitor> OSD::ActiveMonitors() {
     return monitors;
 }
 
-void OSD::PositionWindow(Monitor monitor, MeterWnd &mWnd) {
+void OSD::PositionWindow(Monitor monitor, LayeredWnd &lWnd) {
     Settings::OSDPos pos = Settings::Instance()->OSDPosition();
 
     if (pos == Settings::OSDPos::Custom) {
         int customX = Settings::Instance()->OSDX();
         int customY = Settings::Instance()->OSDY();
-        mWnd.X(customX);
-        mWnd.Y(customY);
+        lWnd.X(customX);
+        lWnd.Y(customY);
         return;
     }
 
@@ -99,29 +99,29 @@ void OSD::PositionWindow(Monitor monitor, MeterWnd &mWnd) {
     /* Edge cases ;-) */
     switch (pos) {
     case Settings::TopLeft:
-        mWnd.X(monitor.X() + offset);
-        mWnd.Y(monitor.Y() + offset);
+        lWnd.X(monitor.X() + offset);
+        lWnd.Y(monitor.Y() + offset);
         return;
 
     case Settings::TopRight:
-        mWnd.X(monitor.X() + monitor.Width() - mWnd.Width() - offset);
-        mWnd.Y(monitor.Y() + offset);
+        lWnd.X(monitor.X() + monitor.Width() - lWnd.Width() - offset);
+        lWnd.Y(monitor.Y() + offset);
         return;
 
     case Settings::BottomLeft:
-        mWnd.X(monitor.X() + offset);
-        mWnd.Y(monitor.Y() + monitor.Height() - mWnd.Height() - offset);
+        lWnd.X(monitor.X() + offset);
+        lWnd.Y(monitor.Y() + monitor.Height() - lWnd.Height() - offset);
         return;
 
     case Settings::BottomRight:
-        mWnd.X(monitor.X() + monitor.Width() - mWnd.Width() - offset);
-        mWnd.Y(monitor.Y() + monitor.Height() - mWnd.Height() - offset);
+        lWnd.X(monitor.X() + monitor.Width() - lWnd.Width() - offset);
+        lWnd.Y(monitor.Y() + monitor.Height() - lWnd.Height() - offset);
         return;
     }
 
     /* Center */
-    CenterWindowX(monitor, mWnd);
-    CenterWindowY(monitor, mWnd);
+    CenterWindowX(monitor, lWnd);
+    CenterWindowY(monitor, lWnd);
     if (pos == Settings::OSDPos::Center) {
         return;
     }
@@ -130,29 +130,29 @@ void OSD::PositionWindow(Monitor monitor, MeterWnd &mWnd) {
 
     switch (pos) {
     case Settings::Top:
-        mWnd.Y(monitor.Y() + offset);
+        lWnd.Y(monitor.Y() + offset);
         return;
 
     case Settings::Bottom:
-        mWnd.Y(monitor.Y() + monitor.Height() - mWnd.Height() - offset);
+        lWnd.Y(monitor.Y() + monitor.Height() - lWnd.Height() - offset);
         return;
 
     case Settings::Left:
-        mWnd.X(monitor.X() + offset);
+        lWnd.X(monitor.X() + offset);
         return;
 
     case Settings::Right:
-        mWnd.X(monitor.X() + monitor.Width() - mWnd.Width() - offset);
+        lWnd.X(monitor.X() + monitor.Width() - lWnd.Width() - offset);
         return;
     }
 }
 
-void OSD::CenterWindowX(Monitor monitor, MeterWnd &mWnd) {
-    mWnd.X(monitor.X() + monitor.Width() / 2 - mWnd.Width() / 2);
+void OSD::CenterWindowX(Monitor monitor, LayeredWnd &lWnd) {
+    lWnd.X(monitor.X() + monitor.Width() / 2 - lWnd.Width() / 2);
 }
 
-void OSD::CenterWindowY(Monitor monitor, MeterWnd &mWnd) {
-    mWnd.Y(monitor.Y() + monitor.Height() / 2 - mWnd.Height() / 2);
+void OSD::CenterWindowY(Monitor monitor, LayeredWnd &lWnd) {
+    lWnd.Y(monitor.Y() + monitor.Height() / 2 - lWnd.Height() / 2);
 }
 
 void OSD::ProcessHotkeys(HotkeyInfo &hki) {

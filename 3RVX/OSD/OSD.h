@@ -24,9 +24,9 @@ protected:
 
     virtual void UpdateWindowPositions(std::vector<Monitor> &monitors) = 0;
     std::vector<Monitor> ActiveMonitors();
-    void PositionWindow(Monitor monitor, MeterWnd &mWnd);
-    void CenterWindowX(Monitor monitor, MeterWnd &mWnd);
-    void CenterWindowY(Monitor monitor, MeterWnd &mWnd);
+    void PositionWindow(Monitor monitor, LayeredWnd &lWnd);
+    void CenterWindowX(Monitor monitor, LayeredWnd &lWnd);
+    void CenterWindowY(Monitor monitor, LayeredWnd &lWnd);
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

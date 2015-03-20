@@ -69,6 +69,10 @@ MeterWnd::~MeterWnd() {
     delete _hideAnimation;
     delete _composite;
     DestroyWindow(_hWnd);
+
+    for (MeterWndClone *clone : _clones) {
+        delete clone;
+    }
 }
 
 void MeterWnd::Update()

@@ -4,16 +4,19 @@
 
 #include "..\3RVX.h"
 #include "..\DisplayManager.h"
+#include "..\Error.h"
 #include "..\HotkeyInfo.h"
 #include "..\Monitor.h"
 
 #define DISPLAY_EDGE_OFFSET 140
 
-OSD::OSD(std::wstring className, HINSTANCE hInstance) {
+OSD::OSD(LPCWSTR className, HINSTANCE hInstance) :
+_className(className) {
 
     if (hInstance == NULL) {
         hInstance = (HINSTANCE) GetModuleHandle(NULL);
     }
+    _hInstance = hInstance;
 
     WNDCLASSEX wcex;
 
@@ -27,21 +30,27 @@ OSD::OSD(std::wstring className, HINSTANCE hInstance) {
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
     wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = className.c_str();
+    wcex.lpszClassName = _className;
     wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
-    RegisterClassEx(&wcex);
-    /* throw exception if failed? */
+    if (!RegisterClassEx(&wcex)) {
+        throw SYSERR_REGISTERCLASS;
+    }
 
-    _hWnd = CreateWindowEx(
-        NULL, className.c_str(), className.c_str(),
+    _hWnd = CreateWindowEx(NULL,
+        className, className,
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, hInstance, this);
+
+    if (_hWnd == NULL) {
+        throw SYSERR_CREATEWINDOW;
+    }
 
     _masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
 }
 
 OSD::~OSD() {
     DestroyWindow(_hWnd);
+    UnregisterClass(_className, _hInstance);
 }
 
 void OSD::HideOthers(OSDType except = All) {

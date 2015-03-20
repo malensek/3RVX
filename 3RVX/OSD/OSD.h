@@ -10,13 +10,16 @@ class Monitor;
 
 class OSD {
 public:
-    OSD(std::wstring className, HINSTANCE hInstance = NULL);
+    OSD(LPCWSTR className, HINSTANCE hInstance = NULL);
     ~OSD();
 
     virtual void Hide() = 0;
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 protected:
+    LPCWSTR _className;
+    HINSTANCE _hInstance;
+
     HWND _hWnd;
     HWND _masterWnd;
 

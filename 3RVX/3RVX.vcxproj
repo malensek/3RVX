@@ -87,11 +87,11 @@
     <ClInclude Include="HotkeyInfo.h" />
     <ClInclude Include="MeterWnd\AnimationFactory.h" />
     <ClInclude Include="MeterWnd\Animations\AnimationTypes.h" />
+    <ClInclude Include="MeterWnd\LayeredWnd.h" />
     <ClInclude Include="MeterWnd\Meters\CallbackMeter.h" />
     <ClInclude Include="MeterWnd\MeterCallbackReceiver.h" />
     <ClInclude Include="MeterWnd\Meters\StaticImage.h" />
     <ClInclude Include="MeterWnd\Meters\VerticalBar.h" />
-    <ClInclude Include="MeterWnd\MeterWndClone.h" />
     <ClInclude Include="OSD\EjectOSD.h" />
     <ClInclude Include="HotkeyManager.h" />
     <ClInclude Include="Logger.h" />
@@ -132,10 +132,10 @@
     <ClCompile Include="HotkeyInfo.cpp" />
     <ClCompile Include="MeterWnd\AnimationFactory.cpp" />
     <ClCompile Include="MeterWnd\Animations\AnimationTypes.cpp" />
+    <ClCompile Include="MeterWnd\LayeredWnd.cpp" />
     <ClCompile Include="MeterWnd\Meters\CallbackMeter.cpp" />
     <ClCompile Include="MeterWnd\Meters\StaticImage.cpp" />
     <ClCompile Include="MeterWnd\Meters\VerticalBar.cpp" />
-    <ClCompile Include="MeterWnd\MeterWndClone.cpp" />
     <ClCompile Include="OSD\EjectOSD.cpp" />
     <ClCompile Include="HotkeyManager.cpp" />
     <ClCompile Include="Logger.cpp" />

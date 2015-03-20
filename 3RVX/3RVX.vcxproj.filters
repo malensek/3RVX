@@ -150,7 +150,7 @@
     <ClInclude Include="FakeKeyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeterWnd\MeterWndClone.h">
+    <ClInclude Include="MeterWnd\LayeredWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -263,7 +263,7 @@
     <ClCompile Include="MeterWnd\AnimationFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MeterWnd\MeterWndClone.cpp">
+    <ClCompile Include="MeterWnd\LayeredWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

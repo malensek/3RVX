@@ -12,11 +12,22 @@ public:
         VolumeSlider,
         EjectDrive,
         EjectLatestDrive,
+        MediaKey,
         RunApp,
         Settings,
         Exit,
     };
     static std::vector<std::wstring> ActionNames;
+
+    enum MediaKeys {
+        PlayPause,
+        Stop,
+        Next,
+        Previous,
+        LaunchPlayer,
+    };
+    static std::vector<std::wstring> MediaKeyNames;
+    static std::vector<unsigned short> MediaKeyVKs;
 
 public:
     int keyCombination = 0;

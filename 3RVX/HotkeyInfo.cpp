@@ -12,9 +12,26 @@ std::vector<std::wstring> HotkeyInfo::ActionNames = {
     L"Show Volume Slider",
     L"Eject Drive",
     L"Eject Latest Drive",
+    L"Media Key",
     L"Run Application",
     L"Open Settings Dialog",
     L"Exit 3RVX",
+};
+
+std::vector<std::wstring> HotkeyInfo::MediaKeyNames = {
+    L"Play/Pause",
+    L"Stop",
+    L"Next",
+    L"Previous",
+    L"Launch Media Player",
+};
+
+std::vector<unsigned short> HotkeyInfo::MediaKeyVKs = {
+    VK_MEDIA_PLAY_PAUSE,
+    VK_MEDIA_STOP,
+    VK_MEDIA_NEXT_TRACK,
+    VK_MEDIA_PREV_TRACK,
+    VK_LAUNCH_MEDIA_SELECT,
 };
 
 int HotkeyInfo::ArgToInt(int argIdx) {

@@ -414,7 +414,7 @@ void MeterWnd::HideClones() {
     }
 }
 
-void MeterWnd::ApplyClonesGlass(Gdiplus::Bitmap *mask) {
+void MeterWnd::ApplyClonesGlass() {
     if (_glassMask == NULL) {
         return;
     }

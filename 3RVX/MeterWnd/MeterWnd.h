@@ -90,7 +90,7 @@ protected:
     void UpdateClonesTransparency(byte transparency);
     void ShowClones();
     void HideClones();
-    void ApplyClonesGlass(Gdiplus::Bitmap *mask);
+    void ApplyClonesGlass();
 
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

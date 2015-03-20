@@ -374,7 +374,10 @@ MeterWndClone *MeterWnd::Clone() {
         cloneTitle.str().c_str(),
         _hInstance);
 
-    ApplyClonesGlass();
+    if (_glassMask) {
+        mwc->GlassMask(_glassMask);
+    }
+    mwc->Update(_composite);
 
     _clones.push_back(mwc);
     CLOG(L"Created meter window clone: %s/%s",

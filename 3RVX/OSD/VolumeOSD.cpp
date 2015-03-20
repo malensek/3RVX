@@ -19,8 +19,8 @@
 
 VolumeOSD::VolumeOSD() :
 OSD(L"3RVX-VolumeDispatcher"),
-_mWnd(L"3RVX-MasterVolumeOSD", L"3RVX-MasterVolumeOSD"),
-_muteWnd(L"3RVX-MasterMuteOSD", L"3RVX-MasterMuteOSD") {
+_mWnd(L"3RVX-VolumeOSD", L"3RVX-VolumeOSD"),
+_muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
 
     LoadSkin();
     Settings *settings = Settings::Instance();
@@ -150,6 +150,7 @@ void VolumeOSD::LoadSkin() {
     }
     _muteWnd.Update();
 
+    /* Create clones for additional monitors */
     std::vector<Monitor> monitors = ActiveMonitors();
     for (unsigned int i = 1; i < monitors.size(); ++i) {
         _mWnd.Clone();
@@ -277,8 +278,8 @@ void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
     std::vector<MeterWndClone *> meterClones = _mWnd.Clones();
     std::vector<MeterWndClone *> muteClones = _muteWnd.Clones();
     for (unsigned int i = 1; i < monitors.size(); ++i) {
-        PositionWindow(monitors[i], meterClones[i]->MeterWindow());
-        PositionWindow(monitors[i], muteClones[i]->MeterWindow());
+        PositionWindow(monitors[i], meterClones[i - 1]->MeterWindow());
+        PositionWindow(monitors[i], muteClones[i - 1]->MeterWindow());
     }
 }
 

@@ -3,43 +3,25 @@
 #include <list>
 
 #include "Animations\AnimationTypes.h"
+#include "LayeredWnd.h"
 #include "Meter.h"
 
 class Animation;
-class MeterWndClone;
 
-#define TIMER_SHOWANIM    0x01
-#define TIMER_HIDEANIM    0x02
-#define TIMER_DELAY       0x03
-
-class MeterWnd {
-    friend class MeterWndClone;
-
+class MeterWnd : public LayeredWnd {
 public:
-    MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL,
-        AnimationTypes::HideAnimation hideAnim = AnimationTypes::None, 
-        int visibleDuration = 0);
+    MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL);
     ~MeterWnd();
 
 	void Update();
 
-    MeterWndClone *Clone();
-    std::vector<MeterWndClone *> Clones();
+    LayeredWnd *Clone();
+    std::vector<LayeredWnd *> Clones();
 
     virtual void Show(bool animate = true);
     virtual void Hide(bool animate = true);
 
-    int X() const;
-    int Y() const;
-    void X(int x);
-    void Y(int y);
-
-    int Width() const;
-    int Height() const;
-
-    void Move(int x, int y);
-
-    byte Transparency() const;
+    byte Transparency();
     void Transparency(byte transparency);
 
     void AddMeter(Meter *meter);
@@ -50,35 +32,25 @@ public:
     void VisibleDuration(int duration);
 
     void BackgroundImage(Gdiplus::Bitmap *background);
-    void GlassMask(Gdiplus::Bitmap *mask);
+    bool EnableGlass(Gdiplus::Bitmap *mask);
 
 protected:
-    HINSTANCE _hInstance;
-    LPCWSTR _className;
-    LPCWSTR _title;
-    HWND _hWnd;
-
-    POINT _location;
-    SIZE _size;
-    byte _transparency;
-    bool _visible;
-
-	Gdiplus::Bitmap *_background;
+    /// <summary>
+    /// The composite (drawn) image for this window, including the background
+    /// and meter states.
+    /// </summary>
 	Gdiplus::Bitmap *_composite;
+
+    Gdiplus::Bitmap *_background;
+
     RECT *_dirtyRect;
-	Gdiplus::Bitmap *_glassMask;
 
     std::list<Meter*> _meters;
-
-    std::vector<MeterWndClone *> _clones;
+    std::vector<LayeredWnd *> _clones;
 
     int _visibleDuration;
     Animation *_hideAnimation;
 
-    void UpdateDirtyRect(Gdiplus::Rect &rect);
-    void ResetDirtyRect();
-
-    void UpdateLayeredWnd();
     void UpdateLocation();
     void UpdateTransparency();
     void ApplyGlass();
@@ -92,7 +64,22 @@ protected:
     void HideClones();
     void ApplyClonesGlass();
 
-    static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
-        WPARAM wParam, LPARAM lParam);
     virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
+
+private:
+    /// <summary>Extended window styles for Meter windows.</summary>
+    static const DWORD WINDOW_STYLES
+        = WS_EX_TOOLWINDOW
+        | WS_EX_NOACTIVATE
+        | WS_EX_TOPMOST
+        | WS_EX_TRANSPARENT;
+
+    /// <summary>
+    /// Timer ID used for determining when the window display duration has
+    /// elapsed.
+    /// <summary>
+    static const int TIMER_HIDE = 100;
+
+    /// <summary> Timer ID used to animate the window as it is hidden.</summary>
+    static const int TIMER_OUT = 101;
 };

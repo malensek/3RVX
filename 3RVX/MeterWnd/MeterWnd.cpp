@@ -6,77 +6,22 @@
 
 #include "Animation.h"
 #include "AnimationFactory.h"
-#include "MeterWndClone.h"
 
-#define TIMER_HIDE 100
-#define TIMER_ANIMIN 101
-#define TIMER_ANIMOUT 102
+MeterWnd::MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance) :
+LayeredWnd(className, title, hInstance, NULL, WINDOW_STYLES) {
 
-MeterWnd::MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance,
-    AnimationTypes::HideAnimation hideAnim, int visibleDuration) :
-_hInstance(hInstance),
-_className(className),
-_title(title),
-_visibleDuration(visibleDuration),
-_visible(false) {
-    if (_hInstance == NULL) {
-        _hInstance = (HINSTANCE) GetModuleHandle(NULL);
-    }
-
-    WNDCLASSEX wcex;
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = 0;
-    wcex.lpfnWndProc = &MeterWnd::StaticWndProc;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = _hInstance;
-    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = _className;
-    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-
-    if (!RegisterClassEx(&wcex)) {
-        /* throw exception */
-    }
-
-    _location.x = 0;
-    _location.y = 0;
-    _size.cx = 1;
-    _size.cy = 1;
-    _transparency = 255;
-
-    _hWnd = CreateWindowEx(
-        WS_EX_TOOLWINDOW |
-        WS_EX_LAYERED |
-        WS_EX_NOACTIVATE |
-        WS_EX_TOPMOST |
-        WS_EX_TRANSPARENT,
-        _className, _title,
-        WS_POPUP, CW_USEDEFAULT, CW_USEDEFAULT,
-        _size.cx, _size.cy,
-        NULL, NULL, _hInstance, this);
-
-    if (_hWnd == NULL) {
-        /* throw exception */
-    }
-
-    HideAnimation(hideAnim, 800);
 }
 
 MeterWnd::~MeterWnd() {
     delete _hideAnimation;
     delete _composite;
-    DestroyWindow(_hWnd);
 
-    for (MeterWndClone *clone : _clones) {
+    for (LayeredWnd *clone : _clones) {
         delete clone;
     }
 }
 
-void MeterWnd::Update()
-{
+void MeterWnd::Update() {
     CLOG(L"Updating meter window");
     using namespace Gdiplus;
 
@@ -90,7 +35,7 @@ void MeterWnd::Update()
     }
 
     if (dirty) {
-        CLOG(L"Contents have changed; redrawing");
+        QCLOG(L"Contents have changed; redrawing");
 
         if (_composite) {
             delete _composite;
@@ -106,152 +51,15 @@ void MeterWnd::Update()
         }
     }
 
-    UpdateLayeredWnd();
+    Bitmap(_composite);
     UpdateClones();
 }
 
-void MeterWnd::UpdateLayeredWnd() {
-    BLENDFUNCTION bFunc;
-    bFunc.AlphaFormat = AC_SRC_ALPHA;
-    bFunc.BlendFlags = 0;
-    bFunc.BlendOp = AC_SRC_OVER;
-    bFunc.SourceConstantAlpha = _transparency;
-
-    HDC screenDc = GetDC(GetDesktopWindow());
-    HDC sourceDc = CreateCompatibleDC(screenDc);
-
-    HBITMAP hBmp;
-    _composite->GetHBITMAP(Gdiplus::Color(0, 0, 0, 0), &hBmp);
-    HGDIOBJ hReplaced = SelectObject(sourceDc, hBmp);
-
-    POINT pt = { 0, 0 };
-    SIZE size = { _composite->GetWidth(), _composite->GetHeight() };
-
-    UPDATELAYEREDWINDOWINFO lwInfo;
-    lwInfo.cbSize = sizeof(UPDATELAYEREDWINDOWINFO);
-    lwInfo.crKey = 0;
-    lwInfo.dwFlags = ULW_ALPHA;
-    lwInfo.hdcDst = screenDc;
-    lwInfo.hdcSrc = sourceDc;
-    lwInfo.pblend = &bFunc;
-    lwInfo.pptDst = &_location;
-    lwInfo.pptSrc = &pt;
-    lwInfo.prcDirty = _dirtyRect;
-    lwInfo.psize = &size;
-
-    UpdateLayeredWindowIndirect(_hWnd, &lwInfo);
-
-    SelectObject(sourceDc, hReplaced);
-    DeleteDC(sourceDc);
-    DeleteObject(hBmp);
-    ReleaseDC(GetDesktopWindow(), screenDc);
-}
-
-void MeterWnd::UpdateTransparency() {
-    BLENDFUNCTION bFunc;
-    bFunc.AlphaFormat = AC_SRC_ALPHA;
-    bFunc.BlendFlags = 0;
-    bFunc.BlendOp = AC_SRC_OVER;
-    bFunc.SourceConstantAlpha = _transparency;
-
-    UPDATELAYEREDWINDOWINFO lwInfo;
-    lwInfo.cbSize = sizeof(UPDATELAYEREDWINDOWINFO);
-    lwInfo.crKey = 0;
-    lwInfo.dwFlags = ULW_ALPHA;
-    lwInfo.hdcDst = NULL;
-    lwInfo.hdcSrc = NULL;
-    lwInfo.pblend = &bFunc;
-    lwInfo.pptDst = NULL;
-    lwInfo.pptSrc = NULL;
-    lwInfo.prcDirty = NULL;
-    lwInfo.psize = NULL;
-
-    UpdateLayeredWindowIndirect(_hWnd, &lwInfo);
-}
-
-void MeterWnd::ApplyGlass() {
-    if (_glassMask == NULL) {
-        return;
-    }
-
-    /* Disable for Windows 8+ */
-    if (IsWindows8OrGreater()) {
-        CLOG(L"Glass disabled: Windows 8+ client detected");
-        return;
-    }
-
-    /* Disable for Windows XP */
-    if (IsWindowsXPOrGreater() == true && IsWindowsVistaOrGreater() == false) {
-        CLOG(L"Glass disabled: Windows XP client detected");
-        return;
-    }
-
-    using namespace Gdiplus;
-    ARGB searchArgb = 0xFF000000;
-
-    unsigned int height = _glassMask->GetHeight();
-    unsigned int width = _glassMask->GetWidth();
-
-    Region reg;
-    reg.MakeEmpty();
-    bool match = false;
-
-    /* One row of pixels is scanned at a time, so the height is 1. */
-    Rect rec(0, 0, 0, 1);
-
-    for (unsigned int y = 0; y < height; ++y) {
-        for (unsigned int x = 0; x < width; ++x) {
-            Color pixelColor;
-            _glassMask->GetPixel(x, y, &pixelColor);
-            ARGB pixelArgb = pixelColor.GetValue();
-
-            if (searchArgb == pixelArgb && (x + 1 != width)) {
-                if (match) {
-                    continue;
-                }
-
-                match = true;
-                rec.X = x;
-                rec.Y = y;
-            } else if (match) {
-                /* Reached the end of a matching line */
-                match = false;
-                rec.Width = x - rec.X;
-                reg.Union(rec);
-            }
-        }
-    }
-
-    DWM_BLURBEHIND blurBehind = { 0 };
-    blurBehind.dwFlags = DWM_BB_ENABLE | DWM_BB_BLURREGION;
-    blurBehind.fEnable = TRUE;
-
-    Graphics g(_glassMask);
-    HRGN hReg = reg.GetHRGN(&g);
-    blurBehind.hRgnBlur = reg.GetHRGN(&g);
-
-    HRESULT hr = DwmEnableBlurBehindWindow(_hWnd, &blurBehind);
-    if (SUCCEEDED(hr)) {
-        CLOG(L"Applied glass mask");
-    }
-}
-
-//
-// UpdateLocation()
-//
-// Uses MoveWindow() to set the window's X,Y coordinates and its size.
-//
-void MeterWnd::UpdateLocation() {
-    MoveWindow(_hWnd, _location.x, _location.y, Width(), Height(), FALSE);
-}
-
-void MeterWnd::AddMeter(Meter *meter)
-{
+void MeterWnd::AddMeter(Meter *meter) {
     _meters.push_back(meter);
 }
 
-void MeterWnd::MeterLevels(float value)
-{
+void MeterWnd::MeterLevels(float value) {
     for (Meter *meter : _meters) {
         meter->Value(value);
     }
@@ -268,19 +76,17 @@ void MeterWnd::VisibleDuration(int duration) {
 
 void MeterWnd::BackgroundImage(Gdiplus::Bitmap *background) {
     _background = background;
-    _size.cx = background->GetWidth();
-    _size.cy = background->GetHeight();
 }
 
-void MeterWnd::GlassMask(Gdiplus::Bitmap *mask) {
-    _glassMask = mask;
-    ApplyGlass();
+bool MeterWnd::EnableGlass(Gdiplus::Bitmap *mask) {
+    bool result = LayeredWnd::EnableGlass(mask);
     ApplyClonesGlass();
+    return result;
 }
 
 void MeterWnd::Show(bool animate) {
     if (_visible == false) {
-        UpdateLocation();
+        UpdateWindowPosition();
         ShowWindow(_hWnd, SW_SHOW);
         _visible = true;
     }
@@ -289,7 +95,7 @@ void MeterWnd::Show(bool animate) {
 
     if (_visibleDuration > 0) {
         SetTimer(_hWnd, TIMER_HIDE, _visibleDuration, NULL);
-        KillTimer(_hWnd, TIMER_ANIMOUT);
+        KillTimer(_hWnd, TIMER_OUT);
 
         if (_hideAnimation) {
             _hideAnimation->Reset(this);
@@ -303,7 +109,7 @@ void MeterWnd::Hide(bool animate) {
     }
 
     if (animate && _hideAnimation) {
-        SetTimer(_hWnd, TIMER_ANIMOUT, _hideAnimation->UpdateInterval(), NULL);
+        SetTimer(_hWnd, TIMER_OUT, _hideAnimation->UpdateInterval(), NULL);
     } else {
         ShowWindow(_hWnd, SW_HIDE);
         _visible = false;
@@ -315,109 +121,71 @@ void MeterWnd::AnimateOut() {
     bool animOver = _hideAnimation->Animate(this);
     if (animOver) {
         CLOG(L"Finished hide animation.");
-        KillTimer(_hWnd, TIMER_ANIMOUT);
+        KillTimer(_hWnd, TIMER_OUT);
         ShowWindow(_hWnd, SW_HIDE);
         _visible = false;
         HideClones();
     }
 }
 
-int MeterWnd::X() const {
-    return _location.x;
-}
-
-void MeterWnd::X(int x) {
-    _location.x = x;
-}
-
-int MeterWnd::Y() const {
-    return _location.y;
-}
-
-void MeterWnd::Y(int y) {
-    _location.y = y;
-}
-
-int MeterWnd::Width() const {
-    return _size.cx;
-}
-
-int MeterWnd::Height() const {
-    return _size.cy;
-}
-
-void MeterWnd::Move(int x, int y) {
-    _location.x = x;
-    _location.y = y;
-    UpdateLocation();
-}
-
-byte MeterWnd::Transparency() const {
-    return _transparency;
+byte MeterWnd::Transparency() {
+    return LayeredWnd::Transparency();
 }
 
 void MeterWnd::Transparency(byte transparency) {
-    _transparency = transparency;
-    UpdateTransparency();
+    LayeredWnd::Transparency(transparency);
     UpdateClonesTransparency(transparency);
 }
 
-MeterWndClone *MeterWnd::Clone() {
+LayeredWnd *MeterWnd::Clone() {
     int numClones = _clones.size() + 1;
     std::wstringstream cloneClass;
     cloneClass << _className << L":" << numClones;
     std::wstringstream cloneTitle;
     cloneTitle << _title << L":" << numClones;
 
-    MeterWndClone *mwc = new MeterWndClone(
+    LayeredWnd *clone = new LayeredWnd(
         cloneClass.str().c_str(),
         cloneTitle.str().c_str(),
-        _hInstance);
+        _hInstance,
+        _composite,
+        WINDOW_STYLES);
 
     if (_glassMask) {
-        mwc->GlassMask(_glassMask);
+        clone->EnableGlass(_glassMask);
     }
-    mwc->Update(_composite);
 
-    _clones.push_back(mwc);
+    _clones.push_back(clone);
     CLOG(L"Created meter window clone: %s/%s",
         cloneClass.str().c_str(), cloneTitle.str().c_str());
-    return mwc;
+    return clone;
 }
 
-std::vector<MeterWndClone *> MeterWnd::Clones() {
+std::vector<LayeredWnd *> MeterWnd::Clones() {
     return _clones;
 }
 
 void MeterWnd::UpdateClones() {
-    if (_clones.size() > 0) {
-        for (MeterWndClone *mwc : _clones) {
-            mwc->Update(_composite);
-        }
+    for (LayeredWnd *clone : _clones) {
+        clone->Bitmap(_composite);
     }
 }
 
 void MeterWnd::UpdateClonesTransparency(byte transparency) {
-    if (_clones.size() > 0) {
-        for (MeterWndClone *mwc : _clones) {
-            mwc->Transparency(transparency);
-        }
+    for (LayeredWnd *clone : _clones) {
+        clone->Transparency(transparency);
     }
 }
 
 void MeterWnd::ShowClones() {
-    if (_clones.size() > 0) {
-        for (MeterWndClone *mwc : _clones) {
-            mwc->Show();
-        }
+    for (LayeredWnd *clone : _clones) {
+        clone->Show();
     }
 }
 
 void MeterWnd::HideClones() {
-    if (_clones.size() > 0) {
-        for (MeterWndClone *mwc : _clones) {
-            mwc->Hide();
-        }
+    for (LayeredWnd *clone : _clones) {
+        clone->Hide();
     }
 }
 
@@ -426,29 +194,9 @@ void MeterWnd::ApplyClonesGlass() {
         return;
     }
 
-    if (_clones.size() > 0) {
-        for (MeterWndClone *mwc : _clones) {
-            mwc->GlassMask(_glassMask);
-        }
+    for (LayeredWnd *clone : _clones) {
+        clone->EnableGlass(_glassMask);
     }
-}
-
-LRESULT CALLBACK
-MeterWnd::StaticWndProc(
-        HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    MeterWnd* wnd;
-
-    if (message == WM_CREATE) {
-        wnd = (MeterWnd*) ((LPCREATESTRUCT) lParam)->lpCreateParams;
-        SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR) wnd);
-    } else {
-        wnd = (MeterWnd*) GetWindowLongPtr(hWnd, GWLP_USERDATA);
-        if (!wnd) {
-            return DefWindowProc(hWnd, message, wParam, lParam);
-        }
-    }
-
-    return wnd->WndProc(message, wParam, lParam);
 }
 
 LRESULT MeterWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
@@ -460,17 +208,12 @@ LRESULT MeterWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
             KillTimer(_hWnd, TIMER_HIDE);
             break;
 
-        case TIMER_ANIMIN:
-            break;
-
-        case TIMER_ANIMOUT:
+        case TIMER_OUT:
             AnimateOut();
             break;
         }
-    } else if (message == WM_DWMCOMPOSITIONCHANGED) {
-        ApplyGlass();
     }
 
-    return DefWindowProc(_hWnd, message, wParam, lParam);
+    return LayeredWnd::WndProc(message, wParam, lParam);
 }
 

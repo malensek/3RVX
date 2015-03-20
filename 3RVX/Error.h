@@ -2,8 +2,9 @@
 
 #include <string>
 
-#define GENERR  (0x1 << 7)
-#define SKINERR (GENERR << 8)
+#define GENERR  0x100
+#define SKINERR 0x200
+#define SYSERR  0x400
 
 #define GENERR_NOTFOUND            GENERR + 1
 #define GENERR_SETTINGSFILE        GENERR + 2
@@ -18,6 +19,9 @@
 #define SKINERR_NOTFOUND           SKINERR + 8
 #define SKINERR_MISSING_XML        SKINERR + 9
 #define SKINERR_READERR            SKINERR + 10
+
+#define SYSERR_REGISTERCLASS       SYSERR + 1
+#define SYSERR_CREATEWINDOW        SYSERR + 2
 
 class Error {
 public:
@@ -39,10 +43,12 @@ public:
 
 private:
     static wchar_t *ErrorType(unsigned int error) {
-        if ((error & GENERR) == GENERR) {
+        if (error & GENERR) {
             return L"3RVX Error";
-        } else if ((error & SKINERR) == SKINERR) {
+        } else if (error & SKINERR) {
             return L"Skin Error";
+        } else if (error & SYSERR) {
+            return L"System Error";
         }
 
         return L"Error";

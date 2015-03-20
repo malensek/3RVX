@@ -173,12 +173,16 @@ void ProcessHotkeys(HotkeyInfo &hki) {
     case HotkeyInfo::DecreaseVolume:
     case HotkeyInfo::Mute:
     case HotkeyInfo::VolumeSlider:
-        vOSD->ProcessHotkeys(hki);
+        if (vOSD) {
+            vOSD->ProcessHotkeys(hki);
+        }
         break;
 
     case HotkeyInfo::EjectDrive:
     case HotkeyInfo::EjectLatestDrive:
-        eOSD->ProcessHotkeys(hki);
+        if (eOSD) {
+            eOSD->ProcessHotkeys(hki);
+        }
         break;
 
     case HotkeyInfo::Settings:

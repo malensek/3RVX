@@ -37,4 +37,5 @@ if (PRINT_LOG) { wprintf(fmt L"\n", __VA_ARGS__); }
 class Logger {
 public:
     static void OpenConsole();
+    static void CloseConsole();
 };

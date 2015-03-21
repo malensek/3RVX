@@ -102,6 +102,10 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     GdiplusShutdown(gdiplusToken);
     CoUninitialize();
 
+#ifdef _3RVX_LOG_ENABLED
+    Logger::CloseConsole();
+#endif
+
     return (int) msg.wParam;
 }
 

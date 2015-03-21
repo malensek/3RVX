@@ -8,3 +8,7 @@ void Logger::OpenConsole() {
     freopen_s(&out, "CONOUT$", "w", stdout);
     freopen_s(&err, "CONOUT$", "w", stderr);
 }
+
+void Logger::CloseConsole() {
+    FreeConsole();
+}

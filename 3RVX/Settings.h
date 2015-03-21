@@ -18,6 +18,8 @@ class Skin;
 #define DEFAULT_OSD_OFFSET 140
 #define DEFAULT_OSD_POS Settings::OSDPos::Bottom
 #define DEFAULT_SKIN L"Default"
+#define DEFAULT_HIDE_SPEED 765
+#define DEFAULT_HIDE_SPEED 800
 
 class Settings {
 public:
@@ -105,7 +107,7 @@ private:
 
     std::wstring GetText(std::string elementName);
     void SetText(std::string elementName, std::string text);
-    int GetInt(std::string elementName);
+    int GetInt(std::string elementName, int defaultValue = 0);
     void SetInt(std::string elementName, int value);
 
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);

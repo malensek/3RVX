@@ -11,7 +11,7 @@ Animation(speed) {
     int bestError = 255;
     int bestInterval = 10;
     for (int i = 10; i <= 20; ++i) {
-        int si = speed / i;
+        int si = _speed / i;
         int error = 255 - 255 / si * si;
         if (error < bestError) {
             bestError = error;
@@ -20,7 +20,7 @@ Animation(speed) {
     }
 
     _interval = bestInterval;
-    _step = 255 / (speed / _interval);
+    _step = 255 / (_speed / _interval);
 }
 
 

@@ -1,4 +1,18 @@
+/*
+Controlling The Logger
+----------------------
+
+- Logging is enabled whenever _DEBUG is defined
+- By default, log entries are printed to the console window
+- To force logging (even when _DEBUG is not defined): 
+    #define FORCE_3RVX_LOG
+- To log to a file instead of the console:
+    #define ENABLE_3RVX_LOGTOFILE
+
+*/
+
 #pragma once
+
 #include <Windows.h>
 #include <Wincon.h>
 #include <tchar.h>

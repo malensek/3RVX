@@ -387,15 +387,15 @@ void Settings::SetText(std::string elementName, std::string text) {
     el->SetText(text.c_str());
 }
 
-int Settings::GetInt(std::string elementName) {
+int Settings::GetInt(std::string elementName, int defaultValue) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
         std::wstring elStr = StringUtils::Widen(elementName);
         CLOG(L"Warning: XML element '%s' not found", elStr.c_str());
-        return 0;
+        return defaultValue;
     }
 
-    int val = 0;
+    int val = defaultValue;
     el->QueryIntText(&val);
     return val;
 }

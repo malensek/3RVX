@@ -216,7 +216,7 @@ void Settings::HideAnim(AnimationTypes::HideAnimation anim) {
 }
 
 int Settings::HideDelay() {
-    return GetInt(XML_HIDETIME);
+    return GetInt(XML_HIDETIME, DEFAULT_HIDE_TIME);
 }
 
 void Settings::HideDelay(int delay) {
@@ -224,7 +224,7 @@ void Settings::HideDelay(int delay) {
 }
 
 int Settings::HideSpeed() {
-    return GetInt(XML_HIDESPEED);
+    return GetInt(XML_HIDESPEED, DEFAULT_HIDE_SPEED);
 }
 
 void Settings::HideSpeed(int speed) {

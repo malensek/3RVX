@@ -19,7 +19,7 @@ class Skin;
 #define DEFAULT_OSD_POS Settings::OSDPos::Bottom
 #define DEFAULT_SKIN L"Default"
 #define DEFAULT_HIDE_SPEED 765
-#define DEFAULT_HIDE_SPEED 800
+#define DEFAULT_HIDE_TIME 800
 
 class Settings {
 public:

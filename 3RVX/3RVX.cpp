@@ -38,9 +38,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     hInst = hInstance;
 
-#ifdef _DEBUG
-    Logger::OpenConsole();
-#endif
+    Logger::Start();
 
     QCLOG(L"  _____ ______     ____  _______ ");
     QCLOG(L" |___ /|  _ \\ \\   / /\\ \\/ /___ / ");
@@ -62,7 +60,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
             L"Requesting Settings dialog from window: %d", (int) masterWnd);
         SendMessage(masterWnd, WM_3RVX_CONTROL, MSG_SETTINGS, NULL);
 
-#ifdef _DEBUG
+#ifdef ENABLE_3RVX_LOG
         CLOG(L"Press [enter] to terminate");
         std::cin.get();
 #endif
@@ -102,9 +100,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     GdiplusShutdown(gdiplusToken);
     CoUninitialize();
 
-#ifdef _3RVX_LOG_ENABLED
-    Logger::CloseConsole();
-#endif
+    Logger::Stop();
 
     return (int) msg.wParam;
 }

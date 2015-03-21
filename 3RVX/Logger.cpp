@@ -1,14 +1,34 @@
 #include "Logger.h"
 #include <string>
 
-void Logger::OpenConsole() {
+void Logger::Start() {
+#ifdef ENABLE_3RVX_LOGTOFILE
+    /* Disable buffering */
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
+
+    FILE *out, *err;
+    _wfreopen_s(&out, L"3RVX_Log.txt", L"w", stdout);
+    _wfreopen_s(&err, L"3RVX_Log.txt", L"w", stderr);
+#else
+#ifdef ENABLE_3RVX_LOG
     AllocConsole();
     FILE *in, *out, *err;
     freopen_s(&in, "CONIN$", "r", stdin);
     freopen_s(&out, "CONOUT$", "w", stdout);
     freopen_s(&err, "CONOUT$", "w", stderr);
+#endif
+#endif
 }
 
-void Logger::CloseConsole() {
+void Logger::Stop() {
+#ifdef ENABLE_3RVX_LOGTOFILE
+    CLOG(L"Logger stopped.");
+    fclose(stdout);
+    fclose(stderr);
+#else
+#ifdef ENABLE_3RVX_LOG
     FreeConsole();
+#endif
+#endif
 }

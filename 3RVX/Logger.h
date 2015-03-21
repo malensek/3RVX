@@ -4,9 +4,13 @@
 #include <tchar.h>
 
 #ifdef _DEBUG
-#define PRINT_LOG 1
+    #define ENABLE_3RVX_LOG 1
 #else
-#define PRINT_LOG 0
+    #ifdef FORCE_3RVX_LOG
+        #define ENABLE_3RVX_LOG 1
+    #else
+        #define ENABLE_3RVX_LOG 0
+    #endif
 #endif
 
 #define FOREGROUND_WHITE (FOREGROUND_RED \
@@ -23,7 +27,7 @@
 
 #define CLOG(fmt, ...) \
 do { \
-    if (PRINT_LOG) { \
+    if (ENABLE_3RVX_LOG) { \
         COLORIZE \
         wprintf(L"[%s:%d]\n", __FUNCTIONW__, __LINE__); \
         DECOLORIZE \
@@ -32,10 +36,13 @@ do { \
 } while (0)
 
 #define QCLOG(fmt, ...) \
-if (PRINT_LOG) { wprintf(fmt L"\n", __VA_ARGS__); }
+if (ENABLE_3RVX_LOG) { wprintf(fmt L"\n", __VA_ARGS__); }
 
 class Logger {
 public:
-    static void OpenConsole();
-    static void CloseConsole();
+    static void Start();
+    static void Stop();
+
+private:
+    static FILE *in, *out, *err;
 };

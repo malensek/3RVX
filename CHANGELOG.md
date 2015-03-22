@@ -9,6 +9,7 @@ Beta 6
 * 'Natural' volume increment and decrement based on skin units
 * Fix mute bug (external mute events did not show OSD)
 * Allows shell hotkeys to be overridden (if desired)
+* 'All Monitors' display option has been implemented
 
 Beta 5
 ------

@@ -2,13 +2,14 @@
 
 #include <Windows.h>
 
+#include "..\HotkeyProcessor.h"
 #include "..\MeterWnd\MeterWnd.h"
 #include "..\Settings.h"
 #include "OSDType.h"
 
 class Monitor;
 
-class OSD {
+class OSD : HotkeyProcessor {
 public:
     OSD(LPCWSTR className, HINSTANCE hInstance = NULL);
     ~OSD();

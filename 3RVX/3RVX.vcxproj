@@ -85,6 +85,8 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="FakeKeyboard.h" />
     <ClInclude Include="HotkeyInfo.h" />
+    <ClInclude Include="HotkeyProcessor.h" />
+    <ClInclude Include="MediaKeys.h" />
     <ClInclude Include="MeterWnd\AnimationFactory.h" />
     <ClInclude Include="MeterWnd\Animations\AnimationTypes.h" />
     <ClInclude Include="MeterWnd\LayeredWnd.h" />
@@ -130,6 +132,7 @@
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="HotkeyInfo.cpp" />
+    <ClCompile Include="MediaKeys.cpp" />
     <ClCompile Include="MeterWnd\AnimationFactory.cpp" />
     <ClCompile Include="MeterWnd\Animations\AnimationTypes.cpp" />
     <ClCompile Include="MeterWnd\LayeredWnd.cpp" />

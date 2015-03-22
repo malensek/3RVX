@@ -11,6 +11,7 @@
 #include "HotkeyInfo.h"
 #include "HotkeyManager.h"
 #include "Logger.h"
+#include "MediaKeys.h"
 #include "OSD\EjectOSD.h"
 #include "OSD\VolumeOSD.h"
 #include "Settings.h"
@@ -183,6 +184,10 @@ void ProcessHotkeys(HotkeyInfo &hki) {
         if (eOSD) {
             eOSD->ProcessHotkeys(hki);
         }
+        break;
+
+    case HotkeyInfo::MediaKey:
+        MediaKeys::ProcessHotkeys(hki);
         break;
 
     case HotkeyInfo::Settings:

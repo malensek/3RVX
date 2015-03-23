@@ -10,6 +10,7 @@ Beta 6
 * Fix mute bug (external mute events did not show OSD)
 * Allows shell hotkeys to be overridden (if desired)
 * 'All Monitors' display option has been implemented
+* Adds development option to log to file
 
 Beta 5
 ------

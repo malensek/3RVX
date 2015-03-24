@@ -290,12 +290,14 @@ LayeredWnd::StaticWndProc(
 LRESULT LayeredWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
     if (_glassMask && message == WM_DWMCOMPOSITIONCHANGED) {
         BOOL compositionEnabled = FALSE;
-        DwmIsCompositionEnabled(&compositionEnabled);
+        HRESULT hr = DwmIsCompositionEnabled(&compositionEnabled);
 
-        if (compositionEnabled) {
-            EnableGlass(_glassMask);
-        } else {
-            DisableGlass();
+        if (SUCCEEDED(hr)) {
+            if (compositionEnabled) {
+                EnableGlass(_glassMask);
+            } else {
+                DisableGlass();
+            }
         }
     }
 

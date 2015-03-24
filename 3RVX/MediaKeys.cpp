@@ -15,7 +15,7 @@ void MediaKeys::ProcessHotkeys(HotkeyInfo &hki) {
 
     std::wstring arg = hki.args[0];
     unsigned short vk = mediaKeyMap[arg];
-    CLOG(L"Simulating media keypress: %s", arg);
+    CLOG(L"Simulating media keypress: %s", arg.c_str());
     FakeKeyboard::SimulateKeypress(vk);
 }
 

@@ -25,9 +25,7 @@ public:
     /// <returns>true if successful, false otherwise.</returns>
     virtual bool EnableGlass(Gdiplus::Bitmap *mask);
 
-    /// <summary>
-    /// Disables the blurred glass effect.
-    /// </summary>
+    /// <summary>Disables the blurred glass effect.</summary>
     virtual bool DisableGlass();
 
     virtual byte Transparency();

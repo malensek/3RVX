@@ -61,7 +61,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
             L"Requesting Settings dialog from window: %d", (int) masterWnd);
         SendMessage(masterWnd, WM_3RVX_CONTROL, MSG_SETTINGS, NULL);
 
-#ifdef ENABLE_3RVX_LOG
+#if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
         CLOG(L"Press [enter] to terminate");
         std::cin.get();
 #endif

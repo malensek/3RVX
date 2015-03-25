@@ -46,8 +46,8 @@ HRESULT CoreAudio::AttachDevice() {
             eMultimedia, &_device);
         if (SUCCEEDED(hr)) {
             LPWSTR id = NULL;
-            _device->GetId(&id);
-            if (id) {
+            hr = _device->GetId(&id);
+            if (SUCCEEDED(hr) && id) {
                 _devId = std::wstring(id);
                 CoTaskMemFree(id);
             }
@@ -134,27 +134,28 @@ std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
         &devices);
 
     if (FAILED(hr)) {
-        if (devices) {
-            devices->Release();
-        }
         return devList;
     }
 
     UINT numDevices = 0;
-    devices->GetCount(&numDevices);
+    hr = devices->GetCount(&numDevices);
+    if (FAILED(hr)) {
+        return devList;
+    }
     LPWSTR devId;
     for (unsigned int i = 0; i < numDevices; ++i) {
         IMMDevice *device = NULL;
         HRESULT hr = devices->Item(i, &device);
         if (FAILED(hr)) {
-            if (device) {
-                device->Release();
-            }
-
             continue;
         }
 
-        device->GetId(&devId);
+        hr = device->GetId(&devId);
+        if (FAILED(hr)) {
+            device->Release();
+            continue;
+        }
+
         std::wstring idStr;
         if (devId) {
             idStr = std::wstring(devId);
@@ -162,6 +163,7 @@ std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
         } else {
             continue;
         }
+
         VolumeController::DeviceInfo devInfo = {};
         devInfo.id = idStr;
         devInfo.name = DeviceName(idStr);
@@ -220,7 +222,11 @@ std::wstring CoreAudio::DeviceName(IMMDevice *device) {
 
     PROPVARIANT pvName;
     PropVariantInit(&pvName);
-    props->GetValue(PKEY_Device_FriendlyName, &pvName);
+    hr = props->GetValue(PKEY_Device_FriendlyName, &pvName);
+    if (FAILED(hr)) {
+        props->Release();
+        return L"";
+    }
 
     std::wstring str(pvName.pwszVal);
     PropVariantClear(&pvName);
@@ -230,31 +236,39 @@ std::wstring CoreAudio::DeviceName(IMMDevice *device) {
 }
 
 std::wstring CoreAudio::DeviceDesc(IMMDevice *device) {
+    HRESULT hr;
+
     if (device == NULL) {
         return L"";
     }
 
     IPropertyStore *props = NULL;
-    HRESULT hr = device->OpenPropertyStore(STGM_READ, &props);
+    hr = device->OpenPropertyStore(STGM_READ, &props);
     if (FAILED(hr)) {
         return L"";
     }
 
     PROPVARIANT pvDesc;
     PropVariantInit(&pvDesc);
-    props->GetValue(PKEY_Device_DeviceDesc, &pvDesc);
+    hr = props->GetValue(PKEY_Device_DeviceDesc, &pvDesc);
+    if (FAILED(hr)) {
+        props->Release();
+        return L"";
+    }
 
     std::wstring str(pvDesc.pwszVal);
     PropVariantClear(&pvDesc);
     props->Release();
-
     return str;
 }
 
 float CoreAudio::Volume() {
     float vol = 0.0f;
     if (_volumeControl) {
-        _volumeControl->GetMasterVolumeLevelScalar(&vol);
+        HRESULT hr = _volumeControl->GetMasterVolumeLevelScalar(&vol);
+        if (FAILED(hr)) {
+            return 0;
+        }
     }
     return vol;
 }
@@ -279,7 +293,10 @@ bool CoreAudio::Muted() {
     }
 
     BOOL muted = FALSE;
-    _volumeControl->GetMute(&muted);
+    HRESULT hr = _volumeControl->GetMute(&muted);
+    if (FAILED(hr)) {
+        return false;
+    }
 
     return (muted == TRUE) ? true : false;
 }

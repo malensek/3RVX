@@ -139,6 +139,23 @@ void Hotkeys::LoadSelection(int idx) {
             _argCombo.ShowWindow(SW_SHOW);
             break;
 
+        case HotkeyInfo::MediaKey: {
+            _argument.SetWindowTextW(L"Action:");
+            _argCombo.ResetContent();
+            unsigned int numMediaKeys = HotkeyInfo::MediaKeyNames.size();
+            for (unsigned int i = 0; i < numMediaKeys; ++i) {
+                _argCombo.InsertString(i, HotkeyInfo::MediaKeyNames[i].c_str());
+            }
+            if (current.args.size() > 0) {
+                //TODO: this needs to be translated again
+                _argCombo.SelectString(0, current.args[0].c_str());
+            }
+
+            _argument.ShowWindow(SW_SHOW);
+            _argCombo.ShowWindow(SW_SHOW);
+        }
+            break;
+
         default:
             _argument.ShowWindow(SW_HIDE);
             _argCombo.ShowWindow(SW_HIDE);
@@ -229,14 +246,26 @@ void Hotkeys::OnCbnSelchangeArg() {
         = (HotkeyInfo::HotkeyActions) _action.GetCurSel();
 
     switch (action) {
-    case HotkeyInfo::EjectDrive:
+    case HotkeyInfo::EjectDrive: {
         wchar_t buf[2];
         _argCombo.GetWindowText(buf, 2);
         if (current->args.size() <= 0) {
             current->args.resize(1);
         }
         current->args[0] = buf;
+    }
         break;
+
+    case HotkeyInfo::MediaKey: {
+        wchar_t buf[128];
+        _argCombo.GetWindowText(buf, 128);
+        if (current->args.size() <= 0) {
+            current->args.resize(1);
+        }
+        current->args[0] = buf;
+    }
+        break;
+
     }
     LoadSelection(_selIdx);
 }

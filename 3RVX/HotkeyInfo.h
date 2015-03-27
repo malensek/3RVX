@@ -24,7 +24,6 @@ public:
         Stop,
         Next,
         Previous,
-        LaunchPlayer,
     };
     static std::vector<std::wstring> MediaKeyNames;
     static std::vector<unsigned short> MediaKeyVKs;

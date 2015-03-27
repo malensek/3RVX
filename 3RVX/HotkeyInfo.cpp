@@ -23,7 +23,6 @@ std::vector<std::wstring> HotkeyInfo::MediaKeyNames = {
     L"Stop",
     L"Next",
     L"Previous",
-    L"Launch Media Player",
 };
 
 std::vector<unsigned short> HotkeyInfo::MediaKeyVKs = {
@@ -31,7 +30,6 @@ std::vector<unsigned short> HotkeyInfo::MediaKeyVKs = {
     VK_MEDIA_STOP,
     VK_MEDIA_NEXT_TRACK,
     VK_MEDIA_PREV_TRACK,
-    VK_LAUNCH_MEDIA_SELECT,
 };
 
 int HotkeyInfo::ArgToInt(int argIdx) {

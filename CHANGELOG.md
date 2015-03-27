@@ -11,6 +11,7 @@ Beta 6
 * Allows shell hotkeys to be overridden (if desired)
 * 'All Monitors' display option has been implemented
 * Adds development option to log to file
+* Media hotkey emulation
 
 Beta 5
 ------

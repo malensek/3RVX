@@ -11,7 +11,7 @@ void Logger::Start() {
     _wfreopen_s(&out, L"3RVX_Log.txt", L"w", stdout);
     _wfreopen_s(&err, L"3RVX_Log.txt", L"w", stderr);
 #else
-#ifdef ENABLE_3RVX_LOG
+#if ENABLE_3RVX_LOG != 0
     AllocConsole();
     FILE *in, *out, *err;
     freopen_s(&in, "CONIN$", "r", stdin);
@@ -27,7 +27,7 @@ void Logger::Stop() {
     fclose(stdout);
     fclose(stderr);
 #else
-#ifdef ENABLE_3RVX_LOG
+#if ENABLE_3RVX_LOG != 0
     FreeConsole();
 #endif
 #endif

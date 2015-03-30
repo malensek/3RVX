@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 
 #define GENERR  0x100
 #define SKINERR 0x200
@@ -25,32 +26,11 @@
 
 class Error {
 public:
-    static void ErrorMessage(unsigned int error, std::wstring detail = L"") {
-        std::wstring msg(L"");
-
-        msg = msg + L"Unknown error occurred: " + std::to_wstring(error);
-        if (detail != L"") {
-            msg = msg + L"\n" + detail;
-        }
-
-        MessageBox(NULL, msg.c_str(), Error::ErrorType(error), MB_ICONERROR);
-    }
-
-    static void ErrorMessageDie(unsigned int error, std::wstring detail = L"") {
-        ErrorMessage(error, detail);
-        exit(EXIT_FAILURE);
-    }
+    static void ErrorMessage(unsigned int error, std::wstring detail = L"");
+    static void ErrorMessageDie(unsigned int error, std::wstring detail = L"");
 
 private:
-    static wchar_t *ErrorType(unsigned int error) {
-        if (error & GENERR) {
-            return L"3RVX Error";
-        } else if (error & SKINERR) {
-            return L"Skin Error";
-        } else if (error & SYSERR) {
-            return L"System Error";
-        }
+    static std::unordered_map<int, std::wstring> errorMap;
 
-        return L"Error";
-    }
+    static wchar_t *ErrorType(unsigned int error);
 };

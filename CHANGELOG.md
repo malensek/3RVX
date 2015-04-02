@@ -1,6 +1,11 @@
 3RVX3 Changelog
 ===============
 
+Beta 7
+------
+* Full screen detection
+* Implement always on top toggle
+
 Beta 6
 ------
 * Adds a new eject hotkey that ejects the most recently inserted drive

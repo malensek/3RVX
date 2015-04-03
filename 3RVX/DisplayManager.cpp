@@ -35,6 +35,28 @@ RECT DisplayManager::Rect(HMONITOR monitor) {
     return Info(monitor).rcMonitor;
 }
 
+bool DisplayManager::IsFullscreen() {
+    HWND fg = GetForegroundWindow();
+    if (fg == NULL) {
+        return false;
+    }
+
+    HWND shell = GetShellWindow();
+    if (fg == shell) {
+        return false;
+    }
+
+    HWND dt = GetDesktopWindow();
+    if (fg == dt) {
+        return false;
+    }
+
+    RECT wndRect = { 0 };
+    GetWindowRect(fg, &wndRect);
+    // check window dimensions vs screen dimensions
+
+}
+
 MONITORINFO DisplayManager::Info(HMONITOR monitor) {
     MONITORINFO mInfo = {};
     mInfo.cbSize = sizeof(MONITORINFO);

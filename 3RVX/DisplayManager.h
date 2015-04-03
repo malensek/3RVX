@@ -19,6 +19,7 @@ private:
     static const int Width(HMONITOR monitor);
     static const int Height(HMONITOR monitor);
     static RECT Rect(HMONITOR monitor);
+    static bool IsFullscreen();
 
     static BOOL CALLBACK MonitorEnumProc(
         HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData);

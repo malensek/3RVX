@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3RVX", "3RVX\3RVX.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SettingsUI", "SettingsUI\SettingsUI.vcxproj", "{A7FE6541-1A5A-44F5-80F9-7A2C19CAD7C1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Settings", "Settings\Settings.vcxproj", "{302FD0A1-5C6B-4370-847A-496A762EA0CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +23,10 @@ Global
 		{A7FE6541-1A5A-44F5-80F9-7A2C19CAD7C1}.Debug|Win32.Build.0 = Debug|Win32
 		{A7FE6541-1A5A-44F5-80F9-7A2C19CAD7C1}.Release|Win32.ActiveCfg = Release|Win32
 		{A7FE6541-1A5A-44F5-80F9-7A2C19CAD7C1}.Release|Win32.Build.0 = Release|Win32
+		{302FD0A1-5C6B-4370-847A-496A762EA0CF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{302FD0A1-5C6B-4370-847A-496A762EA0CF}.Debug|Win32.Build.0 = Debug|Win32
+		{302FD0A1-5C6B-4370-847A-496A762EA0CF}.Release|Win32.ActiveCfg = Release|Win32
+		{302FD0A1-5C6B-4370-847A-496A762EA0CF}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

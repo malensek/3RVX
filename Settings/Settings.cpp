@@ -1,86 +1,118 @@
-// Settings.cpp : Defines the entry point for the application.
-//
-
 #include "stdafx.h"
 #include "Settings.h"
+#include <prsht.h>
+#include <Windows.h>
+#include <CommCtrl.h>
+#pragma comment(lib, "comctl32.lib")
 
 #define MAX_LOADSTRING 100
 
-// Global Variables:
-HINSTANCE hInst;								// current instance
-TCHAR szTitle[MAX_LOADSTRING];					// The title bar text
-TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
+HINSTANCE hInst;
+TCHAR szTitle[MAX_LOADSTRING];
+TCHAR szWindowClass[MAX_LOADSTRING];
+HWND hWnd;
 
-// Forward declarations of functions included in this code module:
-ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
+HWND CreateWnd(HINSTANCE hInstance);
+void InitializeDialog();
+UINT CALLBACK PropSheetPageProc(HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp);
 
-int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPTSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
-{
+                     _In_ int       nCmdShow) {
+
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
- 	// TODO: Place code here.
-	MSG msg;
-	HACCEL hAccelTable;
-
-	// Initialize global strings
-	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-	LoadString(hInstance, IDC_SETTINGS, szWindowClass, MAX_LOADSTRING);
-	MyRegisterClass(hInstance);
-
-	// Perform application initialization:
-	if (!InitInstance (hInstance, nCmdShow))
-	{
+	if (!InitInstance (hInstance, nCmdShow)) {
 		return FALSE;
 	}
 
-	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SETTINGS));
-
-	// Main message loop:
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
 	}
 
 	return (int) msg.wParam;
 }
 
+void InitializeDialog() {
+    WNDCLASSEX wcex;
 
+    wcex.cbSize = sizeof(WNDCLASSEX);
+    wcex.style = NULL;
+    wcex.lpfnWndProc = WndProc;
+    wcex.cbClsExtra = NULL;
+    wcex.cbWndExtra = NULL;
+    wcex.hInstance = hInst;
+    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
+    wcex.lpszMenuName = NULL;
+    wcex.lpszClassName = L"3RVX SettingsUI";
+    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
-//
-//  FUNCTION: MyRegisterClass()
-//
-//  PURPOSE: Registers the window class.
-//
-ATOM MyRegisterClass(HINSTANCE hInstance)
-{
-	WNDCLASSEX wcex;
+    if (!RegisterClassEx(&wcex)) {
+        /* throw exception */
+    }
 
-	wcex.cbSize = sizeof(WNDCLASSEX);
+    HWND hWnd = CreateWindowEx(
+        NULL,
+        L"3RVX SettingsUI", L"3RVX Settings",
+        WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+        500, 500,
+        NULL, NULL, hInst, NULL);
 
-	wcex.style			= CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc	= WndProc;
-	wcex.cbClsExtra		= 0;
-	wcex.cbWndExtra		= 0;
-	wcex.hInstance		= hInstance;
-	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SETTINGS));
-	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
-	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
-	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_SETTINGS);
-	wcex.lpszClassName	= szWindowClass;
-	wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+    PROPSHEETPAGE psp[3];
+    PROPSHEETHEADER psh;
 
-	return RegisterClassEx(&wcex);
+    //Fill out the PROPSHEETPAGE data structure for the Background Color sheet
+    psp[0].dwSize = sizeof(PROPSHEETPAGE);
+    psp[0].dwFlags = NULL;
+    psp[0].hInstance = hInst;
+    //psp[0].pszTemplate = MAKEINTRESOURCE(IDD_PROPPAGE_SMALL);
+    psp[0].pszIcon = NULL;
+    //psp[0].pfnDlgProc = (DLGPROC) ButtonsDlgProc;
+    psp[0].pszTitle = NULL;
+    psp[0].lParam = NULL;
+
+    //Fill out the PROPSHEETPAGE data structure for the Client Area Shape sheet
+    psp[1].dwSize = sizeof(PROPSHEETPAGE);
+    psp[1].dwFlags = NULL;
+    psp[1].hInstance = hInst;
+    //psp[1].pszTemplate = MAKEINTRESOURCE(IDD_SKIN_PROP);
+    psp[1].pszIcon = NULL;
+    //psp[1].pfnDlgProc = (DLGPROC) ComboDlgProc;
+    psp[1].pszTitle = NULL;
+    psp[1].lParam = 0;
+
+    //Fill out the PROPSHEETPAGE data structure for the Client Area Shape sheet
+    psp[2].dwSize = sizeof(PROPSHEETPAGE);
+    psp[2].dwFlags = NULL;
+    psp[2].hInstance = hInst;
+    //psp[2].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT_PROP);
+    psp[2].pszIcon = NULL;
+    //psp[2].pfnDlgProc = (DLGPROC) ComboDlgProc;
+    psp[2].pszTitle = NULL;
+    psp[2].lParam = 0;
+
+    //Fill out the PROPSHEETHEADER
+    psh.dwSize = sizeof(PROPSHEETHEADER);
+    psh.dwFlags = PSH_PROPSHEETPAGE | PSH_USEICONID | PSH_USECALLBACK;
+    psh.hwndParent = hWnd;
+    psh.hInstance = hInst;
+    psh.pszIcon = MAKEINTRESOURCE(COLOR_WINDOW);
+    psh.pszCaption = L"3RVX Settings";
+    psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);
+    psh.ppsp = (LPCPROPSHEETPAGE) &psp;
+    psh.pfnCallback = (PFNPROPSHEETCALLBACK) PropSheetPageProc;
+
+    //And finally display the modal property sheet
+    PropertySheet(&psh);
 }
 
 //
@@ -102,8 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
 
-   if (!hWnd)
-   {
+   if (!hWnd) {
       return FALSE;
    }
 
@@ -137,12 +168,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		// Parse the menu selections:
 		switch (wmId)
 		{
-		case IDM_ABOUT:
-			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-			break;
-		case IDM_EXIT:
-			DestroyWindow(hWnd);
-			break;
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
@@ -161,22 +186,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-// Message handler for about box.
-INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	UNREFERENCED_PARAMETER(lParam);
-	switch (message)
-	{
-	case WM_INITDIALOG:
-		return (INT_PTR)TRUE;
-
-	case WM_COMMAND:
-		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-		{
-			EndDialog(hDlg, LOWORD(wParam));
-			return (INT_PTR)TRUE;
-		}
-		break;
-	}
-	return (INT_PTR)FALSE;
+UINT CALLBACK PropSheetPageProc(HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp) {
+    return uMsg;
 }

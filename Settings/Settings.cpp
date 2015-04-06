@@ -5,6 +5,19 @@
 #include <CommCtrl.h>
 #pragma comment(lib, "comctl32.lib")
 
+/* Enable Visual Styles */
+#if defined _M_IX86
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#elif defined _M_IA64
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='ia64' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#elif defined _M_X64
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='amd64' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#else
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#endif
+
+#include "../3RVX/Logger.h"
+
 #define MAX_LOADSTRING 100
 
 HINSTANCE hInst;
@@ -18,6 +31,7 @@ INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 HWND CreateWnd(HINSTANCE hInstance);
 void InitializeDialog();
 UINT CALLBACK PropSheetPageProc(HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp);
+DLGPROC ComboDlgProc(HWND hdlg, UINT uMessage, WPARAM wParam, LPARAM lParam);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -27,17 +41,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
-	if (!InitInstance (hInstance, nCmdShow)) {
-		return FALSE;
-	}
+    Logger::Start();
 
+    CLOG(L"Starting SettingsUI...");
+    InitializeDialog();
+
+    /*
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0)) {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
 	}
+    */
 
-	return (int) msg.wParam;
+	//return (int) msg.wParam;
+    return 0;
 }
 
 void InitializeDialog() {
@@ -61,46 +79,48 @@ void InitializeDialog() {
     }
 
     HWND hWnd = CreateWindowEx(
-        NULL,
-        L"3RVX SettingsUI", L"3RVX Settings",
-        WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
-        500, 500,
-        NULL, NULL, hInst, NULL);
+        NULL, L"3RVX SettingsUI", L"3RVX SettingsUI",
+        NULL, NULL, NULL, NULL, NULL, NULL, NULL, hInst, NULL);
 
-    PROPSHEETPAGE psp[3];
+    PROPSHEETPAGE psp[4];
     PROPSHEETHEADER psh;
 
-    //Fill out the PROPSHEETPAGE data structure for the Background Color sheet
     psp[0].dwSize = sizeof(PROPSHEETPAGE);
     psp[0].dwFlags = NULL;
     psp[0].hInstance = hInst;
-    //psp[0].pszTemplate = MAKEINTRESOURCE(IDD_PROPPAGE_SMALL);
+    psp[0].pszTemplate = MAKEINTRESOURCE(IDD_GENERAL);
     psp[0].pszIcon = NULL;
-    //psp[0].pfnDlgProc = (DLGPROC) ButtonsDlgProc;
+    psp[0].pfnDlgProc = (DLGPROC) ComboDlgProc;
     psp[0].pszTitle = NULL;
     psp[0].lParam = NULL;
 
-    //Fill out the PROPSHEETPAGE data structure for the Client Area Shape sheet
     psp[1].dwSize = sizeof(PROPSHEETPAGE);
     psp[1].dwFlags = NULL;
     psp[1].hInstance = hInst;
-    //psp[1].pszTemplate = MAKEINTRESOURCE(IDD_SKIN_PROP);
+    psp[1].pszTemplate = MAKEINTRESOURCE(IDD_DISPLAY);
     psp[1].pszIcon = NULL;
-    //psp[1].pfnDlgProc = (DLGPROC) ComboDlgProc;
+    psp[1].pfnDlgProc = (DLGPROC) ComboDlgProc;
     psp[1].pszTitle = NULL;
     psp[1].lParam = 0;
 
-    //Fill out the PROPSHEETPAGE data structure for the Client Area Shape sheet
     psp[2].dwSize = sizeof(PROPSHEETPAGE);
     psp[2].dwFlags = NULL;
     psp[2].hInstance = hInst;
-    //psp[2].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT_PROP);
+    psp[2].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
     psp[2].pszIcon = NULL;
-    //psp[2].pfnDlgProc = (DLGPROC) ComboDlgProc;
+    psp[2].pfnDlgProc = (DLGPROC) ComboDlgProc;
     psp[2].pszTitle = NULL;
     psp[2].lParam = 0;
 
-    //Fill out the PROPSHEETHEADER
+    psp[3].dwSize = sizeof(PROPSHEETPAGE);
+    psp[3].dwFlags = NULL;
+    psp[3].hInstance = hInst;
+    psp[3].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
+    psp[3].pszIcon = NULL;
+    psp[3].pfnDlgProc = (DLGPROC) ComboDlgProc;
+    psp[3].pszTitle = NULL;
+    psp[3].lParam = 0;
+
     psh.dwSize = sizeof(PROPSHEETHEADER);
     psh.dwFlags = PSH_PROPSHEETPAGE | PSH_USEICONID | PSH_USECALLBACK;
     psh.hwndParent = hWnd;
@@ -111,81 +131,79 @@ void InitializeDialog() {
     psh.ppsp = (LPCPROPSHEETPAGE) &psp;
     psh.pfnCallback = (PFNPROPSHEETCALLBACK) PropSheetPageProc;
 
-    //And finally display the modal property sheet
+    CLOG(L"Launching modal property sheet.");
     PropertySheet(&psh);
 }
 
-//
-//   FUNCTION: InitInstance(HINSTANCE, int)
-//
-//   PURPOSE: Saves instance handle and creates main window
-//
-//   COMMENTS:
-//
-//        In this function, we save the instance handle in a global variable and
-//        create and display the main program window.
-//
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
-{
-   HWND hWnd;
+LRESULT CALLBACK WndProc(
+        HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
-   hInst = hInstance; // Store instance handle in our global variable
+    CLOG(L"Message: %x", message);
 
-   hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
+    int wmId, wmEvent;
+    PAINTSTRUCT ps;
+    HDC hdc;
 
-   if (!hWnd) {
-      return FALSE;
-   }
-
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
-
-   return TRUE;
+    switch (message) {
+    case WM_PAINT:
+        hdc = BeginPaint(hWnd, &ps);
+        EndPaint(hWnd, &ps);
+        break;
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+    return 0;
 }
 
-//
-//  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  PURPOSE:  Processes messages for the main window.
-//
-//  WM_COMMAND	- process the application menu
-//  WM_PAINT	- Paint the main window
-//  WM_DESTROY	- post a quit message and return
-//
-//
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	int wmId, wmEvent;
-	PAINTSTRUCT ps;
-	HDC hdc;
+DLGPROC ComboDlgProc(HWND hdlg,
+    UINT uMessage,
+    WPARAM wParam,
+    LPARAM lParam) {
+    LPNMHDR     lpnmhdr;
 
-	switch (message)
-	{
-	case WM_COMMAND:
-		wmId    = LOWORD(wParam);
-		wmEvent = HIWORD(wParam);
-		// Parse the menu selections:
-		switch (wmId)
-		{
-		default:
-			return DefWindowProc(hWnd, message, wParam, lParam);
-		}
-		break;
-	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-		// TODO: Add any drawing code here...
-		EndPaint(hWnd, &ps);
-		break;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
-	}
-	return 0;
+    switch (uMessage) {
+        // on any command notification, tell the property sheet to enable the Apply button
+    case WM_COMMAND:
+        //PropSheet_Changed(GetParent(hdlg), hdlg);
+        break;
+
+    case WM_NOTIFY:
+        lpnmhdr = (NMHDR FAR *)lParam;
+
+        switch (lpnmhdr->code) {
+        case PSN_APPLY:   //sent when OK or Apply button pressed
+            break;
+
+        case PSN_RESET:   //sent when Cancel button pressed
+            break;
+
+        case PSN_SETACTIVE:
+            //this will be ignored if the property sheet is not a wizard
+            //PropSheet_SetWizButtons(GetParent(hdlg), PSWIZB_BACK | PSWIZB_FINISH);
+            return FALSE;
+
+        default:
+            break;
+        }
+        break;
+
+    default:
+        break;
+    }
+
+    return FALSE;
 }
+
 
 UINT CALLBACK PropSheetPageProc(HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp) {
+    if (uMsg == PSPCB_CREATE) {
+        HWND startup = GetDlgItem(hWnd, CHK_STARTUP);
+        CLOG(L"Startup: %d", startup);
+        SendMessage(GetDlgItem(hWnd, CHK_STARTUP), BM_SETCHECK, BST_CHECKED, NULL);
+    }
+
     return uMsg;
 }

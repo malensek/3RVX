@@ -1,8 +1,4 @@
-#include "stdafx.h"
-#include "Settings.h"
-#include <prsht.h>
-#include <Windows.h>
-#include <pshpack1.h>
+#include "SettingsUI.h"
 #include <CommCtrl.h>
 #pragma comment(lib, "comctl32.lib")
 
@@ -23,63 +19,29 @@ typedef struct DLGTEMPLATEEX
 } DLGTEMPLATEEX, *LPDLGTEMPLATEEX;
 #include <poppack.h>
 
-/* Enable Visual Styles */
-#if defined _M_IX86
-#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
-#elif defined _M_IA64
-#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='ia64' publicKeyToken='6595b64144ccf1df' language='*'\"")
-#elif defined _M_X64
-#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='amd64' publicKeyToken='6595b64144ccf1df' language='*'\"")
-#else
-#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
-#endif
-
 #include "../3RVX/Logger.h"
 
-#define MAX_LOADSTRING 100
+/* Tabs*/
+#include "General.h"
 
 HINSTANCE hInst;
-TCHAR szTitle[MAX_LOADSTRING];
-TCHAR szWindowClass[MAX_LOADSTRING];
 HWND mainWnd;
 
-BOOL				InitInstance(HINSTANCE, int);
-LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
-HWND CreateWnd(HINSTANCE hInstance);
-void InitializeDialog();
-UINT CALLBACK PropSheetPageProc(HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp);
-int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);
-DLGPROC ComboDlgProc(HWND hdlg, UINT uMessage, WPARAM wParam, LPARAM lParam);
-
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPTSTR    lpCmdLine,
-                     _In_ int       nCmdShow) {
+int APIENTRY wWinMain(
+        _In_ HINSTANCE hInstance,
+        _In_opt_ HINSTANCE hPrevInstance,
+        _In_ LPTSTR    lpCmdLine,
+        _In_ int       nCmdShow) {
 
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
     Logger::Start();
-
     CLOG(L"Starting SettingsUI...");
-    InitializeDialog();
 
-    /*
-	MSG msg;
-	while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-	}
-    */
+    hInst = hInstance;
 
-	//return (int) msg.wParam;
-    return 0;
-}
-
-void InitializeDialog() {
     WNDCLASSEX wcex;
-
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = NULL;
     wcex.lpfnWndProc = WndProc;
@@ -94,12 +56,14 @@ void InitializeDialog() {
     wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
     if (!RegisterClassEx(&wcex)) {
-        /* throw exception */
+        CLOG(L"Could not register class");
+        return EXIT_FAILURE;
     }
 
     HWND mainWnd = CreateWindowEx(
         NULL, L"3RVX SettingsUI", L"3RVX SettingsUI",
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, hInst, NULL);
+    PostMessage(mainWnd, WM_INITDIALOG, NULL, NULL);
 
     PROPSHEETPAGE psp[4];
 
@@ -108,7 +72,7 @@ void InitializeDialog() {
     psp[0].hInstance = hInst;
     psp[0].pszTemplate = MAKEINTRESOURCE(IDD_GENERAL);
     psp[0].pszIcon = NULL;
-    psp[0].pfnDlgProc = (DLGPROC) ComboDlgProc;
+    psp[0].pfnDlgProc = (DLGPROC) General::GeneralTabProc;
     psp[0].pszTitle = NULL;
     psp[0].lParam = NULL;
 
@@ -151,13 +115,11 @@ void InitializeDialog() {
     psh.pfnCallback = (PFNPROPSHEETCALLBACK) PropSheetProc;
 
     CLOG(L"Launching modal property sheet.");
-    PropertySheet(&psh);
+    return PropertySheet(&psh);
 }
 
 LRESULT CALLBACK WndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-
-    CLOG(L"Message: %x", message);
 
     int wmId, wmEvent;
     PAINTSTRUCT ps;
@@ -181,9 +143,13 @@ DLGPROC ComboDlgProc(HWND hdlg,
     UINT uMessage,
     WPARAM wParam,
     LPARAM lParam) {
+
     LPNMHDR     lpnmhdr;
 
     switch (uMessage) {
+    case WM_INITDIALOG: {
+        break;
+    }
         // on any command notification, tell the property sheet to enable the Apply button
     case WM_COMMAND:
         //PropSheet_Changed(GetParent(hdlg), hdlg);
@@ -219,6 +185,7 @@ DLGPROC ComboDlgProc(HWND hdlg,
 int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
     switch (msg) {
     case PSCB_PRECREATE:
+        /* Disable the help button: */
         if (((LPDLGTEMPLATEEX) lParam)->signature == 0xFFFF) {
             ((LPDLGTEMPLATEEX) lParam)->style &= ~DS_CONTEXTHELP;
         } else {
@@ -228,16 +195,4 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
     }
 
     return TRUE;
-}
-
-UINT CALLBACK PropSheetPageProc(HWND hwnd, UINT msg, LPPROPSHEETPAGE ppsp) {
-    /*
-    if (uMsg == PSPCB_CREATE) {
-        HWND startup = GetDlgItem(, CHK_STARTUP);
-        CLOG(L"Startup: %d", startup);
-        SendMessage(GetDlgItem(hWnd, CHK_STARTUP), BM_SETCHECK, BST_CHECKED, NULL);
-    }
-    */
-
-    return msg;
 }

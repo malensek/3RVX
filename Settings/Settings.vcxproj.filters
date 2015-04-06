@@ -54,6 +54,9 @@
     <ClInclude Include="..\3RVX\Error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UIContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp">
@@ -90,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\3RVX\Error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

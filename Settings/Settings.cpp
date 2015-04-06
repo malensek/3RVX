@@ -2,8 +2,26 @@
 #include "Settings.h"
 #include <prsht.h>
 #include <Windows.h>
+#include <pshpack1.h>
 #include <CommCtrl.h>
 #pragma comment(lib, "comctl32.lib")
+
+/* DLGTEMPLATEEX Structure */
+#include <pshpack1.h>
+typedef struct DLGTEMPLATEEX
+{
+    WORD dlgVer;
+    WORD signature;
+    DWORD helpID;
+    DWORD exStyle;
+    DWORD style;
+    WORD cDlgItems;
+    short x;
+    short y;
+    short cx;
+    short cy;
+} DLGTEMPLATEEX, *LPDLGTEMPLATEEX;
+#include <poppack.h>
 
 /* Enable Visual Styles */
 #if defined _M_IX86
@@ -23,7 +41,7 @@
 HINSTANCE hInst;
 TCHAR szTitle[MAX_LOADSTRING];
 TCHAR szWindowClass[MAX_LOADSTRING];
-HWND hWnd;
+HWND mainWnd;
 
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -31,6 +49,7 @@ INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 HWND CreateWnd(HINSTANCE hInstance);
 void InitializeDialog();
 UINT CALLBACK PropSheetPageProc(HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp);
+int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);
 DLGPROC ComboDlgProc(HWND hdlg, UINT uMessage, WPARAM wParam, LPARAM lParam);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -78,12 +97,11 @@ void InitializeDialog() {
         /* throw exception */
     }
 
-    HWND hWnd = CreateWindowEx(
+    HWND mainWnd = CreateWindowEx(
         NULL, L"3RVX SettingsUI", L"3RVX SettingsUI",
         NULL, NULL, NULL, NULL, NULL, NULL, NULL, hInst, NULL);
 
     PROPSHEETPAGE psp[4];
-    PROPSHEETHEADER psh;
 
     psp[0].dwSize = sizeof(PROPSHEETPAGE);
     psp[0].dwFlags = NULL;
@@ -121,15 +139,16 @@ void InitializeDialog() {
     psp[3].pszTitle = NULL;
     psp[3].lParam = 0;
 
+    PROPSHEETHEADER psh;
     psh.dwSize = sizeof(PROPSHEETHEADER);
     psh.dwFlags = PSH_PROPSHEETPAGE | PSH_USEICONID | PSH_USECALLBACK;
-    psh.hwndParent = hWnd;
+    psh.hwndParent = mainWnd;
     psh.hInstance = hInst;
     psh.pszIcon = MAKEINTRESOURCE(COLOR_WINDOW);
     psh.pszCaption = L"3RVX Settings";
     psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);
     psh.ppsp = (LPCPROPSHEETPAGE) &psp;
-    psh.pfnCallback = (PFNPROPSHEETCALLBACK) PropSheetPageProc;
+    psh.pfnCallback = (PFNPROPSHEETCALLBACK) PropSheetProc;
 
     CLOG(L"Launching modal property sheet.");
     PropertySheet(&psh);
@@ -197,13 +216,28 @@ DLGPROC ComboDlgProc(HWND hdlg,
     return FALSE;
 }
 
+int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
+    switch (msg) {
+    case PSCB_PRECREATE:
+        if (((LPDLGTEMPLATEEX) lParam)->signature == 0xFFFF) {
+            ((LPDLGTEMPLATEEX) lParam)->style &= ~DS_CONTEXTHELP;
+        } else {
+            ((LPDLGTEMPLATE) lParam)->style &= ~DS_CONTEXTHELP;
+        }
+        return TRUE;
+    }
 
-UINT CALLBACK PropSheetPageProc(HWND hwnd, UINT uMsg, LPPROPSHEETPAGE ppsp) {
+    return TRUE;
+}
+
+UINT CALLBACK PropSheetPageProc(HWND hwnd, UINT msg, LPPROPSHEETPAGE ppsp) {
+    /*
     if (uMsg == PSPCB_CREATE) {
-        HWND startup = GetDlgItem(hWnd, CHK_STARTUP);
+        HWND startup = GetDlgItem(, CHK_STARTUP);
         CLOG(L"Startup: %d", startup);
         SendMessage(GetDlgItem(hWnd, CHK_STARTUP), BM_SETCHECK, BST_CHECKED, NULL);
     }
+    */
 
-    return uMsg;
+    return msg;
 }

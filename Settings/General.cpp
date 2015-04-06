@@ -92,4 +92,27 @@ bool General::RunOnStartup() {
 
     RegCloseKey(key);
     return run;
+}std::list<std::wstring> General::FindSkins(std::wstring dir) {
+    std::list<std::wstring> skins;
+    WIN32_FIND_DATA ffd;
+    HANDLE hFind;
+
+    CLOG(L"Finding skins in: %s", dir.c_str());
+    dir += L"\\*";
+    hFind = FindFirstFile(dir.c_str(), &ffd);
+    if (hFind == INVALID_HANDLE_VALUE) {
+        return skins;
+    }
+
+    do {
+        std::wstring fName(ffd.cFileName);
+        if (fName.at(0) == L'.') {
+            continue;
+        }
+        QCLOG(L"%s", fName.c_str());
+        skins.push_back(fName);
+    } while (FindNextFile(hFind, &ffd));
+    FindClose(hFind);
+
+    return skins;
 }

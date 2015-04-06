@@ -20,6 +20,7 @@ typedef struct DLGTEMPLATEEX
 #include <poppack.h>
 
 #include "../3RVX/Logger.h"
+#include "../3RVX/Settings.h"
 
 /* Tabs*/
 #include "General.h"
@@ -38,6 +39,8 @@ int APIENTRY wWinMain(
 
     Logger::Start();
     CLOG(L"Starting SettingsUI...");
+    Settings *settings = Settings::Instance();
+    settings->Load();
 
     hInst = hInstance;
 

@@ -76,21 +76,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\3RVX\Error.h" />
+    <ClInclude Include="..\3RVX\HotkeyInfo.h" />
+    <ClInclude Include="..\3RVX\HotkeyManager.h" />
     <ClInclude Include="..\3RVX\Logger.h" />
+    <ClInclude Include="..\3RVX\MeterWnd\Animations\AnimationTypes.h" />
+    <ClInclude Include="..\3RVX\Settings.h" />
+    <ClInclude Include="..\3RVX\SkinInfo.h" />
+    <ClInclude Include="..\3RVX\StringUtils.h" />
     <ClInclude Include="..\3RVX\TinyXml2\tinyxml2.h" />
+    <ClInclude Include="General.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="Settings.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="SettingsUI.h" />
+    <ClInclude Include="UIUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\3RVX\Error.cpp" />
+    <ClCompile Include="..\3RVX\HotkeyInfo.cpp" />
+    <ClCompile Include="..\3RVX\HotkeyManager.cpp" />
     <ClCompile Include="..\3RVX\Logger.cpp" />
+    <ClCompile Include="..\3RVX\MeterWnd\Animations\AnimationTypes.cpp" />
+    <ClCompile Include="..\3RVX\Settings.cpp" />
+    <ClCompile Include="..\3RVX\SkinInfo.cpp" />
+    <ClCompile Include="..\3RVX\StringUtils.cpp" />
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp" />
-    <ClCompile Include="Settings.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="General.cpp" />
+    <ClCompile Include="SettingsUI.cpp" />
+    <ClCompile Include="UIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Settings.rc" />
@@ -98,6 +110,9 @@
   <ItemGroup>
     <Image Include="Settings.ico" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\3RVX\Settings.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

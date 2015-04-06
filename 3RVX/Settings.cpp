@@ -1,6 +1,7 @@
 #include "Settings.h"
 
 #include <Shlwapi.h>
+#pragma comment(lib, "Shlwapi.lib")
 #include <algorithm>
 
 #include "Error.h"

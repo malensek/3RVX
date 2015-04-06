@@ -3,6 +3,7 @@
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "UIUtils.h"
+#include "UIContext.h"
 
 #define KEY_NAME L"3RVX"
 #define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"
@@ -19,6 +20,9 @@ DLGPROC General::GeneralTabProc(
 
     case WM_COMMAND:
         //PropSheet_Changed(GetParent(hdlg), hdlg);
+        if (HIWORD(wParam) == CBN_SELCHANGE) {
+
+        }
         break;
 
     case WM_NOTIFY:
@@ -44,26 +48,26 @@ DLGPROC General::GeneralTabProc(
 }
 
 void General::LoadSettings(HWND hDlg) {
-    using namespace UIUtils;
     Settings *settings = Settings::Instance();
-    SetCheck(hDlg, CHK_STARTUP, RunOnStartup());
+    UIContext ctxt(hDlg);
+    ctxt.SetCheck(CHK_STARTUP, RunOnStartup());
+    ctxt.SetCheck(CHK_NOTIFY, settings->NotifyIconEnabled());
+    ctxt.SetCheck(CHK_SOUNDS, settings->SoundEffectsEnabled());
 
-//    _startup.SetCheck(RunOnStartup());
-//    _notify.SetCheck(settings->NotifyIconEnabled());
-//    _sounds.SetCheck(settings->SoundEffectsEnabled());
+    /* Determine which skins are available */
+    std::list<std::wstring> skins = FindSkins(Settings::SkinDir().c_str());
+    for (std::wstring skin : skins) {
+        ctxt.AddComboItem(CMB_SKIN, skin);
+    }
 
-//    /* Determine which skins are available */
-//    std::list<CString> skins = FindSkins(Settings::SkinDir().c_str());
-//    for (CString skin : skins) {
-//        _skins.AddString(skin);
-//    }
+    /* Update the combo box with the current skin */
+    std::wstring current = settings->CurrentSkin();
+    CLOG(L"Current skiN: %s", current.c_str());
+    int idx = ctxt.SelectComboItem(CMB_SKIN, current);
+    if (idx == CB_ERR) {
+        ctxt.SelectComboItem(CMB_SKIN, DEFAULT_SKIN);
+    }
 
-//    /* Update the combo box with the current skin */
-//    std::wstring current = settings->CurrentSkin();
-//    int idx = _skins.SelectString(0, current.c_str());
-//    if (idx == CB_ERR) {
-//        _skins.SelectString(0, DEFAULT_SKIN);
-//    }
 //    LoadSkinInfo();
 
 //    /* Populate the language box */
@@ -92,7 +96,9 @@ bool General::RunOnStartup() {
 
     RegCloseKey(key);
     return run;
-}std::list<std::wstring> General::FindSkins(std::wstring dir) {
+}
+
+std::list<std::wstring> General::FindSkins(std::wstring dir) {
     std::list<std::wstring> skins;
     WIN32_FIND_DATA ffd;
     HANDLE hFind;
@@ -116,3 +122,4 @@ bool General::RunOnStartup() {
 
     return skins;
 }
+

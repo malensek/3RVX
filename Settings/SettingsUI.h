@@ -25,10 +25,7 @@
 
 /* Forward Declarations */
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
-HWND CreateWnd(HINSTANCE hInstance);
-void Initialize();
 int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);
-DLGPROC ComboDlgProc(HWND hdlg, UINT uMessage, WPARAM wParam, LPARAM lParam);
 
 DLGPROC GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 DLGPROC DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);

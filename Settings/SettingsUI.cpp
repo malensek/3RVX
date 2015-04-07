@@ -144,6 +144,21 @@ LRESULT CALLBACK WndProc(
     return 0;
 }
 
+int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
+    switch (msg) {
+    case PSCB_PRECREATE:
+        /* Disable the help button: */
+        if (((LPDLGTEMPLATEEX) lParam)->signature == 0xFFFF) {
+            ((LPDLGTEMPLATEEX) lParam)->style &= ~DS_CONTEXTHELP;
+        } else {
+            ((LPDLGTEMPLATE) lParam)->style &= ~DS_CONTEXTHELP;
+        }
+        return TRUE;
+    }
+
+    return TRUE;
+}
+
 DLGPROC GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     return general.TabProc(hDlg, message, wParam, lParam);
 }
@@ -158,19 +173,4 @@ DLGPROC HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 
 DLGPROC AboutTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     return FALSE;
-}
-
-int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
-    switch (msg) {
-    case PSCB_PRECREATE:
-        /* Disable the help button: */
-        if (((LPDLGTEMPLATEEX) lParam)->signature == 0xFFFF) {
-            ((LPDLGTEMPLATEEX) lParam)->style &= ~DS_CONTEXTHELP;
-        } else {
-            ((LPDLGTEMPLATE) lParam)->style &= ~DS_CONTEXTHELP;
-        }
-        return TRUE;
-    }
-
-    return TRUE;
 }

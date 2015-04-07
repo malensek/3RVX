@@ -24,6 +24,7 @@ typedef struct DLGTEMPLATEEX
 
 /* Tabs*/
 #include "General.h"
+General general;
 
 HINSTANCE hInstance = NULL;
 HWND mainWnd = NULL;
@@ -74,7 +75,7 @@ int APIENTRY wWinMain(
     psp[0].hInstance = hInstance;
     psp[0].pszTemplate = MAKEINTRESOURCE(IDD_GENERAL);
     psp[0].pszIcon = NULL;
-    psp[0].pfnDlgProc = (DLGPROC) General::GeneralTabProc;
+    psp[0].pfnDlgProc = (DLGPROC) GeneralTabProc;
     psp[0].pszTitle = NULL;
     psp[0].lParam = NULL;
 
@@ -83,7 +84,7 @@ int APIENTRY wWinMain(
     psp[1].hInstance = hInstance;
     psp[1].pszTemplate = MAKEINTRESOURCE(IDD_DISPLAY);
     psp[1].pszIcon = NULL;
-    psp[1].pfnDlgProc = (DLGPROC) ComboDlgProc;
+    psp[1].pfnDlgProc = (DLGPROC) DisplayTabProc;
     psp[1].pszTitle = NULL;
     psp[1].lParam = 0;
 
@@ -92,7 +93,7 @@ int APIENTRY wWinMain(
     psp[2].hInstance = hInstance;
     psp[2].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
     psp[2].pszIcon = NULL;
-    psp[2].pfnDlgProc = (DLGPROC) ComboDlgProc;
+    psp[2].pfnDlgProc = (DLGPROC) HotkeyTabProc;
     psp[2].pszTitle = NULL;
     psp[2].lParam = 0;
 
@@ -101,7 +102,7 @@ int APIENTRY wWinMain(
     psp[3].hInstance = hInstance;
     psp[3].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
     psp[3].pszIcon = NULL;
-    psp[3].pfnDlgProc = (DLGPROC) ComboDlgProc;
+    psp[3].pfnDlgProc = (DLGPROC) AboutTabProc;
     psp[3].pszTitle = NULL;
     psp[3].lParam = 0;
 
@@ -131,55 +132,31 @@ LRESULT CALLBACK WndProc(
         hdc = BeginPaint(hWnd, &ps);
         EndPaint(hWnd, &ps);
         break;
+
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
+
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
+
     return 0;
 }
 
-DLGPROC ComboDlgProc(HWND hdlg,
-    UINT uMessage,
-    WPARAM wParam,
-    LPARAM lParam) {
+DLGPROC GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+    return general.TabProc(hDlg, message, wParam, lParam);
+}
 
-    LPNMHDR     lpnmhdr;
+DLGPROC DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+    return FALSE;
+}
 
-    switch (uMessage) {
-    case WM_INITDIALOG: {
-        break;
-    }
-        // on any command notification, tell the property sheet to enable the Apply button
-    case WM_COMMAND:
-        //PropSheet_Changed(GetParent(hdlg), hdlg);
-        break;
+DLGPROC HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+    return FALSE;
+}
 
-    case WM_NOTIFY:
-        lpnmhdr = (NMHDR FAR *)lParam;
-
-        switch (lpnmhdr->code) {
-        case PSN_APPLY:   //sent when OK or Apply button pressed
-            break;
-
-        case PSN_RESET:   //sent when Cancel button pressed
-            break;
-
-        case PSN_SETACTIVE:
-            //this will be ignored if the property sheet is not a wizard
-            //PropSheet_SetWizButtons(GetParent(hdlg), PSWIZB_BACK | PSWIZB_FINISH);
-            return FALSE;
-
-        default:
-            break;
-        }
-        break;
-
-    default:
-        break;
-    }
-
+DLGPROC AboutTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     return FALSE;
 }
 

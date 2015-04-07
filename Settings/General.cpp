@@ -5,81 +5,35 @@
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "../3RVX/SkinInfo.h"
-#include "UIUtils.h"
+
 #include "UIContext.h"
 
 #define KEY_NAME L"3RVX"
 #define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
-HWND General::_hWnd = NULL;
-UIContext *General::_ctxt = NULL;
-std::wstring General::_url(L"");
-
-DLGPROC General::GeneralTabProc(
-        HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-
-    LPNMHDR lpnmhdr;
-
-    switch (message) {
-    case WM_INITDIALOG:
-        _hWnd = hDlg;
-        _ctxt = new UIContext(hDlg);
-        LoadSettings(hDlg);
-        break;
-
-    case WM_COMMAND:
-        Command(message, wParam, lParam);
-        break;
-
-    case WM_NOTIFY:
-        lpnmhdr = (NMHDR FAR *)lParam;
-
-        switch (lpnmhdr->code) {
-        case PSN_APPLY:   //sent when OK or Apply button pressed
-            break;
-
-        case PSN_RESET:   //sent when Cancel button pressed
-            break;
-
-        default:
-            break;
+void General::Command(unsigned short nCode, unsigned short ctrlId) {
+    switch (nCode) {
+    case BN_CLICKED:
+        if (ctrlId == BTN_WEBSITE && _url != L"") {
+            ShellExecute(NULL, L"open", _url.c_str(),
+                NULL, NULL, SW_SHOWNORMAL);
         }
         break;
 
-    default:
-        break;
-    }
-
-    return FALSE;
-}
-
-/// <summary>Handles WM_COMMAND messages.</summary>
-void General::Command(UINT message, WPARAM wParam, LPARAM lParam) {
-    switch (HIWORD(wParam)) {
-    case BN_CLICKED: {
-        unsigned short btnId = LOWORD(wParam);
-        if (btnId == BTN_WEBSITE) {
-            if (_url != L"") {
-                ShellExecute(NULL, L"open", _url.c_str(),
-                    NULL, NULL, SW_SHOWNORMAL);
-            }
-        }
-    }
-    break;
-
-    case CBN_SELCHANGE: {
-        unsigned short cmbId = LOWORD(wParam);
-        if (cmbId == CMB_SKIN) {
+    case CBN_SELCHANGE:
+        switch (ctrlId) {
+        case CMB_SKIN:
             LoadSkinInfo(_ctxt->GetComboSelection(CMB_SKIN));
-        } else if (cmbId == CMB_LANG) {
+            break;
+
+        case CMB_LANG:
             // Language selection
+            break;
         }
-    }
-    break;
     }
 }
 
-void General::LoadSettings(HWND hDlg) {
+void General::LoadSettings() {
     Settings *settings = Settings::Instance();
     _ctxt->SetCheck(CHK_STARTUP, RunOnStartup());
     _ctxt->SetCheck(CHK_NOTIFY, settings->NotifyIconEnabled());
@@ -108,6 +62,10 @@ void General::LoadSettings(HWND hDlg) {
 //    }
 //    std::wstring currentLang = settings->LanguageName();
 //    _lang.SelectString(0, currentLang.c_str());
+}
+
+void General::SaveSettings() {
+
 }
 
 bool General::RunOnStartup() {

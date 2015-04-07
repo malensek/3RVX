@@ -1,25 +1,22 @@
 #pragma once
-#include "SettingsUI.h"
+#include "Tab.h"
 
 #include <list>
 #include <string>
 
 class UIContext;
 
-class General {
+class General : public Tab {
 public:
-    static DLGPROC GeneralTabProc(
-        HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 private:
-    static HWND _hWnd;
-    static UIContext *_ctxt;
-    static std::wstring _url;
+    std::wstring _url;
 
-    static void Command(UINT message, WPARAM wParam, LPARAM lParam);
+    virtual void Command(unsigned short nCode, unsigned short ctrlId);
+    virtual void LoadSettings();
+    virtual void SaveSettings();
 
-    static std::list<std::wstring> FindSkins(std::wstring dir);
-    static void LoadSettings(HWND hDlg);
-    static void LoadSkinInfo(std::wstring skinName);
-    static bool RunOnStartup();
+    std::list<std::wstring> FindSkins(std::wstring dir);
+    void LoadSkinInfo(std::wstring skinName);
+    bool RunOnStartup();
 };

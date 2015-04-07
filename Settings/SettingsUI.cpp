@@ -124,7 +124,6 @@ int APIENTRY wWinMain(
 LRESULT CALLBACK WndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
-    int wmId, wmEvent;
     PAINTSTRUCT ps;
     HDC hdc;
 

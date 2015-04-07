@@ -10,5 +10,6 @@ namespace General {
 
     std::list<std::wstring> FindSkins(std::wstring dir);
     void LoadSettings(HWND hDlg);
+    void LoadSkinInfo();
     bool RunOnStartup();
 }

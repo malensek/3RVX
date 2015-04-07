@@ -13,6 +13,9 @@ public:
     std::wstring GetComboSelection(int cmbId);
     bool SetText(int id, std::wstring text);
 
+    void Enable(int id);
+    void Disable(int id);
+
 private:
     HWND _hWnd;
 };

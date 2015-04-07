@@ -23,5 +23,14 @@ int UIContext::SelectComboItem(int cmbId, std::wstring item) {
 }
 
 std::wstring GetComboSelection(int cmbId) {
+}
 
+void UIContext::Enable(int id) {
+    HWND wnd = GetDlgItem(_hWnd, id);
+    EnableWindow(wnd, TRUE);
+}
+
+void UIContext::Disable(int id) {
+    HWND wnd = GetDlgItem(_hWnd, id);
+    EnableWindow(wnd, FALSE);
 }

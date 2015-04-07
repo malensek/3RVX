@@ -18,3 +18,7 @@ int UIContext::SelectComboItem(int cmbId, std::wstring item) {
     HWND cmbWnd = GetDlgItem(_hWnd, cmbId);
     return ComboBox_SelectString(cmbWnd, -1, item.c_str());
 }
+
+std::wstring GetComboSelection(int cmbId) {
+
+}

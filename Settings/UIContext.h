@@ -10,6 +10,7 @@ public:
     bool SetCheck(int chkId, bool checked = true);
     void AddComboItem(int cmbId, std::wstring item);
     int SelectComboItem(int cmbId, std::wstring item);
+    std::wstring GetComboSelection(int cmbId);
 
 private:
     HWND _hWnd;

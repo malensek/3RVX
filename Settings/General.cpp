@@ -1,12 +1,19 @@
 #include "General.h"
 
+#include <shellapi.h>
+
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
+#include "../3RVX/SkinInfo.h"
 #include "UIUtils.h"
 #include "UIContext.h"
 
 #define KEY_NAME L"3RVX"
 #define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+
+HWND General::_hWnd = NULL;
+UIContext *General::_ctxt = NULL;
+std::wstring General::_url(L"");
 
 DLGPROC General::GeneralTabProc(
         HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -15,14 +22,13 @@ DLGPROC General::GeneralTabProc(
 
     switch (message) {
     case WM_INITDIALOG:
+        _hWnd = hDlg;
+        _ctxt = new UIContext(hDlg);
         LoadSettings(hDlg);
         break;
 
     case WM_COMMAND:
-        //PropSheet_Changed(GetParent(hdlg), hdlg);
-        if (HIWORD(wParam) == CBN_SELCHANGE) {
-
-        }
+        Command(message, wParam, lParam);
         break;
 
     case WM_NOTIFY:
@@ -47,28 +53,51 @@ DLGPROC General::GeneralTabProc(
     return FALSE;
 }
 
+/// <summary>Handles WM_COMMAND messages.</summary>
+void General::Command(UINT message, WPARAM wParam, LPARAM lParam) {
+    switch (HIWORD(wParam)) {
+    case BN_CLICKED: {
+        unsigned short btnId = LOWORD(wParam);
+        if (btnId == BTN_WEBSITE) {
+            if (_url != L"") {
+                ShellExecute(NULL, L"open", _url.c_str(),
+                    NULL, NULL, SW_SHOWNORMAL);
+            }
+        }
+    }
+    break;
+
+    case CBN_SELCHANGE: {
+        unsigned short cmbId = LOWORD(wParam);
+        if (cmbId == CMB_SKIN) {
+            LoadSkinInfo(_ctxt->GetComboSelection(CMB_SKIN));
+        } else if (cmbId == CMB_LANG) {
+            // Language selection
+        }
+    }
+    break;
+    }
+}
+
 void General::LoadSettings(HWND hDlg) {
     Settings *settings = Settings::Instance();
-    UIContext ctxt(hDlg);
-    ctxt.SetCheck(CHK_STARTUP, RunOnStartup());
-    ctxt.SetCheck(CHK_NOTIFY, settings->NotifyIconEnabled());
-    ctxt.SetCheck(CHK_SOUNDS, settings->SoundEffectsEnabled());
+    _ctxt->SetCheck(CHK_STARTUP, RunOnStartup());
+    _ctxt->SetCheck(CHK_NOTIFY, settings->NotifyIconEnabled());
+    _ctxt->SetCheck(CHK_SOUNDS, settings->SoundEffectsEnabled());
 
     /* Determine which skins are available */
     std::list<std::wstring> skins = FindSkins(Settings::SkinDir().c_str());
     for (std::wstring skin : skins) {
-        ctxt.AddComboItem(CMB_SKIN, skin);
+        _ctxt->AddComboItem(CMB_SKIN, skin);
     }
 
     /* Update the combo box with the current skin */
     std::wstring current = settings->CurrentSkin();
-    CLOG(L"Current skiN: %s", current.c_str());
-    int idx = ctxt.SelectComboItem(CMB_SKIN, current);
+    int idx = _ctxt->SelectComboItem(CMB_SKIN, current);
     if (idx == CB_ERR) {
-        ctxt.SelectComboItem(CMB_SKIN, DEFAULT_SKIN);
+        _ctxt->SelectComboItem(CMB_SKIN, DEFAULT_SKIN);
     }
-
-//    LoadSkinInfo();
+    LoadSkinInfo(current);
 
 //    /* Populate the language box */
 //    std::list<CString> languages = FindLanguages(
@@ -123,3 +152,19 @@ std::list<std::wstring> General::FindSkins(std::wstring dir) {
     return skins;
 }
 
+void General::LoadSkinInfo(std::wstring skinName) {
+    std::wstring skinXML = Settings::Instance()->SkinXML(skinName);
+    SkinInfo s(skinXML);
+
+    std::wstring authorText(L"Author: ");
+    authorText.append(s.Author());
+    _ctxt->SetText(LBL_AUTHOR, authorText);
+
+    std::wstring url = s.URL();
+    if (url == L"") {
+        _ctxt->Disable(BTN_WEBSITE);
+    } else {
+        _url = s.URL();
+        _ctxt->Enable(BTN_WEBSITE);
+    }
+}

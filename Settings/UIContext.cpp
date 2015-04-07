@@ -22,7 +22,16 @@ int UIContext::SelectComboItem(int cmbId, std::wstring item) {
     return ComboBox_SelectString(cmbWnd, -1, item.c_str());
 }
 
-std::wstring GetComboSelection(int cmbId) {
+std::wstring UIContext::GetComboSelection(int cmbId) {
+    HWND cmbWnd = GetDlgItem(_hWnd, cmbId);
+    wchar_t text[MAX_COMBOSTR];
+    ComboBox_GetText(cmbWnd, text, MAX_COMBOSTR);
+    return std::wstring(text);
+}
+
+bool UIContext::SetText(int id, std::wstring text) {
+    HWND wnd = GetDlgItem(_hWnd, id);
+    return SetWindowText(wnd, text.c_str()) == TRUE;
 }
 
 void UIContext::Enable(int id) {

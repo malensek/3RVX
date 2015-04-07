@@ -25,8 +25,8 @@ typedef struct DLGTEMPLATEEX
 /* Tabs*/
 #include "General.h"
 
-HINSTANCE hInst;
-HWND mainWnd;
+HINSTANCE hInstance = NULL;
+HWND mainWnd = NULL;
 
 int APIENTRY wWinMain(
         _In_ HINSTANCE hInstance,
@@ -42,7 +42,7 @@ int APIENTRY wWinMain(
     Settings *settings = Settings::Instance();
     settings->Load();
 
-    hInst = hInstance;
+    hInstance = hInstance;
 
     WNDCLASSEX wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);
@@ -50,7 +50,7 @@ int APIENTRY wWinMain(
     wcex.lpfnWndProc = WndProc;
     wcex.cbClsExtra = NULL;
     wcex.cbWndExtra = NULL;
-    wcex.hInstance = hInst;
+    wcex.hInstance = hInstance;
     wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
@@ -63,16 +63,15 @@ int APIENTRY wWinMain(
         return EXIT_FAILURE;
     }
 
-    HWND mainWnd = CreateWindowEx(
+    mainWnd = CreateWindowEx(
         NULL, L"3RVX SettingsUI", L"3RVX SettingsUI",
-        NULL, NULL, NULL, NULL, NULL, NULL, NULL, hInst, NULL);
-    PostMessage(mainWnd, WM_INITDIALOG, NULL, NULL);
+        NULL, NULL, NULL, NULL, NULL, NULL, NULL, hInstance, NULL);
 
     PROPSHEETPAGE psp[4];
 
     psp[0].dwSize = sizeof(PROPSHEETPAGE);
     psp[0].dwFlags = NULL;
-    psp[0].hInstance = hInst;
+    psp[0].hInstance = hInstance;
     psp[0].pszTemplate = MAKEINTRESOURCE(IDD_GENERAL);
     psp[0].pszIcon = NULL;
     psp[0].pfnDlgProc = (DLGPROC) General::GeneralTabProc;
@@ -81,7 +80,7 @@ int APIENTRY wWinMain(
 
     psp[1].dwSize = sizeof(PROPSHEETPAGE);
     psp[1].dwFlags = NULL;
-    psp[1].hInstance = hInst;
+    psp[1].hInstance = hInstance;
     psp[1].pszTemplate = MAKEINTRESOURCE(IDD_DISPLAY);
     psp[1].pszIcon = NULL;
     psp[1].pfnDlgProc = (DLGPROC) ComboDlgProc;
@@ -90,7 +89,7 @@ int APIENTRY wWinMain(
 
     psp[2].dwSize = sizeof(PROPSHEETPAGE);
     psp[2].dwFlags = NULL;
-    psp[2].hInstance = hInst;
+    psp[2].hInstance = hInstance;
     psp[2].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
     psp[2].pszIcon = NULL;
     psp[2].pfnDlgProc = (DLGPROC) ComboDlgProc;
@@ -99,7 +98,7 @@ int APIENTRY wWinMain(
 
     psp[3].dwSize = sizeof(PROPSHEETPAGE);
     psp[3].dwFlags = NULL;
-    psp[3].hInstance = hInst;
+    psp[3].hInstance = hInstance;
     psp[3].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
     psp[3].pszIcon = NULL;
     psp[3].pfnDlgProc = (DLGPROC) ComboDlgProc;
@@ -110,7 +109,7 @@ int APIENTRY wWinMain(
     psh.dwSize = sizeof(PROPSHEETHEADER);
     psh.dwFlags = PSH_PROPSHEETPAGE | PSH_USEICONID | PSH_USECALLBACK;
     psh.hwndParent = mainWnd;
-    psh.hInstance = hInst;
+    psh.hInstance = hInstance;
     psh.pszIcon = MAKEINTRESOURCE(COLOR_WINDOW);
     psh.pszCaption = L"3RVX Settings";
     psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);

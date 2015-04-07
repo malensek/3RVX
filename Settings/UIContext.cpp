@@ -1,13 +1,16 @@
 #include "UIContext.h"
 #include <windowsx.h>
 
+#define MAX_COMBOSTR 1024
+
 UIContext::UIContext(HWND hWnd) :
 _hWnd(hWnd) {
 
 }
 
 bool UIContext::SetCheck(int chkId, bool checked) {
-    return CheckDlgButton(_hWnd, chkId, checked ? BST_CHECKED : BST_UNCHECKED);
+    return CheckDlgButton(
+        _hWnd, chkId, checked ? BST_CHECKED : BST_UNCHECKED) == TRUE;
 }
 
 void UIContext::AddComboItem(int cmbId, std::wstring item) {

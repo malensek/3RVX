@@ -11,6 +11,7 @@ public:
     void AddComboItem(int cmbId, std::wstring item);
     int SelectComboItem(int cmbId, std::wstring item);
     std::wstring GetComboSelection(int cmbId);
+    bool SetText(int id, std::wstring text);
 
 private:
     HWND _hWnd;

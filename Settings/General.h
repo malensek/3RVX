@@ -11,6 +11,7 @@ private:
     std::wstring _url;
 
     virtual DLGPROC Command(unsigned short nCode, unsigned short ctrlId);
+    virtual DLGPROC Notification(NMHDR *nHdr);
     virtual void LoadSettings();
     virtual void SaveSettings();
 

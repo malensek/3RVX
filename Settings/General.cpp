@@ -37,6 +37,10 @@ DLGPROC General::Command(unsigned short nCode, unsigned short ctrlId) {
     return FALSE;
 }
 
+DLGPROC General::Notification(NMHDR *nHdr) {
+    return FALSE;
+}
+
 void General::LoadSettings() {
     Settings *settings = Settings::Instance();
     _ctxt->SetCheck(CHK_STARTUP, RunOnStartup());

@@ -1,5 +1,7 @@
 #include "UIContext.h"
+
 #include <windowsx.h>
+#include <CommCtrl.h>
 
 #define MAX_COMBOSTR 1024
 
@@ -36,6 +38,11 @@ std::wstring UIContext::GetComboSelection(int cmbId) {
     wchar_t text[MAX_COMBOSTR];
     ComboBox_GetText(cmbWnd, text, MAX_COMBOSTR);
     return std::wstring(text);
+}
+
+void UIContext::SetSpinRange(int spId, int lo, int hi) {
+    HWND spWnd = GetDlgItem(_hWnd, spId);
+    SendMessage(spWnd, UDM_SETRANGE32, lo, hi);
 }
 
 bool UIContext::SetText(int id, std::wstring text) {

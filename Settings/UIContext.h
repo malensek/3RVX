@@ -16,6 +16,7 @@ public:
     std::wstring GetComboSelection(int cmbId);
     bool SetText(int id, std::wstring text);
     bool SetText(int id, int value);
+    void SetSpinRange(int spId, int lo, int hi);
 
     void Enable(int id);
     void Disable(int id);

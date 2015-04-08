@@ -14,6 +14,7 @@ public:
     int SelectComboItem(int cmbId, std::wstring item);
     std::wstring GetComboSelection(int cmbId);
     bool SetText(int id, std::wstring text);
+    bool SetText(int id, int value);
 
     void Enable(int id);
     void Disable(int id);

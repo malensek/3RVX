@@ -37,6 +37,10 @@ bool UIContext::SetText(int id, std::wstring text) {
     return SetDlgItemText(_hWnd, id, text.c_str()) == TRUE;
 }
 
+bool UIContext::SetText(int id, int value) {
+    return SetText(id, std::to_wstring(value));
+}
+
 void UIContext::Enable(int id) {
     HWND wnd = GetDlgItem(_hWnd, id);
     EnableWindow(wnd, TRUE);

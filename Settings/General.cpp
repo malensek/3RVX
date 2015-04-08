@@ -7,6 +7,7 @@
 #include "../3RVX/SkinInfo.h"
 
 #include "UIContext.h"
+#include "resource.h"
 
 #define KEY_NAME L"3RVX"
 #define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"

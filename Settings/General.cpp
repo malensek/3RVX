@@ -148,3 +148,36 @@ void General::LoadSkinInfo(std::wstring skinName) {
         _ctxt->Enable(BTN_WEBSITE);
     }
 }
+
+std::list<std::wstring> General::FindLanguages(std::wstring dir) {
+    std::list<std::wstring> languages;
+    WIN32_FIND_DATA ffd;
+    HANDLE hFind;
+
+    CLOG(L"Finding language translations in: %s", dir.c_str());
+    dir += L"\\*.xml";
+    hFind = FindFirstFile(dir.c_str(), &ffd);
+    if (hFind == INVALID_HANDLE_VALUE) {
+        CLOG(L"FindFirstFile() failed");
+        return languages;
+    }
+
+    do {
+        std::wstring fName(ffd.cFileName);
+
+        if (fName.at(0) == L'.') {
+            continue;
+        }
+
+        if (ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+            continue;
+        }
+
+        QCLOG(L"%s", fName.c_str());
+        languages.push_back(fName);
+    } while (FindNextFile(hFind, &ffd));
+    FindClose(hFind);
+
+    return languages;
+}
+

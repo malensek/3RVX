@@ -16,6 +16,7 @@ private:
     virtual void LoadSettings();
     virtual void SaveSettings();
 
+    std::list<std::wstring> FindLanguages(std::wstring dir);
     std::list<std::wstring> FindSkins(std::wstring dir);
     void LoadSkinInfo(std::wstring skinName);
     bool RunOnStartup();

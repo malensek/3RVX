@@ -12,6 +12,7 @@ public:
 
     void AddComboItem(int cmbId, std::wstring item);
     int SelectComboItem(int cmbId, std::wstring item);
+    void SelectComboItem(int cmbId, int itemIdx);
     std::wstring GetComboSelection(int cmbId);
     bool SetText(int id, std::wstring text);
     bool SetText(int id, int value);

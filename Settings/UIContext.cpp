@@ -26,6 +26,11 @@ int UIContext::SelectComboItem(int cmbId, std::wstring item) {
     return ComboBox_SelectString(cmbWnd, -1, item.c_str());
 }
 
+void UIContext::SelectComboItem(int cmbId, int itemIdx) {
+    HWND cmbWnd = GetDlgItem(_hWnd, cmbId);
+    ComboBox_SetCurSel(cmbWnd, itemIdx);
+}
+
 std::wstring UIContext::GetComboSelection(int cmbId) {
     HWND cmbWnd = GetDlgItem(_hWnd, cmbId);
     wchar_t text[MAX_COMBOSTR];

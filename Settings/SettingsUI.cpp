@@ -23,8 +23,10 @@ typedef struct DLGTEMPLATEEX
 #include "../3RVX/Settings.h"
 
 /* Tabs*/
+#include "Tab.h"
 #include "General.h"
 General general;
+Tab *tabs[] = { &general };
 
 HINSTANCE hInstance = NULL;
 HWND mainWnd = NULL;

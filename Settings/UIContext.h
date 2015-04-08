@@ -17,6 +17,7 @@ public:
 
     void Enable(int id);
     void Disable(int id);
+    void SetEnabled(int id, bool enabled);
 
 private:
     HWND _hWnd;

@@ -46,3 +46,11 @@ void UIContext::Disable(int id) {
     HWND wnd = GetDlgItem(_hWnd, id);
     EnableWindow(wnd, FALSE);
 }
+
+void UIContext::SetEnabled(int id, bool enabled) {
+    if (enabled == true) {
+        Enable(id);
+    } else {
+        Disable(id);
+    }
+}

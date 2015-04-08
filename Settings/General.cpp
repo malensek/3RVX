@@ -65,7 +65,7 @@ void General::LoadSettings() {
 }
 
 void General::SaveSettings() {
-
+    RunOnStartup(true);
 }
 
 bool General::RunOnStartup() {
@@ -76,14 +76,36 @@ bool General::RunOnStartup() {
     res = RegOpenKeyEx(HKEY_CURRENT_USER, STARTUP_KEY, NULL, KEY_READ, &key);
     if (res == ERROR_SUCCESS) {
         res = RegQueryValueEx(key, KEY_NAME, NULL, NULL, NULL, NULL);
-        if (res == ERROR_SUCCESS) {
-            run = true;
-        }
+        run = (res == ERROR_SUCCESS);
     }
 
     RegCloseKey(key);
     return run;
 }
+
+bool General::RunOnStartup(bool enable) {
+    long res;
+    HKEY key;
+    bool ok = false;
+
+    std::wstring path = Settings::AppDir() + L"\\3RVX.exe";
+
+    res = RegOpenKeyEx(HKEY_CURRENT_USER, STARTUP_KEY, NULL, KEY_ALL_ACCESS, &key);
+    if (res == ERROR_SUCCESS) {
+        if (enable) {
+            res = RegSetValueEx(key, KEY_NAME, NULL, REG_SZ,
+                (LPBYTE) path.c_str(), path.size() + 1);
+            ok = (res == ERROR_SUCCESS);
+        } else {
+            res = RegDeleteValue(key, KEY_NAME);
+            ok = (res == ERROR_SUCCESS);
+        }
+    }
+    RegCloseKey(key);
+    return ok;
+}
+
+
 
 std::list<std::wstring> General::FindSkins(std::wstring dir) {
     std::list<std::wstring> skins;

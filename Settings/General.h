@@ -19,4 +19,5 @@ private:
     std::list<std::wstring> FindSkins(std::wstring dir);
     void LoadSkinInfo(std::wstring skinName);
     bool RunOnStartup();
+    bool RunOnStartup(bool enable);
 };

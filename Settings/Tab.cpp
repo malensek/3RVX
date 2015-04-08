@@ -25,6 +25,10 @@ DLGPROC Tab::TabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
         nCode = HIWORD(wParam);
         ctrlId = LOWORD(wParam);
         return Command(nCode, ctrlId);
+
+    case WM_NOTIFY:
+        NMHDR *nHdr = (NMHDR *) lParam;
+        return Notification(nHdr);
     }
 
     return FALSE;

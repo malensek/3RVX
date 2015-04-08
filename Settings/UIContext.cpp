@@ -8,6 +8,10 @@ _hWnd(hWnd) {
 
 }
 
+bool UIContext::GetCheck(int chkId) {
+    return IsDlgButtonChecked(_hWnd, chkId) == BST_CHECKED;
+}
+
 bool UIContext::SetCheck(int chkId, bool checked) {
     return CheckDlgButton(
         _hWnd, chkId, checked ? BST_CHECKED : BST_UNCHECKED) == TRUE;

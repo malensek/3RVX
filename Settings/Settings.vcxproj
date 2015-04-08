@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\3RVX\DisplayManager.h" />
     <ClInclude Include="..\3RVX\Error.h" />
     <ClInclude Include="..\3RVX\HotkeyInfo.h" />
     <ClInclude Include="..\3RVX\HotkeyManager.h" />
@@ -91,9 +92,9 @@
     <ClInclude Include="SettingsUI.h" />
     <ClInclude Include="Tab.h" />
     <ClInclude Include="UIContext.h" />
-    <ClInclude Include="UIUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\3RVX\DisplayManager.cpp" />
     <ClCompile Include="..\3RVX\Error.cpp" />
     <ClCompile Include="..\3RVX\HotkeyInfo.cpp" />
     <ClCompile Include="..\3RVX\HotkeyManager.cpp" />
@@ -108,7 +109,6 @@
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="Tab.cpp" />
     <ClCompile Include="UIContext.cpp" />
-    <ClCompile Include="UIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Settings.rc" />

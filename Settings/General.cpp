@@ -65,7 +65,18 @@ void General::LoadSettings() {
 }
 
 void General::SaveSettings() {
-    RunOnStartup(true);
+    if (_hWnd == NULL) {
+        return;
+    }
+
+    CLOG(L"Saving: General");
+    Settings *settings = Settings::Instance();
+
+    RunOnStartup(_ctxt->GetCheck(CHK_STARTUP));
+    settings->NotifyIconEnabled(_ctxt->GetCheck(CHK_NOTIFY));
+    settings->SoundEffectsEnabled(_ctxt->GetCheck(CHK_SOUNDS));
+
+    settings->CurrentSkin(_ctxt->GetComboSelection(CMB_SKIN));
 }
 
 bool General::RunOnStartup() {

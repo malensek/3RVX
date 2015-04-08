@@ -31,5 +31,5 @@ protected:
     /// <summary>Handles WM_COMMAND messages.</summary>
     /// <param name="nCode">Control-defined notification code</param>
     /// <param name="ctrlId">Control identifier</param>
-    virtual void Command(unsigned short nCode, unsigned short ctrlId) = 0;
+    virtual DLGPROC Command(unsigned short nCode, unsigned short ctrlId) = 0;
 };

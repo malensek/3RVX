@@ -10,7 +10,7 @@ public:
 private:
     std::wstring _url;
 
-    virtual void Command(unsigned short nCode, unsigned short ctrlId);
+    virtual DLGPROC Command(unsigned short nCode, unsigned short ctrlId);
     virtual void LoadSettings();
     virtual void SaveSettings();
 

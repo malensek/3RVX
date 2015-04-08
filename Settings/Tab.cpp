@@ -18,14 +18,13 @@ DLGPROC Tab::TabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
         _hWnd = hDlg;
         _ctxt = new UIContext(hDlg);
         LoadSettings();
-        break;
+        return FALSE;
 
     case WM_COMMAND:
         PropSheet_Changed(GetParent(hDlg), NULL);
         nCode = HIWORD(wParam);
         ctrlId = LOWORD(wParam);
-        Command(nCode, ctrlId);
-        break;
+        return Command(nCode, ctrlId);
     }
 
     return FALSE;

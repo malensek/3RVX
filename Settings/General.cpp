@@ -12,12 +12,13 @@
 #define KEY_NAME L"3RVX"
 #define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
-void General::Command(unsigned short nCode, unsigned short ctrlId) {
+DLGPROC General::Command(unsigned short nCode, unsigned short ctrlId) {
     switch (nCode) {
     case BN_CLICKED:
         if (ctrlId == BTN_WEBSITE && _url != L"") {
             ShellExecute(NULL, L"open", _url.c_str(),
                 NULL, NULL, SW_SHOWNORMAL);
+            return (DLGPROC) TRUE;
         }
         break;
 
@@ -25,13 +26,15 @@ void General::Command(unsigned short nCode, unsigned short ctrlId) {
         switch (ctrlId) {
         case CMB_SKIN:
             LoadSkinInfo(_ctxt->GetComboSelection(CMB_SKIN));
-            break;
+            return (DLGPROC) TRUE;
 
         case CMB_LANG:
             // Language selection
-            break;
+            return (DLGPROC) TRUE;
         }
     }
+
+    return FALSE;
 }
 
 void General::LoadSettings() {

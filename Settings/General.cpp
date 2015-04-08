@@ -105,8 +105,6 @@ bool General::RunOnStartup(bool enable) {
     return ok;
 }
 
-
-
 std::list<std::wstring> General::FindSkins(std::wstring dir) {
     std::list<std::wstring> skins;
     WIN32_FIND_DATA ffd;
@@ -116,6 +114,7 @@ std::list<std::wstring> General::FindSkins(std::wstring dir) {
     dir += L"\\*";
     hFind = FindFirstFile(dir.c_str(), &ffd);
     if (hFind == INVALID_HANDLE_VALUE) {
+        CLOG(L"FindFirstFile() failed");
         return skins;
     }
 

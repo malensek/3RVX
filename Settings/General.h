@@ -4,8 +4,6 @@
 #include <list>
 #include <string>
 
-class UIContext;
-
 class General : public Tab {
 public:
 

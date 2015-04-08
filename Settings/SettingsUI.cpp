@@ -19,6 +19,10 @@ typedef struct DLGTEMPLATEEX
 } DLGTEMPLATEEX, *LPDLGTEMPLATEEX;
 #include <poppack.h>
 
+/* Needed to determine whether the Apply button is enabled/disabled */
+#define IDD_APPLYNOW 0x3021
+
+#include "../3RVX/3RVX.h"
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 
@@ -155,7 +159,25 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
         } else {
             ((LPDLGTEMPLATE) lParam)->style &= ~DS_CONTEXTHELP;
         }
-        return TRUE;
+        break;
+
+    case PSCB_BUTTONPRESSED:
+        if (lParam == PSBTN_OK || lParam == PSBTN_APPLYNOW) {
+            HWND hApply = GetDlgItem(hWnd, IDD_APPLYNOW);
+            if (IsWindowEnabled(hApply)) {
+                /* Save settings*/
+                CLOG(L"Persisting settings...");
+                for (Tab *tab : tabs) {
+                    tab->SaveSettings();
+                }
+                Settings::Instance()->Save();
+
+                CLOG(L"Notifying 3RVX process of settings change");
+                HWND masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
+                SendMessage(masterWnd, WM_3RVX_CONTROL, MSG_LOAD, NULL);
+            }
+        }
+        break;
     }
 
     return TRUE;

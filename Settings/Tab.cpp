@@ -12,7 +12,6 @@ Tab::~Tab() {
 
 DLGPROC Tab::TabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     unsigned short nCode, ctrlId;
-    LPNMHDR lpnmhdr;
 
     switch (message) {
     case WM_INITDIALOG:
@@ -26,13 +25,6 @@ DLGPROC Tab::TabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
         nCode = HIWORD(wParam);
         ctrlId = LOWORD(wParam);
         Command(nCode, ctrlId);
-        break;
-
-    case WM_NOTIFY:
-        lpnmhdr = (NMHDR FAR *) lParam;
-        if (lpnmhdr->code == PSN_APPLY) {
-            SaveSettings();
-        }
         break;
     }
 

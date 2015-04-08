@@ -34,8 +34,7 @@ std::wstring UIContext::GetComboSelection(int cmbId) {
 }
 
 bool UIContext::SetText(int id, std::wstring text) {
-    HWND wnd = GetDlgItem(_hWnd, id);
-    return SetWindowText(wnd, text.c_str()) == TRUE;
+    return SetDlgItemText(_hWnd, id, text.c_str()) == TRUE;
 }
 
 void UIContext::Enable(int id) {

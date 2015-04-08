@@ -31,16 +31,16 @@ std::wstring Settings::_appDir(L"");
 Settings *Settings::instance;
 
 std::vector<std::wstring> Settings::OSDPosNames = {
-    L"top",
-    L"left",
-    L"right",
-    L"bottom",
-    L"center",
-    L"top-left",
-    L"top-right",
-    L"bottom-left",
-    L"bottom-right",
-    L"custom"
+    L"Top",
+    L"Left",
+    L"Right",
+    L"Bottom",
+    L"Center",
+    L"Top-left",
+    L"Top-right",
+    L"Bottom-left",
+    L"Bottom-right",
+    L"Custom"
 };
 
 Settings *Settings::Instance() {
@@ -166,10 +166,10 @@ void Settings::OSDEdgeOffset(int offset) {
 
 Settings::OSDPos Settings::OSDPosition() {
     std::wstring pos = GetText(XML_OSD_POS);
-    std::transform(pos.begin(), pos.end(), pos.begin(), ::tolower);
+    const wchar_t *posStr = pos.c_str();
 
     for (unsigned int i = 0; i < OSDPosNames.size(); ++i) {
-        if (pos == OSDPosNames[i]) {
+        if (_wcsicmp(posStr, OSDPosNames[i].c_str()) == 0) {
             return (Settings::OSDPos) i;
         }
     }
@@ -200,11 +200,11 @@ void Settings::OSDY(int y) {
 
 AnimationTypes::HideAnimation Settings::HideAnim() {
     std::wstring anim = GetText(XML_HIDEANIM);
-    std::transform(anim.begin(), anim.end(), anim.begin(), ::tolower);
+    const wchar_t *animStr = anim.c_str();
 
     std::vector<std::wstring> *names = &AnimationTypes::HideAnimationNames;
     for (unsigned int i = 0; i < names->size(); ++i) {
-        if (anim == (*names)[i]) {
+        if (_wcsicmp(animStr, (*names)[i].c_str()) == 0) {
             return (AnimationTypes::HideAnimation) i;
         }
     }

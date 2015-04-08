@@ -53,15 +53,14 @@ void General::LoadSettings() {
     }
     LoadSkinInfo(current);
 
-//    /* Populate the language box */
-//    std::list<CString> languages = FindLanguages(
-//        settings->LanguagesDir().c_str());
-
-//    for (CString language : languages) {
-//        _lang.AddString(language);
-//    }
-//    std::wstring currentLang = settings->LanguageName();
-//    _lang.SelectString(0, currentLang.c_str());
+    /* Populate the language box */
+    std::list<std::wstring> languages = FindLanguages(
+        settings->LanguagesDir().c_str());
+    for (std::wstring language : languages) {
+        _ctxt->AddComboItem(CMB_LANG, language);
+    }
+    std::wstring currentLang = settings->LanguageName();
+    _ctxt->SelectComboItem(CMB_LANG, currentLang);
 }
 
 void General::SaveSettings() {

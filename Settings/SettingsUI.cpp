@@ -30,9 +30,11 @@ typedef struct DLGTEMPLATEEX
 #include "Tab.h"
 #include "General.h"
 #include "Display.h"
+#include "Hotkeys.h"
 General general;
 Display display;
-Tab *tabs[] = { &general, &display };
+Hotkeys hotkeys;
+Tab *tabs[] = { &general, &display, &hotkeys };
 
 HINSTANCE hInstance = NULL;
 HWND mainWnd = NULL;
@@ -194,7 +196,7 @@ DLGPROC DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 }
 
 DLGPROC HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-    return FALSE;
+    return hotkeys.TabProc(hDlg, message, wParam, lParam);
 }
 
 DLGPROC AboutTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {

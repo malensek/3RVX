@@ -13,6 +13,7 @@ DLGPROC Hotkeys::Command(unsigned short nCode, unsigned short ctrlId) {
         break;
 
     case CBN_SELCHANGE:
+        break;
     }
 
     return FALSE;
@@ -33,6 +34,5 @@ void Hotkeys::SaveSettings() {
 
     CLOG(L"Saving: Hotkeys");
     Settings *settings = Settings::Instance();
-
 }
 

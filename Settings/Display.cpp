@@ -111,6 +111,42 @@ void Display::SaveSettings() {
     CLOG(L"Saving: Display");
     Settings *settings = Settings::Instance();
 
+    settings->AlwaysOnTop(_ctxt->GetCheck(CHK_ONTOP));
+    settings->HideFullscreen(_ctxt->GetCheck(CHK_FULLSCREEN));
+
+    Settings::OSDPos pos = (Settings::OSDPos)
+        _ctxt->GetComboSelectionIndex(CMB_POSITION);
+    settings->OSDPosition(pos);
+    if (pos == Settings::OSDPos::Custom) {
+        int x = _ctxt->GetTextAsInt(ED_CUSTOMX);
+        int y = _ctxt->GetTextAsInt(ED_CUSTOMY);
+        settings->OSDX(x);
+        settings->OSDY(y);
+    }
+
+    if (_ctxt->GetCheck(CHK_EDGE) == true) {
+        int edge = _ctxt->GetTextAsInt(ED_EDGE);
+        settings->OSDEdgeOffset(edge);
+    } else {
+        /* We have to write the default here, just in case somebody unchecked
+         * the checkbox. */
+        settings->OSDEdgeOffset(DEFAULT_OSD_OFFSET);
+    }
+
+    std::wstring monitor = _ctxt->GetComboSelection(CMB_MONITOR);
+    int monitorIdx = _ctxt->GetComboSelectionIndex(CMB_MONITOR);
+    if (monitorIdx == 0) {
+        monitor = L"";
+    } else if (monitorIdx == 1) {
+        monitor = L"*";
+    }
+    settings->Monitor(monitor);
+
+    int hideAnimIdx = _ctxt->GetComboSelectionIndex(CMB_ANIMATION);
+    settings->HideAnim((AnimationTypes::HideAnimation) hideAnimIdx);
+
+    settings->HideDelay(_ctxt->GetTextAsInt(ED_DELAY));
+    settings->HideSpeed(_ctxt->GetTextAsInt(ED_SPEED));
 }
 
 void Display::OnPositionChanged() {

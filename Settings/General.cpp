@@ -9,8 +9,9 @@
 #include "UIContext.h"
 #include "resource.h"
 
-#define KEY_NAME L"3RVX"
-#define STARTUP_KEY L"Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+const wchar_t General::REGKEY_NAME[] = L"3RVX";
+const wchar_t General::REGKEY_RUN[]
+    = L"Software\\Microsoft\\Windows\\CurrentVersion\\Run";
 
 DLGPROC General::Command(unsigned short nCode, unsigned short ctrlId) {
     switch (nCode) {
@@ -91,9 +92,9 @@ bool General::RunOnStartup() {
     HKEY key;
     bool run = false;
 
-    res = RegOpenKeyEx(HKEY_CURRENT_USER, STARTUP_KEY, NULL, KEY_READ, &key);
+    res = RegOpenKeyEx(HKEY_CURRENT_USER, REGKEY_RUN, NULL, KEY_READ, &key);
     if (res == ERROR_SUCCESS) {
-        res = RegQueryValueEx(key, KEY_NAME, NULL, NULL, NULL, NULL);
+        res = RegQueryValueEx(key, REGKEY_NAME, NULL, NULL, NULL, NULL);
         run = (res == ERROR_SUCCESS);
     }
 
@@ -108,14 +109,15 @@ bool General::RunOnStartup(bool enable) {
 
     std::wstring path = Settings::AppDir() + L"\\3RVX.exe";
 
-    res = RegOpenKeyEx(HKEY_CURRENT_USER, STARTUP_KEY, NULL, KEY_ALL_ACCESS, &key);
+    res = RegOpenKeyEx(HKEY_CURRENT_USER, REGKEY_RUN,
+        NULL, KEY_ALL_ACCESS, &key);
     if (res == ERROR_SUCCESS) {
         if (enable) {
-            res = RegSetValueEx(key, KEY_NAME, NULL, REG_SZ,
+            res = RegSetValueEx(key, REGKEY_NAME, NULL, REG_SZ,
                 (LPBYTE) path.c_str(), path.size() + 1);
             ok = (res == ERROR_SUCCESS);
         } else {
-            res = RegDeleteValue(key, KEY_NAME);
+            res = RegDeleteValue(key, REGKEY_NAME);
             ok = (res == ERROR_SUCCESS);
         }
     }

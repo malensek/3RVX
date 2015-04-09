@@ -2,8 +2,10 @@
 
 #include <windowsx.h>
 #include <CommCtrl.h>
+#include <sstream>
 
 #define MAX_COMBOSTR 1024
+#define MAX_EDITSTR 10240
 
 UIContext::UIContext(HWND hWnd) :
 _hWnd(hWnd) {
@@ -40,17 +42,14 @@ std::wstring UIContext::GetComboSelection(int cmbId) {
     return std::wstring(text);
 }
 
+int UIContext::GetComboSelectionIndex(int cmbId) {
+    HWND cmbWnd = GetDlgItem(_hWnd, cmbId);
+    return ComboBox_GetCurSel(cmbWnd);
+}
+
 void UIContext::SetSpinRange(int spId, int lo, int hi) {
     HWND spWnd = GetDlgItem(_hWnd, spId);
     SendMessage(spWnd, UDM_SETRANGE32, lo, hi);
-}
-
-bool UIContext::SetText(int id, std::wstring text) {
-    return SetDlgItemText(_hWnd, id, text.c_str()) == TRUE;
-}
-
-bool UIContext::SetText(int id, int value) {
-    return SetText(id, std::to_wstring(value));
 }
 
 void UIContext::Enable(int id) {
@@ -69,4 +68,26 @@ void UIContext::SetEnabled(int id, bool enabled) {
     } else {
         Disable(id);
     }
+}
+
+bool UIContext::SetText(int id, std::wstring text) {
+    return SetDlgItemText(_hWnd, id, text.c_str()) == TRUE;
+}
+
+bool UIContext::SetText(int id, int value) {
+    return SetText(id, std::to_wstring(value));
+}
+
+std::wstring UIContext::GetText(int id) {
+    wchar_t text[MAX_EDITSTR];
+    GetDlgItemText(_hWnd, id, text, MAX_EDITSTR);
+    return std::wstring(text);
+}
+
+int UIContext::GetTextAsInt(int id) {
+    std::wstring str = GetText(id);
+    int num;
+    std::wistringstream wistr(str);
+    wistr >> num;
+    return num;
 }

@@ -7,6 +7,10 @@ class UIContext {
 public:
     UIContext(HWND hWnd);
 
+    void Enable(int id);
+    void Disable(int id);
+    void SetEnabled(int id, bool enabled);
+
     bool GetCheck(int chkId);
     bool SetCheck(int chkId, bool checked = true);
 
@@ -14,13 +18,14 @@ public:
     int SelectComboItem(int cmbId, std::wstring item);
     void SelectComboItem(int cmbId, int itemIdx);
     std::wstring GetComboSelection(int cmbId);
-    bool SetText(int id, std::wstring text);
-    bool SetText(int id, int value);
+    int GetComboSelectionIndex(int cmbId);
+
     void SetSpinRange(int spId, int lo, int hi);
 
-    void Enable(int id);
-    void Disable(int id);
-    void SetEnabled(int id, bool enabled);
+    bool SetText(int id, std::wstring text);
+    bool SetText(int id, int value);
+    std::wstring GetText(int id);
+    int GetTextAsInt(int id);
 
 private:
     HWND _hWnd;

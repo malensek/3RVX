@@ -88,6 +88,7 @@
     <ClInclude Include="..\3RVX\TinyXml2\tinyxml2.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="General.h" />
+    <ClInclude Include="Hotkeys.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SettingsUI.h" />
     <ClInclude Include="Tab.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="General.cpp" />
+    <ClCompile Include="Hotkeys.cpp" />
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="Tab.cpp" />
     <ClCompile Include="UIContext.cpp" />

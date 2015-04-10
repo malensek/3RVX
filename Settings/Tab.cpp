@@ -17,6 +17,7 @@ DLGPROC Tab::TabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     case WM_INITDIALOG:
         _hWnd = hDlg;
         _ctxt = new UIContext(hDlg);
+        Initialize();
         LoadSettings();
         return FALSE;
 

@@ -21,7 +21,7 @@ bool Control::Text(std::wstring text) {
 }
 
 bool Control::Text(int value) {
-    return Text(std::to_wstring(value));
+    return SetDlgItemInt(_parent, _id, value, TRUE) == TRUE;
 }
 
 std::wstring Control::Text() {

@@ -28,6 +28,7 @@ public:
     std::wstring GetText(int id);
     int GetTextAsInt(int id);
 
+    void AddWindowExStyle(int id, long exStyle);
 private:
     HWND _hWnd;
 };

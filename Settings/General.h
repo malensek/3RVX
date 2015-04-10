@@ -6,15 +6,16 @@
 
 class General : public Tab {
 public:
+    virtual void SaveSettings();
 
 private:
     std::wstring _url;
 
     virtual DLGPROC Command(unsigned short nCode, unsigned short ctrlId);
     virtual DLGPROC Notification(NMHDR *nHdr);
+
     virtual void Initialize();
     virtual void LoadSettings();
-    virtual void SaveSettings();
 
     std::list<std::wstring> FindLanguages(std::wstring dir);
     std::list<std::wstring> FindSkins(std::wstring dir);

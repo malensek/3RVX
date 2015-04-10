@@ -4,6 +4,7 @@
 
 class Display : public Tab {
 public:
+    virtual void SaveSettings();
 
 private:
     virtual DLGPROC Command(unsigned short nCode, unsigned short ctrlId);
@@ -11,7 +12,6 @@ private:
 
     virtual void Initialize();
     virtual void LoadSettings();
-    virtual void SaveSettings();
 
     void OnPositionChanged();
     void OnCustomCheckChanged();

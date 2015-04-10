@@ -24,6 +24,10 @@ private:
     bool RunOnStartup(bool enable);
 
 private:
+    /* Controls: */
+    Control _author;
+
+private:
     static const wchar_t REGKEY_NAME[];
     static const wchar_t REGKEY_RUN[];
 };

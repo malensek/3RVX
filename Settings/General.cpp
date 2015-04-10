@@ -43,7 +43,7 @@ DLGPROC General::Notification(NMHDR *nHdr) {
 }
 
 void General::Initialize() {
-
+    _author = Control(LBL_AUTHOR, _hWnd);
 }
 
 void General::LoadSettings() {
@@ -161,7 +161,7 @@ void General::LoadSkinInfo(std::wstring skinName) {
 
     std::wstring authorText(L"Author: ");
     authorText.append(s.Author());
-    _ctxt->SetText(LBL_AUTHOR, authorText);
+    _author.Text(authorText);
 
     std::wstring url = s.URL();
     if (url == L"") {

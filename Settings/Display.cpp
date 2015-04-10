@@ -51,6 +51,10 @@ DLGPROC Display::Notification(NMHDR *nHdr) {
     return FALSE;
 }
 
+void Display::Initialize() {
+
+}
+
 void Display::LoadSettings() {
     Settings *settings = Settings::Instance();
 

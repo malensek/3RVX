@@ -42,6 +42,10 @@ DLGPROC General::Notification(NMHDR *nHdr) {
     return FALSE;
 }
 
+void General::Initialize() {
+
+}
+
 void General::LoadSettings() {
     Settings *settings = Settings::Instance();
     _ctxt->SetCheck(CHK_STARTUP, RunOnStartup());

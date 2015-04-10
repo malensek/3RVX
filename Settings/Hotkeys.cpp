@@ -23,6 +23,10 @@ DLGPROC Hotkeys::Notification(NMHDR *nHdr) {
     return FALSE;
 }
 
+void Hotkeys::Initialize() {
+
+}
+
 void Hotkeys::LoadSettings() {
     Settings *settings = Settings::Instance();
 }

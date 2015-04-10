@@ -1,5 +1,7 @@
 #include "Hotkeys.h"
 
+#include <CommCtrl.h>
+
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "../3RVX/SkinInfo.h"

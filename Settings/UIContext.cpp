@@ -12,6 +12,24 @@ _hWnd(hWnd) {
 
 }
 
+void UIContext::Enable(int id) {
+    HWND wnd = GetDlgItem(_hWnd, id);
+    EnableWindow(wnd, TRUE);
+}
+
+void UIContext::Disable(int id) {
+    HWND wnd = GetDlgItem(_hWnd, id);
+    EnableWindow(wnd, FALSE);
+}
+
+void UIContext::SetEnabled(int id, bool enabled) {
+    if (enabled == true) {
+        Enable(id);
+    } else {
+        Disable(id);
+    }
+}
+
 bool UIContext::GetCheck(int chkId) {
     return IsDlgButtonChecked(_hWnd, chkId) == BST_CHECKED;
 }
@@ -59,24 +77,6 @@ void UIContext::AddListColumn(int lstId, int colIdx, std::wstring colName, int w
 void UIContext::SetSpinRange(int spId, int lo, int hi) {
     HWND spWnd = GetDlgItem(_hWnd, spId);
     SendMessage(spWnd, UDM_SETRANGE32, lo, hi);
-}
-
-void UIContext::Enable(int id) {
-    HWND wnd = GetDlgItem(_hWnd, id);
-    EnableWindow(wnd, TRUE);
-}
-
-void UIContext::Disable(int id) {
-    HWND wnd = GetDlgItem(_hWnd, id);
-    EnableWindow(wnd, FALSE);
-}
-
-void UIContext::SetEnabled(int id, bool enabled) {
-    if (enabled == true) {
-        Enable(id);
-    } else {
-        Disable(id);
-    }
 }
 
 bool UIContext::SetText(int id, std::wstring text) {

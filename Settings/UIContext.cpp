@@ -99,6 +99,8 @@ int UIContext::GetTextAsInt(int id) {
     std::wistringstream wistr(str);
     wistr >> num;
     return num;
+}
+
 void UIContext::AddWindowExStyle(int id, long exStyle) {
     HWND ctrl = GetDlgItem(_hWnd, id);
     long exs = GetWindowLongPtr(ctrl, GWL_EXSTYLE);
@@ -106,4 +108,9 @@ void UIContext::AddWindowExStyle(int id, long exStyle) {
     SetWindowLongPtr(ctrl, GWL_EXSTYLE, exs);
 }
 
+RECT UIContext::GetWindowDimensions(int id) {
+    HWND ctrl = GetDlgItem(_hWnd, id);
+    RECT r;
+    GetWindowRect(ctrl, &r);
+    return r;
 }

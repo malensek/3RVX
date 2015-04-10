@@ -21,6 +21,7 @@ public:
     int GetComboSelectionIndex(int cmbId);
 
     void AddListColumn(int lstId, int colNum, std::wstring colName, int width);
+
     void SetSpinRange(int spId, int lo, int hi);
 
     bool SetText(int id, std::wstring text);
@@ -29,6 +30,8 @@ public:
     int GetTextAsInt(int id);
 
     void AddWindowExStyle(int id, long exStyle);
+    RECT GetWindowDimensions(int id);
+
 private:
     HWND _hWnd;
 };

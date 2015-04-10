@@ -86,6 +86,7 @@
     <ClInclude Include="..\3RVX\SkinInfo.h" />
     <ClInclude Include="..\3RVX\StringUtils.h" />
     <ClInclude Include="..\3RVX\TinyXml2\tinyxml2.h" />
+    <ClInclude Include="Control.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Hotkeys.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="..\3RVX\SkinInfo.cpp" />
     <ClCompile Include="..\3RVX\StringUtils.cpp" />
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp" />
+    <ClCompile Include="Control.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="General.cpp" />
     <ClCompile Include="Hotkeys.cpp" />

@@ -87,9 +87,11 @@
     <ClInclude Include="..\3RVX\StringUtils.h" />
     <ClInclude Include="..\3RVX\TinyXml2\tinyxml2.h" />
     <ClInclude Include="Control.h" />
+    <ClInclude Include="Controls.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Hotkeys.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SettingsUI.h" />
     <ClInclude Include="Tab.h" />

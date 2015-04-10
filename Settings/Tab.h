@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Control.h"
+#include "Controls.h"
 
 class UIContext;
 /// <summary>

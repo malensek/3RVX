@@ -29,6 +29,7 @@ void Hotkeys::Initialize() {
 
 void Hotkeys::LoadSettings() {
     Settings *settings = Settings::Instance();
+
     /* Make highlighted items span the entire row in the list view */
     _ctxt->AddWindowExStyle(LST_KEYS, LVS_EX_FULLROWSELECT);
 

@@ -3,6 +3,8 @@
 #include <Windows.h>
 #include <vector>
 
+#include "Control.h"
+
 class UIContext;
 /// <summary>
 /// Abstract class that encapsulates functionality for dealing with
@@ -21,9 +23,12 @@ public:
     virtual void SaveSettings() = 0;
 
 protected:
+    /// <summary>Window handle of this tab.</summary>
     HWND _hWnd;
     UIContext *_ctxt;
 
+    /// <summary>A vector of all the controls present on this tab.</summary>
+    std::vector<Control *> _controls;
 
     /// <summary>
     /// Performs intitialization for the tab page, similar to a constructor.

@@ -2,10 +2,18 @@
 
 #include <sstream>
 
+Control::Control() {
+
+}
+
 Control::Control(int id, HWND parent) :
 _id(id),
 _parent(parent) {
     _hWnd = GetDlgItem(parent, id);
+}
+
+Control::~Control() {
+
 }
 
 bool Control::Text(std::wstring text) {

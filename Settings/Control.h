@@ -5,6 +5,7 @@
 
 class Control {
 public:
+    Control();
     Control(int id, HWND parent);
     ~Control();
 

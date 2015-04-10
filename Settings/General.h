@@ -25,7 +25,7 @@ private:
 
 private:
     /* Controls: */
-    Control _author;
+    Label _author;
 
 private:
     static const wchar_t REGKEY_NAME[];

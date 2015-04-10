@@ -43,7 +43,7 @@ DLGPROC General::Notification(NMHDR *nHdr) {
 }
 
 void General::Initialize() {
-    _author = Control(LBL_AUTHOR, _hWnd);
+    _author = Label(LBL_AUTHOR, _hWnd);
 }
 
 void General::LoadSettings() {

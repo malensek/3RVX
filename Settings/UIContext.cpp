@@ -47,6 +47,15 @@ int UIContext::GetComboSelectionIndex(int cmbId) {
     return ComboBox_GetCurSel(cmbWnd);
 }
 
+void UIContext::AddListColumn(int lstId, int colIdx, std::wstring colName, int width) {
+    HWND list = GetDlgItem(_hWnd, lstId);
+    LVCOLUMN lvc = { 0 };
+    lvc.mask = LVCF_WIDTH | LVCF_TEXT;
+    lvc.cx = width;
+    lvc.pszText = &colName[0];
+    ListView_InsertColumn(list, colIdx, &lvc);
+}
+
 void UIContext::SetSpinRange(int spId, int lo, int hi) {
     HWND spWnd = GetDlgItem(_hWnd, spId);
     SendMessage(spWnd, UDM_SETRANGE32, lo, hi);

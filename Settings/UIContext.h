@@ -20,6 +20,7 @@ public:
     std::wstring GetComboSelection(int cmbId);
     int GetComboSelectionIndex(int cmbId);
 
+    void AddListColumn(int lstId, int colNum, std::wstring colName, int width);
     void SetSpinRange(int spId, int lo, int hi);
 
     bool SetText(int id, std::wstring text);

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Windows.h>
+#include <functional>
+#include <unordered_map>
 #include <vector>
 
 #include "Control.h"
@@ -46,4 +48,7 @@ protected:
     /// <summary>Handles WM_NOTIFY messages.</summary>
     /// <param name="nHdr">Notification header structure</param>
     virtual DLGPROC Notification(NMHDR *nHdr) = 0;
+
+private:
+    std::unordered_map<int, std::function<void(int)>> _eventMap;
 };

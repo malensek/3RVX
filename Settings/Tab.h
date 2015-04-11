@@ -28,9 +28,6 @@ protected:
     HWND _hWnd;
     UIContext *_ctxt;
 
-    /// <summary>A vector of all the controls present on this tab.</summary>
-    std::vector<Control *> _controls;
-
     /// <summary>
     /// Performs intitialization for the tab page, similar to a constructor.
     /// Since tab page windows are created on demand, this method could be

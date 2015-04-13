@@ -283,6 +283,13 @@ void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
     }
 }
 
+void VolumeOSD::UpdateVolumeState() {
+    float v = _volumeCtrl->Volume();
+    MeterLevels(v);
+    _volumeSlider->MeterLevels(v);
+    UpdateIcon();
+}
+
 LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == MSG_VOL_CHNG) {
@@ -335,6 +342,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         }
         _selectedDesc = _volumeCtrl->DeviceDesc();
         UpdateDeviceMenu();
+        UpdateVolumeState();
 
     } else if (message == MSG_NOTIFYICON) {
         if (lParam == WM_LBUTTONUP) {
@@ -378,6 +386,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                     selectedDev.name.c_str());
                 _volumeCtrl->SelectDevice(selectedDev.id);
                 UpdateDeviceMenu();
+                UpdateVolumeState();
             }
         }
     }

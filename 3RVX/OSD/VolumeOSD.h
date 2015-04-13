@@ -61,6 +61,12 @@ private:
 
     virtual void UpdateWindowPositions(std::vector<Monitor> &monitors);
 
+    /// <summary>
+    /// Re-initializes volume state variables (used after a device change
+    /// occurs).
+    /// </summary>
+    void UpdateVolumeState();
+
     virtual LRESULT
         WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

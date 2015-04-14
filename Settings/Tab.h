@@ -46,13 +46,4 @@ protected:
 
     /// <summary>Applies the current settings state to the tab page.</summary>
     virtual void LoadSettings() = 0;
-
-    /// <summary>Handles WM_COMMAND messages.</summary>
-    /// <param name="nCode">Control-defined notification code</param>
-    /// <param name="ctrlId">Control identifier</param>
-    virtual DLGPROC Command(unsigned short nCode, unsigned short ctrlId) = 0;
-
-    /// <summary>Handles WM_NOTIFY messages.</summary>
-    /// <param name="nHdr">Notification header structure</param>
-    virtual DLGPROC Notification(NMHDR *nHdr) = 0;
 };

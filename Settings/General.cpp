@@ -6,7 +6,6 @@
 #include "../3RVX/Settings.h"
 #include "../3RVX/SkinInfo.h"
 
-#include "UIContext.h"
 #include "resource.h"
 
 const wchar_t General::REGKEY_NAME[] = L"3RVX";
@@ -26,7 +25,7 @@ DLGPROC General::Command(unsigned short nCode, unsigned short ctrlId) {
     case CBN_SELCHANGE:
         switch (ctrlId) {
         case CMB_SKIN:
-            LoadSkinInfo(_ctxt->GetComboSelection(CMB_SKIN));
+            //LoadSkinInfo(_ctxt->GetComboSelection(CMB_SKIN));
             return (DLGPROC) TRUE;
 
         case CMB_LANG:
@@ -43,26 +42,34 @@ DLGPROC General::Notification(NMHDR *nHdr) {
 }
 
 void General::Initialize() {
-    _author = Label(LBL_AUTHOR, _hWnd);
+    INIT_CONTROL(CHK_STARTUP, Checkbox, _startup);
+    INIT_CONTROL(CHK_NOTIFY, Checkbox, _notifyIcon);
+    INIT_CONTROL(CHK_SOUNDS, Checkbox, _sounds);
+
+    INIT_CONTROL(CMB_SKIN, ComboBox, _skin);
+    INIT_CONTROL(LBL_AUTHOR, Label, _author);
+    INIT_CONTROL(BTN_WEBSITE, Button, _website);
+
+    INIT_CONTROL(CMB_LANG, ComboBox, _language);
 }
 
 void General::LoadSettings() {
     Settings *settings = Settings::Instance();
-    _ctxt->SetCheck(CHK_STARTUP, RunOnStartup());
-    _ctxt->SetCheck(CHK_NOTIFY, settings->NotifyIconEnabled());
-    _ctxt->SetCheck(CHK_SOUNDS, settings->SoundEffectsEnabled());
+    _startup.Checked(RunOnStartup());
+    _notifyIcon.Checked(settings->NotifyIconEnabled());
+    _sounds.Checked(settings->SoundEffectsEnabled());
 
     /* Determine which skins are available */
     std::list<std::wstring> skins = FindSkins(Settings::SkinDir().c_str());
     for (std::wstring skin : skins) {
-        _ctxt->AddComboItem(CMB_SKIN, skin);
+        _skin.AddItem(skin);
     }
 
     /* Update the combo box with the current skin */
     std::wstring current = settings->CurrentSkin();
-    int idx = _ctxt->SelectComboItem(CMB_SKIN, current);
+    int idx = _skin.Select(current);
     if (idx == CB_ERR) {
-        _ctxt->SelectComboItem(CMB_SKIN, DEFAULT_SKIN);
+        _skin.Select(DEFAULT_SKIN);
     }
     LoadSkinInfo(current);
 
@@ -70,10 +77,10 @@ void General::LoadSettings() {
     std::list<std::wstring> languages = FindLanguages(
         settings->LanguagesDir().c_str());
     for (std::wstring language : languages) {
-        _ctxt->AddComboItem(CMB_LANG, language);
+        _language.AddItem(language);
     }
     std::wstring currentLang = settings->LanguageName();
-    _ctxt->SelectComboItem(CMB_LANG, currentLang);
+    _language.Select(currentLang);
 }
 
 void General::SaveSettings() {
@@ -84,11 +91,11 @@ void General::SaveSettings() {
     CLOG(L"Saving: General");
     Settings *settings = Settings::Instance();
 
-    RunOnStartup(_ctxt->GetCheck(CHK_STARTUP));
-    settings->NotifyIconEnabled(_ctxt->GetCheck(CHK_NOTIFY));
-    settings->SoundEffectsEnabled(_ctxt->GetCheck(CHK_SOUNDS));
+    RunOnStartup(_startup.Checked());
+    settings->NotifyIconEnabled(_notifyIcon.Checked());
+    settings->SoundEffectsEnabled(_sounds.Checked());
 
-    settings->CurrentSkin(_ctxt->GetComboSelection(CMB_SKIN));
+    settings->CurrentSkin(_skin.Selection());
 }
 
 bool General::RunOnStartup() {
@@ -165,10 +172,10 @@ void General::LoadSkinInfo(std::wstring skinName) {
 
     std::wstring url = s.URL();
     if (url == L"") {
-        _ctxt->Disable(BTN_WEBSITE);
+        _website.Disable();
     } else {
         _url = s.URL();
-        _ctxt->Enable(BTN_WEBSITE);
+        _website.Enable();
     }
 }
 

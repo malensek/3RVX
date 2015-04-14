@@ -9,6 +9,12 @@
 #include "Controls.h"
 
 class UIContext;
+
+#define INIT_CONTROL(ctrlId, ctrlType, var) { \
+    var = ctrlType(ctrlId, _hWnd); \
+    _controlMap[ctrlId] = &var; \
+}
+
 /// <summary>
 /// Abstract class that encapsulates functionality for dealing with
 /// property sheet pages (tabs).

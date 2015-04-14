@@ -25,11 +25,20 @@ DLGPROC Tab::TabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
         PropSheet_Changed(GetParent(hDlg), NULL);
         nCode = HIWORD(wParam);
         ctrlId = LOWORD(wParam);
-        return Command(nCode, ctrlId);
+        if (_controlMap.count(ctrlId) > 0) {
+            return _controlMap[ctrlId]->Command(nCode);
+        } else {
+            return FALSE;
+        }
 
     case WM_NOTIFY:
         NMHDR *nHdr = (NMHDR *) lParam;
-        return Notification(nHdr);
+        ctrlId = nHdr->idFrom;
+        if (_controlMap.count(ctrlId) > 0) {
+            return _controlMap[ctrlId]->Notification(nHdr);
+        } else {
+            return FALSE;
+        }
     }
 
     return FALSE;

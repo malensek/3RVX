@@ -52,7 +52,26 @@ DLGPROC Display::Notification(NMHDR *nHdr) {
 }
 
 void Display::Initialize() {
+    INIT_CONTROL(CHK_ONTOP, Checkbox, _onTop);
+    INIT_CONTROL(CHK_FULLSCREEN, Checkbox, _hideFullscreen);
 
+    INIT_CONTROL(CMB_POSITION, ComboBox, _position);
+    INIT_CONTROL(ED_CUSTOMX, EditBox, _positionX);
+    INIT_CONTROL(ED_CUSTOMY, EditBox, _positionY);
+    INIT_CONTROL(CHK_EDGE, Checkbox, _customDistance);
+    INIT_CONTROL(SP_EDGE, Spinner, _edgeSpinner);
+    _edgeSpinner.Buddy(ED_EDGE);
+
+    INIT_CONTROL(LBL_DISPLAYDEV, Label, _displayDevLabel);
+    INIT_CONTROL(CMB_MONITOR, ComboBox, _displayDevice);
+
+    INIT_CONTROL(CMB_ANIMATION, ComboBox, _animation);
+    INIT_CONTROL(LBL_HIDEDELAY, Label, _hideDelayLabel);
+    INIT_CONTROL(SP_HIDEDELAY, Spinner, _hideDelay);
+    _hideDelay.Buddy(ED_HIDEDELAY);
+    INIT_CONTROL(LBL_HIDESPEED, Label, _hideSpeedLabel);
+    INIT_CONTROL(SP_HIDESPEED, Spinner, _hideSpeed);
+    _hideSpeed.Buddy(ED_HIDESPEED);
 }
 
 void Display::LoadSettings() {

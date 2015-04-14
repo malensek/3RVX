@@ -70,3 +70,12 @@ void Control::AddWindowExStyle(long exStyle) {
     SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exs);
 }
 
+DLGPROC General::Command(unsigned short nCode) {
+    /* By default, indicate that we did not process the message: */
+    return FALSE;
+}
+
+DLGPROC General::Notification(NMHDR *nHdr) {
+    /* By default, indicate that we did not process the message: */
+    return FALSE;
+}

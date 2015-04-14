@@ -49,6 +49,13 @@ void General::Initialize() {
     INIT_CONTROL(CMB_SKIN, ComboBox, _skin);
     INIT_CONTROL(LBL_AUTHOR, Label, _author);
     INIT_CONTROL(BTN_WEBSITE, Button, _website);
+    _website.OnClick = [this]() {
+        if (_url != L"") {
+            ShellExecute(NULL, L"open", _url.c_str(),
+                NULL, NULL, SW_SHOWNORMAL);
+        }
+        return true;
+    };
 
     INIT_CONTROL(CMB_LANG, ComboBox, _language);
 }
@@ -210,4 +217,3 @@ std::list<std::wstring> General::FindLanguages(std::wstring dir) {
 
     return languages;
 }
-

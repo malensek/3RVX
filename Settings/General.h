@@ -35,7 +35,6 @@ private:
 
     ComboBox _language;
 
-
 private:
     static const wchar_t REGKEY_NAME[];
     static const wchar_t REGKEY_RUN[];

@@ -1,12 +1,10 @@
 #pragma once
 
 #include <Windows.h>
-#include <functional>
 #include <unordered_map>
-#include <vector>
 
-#include "Control.h"
-#include "Controls.h"
+#include "Controls/Control.h"
+#include "Controls/Controls.h"
 
 class UIContext;
 
@@ -36,6 +34,9 @@ protected:
     HWND _hWnd;
     UIContext *_ctxt;
 
+    /// <summary>Maps control IDs to their respective instances.</summary>
+    std::unordered_map<int, Control *> _controlMap;
+
     /// <summary>
     /// Performs intitialization for the tab page, similar to a constructor.
     /// Since tab page windows are created on demand, this method could be
@@ -54,7 +55,4 @@ protected:
     /// <summary>Handles WM_NOTIFY messages.</summary>
     /// <param name="nHdr">Notification header structure</param>
     virtual DLGPROC Notification(NMHDR *nHdr) = 0;
-
-private:
-    std::unordered_map<int, std::function<void(int)>> _eventMap;
 };

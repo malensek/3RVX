@@ -78,21 +78,21 @@ void Display::LoadSettings() {
     Settings *settings = Settings::Instance();
 
     /* Visibility Settings */
-    _ctxt->SetCheck(CHK_ONTOP, settings->AlwaysOnTop());
-    _ctxt->SetCheck(CHK_FULLSCREEN, settings->HideFullscreen());
+    _onTop.Checked(settings->AlwaysOnTop());
+    _hideFullscreen.Checked(settings->HideFullscreen());
 
     /* Position on Screen*/
-    for (std::wstring pos : settings->OSDPosNames) {
-        _ctxt->AddComboItem(CMB_POSITION, pos);
+    for (std::wstring position : settings->OSDPosNames) {
+        _position.AddItem(position);
     }
-    _ctxt->SelectComboItem(CMB_POSITION, (int) settings->OSDPosition());
+    _position.Select((int) settings->OSDPosition());
 
     /* Custom positions/offsets */
-    _ctxt->SetText(ED_CUSTOMX, settings->OSDX());
-    _ctxt->SetText(ED_CUSTOMY, settings->OSDY());
-    _ctxt->SetCheck(CHK_EDGE, settings->OSDEdgeOffset() != DEFAULT_OSD_OFFSET);
-    _ctxt->SetText(ED_EDGE, settings->OSDEdgeOffset());
-    _ctxt->SetSpinRange(SP_EDGE, MIN_EDGE, MAX_EDGE);
+    _positionX.Text(settings->OSDX());
+    _positionY.Text(settings->OSDY());
+    _customDistance.Checked(settings->OSDEdgeOffset() != DEFAULT_OSD_OFFSET);
+    _edgeSpinner.Text(settings->OSDEdgeOffset());
+    _edgeSpinner.Range(MIN_EDGE, MAX_EDGE);
 
     /* Display Devices */
     _ctxt->AddComboItem(CMB_MONITOR, L"Primary Monitor");

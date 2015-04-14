@@ -10,17 +10,17 @@ public:
     Control(int id, HWND parent);
     ~Control();
 
-    RECT Dimensions();
+    virtual RECT Dimensions();
 
-    void Enable();
-    void Disable();
-    bool Enabled();
-    void Enabled(bool enabled);
+    virtual void Enable();
+    virtual void Disable();
+    virtual bool Enabled();
+    virtual void Enabled(bool enabled);
 
-    std::wstring Text();
-    int TextAsInt();
-    bool Text(std::wstring text);
-    bool Text(int value);
+    virtual std::wstring Text();
+    virtual int TextAsInt();
+    virtual bool Text(std::wstring text);
+    virtual bool Text(int value);
 
     void WindowExStyle();
     void WindowExStyle(long exStyle);

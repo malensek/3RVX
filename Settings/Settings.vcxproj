@@ -86,6 +86,9 @@
     <ClInclude Include="..\3RVX\SkinInfo.h" />
     <ClInclude Include="..\3RVX\StringUtils.h" />
     <ClInclude Include="..\3RVX\TinyXml2\tinyxml2.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Checkbox.h" />
+    <ClInclude Include="ComboBox.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="Display.h" />
@@ -108,6 +111,9 @@
     <ClCompile Include="..\3RVX\SkinInfo.cpp" />
     <ClCompile Include="..\3RVX\StringUtils.cpp" />
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Checkbox.cpp" />
+    <ClCompile Include="ComboBox.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="General.cpp" />

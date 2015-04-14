@@ -25,7 +25,16 @@ private:
 
 private:
     /* Controls: */
+    Checkbox _startup;
+    Checkbox _notifyIcon;
+    Checkbox _sounds;
+
+    ComboBox _skin;
     Label _author;
+    Button _website;
+
+    ComboBox _language;
+
 
 private:
     static const wchar_t REGKEY_NAME[];

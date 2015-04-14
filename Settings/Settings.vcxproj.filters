@@ -54,9 +54,6 @@
     <ClInclude Include="UIContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -66,22 +63,25 @@
     <ClInclude Include="Hotkeys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Control.h">
+    <ClInclude Include="Controls\Controls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Label.h">
+    <ClInclude Include="Controls\Control.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls.h">
+    <ClInclude Include="Controls\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Checkbox.h">
+    <ClInclude Include="Controls\Checkbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ComboBox.h">
+    <ClInclude Include="Controls\ComboBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="Controls\Label.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -122,9 +122,6 @@
     <ClCompile Include="UIContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -134,16 +131,19 @@
     <ClCompile Include="Hotkeys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Control.cpp">
+    <ClCompile Include="Controls\Control.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Checkbox.cpp">
+    <ClCompile Include="Controls\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ComboBox.cpp">
+    <ClCompile Include="Controls\Checkbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="Controls\ComboBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

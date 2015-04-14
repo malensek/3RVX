@@ -12,41 +12,16 @@ const wchar_t General::REGKEY_NAME[] = L"3RVX";
 const wchar_t General::REGKEY_RUN[]
     = L"Software\\Microsoft\\Windows\\CurrentVersion\\Run";
 
-DLGPROC General::Command(unsigned short nCode, unsigned short ctrlId) {
-    switch (nCode) {
-    case BN_CLICKED:
-        if (ctrlId == BTN_WEBSITE && _url != L"") {
-            ShellExecute(NULL, L"open", _url.c_str(),
-                NULL, NULL, SW_SHOWNORMAL);
-            return (DLGPROC) TRUE;
-        }
-        break;
-
-    case CBN_SELCHANGE:
-        switch (ctrlId) {
-        case CMB_SKIN:
-            //LoadSkinInfo(_ctxt->GetComboSelection(CMB_SKIN));
-            return (DLGPROC) TRUE;
-
-        case CMB_LANG:
-            // Language selection
-            return (DLGPROC) TRUE;
-        }
-    }
-
-    return FALSE;
-}
-
-DLGPROC General::Notification(NMHDR *nHdr) {
-    return FALSE;
-}
-
 void General::Initialize() {
     INIT_CONTROL(CHK_STARTUP, Checkbox, _startup);
     INIT_CONTROL(CHK_NOTIFY, Checkbox, _notifyIcon);
     INIT_CONTROL(CHK_SOUNDS, Checkbox, _sounds);
 
     INIT_CONTROL(CMB_SKIN, ComboBox, _skin);
+    _skin.OnSelectionChange = [this]() {
+        LoadSkinInfo(_skin.Selection());
+        return true;
+    };
     INIT_CONTROL(LBL_AUTHOR, Label, _author);
     INIT_CONTROL(BTN_WEBSITE, Button, _website);
     _website.OnClick = [this]() {
@@ -58,6 +33,10 @@ void General::Initialize() {
     };
 
     INIT_CONTROL(CMB_LANG, ComboBox, _language);
+    _language.OnSelectionChange = [this]() {
+        // Handle language selection change 
+        return true;
+    };
 }
 
 void General::LoadSettings() {

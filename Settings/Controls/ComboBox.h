@@ -19,4 +19,10 @@ public:
     int Select(std::wstring item);
     void Select(int itemIdx);
 
+    virtual DLGPROC Command(unsigned short nCode);
+
+public:
+    /* Event Handlers */
+    std::function<bool()> OnSelectionChange;
+
 };

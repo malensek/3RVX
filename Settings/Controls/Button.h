@@ -13,4 +13,10 @@ public:
 
     }
 
+    virtual DLGPROC Command(unsigned short nCode);
+
+public:
+    /* Event Handlers */
+    std::function<bool()> OnClick;
+
 };

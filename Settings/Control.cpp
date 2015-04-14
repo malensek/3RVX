@@ -16,6 +16,32 @@ Control::~Control() {
 
 }
 
+RECT Control::Dimensions() {
+    RECT r;
+    GetWindowRect(_hWnd, &r);
+    return r;
+}
+
+void Control::Enable() {
+    EnableWindow(_hWnd, TRUE);
+}
+
+void Control::Disable() {
+    EnableWindow(_hWnd, FALSE);
+}
+
+bool Control::Enabled() {
+    return (IsWindowEnabled(_hWnd) == TRUE);
+}
+
+void Control::Enabled(bool enabled) {
+    if (enabled == true) {
+        Enable();
+    } else {
+        Disable();
+    }
+}
+
 bool Control::Text(std::wstring text) {
     return SetDlgItemText(_parent, _id, text.c_str()) == TRUE;
 }
@@ -44,8 +70,3 @@ void Control::AddWindowExStyle(long exStyle) {
     SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exs);
 }
 
-RECT Control::Dimensions() {
-    RECT r;
-    GetWindowRect(_hWnd, &r);
-    return r;
-}

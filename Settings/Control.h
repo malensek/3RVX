@@ -13,8 +13,8 @@ public:
 
     void Enable();
     void Disable();
-    void Enabled();
-    void Enabled(int id, bool enabled);
+    bool Enabled();
+    void Enabled(bool enabled);
 
     std::wstring Text();
     int TextAsInt();

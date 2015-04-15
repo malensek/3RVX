@@ -163,6 +163,9 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
         } else {
             ((LPDLGTEMPLATE) lParam)->style &= ~DS_CONTEXTHELP;
         }
+
+        /* Show window in the taskbar: */
+        ((LPDLGTEMPLATE) lParam)->dwExtendedStyle |= WS_EX_APPWINDOW;
         break;
 
     case PSCB_BUTTONPRESSED:

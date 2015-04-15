@@ -2,6 +2,8 @@
 
 #include "Control.h"
 
+#include <CommCtrl.h>
+
 class Spinner : public Control {
 public:
     Spinner() {
@@ -28,7 +30,14 @@ public:
     bool Text(std::wstring text);
     bool Text(int value);
 
+    virtual DLGPROC Notification(NMHDR *nHdr);
+
+public:
+    /* Event Handlers */
+    std::function<bool(NMUPDOWN *)> OnSpin;
+
 private:
     int _buddyId;
     HWND _buddyWnd;
+
 };

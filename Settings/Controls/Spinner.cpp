@@ -43,3 +43,17 @@ int Spinner::TextAsInt() {
     wistr >> num;
     return num;
 }
+
+DLGPROC Spinner::Notification(NMHDR *nHdr) {
+    switch (nHdr->code) {
+    case UDN_DELTAPOS:
+        if (OnSpin) {
+            NMUPDOWN *ud = (NMUPDOWN *) nHdr;
+            return (DLGPROC) OnSpin(ud);
+        } else {
+            return FALSE;
+        }
+    }
+
+    return FALSE;
+}

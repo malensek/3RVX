@@ -3,6 +3,7 @@
 #include <CommCtrl.h>
 
 #include "../3RVX/DisplayManager.h"
+#include "../3RVX/LanguageTranslator.h"
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 
@@ -10,15 +11,20 @@
 #include "resource.h"
 
 void Display::Initialize() {
+    using std::placeholders::_1;
+
     INIT_CONTROL(CHK_ONTOP, Checkbox, _onTop);
     INIT_CONTROL(CHK_FULLSCREEN, Checkbox, _hideFullscreen);
 
     INIT_CONTROL(CMB_POSITION, ComboBox, _position);
+    _position.OnSelectionChange
+        = std::bind(&Display::OnPositionChanged, this);
     INIT_CONTROL(LBL_CUSTOMX, Label, _customX);
     INIT_CONTROL(ED_CUSTOMX, EditBox, _positionX);
     INIT_CONTROL(LBL_CUSTOMY, Label, _customY);
     INIT_CONTROL(ED_CUSTOMY, EditBox, _positionY);
     INIT_CONTROL(CHK_EDGE, Checkbox, _customDistance);
+    _customDistance.OnClick = std::bind(&Display::OnCustomCheckChanged, this);
     INIT_CONTROL(SP_EDGE, Spinner, _edgeSpinner);
     _edgeSpinner.Buddy(ED_EDGE);
 
@@ -26,16 +32,21 @@ void Display::Initialize() {
     INIT_CONTROL(CMB_MONITOR, ComboBox, _displayDevice);
 
     INIT_CONTROL(CMB_ANIMATION, ComboBox, _animation);
+    _animation.OnSelectionChange
+        = std::bind(&Display::OnAnimationChanged, this);
     INIT_CONTROL(LBL_HIDEDELAY, Label, _hideDelayLabel);
     INIT_CONTROL(SP_HIDEDELAY, Spinner, _hideDelay);
     _hideDelay.Buddy(ED_HIDEDELAY);
+    _hideDelay.OnSpin = std::bind(&Display::OnAnimationSpin, this, _1);
     INIT_CONTROL(LBL_HIDESPEED, Label, _hideSpeedLabel);
     INIT_CONTROL(SP_HIDESPEED, Spinner, _hideSpeed);
     _hideSpeed.Buddy(ED_HIDESPEED);
+    _hideSpeed.OnSpin = std::bind(&Display::OnAnimationSpin, this, _1);
 }
 
 void Display::LoadSettings() {
     Settings *settings = Settings::Instance();
+    LanguageTranslator *translator = settings->Translator();
 
     /* Visibility Settings */
     _onTop.Checked(settings->AlwaysOnTop());
@@ -55,30 +66,30 @@ void Display::LoadSettings() {
     _edgeSpinner.Range(MIN_EDGE, MAX_EDGE);
 
     /* Display Devices */
-    _ctxt->AddComboItem(CMB_MONITOR, L"Primary Monitor");
-    _ctxt->AddComboItem(CMB_MONITOR, L"All Monitors");
+    _displayDevice.AddItem(primaryMonitorStr);
+    _displayDevice.AddItem(allMonitorStr);
     std::list<DISPLAY_DEVICE> devices = DisplayManager::ListAllDevices();
     for (DISPLAY_DEVICE dev : devices) {
         std::wstring devString(dev.DeviceName);
-        _ctxt->AddComboItem(CMB_MONITOR, devString.c_str());
+        _displayDevice.AddItem(devString);
     }
     std::wstring monitorName = settings->Monitor();
     if (monitorName == L"") {
-        monitorName = L"Primary Monitor";
+        monitorName = primaryMonitorStr;
     } else if (monitorName == L"*") {
-        monitorName = L"All Monitors";
+        monitorName = allMonitorStr;
     }
-    _ctxt->SelectComboItem(CMB_MONITOR, monitorName);
+    _displayDevice.Select(monitorName);
 
     /* Animation Settings */
     for (std::wstring anim : AnimationTypes::HideAnimationNames) {
-        _ctxt->AddComboItem(CMB_ANIMATION, anim);
+        _animation.AddItem(anim);
     }
-    _ctxt->SelectComboItem(CMB_ANIMATION, (int) settings->HideAnim());
-    _ctxt->SetSpinRange(SP_DELAY, MIN_MS, MAX_MS);
-    _ctxt->SetText(ED_DELAY, settings->HideDelay());
-    _ctxt->SetSpinRange(SP_SPEED, MIN_MS, MAX_MS);
-    _ctxt->SetText(ED_SPEED, settings->HideSpeed());
+    _animation.Select((int) settings->HideAnim());
+    _hideDelay.Range(MIN_MS, MAX_MS);
+    _hideDelay.Text(settings->HideDelay());
+    _hideSpeed.Range(MIN_MS, MAX_MS);
+    _hideSpeed.Text(settings->HideSpeed());
 
     /* Refresh control states */
     OnPositionChanged();

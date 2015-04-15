@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Control.h"
+#include "Button.h"
 
-class Checkbox : public Control {
+class Checkbox : public Button {
 public:
     Checkbox() {
 
     }
 
     Checkbox(int id, HWND parent) :
-    Control(id, parent) {
+    Button(id, parent) {
 
     }
 

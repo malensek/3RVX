@@ -7,6 +7,7 @@
 #include "MeterWnd\Animations\AnimationTypes.h"
 
 class HotkeyInfo;
+class LanguageTranslator;
 class Skin;
 
 #define SETTINGS_APP L"SettingsUI.exe"
@@ -86,6 +87,8 @@ public:
     bool SoundEffectsEnabled();
     void SoundEffectsEnabled(bool enable);
 
+    LanguageTranslator *Translator();
+
     std::unordered_map<int, HotkeyInfo> Hotkeys();
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
@@ -100,6 +103,8 @@ private:
     std::wstring _file;
     tinyxml2::XMLDocument _xml;
     tinyxml2::XMLElement *_root;
+
+    LanguageTranslator *_translator;
 
     bool HasSetting(std::string elementName);
     bool GetEnabled(std::string elementName);

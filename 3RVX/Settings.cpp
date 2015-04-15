@@ -6,6 +6,7 @@
 
 #include "Error.h"
 #include "HotkeyInfo.h"
+#include "LanguageTranslator.h"
 #include "Logger.h"
 #include "Monitor.h"
 #include "Skin.h"
@@ -327,6 +328,14 @@ void Settings::Hotkeys(std::vector<HotkeyInfo> hotkeys) {
 
         hkElem->InsertEndChild(hk);
     }
+}
+
+LanguageTranslator *Settings::Translator() {
+    if (_translator == NULL) {
+        _translator = new LanguageTranslator();
+    }
+
+    return _translator;
 }
 
 bool Settings::NotifyIconEnabled() {

@@ -38,6 +38,12 @@ private:
     Label _hideSpeedLabel;
     Spinner _hideSpeed;
 
+private:
+    /* Strings: */
+    std::wstring primaryMonitorStr = L"Primary Monitor";
+    std::wstring allMonitorStr = L"All Monitors";
+    std::wstring customPositionStr = L"Custom";
+    std::wstring noAnimStr = L"None";
 
 private:
     /* Constants: */

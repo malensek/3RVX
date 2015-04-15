@@ -8,6 +8,16 @@ void Spinner::Buddy(int buddyId) {
     _buddyWnd = GetDlgItem(_parent, buddyId);
 }
 
+void Spinner::Enable() {
+    EnableWindow(_hWnd, TRUE);
+    EnableWindow(_buddyWnd, TRUE);
+}
+
+void Spinner::Disable() {
+    EnableWindow(_hWnd, FALSE);
+    EnableWindow(_buddyWnd, FALSE);
+}
+
 void Spinner::Range(int lo, int hi) {
     SendMessage(_hWnd, UDM_SETRANGE32, lo, hi);
 }

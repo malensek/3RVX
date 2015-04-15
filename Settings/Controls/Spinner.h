@@ -13,6 +13,9 @@ public:
 
     }
 
+    virtual void Enable();
+    virtual void Disable();
+
     void Buddy(int buddyId);
 
     /// <summary>Sets the range (min, max) for the spin control.</summary>

@@ -2,6 +2,8 @@
 
 #include "Tab.h"
 
+#include <CommCtrl.h>
+
 class Display : public Tab {
 public:
     virtual void SaveSettings();
@@ -50,4 +52,5 @@ private:
     const int MAX_EDGE = 65535;
     const int MIN_MS = USER_TIMER_MINIMUM;
     const int MAX_MS = 60000;
+    const int ANIM_SPIN_INCREMENT = 100;
 };

@@ -13,9 +13,11 @@ private:
     virtual void Initialize();
     virtual void LoadSettings();
 
-    void OnPositionChanged();
-    void OnCustomCheckChanged();
-    void OnAnimationChanged();
+private:
+    bool OnAnimationChanged();
+    bool OnAnimationSpin(NMUPDOWN *ud);
+    bool OnCustomCheckChanged();
+    bool OnPositionChanged();
 
 private:
     /* Controls: */

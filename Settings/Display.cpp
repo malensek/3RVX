@@ -174,23 +174,27 @@ void Display::SaveSettings() {
     settings->HideSpeed(_ctxt->GetTextAsInt(ED_SPEED));
 }
 
-void Display::OnPositionChanged() {
-    std::wstring sel = _ctxt->GetComboSelection(CMB_POSITION);
-    bool isCustom = (sel == L"Custom");
-    _ctxt->SetEnabled(LBL_CUSTOMX, isCustom);
-    _ctxt->SetEnabled(LBL_CUSTOMY, isCustom);
-    _ctxt->SetEnabled(ED_CUSTOMX, isCustom);
-    _ctxt->SetEnabled(ED_CUSTOMY, isCustom);
+bool Display::OnAnimationChanged() {
+    _hideSpeed.Enabled(_animation.Selection() != noAnimStr);
+    return true;
 }
 
-void Display::OnCustomCheckChanged() {
-    bool checked = _ctxt->GetCheck(CHK_EDGE);
-    _ctxt->SetEnabled(ED_EDGE, checked);
-    _ctxt->SetEnabled(SP_EDGE, checked);
+bool Display::OnAnimationSpin(NMUPDOWN *ud) {
+    /* Increase the up/down spin increment: */
+    ud->iDelta *= ANIM_SPIN_INCREMENT;
+    return FALSE; /* Allows the change */
 }
 
-void Display::OnAnimationChanged() {
-    std::wstring sel = _ctxt->GetComboSelection(CMB_ANIMATION);
-    bool animEnabled = (sel != L"None");
-    _ctxt->SetEnabled(ED_SPEED, animEnabled);
+bool Display::OnCustomCheckChanged() {
+    _edgeSpinner.Enabled(_customDistance.Checked());
+    return true;
+}
+
+bool Display::OnPositionChanged() {
+    bool isCustom = (_position.Selection() == customPositionStr);
+    _customX.Enabled(isCustom);
+    _customY.Enabled(isCustom);
+    _positionX.Enabled(isCustom);
+    _positionY.Enabled(isCustom);
+    return true;
 }

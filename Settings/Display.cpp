@@ -31,8 +31,8 @@ void Display::Initialize() {
     INIT_CONTROL(LBL_DISPLAYDEV, Label, _displayDevLabel);
     INIT_CONTROL(CMB_MONITOR, ComboBox, _displayDevice);
 
-    INIT_CONTROL(CMB_ANIMATION, ComboBox, _animation);
-    _animation.OnSelectionChange
+    INIT_CONTROL(CMB_ANIMATION, ComboBox, _hideAnimation);
+    _hideAnimation.OnSelectionChange
         = std::bind(&Display::OnAnimationChanged, this);
     INIT_CONTROL(LBL_HIDEDELAY, Label, _hideDelayLabel);
     INIT_CONTROL(SP_HIDEDELAY, Spinner, _hideDelay);
@@ -83,9 +83,9 @@ void Display::LoadSettings() {
 
     /* Animation Settings */
     for (std::wstring anim : AnimationTypes::HideAnimationNames) {
-        _animation.AddItem(anim);
+        _hideAnimation.AddItem(anim);
     }
-    _animation.Select((int) settings->HideAnim());
+    _hideAnimation.Select((int) settings->HideAnim());
     _hideDelay.Range(MIN_MS, MAX_MS);
     _hideDelay.Text(settings->HideDelay());
     _hideSpeed.Range(MIN_MS, MAX_MS);
@@ -144,7 +144,7 @@ void Display::SaveSettings() {
 }
 
 bool Display::OnAnimationChanged() {
-    _hideSpeed.Enabled(_animation.Selection() != noAnimStr);
+    _hideSpeed.Enabled(_hideAnimation.Selection() != noAnimStr);
     return true;
 }
 

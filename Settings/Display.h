@@ -33,7 +33,7 @@ private:
     Label _displayDevLabel;
     ComboBox _displayDevice;
 
-    ComboBox _animation;
+    ComboBox _hideAnimation;
     Label _hideDelayLabel;
     Spinner _hideDelay;
     Label _hideSpeedLabel;

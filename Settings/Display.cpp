@@ -9,48 +9,6 @@
 #include "UIContext.h"
 #include "resource.h"
 
-DLGPROC Display::Command(unsigned short nCode, unsigned short ctrlId) {
-    switch (nCode) {
-    case BN_CLICKED:
-        switch (ctrlId) {
-        case CHK_EDGE:
-            OnCustomCheckChanged();
-            return (DLGPROC) TRUE;
-        }
-
-        break;
-
-    case CBN_SELCHANGE:
-        switch (ctrlId) {
-        case CMB_POSITION:
-            OnPositionChanged();
-            return (DLGPROC) TRUE;
-
-        case CMB_ANIMATION:
-            OnAnimationChanged();
-            return (DLGPROC) TRUE;
-        }
-
-        break;
-    }
-
-    return FALSE;
-}
-
-DLGPROC Display::Notification(NMHDR *nHdr) {
-    unsigned int ctrlId = nHdr->idFrom;
-    switch (nHdr->code) {
-    case UDN_DELTAPOS:
-        if (ctrlId == SP_DELAY || ctrlId == SP_SPEED) {
-            NMUPDOWN *ud = (NMUPDOWN *) nHdr;
-            ud->iDelta *= 100;
-            return FALSE; /* Allows the change */
-        }
-    }
-
-    return FALSE;
-}
-
 void Display::Initialize() {
     INIT_CONTROL(CHK_ONTOP, Checkbox, _onTop);
     INIT_CONTROL(CHK_FULLSCREEN, Checkbox, _hideFullscreen);

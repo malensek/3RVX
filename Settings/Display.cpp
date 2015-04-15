@@ -7,7 +7,6 @@
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 
-#include "UIContext.h"
 #include "resource.h"
 
 void Display::Initialize() {

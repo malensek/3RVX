@@ -120,9 +120,6 @@
     <ClInclude Include="SoundPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Translator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HotkeyInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -157,6 +154,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HotkeyProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LanguageTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -248,9 +248,6 @@
     <ClCompile Include="SoundPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Translator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HotkeyInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -276,6 +273,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LanguageTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -125,7 +125,7 @@
     <ClInclude Include="TinyXml2\tinyxml2.h" />
     <ClInclude Include="OSD\VolumeOSD.h" />
     <ClInclude Include="Slider\VolumeSlider.h" />
-    <ClInclude Include="Translator.h" />
+    <ClInclude Include="LanguageTranslator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
@@ -166,7 +166,7 @@
     <ClCompile Include="TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="OSD\VolumeOSD.cpp" />
     <ClCompile Include="Slider\VolumeSlider.cpp" />
-    <ClCompile Include="Translator.cpp" />
+    <ClCompile Include="LanguageTranslator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3RVX.rc" />

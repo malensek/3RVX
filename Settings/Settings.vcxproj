@@ -80,6 +80,7 @@
     <ClInclude Include="..\3RVX\Error.h" />
     <ClInclude Include="..\3RVX\HotkeyInfo.h" />
     <ClInclude Include="..\3RVX\HotkeyManager.h" />
+    <ClInclude Include="..\3RVX\LanguageTranslator.h" />
     <ClInclude Include="..\3RVX\Logger.h" />
     <ClInclude Include="..\3RVX\MeterWnd\Animations\AnimationTypes.h" />
     <ClInclude Include="..\3RVX\Settings.h" />
@@ -108,6 +109,7 @@
     <ClCompile Include="..\3RVX\Error.cpp" />
     <ClCompile Include="..\3RVX\HotkeyInfo.cpp" />
     <ClCompile Include="..\3RVX\HotkeyManager.cpp" />
+    <ClCompile Include="..\3RVX\LanguageTranslator.cpp" />
     <ClCompile Include="..\3RVX\Logger.cpp" />
     <ClCompile Include="..\3RVX\MeterWnd\Animations\AnimationTypes.cpp" />
     <ClCompile Include="..\3RVX\Settings.cpp" />

@@ -27,7 +27,12 @@ int ComboBox::SelectionIndex() {
 DLGPROC ComboBox::Command(unsigned short nCode) {
     switch (nCode) {
     case CBN_SELCHANGE:
-        return (DLGPROC) OnSelectionChange();
+        if (OnSelectionChange) {
+            return (DLGPROC) OnSelectionChange();
+        } else {
+            return FALSE;
+        }
+
     }
     return FALSE;
 }

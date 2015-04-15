@@ -105,30 +105,26 @@ void Display::SaveSettings() {
     CLOG(L"Saving: Display");
     Settings *settings = Settings::Instance();
 
-    settings->AlwaysOnTop(_ctxt->GetCheck(CHK_ONTOP));
-    settings->HideFullscreen(_ctxt->GetCheck(CHK_FULLSCREEN));
+    settings->AlwaysOnTop(_onTop.Checked());
+    settings->HideFullscreen(_hideFullscreen.Checked());
 
-    Settings::OSDPos pos = (Settings::OSDPos)
-        _ctxt->GetComboSelectionIndex(CMB_POSITION);
+    Settings::OSDPos pos = (Settings::OSDPos) _position.SelectionIndex();
     settings->OSDPosition(pos);
     if (pos == Settings::OSDPos::Custom) {
-        int x = _ctxt->GetTextAsInt(ED_CUSTOMX);
-        int y = _ctxt->GetTextAsInt(ED_CUSTOMY);
-        settings->OSDX(x);
-        settings->OSDY(y);
+        settings->OSDX(_positionX.TextAsInt());
+        settings->OSDY(_positionY.TextAsInt());
     }
 
-    if (_ctxt->GetCheck(CHK_EDGE) == true) {
-        int edge = _ctxt->GetTextAsInt(ED_EDGE);
-        settings->OSDEdgeOffset(edge);
+    if (_customDistance.Checked()) {
+        settings->OSDEdgeOffset(_edgeSpinner.TextAsInt());
     } else {
         /* We have to write the default here, just in case somebody unchecked
          * the checkbox. */
         settings->OSDEdgeOffset(DEFAULT_OSD_OFFSET);
     }
 
-    std::wstring monitor = _ctxt->GetComboSelection(CMB_MONITOR);
-    int monitorIdx = _ctxt->GetComboSelectionIndex(CMB_MONITOR);
+    std::wstring monitor = _displayDevice.Selection();
+    int monitorIdx = _displayDevice.SelectionIndex();
     if (monitorIdx == 0) {
         monitor = L"";
     } else if (monitorIdx == 1) {
@@ -136,11 +132,11 @@ void Display::SaveSettings() {
     }
     settings->Monitor(monitor);
 
-    int hideAnimIdx = _ctxt->GetComboSelectionIndex(CMB_ANIMATION);
-    settings->HideAnim((AnimationTypes::HideAnimation) hideAnimIdx);
+    settings->HideAnim(
+        (AnimationTypes::HideAnimation) _hideAnimation.SelectionIndex());
 
-    settings->HideDelay(_ctxt->GetTextAsInt(ED_DELAY));
-    settings->HideSpeed(_ctxt->GetTextAsInt(ED_SPEED));
+    settings->HideDelay(_hideDelay.TextAsInt());
+    settings->HideSpeed(_hideSpeed.TextAsInt());
 }
 
 bool Display::OnAnimationChanged() {

@@ -23,7 +23,9 @@ private:
     Checkbox _hideFullscreen;
 
     ComboBox _position;
+    Label _customX;
     EditBox _positionX;
+    Label _customY;
     EditBox _positionY;
     Checkbox _customDistance;
     Spinner _edgeSpinner;

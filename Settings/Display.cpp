@@ -56,7 +56,9 @@ void Display::Initialize() {
     INIT_CONTROL(CHK_FULLSCREEN, Checkbox, _hideFullscreen);
 
     INIT_CONTROL(CMB_POSITION, ComboBox, _position);
+    INIT_CONTROL(LBL_CUSTOMX, Label, _customX);
     INIT_CONTROL(ED_CUSTOMX, EditBox, _positionX);
+    INIT_CONTROL(LBL_CUSTOMY, Label, _customY);
     INIT_CONTROL(ED_CUSTOMY, EditBox, _positionY);
     INIT_CONTROL(CHK_EDGE, Checkbox, _customDistance);
     INIT_CONTROL(SP_EDGE, Spinner, _edgeSpinner);

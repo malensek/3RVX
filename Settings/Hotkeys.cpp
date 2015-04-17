@@ -10,7 +10,12 @@
 #include "resource.h"
 
 void Hotkeys::Initialize() {
+    INIT_CONTROL(LST_KEYS, ListBox, _keyList);
+    INIT_CONTROL(BTN_ADD, Button, _add);
+    INIT_CONTROL(BTN_REMOVE, Button, _remove);
 
+    INIT_CONTROL(BTN_KEYS, Button, _keys);
+    INIT_CONTROL(CMB_ACTION, ComboBox, _action);
 }
 
 void Hotkeys::LoadSettings() {

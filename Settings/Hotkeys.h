@@ -8,4 +8,12 @@ public:
 
     virtual void Initialize();
     virtual void LoadSettings();
+private:
+    /* Controls: */
+    ListBox _keyList;
+    Button _add;
+    Button _remove;
+
+    Button _keys;
+    ComboBox _action;
 };

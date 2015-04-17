@@ -7,6 +7,7 @@ Beta 7
 * Implement always on top toggle
 * Completely overhauled settings UI backend - no more MFC
 * If the settings file is missing or corrupted, defaults will be loaded automatically
+* Fix volume state bug (switching devices didn't update volume state)
 
 Beta 6
 ------

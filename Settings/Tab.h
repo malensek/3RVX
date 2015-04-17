@@ -32,7 +32,6 @@ public:
 protected:
     /// <summary>Window handle of this tab.</summary>
     HWND _hWnd;
-    UIContext *_ctxt;
 
     /// <summary>Maps control IDs to their respective instances.</summary>
     std::unordered_map<int, Control *> _controlMap;

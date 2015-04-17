@@ -6,6 +6,7 @@ Beta 7
 * Full screen detection
 * Implement always on top toggle
 * Completely overhauled settings UI backend - no more MFC
+* If the settings file is missing or corrupted, defaults will be loaded automatically
 
 Beta 6
 ------

@@ -3,7 +3,10 @@
 DLGPROC Button::Command(unsigned short nCode) {
     switch (nCode) {
     case BN_CLICKED:
-        return (DLGPROC) OnClick();
+        if (OnClick) {
+            return (DLGPROC) OnClick();
+        }
     }
+
     return FALSE;
 }

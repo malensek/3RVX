@@ -29,10 +29,8 @@ DLGPROC ComboBox::Command(unsigned short nCode) {
     case CBN_SELCHANGE:
         if (OnSelectionChange) {
             return (DLGPROC) OnSelectionChange();
-        } else {
-            return FALSE;
         }
-
     }
+
     return FALSE;
 }

@@ -92,6 +92,7 @@
     <ClInclude Include="Controls\ComboBox.h" />
     <ClInclude Include="Controls\Control.h" />
     <ClInclude Include="Controls\Controls.h" />
+    <ClInclude Include="Controls\ListBox.h" />
     <ClInclude Include="Controls\Spinner.h" />
     <ClInclude Include="Controls\EditBox.h" />
     <ClInclude Include="targetver.h" />
@@ -120,6 +121,7 @@
     <ClCompile Include="Controls\Checkbox.cpp" />
     <ClCompile Include="Controls\ComboBox.cpp" />
     <ClCompile Include="Controls\Control.cpp" />
+    <ClCompile Include="Controls\ListBox.cpp" />
     <ClCompile Include="Controls\Spinner.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="General.cpp" />

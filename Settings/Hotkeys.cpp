@@ -2,11 +2,11 @@
 
 #include <CommCtrl.h>
 
+#include "../3RVX/HotkeyInfo.h"
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "../3RVX/SkinInfo.h"
 
-#include "UIContext.h"
 #include "resource.h"
 
 void Hotkeys::Initialize() {
@@ -22,13 +22,34 @@ void Hotkeys::LoadSettings() {
     Settings *settings = Settings::Instance();
 
     /* Make highlighted items span the entire row in the list view */
-    _ctxt->AddWindowExStyle(LST_KEYS, LVS_EX_FULLROWSELECT);
+    _keyList.AddWindowExStyle(LVS_EX_FULLROWSELECT);
 
-    RECT dims = _ctxt->GetWindowDimensions(LST_KEYS);
+    RECT dims = _keyList.Dimensions();
     int width = dims.right - dims.left;
 
-    _ctxt->AddListColumn(LST_KEYS, 0, L"Hotkeys", (int) (width * .485));
-    _ctxt->AddListColumn(LST_KEYS, 0, L"Action", (int) (width * .445));
+    _keyList.AddColumn(L"Hotkeys", (int) (width * .485));
+    _keyList.AddColumn(L"Action", (int) (width * .445));
+
+    for (std::wstring action : HotkeyInfo::ActionNames) {
+        _action.AddItem(action);
+    }
+
+    std::unordered_map<int, HotkeyInfo> hotkeys = settings->Hotkeys();
+    for (auto it = hotkeys.begin(); it != hotkeys.end(); ++it) {
+        _keyInfo.push_back(it->second);
+    }
+
+//    for (unsigned int i = 0; i < _keyInfo.size(); ++i) {
+//        LoadSelection(i);
+//        HotkeyInfo hki = _keyInfo[i];
+//        std::wstring hkStr = HotkeyManager::HotkeysToString(hki.keyCombination);
+//        _list.InsertItem(i, hkStr.c_str());
+//        _list.SetItemText(i, 1, HotkeyInfo::ActionNames[hki.action].c_str());
+//    }
+
+//    SelectItem(0);
+
+
 }
 
 void Hotkeys::SaveSettings() {

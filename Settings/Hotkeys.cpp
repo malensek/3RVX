@@ -9,22 +9,6 @@
 #include "UIContext.h"
 #include "resource.h"
 
-DLGPROC Hotkeys::Command(unsigned short nCode, unsigned short ctrlId) {
-    switch (nCode) {
-    case BN_CLICKED:
-        break;
-
-    case CBN_SELCHANGE:
-        break;
-    }
-
-    return FALSE;
-}
-
-DLGPROC Hotkeys::Notification(NMHDR *nHdr) {
-    return FALSE;
-}
-
 void Hotkeys::Initialize() {
 
 }

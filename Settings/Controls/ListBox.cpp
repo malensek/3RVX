@@ -17,4 +17,11 @@ void ListBox::InsertColumn(int index, std::wstring colName, int width) {
     }
 }
 
+void ListBox::AddItem(std::wstring item) {
+    LVITEM lvi = { 0 };
+    lvi.mask = LVIF_TEXT;
+    lvi.iItem = 0;
+    lvi.pszText = L"test";
 
+    ListView_InsertItem(_hWnd, &lvi);
+}

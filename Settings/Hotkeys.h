@@ -24,4 +24,9 @@ private:
 
     Button _keys;
     ComboBox _action;
+
+private:
+    /* Strings: */
+    std::wstring hotkeysColumnStr = L"Hotkeys";
+    std::wstring actionColumnStr = L"Action";
 };

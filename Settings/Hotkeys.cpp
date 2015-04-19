@@ -27,8 +27,8 @@ void Hotkeys::LoadSettings() {
     RECT dims = _keyList.Dimensions();
     int width = dims.right - dims.left;
 
-    _keyList.AddColumn(L"Hotkeys", (int) (width * .485));
-    _keyList.AddColumn(L"Action", (int) (width * .445));
+    _keyList.AddColumn(hotkeysColumnStr, (int) (width * .485));
+    _keyList.AddColumn(actionColumnStr, (int) (width * .445));
 
     for (std::wstring action : HotkeyInfo::ActionNames) {
         _action.AddItem(action);

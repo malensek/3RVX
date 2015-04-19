@@ -4,12 +4,14 @@
 
 class ListBox : public Control {
 public:
-    ListBox() {
+    ListBox() :
+    _columns(0) {
 
     }
 
     ListBox(int id, HWND parent) :
-    Control(id, parent) {
+    Control(id, parent),
+    _columns(0) {
 
     }
 

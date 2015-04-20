@@ -44,16 +44,13 @@ void Hotkeys::LoadSettings() {
     }
 
     for (unsigned int i = 0; i < _keyInfo.size(); ++i) {
-        //LoadSelection(i);
         HotkeyInfo hki = _keyInfo[i];
         std::wstring hkStr = HotkeyManager::HotkeysToString(hki.keyCombination);
         int idx = _keyList.AddItem(hkStr);
         _keyList.ItemText(idx, 1, HotkeyInfo::ActionNames[hki.action]);
     }
 
-//    SelectItem(0);
-
-
+    _keyList.Selection(0);
 }
 
 void Hotkeys::SaveSettings() {

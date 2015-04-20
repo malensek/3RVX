@@ -11,7 +11,10 @@
 #include "resource.h"
 
 void Hotkeys::Initialize() {
+    using std::placeholders::_1;
+
     INIT_CONTROL(LST_KEYS, ListView, _keyList);
+    _keyList.OnItemChange = std::bind(&Hotkeys::OnKeyListItemChanged, this, _1);
     INIT_CONTROL(BTN_ADD, Button, _add);
     INIT_CONTROL(BTN_REMOVE, Button, _remove);
 
@@ -62,3 +65,16 @@ void Hotkeys::SaveSettings() {
     Settings *settings = Settings::Instance();
 }
 
+void Hotkeys::OnKeyListItemChanged(NMLISTVIEW *lv) {
+    if (lv->uChanged & LVIF_STATE) {
+        if (lv->uNewState & LVIS_SELECTED) {
+            OnKeyListSelectionChanged(lv->iItem);
+        }
+    }
+}
+
+void Hotkeys::OnKeyListSelectionChanged(int index) {
+    HotkeyInfo current = _keyInfo[index];
+    CLOG(L"Selecting key combination %d:", index);
+    QCLOG(L"%s", current.ToString().c_str());
+}

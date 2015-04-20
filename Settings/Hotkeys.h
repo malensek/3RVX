@@ -3,7 +3,6 @@
 #include "Tab.h"
 
 #include "../3RVX/HotkeyInfo.h"
-class HotkeyInfo;
 
 class Hotkeys : public Tab {
 public:
@@ -15,6 +14,10 @@ protected:
 
 private:
     std::vector<HotkeyInfo> _keyInfo;
+
+private:
+    void OnKeyListItemChanged(NMLISTVIEW *lv);
+    void OnKeyListSelectionChanged(int index);
 
 private:
     /* Controls: */

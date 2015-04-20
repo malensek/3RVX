@@ -33,6 +33,10 @@ int ListView::InsertItem(int index, std::wstring item) {
     return ListView_InsertItem(_hWnd, &lvi);
 }
 
+void ListView::ItemState(int index, unsigned int state, unsigned int mask) {
+    ListView_SetItemState(_hWnd, index, state, mask);
+}
+
 void ListView::ItemText(int index, int subIndex, std::wstring text) {
     ListView_SetItemText(_hWnd, index, subIndex, &text[0]);
 }

@@ -37,6 +37,10 @@ public:
 public:
     /* Event Handlers */
     std::function<void(NMLISTVIEW *lv)> OnItemChange;
+
+protected:
+    void ItemState(int index, unsigned int state, unsigned int mask);
+
 private:
     int _columns;
 };

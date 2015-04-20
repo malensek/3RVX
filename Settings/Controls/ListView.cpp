@@ -40,6 +40,20 @@ void ListView::ItemText(int index, int subIndex, std::wstring text) {
 int ListView::Selection() {
     return ListView_GetSelectionMark(_hWnd);
 }
+
+void ListView::Selection(int index) {
+    if (index < 0) {
+        index = 0;
+    }
+    if (index > Size() - 1) {
+        index = Size() - 1;
+    }
+
+    ItemState(index, LVIS_SELECTED, LVIS_SELECTED);
+    ListView_SetSelectionMark(_hWnd, index);
+    ListView_EnsureVisible(_hWnd, index, FALSE);
+}
+
 int ListView::Size() {
     return ListView_GetItemCount(_hWnd);
 }

@@ -25,11 +25,14 @@ public:
 
     int AddItem(std::wstring item);
     int InsertItem(int index, std::wstring item);
-
     void ItemText(int index, int subIndex, std::wstring str);
 
     int Selection();
+    void Selection(int index);
+
     int Size();
+
+    virtual DLGPROC Notification(NMHDR *nHdr);
 
 public:
     /* Event Handlers */

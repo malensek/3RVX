@@ -43,3 +43,15 @@ int ListView::Selection() {
 int ListView::Size() {
     return ListView_GetItemCount(_hWnd);
 }
+
+DLGPROC ListView::Notification(NMHDR *nHdr) {
+    switch (nHdr->code) {
+    case LVN_ITEMCHANGED:
+        if (OnItemChange) {
+            NMLISTVIEW *lv = reinterpret_cast<NMLISTVIEW *>(nHdr);
+            OnItemChange(lv);
+        }
+    }
+
+    return FALSE;
+}

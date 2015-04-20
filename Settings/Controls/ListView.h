@@ -1,5 +1,8 @@
 #pragma once
 
+#include <Windows.h>
+#include <CommCtrl.h>
+
 #include "Control.h"
 
 class ListView : public Control {
@@ -28,6 +31,9 @@ public:
     int Selection();
     int Size();
 
+public:
+    /* Event Handlers */
+    std::function<void(NMLISTVIEW *lv)> OnItemChange;
 private:
     int _columns;
 };

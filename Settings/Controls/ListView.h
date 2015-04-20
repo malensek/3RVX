@@ -20,7 +20,11 @@ public:
 
     int AddItem(std::wstring item);
     int InsertItem(int index, std::wstring item);
+
+    void ItemText(int index, int subIndex, std::wstring str);
+
     int Size();
+
 private:
     int _columns;
 };

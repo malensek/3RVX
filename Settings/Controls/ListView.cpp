@@ -29,6 +29,10 @@ int ListView::InsertItem(int index, std::wstring item) {
     return ListView_InsertItem(_hWnd, &lvi);
 }
 
+void ListView::ItemText(int index, int subIndex, std::wstring text) {
+    ListView_SetItemText(_hWnd, index, subIndex, &text[0]);
+}
+
 int ListView::Size() {
     return ListView_GetItemCount(_hWnd);
 }

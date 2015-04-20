@@ -2,14 +2,14 @@
 
 #include "Control.h"
 
-class ListBox : public Control {
+class ListView : public Control {
 public:
-    ListBox() :
+    ListView() :
     _columns(0) {
 
     }
 
-    ListBox(int id, HWND parent) :
+    ListView(int id, HWND parent) :
     Control(id, parent),
     _columns(0) {
 
@@ -18,7 +18,12 @@ public:
     void AddColumn(std::wstring name, int width);
     void InsertColumn(int index, std::wstring name, int width);
 
-    void AddItem(std::wstring);
+    int AddItem(std::wstring item);
+    int InsertItem(int index, std::wstring item);
+
+    void ItemText(int index, int subIndex, std::wstring str);
+
+    int Size();
 
 private:
     int _columns;

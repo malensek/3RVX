@@ -18,7 +18,7 @@ private:
 
 private:
     /* Controls: */
-    ListBox _keyList;
+    ListView _keyList;
     Button _add;
     Button _remove;
 

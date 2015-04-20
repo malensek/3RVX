@@ -96,7 +96,7 @@
     <ClInclude Include="..\3RVX\LanguageTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\ListBox.h">
+    <ClInclude Include="Controls\ListView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -167,7 +167,7 @@
     <ClCompile Include="..\3RVX\LanguageTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\ListBox.cpp">
+    <ClCompile Include="Controls\ListView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

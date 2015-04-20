@@ -3,6 +3,7 @@
 #include <CommCtrl.h>
 
 #include "../3RVX/HotkeyInfo.h"
+#include "../3RVX/HotkeyManager.h"
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "../3RVX/SkinInfo.h"
@@ -10,7 +11,7 @@
 #include "resource.h"
 
 void Hotkeys::Initialize() {
-    INIT_CONTROL(LST_KEYS, ListBox, _keyList);
+    INIT_CONTROL(LST_KEYS, ListView, _keyList);
     INIT_CONTROL(BTN_ADD, Button, _add);
     INIT_CONTROL(BTN_REMOVE, Button, _remove);
 
@@ -39,13 +40,13 @@ void Hotkeys::LoadSettings() {
         _keyInfo.push_back(it->second);
     }
 
-//    for (unsigned int i = 0; i < _keyInfo.size(); ++i) {
-//        LoadSelection(i);
-//        HotkeyInfo hki = _keyInfo[i];
-//        std::wstring hkStr = HotkeyManager::HotkeysToString(hki.keyCombination);
-//        _list.InsertItem(i, hkStr.c_str());
-//        _list.SetItemText(i, 1, HotkeyInfo::ActionNames[hki.action].c_str());
-//    }
+    for (unsigned int i = 0; i < _keyInfo.size(); ++i) {
+        //LoadSelection(i);
+        HotkeyInfo hki = _keyInfo[i];
+        std::wstring hkStr = HotkeyManager::HotkeysToString(hki.keyCombination);
+        int idx = _keyList.AddItem(hkStr);
+        _keyList.ItemText(idx, 1, HotkeyInfo::ActionNames[hki.action]);
+    }
 
 //    SelectItem(0);
 

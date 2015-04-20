@@ -23,7 +23,7 @@ void Hotkeys::LoadSettings() {
     Settings *settings = Settings::Instance();
 
     /* Make highlighted items span the entire row in the list view */
-    _keyList.AddWindowExStyle(LVS_EX_FULLROWSELECT);
+    _keyList.AddListExStyle(LVS_EX_FULLROWSELECT);
 
     RECT dims = _keyList.Dimensions();
     int width = dims.right - dims.left;

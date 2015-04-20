@@ -25,6 +25,7 @@ public:
 
     void ItemText(int index, int subIndex, std::wstring str);
 
+    int Selection();
     int Size();
 
 private:

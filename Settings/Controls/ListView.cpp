@@ -37,6 +37,9 @@ void ListView::ItemText(int index, int subIndex, std::wstring text) {
     ListView_SetItemText(_hWnd, index, subIndex, &text[0]);
 }
 
+int ListView::Selection() {
+    return ListView_GetSelectionMark(_hWnd);
+}
 int ListView::Size() {
     return ListView_GetItemCount(_hWnd);
 }

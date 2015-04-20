@@ -18,3 +18,6 @@ void ListView::InsertColumn(int index, std::wstring colName, int width) {
 }
 
 
+int ListView::Size() {
+    return ListView_GetItemCount(_hWnd);
+}

@@ -18,6 +18,7 @@ public:
     void AddColumn(std::wstring name, int width);
     void InsertColumn(int index, std::wstring name, int width);
 
+    int Size();
 private:
     int _columns;
 };

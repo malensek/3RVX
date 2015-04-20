@@ -2,6 +2,10 @@
 
 #include <CommCtrl.h>
 
+void ListView::AddListExStyle(DWORD style) {
+    ListView_SetExtendedListViewStyleEx(_hWnd, style, style);
+}
+
 void ListView::AddColumn(std::wstring colName, int width) {
     InsertColumn(_columns, colName, width);
 }

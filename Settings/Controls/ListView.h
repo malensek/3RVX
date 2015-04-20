@@ -15,6 +15,8 @@ public:
 
     }
 
+    void AddListExStyle(DWORD style);
+
     void AddColumn(std::wstring name, int width);
     void InsertColumn(int index, std::wstring name, int width);
 

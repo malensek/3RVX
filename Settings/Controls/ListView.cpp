@@ -17,6 +17,17 @@ void ListView::InsertColumn(int index, std::wstring colName, int width) {
     }
 }
 
+int ListView::AddItem(std::wstring item) {
+    return InsertItem(Size(), item);
+}
+
+int ListView::InsertItem(int index, std::wstring item) {
+    LVITEM lvi = { 0 };
+    lvi.mask = LVIF_TEXT;
+    lvi.iItem = index;
+    lvi.pszText = &item[0];
+    return ListView_InsertItem(_hWnd, &lvi);
+}
 
 int ListView::Size() {
     return ListView_GetItemCount(_hWnd);

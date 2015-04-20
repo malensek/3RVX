@@ -4,12 +4,14 @@
 
 class ListView : public Control {
 public:
-    ListView() {
+    ListView() :
+    _columns(0) {
 
     }
 
     ListView(int id, HWND parent) :
-    Control(id, parent) {
+    Control(id, parent),
+    _columns(0) {
 
     }
 

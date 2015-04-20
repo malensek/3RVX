@@ -1,12 +1,12 @@
-#include "ListBox.h"
+#include "ListView.h"
 
 #include <CommCtrl.h>
 
-void ListBox::AddColumn(std::wstring colName, int width) {
+void ListView::AddColumn(std::wstring colName, int width) {
     InsertColumn(_columns, colName, width);
 }
 
-void ListBox::InsertColumn(int index, std::wstring colName, int width) {
+void ListView::InsertColumn(int index, std::wstring colName, int width) {
     LVCOLUMN lvc = { 0 };
     lvc.mask = LVCF_WIDTH | LVCF_TEXT;
     lvc.cx = width;

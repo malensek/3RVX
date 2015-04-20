@@ -2,13 +2,13 @@
 
 #include "Control.h"
 
-class ListBox : public Control {
+class ListView : public Control {
 public:
-    ListBox() {
+    ListView() {
 
     }
 
-    ListBox(int id, HWND parent) :
+    ListView(int id, HWND parent) :
     Control(id, parent) {
 
     }

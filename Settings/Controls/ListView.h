@@ -25,6 +25,7 @@ public:
 
     int AddItem(std::wstring item);
     int InsertItem(int index, std::wstring item);
+    std::wstring ItemText(int index, int subIndex);
     void ItemText(int index, int subIndex, std::wstring str);
 
     int Selection();

@@ -16,6 +16,7 @@ private:
     std::vector<HotkeyInfo> _keyInfo;
 
 private:
+    bool OnAddButtonClick();
     void OnKeyListItemChange(NMLISTVIEW *lv);
     void OnKeyListSelectionChange(int index);
 

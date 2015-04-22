@@ -62,7 +62,24 @@ void Hotkeys::SaveSettings() {
     Settings *settings = Settings::Instance();
 }
 
-void Hotkeys::OnKeyListItemChanged(NMLISTVIEW *lv) {
+bool Hotkeys::OnAddButtonClick() {
+    int items = _keyList.Size();
+    for (int i = 0; i < items; ++i) {
+        if (_keyList.ItemText(i, 0) == L"" && _keyList.ItemText(i, 1) == L"") {
+            /* We found a blank item already in the list */
+            _keyList.Selection(i);
+            return true;
+        }
+    }
+
+    HotkeyInfo hi;
+    _keyInfo.push_back(hi);
+    int idx = _keyList.InsertItem(items, L"");
+    _keyList.ItemText(idx, 1, L"");
+    _keyList.Selection(idx);
+    return true;
+}
+
 void Hotkeys::OnKeyListItemChange(NMLISTVIEW *lv) {
     if (lv->uChanged & LVIF_STATE) {
         if (lv->uNewState & LVIS_SELECTED) {

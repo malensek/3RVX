@@ -16,8 +16,8 @@ private:
     std::vector<HotkeyInfo> _keyInfo;
 
 private:
-    void OnKeyListItemChanged(NMLISTVIEW *lv);
-    void OnKeyListSelectionChanged(int index);
+    void OnKeyListItemChange(NMLISTVIEW *lv);
+    void OnKeyListSelectionChange(int index);
 
 private:
     /* Controls: */

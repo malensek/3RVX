@@ -14,7 +14,7 @@ void Hotkeys::Initialize() {
     using std::placeholders::_1;
 
     INIT_CONTROL(LST_KEYS, ListView, _keyList);
-    _keyList.OnItemChange = std::bind(&Hotkeys::OnKeyListItemChanged, this, _1);
+    _keyList.OnItemChange = std::bind(&Hotkeys::OnKeyListItemChange, this, _1);
     INIT_CONTROL(BTN_ADD, Button, _add);
     INIT_CONTROL(BTN_REMOVE, Button, _remove);
 
@@ -63,14 +63,15 @@ void Hotkeys::SaveSettings() {
 }
 
 void Hotkeys::OnKeyListItemChanged(NMLISTVIEW *lv) {
+void Hotkeys::OnKeyListItemChange(NMLISTVIEW *lv) {
     if (lv->uChanged & LVIF_STATE) {
         if (lv->uNewState & LVIS_SELECTED) {
-            OnKeyListSelectionChanged(lv->iItem);
+            OnKeyListSelectionChange(lv->iItem);
         }
     }
 }
 
-void Hotkeys::OnKeyListSelectionChanged(int index) {
+void Hotkeys::OnKeyListSelectionChange(int index) {
     HotkeyInfo current = _keyInfo[index];
     CLOG(L"Selecting key combination %d:", index);
     QCLOG(L"%s", current.ToString().c_str());

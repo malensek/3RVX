@@ -38,10 +38,9 @@ void ListView::ItemState(int index, unsigned int state, unsigned int mask) {
 }
 
 std::wstring ListView::ItemText(int index, int subIndex) {
-    std::wstring str;
-    str.reserve(MAX_EDITSTR);
-    ListView_GetItemText(_hWnd, index, subIndex, &str[0], MAX_EDITSTR);
-    return str;
+    wchar_t str[MAX_EDITSTR];
+    ListView_GetItemText(_hWnd, index, subIndex, str, MAX_EDITSTR);
+    return std::wstring(str);
 }
 
 void ListView::ItemText(int index, int subIndex, std::wstring text) {

@@ -16,7 +16,9 @@ void Hotkeys::Initialize() {
     INIT_CONTROL(LST_KEYS, ListView, _keyList);
     _keyList.OnItemChange = std::bind(&Hotkeys::OnKeyListItemChange, this, _1);
     INIT_CONTROL(BTN_ADD, Button, _add);
+    _add.OnClick = std::bind(&Hotkeys::OnAddButtonClick, this);
     INIT_CONTROL(BTN_REMOVE, Button, _remove);
+    _remove.OnClick = std::bind(&Hotkeys::OnRemoveButtonClick, this);
 
     INIT_CONTROL(BTN_KEYS, Button, _keys);
     INIT_CONTROL(CMB_ACTION, ComboBox, _action);

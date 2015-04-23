@@ -48,6 +48,10 @@ void ListView::ItemText(int index, int subIndex, std::wstring text) {
     ListView_SetItemText(_hWnd, index, subIndex, &text[0]);
 }
 
+void ListView::RemoveItem(int index) {
+    ListView_DeleteItem(_hWnd, index);
+}
+
 int ListView::Selection() {
     return ListView_GetSelectionMark(_hWnd);
 }

@@ -28,6 +28,8 @@ public:
     std::wstring ItemText(int index, int subIndex);
     void ItemText(int index, int subIndex, std::wstring str);
 
+    void RemoveItem(int index);
+
     int Selection();
     void Selection(int index);
 

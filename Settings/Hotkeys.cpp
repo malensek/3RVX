@@ -80,6 +80,18 @@ bool Hotkeys::OnAddButtonClick() {
     return true;
 }
 
+bool Hotkeys::OnRemoveButtonClick() {
+    int sel = _keyList.Selection();
+    CLOG(L"Removing: %d", sel);
+    _keyInfo.erase(_keyInfo.begin() + sel);
+    _keyList.RemoveItem(sel);
+
+    /* Select the item closest to the previous selection: */
+    _keyList.Selection(sel);
+
+    return true;
+}
+
 void Hotkeys::OnKeyListItemChange(NMLISTVIEW *lv) {
     if (lv->uChanged & LVIF_STATE) {
         if (lv->uNewState & LVIS_SELECTED) {

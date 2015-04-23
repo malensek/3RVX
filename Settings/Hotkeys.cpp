@@ -84,7 +84,10 @@ bool Hotkeys::OnAddButtonClick() {
 
 bool Hotkeys::OnRemoveButtonClick() {
     int sel = _keyList.Selection();
-    CLOG(L"Removing: %d", sel);
+    if (sel < 0) {
+        return false;
+    }
+
     _keyInfo.erase(_keyInfo.begin() + sel);
     _keyList.RemoveItem(sel);
 

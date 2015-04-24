@@ -18,6 +18,7 @@ private:
 private:
     bool OnAddButtonClick();
     bool OnRemoveButtonClick();
+    bool OnKeysButtonClick();
     void OnKeyListItemChange(NMLISTVIEW *lv);
     void OnKeyListSelectionChange(int index);
 

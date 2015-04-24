@@ -8,6 +8,7 @@
 #include "../3RVX/Settings.h"
 #include "../3RVX/SkinInfo.h"
 
+#include "KeyGrabber.h"
 #include "resource.h"
 
 void Hotkeys::Initialize() {
@@ -21,6 +22,8 @@ void Hotkeys::Initialize() {
     _remove.OnClick = std::bind(&Hotkeys::OnRemoveButtonClick, this);
 
     INIT_CONTROL(BTN_KEYS, Button, _keys);
+    _keys.OnClick = std::bind(&Hotkeys::OnKeysButtonClick, this);
+
     INIT_CONTROL(CMB_ACTION, ComboBox, _action);
 }
 
@@ -95,6 +98,20 @@ bool Hotkeys::OnRemoveButtonClick() {
     _keyList.Selection(sel);
 
     return true;
+}
+
+bool Hotkeys::OnKeysButtonClick() {
+    //HotkeyPrompt hkp;
+    //hkp.DoModal();
+    KeyGrabber::Instance()->Unhook();
+    int keyCombo = KeyGrabber::Instance()->KeyCombination();
+    if (keyCombo > 0) {
+        std::wstring keyStr = HotkeyManager::HotkeysToString(keyCombo);
+        _keys.Text(keyStr);
+        int sel = _keyList.Selection();
+        _keyInfo[sel].keyCombination = keyCombo;
+        //LoadSelection(_selIdx);
+    }
 }
 
 void Hotkeys::OnKeyListItemChange(NMLISTVIEW *lv) {

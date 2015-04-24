@@ -99,6 +99,12 @@
     <ClInclude Include="Controls\ListView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="KeyGrabber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HotkeyPrompt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp">
@@ -168,6 +174,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controls\ListView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyGrabber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HotkeyPrompt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

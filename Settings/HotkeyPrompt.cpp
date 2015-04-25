@@ -1,12 +1,21 @@
 #include "HotkeyPrompt.h"
 
 #include "../3RVX/Error.h"
+#include "../3RVX/Logger.h"
+
+#include "KeyGrabber.h"
 #include "resource.h"
 
-HotkeyPrompt::HotkeyPrompt(HINSTANCE hInstance, std::wstring className) {
-    if (hInstance == NULL) {
-        hInstance = (HINSTANCE) GetModuleHandle(NULL);
-    }
+HotkeyPrompt *HotkeyPrompt::_instance = NULL;
+const wchar_t *HotkeyPrompt::CLASS_NAME = L"3RVX Hotkey Input Dialog";
+HWND HotkeyPrompt::_hWnd = NULL;
+HWND HotkeyPrompt::_parent = NULL;
+HINSTANCE HotkeyPrompt::_hInstance = NULL;
+
+HotkeyPrompt::HotkeyPrompt() {
+
+}
+
 void HotkeyPrompt::Show(HWND parent, HINSTANCE hInstance) {
     _hInstance = hInstance;
     _parent = parent;

@@ -5,18 +5,20 @@
 
 class HotkeyPrompt {
 public:
-    HotkeyPrompt(HINSTANCE hInstance = NULL,
-        std::wstring className = L"3RVX Hotkey Input Dialog");
-
-    void Show();
     static void Show(HWND parent, HINSTANCE hInstance = NULL);
 
 protected:
-    HINSTANCE _hInstance;
-    HWND _hWnd;
+    static HotkeyPrompt *_instance;
+    static HINSTANCE _hInstance;
+    static HWND _hWnd;
+    static HWND _parent;
 
-    static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
+    HotkeyPrompt();
+    static INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg,
         WPARAM wParam, LPARAM lParam);
-    virtual LRESULT WndProc(HWND hWnd, UINT message,
+    static LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
+
+private:
+    static const wchar_t *CLASS_NAME;
 };

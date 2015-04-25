@@ -7,38 +7,45 @@ HotkeyPrompt::HotkeyPrompt(HINSTANCE hInstance, std::wstring className) {
     if (hInstance == NULL) {
         hInstance = (HINSTANCE) GetModuleHandle(NULL);
     }
+void HotkeyPrompt::Show(HWND parent, HINSTANCE hInstance) {
     _hInstance = hInstance;
+    _parent = parent;
 
-    const wchar_t *cls = className.c_str();
-
-    WNDCLASSEX wcex;
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = NULL;
-    wcex.lpfnWndProc = &HotkeyPrompt::StaticWndProc;
-    wcex.cbClsExtra = NULL;
-    wcex.cbWndExtra = NULL;
-    wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = cls;
-    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-
-    if (!RegisterClassEx(&wcex)) {
-        throw SYSERR_REGISTERCLASS;
+    if (_hInstance == NULL) {
+        _hInstance = (HINSTANCE) GetModuleHandle(NULL);
     }
-
-    _hWnd = CreateWindowEx(NULL, cls, cls, NULL, NULL, NULL,
-        NULL, NULL, NULL, NULL, hInstance, this);
 
     if (_hWnd == NULL) {
-        throw SYSERR_CREATEWINDOW;
-    }
-}
+        WNDCLASSEX wcex;
+        wcex.cbSize = sizeof(WNDCLASSEX);
+        wcex.style = NULL;
+        wcex.lpfnWndProc = &HotkeyPrompt::WndProc;
+        wcex.cbClsExtra = NULL;
+        wcex.cbWndExtra = NULL;
+        wcex.hInstance = _hInstance;
+        wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+        wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+        wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
+        wcex.lpszMenuName = NULL;
+        wcex.lpszClassName = CLASS_NAME;
+        wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
-void HotkeyPrompt::Show() {
-    DialogBox(_hInstance, MAKEINTRESOURCE(IDD_HOTKEYPROMPT), _hWnd, NULL);
+        if (!RegisterClassEx(&wcex)) {
+            throw SYSERR_REGISTERCLASS;
+        }
+
+        _hWnd = CreateWindowEx(NULL, CLASS_NAME, CLASS_NAME, NULL, NULL, NULL,
+            NULL, NULL, parent, NULL, _hInstance, NULL);
+
+        if (_hWnd == NULL) {
+            throw SYSERR_CREATEWINDOW;
+        }
+
+        EnableWindow(parent, FALSE);
+    }
+
+    DialogBox(_hInstance, MAKEINTRESOURCE(IDD_HOTKEYPROMPT),
+        parent, &HotkeyPrompt::DialogProc);
 }
 
 LRESULT CALLBACK HotkeyPrompt::StaticWndProc(

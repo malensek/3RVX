@@ -9,6 +9,7 @@ public:
         std::wstring className = L"3RVX Hotkey Input Dialog");
 
     void Show();
+    static void Show(HWND parent, HINSTANCE hInstance = NULL);
 
 protected:
     HINSTANCE _hInstance;

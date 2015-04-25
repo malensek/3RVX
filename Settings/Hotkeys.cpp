@@ -102,8 +102,7 @@ bool Hotkeys::OnRemoveButtonClick() {
 }
 
 bool Hotkeys::OnKeysButtonClick() {
-    HotkeyPrompt hkp;
-    hkp.Show();
+    HotkeyPrompt::Show(_hWnd);
     KeyGrabber::Instance()->Unhook();
     int keyCombo = KeyGrabber::Instance()->KeyCombination();
     if (keyCombo > 0) {

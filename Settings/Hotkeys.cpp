@@ -8,6 +8,7 @@
 #include "../3RVX/Settings.h"
 #include "../3RVX/SkinInfo.h"
 
+#include "HotkeyPrompt.h"
 #include "KeyGrabber.h"
 #include "resource.h"
 
@@ -101,8 +102,8 @@ bool Hotkeys::OnRemoveButtonClick() {
 }
 
 bool Hotkeys::OnKeysButtonClick() {
-    //HotkeyPrompt hkp;
-    //hkp.DoModal();
+    HotkeyPrompt hkp;
+    hkp.Show();
     KeyGrabber::Instance()->Unhook();
     int keyCombo = KeyGrabber::Instance()->KeyCombination();
     if (keyCombo > 0) {
@@ -112,6 +113,7 @@ bool Hotkeys::OnKeysButtonClick() {
         _keyInfo[sel].keyCombination = keyCombo;
         //LoadSelection(_selIdx);
     }
+    return true;
 }
 
 void Hotkeys::OnKeyListItemChange(NMLISTVIEW *lv) {

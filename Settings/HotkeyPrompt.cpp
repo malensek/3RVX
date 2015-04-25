@@ -48,24 +48,37 @@ void HotkeyPrompt::Show(HWND parent, HINSTANCE hInstance) {
         parent, &HotkeyPrompt::DialogProc);
 }
 
-LRESULT CALLBACK HotkeyPrompt::StaticWndProc(
-        HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    HotkeyPrompt *prompt;
+INT_PTR CALLBACK HotkeyPrompt::DialogProc(
+        HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    unsigned short nCode, ctrlId;
 
-    if (message == WM_CREATE) {
-        prompt = (HotkeyPrompt *) ((LPCREATESTRUCT) lParam)->lpCreateParams;
-        SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR) prompt);
-    } else {
-        prompt = (HotkeyPrompt *) GetWindowLongPtr(hWnd, GWLP_USERDATA);
-        if (!prompt) {
-            return DefWindowProc(hWnd, message, wParam, lParam);
+    switch (uMsg) {
+    case WM_INITDIALOG:
+        KeyGrabber::Instance()->SetHwnd(hwndDlg);
+        KeyGrabber::Instance()->Grab();
+        break;
+
+    case WM_CLOSE:
+        CLOG(L"Closing hotkey prompt.");
+        EnableWindow(_parent, TRUE);
+        EndDialog(hwndDlg, 0);
+        DestroyWindow(_hWnd);
+        break;
+
+    case WM_COMMAND:
+        nCode = HIWORD(wParam);
+        ctrlId = LOWORD(wParam);
+        if (ctrlId == BTN_CANCEL && nCode == BN_CLICKED) {
+            SendMessage(hwndDlg, WM_CLOSE, NULL, NULL);
         }
+        break;
     }
 
-    return prompt->WndProc(hWnd, message, wParam, lParam);
+    return 0;
 }
 
-LRESULT HotkeyPrompt::WndProc(
+LRESULT CALLBACK HotkeyPrompt::WndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+
     return DefWindowProc(hWnd, message, wParam, lParam);
 }

@@ -57,6 +57,7 @@ void Hotkeys::LoadSettings() {
     }
 
     _keyList.Selection(0);
+    LoadSelection();
 }
 
 void Hotkeys::SaveSettings() {
@@ -130,7 +131,7 @@ bool Hotkeys::OnKeysButtonClick() {
         _keys.Text(keyStr);
         int sel = _keyList.Selection();
         _keyInfo[sel].keyCombination = keyCombo;
-        //LoadSelection(_selIdx);
+        LoadSelection(sel);
     }
     return true;
 }
@@ -147,4 +148,5 @@ void Hotkeys::OnKeyListSelectionChange(int index) {
     HotkeyInfo current = _keyInfo[index];
     CLOG(L"Selecting key combination %d:", index);
     QCLOG(L"%s", current.ToString().c_str());
+    LoadSelection(index);
 }

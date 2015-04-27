@@ -68,6 +68,26 @@ void Hotkeys::SaveSettings() {
     Settings *settings = Settings::Instance();
 }
 
+void Hotkeys::LoadSelection() {
+    int idx = _keyList.Selection();
+    if (idx < 0) {
+        return;
+    }
+    LoadSelection(idx);
+}
+
+void Hotkeys::LoadSelection(int index) {
+    HotkeyInfo selection = _keyInfo[index];
+
+    _keys.Text(L"");
+    if (selection.keyCombination > 0) {
+        std::wstring keyStr
+            = HotkeyManager::HotkeysToString(selection.keyCombination);
+        _keys.Text(keyStr);
+        _keyList.ItemText(index, 0, keyStr);
+    }
+}
+
 bool Hotkeys::OnAddButtonClick() {
     int items = _keyList.Size();
     for (int i = 0; i < items; ++i) {

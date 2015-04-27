@@ -15,6 +15,9 @@ protected:
 private:
     std::vector<HotkeyInfo> _keyInfo;
 
+    void LoadSelection();
+    void LoadSelection(int index);
+
 private:
     bool OnAddButtonClick();
     bool OnRemoveButtonClick();

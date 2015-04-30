@@ -6,7 +6,7 @@
   </info>
 
   <osds>
-    <volume background="OSD\back.png" defaultUnits="16">
+    <volume background="OSD\back.png" defaultUnits="21">
       <meter type="HorizontalBar" image="OSD\meter.png"
              x="43" y="8" units="21"/>
       <iconset location="Icons\Volume"/>

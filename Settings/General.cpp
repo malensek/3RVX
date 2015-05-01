@@ -86,22 +86,22 @@ void General::SaveSettings() {
 
 bool General::RunOnStartup() {
     long res;
-    HKEY key;
+    HKEY key = NULL;
     bool run = false;
 
     res = RegOpenKeyEx(HKEY_CURRENT_USER, REGKEY_RUN, NULL, KEY_READ, &key);
     if (res == ERROR_SUCCESS) {
         res = RegQueryValueEx(key, REGKEY_NAME, NULL, NULL, NULL, NULL);
         run = (res == ERROR_SUCCESS);
+        RegCloseKey(key);
     }
 
-    RegCloseKey(key);
     return run;
 }
 
 bool General::RunOnStartup(bool enable) {
     long res;
-    HKEY key;
+    HKEY key = NULL;
     bool ok = false;
 
     std::wstring path = Settings::AppDir() + L"\\3RVX.exe";
@@ -117,8 +117,9 @@ bool General::RunOnStartup(bool enable) {
             res = RegDeleteValue(key, REGKEY_NAME);
             ok = (res == ERROR_SUCCESS);
         }
+        RegCloseKey(key);
     }
-    RegCloseKey(key);
+
     return ok;
 }
 

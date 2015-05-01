@@ -41,5 +41,5 @@ protected:
     HWND _parent;
 
 protected:
-    static const int MAX_EDITSTR = 0x4000;
+    static const int MAX_EDITSTR = 4096;
 };

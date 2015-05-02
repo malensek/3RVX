@@ -17,6 +17,7 @@ private:
 
     void LoadSelection();
     void LoadSelection(int index);
+    void LoadActionParameters(int action);
 
 private:
     bool OnAddButtonClick();

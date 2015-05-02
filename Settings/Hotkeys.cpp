@@ -90,6 +90,18 @@ void Hotkeys::LoadSelection(int index) {
     }
 }
 
+void Hotkeys::LoadActionParameters(int action) {
+    switch ((HotkeyInfo::HotkeyActions) action) {
+    case HotkeyInfo::EjectDrive:
+
+        break;
+
+    case HotkeyInfo::MediaKey:
+
+        break;
+    }
+}
+
 bool Hotkeys::OnAddButtonClick() {
     int items = _keyList.Size();
     for (int i = 0; i < items; ++i) {

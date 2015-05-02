@@ -88,6 +88,13 @@ void Hotkeys::LoadSelection(int index) {
         _keys.Text(keyStr);
         _keyList.ItemText(index, 0, keyStr);
     }
+
+    int action = selection.action;
+    if (action >= 0) {
+        _keyList.ItemText(index, 1, HotkeyInfo::ActionNames[action]);
+        LoadActionParameters(action);
+        _action.Select(action);
+    }
 }
 
 void Hotkeys::LoadActionParameters(int action) {

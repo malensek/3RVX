@@ -26,6 +26,7 @@ void Hotkeys::Initialize() {
     _keys.OnClick = std::bind(&Hotkeys::OnKeysButtonClick, this);
 
     INIT_CONTROL(CMB_ACTION, ComboBox, _action);
+    _action.OnSelectionChange = std::bind(&Hotkeys::OnActionChange, this);
 }
 
 void Hotkeys::LoadSettings() {
@@ -119,6 +120,15 @@ bool Hotkeys::OnRemoveButtonClick() {
     /* Select the item closest to the previous selection: */
     _keyList.Selection(sel);
 
+    return true;
+}
+
+bool Hotkeys::OnActionChange() {
+    int actionIdx = _action.SelectionIndex();
+    int selectionIdx = _keyList.Selection();
+    HotkeyInfo &currentListSelection = _keyInfo[selectionIdx];
+    currentListSelection.action = (HotkeyInfo::HotkeyActions) actionIdx;
+    LoadSelection(selectionIdx);
     return true;
 }
 

@@ -21,6 +21,9 @@ private:
 private:
     bool OnAddButtonClick();
     bool OnRemoveButtonClick();
+
+    bool OnActionChange();
+
     bool OnKeysButtonClick();
     void OnKeyListItemChange(NMLISTVIEW *lv);
     void OnKeyListSelectionChange(int index);

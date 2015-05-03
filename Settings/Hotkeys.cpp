@@ -102,15 +102,48 @@ void Hotkeys::LoadSelection(int index) {
 }
 
 void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
+    bool showLabel = false;
+    bool showCombo = false;
+    bool showEdit = false;
+
+    /* Clean things up */
+    _argLabel.Text(L"");
+    _argCombo.Clear();
+    _argEdit.Clear();
+
     switch ((HotkeyInfo::HotkeyActions) action) {
     case HotkeyInfo::EjectDrive:
+        _argLabel.Text(L"Drive:");
+        for (int i = 0; i < 26; ++i) {
+            wchar_t ch = (wchar_t) i + 65;
+            _argCombo.AddItem(std::wstring(1, ch));
+        }
 
+        if (selection.HasArgs()) {
+            _argCombo.Select(selection.args[0]);
+        }
+
+        showLabel = true;
+        showCombo = true;
         break;
 
     case HotkeyInfo::MediaKey:
+        _argLabel.Text(L"Key:");
+        for (std::wstring keys : HotkeyInfo::MediaKeyNames) {
+            _argCombo.AddItem(keys);
+        }
+        if (selection.HasArgs()) {
+            _argCombo.Select(selection.args[0]);
+        }
 
+        showLabel = true;
+        showCombo = true;
         break;
     }
+
+    _argLabel.Visible(showLabel);
+    _argCombo.Visible(showCombo);
+    _argEdit.Visible(showEdit);
 }
 
 bool Hotkeys::OnAddButtonClick() {

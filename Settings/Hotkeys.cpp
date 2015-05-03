@@ -27,6 +27,10 @@ void Hotkeys::Initialize() {
 
     INIT_CONTROL(CMB_ACTION, ComboBox, _action);
     _action.OnSelectionChange = std::bind(&Hotkeys::OnActionChange, this);
+
+    INIT_CONTROL(LBL_ARG, Label, _argLabel);
+    INIT_CONTROL(CMB_ARG, ComboBox, _argCombo);
+    INIT_CONTROL(ED_ARG, EditBox, _argEdit);
 }
 
 void Hotkeys::LoadSettings() {

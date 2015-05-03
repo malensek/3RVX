@@ -38,6 +38,10 @@ private:
     Button _keys;
     ComboBox _action;
 
+    Label _argLabel;
+    ComboBox _argCombo;
+    EditBox _argEdit;
+
 private:
     /* Strings: */
     std::wstring hotkeysColumnStr = L"Hotkeys";

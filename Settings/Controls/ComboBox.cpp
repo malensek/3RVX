@@ -3,7 +3,7 @@
 #include <windowsx.h>
 
 void ComboBox::AddItem(std::wstring item) {
-    SendDlgItemMessage(_parent, _id, CB_ADDSTRING, NULL, (LPARAM) item.c_str());
+    ComboBox_AddString(_hWnd, &item[0]);
 }
 
 void ComboBox::Clear() {

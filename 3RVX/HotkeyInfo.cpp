@@ -46,6 +46,10 @@ double HotkeyInfo::ArgToDouble(int argIdx) {
     return d;
 }
 
+bool HotkeyInfo::HasArgs() {
+    return args.size() > 0;
+}
+
 std::wstring HotkeyInfo::ToString() {
     std::wstring combination = HotkeyManager::HotkeysToString(keyCombination);
     std::wstring act = L"(none)";

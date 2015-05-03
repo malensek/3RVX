@@ -123,6 +123,7 @@
     <ClCompile Include="Controls\Checkbox.cpp" />
     <ClCompile Include="Controls\ComboBox.cpp" />
     <ClCompile Include="Controls\Control.cpp" />
+    <ClCompile Include="Controls\EditBox.cpp" />
     <ClCompile Include="Controls\ListView.cpp" />
     <ClCompile Include="Controls\Spinner.cpp" />
     <ClCompile Include="Display.cpp" />

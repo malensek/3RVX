@@ -14,6 +14,9 @@ public:
     }
 
     void AddItem(std::wstring item);
+
+    void Clear();
+
     std::wstring Selection();
     int SelectionIndex();
     int Select(std::wstring item);

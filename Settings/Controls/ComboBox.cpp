@@ -6,6 +6,10 @@ void ComboBox::AddItem(std::wstring item) {
     SendDlgItemMessage(_parent, _id, CB_ADDSTRING, NULL, (LPARAM) item.c_str());
 }
 
+void ComboBox::Clear() {
+    ComboBox_ResetContent(_hWnd);
+}
+
 int ComboBox::Select(std::wstring item) {
     return ComboBox_SelectString(_hWnd, -1, item.c_str());
 }

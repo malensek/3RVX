@@ -17,7 +17,7 @@ private:
 
     void LoadSelection();
     void LoadSelection(int index);
-    void LoadActionParameters(int action);
+    void LoadActionParameters(int action, HotkeyInfo &selection);
 
 private:
     bool OnAddButtonClick();

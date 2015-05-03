@@ -96,12 +96,12 @@ void Hotkeys::LoadSelection(int index) {
     int action = selection.action;
     if (action >= 0) {
         _keyList.ItemText(index, 1, HotkeyInfo::ActionNames[action]);
-        LoadActionParameters(action);
+        LoadActionParameters(action, selection);
         _action.Select(action);
     }
 }
 
-void Hotkeys::LoadActionParameters(int action) {
+void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     switch ((HotkeyInfo::HotkeyActions) action) {
     case HotkeyInfo::EjectDrive:
 

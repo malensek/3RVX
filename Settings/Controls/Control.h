@@ -22,6 +22,9 @@ public:
     virtual bool Text(std::wstring text);
     virtual bool Text(int value);
 
+    virtual bool Visible();
+    virtual void Visible(bool visible);
+
     void WindowExStyle();
     void WindowExStyle(long exStyle);
     void AddWindowExStyle(long exStyle);

@@ -64,6 +64,14 @@ int Control::TextAsInt() {
     return num;
 }
 
+bool Control::Visible() {
+    return IsWindowVisible(_hWnd) != FALSE;
+}
+
+void Control::Visible(bool visible) {
+    ShowWindow(_hWnd, visible ? SW_SHOW : SW_HIDE);
+}
+
 void Control::AddWindowExStyle(long exStyle) {
     long exs = GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
     exs |= exStyle;

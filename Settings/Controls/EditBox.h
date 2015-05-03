@@ -12,4 +12,6 @@ public:
     Control(id, parent) {
 
     }
+
+    void Clear();
 };

@@ -36,6 +36,7 @@ public:
     int ArgToInt(int argIdx);
     double ArgToDouble(int argIdx);
     bool HasArgs();
+    void AllocateArg(unsigned int index);
     std::wstring ToString();
 
 };

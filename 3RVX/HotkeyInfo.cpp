@@ -50,6 +50,14 @@ bool HotkeyInfo::HasArgs() {
     return args.size() > 0;
 }
 
+void HotkeyInfo::AllocateArg(unsigned int index) {
+    unsigned int newSize = index + 1;
+    if (args.size() >= newSize) {
+        return;
+    }
+    args.resize(newSize);
+}
+
 std::wstring HotkeyInfo::ToString() {
     std::wstring combination = HotkeyManager::HotkeysToString(keyCombination);
     std::wstring act = L"(none)";

@@ -30,6 +30,7 @@ void Hotkeys::Initialize() {
 
     INIT_CONTROL(LBL_ARG, Label, _argLabel);
     INIT_CONTROL(CMB_ARG, ComboBox, _argCombo);
+    _argCombo.OnSelectionChange = std::bind(&Hotkeys::OnArgComboChange, this);
     INIT_CONTROL(ED_ARG, EditBox, _argEdit);
 }
 
@@ -215,4 +216,23 @@ void Hotkeys::OnKeyListSelectionChange(int index) {
     CLOG(L"Selecting key combination %d:", index);
     QCLOG(L"%s", current.ToString().c_str());
     LoadSelection(index);
+}
+
+bool Hotkeys::OnArgComboChange() {
+    int selectionIdx = _keyList.Selection();
+    HotkeyInfo *current = &_keyInfo[selectionIdx];
+
+    HotkeyInfo::HotkeyActions action
+        = (HotkeyInfo::HotkeyActions) _action.SelectionIndex();
+
+    switch (action) {
+    case HotkeyInfo::EjectDrive:
+    case HotkeyInfo::MediaKey:
+        current->AllocateArg(0);
+        current->args[0] = _argCombo.Selection();
+        break;
+    }
+
+    LoadSelection(selectionIdx);
+    return true;
 }

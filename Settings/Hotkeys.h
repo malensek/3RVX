@@ -20,14 +20,15 @@ private:
     void LoadActionParameters(int action, HotkeyInfo &selection);
 
 private:
+    void OnKeyListItemChange(NMLISTVIEW *lv);
+    void OnKeyListSelectionChange(int index);
+
     bool OnAddButtonClick();
     bool OnRemoveButtonClick();
 
-    bool OnActionChange();
-
     bool OnKeysButtonClick();
-    void OnKeyListItemChange(NMLISTVIEW *lv);
-    void OnKeyListSelectionChange(int index);
+    bool OnActionChange();
+    bool OnArgComboChange();
 
 private:
     /* Controls: */

@@ -60,7 +60,8 @@ void Display::LoadSettings() {
     /* Custom positions/offsets */
     _positionX.Text(settings->OSDX());
     _positionY.Text(settings->OSDY());
-    _customDistance.Checked(settings->OSDEdgeOffset() != DEFAULT_OSD_OFFSET);
+    _customDistance.Checked(
+        settings->OSDEdgeOffset() != Settings::DefaultOSDOffset);
     _edgeSpinner.Text(settings->OSDEdgeOffset());
     _edgeSpinner.Range(MIN_EDGE, MAX_EDGE);
 
@@ -119,7 +120,7 @@ void Display::SaveSettings() {
     } else {
         /* We have to write the default here, just in case somebody unchecked
          * the checkbox. */
-        settings->OSDEdgeOffset(DEFAULT_OSD_OFFSET);
+        settings->OSDEdgeOffset(Settings::DefaultOSDOffset);
     }
 
     std::wstring monitor = _displayDevice.Selection();

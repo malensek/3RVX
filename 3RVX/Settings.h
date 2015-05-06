@@ -99,7 +99,7 @@ private:
     LanguageTranslator *_translator;
 
     bool HasSetting(std::string elementName);
-    bool GetEnabled(std::string elementName);
+    bool GetEnabled(std::string elementName, const bool defaultSetting);
     void SetEnabled(std::string elementName, bool enabled);
 
     std::wstring GetText(std::string elementName);

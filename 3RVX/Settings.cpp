@@ -130,7 +130,7 @@ std::wstring Settings::LanguageName() {
 }
 
 bool Settings::AlwaysOnTop() {
-    return GetEnabled(XML_ONTOP);
+    return GetEnabled(XML_ONTOP, DefaultOnTop);
 }
 
 void Settings::AlwaysOnTop(bool enable) {
@@ -138,7 +138,7 @@ void Settings::AlwaysOnTop(bool enable) {
 }
 
 bool Settings::HideFullscreen() {
-    return GetEnabled(XML_HIDE_WHENFULL);
+    return GetEnabled(XML_HIDE_WHENFULL, DefaultHideFullscreen);
 }
 
 void Settings::HideFullscreen(bool enable) {
@@ -339,7 +339,7 @@ LanguageTranslator *Settings::Translator() {
 }
 
 bool Settings::NotifyIconEnabled() {
-    return GetEnabled(XML_NOTIFYICON);
+    return GetEnabled(XML_NOTIFYICON, DefaultNotifyIcon);
 }
 
 void Settings::NotifyIconEnabled(bool enable) {
@@ -347,7 +347,7 @@ void Settings::NotifyIconEnabled(bool enable) {
 }
 
 bool Settings::SoundEffectsEnabled() {
-    return GetEnabled(XML_SOUNDS);
+    return GetEnabled(XML_SOUNDS, DefaultSoundsEnabled);
 }
 
 void Settings::SoundEffectsEnabled(bool enable) {
@@ -359,12 +359,12 @@ bool Settings::HasSetting(std::string elementName) {
     return (el != NULL);
 }
 
-bool Settings::GetEnabled(std::string elementName) {
+bool Settings::GetEnabled(std::string elementName, const bool defaultSetting) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
         std::wstring elStr = StringUtils::Widen(elementName);
         CLOG(L"Warning: XML element '%s' not found", elStr.c_str());
-        return false;
+        return defaultSetting;
     } else {
         bool val = false;
         el->QueryBoolText(&val);

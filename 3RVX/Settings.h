@@ -14,14 +14,6 @@ class Skin;
 #define LANG_DIR L"Languages"
 #define SKIN_DIR L"Skins"
 
-#define DEFAULT_HIDE_ANIM AnimationTypes::HideAnimation::Fade
-#define DEFAULT_LANGUAGE L"English"
-#define DEFAULT_OSD_OFFSET 140
-#define DEFAULT_OSD_POS Settings::OSDPos::Bottom
-#define DEFAULT_SKIN L"Default"
-#define DEFAULT_HIDE_SPEED 765
-#define DEFAULT_HIDE_TIME 800
-
 class Settings {
 public:
     enum OSDPos {
@@ -116,4 +108,19 @@ private:
     void SetInt(std::string elementName, int value);
 
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
+
+public:
+    /* Default settings */
+    const bool DefaultOnTop = true;
+    const AnimationTypes::HideAnimation DefaultHideAnim = AnimationTypes::Fade;
+    const bool DefaultHideFullscreen = false;
+    const int DefaultHideSpeed = 765;
+    const int DefaultHideTime = 800;
+    const wchar_t *DefaultLanguage = L"English";
+    const bool DefaultNotifyIcon = false;
+    const bool DefaultSoundsEnabled = true;
+    const int DefaultOSDOffset = 140;
+    const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
+    const wchar_t *DefaultSkin = L"Classic";
+
 };

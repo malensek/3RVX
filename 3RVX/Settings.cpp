@@ -94,7 +94,6 @@ std::wstring Settings::SkinDir() {
     return AppDir() + L"\\" + SKIN_DIR;
 }
 
-
 std::wstring Settings::SettingsApp() {
     return Settings::AppDir() + L"\\" + SETTINGS_APP;
 }
@@ -219,7 +218,7 @@ void Settings::HideAnim(AnimationTypes::HideAnimation anim) {
 }
 
 int Settings::HideDelay() {
-    return GetInt(XML_HIDETIME, DEFAULT_HIDE_TIME);
+    return GetInt(XML_HIDETIME, DefaultHideTime);
 }
 
 void Settings::HideDelay(int delay) {
@@ -227,7 +226,7 @@ void Settings::HideDelay(int delay) {
 }
 
 int Settings::HideSpeed() {
-    return GetInt(XML_HIDESPEED, DEFAULT_HIDE_SPEED);
+    return GetInt(XML_HIDESPEED, DefaultHideSpeed);
 }
 
 void Settings::HideSpeed(int speed) {

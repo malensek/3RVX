@@ -113,18 +113,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\3RVX\3RVX.h" />
-    <ClInclude Include="..\3RVX\DisplayManager.h" />
-    <ClInclude Include="..\3RVX\HotkeyInfo.h" />
-    <ClInclude Include="..\3RVX\HotkeyManager.h" />
-    <ClInclude Include="..\3RVX\Logger.h" />
-    <ClInclude Include="..\3RVX\MeterWnd\Animations\AnimationTypes.h" />
-    <ClInclude Include="..\3RVX\Monitor.h" />
-    <ClInclude Include="..\3RVX\Settings.h" />
-    <ClInclude Include="..\3RVX\SkinInfo.h" />
-    <ClInclude Include="..\3RVX\StringUtils.h" />
-    <ClInclude Include="..\3RVX\TinyXml2\tinyxml2.h" />
-    <ClInclude Include="About.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="HotkeyPrompt.h" />
@@ -138,16 +126,6 @@
     <ClInclude Include="UIUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\3RVX\DisplayManager.cpp" />
-    <ClCompile Include="..\3RVX\HotkeyInfo.cpp" />
-    <ClCompile Include="..\3RVX\HotkeyManager.cpp" />
-    <ClCompile Include="..\3RVX\Logger.cpp" />
-    <ClCompile Include="..\3RVX\MeterWnd\Animations\AnimationTypes.cpp" />
-    <ClCompile Include="..\3RVX\Settings.cpp" />
-    <ClCompile Include="..\3RVX\SkinInfo.cpp" />
-    <ClCompile Include="..\3RVX\StringUtils.cpp" />
-    <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp" />
-    <ClCompile Include="About.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="General.cpp" />
     <ClCompile Include="HotkeyPrompt.cpp" />

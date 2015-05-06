@@ -104,7 +104,7 @@ private:
 
     std::wstring GetText(std::string elementName);
     void SetText(std::string elementName, std::string text);
-    int GetInt(std::string elementName, int defaultValue = 0);
+    int GetInt(std::string elementName, const int defaultValue = 0);
     void SetInt(std::string elementName, int value);
 
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);

@@ -28,6 +28,9 @@
 #define XML_SKIN "skin"
 #define XML_SOUNDS "soundEffects"
 
+const std::wstring Settings::DefaultLanguage = L"English";
+const std::wstring Settings::DefaultSkin = L"Classic";
+
 std::wstring Settings::_appDir(L"");
 Settings *Settings::instance;
 

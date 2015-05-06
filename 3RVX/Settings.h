@@ -111,16 +111,16 @@ private:
 
 public:
     /* Default settings */
-    const bool DefaultOnTop = true;
-    const AnimationTypes::HideAnimation DefaultHideAnim = AnimationTypes::Fade;
-    const bool DefaultHideFullscreen = false;
-    const int DefaultHideSpeed = 765;
-    const int DefaultHideTime = 800;
-    const wchar_t *DefaultLanguage = L"English";
-    const bool DefaultNotifyIcon = false;
-    const bool DefaultSoundsEnabled = true;
-    const int DefaultOSDOffset = 140;
-    const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
-    const wchar_t *DefaultSkin = L"Classic";
+    static const bool DefaultOnTop = true;
+    static const AnimationTypes::HideAnimation DefaultHideAnim = AnimationTypes::Fade;
+    static const bool DefaultHideFullscreen = false;
+    static const int DefaultHideSpeed = 765;
+    static const int DefaultHideTime = 800;
+    static const std::wstring DefaultLanguage;
+    static const bool DefaultNotifyIcon = false;
+    static const bool DefaultSoundsEnabled = true;
+    static const int DefaultOSDOffset = 140;
+    static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
+    static const std::wstring DefaultSkin;
 
 };

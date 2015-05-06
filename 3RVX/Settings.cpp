@@ -123,7 +123,7 @@ std::wstring Settings::LanguageName() {
     std::wstring lang = GetText(XML_LANGUAGE);
 
     if (lang == L"") {
-        return DEFAULT_LANGUAGE;
+        return DefaultLanguage;
     } else {
         return lang;
     }
@@ -157,7 +157,7 @@ int Settings::OSDEdgeOffset() {
     if (HasSetting(XML_OSD_OFFSET)) {
         return GetInt(XML_OSD_OFFSET);
     } else {
-        return DEFAULT_OSD_OFFSET;
+        return DefaultOSDOffset;
     }
 }
 
@@ -175,7 +175,7 @@ Settings::OSDPos Settings::OSDPosition() {
         }
     }
 
-    return DEFAULT_OSD_POS;
+    return DefaultOSDPosition;
 }
 
 void Settings::OSDPosition(OSDPos pos) {
@@ -210,7 +210,7 @@ AnimationTypes::HideAnimation Settings::HideAnim() {
         }
     }
 
-    return DEFAULT_HIDE_ANIM;
+    return DefaultHideAnim;
 }
 
 void Settings::HideAnim(AnimationTypes::HideAnimation anim) {
@@ -249,7 +249,7 @@ std::wstring Settings::CurrentSkin() {
     std::wstring name = GetText("skin");
 
     if (name == L"") {
-        return DEFAULT_SKIN;
+        return DefaultSkin;
     } else {
         return name;
     }

@@ -268,6 +268,10 @@ std::wstring Settings::SkinXML(std::wstring skinName) {
 std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
     std::unordered_map<int, HotkeyInfo> keyMappings;
 
+    if (_root == NULL) {
+        return keyMappings;
+    }
+
     tinyxml2::XMLElement *hotkeys = _root->FirstChildElement("hotkeys");
     if (hotkeys == NULL) {
         return keyMappings;
@@ -355,11 +359,19 @@ void Settings::SoundEffectsEnabled(bool enable) {
 }
 
 bool Settings::HasSetting(std::string elementName) {
+    if (_root == NULL) {
+        return false;
+    }
+
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     return (el != NULL);
 }
 
 bool Settings::GetEnabled(std::string elementName, const bool defaultSetting) {
+    if (_root == NULL) {
+        return defaultSetting;
+    }
+
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
         std::wstring elStr = StringUtils::Widen(elementName);

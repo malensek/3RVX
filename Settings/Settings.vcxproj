@@ -105,7 +105,6 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SettingsUI.h" />
     <ClInclude Include="Tab.h" />
-    <ClInclude Include="UIContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\DisplayManager.cpp" />
@@ -133,7 +132,6 @@
     <ClCompile Include="KeyGrabber.cpp" />
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="Tab.cpp" />
-    <ClCompile Include="UIContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Settings.rc" />

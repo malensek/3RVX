@@ -378,6 +378,10 @@ void Settings::SetEnabled(std::string elementName, bool enabled) {
 }
 
 std::wstring Settings::GetText(std::string elementName) {
+    if (_root == NULL) {
+        return L"";
+    }
+
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
         CLOG(L"Warning: XML element %s not found",
@@ -399,6 +403,10 @@ void Settings::SetText(std::string elementName, std::string text) {
 }
 
 int Settings::GetInt(std::string elementName, const int defaultValue) {
+    if (_root == NULL) {
+        return defaultValue;
+    }
+
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
         std::wstring elStr = StringUtils::Widen(elementName);

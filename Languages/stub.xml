@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<translation author="Jane Doe" version="1">
+
+    <language name="English" primaryId="09" subId="01"/>
+    
+    <string  text="Author: {1}"
+      translation="Autor: {1}"/>
+     
+</translation>

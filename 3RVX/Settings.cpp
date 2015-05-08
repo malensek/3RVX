@@ -63,11 +63,13 @@ void Settings::Load() {
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
         _xml.Clear();
         Error::ErrorMessage(GENERR_SETTINGSFILE, _file);
+        return;
     }
 
     _root = _xml.GetDocument()->FirstChildElement("settings");
     if (_root == NULL) {
         Error::ErrorMessage(GENERR_MISSING_XML, L"<settings>");
+        return;
     }
 }
 

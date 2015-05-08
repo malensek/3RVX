@@ -55,6 +55,9 @@ Settings *Settings::Instance() {
 }
 
 void Settings::Load() {
+    /* First, clean up (if needed) */
+    delete _translator;
+
     _file = AppDir() + L"\\Settings.xml";
     CLOG(L"Loading settings: %s", _file.c_str());
 

@@ -341,7 +341,14 @@ void Settings::Hotkeys(std::vector<HotkeyInfo> hotkeys) {
 
 LanguageTranslator *Settings::Translator() {
     if (_translator == NULL) {
-        _translator = new LanguageTranslator();
+        std::wstring langDir = Settings::LanguagesDir();
+        std::wstring lang = Settings::LanguageName();
+        std::wstring langFile = langDir + L"\\" + lang + L".xml";
+        if (PathFileExists(langFile.c_str()) == FALSE) {
+            _translator = new LanguageTranslator();
+        } else {
+            _translator = new LanguageTranslator(langFile);
+        }
     }
 
     return _translator;

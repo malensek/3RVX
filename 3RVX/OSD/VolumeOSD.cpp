@@ -62,9 +62,11 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
         UpdateDeviceMenu();
     }
 
+    _mWnd.AlwaysOnTop(settings->AlwaysOnTop());
     _mWnd.HideAnimation(settings->HideAnim(), settings->HideSpeed());
     _mWnd.VisibleDuration(settings->HideDelay());
 
+    _muteWnd.AlwaysOnTop(settings->AlwaysOnTop());
     _muteWnd.HideAnimation(settings->HideAnim(), settings->HideSpeed());
     _muteWnd.VisibleDuration(settings->HideDelay());
 

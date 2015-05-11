@@ -10,6 +10,9 @@ public:
         Gdiplus::Bitmap *bitmap = NULL, DWORD exStyles = NULL);
     ~LayeredWnd();
 
+    virtual bool AlwaysOnTop();
+    virtual void AlwaysOnTop(bool onTop);
+
     virtual Gdiplus::Bitmap *Bitmap();
     virtual void Bitmap(Gdiplus::Bitmap *bitmap);
 

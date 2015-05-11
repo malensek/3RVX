@@ -8,6 +8,8 @@ Beta 7
 * Completely overhauled settings UI backend - no more MFC
 * If the settings file is missing or corrupted, defaults will be loaded automatically
 * Fix volume state bug (switching devices didn't update volume state)
+* Initial UI internationalization (language translation) functionality
+* Update small glass skin to work with v3
 
 Beta 6
 ------

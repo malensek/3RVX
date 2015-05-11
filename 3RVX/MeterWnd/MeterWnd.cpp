@@ -149,7 +149,7 @@ LayeredWnd *MeterWnd::Clone() {
         cloneTitle.str().c_str(),
         _hInstance,
         _composite,
-        WINDOW_STYLES);
+        GetWindowLong(_hWnd, GWL_EXSTYLE));
 
     if (_glassMask) {
         clone->EnableGlass(_glassMask);

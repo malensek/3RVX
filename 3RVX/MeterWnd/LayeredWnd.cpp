@@ -226,6 +226,18 @@ void LayeredWnd::Bitmap(Gdiplus::Bitmap *bitmap) {
     UpdateWindow();
 }
 
+bool LayeredWnd::AlwaysOnTop() {
+    return GetWindowLong(_hWnd, GWL_EXSTYLE) & WS_EX_TOPMOST;
+}
+
+void LayeredWnd::AlwaysOnTop(bool onTop) {
+    if (onTop) {
+        SetWindowPos(_hWnd, HWND_TOPMOST, X(), Y(), Width(), Height(), NULL);
+    } else {
+        SetWindowPos(_hWnd, HWND_NOTOPMOST, X(), Y(), Width(), Height(), NULL);
+    }
+}
+
 byte LayeredWnd::Transparency() {
     return _transparency;
 }

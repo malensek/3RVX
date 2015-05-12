@@ -10,10 +10,6 @@ class HotkeyInfo;
 class LanguageTranslator;
 class Skin;
 
-#define SETTINGS_APP L"SettingsUI.exe"
-#define LANG_DIR L"Languages"
-#define SKIN_DIR L"Skins"
-
 class Settings {
 public:
     enum OSDPos {
@@ -110,6 +106,10 @@ private:
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 
 public:
+    static const std::wstring SETTINGS_APP;
+    static const std::wstring LANG_DIR;
+    static const std::wstring SKIN_DIR;
+
     /* Default settings */
     static const bool DefaultOnTop = true;
     static const AnimationTypes::HideAnimation DefaultHideAnim = AnimationTypes::Fade;

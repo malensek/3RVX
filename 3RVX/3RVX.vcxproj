@@ -55,7 +55,7 @@
       <AdditionalDependencies>Wtsapi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || exit /B 0</Command>
+      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || mklink /j "$(TargetDir)\Languages" "$(ProjectDir)\..\Languages" || exit /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,7 +74,7 @@
       <AdditionalDependencies>Wtsapi32.lib;winmm.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || exit /B 0</Command>
+      <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || mklink /j "$(TargetDir)\Languages" "$(ProjectDir)\..\Languages" || exit /B 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

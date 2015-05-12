@@ -244,6 +244,11 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
     if (_volumeCtrl->Volume() == 0.0000f) {
         currentUnit = 0;
     }
+    int numUnits = 1;
+    if (hki.args.size() > 0) {
+        CLOG(L"Amount: %s", hki.args[0].c_str());
+    }
+
     switch (hki.action) {
     case HotkeyInfo::IncreaseVolume:
         UnMute();

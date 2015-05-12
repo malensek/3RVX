@@ -28,7 +28,7 @@
 #define XML_SKIN "skin"
 #define XML_SOUNDS "soundEffects"
 
-const std::wstring Settings::SETTINGS_APP = L"SettingsUI.exe";
+const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
 const std::wstring Settings::LANG_DIR = L"Languages";
 const std::wstring Settings::SKIN_DIR = L"English";
 

@@ -33,8 +33,6 @@ public:
     int keyCombination = 0;
     int action = -1;
     std::vector<std::wstring> args;
-    std::map<int, int> intArgs;
-    std::map<int, double> doubleArgs;
 
     int ArgToInt(int argIdx);
     double ArgToDouble(int argIdx);
@@ -42,4 +40,7 @@ public:
     void AllocateArg(unsigned int index);
     std::wstring ToString();
 
+private:
+    std::map<int, int> _intArgs;
+    std::map<int, double> _doubleArgs;
 };

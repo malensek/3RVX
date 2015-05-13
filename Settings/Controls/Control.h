@@ -4,6 +4,11 @@
 #include <functional>
 #include <string>
 
+/// <summary>
+/// Base class for Windows forms control implementations (buttons, checkboxes,
+/// etc). Many common features, like control dimensions, window text, and styles
+/// are managed by this class.
+/// </summary>
 class Control {
 public:
     Control();

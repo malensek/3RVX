@@ -34,8 +34,18 @@ public:
     int action = -1;
     std::vector<std::wstring> args;
 
-    int ArgToInt(int argIdx);
-    double ArgToDouble(int argIdx);
+    /// <summary>
+    /// Retrieves the argument at the given index and converts it to an integer.
+    /// Subsequent calls that specify the same index will be cached.
+    /// </summary>
+    int ArgToInt(unsigned int argIdx);
+
+    /// <summary>
+    /// Retrieves the argument at the given index and converts it to a double.
+    /// Subsequent calls that specify the same index will be cached.
+    /// </summary>
+    double ArgToDouble(unsigned int argIdx);
+
     bool HasArgs();
     void AllocateArg(unsigned int argIdx);
     std::wstring ToString();

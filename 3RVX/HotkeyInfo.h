@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <vector>
 
 class HotkeyInfo {
@@ -32,6 +33,8 @@ public:
     int keyCombination = 0;
     int action = -1;
     std::vector<std::wstring> args;
+    std::map<int, int> intArgs;
+    std::map<int, double> doubleArgs;
 
     int ArgToInt(int argIdx);
     double ArgToDouble(int argIdx);

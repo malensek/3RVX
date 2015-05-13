@@ -15,6 +15,7 @@ public:
     Control(int id, HWND parent);
     ~Control();
 
+    /// <summary>Retrieves the dimensions of this control's window.</summary>
     virtual RECT Dimensions();
 
     virtual void Enable();

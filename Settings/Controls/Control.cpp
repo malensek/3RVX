@@ -78,6 +78,12 @@ void Control::AddWindowExStyle(long exStyle) {
     SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exs);
 }
 
+void Control::RemoveWindowExStyle(long exStyle) {
+    long exs = GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
+    exs &= ~exStyle;
+    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exs);
+}
+
 DLGPROC Control::Command(unsigned short nCode) {
     /* By default, indicate that we did not process the message: */
     return FALSE;

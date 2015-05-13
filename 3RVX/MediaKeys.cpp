@@ -4,6 +4,7 @@
 
 #include "FakeKeyboard.h"
 #include "HotkeyInfo.h"
+#include "Logger.h"
 
 std::unordered_map<std::wstring, unsigned short> MediaKeys::mediaKeyMap
     = MediaKeys::CreateKeyMap();

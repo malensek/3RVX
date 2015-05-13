@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Windows.h>
-#include "Logger.h"
 
 class FakeKeyboard {
 public:

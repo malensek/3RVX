@@ -80,6 +80,11 @@ bool HotkeyInfo::HasArg(unsigned int argIdx) {
     args.resize(newSize);
 }
 
+void HotkeyInfo::ClearArgCache() {
+    _intArgs.clear();
+    _doubleArgs.clear();
+}
+
 std::wstring HotkeyInfo::ToString() {
     std::wstring combination = HotkeyManager::HotkeysToString(keyCombination);
     std::wstring act = L"(none)";

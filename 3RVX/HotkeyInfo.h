@@ -49,6 +49,8 @@ public:
     bool HasArgs();
     bool HasArg(unsigned int argIdx);
     void AllocateArg(unsigned int argIdx);
+    void ClearArgCache();
+
     std::wstring ToString();
 
 private:

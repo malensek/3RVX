@@ -47,6 +47,7 @@ public:
     double ArgToDouble(unsigned int argIdx);
 
     bool HasArgs();
+    bool HasArg(unsigned int argIdx);
     void AllocateArg(unsigned int argIdx);
     std::wstring ToString();
 

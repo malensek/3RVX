@@ -66,6 +66,14 @@ bool HotkeyInfo::HasArgs() {
 
 void HotkeyInfo::AllocateArg(unsigned int index) {
     unsigned int newSize = index + 1;
+bool HotkeyInfo::HasArg(unsigned int argIdx) {
+    if (args.empty()) {
+        return false;
+    }
+
+    return args.size() - 1 >= argIdx;
+}
+
     if (args.size() >= newSize) {
         return;
     }

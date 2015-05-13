@@ -32,17 +32,31 @@ std::vector<unsigned short> HotkeyInfo::MediaKeyVKs = {
     VK_MEDIA_PREV_TRACK,
 };
 
-int HotkeyInfo::ArgToInt(int argIdx) {
+int HotkeyInfo::ArgToInt(unsigned int argIdx) {
+    if (_intArgs.count(argIdx) > 0) {
+        return _intArgs[argIdx];
+    }
+
     std::wistringstream str(args[argIdx]);
     int i;
     str >> i;
+
+    _intArgs[argIdx] = i;
+
     return i;
 }
 
-double HotkeyInfo::ArgToDouble(int argIdx) {
+double HotkeyInfo::ArgToDouble(unsigned int argIdx) {
+    if (_doubleArgs.count(argIdx) > 0) {
+        return _doubleArgs[argIdx];
+    }
+
     std::wistringstream str(args[argIdx]);
     double d;
     str >> d;
+
+    _doubleArgs[argIdx] = d;
+
     return d;
 }
 

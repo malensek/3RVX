@@ -4,6 +4,10 @@
 
 #include <CommCtrl.h>
 
+/// <summary>
+/// Manages a 'spin control': a numeric edit box with a up/down 'buddy' to
+/// increment or decrement the current value of the box.
+/// </summary>
 class Spinner : public Control {
 public:
     Spinner() {

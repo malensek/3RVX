@@ -73,9 +73,15 @@ void Control::Move(int x, int y) {
 
 void Control::PlaceRightOf(Control &control) {
     RECT otherRect = control.ClientDimensions();
-    CLOG(L"Other dims: %d %d %d %d", otherRect.top, otherRect.right, otherRect.bottom, otherRect.left);
-    int x = otherRect.right;
-    int y = ClientDimensions().top;
+    int otherHeight = otherRect.bottom - otherRect.top;
+    /* Vertical center point of the other control: */
+    int vCenter = otherRect.top + otherHeight / 2;
+    
+    RECT myRect = ClientDimensions();
+    int myHeight = myRect.bottom - myRect.top;
+
+    int x = otherRect.right + EmSize();
+    int y = vCenter - myHeight / 2;
     Move(x, y);
 }
 

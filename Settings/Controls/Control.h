@@ -15,8 +15,19 @@ public:
     Control(int id, HWND parent);
     ~Control();
 
-    /// <summary>Retrieves the dimensions of this control's window.</summary>
-    virtual RECT Dimensions();
+    /// <summary>
+    /// Retrieves the dimensions of this control's window based on screen
+    /// coordinates.
+    /// </summary>
+    virtual RECT ScreenDimensions();
+
+    /// <summary>
+    /// Retrieves the dimensions of this control's window based its client
+    /// coordinates (position relative to the parent window). Note: If only
+    /// interested in the width and height of the control, use
+    /// ScreenDimensions().
+    /// </summary>
+    virtual RECT ClientDimensions();
 
     virtual void Enable();
     virtual void Disable();

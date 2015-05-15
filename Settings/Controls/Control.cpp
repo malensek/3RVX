@@ -16,9 +16,25 @@ Control::~Control() {
 
 }
 
-RECT Control::Dimensions() {
+RECT Control::ScreenDimensions() {
     RECT r;
     GetWindowRect(_hWnd, &r);
+    return r;
+}
+
+RECT Control::ClientDimensions() {
+    RECT r;
+    GetWindowRect(_hWnd, &r);
+    int width = r.right - r.left;
+    int height = r.bottom - r.top;
+
+    POINT p = { r.left, r.top };
+    int ret = ScreenToClient(_parent, &p);
+    r.left = p.x;
+    r.top = p.y;
+    r.right = r.left + width;
+    r.bottom = r.top + height;
+
     return r;
 }
 

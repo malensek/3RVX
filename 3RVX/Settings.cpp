@@ -30,7 +30,7 @@
 
 const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
 const std::wstring Settings::LANG_DIR = L"Languages";
-const std::wstring Settings::SKIN_DIR = L"English";
+const std::wstring Settings::SKIN_DIR = L"Skins";
 
 const std::wstring Settings::DefaultLanguage = L"English";
 const std::wstring Settings::DefaultSkin = L"Classic";

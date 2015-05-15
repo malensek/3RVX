@@ -332,7 +332,9 @@ void Settings::Hotkeys(std::vector<HotkeyInfo> hotkeys) {
         tinyxml2::XMLElement *hk = _xml.NewElement("hotkey");
 
         hk->SetAttribute("combination", hotkey.keyCombination);
-        hk->SetAttribute("action", hotkey.action);
+        std::string actionStr = StringUtils::Narrow(
+            HotkeyInfo::ActionNames[hotkey.action]);
+        hk->SetAttribute("action", actionStr.c_str());
 
         if (hotkey.args.size() > 0) {
             for (std::wstring arg : hotkey.args) {

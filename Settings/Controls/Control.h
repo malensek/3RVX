@@ -34,6 +34,7 @@ public:
     virtual bool Enabled();
     virtual void Enabled(bool enabled);
 
+    virtual void Move(int x, int y);
     virtual std::wstring Text();
     virtual int TextAsInt();
     virtual bool Text(std::wstring text);

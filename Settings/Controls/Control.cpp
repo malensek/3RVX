@@ -58,6 +58,10 @@ void Control::Enabled(bool enabled) {
     }
 }
 
+void Control::Move(int x, int y) {
+    RECT r = ClientDimensions();
+    MoveWindow(_hWnd, x, y, r.right - r.left, r.bottom - r.top, TRUE);
+}
 bool Control::Text(std::wstring text) {
     return SetDlgItemText(_parent, _id, text.c_str()) == TRUE;
 }

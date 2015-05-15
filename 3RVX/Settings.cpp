@@ -291,10 +291,24 @@ std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
 
     tinyxml2::XMLElement *hotkey = hotkeys->FirstChildElement("hotkey");
     for (; hotkey != NULL; hotkey = hotkey->NextSiblingElement()) {
-        int action = -1;
-        hotkey->QueryIntAttribute("action", &action);
-        if (action == -1) {
+        const char *actionStr = hotkey->Attribute("action");
+        if (actionStr == NULL) {
             CLOG(L"No action provided for hotkey; skipping");
+            continue;
+        }
+
+        int action = -1;
+        std::wstring wActionStr = StringUtils::Widen(actionStr);
+        for (unsigned int i = 0; i < HotkeyInfo::ActionNames.size(); ++i) {
+            const wchar_t *currentAction = HotkeyInfo::ActionNames[i].c_str();
+            if (_wcsicmp(wActionStr.c_str(), currentAction) == 0) {
+                action = i;
+                break;
+            }
+        }
+
+        if (action == -1) {
+            CLOG(L"Hotkey action '%s' not recognized; skipping", wActionStr);
             continue;
         }
 

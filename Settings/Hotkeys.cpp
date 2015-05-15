@@ -40,7 +40,7 @@ void Hotkeys::LoadSettings() {
     /* Make highlighted items span the entire row in the list view */
     _keyList.AddListExStyle(LVS_EX_FULLROWSELECT);
 
-    RECT dims = _keyList.Dimensions();
+    RECT dims = _keyList.ScreenDimensions();
     int width = dims.right - dims.left;
 
     _keyList.AddColumn(hotkeysColumnStr, (int) (width * .485));

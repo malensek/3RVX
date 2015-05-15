@@ -62,6 +62,15 @@ void Control::Move(int x, int y) {
     RECT r = ClientDimensions();
     MoveWindow(_hWnd, x, y, r.right - r.left, r.bottom - r.top, TRUE);
 }
+
+void Control::PlaceRightOf(Control &control) {
+    RECT otherRect = control.ClientDimensions();
+    CLOG(L"Other dims: %d %d %d %d", otherRect.top, otherRect.right, otherRect.bottom, otherRect.left);
+    int x = otherRect.right;
+    int y = ClientDimensions().top;
+    Move(x, y);
+}
+
 bool Control::Text(std::wstring text) {
     return SetDlgItemText(_parent, _id, text.c_str()) == TRUE;
 }

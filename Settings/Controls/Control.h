@@ -35,6 +35,8 @@ public:
     virtual void Enabled(bool enabled);
 
     virtual void Move(int x, int y);
+    virtual void PlaceRightOf(Control &control);
+
     virtual std::wstring Text();
     virtual int TextAsInt();
     virtual bool Text(std::wstring text);

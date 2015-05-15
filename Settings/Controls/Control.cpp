@@ -58,6 +58,14 @@ void Control::Enabled(bool enabled) {
     }
 }
 
+int Control::EmSize() {
+    /* Determine the width of the text */
+    HDC dc = GetDC(_hWnd);
+    SIZE sz = { 0 };
+    GetTextExtentPoint32(dc, L"M", 1, &sz);
+    return sz.cx;
+}
+
 void Control::Move(int x, int y) {
     RECT r = ClientDimensions();
     MoveWindow(_hWnd, x, y, r.right - r.left, r.bottom - r.top, TRUE);

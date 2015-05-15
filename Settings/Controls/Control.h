@@ -34,6 +34,8 @@ public:
     virtual bool Enabled();
     virtual void Enabled(bool enabled);
 
+    virtual int EmSize();
+
     virtual void Move(int x, int y);
     virtual void PlaceRightOf(Control &control);
 

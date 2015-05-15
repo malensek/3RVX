@@ -27,7 +27,7 @@ public:
         GetTextExtentPoint32(dc, &text[0], text.size(), &sz);
 
         /* Update the window size based on the text size */
-        RECT r = Control::Dimensions();
+        RECT r = Control::ScreenDimensions();
         POINT pt = { r.left, r.top };
         ScreenToClient(_parent, &pt);
         MoveWindow(_hWnd, pt.x, pt.y, sz.cx, sz.cy, TRUE);

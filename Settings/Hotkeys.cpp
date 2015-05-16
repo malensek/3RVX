@@ -122,6 +122,21 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     _argEdit.Clear();
 
     switch ((HotkeyInfo::HotkeyActions) action) {
+    case HotkeyInfo::IncreaseVolume:
+    case HotkeyInfo::DecreaseVolume:
+        _argCheck.Text(L"Amount:");
+        _argEdit.PlaceRightOf(_argCheck);
+        _argCombo.AddItem(L"Volume Units");
+        _argCombo.AddItem(L"Percent");
+        _argCombo.AutoWidth();
+        _argCombo.PlaceRightOf(_argEdit);
+
+        showCheck = true;
+        showCombo = true;
+        showEdit = true;
+        OnArgCheckChange();
+        break;
+
     case HotkeyInfo::EjectDrive:
         _argLabel.Text(L"Drive:");
         for (int i = 0; i < 26; ++i) {

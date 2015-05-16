@@ -26,6 +26,9 @@ public:
     void Select(int itemIdx);
 
     int Size();
+
+    void AutoWidth();
+
     virtual DLGPROC Command(unsigned short nCode);
 
 public:

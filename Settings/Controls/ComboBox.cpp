@@ -41,6 +41,12 @@ int ComboBox::SelectionIndex() {
 int ComboBox::Size() {
     return ComboBox_GetCount(_hWnd);
 }
+
+void ComboBox::AutoWidth() {
+    std::vector<std::wstring> items = Items();
+    SIZE sz = LargestTextDimensions(items);
+}
+
 DLGPROC ComboBox::Command(unsigned short nCode) {
     switch (nCode) {
     case CBN_SELCHANGE:

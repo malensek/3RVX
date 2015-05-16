@@ -27,7 +27,6 @@ public:
 
     int Size();
 
-    void AutoWidth();
 
     virtual DLGPROC Command(unsigned short nCode);
 

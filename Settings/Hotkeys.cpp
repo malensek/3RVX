@@ -178,6 +178,11 @@ bool Hotkeys::OnRemoveButtonClick() {
     /* Select the item closest to the previous selection: */
     _keyList.Selection(sel);
 
+    /* This handles disabling the other controls if the last item was removed:*/
+    if (_keyList.Size() <= 0) {
+        LoadSelection();
+    }
+
     return true;
 }
 

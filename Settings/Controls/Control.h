@@ -38,6 +38,16 @@ public:
 
     virtual void Move(int x, int y);
     virtual void PlaceRightOf(Control &control);
+    virtual void Resize(int width, int height);
+
+    virtual int X();
+    virtual int Y();
+    virtual int Width();
+    virtual int Height();
+    virtual void X(int x);
+    virtual void Y(int y);
+    virtual void Width(int width);
+    virtual void Height(int height);
 
     virtual std::wstring Text();
     virtual int TextAsInt();

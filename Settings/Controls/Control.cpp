@@ -85,6 +85,47 @@ void Control::PlaceRightOf(Control &control) {
     Move(x, y);
 }
 
+void Control::Resize(int width, int height) {
+    RECT r = ClientDimensions();
+    MoveWindow(_hWnd, r.left, r.top, width, height, TRUE);
+}
+
+int Control::X() {
+    RECT r = ClientDimensions();
+    return r.left;
+}
+
+int Control::Y() {
+    RECT r = ClientDimensions();
+    return r.top;
+}
+
+int Control::Width() {
+    RECT r = ClientDimensions();
+    return r.right - r.left;
+}
+
+int Control::Height() {
+    RECT r = ClientDimensions();
+    return r.bottom - r.top;
+}
+
+void Control::X(int x) {
+    Move(x, Y());
+}
+
+void Control::Y(int y) {
+    Move(X(), y);
+}
+
+void Control::Width(int width) {
+    Resize(width, Height());
+}
+
+void Control::Height(int height) {
+    Resize(Width(), height);
+}
+
 bool Control::Text(std::wstring text) {
     return SetDlgItemText(_parent, _id, text.c_str()) == TRUE;
 }

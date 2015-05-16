@@ -242,3 +242,9 @@ bool Hotkeys::OnArgComboChange() {
     LoadSelection(selectionIdx);
     return true;
 }
+
+bool Hotkeys::OnArgCheckChange() {
+    _argCombo.Enabled(_argCheck.Checked());
+    _argEdit.Enabled(_argCheck.Checked());
+    return true;
+}

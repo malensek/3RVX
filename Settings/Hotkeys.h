@@ -29,6 +29,7 @@ private:
     bool OnKeysButtonClick();
     bool OnActionChange();
     bool OnArgComboChange();
+    bool OnArgCheckChange();
 
 private:
     /* Controls: */

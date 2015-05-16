@@ -1,6 +1,7 @@
 #include "Control.h"
 
 #include <sstream>
+#include "../../3RVX/Logger.h"
 
 Control::Control() {
 
@@ -38,6 +39,43 @@ RECT Control::ClientDimensions() {
     return r;
 }
 
+SIZE Control::TextDimensions() {
+    return TextDimensions(Text());
+}
+
+SIZE Control::TextDimensions(std::wstring &text) {
+    HDC dc = GetDC(_hWnd);
+    /* Get font */
+    HFONT font = (HFONT) SendMessage(_hWnd, WM_GETFONT, NULL, NULL);
+    SelectObject(dc, font);
+    wchar_t x[128];
+    GetTextFace(dc, 128, x);
+    CLOG(L"Fname: %s", x);
+    SIZE sz = { 0 };
+    RECT z = { 0 };
+    DrawText(dc, &text[0], -1, &z, DT_CALCRECT);
+    /* Determine the width and height of the text */
+    GetTextExtentPoint32(dc, &text[0], text.size(), &sz);
+    ReleaseDC(_hWnd, dc);
+    //sz.cx = z.right - z.left;
+    //sz.cy = z.bottom - z.top;
+    return sz;
+}
+
+SIZE Control::LargestTextDimensions(std::vector<std::wstring> &items) {
+    SIZE sz = { 0 };
+    for (std::wstring item : items) {
+        SIZE itemSz = TextDimensions(item);
+        if (itemSz.cx > sz.cx) {
+            sz.cx = itemSz.cx;
+        }
+        if (itemSz.cy > sz.cy) {
+            sz.cy = itemSz.cy;
+        }
+    }
+    return sz;
+}
+
 void Control::Enable() {
     EnableWindow(_hWnd, TRUE);
 }
@@ -59,11 +97,8 @@ void Control::Enabled(bool enabled) {
 }
 
 int Control::EmSize() {
-    /* Determine the width of the text */
-    HDC dc = GetDC(_hWnd);
-    SIZE sz = { 0 };
-    GetTextExtentPoint32(dc, L"M", 1, &sz);
-    return sz.cx;
+    std::wstring m = L"M";
+    return TextDimensions(m).cx;
 }
 
 void Control::Move(int x, int y) {

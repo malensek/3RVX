@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <functional>
 #include <string>
+#include <vector>
 
 /// <summary>
 /// Base class for Windows forms control implementations (buttons, checkboxes,
@@ -28,6 +29,10 @@ public:
     /// ScreenDimensions().
     /// </summary>
     virtual RECT ClientDimensions();
+
+    virtual SIZE TextDimensions();
+    virtual SIZE TextDimensions(std::wstring &text);
+    virtual SIZE LargestTextDimensions(std::vector<std::wstring> &items);
 
     virtual void Enable();
     virtual void Disable();

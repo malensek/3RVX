@@ -38,6 +38,9 @@ int ComboBox::SelectionIndex() {
     return ComboBox_GetCurSel(_hWnd);
 }
 
+int ComboBox::Size() {
+    return ComboBox_GetCount(_hWnd);
+}
 DLGPROC ComboBox::Command(unsigned short nCode) {
     switch (nCode) {
     case CBN_SELCHANGE:

@@ -25,6 +25,7 @@ public:
     int Select(std::wstring item);
     void Select(int itemIdx);
 
+    int Size();
     virtual DLGPROC Command(unsigned short nCode);
 
 public:

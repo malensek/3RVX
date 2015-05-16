@@ -128,9 +128,9 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     case HotkeyInfo::DecreaseVolume:
         _argCheck.Text(L"Amount:");
         _argEdit.PlaceRightOf(_argCheck);
+        _argEdit.X(_action.X());
         _argCombo.AddItem(L"Volume Units");
         _argCombo.AddItem(L"Percent");
-        _argCombo.AutoWidth();
         _argCombo.PlaceRightOf(_argEdit);
 
         showCheck = true;

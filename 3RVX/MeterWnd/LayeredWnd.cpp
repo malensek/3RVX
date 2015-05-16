@@ -227,7 +227,7 @@ void LayeredWnd::Bitmap(Gdiplus::Bitmap *bitmap) {
 }
 
 bool LayeredWnd::AlwaysOnTop() {
-    return GetWindowLong(_hWnd, GWL_EXSTYLE) & WS_EX_TOPMOST;
+    return (GetWindowLong(_hWnd, GWL_EXSTYLE) & WS_EX_TOPMOST) != 0;
 }
 
 void LayeredWnd::AlwaysOnTop(bool onTop) {

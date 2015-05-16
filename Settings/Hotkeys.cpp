@@ -90,6 +90,8 @@ void Hotkeys::LoadSelection() {
 
 void Hotkeys::LoadSelection(int index) {
     HotkeyInfo selection = _keyInfo[index];
+    _keys.Enable();
+    _action.Enable();
 
     _keys.Text(L"");
     if (selection.keyCombination > 0) {

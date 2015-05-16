@@ -41,6 +41,7 @@ private:
     ComboBox _action;
 
     Label _argLabel;
+    Checkbox _argCheck;
     ComboBox _argCombo;
     EditBox _argEdit;
 

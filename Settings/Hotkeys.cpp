@@ -107,11 +107,14 @@ void Hotkeys::LoadSelection(int index) {
 
 void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     bool showLabel = false;
+    bool showCheck = false;
     bool showCombo = false;
     bool showEdit = false;
 
     /* Clean things up */
     _argLabel.Text(L"");
+    _argCheck.Text(L"");
+    _argCheck.Checked(false);
     _argCombo.Clear();
     _argEdit.Clear();
 
@@ -146,6 +149,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     }
 
     _argLabel.Visible(showLabel);
+    _argCheck.Visible(showCheck);
     _argCombo.Visible(showCombo);
     _argEdit.Visible(showEdit);
 }

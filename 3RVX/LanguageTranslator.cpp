@@ -9,6 +9,7 @@ LanguageTranslator::LanguageTranslator() {
 
 LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
     CLOG(L"Loading language XML: %s", langFileName.c_str());
+    /*
     std::string u8FileName = StringUtils::Narrow(langFileName);
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
@@ -22,6 +23,11 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
     if (_root == NULL) {
         throw std::runtime_error("Could not find root XML element");
     }
+    */
+
+    wchar_t buf[LOCALE_NAME_MAX_LENGTH];
+    GetUserDefaultLocaleName(buf, LOCALE_NAME_MAX_LENGTH);
+    CLOG(L"Locale: %s", buf);
 }
 
 std::wstring LanguageTranslator::Translate(std::wstring str) {

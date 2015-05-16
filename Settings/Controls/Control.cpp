@@ -62,20 +62,6 @@ SIZE Control::TextDimensions(std::wstring &text) {
     return sz;
 }
 
-SIZE Control::LargestTextDimensions(std::vector<std::wstring> &items) {
-    SIZE sz = { 0 };
-    for (std::wstring item : items) {
-        SIZE itemSz = TextDimensions(item);
-        if (itemSz.cx > sz.cx) {
-            sz.cx = itemSz.cx;
-        }
-        if (itemSz.cy > sz.cy) {
-            sz.cy = itemSz.cy;
-        }
-    }
-    return sz;
-}
-
 void Control::Enable() {
     EnableWindow(_hWnd, TRUE);
 }

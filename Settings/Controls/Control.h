@@ -32,7 +32,6 @@ public:
 
     virtual SIZE TextDimensions();
     virtual SIZE TextDimensions(std::wstring &text);
-    virtual SIZE LargestTextDimensions(std::vector<std::wstring> &items);
 
     virtual void Enable();
     virtual void Disable();

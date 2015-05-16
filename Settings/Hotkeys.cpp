@@ -175,7 +175,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
 }
 
 bool Hotkeys::OnAddButtonClick() {
-    int items = _keyList.Size();
+    int items = _keyList.Count();
     for (int i = 0; i < items; ++i) {
         if (_keyList.ItemText(i, 0) == L"" && _keyList.ItemText(i, 1) == L"") {
             /* We found a blank item already in the list */
@@ -205,7 +205,7 @@ bool Hotkeys::OnRemoveButtonClick() {
     _keyList.Selection(sel);
 
     /* This handles disabling the other controls if the last item was removed:*/
-    if (_keyList.Size() <= 0) {
+    if (_keyList.Count() <= 0) {
         LoadSelection();
     }
 

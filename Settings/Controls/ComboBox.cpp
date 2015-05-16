@@ -8,7 +8,7 @@ void ComboBox::AddItem(std::wstring item) {
 
 std::vector<std::wstring> ComboBox::Items() {
     std::vector<std::wstring> items;
-    for (int i = 0; i < Size(); ++i) {
+    for (int i = 0; i < Count(); ++i) {
         wchar_t buf[MAX_EDITSTR];
         ComboBox_GetLBText(_hWnd, i, buf);
         items.push_back(buf);
@@ -18,6 +18,10 @@ std::vector<std::wstring> ComboBox::Items() {
 
 void ComboBox::Clear() {
     ComboBox_ResetContent(_hWnd);
+}
+
+int ComboBox::Count() {
+    return ComboBox_GetCount(_hWnd);
 }
 
 int ComboBox::Select(std::wstring item) {
@@ -36,10 +40,6 @@ std::wstring ComboBox::Selection() {
 
 int ComboBox::SelectionIndex() {
     return ComboBox_GetCurSel(_hWnd);
-}
-
-int ComboBox::Size() {
-    return ComboBox_GetCount(_hWnd);
 }
 
 DLGPROC ComboBox::Command(unsigned short nCode) {

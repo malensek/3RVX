@@ -23,6 +23,8 @@ public:
     void AddColumn(std::wstring name, int width);
     void InsertColumn(int index, std::wstring name, int width);
 
+    int Count();
+
     int AddItem(std::wstring item);
     int InsertItem(int index, std::wstring item);
     std::wstring ItemText(int index, int subIndex);
@@ -32,8 +34,6 @@ public:
 
     int Selection();
     void Selection(int index);
-
-    int Size();
 
     virtual DLGPROC Notification(NMHDR *nHdr);
 

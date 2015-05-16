@@ -21,8 +21,12 @@ void ListView::InsertColumn(int index, std::wstring colName, int width) {
     }
 }
 
+int ListView::Count() {
+    return ListView_GetItemCount(_hWnd);
+}
+
 int ListView::AddItem(std::wstring item) {
-    return InsertItem(Size(), item);
+    return InsertItem(Count(), item);
 }
 
 int ListView::InsertItem(int index, std::wstring item) {
@@ -59,17 +63,13 @@ void ListView::Selection(int index) {
     if (index < 0) {
         index = 0;
     }
-    if (index > Size() - 1) {
-        index = Size() - 1;
+    if (index > Count() - 1) {
+        index = Count() - 1;
     }
 
     ItemState(index, LVIS_SELECTED, LVIS_SELECTED);
     ListView_SetSelectionMark(_hWnd, index);
     ListView_EnsureVisible(_hWnd, index, FALSE);
-}
-
-int ListView::Size() {
-    return ListView_GetItemCount(_hWnd);
 }
 
 DLGPROC ListView::Notification(NMHDR *nHdr) {

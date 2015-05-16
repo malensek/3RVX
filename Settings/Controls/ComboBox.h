@@ -19,13 +19,12 @@ public:
     std::vector<std::wstring> Items();
 
     void Clear();
+    int Count();
 
     std::wstring Selection();
     int SelectionIndex();
     int Select(std::wstring item);
     void Select(int itemIdx);
-
-    int Size();
 
 
     virtual DLGPROC Command(unsigned short nCode);

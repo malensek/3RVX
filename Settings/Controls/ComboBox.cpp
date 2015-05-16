@@ -6,6 +6,16 @@ void ComboBox::AddItem(std::wstring item) {
     ComboBox_AddString(_hWnd, &item[0]);
 }
 
+std::vector<std::wstring> ComboBox::Items() {
+    std::vector<std::wstring> items;
+    for (int i = 0; i < Size(); ++i) {
+        wchar_t buf[MAX_EDITSTR];
+        ComboBox_GetLBText(_hWnd, i, buf);
+        items.push_back(buf);
+    }
+    return items;
+}
+
 void ComboBox::Clear() {
     ComboBox_ResetContent(_hWnd);
 }

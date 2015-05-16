@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "Control.h"
 
 class ComboBox : public Control {
@@ -14,6 +16,7 @@ public:
     }
 
     void AddItem(std::wstring item);
+    std::vector<std::wstring> Items();
 
     void Clear();
 

@@ -17,13 +17,13 @@ void Display::Initialize() {
 
     INIT_CONTROL(CMB_POSITION, ComboBox, _position);
     _position.OnSelectionChange
-        = std::bind(&Display::OnPositionChanged, this);
+        = std::bind(&Display::OnPositionChange, this);
     INIT_CONTROL(LBL_CUSTOMX, Label, _customX);
     INIT_CONTROL(ED_CUSTOMX, EditBox, _positionX);
     INIT_CONTROL(LBL_CUSTOMY, Label, _customY);
     INIT_CONTROL(ED_CUSTOMY, EditBox, _positionY);
     INIT_CONTROL(CHK_EDGE, Checkbox, _customDistance);
-    _customDistance.OnClick = std::bind(&Display::OnCustomCheckChanged, this);
+    _customDistance.OnClick = std::bind(&Display::OnCustomCheckChange, this);
     INIT_CONTROL(SP_EDGE, Spinner, _edgeSpinner);
     _edgeSpinner.Buddy(ED_EDGE);
 
@@ -32,7 +32,7 @@ void Display::Initialize() {
 
     INIT_CONTROL(CMB_ANIMATION, ComboBox, _hideAnimation);
     _hideAnimation.OnSelectionChange
-        = std::bind(&Display::OnAnimationChanged, this);
+        = std::bind(&Display::OnAnimationChange, this);
     INIT_CONTROL(LBL_HIDEDELAY, Label, _hideDelayLabel);
     INIT_CONTROL(SP_HIDEDELAY, Spinner, _hideDelay);
     _hideDelay.Buddy(ED_HIDEDELAY);
@@ -92,9 +92,9 @@ void Display::LoadSettings() {
     _hideSpeed.Text(settings->HideSpeed());
 
     /* Refresh control states */
-    OnPositionChanged();
-    OnCustomCheckChanged();
-    OnAnimationChanged();
+    OnPositionChange();
+    OnCustomCheckChange();
+    OnAnimationChange();
 }
 
 void Display::SaveSettings() {
@@ -139,7 +139,7 @@ void Display::SaveSettings() {
     settings->HideSpeed(_hideSpeed.TextAsInt());
 }
 
-bool Display::OnAnimationChanged() {
+bool Display::OnAnimationChange() {
     _hideSpeed.Enabled(_hideAnimation.Selection() != noAnimStr);
     return true;
 }
@@ -150,12 +150,12 @@ bool Display::OnAnimationSpin(NMUPDOWN *ud) {
     return FALSE; /* Allows the change */
 }
 
-bool Display::OnCustomCheckChanged() {
+bool Display::OnCustomCheckChange() {
     _edgeSpinner.Enabled(_customDistance.Checked());
     return true;
 }
 
-bool Display::OnPositionChanged() {
+bool Display::OnPositionChange() {
     bool isCustom = (_position.Selection() == customPositionStr);
     _customX.Enabled(isCustom);
     _customY.Enabled(isCustom);

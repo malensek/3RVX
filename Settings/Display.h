@@ -13,10 +13,10 @@ protected:
     virtual void LoadSettings();
 
 private:
-    bool OnAnimationChanged();
+    bool OnAnimationChange();
     bool OnAnimationSpin(NMUPDOWN *ud);
-    bool OnCustomCheckChanged();
-    bool OnPositionChanged();
+    bool OnCustomCheckChange();
+    bool OnPositionChange();
 
 private:
     /* Controls: */

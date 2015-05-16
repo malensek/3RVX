@@ -97,6 +97,7 @@ void Hotkeys::LoadSelection(int index) {
         _keyList.ItemText(index, 0, keyStr);
     }
 
+    _action.Select(-1);
     int action = selection.action;
     if (action >= 0) {
         _keyList.ItemText(index, 1, HotkeyInfo::ActionNames[action]);

@@ -81,6 +81,8 @@ void Hotkeys::SaveSettings() {
 void Hotkeys::LoadSelection() {
     int idx = _keyList.Selection();
     if (idx < 0) {
+        _keys.Disable();
+        _action.Disable();
         return;
     }
     LoadSelection(idx);

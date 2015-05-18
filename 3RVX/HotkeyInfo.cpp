@@ -61,7 +61,7 @@ double HotkeyInfo::ArgToDouble(unsigned int argIdx) {
 }
 
 bool HotkeyInfo::HasArgs() {
-    return args.size() > 0;
+    return args.empty() == false;
 }
 
 bool HotkeyInfo::HasArg(unsigned int argIdx) {

@@ -144,7 +144,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
         break;
 
     case HotkeyInfo::EjectDrive:
-        _argLabel.Text(L"Drive:");
+        _argLabel.Text(driveArgStr);
         for (int i = 0; i < 26; ++i) {
             wchar_t ch = (wchar_t) i + 65;
             _argCombo.AddItem(std::wstring(1, ch));
@@ -159,7 +159,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
         break;
 
     case HotkeyInfo::MediaKey:
-        _argLabel.Text(L"Key:");
+        _argLabel.Text(keyArgStr);
         for (std::wstring keys : HotkeyInfo::MediaKeyNames) {
             _argCombo.AddItem(keys);
         }

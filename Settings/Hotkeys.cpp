@@ -271,6 +271,10 @@ bool Hotkeys::OnArgComboChange() {
 
 bool Hotkeys::OnArgCheckChange() {
     int selectionIdx = _keyList.Selection();
+    if (selectionIdx == -1) {
+        return false;
+    }
+
     HotkeyInfo *current = &_keyInfo[selectionIdx];
 
     HotkeyInfo::HotkeyActions action

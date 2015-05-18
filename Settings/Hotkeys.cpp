@@ -312,9 +312,11 @@ void Hotkeys::DefaultArgControlStates() {
 void Hotkeys::VolumeArgControlStates(HotkeyInfo &selection) {
     _argCheck.Text(amountVolArgStr);
     _argCheck.Checked(selection.HasArgs());
+    _argEdit.Enabled(_argCheck.Checked());
     _argEdit.Width(_argEdit.EmSize() * 6);
     _argEdit.PlaceRightOf(_argCheck);
     _argEdit.X(_action.X());
+    _argCombo.Enabled(_argCheck.Checked());
     _argCombo.AddItem(unitsVolArgStr);
     _argCombo.AddItem(percentVolArgStr);
     _argCombo.Select(0);

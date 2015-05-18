@@ -63,4 +63,5 @@ private:
     std::wstring percentVolArgStr = L"Percent";
     std::wstring keyArgStr = L"Key:";
     std::wstring driveArgStr = L"Drive:";
+    std::wstring pathArgStr = L"Path:";
 };

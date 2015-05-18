@@ -175,6 +175,23 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
         showLabel = true;
         showCombo = true;
         break;
+
+    case HotkeyInfo::Run:
+        _argLabel.Text(pathArgStr);
+        _argButton.Text(L"…");
+        _argButton.Width(_argButton.EmSize() * 3);
+        _argEdit.PlaceRightOf(_argLabel);
+        _argEdit.X(_action.X());
+        _argEdit.Width(_keys.Width() - _argButton.Width() - _argEdit.EmSize());
+        _argButton.PlaceRightOf(_argEdit);
+        if (selection.HasArgs()) {
+            _argEdit.Text(selection.args[0]);
+        }
+
+        showLabel = true;
+        showEdit = true;
+        showButton = true;
+        break;
     }
 
     _argLabel.Visible(showLabel);
@@ -335,6 +352,27 @@ bool Hotkeys::OnArgCheckChange() {
     return true;
 }
 
+bool Hotkeys::OnArgButtonClick() {
+    int selectionIdx = _keyList.Selection();
+    if (selectionIdx == -1) {
+        return false;
+    }
+
+    HotkeyInfo *current = &_keyInfo[selectionIdx];
+
+    HotkeyInfo::HotkeyActions action
+        = (HotkeyInfo::HotkeyActions) _action.SelectionIndex();
+
+    switch (action) {
+    case HotkeyInfo::Run: 
+        std::wstring fName = OpenFileDialog();
+        _argEdit.Text(fName);
+        break;
+    }
+
+    return true;
+}
+
 void Hotkeys::UpdateEditArgument() {
     HotkeyInfo *current = &_keyInfo[_listSelection];
 
@@ -349,7 +387,13 @@ void Hotkeys::UpdateEditArgument() {
             current->AllocateArg(0);
             current->args[0] = _argEdit.Text();
         }
+        break;
 
+    case HotkeyInfo::Run:
+        if (_argEdit.Text() != L"") {
+            current->AllocateArg(0);
+            current->args[0] = _argEdit.Text();
+        }
         break;
     }
 }
@@ -395,7 +439,7 @@ void Hotkeys::VolumeArgControlStates(HotkeyInfo &selection) {
 }
 
 std::wstring Hotkeys::OpenFileDialog() {
-    wchar_t fileName[1024] = L"ï¿½";
+    wchar_t fileName[1024] = L" ";
 
     OPENFILENAME ofn = { 0 };
     ofn.lStructSize = sizeof(OPENFILENAME);
@@ -407,7 +451,7 @@ std::wstring Hotkeys::OpenFileDialog() {
     GetOpenFileName(&ofn);
 
     std::wstring fNameStr(fileName);
-    if (fNameStr.back() == L'ï¿½') {
+    if (fNameStr.back() == L' ') {
         fNameStr.back() = L'\0';
     }
 

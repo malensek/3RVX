@@ -22,7 +22,10 @@ private:
 
     void DefaultArgControlStates();
     void VolumeArgControlStates(HotkeyInfo &selection);
+    void UpdateEditArgument();
+
 private:
+    /* Control Event Handlers */
     void OnKeyListItemChange(NMLISTVIEW *lv);
     void OnKeyListSelectionChange(int index);
 

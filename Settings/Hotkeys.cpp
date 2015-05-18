@@ -295,6 +295,25 @@ bool Hotkeys::OnArgCheckChange() {
     return true;
 }
 
+void Hotkeys::UpdateEditArgument() {
+    HotkeyInfo *current = &_keyInfo[_listSelection];
+
+    HotkeyInfo::HotkeyActions action
+        = (HotkeyInfo::HotkeyActions) _action.SelectionIndex();
+
+    switch (action) {
+    case HotkeyInfo::IncreaseVolume:
+    case HotkeyInfo::DecreaseVolume:
+    case HotkeyInfo::SetVolume:
+        if (_argEdit.Text() != L"") {
+            current->AllocateArg(0);
+            current->args[0] = _argEdit.Text();
+        }
+
+        break;
+    }
+}
+
 void Hotkeys::DefaultArgControlStates() {
     _argLabel.Visible(false);
     _argCheck.Visible(false);

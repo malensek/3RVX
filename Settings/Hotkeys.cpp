@@ -270,7 +270,41 @@ bool Hotkeys::OnArgComboChange() {
 }
 
 bool Hotkeys::OnArgCheckChange() {
+    int selectionIdx = _keyList.Selection();
+    HotkeyInfo *current = &_keyInfo[selectionIdx];
+
+    HotkeyInfo::HotkeyActions action
+        = (HotkeyInfo::HotkeyActions) _action.SelectionIndex();
+
+    switch (action) {
+    case HotkeyInfo::IncreaseVolume:
+    case HotkeyInfo::DecreaseVolume:
+    case HotkeyInfo::SetVolume:
+        if (_argCheck.Checked() == false) {
+            current->args.clear();
+        }
+        break;
+    }
+
     _argCombo.Enabled(_argCheck.Checked());
     _argEdit.Enabled(_argCheck.Checked());
     return true;
+}
+
+void Hotkeys::DefaultArgControlStates() {
+    _argLabel.Visible(false);
+    _argCheck.Visible(false);
+    _argCombo.Visible(false);
+    _argEdit.Visible(false);
+    _argLabel.Text(L"");
+    _argCheck.Text(L"");
+    _argCheck.Checked(false);
+    _argCombo.Clear();
+    _argCombo.Width(_action.Width());
+    _argCombo.PlaceRightOf(_argLabel);
+    _argCombo.X(_action.X());
+    _argEdit.Clear();
+    _argEdit.Width(_action.Width());
+    _argEdit.PlaceRightOf(_argLabel);
+    _argEdit.X(_action.X());
 }

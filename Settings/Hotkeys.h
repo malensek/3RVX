@@ -19,6 +19,7 @@ private:
     void LoadSelection(int index);
     void LoadActionParameters(int action, HotkeyInfo &selection);
 
+    void DefaultArgControlStates();
 private:
     void OnKeyListItemChange(NMLISTVIEW *lv);
     void OnKeyListSelectionChange(int index);

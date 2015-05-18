@@ -387,3 +387,23 @@ void Hotkeys::VolumeArgControlStates(HotkeyInfo &selection) {
         _argCombo.Select(selection.ArgToInt(1));
     }
 }
+
+std::wstring Hotkeys::OpenFileDialog() {
+    wchar_t fileName[1024] = L"�";
+
+    OPENFILENAME ofn = { 0 };
+    ofn.lStructSize = sizeof(OPENFILENAME);
+    ofn.hwndOwner = _hWnd;
+    ofn.lpstrFile = fileName;
+    ofn.nMaxFile = 1024;
+    ofn.Flags = OFN_HIDEREADONLY | OFN_READONLY;
+
+    GetOpenFileName(&ofn);
+
+    std::wstring fNameStr(fileName);
+    if (fNameStr.back() == L'�') {
+        fNameStr.back() = L'\0';
+    }
+
+    return fNameStr;
+}

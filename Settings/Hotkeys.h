@@ -23,6 +23,7 @@ private:
     void DefaultArgControlStates();
     void VolumeArgControlStates(HotkeyInfo &selection);
     void UpdateEditArgument();
+    std::wstring OpenFileDialog();
 
 private:
     /* Control Event Handlers */

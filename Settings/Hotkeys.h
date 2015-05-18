@@ -21,6 +21,7 @@ private:
     void LoadActionParameters(int action, HotkeyInfo &selection);
 
     void DefaultArgControlStates();
+    void VolumeArgControlStates(HotkeyInfo &selection);
 private:
     void OnKeyListItemChange(NMLISTVIEW *lv);
     void OnKeyListSelectionChange(int index);

@@ -308,3 +308,23 @@ void Hotkeys::DefaultArgControlStates() {
     _argEdit.PlaceRightOf(_argLabel);
     _argEdit.X(_action.X());
 }
+
+void Hotkeys::VolumeArgControlStates(HotkeyInfo &selection) {
+    _argCheck.Text(amountVolArgStr);
+    _argCheck.Checked(selection.HasArgs());
+    _argEdit.Width(_argEdit.EmSize() * 6);
+    _argEdit.PlaceRightOf(_argCheck);
+    _argEdit.X(_action.X());
+    _argCombo.AddItem(unitsVolArgStr);
+    _argCombo.AddItem(percentVolArgStr);
+    _argCombo.Select(0);
+    _argCombo.PlaceRightOf(_argEdit);
+    _argCombo.Width(_action.Width() - (_argCombo.X() - _action.X()));
+
+    if (selection.HasArg(0)) {
+        _argEdit.Text(selection.args[0]);
+    }
+    if (selection.HasArg(1)) {
+        _argCombo.Select(selection.ArgToInt(1));
+    }
+}

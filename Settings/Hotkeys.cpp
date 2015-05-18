@@ -73,6 +73,10 @@ void Hotkeys::SaveSettings() {
         return;
     }
 
+    /* If the edit box was the last thing the user touched, then we need to
+     * manually sync the changes here. */
+    UpdateEditArgument();
+
     CLOG(L"Saving: Hotkeys");
     Settings *settings = Settings::Instance();
     settings->Hotkeys(_keyInfo);

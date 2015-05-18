@@ -111,6 +111,8 @@ void Hotkeys::LoadSelection(int index) {
         _keyList.ItemText(index, 1, HotkeyInfo::ActionNames[action]);
         LoadActionParameters(action, selection);
         _action.Select(action);
+    } else {
+        DefaultArgControlStates();
     }
 }
 
@@ -176,6 +178,13 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     _argCheck.Visible(showCheck);
     _argCombo.Visible(showCombo);
     _argEdit.Visible(showEdit);
+
+    if (_argCheck.Visible() == false) {
+        /* Controls are only disabled for optional arguments (check box).
+         * If _argCheck isn't visible, make sure everything is enabled. */
+        _argEdit.Enable();
+        _argCombo.Enable();
+    }
 }
 
 bool Hotkeys::OnAddButtonClick() {
@@ -220,8 +229,11 @@ bool Hotkeys::OnActionChange() {
     int actionIdx = _action.SelectionIndex();
     int selectionIdx = _keyList.Selection();
     HotkeyInfo &currentListSelection = _keyInfo[selectionIdx];
-    currentListSelection.action = (HotkeyInfo::HotkeyActions) actionIdx;
-    LoadSelection(selectionIdx);
+    if (currentListSelection.action != actionIdx) {
+        currentListSelection.args.clear();
+        currentListSelection.action = (HotkeyInfo::HotkeyActions) actionIdx;
+        LoadSelection(selectionIdx);
+    }
     return true;
 }
 
@@ -248,7 +260,14 @@ void Hotkeys::OnKeyListItemChange(NMLISTVIEW *lv) {
 }
 
 void Hotkeys::OnKeyListSelectionChange(int index) {
-    HotkeyInfo current = _keyInfo[index];
+    if (_listSelection != -1) {
+        /* Update the edit control of the previously-selected item. This avoids
+         * constantly updating the key combination state as the user types. */
+        UpdateEditArgument();
+    }
+    /* Update with the new index */
+    _listSelection = index;
+
 #if ENABLE_3RVX_LOG != 0
     HotkeyInfo *current = &_keyInfo[index];
     CLOG(L"Selecting key combination %d:", index);
@@ -266,6 +285,13 @@ bool Hotkeys::OnArgComboChange() {
         = (HotkeyInfo::HotkeyActions) _action.SelectionIndex();
 
     switch (action) {
+    case HotkeyInfo::IncreaseVolume:
+    case HotkeyInfo::DecreaseVolume:
+    case HotkeyInfo::SetVolume:
+        current->AllocateArg(1);
+        current->args[1] = std::to_wstring(_argCombo.SelectionIndex());
+        break;
+
     case HotkeyInfo::EjectDrive:
     case HotkeyInfo::MediaKey:
         current->AllocateArg(0);

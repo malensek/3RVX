@@ -51,4 +51,9 @@ private:
     /* Strings: */
     std::wstring hotkeysColumnStr = L"Hotkeys";
     std::wstring actionColumnStr = L"Action";
+    std::wstring amountVolArgStr = L"Amount:";
+    std::wstring unitsVolArgStr = L"Volume Units";
+    std::wstring percentVolArgStr = L"Percent";
+    std::wstring keyArgStr = L"Key:";
+    std::wstring driveArgStr = L"Drive:";
 };

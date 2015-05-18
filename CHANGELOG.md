@@ -10,7 +10,9 @@ Beta 7
 * Fix volume state bug (switching devices didn't update volume state)
 * Initial UI internationalization (language translation) functionality
 * Update small glass skin to work with v3
-* Custom volume increments: percentage and volume units
+* Custom volume hotkey increments: percentage and volume units
+* 'Set Volume' hotkey
+* 'Run' hotkey: open applications, folders, etc.
 
 Beta 6
 ------

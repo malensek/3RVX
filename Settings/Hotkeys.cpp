@@ -34,6 +34,8 @@ void Hotkeys::Initialize() {
     INIT_CONTROL(CMB_ARG, ComboBox, _argCombo);
     _argCombo.OnSelectionChange = std::bind(&Hotkeys::OnArgComboChange, this);
     INIT_CONTROL(ED_ARG, EditBox, _argEdit);
+    INIT_CONTROL(BTN_ARG, Button, _argButton);
+    _argButton.OnClick = std::bind(&Hotkeys::OnArgButtonClick, this);
 }
 
 void Hotkeys::LoadSettings() {
@@ -121,6 +123,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     bool showCheck = false;
     bool showCombo = false;
     bool showEdit = false;
+    bool showButton = false;
 
     /* Restore things to their default state */
     DefaultArgControlStates();
@@ -178,12 +181,14 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     _argCheck.Visible(showCheck);
     _argCombo.Visible(showCombo);
     _argEdit.Visible(showEdit);
+    _argButton.Visible(showButton);
 
     if (_argCheck.Visible() == false) {
         /* Controls are only disabled for optional arguments (check box).
          * If _argCheck isn't visible, make sure everything is enabled. */
         _argEdit.Enable();
         _argCombo.Enable();
+        _argButton.Enable();
     }
 }
 
@@ -326,6 +331,7 @@ bool Hotkeys::OnArgCheckChange() {
 
     _argCombo.Enabled(_argCheck.Checked());
     _argEdit.Enabled(_argCheck.Checked());
+    _argButton.Enabled(_argCheck.Checked());
     return true;
 }
 

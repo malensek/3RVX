@@ -37,6 +37,7 @@ private:
     bool OnActionChange();
     bool OnArgComboChange();
     bool OnArgCheckChange();
+    bool OnArgButtonClick();
 
 private:
     /* Controls: */
@@ -51,6 +52,7 @@ private:
     Checkbox _argCheck;
     ComboBox _argCombo;
     EditBox _argEdit;
+    Button _argButton;
 
 private:
     /* Strings: */

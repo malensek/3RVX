@@ -13,6 +13,7 @@ protected:
     virtual void LoadSettings();
 
 private:
+    int _listSelection = -1;
     std::vector<HotkeyInfo> _keyInfo;
 
     void LoadSelection();

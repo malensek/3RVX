@@ -14,7 +14,7 @@ public:
         EjectDrive,
         EjectLatestDrive,
         MediaKey,
-        RunApp,
+        Run,
         Settings,
         Exit,
     };

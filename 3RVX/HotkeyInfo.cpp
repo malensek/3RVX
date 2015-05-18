@@ -13,7 +13,7 @@ std::vector<std::wstring> HotkeyInfo::ActionNames = {
     L"Eject Drive",
     L"Eject Latest Drive",
     L"Media Key",
-    L"Run Application",
+    L"Run",
     L"Open Settings Dialog",
     L"Exit 3RVX",
 };

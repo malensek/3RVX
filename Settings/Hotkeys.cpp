@@ -120,31 +120,31 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     bool showCombo = false;
     bool showEdit = false;
 
-    /* Clean things up */
-    _argLabel.Text(L"");
-    _argCheck.Text(L"");
-    _argCheck.Checked(false);
-    _argCombo.Clear();
-    _argEdit.Clear();
+    /* Restore things to their default state */
+    DefaultArgControlStates();
 
     switch ((HotkeyInfo::HotkeyActions) action) {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
-        _argCheck.Text(L"Amount:");
-        _argEdit.PlaceRightOf(_argCheck);
-        _argEdit.X(_action.X());
-        _argCombo.AddItem(L"Volume Units");
-        _argCombo.AddItem(L"Percent");
-        _argCombo.PlaceRightOf(_argEdit);
+        VolumeArgControlStates(selection);
 
         showCheck = true;
         showCombo = true;
         showEdit = true;
-        OnArgCheckChange();
+        break;
+
+    case HotkeyInfo::SetVolume:
+        VolumeArgControlStates(selection);
+        _argLabel.Text(amountVolArgStr);
+
+        showLabel = true;
+        showCombo = true;
+        showEdit = true;
         break;
 
     case HotkeyInfo::EjectDrive:
         _argLabel.Text(driveArgStr);
+        _argCombo.Width(_argCombo.EmSize() * 6);
         for (int i = 0; i < 26; ++i) {
             wchar_t ch = (wchar_t) i + 65;
             _argCombo.AddItem(std::wstring(1, ch));

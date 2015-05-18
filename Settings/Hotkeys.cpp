@@ -280,6 +280,7 @@ bool Hotkeys::OnArgCheckChange() {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
         if (_argCheck.Checked() == false) {
+            _argEdit.Clear();
             current->args.clear();
         }
         break;

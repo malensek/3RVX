@@ -249,8 +249,12 @@ void Hotkeys::OnKeyListItemChange(NMLISTVIEW *lv) {
 
 void Hotkeys::OnKeyListSelectionChange(int index) {
     HotkeyInfo current = _keyInfo[index];
+#if ENABLE_3RVX_LOG != 0
+    HotkeyInfo *current = &_keyInfo[index];
     CLOG(L"Selecting key combination %d:", index);
-    QCLOG(L"%s", current.ToString().c_str());
+    QCLOG(L"%s", current->ToString().c_str());
+#endif
+
     LoadSelection(index);
 }
 

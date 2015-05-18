@@ -45,20 +45,13 @@ SIZE Control::TextDimensions() {
 
 SIZE Control::TextDimensions(std::wstring &text) {
     HDC dc = GetDC(_hWnd);
-    /* Get font */
     HFONT font = (HFONT) SendMessage(_hWnd, WM_GETFONT, NULL, NULL);
     SelectObject(dc, font);
-    wchar_t x[128];
-    GetTextFace(dc, 128, x);
-    CLOG(L"Fname: %s", x);
     SIZE sz = { 0 };
-    RECT z = { 0 };
-    DrawText(dc, &text[0], -1, &z, DT_CALCRECT);
+
     /* Determine the width and height of the text */
     GetTextExtentPoint32(dc, &text[0], text.size(), &sz);
     ReleaseDC(_hWnd, dc);
-    //sz.cx = z.right - z.left;
-    //sz.cy = z.bottom - z.top;
     return sz;
 }
 

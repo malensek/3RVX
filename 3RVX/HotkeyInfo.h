@@ -20,6 +20,12 @@ public:
     };
     static std::vector<std::wstring> ActionNames;
 
+    enum VolumeKeyArgTypes {
+        NoArgs = -1,
+        Units = 0,
+        Percentage = 1,
+    };
+
     enum MediaKeys {
         PlayPause,
         Stop,

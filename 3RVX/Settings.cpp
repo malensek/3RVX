@@ -308,7 +308,8 @@ std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
         }
 
         if (action == -1) {
-            CLOG(L"Hotkey action '%s' not recognized; skipping", wActionStr);
+            CLOG(L"Hotkey action '%s' not recognized; skipping",
+                wActionStr.c_str());
             continue;
         }
 

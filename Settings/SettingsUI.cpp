@@ -36,6 +36,10 @@ Display display;
 Hotkeys hotkeys;
 Tab *tabs[] = { &general, &display, &hotkeys };
 
+/* Startup x/y location offsets */
+#define XOFFSET 70
+#define YOFFSET 20
+
 HINSTANCE hInstance = NULL;
 HWND mainWnd = NULL;
 
@@ -75,8 +79,8 @@ int APIENTRY wWinMain(
     }
 
     mainWnd = CreateWindowEx(
-        NULL, L"3RVX SettingsUI", L"3RVX SettingsUI",
-        NULL, NULL, NULL, NULL, NULL, NULL, NULL, hInstance, NULL);
+        NULL, L"3RVX SettingsUI", L"3RVX SettingsUI", NULL,
+        0, 0, 0, 0, NULL, NULL, hInstance, NULL);
 
     PROPSHEETPAGE psp[4];
 
@@ -126,6 +130,11 @@ int APIENTRY wWinMain(
     psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);
     psh.ppsp = (LPCPROPSHEETPAGE) &psp;
     psh.pfnCallback = (PFNPROPSHEETCALLBACK) PropSheetProc;
+
+    /* Position the window */
+    POINT pt = { 0 };
+    GetCursorPos(&pt);
+    MoveWindow(mainWnd, pt.x - XOFFSET, pt.y - YOFFSET, 0, 0, TRUE);
 
     CLOG(L"Launching modal property sheet.");
     return PropertySheet(&psh);

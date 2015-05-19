@@ -374,7 +374,12 @@ bool Hotkeys::OnArgButtonClick() {
 }
 
 void Hotkeys::UpdateEditArgument() {
-    HotkeyInfo *current = &_keyInfo[_listSelection];
+    HotkeyInfo *current;
+    try {
+        current = &_keyInfo.at(_listSelection);
+    } catch (std::out_of_range e) {
+        return;
+    }
 
     HotkeyInfo::HotkeyActions action
         = (HotkeyInfo::HotkeyActions) _action.SelectionIndex();

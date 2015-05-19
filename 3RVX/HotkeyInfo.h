@@ -36,6 +36,9 @@ public:
     static std::vector<unsigned short> MediaKeyVKs;
 
 public:
+    static VolumeKeyArgTypes VolumeArgType(HotkeyInfo &hki);
+
+public:
     int keyCombination = 0;
     int action = -1;
     std::vector<std::wstring> args;

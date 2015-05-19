@@ -32,6 +32,20 @@ std::vector<unsigned short> HotkeyInfo::MediaKeyVKs = {
     VK_MEDIA_PREV_TRACK,
 };
 
+HotkeyInfo::VolumeKeyArgTypes HotkeyInfo::VolumeArgType(HotkeyInfo &hki) {
+    if (hki.HasArgs() == false) {
+        return VolumeKeyArgTypes::NoArgs;
+    }
+
+    if (hki.HasArg(1) == false) {
+        /* No 2nd arg; assume units */
+        return VolumeKeyArgTypes::Units;
+    }
+
+    int arg1 = hki.ArgToInt(1);
+    return (VolumeKeyArgTypes) arg1;
+}
+
 int HotkeyInfo::ArgToInt(unsigned int argIdx) {
     if (_intArgs.count(argIdx) > 0) {
         return _intArgs[argIdx];

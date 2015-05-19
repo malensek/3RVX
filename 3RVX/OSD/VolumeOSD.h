@@ -53,6 +53,7 @@ private:
     void LoadSkin();
     void MeterLevels(float value);
     virtual void MeterChangeCallback(int units);
+    void ProcessVolumeHotkeys(HotkeyInfo &hki);
     void UpdateIcon();
     void UpdateIconImage();
     void UpdateIconTip();

@@ -279,6 +279,41 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
     }
 }
 
+void VolumeOSD::ProcessVolumeHotkeys(HotkeyInfo &hki) {
+    float currentVol = _volumeCtrl->Volume();
+    HotkeyInfo::VolumeKeyArgTypes type = HotkeyInfo::VolumeArgType(hki);
+
+    if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
+        /* Deal with percentage-based amounts */
+        float amount = (hki.ArgToDouble(0) / 100.0f);
+        if (hki.action == HotkeyInfo::HotkeyActions::DecreaseVolume) {
+            amount = -amount;
+        }
+        _volumeCtrl->Volume(currentVol + amount);
+    } else {
+        /* Unit-based amounts */
+        int unitIncrement = 1;
+        int currentUnit = _callbackMeter->CalcUnits();
+        if (currentVol <= 0.000001f) {
+            currentUnit = 0;
+        }
+
+        if (hki.action == HotkeyInfo::DecreaseVolume) {
+            unitIncrement = -1;
+        }
+
+        if (type == HotkeyInfo::VolumeKeyArgTypes::Units) {
+            unitIncrement *= hki.ArgToInt(0);
+        }
+
+        _volumeCtrl->Volume(
+            (float) (currentUnit + unitIncrement) * _defaultIncrement);
+    }
+
+    /* Tell 3RVX that we changed the volume */
+    SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
+}
+
 void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
     PositionWindow(monitors[0], _mWnd);
     PositionWindow(monitors[0], _muteWnd);

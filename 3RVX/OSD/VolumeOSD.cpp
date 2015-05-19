@@ -240,23 +240,12 @@ void VolumeOSD::UnMute() {
 }
 
 void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
-    int unitIncrement = 1;
-
-    int currentUnit = _callbackMeter->CalcUnits();
-    float currentVol = _volumeCtrl->Volume();
-    if (currentVol <= 0.000001f) {
-        currentUnit = 0;
-    }
-
     switch (hki.action) {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
         UnMute();
-        if (hki.action == HotkeyInfo::DecreaseVolume) {
-            unitIncrement = -1;
-        }
-        if (hki.HasArg(0)) {
-            unitIncrement *= hki.ArgToInt(0);
+        ProcessVolumeHotkeys(hki);
+        break;
         }
         _volumeCtrl->Volume(
             (float) (currentUnit + unitIncrement) * _defaultIncrement);

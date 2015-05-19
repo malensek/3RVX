@@ -163,7 +163,8 @@ int Control::TextAsInt() {
 }
 
 bool Control::Visible() {
-    return IsWindowVisible(_hWnd) != FALSE;
+    long l = GetWindowLong(_hWnd, GWL_STYLE);
+    return (l & WS_VISIBLE) != 0;
 }
 
 void Control::Visible(bool visible) {

@@ -191,9 +191,16 @@ void ProcessHotkeys(HotkeyInfo &hki) {
         MediaKeys::ProcessHotkeys(hki);
         break;
 
+    case HotkeyInfo::Run:
+        if (hki.HasArgs()) {
+            ShellExecute(NULL, L"open", hki.args[0].c_str(),
+                NULL, NULL, SW_SHOWNORMAL);
+        }
+        break;
+
     case HotkeyInfo::Settings:
-        ShellExecute(NULL, L"open",
-            Settings::SettingsApp().c_str(), NULL, NULL, SW_SHOWNORMAL);
+        ShellExecute(NULL, L"open", Settings::SettingsApp().c_str(),
+            NULL, NULL, SW_SHOWNORMAL);
         break;
 
     case HotkeyInfo::Exit:

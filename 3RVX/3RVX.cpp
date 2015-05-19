@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#pragma comment(lib, "Wtsapi32.lib")
 #include <Wtsapi32.h>
 
 #include "3RVX.h"

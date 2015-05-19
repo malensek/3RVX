@@ -285,7 +285,7 @@ void VolumeOSD::ProcessVolumeHotkeys(HotkeyInfo &hki) {
 
     if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
         /* Deal with percentage-based amounts */
-        float amount = (hki.ArgToDouble(0) / 100.0f);
+        float amount = ((float) hki.ArgToDouble(0) / 100.0f);
         if (hki.action == HotkeyInfo::HotkeyActions::DecreaseVolume) {
             amount = -amount;
         }

@@ -408,6 +408,11 @@ void Hotkeys::DefaultArgControlStates() {
     _argCheck.Visible(false);
     _argCombo.Visible(false);
     _argEdit.Visible(false);
+
+    _argCombo.Enabled(false);
+    _argEdit.Enabled(false);
+    _argButton.Enabled(false);
+
     _argLabel.Text(L"");
     _argCheck.Text(L"");
     _argCheck.Checked(false);

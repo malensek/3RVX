@@ -172,6 +172,7 @@ void ProcessHotkeys(HotkeyInfo &hki) {
     switch (hki.action) {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
+    case HotkeyInfo::SetVolume:
     case HotkeyInfo::Mute:
     case HotkeyInfo::VolumeSlider:
         if (vOSD) {

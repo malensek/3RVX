@@ -246,9 +246,20 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
         UnMute();
         ProcessVolumeHotkeys(hki);
         break;
+
+    case HotkeyInfo::SetVolume: {
+        HotkeyInfo::VolumeKeyArgTypes type = HotkeyInfo::VolumeArgType(hki);
+        if (type == HotkeyInfo::VolumeKeyArgTypes::NoArgs) {
+            return;
+        } else if (type == HotkeyInfo::VolumeKeyArgTypes::Units) {
+            int numUnits = hki.ArgToInt(0);
+            _volumeCtrl->Volume(numUnits * _defaultIncrement);
+        } else if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
+            double perc = hki.ArgToDouble(0);
+            _volumeCtrl->Volume((float) perc);
         }
-        _volumeCtrl->Volume(
-            (float) (currentUnit + unitIncrement) * _defaultIncrement);
+    }
+
         SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
         break;
 

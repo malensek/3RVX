@@ -12,6 +12,7 @@ public:
     static std::unordered_map<std::wstring, Monitor> &MonitorMap();
     static void UpdateMonitorMap();
     static Monitor Primary();
+    static Monitor MonitorAtPoint(POINT &pt, bool workingArea = false);
     static std::list<DISPLAY_DEVICE> ListAllDevices();
 
 private:

@@ -1,9 +1,13 @@
 3RVX3 Changelog
 ===============
 
-Beta 7
+Beta 8
 ------
 * Full screen detection
+* UI Internationalization
+
+Beta 7
+------
 * Implement always on top toggle
 * Completely overhauled settings UI backend - no more MFC
 * If the settings file is missing or corrupted, defaults will be loaded automatically

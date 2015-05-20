@@ -46,8 +46,8 @@ HWND mainWnd = NULL;
 int APIENTRY wWinMain(
         _In_ HINSTANCE hInstance,
         _In_opt_ HINSTANCE hPrevInstance,
-        _In_ LPTSTR    lpCmdLine,
-        _In_ int       nCmdShow) {
+        _In_ LPTSTR lpCmdLine,
+        _In_ int nCmdShow) {
 
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
@@ -84,6 +84,7 @@ int APIENTRY wWinMain(
 
     PROPSHEETPAGE psp[4];
 
+    psp[0] = { 0 };
     psp[0].dwSize = sizeof(PROPSHEETPAGE);
     psp[0].dwFlags = NULL;
     psp[0].hInstance = hInstance;
@@ -93,6 +94,7 @@ int APIENTRY wWinMain(
     psp[0].pszTitle = NULL;
     psp[0].lParam = NULL;
 
+    psp[1] = { 0 };
     psp[1].dwSize = sizeof(PROPSHEETPAGE);
     psp[1].dwFlags = NULL;
     psp[1].hInstance = hInstance;
@@ -102,6 +104,7 @@ int APIENTRY wWinMain(
     psp[1].pszTitle = NULL;
     psp[1].lParam = 0;
 
+    psp[2] = { 0 };
     psp[2].dwSize = sizeof(PROPSHEETPAGE);
     psp[2].dwFlags = NULL;
     psp[2].hInstance = hInstance;
@@ -111,6 +114,7 @@ int APIENTRY wWinMain(
     psp[2].pszTitle = NULL;
     psp[2].lParam = 0;
 
+    psp[3] = { 0 };
     psp[3].dwSize = sizeof(PROPSHEETPAGE);
     psp[3].dwFlags = NULL;
     psp[3].hInstance = hInstance;
@@ -120,13 +124,14 @@ int APIENTRY wWinMain(
     psp[3].pszTitle = NULL;
     psp[3].lParam = 0;
 
-    PROPSHEETHEADER psh;
+    PROPSHEETHEADER psh = { 0 };
     psh.dwSize = sizeof(PROPSHEETHEADER);
     psh.dwFlags = PSH_PROPSHEETPAGE | PSH_USEICONID | PSH_USECALLBACK;
     psh.hwndParent = mainWnd;
     psh.hInstance = hInstance;
     psh.pszIcon = MAKEINTRESOURCE(COLOR_WINDOW);
     psh.pszCaption = L"3RVX Settings";
+    psh.nStartPage = 0;
     psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);
     psh.ppsp = (LPCPROPSHEETPAGE) &psp;
     psh.pfnCallback = (PFNPROPSHEETCALLBACK) PropSheetProc;

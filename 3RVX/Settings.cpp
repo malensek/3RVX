@@ -68,16 +68,25 @@ void Settings::Load() {
     std::string u8FileName = StringUtils::Narrow(_file);
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
-        _xml.Clear();
         Error::ErrorMessage(GENERR_SETTINGSFILE, _file);
+        LoadEmptySettings();
         return;
     }
 
     _root = _xml.GetDocument()->FirstChildElement("settings");
     if (_root == NULL) {
         Error::ErrorMessage(GENERR_MISSING_XML, L"<settings>");
+        LoadEmptySettings();
         return;
     }
+
+}
+
+void Settings::LoadEmptySettings() {
+    _xml.Clear();
+    _xml.InsertFirstChild(_xml.NewDeclaration());
+    _root = _xml.NewElement("settings");
+    _xml.GetDocument()->InsertEndChild(_root);
 }
 
 int Settings::Save() {

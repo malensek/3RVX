@@ -30,6 +30,7 @@ public:
     static Settings *Instance();
 
     void Load();
+    void LoadEmptySettings();
     int Save();
 
     static std::wstring AppDir();

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <translation author="Uncle Sam" version="1">
 
-  <language name="English (USA)" locale="en-US"/>
+  <language name="English" locale="en-US"/>
 
   <!--
     This file is simply a placeholder for the default language settings,
     so there are no translations here. For examples, please see:
-      English (UK).xml,
+      Deutsch.xml,
       Français.xml,
     etc.
   -->

@@ -117,7 +117,7 @@ public:
     static const int DefaultHideSpeed = 765;
     static const int DefaultHideTime = 800;
     static const std::wstring DefaultLanguage;
-    static const bool DefaultNotifyIcon = false;
+    static const bool DefaultNotifyIcon = true;
     static const bool DefaultSoundsEnabled = true;
     static const int DefaultOSDOffset = 140;
     static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;

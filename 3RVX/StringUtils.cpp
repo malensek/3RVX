@@ -1,6 +1,9 @@
 #include "StringUtils.h"
 
 std::wstring StringUtils::Widen(const char *str) {
+    if (str == NULL) {
+        return L"";
+    }
     std::string sstr(str);
     return Widen(sstr);
 }

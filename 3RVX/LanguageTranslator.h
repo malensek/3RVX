@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include "TinyXml2\tinyxml2.h"
@@ -18,4 +19,10 @@ public:
 private:
     tinyxml2::XMLDocument _xml;
     tinyxml2::XMLElement *_root;
+    std::unordered_map<std::wstring, std::wstring> _translations;
+
+    std::wstring _author;
+    std::wstring _name;
+    std::wstring _id;
+    std::vector<std::wstring> _regions;
 };

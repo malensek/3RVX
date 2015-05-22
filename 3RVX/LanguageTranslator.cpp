@@ -46,7 +46,6 @@ LanguageTranslator::LanguageTranslator() {
 
 LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
     CLOG(L"Loading language XML: %s", langFileName.c_str());
-    /*
     std::string u8FileName = StringUtils::Narrow(langFileName);
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
@@ -60,11 +59,40 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
     if (_root == NULL) {
         throw std::runtime_error("Could not find root XML element");
     }
-    */
 
-    for (std::wstring str : CurrentLocale()) {
-        CLOG(L"-> %s", str.c_str());
+    _author = StringUtils::Widen(_root->Attribute("author", ""));
+    tinyxml2::XMLElement *trans = _root->FirstChildElement("language");
+    if (trans == NULL) {
+        CLOG(L"No <language> tag.");
     }
+
+    CLOG(L"Loading translation header");
+    _name = StringUtils::Widen(trans->Attribute("name"));
+    _id = StringUtils::Widen(trans->Attribute("id"));
+
+    if (_name == L"" || _id == L"") {
+        CLOG(L"whoops");
+    }
+
+    QCLOG(L"Language name: %s", _name.c_str());
+    QCLOG(L"Locale identifier: %s", _id.c_str());
+    const char *regions = trans->Attribute("regions");
+    if (regions != NULL) {
+        std::string region;
+        std::istringstream ss(regions);
+        while (std::getline(ss, region, ',')) {
+            std::wstring regionStr = StringUtils::Widen(region);
+            _regions.push_back(regionStr);
+            QCLOG(L"Region: %s", regionStr.c_str());
+        }
+    }
+
+    tinyxml2::XMLElement *string = _root->FirstChildElement("string");
+    for (; string != NULL; string = string->NextSiblingElement()) {
+        /* parse translation */
+    }
+
+
 }
 
 std::wstring LanguageTranslator::Translate(std::wstring str) {

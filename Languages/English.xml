@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <translation author="Uncle Sam" version="1">
 
-  <language name="English" locale="en-US"/>
+  <language name="English" id="en" regions="us,uk,in"/>
 
   <!--
     This file is simply a placeholder for the default language settings,
@@ -10,5 +10,10 @@
       Français.xml,
     etc.
   -->
+
+  <string>
+    <resource>Settings</resource>
+    <translation>Super Duper Settings</translation>
+  </string>
     
 </translation>

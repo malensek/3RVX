@@ -339,7 +339,7 @@ std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
             const char *argStr = arg->GetText();
             hki.args.push_back(StringUtils::Widen(argStr));
         }
-        
+
         /* Whew, we made it! */
         CLOG(L"%s", hki.ToString().c_str());
         keyMappings[combination] = hki;

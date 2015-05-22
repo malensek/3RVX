@@ -2,6 +2,7 @@
 
 #include <shellapi.h>
 
+#include "../3RVX/LanguageTranslator.h"
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "../3RVX/SkinInfo.h"
@@ -41,6 +42,7 @@ void General::Initialize() {
 
 void General::LoadSettings() {
     Settings *settings = Settings::Instance();
+    LanguageTranslator *lt = settings->Translator();
     _startup.Checked(RunOnStartup());
     _notifyIcon.Checked(settings->NotifyIconEnabled());
     _sounds.Checked(settings->SoundEffectsEnabled());

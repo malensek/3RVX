@@ -113,7 +113,7 @@ bool General::RunOnStartup(bool enable) {
     if (res == ERROR_SUCCESS) {
         if (enable) {
             res = RegSetValueEx(key, REGKEY_NAME, NULL, REG_SZ,
-                (LPBYTE) path.c_str(), path.size() + 1);
+                (LPBYTE) path.c_str(), (path.size() + 1) * sizeof(TCHAR));
             ok = (res == ERROR_SUCCESS);
         } else {
             res = RegDeleteValue(key, REGKEY_NAME);

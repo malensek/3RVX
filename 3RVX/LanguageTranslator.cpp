@@ -89,6 +89,7 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
 
     tinyxml2::XMLElement *string = _root->FirstChildElement("string");
     for (; string != NULL; string = string->NextSiblingElement()) {
+        string->FirstChildElement("resource");
         /* parse translation */
     }
 

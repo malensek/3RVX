@@ -96,6 +96,10 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
 
 }
 
-std::wstring LanguageTranslator::Translate(std::wstring str) {
-    return str;
+std::wstring &LanguageTranslator::Translate(std::wstring &str) {
+    if (_translations.find(str) == _translations.end()) {
+        /* If the translation isn't found, return the original string. */
+        return str;
+    }
+    return _translations[str];
 }

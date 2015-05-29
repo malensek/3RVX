@@ -381,6 +381,7 @@ LanguageTranslator *Settings::Translator() {
             _translator = new LanguageTranslator();
         } else {
             _translator = new LanguageTranslator(langFile);
+            _translator->LoadTranslations();
         }
     }
 

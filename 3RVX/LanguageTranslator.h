@@ -11,7 +11,7 @@ public:
     LanguageTranslator();
     LanguageTranslator(std::wstring langFileName);
 
-    std::wstring Translate(std::wstring str);
+    void LoadTranslations();
     std::wstring &Translate(std::wstring &str);
 
 public:

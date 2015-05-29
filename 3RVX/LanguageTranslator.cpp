@@ -64,6 +64,7 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
     tinyxml2::XMLElement *trans = _root->FirstChildElement("language");
     if (trans == NULL) {
         CLOG(L"No <language> tag.");
+        return;
     }
 
     CLOG(L"Loading translation header");
@@ -86,14 +87,29 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
             QCLOG(L"Region: %s", regionStr.c_str());
         }
     }
+}
 
+void LanguageTranslator::LoadTranslations() {
     tinyxml2::XMLElement *string = _root->FirstChildElement("string");
     for (; string != NULL; string = string->NextSiblingElement()) {
-        string->FirstChildElement("resource");
-        /* parse translation */
+        const char *originalText = NULL;
+        const char *translatedText = NULL;
+
+        tinyxml2::XMLElement *orig = string->FirstChildElement("original");
+        if (orig) {
+            originalText = orig->GetText();
+        }
+        tinyxml2::XMLElement *trans = string->FirstChildElement("translation");
+        if (trans) {
+            translatedText = trans->GetText();
+        }
+
+        if (originalText && translatedText) {
+            std::wstring origStr = StringUtils::Widen(originalText);
+            std::wstring transStr = StringUtils::Widen(translatedText);
+            _translations[origStr] = transStr;
+        }
     }
-
-
 }
 
 std::wstring &LanguageTranslator::Translate(std::wstring &str) {

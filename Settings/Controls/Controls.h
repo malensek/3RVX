@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Checkbox.h"
 #include "ComboBox.h"
+#include "GroupBox.h"
 #include "Label.h"
 #include "ListView.h"
 #include "Spinner.h"

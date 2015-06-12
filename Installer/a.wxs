@@ -1,0 +1,703 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Directory Id="dir4A939956C3CBABAE8772A809E8B414F8" Name="Languages" />
+            <Directory Id="dir9CB560686C187631667869F5F603EC69" Name="Skins" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="ProductComponents">
+            <Component Id="cmp0F1CCDC3BB6DB8476F3F534B30803740" Directory="INSTALLFOLDER" Guid="{8F7A22C1-929B-4797-815B-3013A249068A}">
+                <File Id="filABBF9B6154088DD324970E0198BDA5E7" KeyPath="yes" Source="SourceDir\3RVX-LogEnabled.exe" />
+            </Component>
+            <Component Id="cmp1C89C94BD21E2BAF3A6106C72C02E5F7" Directory="INSTALLFOLDER" Guid="{F6A143CB-31AE-488A-958D-65486C4E6F4B}">
+                <File Id="fil161C7AD55D840FA61105F27557C05446" KeyPath="yes" Source="SourceDir\3RVX.exe" />
+            </Component>
+            <Component Id="cmpEB157B38DC2A6E216A6258E9A036F073" Directory="INSTALLFOLDER" Guid="{52F140AB-1329-4D96-81DD-AF050E330116}">
+                <File Id="fil74C04AFFF3B5DDF37BA8D4E26967EE89" KeyPath="yes" Source="SourceDir\3RVX.pdb" />
+            </Component>
+            <Component Id="cmpCD844A0B9AB6CAA24C6963DD471B31FE" Directory="INSTALLFOLDER" Guid="{1F6B9F12-C24D-493B-9124-FC8928187293}">
+                <File Id="filB2D5E1FC6E2D72C3A03A9AA664BFC48B" KeyPath="yes" Source="SourceDir\3RVX3-B7-pre1.zip" />
+            </Component>
+            <Component Id="cmp8CCC4D44265EACAC40ABBE827B967A3A" Directory="INSTALLFOLDER" Guid="{985EEEFE-B430-4871-8C73-BB677C9DF07B}">
+                <File Id="fil4692D6B736FEB5653B0DA8177C13C6BD" KeyPath="yes" Source="SourceDir\3RVX3-B7-pre2.zip" />
+            </Component>
+            <Component Id="cmp2EB5D5DA615E3F2819BF223238CD5239" Directory="INSTALLFOLDER" Guid="{36CC6182-628A-4A1E-9F32-7A73CBF8B2CE}">
+                <File Id="fil531D23B7B271F29BA0B1D20B164C253E" KeyPath="yes" Source="SourceDir\3RVX_Log.txt" />
+            </Component>
+            <Component Id="cmp5BF76586EF1FAA8F6F354245E25EAB84" Directory="INSTALLFOLDER" Guid="{AC4D25C4-BC1E-4906-9065-6CB0674404AF}">
+                <File Id="filB7C9D92D8B39CB2C8E143CC4B9D9DEE5" KeyPath="yes" Source="SourceDir\Settings.exe" />
+            </Component>
+            <Component Id="cmp62100D38459FC7FFF62165E98A54ACE6" Directory="INSTALLFOLDER" Guid="{071DBB82-BE91-4BED-BD92-AE1E401A8CED}">
+                <File Id="fil6BB13BFE8B47868EF136FAD2F2E12300" KeyPath="yes" Source="SourceDir\Settings.pdb" />
+            </Component>
+            <Component Id="cmp4F763A77F25C09DEB085AC7DF0D1467F" Directory="INSTALLFOLDER" Guid="{94A70B70-8611-4657-B2BE-C75FD98FBB91}">
+                <File Id="fil1C642CC27BD5A4FC70D40BC01F412A3B" KeyPath="yes" Source="SourceDir\Settings.xml" />
+            </Component>
+            <Component Id="cmpCF0D8400F61725B66F30C8B253CB9649" Directory="dir4A939956C3CBABAE8772A809E8B414F8" Guid="{150D80C6-C365-4193-BDBC-4CB45A5A9D0B}">
+                <File Id="fil1969CD0AA9EAD82C75356F1D1C63CD51" KeyPath="yes" Source="SourceDir\Languages\ChineseSimplified.xml" />
+            </Component>
+            <Component Id="cmpF1CD376F9149DEDEB452320FFEB5AE1C" Directory="dir4A939956C3CBABAE8772A809E8B414F8" Guid="{B532E944-DDAD-495C-BEEE-3E3488C7CDB0}">
+                <File Id="fil77B3FF3D880C71C1156608545234F474" KeyPath="yes" Source="SourceDir\Languages\ChineseTraditional.xml" />
+            </Component>
+            <Component Id="cmp7705CEADE107F147801C80F8341F763E" Directory="dir4A939956C3CBABAE8772A809E8B414F8" Guid="{65A00B34-6BD7-4A4F-B8EB-6AFBFE7618F6}">
+                <File Id="fil832F55BB75E845F41DD71AAB32519501" KeyPath="yes" Source="SourceDir\Languages\Deutsch.xml" />
+            </Component>
+            <Component Id="cmp09FC8A5834D9FE7172F0A8384D38909E" Directory="dir4A939956C3CBABAE8772A809E8B414F8" Guid="{0FF32E17-5EAE-4B1A-BFC2-A10EA3E0A1A3}">
+                <File Id="fil51F3EF94942399B957627256BD43AAA1" KeyPath="yes" Source="SourceDir\Languages\English.xml" />
+            </Component>
+            <Component Id="cmp9892CD19086E674CA8CA81FFDAA38E3B" Directory="dir4A939956C3CBABAE8772A809E8B414F8" Guid="{6EA6AD99-87C8-4148-A8A8-EF12F74EB20C}">
+                <File Id="fil0E1ECC9AE3AFC1C67FEC0426E1F55AA7" KeyPath="yes" Source="SourceDir\Languages\Italian.xml" />
+            </Component>
+            <Component Id="cmpBA6D39230DB64B873A32FE9D2A83C7DC" Directory="dir4A939956C3CBABAE8772A809E8B414F8" Guid="{723C746C-533E-4819-81F5-BDCBC08A6CDA}">
+                <File Id="fil22C99CFFF012E7960779D12579DCD8AC" KeyPath="yes" Source="SourceDir\Languages\PolishBETA2.xml" />
+            </Component>
+            <Component Id="cmp35D34907F266E6A2B001273F585715B0" Directory="dirCF7607BE20F23FAD1BB966AAE60D3285" Guid="{EB261C4D-F626-4426-9D3C-542F3FF0071C}">
+                <File Id="filA92B8B143251A198987499C58F3A6A9B" KeyPath="yes" Source="SourceDir\Skins\Classic\skin.xml" />
+            </Component>
+            <Component Id="cmp6CDFBF6F4129D2B50B3FDE5165516F3E" Directory="dirCF7607BE20F23FAD1BB966AAE60D3285" Guid="{67C7B533-1D2C-473F-B8CA-932A2A20D29B}">
+                <File Id="filC2A5E1B70A20EC27A0A19B22ACD86B05" KeyPath="yes" Source="SourceDir\Skins\Classic\sound.wav" />
+            </Component>
+            <Component Id="cmpBA2D92F1A2258B4184363C52B22403B6" Directory="dir71164AAF36B937E28DBF9B28193361CC" Guid="{81CFF87B-D8D3-4005-8C62-F66143D419A3}">
+                <File Id="filA4BEF16376FCC049D9F83720F2ABB0FC" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\0.ico" />
+            </Component>
+            <Component Id="cmp8B85511777901CC651CA963CCE200A16" Directory="dir71164AAF36B937E28DBF9B28193361CC" Guid="{8FEF8327-40DC-4AE8-8FAF-A355052052B5}">
+                <File Id="filFF2ADB2E99452F1549B710ED701F9C6D" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\1.ico" />
+            </Component>
+            <Component Id="cmpFD71FA70C68EFA6DB6DF0E0883C94DB7" Directory="dir71164AAF36B937E28DBF9B28193361CC" Guid="{3E470238-9F25-471B-A60B-658C49ECAEA2}">
+                <File Id="filFBCE5F03ACB09D7A7EF375F1B1CCEC4F" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\2.ico" />
+            </Component>
+            <Component Id="cmpD8D9C0D9011F175FD95C499FDB498550" Directory="dir71164AAF36B937E28DBF9B28193361CC" Guid="{EADF87D8-AE49-4CAC-95DF-2C9E755038EA}">
+                <File Id="fil545E5034F8A26273A262EBF09E86AE20" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\3.ico" />
+            </Component>
+            <Component Id="cmpAA97F5A120E495431E3DA698914CF128" Directory="dir71164AAF36B937E28DBF9B28193361CC" Guid="{C0266273-C389-4F25-9C79-082AEB72CE42}">
+                <File Id="filCFA6BD3C5D6E96F90096E6DA5D44E0C6" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\4.ico" />
+            </Component>
+            <Component Id="cmp6D55CDBB9324E362701D29C112E5EEDF" Directory="dir1F40F4F6859EA4EDCAB42207E2A1AB27" Guid="{4EE73CC8-9221-40B2-A406-766CDC3CAA63}">
+                <File Id="filDD4542423991DEF4B3BABB27B5B43E83" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\0.ico" />
+            </Component>
+            <Component Id="cmp71E41177B838ED9243CF52ED50F3005E" Directory="dir1F40F4F6859EA4EDCAB42207E2A1AB27" Guid="{3002AFB1-035D-44AE-8874-0BB669176318}">
+                <File Id="filDE3F63E5E54EE59D990D1FD78FB8BE8C" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\1.ico" />
+            </Component>
+            <Component Id="cmpA5E97507BFDF9CAF27367723D3D98C8A" Directory="dir1F40F4F6859EA4EDCAB42207E2A1AB27" Guid="{4EDCCBEF-5084-4CF8-A80A-A2829F01A7FE}">
+                <File Id="fil25EB624ABEDFC19AAC23A73FB8140A60" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\2.ico" />
+            </Component>
+            <Component Id="cmp7EA9327216ED3CA47819514F19851427" Directory="dir1F40F4F6859EA4EDCAB42207E2A1AB27" Guid="{238797B9-7C8E-4D7C-A2EB-56E127DD447E}">
+                <File Id="fil38F4937D881043942F5F57F44EA23D07" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\3.ico" />
+            </Component>
+            <Component Id="cmp76B7CC5A779C72173746F27D6E5E7BD4" Directory="dir1F40F4F6859EA4EDCAB42207E2A1AB27" Guid="{6A29F499-369C-4F33-A3F3-56859DBFBD70}">
+                <File Id="filBDDAD54D2D1FDEA652075D42980B9B84" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\4.ico" />
+            </Component>
+            <Component Id="cmp57B66F1D3BB0239E860BFF98F251CD9A" Directory="dir6C5679730E6B21021F8041607FBB554E" Guid="{79A3CE1C-5858-4431-90F4-459D789776C5}">
+                <File Id="filBEC982205A152EA32A75BE0D0A30E29F" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\eject.png" />
+            </Component>
+            <Component Id="cmpBCC41DD4FDE582DA7BB49154A98A30E8" Directory="dir6C5679730E6B21021F8041607FBB554E" Guid="{12A5BA09-92B3-4345-9C2E-610ED790B1C6}">
+                <File Id="fil14312821B40CFB770D2D9BA489ACFD37" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\meter.png" />
+            </Component>
+            <Component Id="cmp710D6A6F96D9262D52084127F265EC6C" Directory="dir6C5679730E6B21021F8041607FBB554E" Guid="{AA78BFD8-08F0-41A6-8883-A4380D6E1D18}">
+                <File Id="fil649255F94E4E49CDB1C22CDB80D89871" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\mute.png" />
+            </Component>
+            <Component Id="cmp1B7A84269B3CB881FFDB7AF84C2D9483" Directory="dir6C5679730E6B21021F8041607FBB554E" Guid="{B7C3B7A1-5337-4686-B921-0BC14F356CD8}">
+                <File Id="fil3EE8455FBDCB88FBB2F255402FAFF3F0" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\Thumbs.db" />
+            </Component>
+            <Component Id="cmpBBA221F0FBFD1B3653C88A434595B6A6" Directory="dir6C5679730E6B21021F8041607FBB554E" Guid="{2454B3DD-BE3D-411D-BC86-44C4801F3740}">
+                <File Id="fil5338057CD71A39F66C81902AA8AB4144" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\volume.png" />
+            </Component>
+            <Component Id="cmpD169114FC02212DF42B5BF86D5734292" Directory="dir41EB02BFAEBE3F786FA68C9ACFA2149E" Guid="{A546F5E6-9B73-4C76-96C7-338D70207923}">
+                <File Id="fil0678906D2C5A769DD27F335E3B14B21F" KeyPath="yes" Source="SourceDir\Skins\Classic\Slider\background.png" />
+            </Component>
+            <Component Id="cmp1094035BCF2A0DEFA54C264921494410" Directory="dir41EB02BFAEBE3F786FA68C9ACFA2149E" Guid="{F9A67DF3-6EC9-44A3-9684-9107C3BCD5EB}">
+                <File Id="fil419B59FE46C951962A362D825EE4B8C5" KeyPath="yes" Source="SourceDir\Skins\Classic\Slider\knob.png" />
+            </Component>
+            <Component Id="cmp8328159787F5FF9A60213FCF280DD84F" Directory="dir41EB02BFAEBE3F786FA68C9ACFA2149E" Guid="{CC16AA75-2B5A-4F85-8456-C496E8754FE7}">
+                <File Id="filB82C2DE0CEF0456A0AE3BC5F947BF837" KeyPath="yes" Source="SourceDir\Skins\Classic\Slider\Thumbs.db" />
+            </Component>
+            <Component Id="cmp6DF7CB196E3CAE82BD5F0A0ED0009DA7" Directory="dir67A1474D375E45C62E554552D9682528" Guid="{32326861-3B8B-45E4-9ADD-2A186EFE5FD5}">
+                <File Id="fil93576F207A305549A7AB606FCC54DC4B" KeyPath="yes" Source="SourceDir\Skins\Ice\skin.xml" />
+            </Component>
+            <Component Id="cmp0A12363A497BA0A75E5EB0BA3C5C54EF" Directory="dir67A1474D375E45C62E554552D9682528" Guid="{FC6E05E1-1B3E-46CF-AFDE-75139DA06EF4}">
+                <File Id="fil9ED503CE8ED38639E4D0903A1FD642F1" KeyPath="yes" Source="SourceDir\Skins\Ice\sound.wav" />
+            </Component>
+            <Component Id="cmp3D35858FE01E0742A07DB17D41EB2C14" Directory="dirD5C15F8FD9F622E89CF6B5315C4D2C97" Guid="{5DE74687-04F4-43AF-9E81-54FBF90BC378}">
+                <File Id="fil53FF8C0D4A40506A9BDED2571841D8A3" KeyPath="yes" Source="SourceDir\Skins\Ice\Control\back.png" />
+            </Component>
+            <Component Id="cmp8B97171E340748625704CE6475E4B649" Directory="dirD5C15F8FD9F622E89CF6B5315C4D2C97" Guid="{C7D1351D-8198-4725-8901-795C6D2D05D5}">
+                <File Id="filC604C83DD9DEE2037825305C563B9CD6" KeyPath="yes" Source="SourceDir\Skins\Ice\Control\knob.png" />
+            </Component>
+            <Component Id="cmp64F320EF91868589053BFDB93076D87F" Directory="dir0B4C6F70C823CD59A09B4BDD55090B08" Guid="{92C5E910-45E9-472E-BFE4-FB979C8A6EB7}">
+                <File Id="fil51180DBE80062D71354CA7828516DE8F" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\0.ico" />
+            </Component>
+            <Component Id="cmpB4FA973242277EBFC206A10239024E63" Directory="dir0B4C6F70C823CD59A09B4BDD55090B08" Guid="{F23DB622-0D2D-42D7-8930-BCBDA7C66DA9}">
+                <File Id="filFF9098E454CA679653106F66EC53486F" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\1.ico" />
+            </Component>
+            <Component Id="cmp176A425FCE474612746D82D3EABE9603" Directory="dir0B4C6F70C823CD59A09B4BDD55090B08" Guid="{AA246F76-EB93-4654-BED2-E06D9D250DB3}">
+                <File Id="fil3E1D791069EECAFE78632484C2EBAE9A" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\2.ico" />
+            </Component>
+            <Component Id="cmp909A2E7EF891E1F0371825637283EE09" Directory="dir0B4C6F70C823CD59A09B4BDD55090B08" Guid="{A52CDFC1-AAE6-4035-AFA7-7DB4FA3E3F6B}">
+                <File Id="filDCCA9E4CE4B5E7BCFF14344177EB63AF" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\3.ico" />
+            </Component>
+            <Component Id="cmpB2064B66BB46AA326E3D82A63F2CF721" Directory="dir0B4C6F70C823CD59A09B4BDD55090B08" Guid="{3899C680-9E33-4252-A522-8A6F2D0656A4}">
+                <File Id="fil4D4B16008C43C5630496A95DAFD0BA23" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\4.ico" />
+            </Component>
+            <Component Id="cmpBDCD92F27C3AC49518F6057588C6555D" Directory="dir122D76B7D69CA4601265F2D18F69782E" Guid="{95D87658-47AC-437E-80AE-1AA7DB4E014F}">
+                <File Id="fil37BBB0B9DA1D96162483A7B7D5F14CB5" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\background.png" />
+            </Component>
+            <Component Id="cmpC607649663E63AAF3DDB9A81A98031EE" Directory="dir122D76B7D69CA4601265F2D18F69782E" Guid="{697FA772-429A-49C9-87EC-5C3A31EA189B}">
+                <File Id="fil9313B4CE1B4ACB097CB25442CA13268E" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\eject.png" />
+            </Component>
+            <Component Id="cmp173A6296130955DA362910571FFFF0CB" Directory="dir122D76B7D69CA4601265F2D18F69782E" Guid="{4962B440-D9F0-44E7-AC5A-F8A7F1680C0E}">
+                <File Id="fil4E2C932BD1688EB7D97414E291BCBA3A" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\meter.png" />
+            </Component>
+            <Component Id="cmp4CDC1E31420B2F02939E9E5D147BE604" Directory="dir122D76B7D69CA4601265F2D18F69782E" Guid="{974F2316-38FA-478D-95AA-6B869998E086}">
+                <File Id="filD9086D944128E6AE2935EF9997BA90BB" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\mute.png" />
+            </Component>
+            <Component Id="cmp3592777D7183C2F38F25AAADE27D03ED" Directory="dir122D76B7D69CA4601265F2D18F69782E" Guid="{5247C273-FAEF-492C-819D-6B72BC01AF1B}">
+                <File Id="fil649F7E66C30B4C01E05DDBDAA1E35303" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\Thumbs.db" />
+            </Component>
+            <Component Id="cmp096F46A0D0056460B21D0D5319C3E1DC" Directory="dir53E8F0B3A536B1967D68E60322DA9845" Guid="{85086501-0B8B-459C-B3EC-1D89ED999CB3}">
+                <File Id="fil447C6245891976171F0A78224725B076" KeyPath="yes" Source="SourceDir\Skins\Ignition\skin.xml" />
+            </Component>
+            <Component Id="cmp5FE2DDEFB80DA9CE10594DAD1E7D4F11" Directory="dir53E8F0B3A536B1967D68E60322DA9845" Guid="{8CFF8558-2473-44E8-A228-EC1CF6CDDADF}">
+                <File Id="filFD5C15449E897611A587DCC63BB841B1" KeyPath="yes" Source="SourceDir\Skins\Ignition\sound.wav" />
+            </Component>
+            <Component Id="cmpC58B0842496B617BD77117444A1CE8DB" Directory="dirB2D2F1114AB0F6B6B205BB199AE04FEE" Guid="{6B4468B0-C22D-4E39-8319-AC1107D2B0AC}">
+                <File Id="filA9E0D55AD1D5612311351706B03F8661" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\0.ico" />
+            </Component>
+            <Component Id="cmpDCC62A1C1D4ED682ADF797A0EB99AA52" Directory="dirB2D2F1114AB0F6B6B205BB199AE04FEE" Guid="{3658C260-B37F-4096-8B6E-1864BA42ADFC}">
+                <File Id="fil03B09F33C15C1C97CFAE0E8A76A7C117" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\1.ico" />
+            </Component>
+            <Component Id="cmp0AA24E53DC15625FAAF4FBDF4F4AF0EF" Directory="dirB2D2F1114AB0F6B6B205BB199AE04FEE" Guid="{E0FC1A73-32AA-419B-A549-51576790EE5C}">
+                <File Id="fil268E67B0DE1AEDECA4851E83B7ACFF12" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\2.ico" />
+            </Component>
+            <Component Id="cmp2B0252D839E713D1518D36ED3CC07295" Directory="dirB2D2F1114AB0F6B6B205BB199AE04FEE" Guid="{3447590F-23BF-4153-A0F9-37BBCA4604B2}">
+                <File Id="fil77D811F1719C31F68D4A4A8F0885C2D4" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\3.ico" />
+            </Component>
+            <Component Id="cmp03970F9C5EABAC8727990E9592911D4B" Directory="dirB2D2F1114AB0F6B6B205BB199AE04FEE" Guid="{D3FC60AB-DB4E-4A13-A4A2-E37079D62EF4}">
+                <File Id="fil9ED74D00D32DD21FA069C79881C69A10" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\4.ico" />
+            </Component>
+            <Component Id="cmp38E2EC4292351B38732FAB8B0BF6EA23" Directory="dir382474E8A2FBC200CE646AB93CDC6DBB" Guid="{9A06FAC0-587A-44FE-ABDB-EE64C92C2CAE}">
+                <File Id="fil9EA4139A05A6AE4611DC50C3864E9FC6" KeyPath="yes" Source="SourceDir\Skins\Ignition\OSD\back.png" />
+            </Component>
+            <Component Id="cmp892E89BB9FC0284D80DDC2026EA9E07F" Directory="dir382474E8A2FBC200CE646AB93CDC6DBB" Guid="{AE28DE67-F300-42AD-BDA5-22F4F4D3EF00}">
+                <File Id="fil3C70B85CF4DF292838AD14471E9BDD7D" KeyPath="yes" Source="SourceDir\Skins\Ignition\OSD\eject.png" />
+            </Component>
+            <Component Id="cmp5E80B38516F96E1D7B5B8B87E64AAE47" Directory="dir382474E8A2FBC200CE646AB93CDC6DBB" Guid="{DE9E96D6-134F-4706-8605-AA8377948829}">
+                <File Id="fil51019B07F28939BC5588D9E30E7DF00E" KeyPath="yes" Source="SourceDir\Skins\Ignition\OSD\meter.png" />
+            </Component>
+            <Component Id="cmp269224F9689A732E139DA31CA7C0E94E" Directory="dir382474E8A2FBC200CE646AB93CDC6DBB" Guid="{05B6F38E-0B6D-4BE7-8290-17C3A8F87F5C}">
+                <File Id="fil7D984A45162353F1B34DB40D0045A5CD" KeyPath="yes" Source="SourceDir\Skins\Ignition\OSD\mute.png" />
+            </Component>
+            <Component Id="cmp99E5D5E2DEC60BA2B1B73700CFF49495" Directory="dir2D4E254DF441C17F4D250FB82B3FC3A0" Guid="{333E9C66-EFEF-439D-B274-27D2AF2D8797}">
+                <File Id="fil0DCBEF44BB8012E053CE318B87B94C6D" KeyPath="yes" Source="SourceDir\Skins\Ignition\Slider\back.png" />
+            </Component>
+            <Component Id="cmp13028B179BADC28967917FCA4A13FA14" Directory="dir2D4E254DF441C17F4D250FB82B3FC3A0" Guid="{2BC6FE6F-1A48-4BCD-A789-5EF4FA4251C3}">
+                <File Id="fil92DC44EC6EF0E88A49A0732A74FCD272" KeyPath="yes" Source="SourceDir\Skins\Ignition\Slider\knob.png" />
+            </Component>
+            <Component Id="cmp9AA678AB5E1FDDF03DC36A4FB9A8C0AF" Directory="dir3B292EE1A52199EC3F18ECEB61110AC8" Guid="{3121AAAC-F1B9-4F1A-B11C-F0E2F44AD5CE}">
+                <File Id="filFA4DB8CE8A793D9FCC436258699481AD" KeyPath="yes" Source="SourceDir\Skins\liquid\skin.xml" />
+            </Component>
+            <Component Id="cmp1CFD4840D48D05718FBE131B2D3A6A0B" Directory="dirD3CB9A563B9B1107865C1FB6FFA06C80" Guid="{BD8790AA-9177-494E-B345-D13BDD7ED79F}">
+                <File Id="filAF2A8FEB7F2A2815D15A946C6F3208F6" KeyPath="yes" Source="SourceDir\Skins\liquid\OSD\background.png" />
+            </Component>
+            <Component Id="cmp0459566B79A0057211F0205C17F91A02" Directory="dirD3CB9A563B9B1107865C1FB6FFA06C80" Guid="{B9862AEB-CD49-4F6F-BE87-88517175A059}">
+                <File Id="filC14844CF82E5E4A0E8F76185C8049428" KeyPath="yes" Source="SourceDir\Skins\liquid\OSD\bitstrip.png" />
+            </Component>
+            <Component Id="cmp2F0D1C723D06DE9B01B582C21688E65D" Directory="dirD3CB9A563B9B1107865C1FB6FFA06C80" Guid="{A96743F5-FE99-4D21-B491-3ACE314DB7CD}">
+                <File Id="filFBF69A3FCCC3DFB3156859B80DEF5551" KeyPath="yes" Source="SourceDir\Skins\liquid\OSD\meter.png" />
+            </Component>
+            <Component Id="cmp5122A591D52301BA03A95377980148C4" Directory="dir86F3F806FEF77C87F0FDB7EFE8260296" Guid="{F62C587B-3D80-4514-AFDF-1069BB36957A}">
+                <File Id="fil2BC835BA48F33867BF569F79794D01B4" KeyPath="yes" Source="SourceDir\Skins\mini\skin.xml" />
+            </Component>
+            <Component Id="cmp1613274FBEE0FB4CFA9EE1CAEA5BBE91" Directory="dir86F3F806FEF77C87F0FDB7EFE8260296" Guid="{2EFB2EB5-E644-4F3C-B2F9-C3BCAD13F330}">
+                <File Id="fil79DE00E8AD16564EC6052F6FFA2AA24D" KeyPath="yes" Source="SourceDir\Skins\mini\Thumbs.db" />
+            </Component>
+            <Component Id="cmpA89B760B53AEDE2620ECAC5DF770C8F3" Directory="dir6A74CABFC5DA4A0AC150A259382EA9B4" Guid="{EA35B99C-1181-4777-AD85-7A2A8B158F84}">
+                <File Id="filDA45BB3F6EF1A4FF444708B5AEE07CE0" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\0.ico" />
+            </Component>
+            <Component Id="cmp31236DF749649EC2E64DD6C02A2C7FB5" Directory="dir6A74CABFC5DA4A0AC150A259382EA9B4" Guid="{2B14EAD3-CE5F-48B5-809B-3B1F61CF181E}">
+                <File Id="fil15A7402A408C9E7E98867C1C5AFBC9AE" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\1.ico" />
+            </Component>
+            <Component Id="cmpB51AF09B6AFC5293C0B520F40977C14A" Directory="dir6A74CABFC5DA4A0AC150A259382EA9B4" Guid="{B6713A53-A06D-4C70-8222-8F643800D476}">
+                <File Id="fil4ADDCB08C231C6BFB9CFBB81CA5F0478" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\2.ico" />
+            </Component>
+            <Component Id="cmpFB8D0AE14FDE4B0B5009DCE51D13E174" Directory="dir6A74CABFC5DA4A0AC150A259382EA9B4" Guid="{F5EE49D2-4DF3-4FA2-8DBA-AD78A767DC94}">
+                <File Id="fil07A4889DB0598C9814124C6F33E9A32B" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\3.ico" />
+            </Component>
+            <Component Id="cmpD8FFBC0BC71F529F8BF87B264463DE1F" Directory="dir6A74CABFC5DA4A0AC150A259382EA9B4" Guid="{44688EF2-AE1E-44A1-A9FF-55A3388218E3}">
+                <File Id="filCB711F9366E6BD6F6E0A27C36590BDF9" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\4.ico" />
+            </Component>
+            <Component Id="cmpB691B617D818B17145E99D40BA054C0E" Directory="dir2FFF459D7EA6A0E175DB8F20A36C67C7" Guid="{ADF1E6E9-6EDA-4A0D-AD1E-6B1585DA474E}">
+                <File Id="fil78A030B37EF73525AC06903103950DC2" KeyPath="yes" Source="SourceDir\Skins\mini\OSD\eject.png" />
+            </Component>
+            <Component Id="cmp6C9C34FFB373CBC10115CABDE1F6E87F" Directory="dir2FFF459D7EA6A0E175DB8F20A36C67C7" Guid="{1492B310-61A9-41C1-A244-33522AC30A87}">
+                <File Id="fil160BAFAEA14AEDC9BA7229AD7D51CDF2" KeyPath="yes" Source="SourceDir\Skins\mini\OSD\meter.png" />
+            </Component>
+            <Component Id="cmp2729BB5F605D1C88F0FC84D534C58F81" Directory="dir2FFF459D7EA6A0E175DB8F20A36C67C7" Guid="{BDC9FE74-ACB3-4B85-A034-3701510D4BCB}">
+                <File Id="fil61DF7D106A29593313D3535E6913187A" KeyPath="yes" Source="SourceDir\Skins\mini\OSD\mute.png" />
+            </Component>
+            <Component Id="cmp462F5E9DC4F3635BFD1557F311A4D3F6" Directory="dir2FFF459D7EA6A0E175DB8F20A36C67C7" Guid="{FB1CDFED-84F4-412A-9C58-589A0B011ECB}">
+                <File Id="filB16D4E3033830FABAE9DCB23F818EA57" KeyPath="yes" Source="SourceDir\Skins\mini\OSD\volume.png" />
+            </Component>
+            <Component Id="cmp88F901EE2FBA2F10E4CC790A39AAD00B" Directory="dirAEAD8C56EDDF2617CB9CF949FB4C9797" Guid="{A8C9E7D5-F443-4ACB-A73F-5E7690E2CC2F}">
+                <File Id="fil1BA024EB477CA6C57E64E9C967EF83F2" KeyPath="yes" Source="SourceDir\Skins\mini\Slider\background.png" />
+            </Component>
+            <Component Id="cmp0C7EBBC8131795DBD3F6646001C8ED29" Directory="dirAEAD8C56EDDF2617CB9CF949FB4C9797" Guid="{EDE7ABCC-C82E-4BBC-BB08-3468EB283BA0}">
+                <File Id="fil299529E664380E6EE3A5F131823D9088" KeyPath="yes" Source="SourceDir\Skins\mini\Slider\knob.png" />
+            </Component>
+            <Component Id="cmpA97E6D099C53642437641B0078750013" Directory="dirAEAD8C56EDDF2617CB9CF949FB4C9797" Guid="{81C8224D-9867-4F35-8C67-7D928A300672}">
+                <File Id="fil8BEC7970FFDB0EC8077DF55F8ADA8931" KeyPath="yes" Source="SourceDir\Skins\mini\Slider\Thumbs.db" />
+            </Component>
+            <Component Id="cmp0FBDCC18A0FC3A492ADA3B34C550119F" Directory="dirEDDF16F4CDFF5546295047720E1CA706" Guid="{A1FA5662-A34F-461C-AC00-320DEAE46E23}">
+                <File Id="filC705C97A9AE770768E44B2B2C99C3B83" KeyPath="yes" Source="SourceDir\Skins\Notes\skin.xml" />
+            </Component>
+            <Component Id="cmp71DBA6C8F09E8D498BA729F07AFEB6B2" Directory="dir02569E529BD71158369D8B6FC6F4750F" Guid="{BEAFA457-9541-4702-8FF6-D4195DAF23CB}">
+                <File Id="fil1F11907F7C304300E93B4AC171365C7D" KeyPath="yes" Source="SourceDir\Skins\Notes\Controller\Thumbs.db" />
+            </Component>
+            <Component Id="cmp61803865B5F7E53F1C128465B4382A01" Directory="dirC6BCFDEBACB5A9BA4821960C143D2348" Guid="{7DF11B7A-F8D1-46A2-8140-8E7B18800A54}">
+                <File Id="fil83CA633E9D29E28558634B474718763A" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Thumbs.db" />
+            </Component>
+            <Component Id="cmp448E74FDBDB6155B419D9AD052E17058" Directory="dir46A6D92B835CBA9A033329B96DB5164B" Guid="{41ED7AA7-4238-4E11-A66D-79EDB8072FD3}">
+                <File Id="fil7D1699A1A79E1EA4BF5957BF8FA5684F" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\0.ico" />
+            </Component>
+            <Component Id="cmp1F16F1518F423EB18B20BD2359B9BFD0" Directory="dir46A6D92B835CBA9A033329B96DB5164B" Guid="{1D70A231-ADAD-42CC-A78B-54A1BA8A7D5E}">
+                <File Id="filFD06B7296F9BC1BBA24FC50F187ED881" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\1.ico" />
+            </Component>
+            <Component Id="cmpE2C20AC7A1D86C1F08B942EBFE9ED712" Directory="dir46A6D92B835CBA9A033329B96DB5164B" Guid="{4EC26160-E5B8-4413-8784-1C98181E0426}">
+                <File Id="fil89284630A0C9D88F4083842C5D14BCE1" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\2.ico" />
+            </Component>
+            <Component Id="cmp368218E167DD2B1B81C49E0B66A60B92" Directory="dir46A6D92B835CBA9A033329B96DB5164B" Guid="{49AF38C0-DD7F-48E8-8790-5201528125C2}">
+                <File Id="filFF9DACA48B906C66287B30FF4B42D0BB" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\3.ico" />
+            </Component>
+            <Component Id="cmp709AF3826ABD20CE972F48624724934A" Directory="dir46A6D92B835CBA9A033329B96DB5164B" Guid="{88650899-1229-4643-9080-1ED16485C4DF}">
+                <File Id="fil32519B3D534315879916EDF656EFAC89" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\4.ico" />
+            </Component>
+            <Component Id="cmpCD0F4EDF6607F526C59AF4A4AA1E197C" Directory="dir30A0C240DD71079E04CC0E46E728E65F" Guid="{1BFA558E-09DD-4869-9C0E-70CB894DF1F6}">
+                <File Id="filA78458C57AC67274B6CCB64381B42623" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\bars.png" />
+            </Component>
+            <Component Id="cmp6FB06BE1C7F2A09746918BEDD71FC77C" Directory="dir30A0C240DD71079E04CC0E46E728E65F" Guid="{2A8AFA24-E747-434C-8DDF-83D3B75589FA}">
+                <File Id="fil18643168908559828F59112DAE792B7D" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\eject.png" />
+            </Component>
+            <Component Id="cmpC0970A096A42A268F5E9B059927C991C" Directory="dir30A0C240DD71079E04CC0E46E728E65F" Guid="{AE53BDE4-5C35-4EFC-BB0B-A7EBF4991197}">
+                <File Id="filE0DA51ECE2E534CB811151EB40CCE32C" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\mute.png" />
+            </Component>
+            <Component Id="cmpF9A024C9E48EE26E0D1EDB54194F16A9" Directory="dir30A0C240DD71079E04CC0E46E728E65F" Guid="{D0FC6C80-A64C-4DB6-961B-BDBC2BE984CC}">
+                <File Id="fil1FC65CAC522B1B5990499AA55EFB40B0" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\numbers.png" />
+            </Component>
+            <Component Id="cmpEC7FF150A431853D1ED9568BE489EA25" Directory="dir30A0C240DD71079E04CC0E46E728E65F" Guid="{20650661-79AA-4BBA-9D4C-31608BF00731}">
+                <File Id="filCFE3C1156FD6474A8E4CDAC9A72AF5D1" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\Thumbs.db" />
+            </Component>
+            <Component Id="cmp9A14B1FE3F62B590C7738A309AE4CC6C" Directory="dir30A0C240DD71079E04CC0E46E728E65F" Guid="{B4D52105-F245-47D7-9A92-521631330380}">
+                <File Id="fil9738459B30CE021B21BF14E1F3268316" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\volbg.png" />
+            </Component>
+            <Component Id="cmp3F8BDA67CB68FF891659DD8B98DE9505" Directory="dirF27C3829FC726AD4005808E3598F6BCE" Guid="{E26B3568-EDAF-45CC-B3CC-44E90E8BDE3B}">
+                <File Id="filA161DE86DD1B63225C001456C3B96D16" KeyPath="yes" Source="SourceDir\Skins\Notes\Slider\background.png" />
+            </Component>
+            <Component Id="cmpDDAE54D3E4D50217A4E772499E0AFEC3" Directory="dirF27C3829FC726AD4005808E3598F6BCE" Guid="{4673B197-2237-45C3-A9AC-B01D20E78DFE}">
+                <File Id="fil56AEF3A386CDBAED187B1FBE7B0DB556" KeyPath="yes" Source="SourceDir\Skins\Notes\Slider\knob.png" />
+            </Component>
+            <Component Id="cmpAD03D3BFD4277B3562B772F772F46F3E" Directory="dir5A530A61B486A341F1B71BFF65AD3E55" Guid="{6AF9A563-EA1F-45AA-AFF3-1CC3107AC60C}">
+                <File Id="fil6D8CF72E20E74839F37BF42DFA46001D" KeyPath="yes" Source="SourceDir\Skins\pix\skin.xml" />
+            </Component>
+            <Component Id="cmp52E361E4E1EFE56E77B683547A9A9AF3" Directory="dirBED771303C8D828E71A452BAA5F5103F" Guid="{CEA82DDD-4255-4B2D-A086-A83260380390}">
+                <File Id="filC1632DF4165D7C062EEDC5205B9307C0" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\0.ico" />
+            </Component>
+            <Component Id="cmp9C4F65EF0477C5B0BFB7892F496ACF95" Directory="dirBED771303C8D828E71A452BAA5F5103F" Guid="{DD5ABD6C-AAF8-4AE3-90DE-C199EFA61DD2}">
+                <File Id="fil116EF543E4DC5A84396A42D60D809DAB" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\1.ico" />
+            </Component>
+            <Component Id="cmp007144CA8BF1BC4AE50752657A43099D" Directory="dirBED771303C8D828E71A452BAA5F5103F" Guid="{43DB3303-8EAF-4E7D-A183-06E2E6D8D211}">
+                <File Id="fil3AE847FB57254F7AC9EA43F1B801040C" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\2.ico" />
+            </Component>
+            <Component Id="cmpC1BF38BA65EEB39278644F7ABBC83E20" Directory="dirBED771303C8D828E71A452BAA5F5103F" Guid="{0D7BCF27-914C-4F3B-9E36-CD4872B00277}">
+                <File Id="fil3B68AE4B924A3946A6B51CDDFFAD9FAE" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\3.ico" />
+            </Component>
+            <Component Id="cmp298FFC173FE1CD02EACBE822424473E0" Directory="dirBED771303C8D828E71A452BAA5F5103F" Guid="{1B75F9F9-06DC-424F-9DC3-F5C9627A10A3}">
+                <File Id="fil06FB7DE87B1595940B0985A572F0A166" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\4.ico" />
+            </Component>
+            <Component Id="cmp93F0AB07254CB718D519A96AEEFB66B6" Directory="dirBED771303C8D828E71A452BAA5F5103F" Guid="{4D9CEC0E-8E48-4C5B-84C7-14B0472B171A}">
+                <File Id="fil6DD79C5D33C32FB9E796810B8157FB45" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\5.ico" />
+            </Component>
+            <Component Id="cmp22ABD4C258273FBB8262B7410EF7A2DA" Directory="dir32B69EEEF6FFC9480FF8245C4889B328" Guid="{E2C00307-5693-4475-BA21-235ADB128623}">
+                <File Id="filACEC171E49D419B3B564F1E2E6F2B7D9" KeyPath="yes" Source="SourceDir\Skins\pix\OSD\eject.png" />
+            </Component>
+            <Component Id="cmp76B0481D98CE6E1E542B483B5EF02A22" Directory="dir32B69EEEF6FFC9480FF8245C4889B328" Guid="{826A099B-928F-4371-9F91-436085AE4B2B}">
+                <File Id="filF4CD5CEE36BF7B94380BE33E14236FE0" KeyPath="yes" Source="SourceDir\Skins\pix\OSD\meter.png" />
+            </Component>
+            <Component Id="cmpB729C662256B5C9CDE4579871174F2F0" Directory="dir32B69EEEF6FFC9480FF8245C4889B328" Guid="{90B811D8-57AC-4341-936A-4181F8BC38E1}">
+                <File Id="fil92AECF9EEDE2CF6DF2CB41F1C2D355C5" KeyPath="yes" Source="SourceDir\Skins\pix\OSD\mute.png" />
+            </Component>
+            <Component Id="cmpC84EACE1EB124E195D6E1D0B19ED93C9" Directory="dir32B69EEEF6FFC9480FF8245C4889B328" Guid="{499666E6-FD9B-4710-9942-074B646F77D4}">
+                <File Id="fil9EC3091842BB1292F500B367BC990A94" KeyPath="yes" Source="SourceDir\Skins\pix\OSD\volume_background.png" />
+            </Component>
+            <Component Id="cmpAE1AB4EF2571ED5455932ABA1E5703F9" Directory="dir4A5F8DB668005F65C81A096109F09632" Guid="{15F9D56C-FACC-4FC2-B2DC-8273BB020ACA}">
+                <File Id="fil5DC81FAEB1614C9914EBF4A6FC946FD1" KeyPath="yes" Source="SourceDir\Skins\pix\Slider\background.png" />
+            </Component>
+            <Component Id="cmp7C8ADFE63C1CA59C0869804E0D8DD715" Directory="dir4A5F8DB668005F65C81A096109F09632" Guid="{FAB9A6F6-9705-4445-898E-F770415039BA}">
+                <File Id="filA7DDB0FA3D6FE40D713AD0F19C56CD88" KeyPath="yes" Source="SourceDir\Skins\pix\Slider\knob.png" />
+            </Component>
+            <Component Id="cmp503C31F9E8E538178CAEF44B98C81879" Directory="dir2BD16B1F3048189F510CF2B774F22482" Guid="{2A062902-AE49-4833-B3AF-F0641670CFF3}">
+                <File Id="fil4746B605C00BD5358F18139DBBBD9F3B" KeyPath="yes" Source="SourceDir\Skins\Small Glass\skin.xml" />
+            </Component>
+            <Component Id="cmpAA0965A8A52A851839C62157A6125C51" Directory="dir9C47FF7369A40980E2FDB7C943C4865F" Guid="{D50ACF6F-B49B-410C-91FA-5E0A46EA28E2}">
+                <File Id="filC89C97D8A73369F8274D26F4D3856D4A" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\0.ico" />
+            </Component>
+            <Component Id="cmpADC14A618709ECB665A2C464EEE4B398" Directory="dir9C47FF7369A40980E2FDB7C943C4865F" Guid="{4DC6C208-C3B1-410B-8CCD-3513F637DF51}">
+                <File Id="fil0B22812C019CCFFE336F374F48FB6468" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\1.ico" />
+            </Component>
+            <Component Id="cmp803CD43C3FD6421513C164EA13F2715F" Directory="dir9C47FF7369A40980E2FDB7C943C4865F" Guid="{401D52DF-391E-4159-A0B1-08FEA768DB76}">
+                <File Id="fil3CD935CE91F9AF1279984542E6C39DA9" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\2.ico" />
+            </Component>
+            <Component Id="cmp5FD8EC927D1BB3CD955C70E735705C26" Directory="dir9C47FF7369A40980E2FDB7C943C4865F" Guid="{C7000966-5BE0-4205-B9D6-95ADBD3AF414}">
+                <File Id="filA55F1DDD093AD4DC68420B56BF4174E5" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\3.ico" />
+            </Component>
+            <Component Id="cmp19D8508AB9D6506FD9A5816738E6A12A" Directory="dir9C47FF7369A40980E2FDB7C943C4865F" Guid="{6C5F0C8A-D4B6-46C8-A773-EDC62BD6BB21}">
+                <File Id="fil82A4D5932D08BA802879A2FB5A37882A" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\4.ico" />
+            </Component>
+            <Component Id="cmp361BA6E943BE8664EB1D32AFA719AFDA" Directory="dir2DB54200EDCE093E1B4326B7BEAE914E" Guid="{BC30E958-7309-4B50-9B1F-312F322D74BE}">
+                <File Id="fil8DFBB5F8D6A6D784AE64E6B63AD62A0F" KeyPath="yes" Source="SourceDir\Skins\Small Glass\OSD\back.png" />
+            </Component>
+            <Component Id="cmpA904ADFB68AACE364A982A04E45FD739" Directory="dir2DB54200EDCE093E1B4326B7BEAE914E" Guid="{52A34FB1-69B8-4FC9-8315-4107E0403CF9}">
+                <File Id="fil5FE76536488ECBBF26766A900FE62B62" KeyPath="yes" Source="SourceDir\Skins\Small Glass\OSD\eject.png" />
+            </Component>
+            <Component Id="cmp97879ABB030E4731A218D4A621F48354" Directory="dir2DB54200EDCE093E1B4326B7BEAE914E" Guid="{A926420B-AE5E-4D99-962E-3C722637B5D7}">
+                <File Id="filF4C0EC863226383C38B296751150BCCA" KeyPath="yes" Source="SourceDir\Skins\Small Glass\OSD\meter.png" />
+            </Component>
+            <Component Id="cmp805F62F8663FA644467369C082E8F8F2" Directory="dir2DB54200EDCE093E1B4326B7BEAE914E" Guid="{ED1D8899-F00B-4182-83DB-CBABA0AB54B1}">
+                <File Id="fil830F55B0003785080412AB687BA2A259" KeyPath="yes" Source="SourceDir\Skins\Small Glass\OSD\mute.png" />
+            </Component>
+            <Component Id="cmpDC7DE29D76E1FD90AF1DB32ED97EFF61" Directory="dirD56D5F9BF852FFCC14B14021FBBBA8EC" Guid="{CEF95AA1-8CBE-4265-8DB8-884DE5D9E7DE}">
+                <File Id="filD2B92BCC8D782A5C14363BD4F8574615" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Slider\back.png" />
+            </Component>
+            <Component Id="cmp8E26055652DA81A7691012E02C5584D7" Directory="dirD56D5F9BF852FFCC14B14021FBBBA8EC" Guid="{822E3AC2-358B-42F2-9A39-5C3FF32E563A}">
+                <File Id="filEAC32836B9BFF84FB54B89F5018F24EC" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Slider\knob.png" />
+            </Component>
+            <Component Id="cmpFD121EC5BEE0271DFC66126A00BC7D46" Directory="dir6DA5B9C179FFC4BE9DA523610F81E950" Guid="{3865E0DE-53B5-4EE0-92C5-9A3FA0359C0C}">
+                <File Id="fil9D8C9010046A9B2280273507E65369BC" KeyPath="yes" Source="SourceDir\Skins\Vista 808\skin.xml" />
+            </Component>
+            <Component Id="cmp48626351D64786D84C13CA266FB369E3" Directory="dir92B996C006E2564DCF68AC0FFF661717" Guid="{44AC1E57-FBCA-4C95-8BCE-6A702FF78326}">
+                <File Id="fil9EA0D7FF912F931B1AEBCC04DE55C43C" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\0.ico" />
+            </Component>
+            <Component Id="cmp57BE50CE257F5E7C1837D4F85AF9B1FC" Directory="dir92B996C006E2564DCF68AC0FFF661717" Guid="{0C6A4451-080F-4E47-9349-BB42C61F45A7}">
+                <File Id="fil5A4628C95FAAFE9FFF69847848BE1E8C" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\1.ico" />
+            </Component>
+            <Component Id="cmpEDB7B11443F83D387CA82CA711FC10C6" Directory="dir92B996C006E2564DCF68AC0FFF661717" Guid="{D90B93E9-66CA-412F-9DAF-91D8D86B3CBC}">
+                <File Id="filE495BFC94863CB914E61EF02B5EF880D" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\2.ico" />
+            </Component>
+            <Component Id="cmp08D729E42FBF9953155D2D6F53D78C7C" Directory="dir92B996C006E2564DCF68AC0FFF661717" Guid="{91D0AE7D-CED4-4184-B81F-BF117A9A9F43}">
+                <File Id="fil24EE4A7C90E8C5496EF8DB7AF96C52ED" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\3.ico" />
+            </Component>
+            <Component Id="cmp5C6705CD73E9D17FEAFB5E9D17866EB3" Directory="dir92B996C006E2564DCF68AC0FFF661717" Guid="{8EB74326-4F9C-4297-90E6-027AB25673FA}">
+                <File Id="fil3D09D21B083A80DA2469FEA5A83FDD94" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\4.ico" />
+            </Component>
+            <Component Id="cmpE639734D06EED44320105B29C369502E" Directory="dir2D6220C58273555A69066BD04DC2E1DB" Guid="{F0AA5373-85C8-4A25-887B-80E12897E764}">
+                <File Id="fil06A5EF405190BDB974937E6AFC841FF9" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\back.png" />
+            </Component>
+            <Component Id="cmpA9B659774C0CD4369C7237C5B7C7247E" Directory="dir2D6220C58273555A69066BD04DC2E1DB" Guid="{9E228A95-3BD0-4530-BDBF-D586BA393032}">
+                <File Id="fil3966A0B256F4D484317760E258689B87" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\eject.png" />
+            </Component>
+            <Component Id="cmpBE9C5253B4629E14278E568F932F8475" Directory="dir2D6220C58273555A69066BD04DC2E1DB" Guid="{3D5EC574-A2CD-4701-8FC2-908DD5201C95}">
+                <File Id="fil28B8497BA40B108E59B4B11C0695CDE7" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\glass.png" />
+            </Component>
+            <Component Id="cmp9500E9AED9ACB309B5C9AD6F2B70B6AB" Directory="dir2D6220C58273555A69066BD04DC2E1DB" Guid="{7405D5F8-0BC4-4D70-B73B-63C8E25C5498}">
+                <File Id="fil2B74A7A4C1B32E264F735E602409B703" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\meter.png" />
+            </Component>
+            <Component Id="cmpA5691D579841B6616B7CCAD9DE6607D5" Directory="dir2D6220C58273555A69066BD04DC2E1DB" Guid="{B913190B-DEFB-4C5A-BA18-2024D8F3555B}">
+                <File Id="filC96C94705EF50EB2589BBA9E5E295E67" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\mute.png" />
+            </Component>
+            <Component Id="cmp17613F526004548FAF64BFB3F621E055" Directory="dir5EC72CAAF4EAC4F605FF06EBD504708B" Guid="{1AFD0A40-1401-4EB4-A93F-56AC9DF73737}">
+                <File Id="filCFFEA7C75A7F16DFEA5D7629941CF94F" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Slider\back.png" />
+            </Component>
+            <Component Id="cmp39FB520CEF5C7C297863A00C46835AC5" Directory="dir5EC72CAAF4EAC4F605FF06EBD504708B" Guid="{F535E0D4-7381-4A04-9329-0BB15593D9B3}">
+                <File Id="filEBD6FB6FF71527A70F2C67AFA11A71D3" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Slider\glass.png" />
+            </Component>
+            <Component Id="cmp612D8548C9CF52162EE192C0F73BAA69" Directory="dir5EC72CAAF4EAC4F605FF06EBD504708B" Guid="{0C2AE61F-2A37-472C-83B6-FD913F0D03C8}">
+                <File Id="fil830B876837E7624B6F52A04BA2D0B8FF" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Slider\knob.png" />
+            </Component>
+            <Component Id="cmp7501164C4AEA6E430531052A6980BF4B" Directory="dir2BE9487B15A75EF029DE1CF71C7327A3" Guid="{042FCAA3-A73A-4DFE-AEBD-D9902572AE0F}">
+                <File Id="fil5539348857B519733D4087F8C1D2D69C" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\skin.xml" />
+            </Component>
+            <Component Id="cmpDE99CE4123308FF02C6C57943C3B6A14" Directory="dirE71E360A3C6CCA9551BB9A7E72792AFB" Guid="{027CE470-7DAF-4841-AC00-6C9FED63E19D}">
+                <File Id="fil6FCBEA539725892431F6688D6FD4EAFE" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\0.ico" />
+            </Component>
+            <Component Id="cmpAD4AAA5FEC58B9633F92C263085E293B" Directory="dirE71E360A3C6CCA9551BB9A7E72792AFB" Guid="{141BD5FA-B23C-4F4A-A0D8-81C3BDD890FB}">
+                <File Id="fil5B61DEDAB06D55DA238E608B3633DE63" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\1.ico" />
+            </Component>
+            <Component Id="cmpBA9F1C2AA1E01615B1FC7EAB3A8856FD" Directory="dirE71E360A3C6CCA9551BB9A7E72792AFB" Guid="{43F973F2-DD65-44ED-AA14-6636C3C39754}">
+                <File Id="filDB2EB58A713300C6A4BB5026CA56034E" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\2.ico" />
+            </Component>
+            <Component Id="cmp77FE91FF3E58379100933BB069D0C1A9" Directory="dirE71E360A3C6CCA9551BB9A7E72792AFB" Guid="{A345C2FE-C48E-4AE2-B86C-9B1E495FD155}">
+                <File Id="fil4B846B9C2AFF479005CF2FD7C32C28F0" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\3.ico" />
+            </Component>
+            <Component Id="cmp4141AA39DA51413D36CF64DD0A8C6C08" Directory="dirE71E360A3C6CCA9551BB9A7E72792AFB" Guid="{99F03892-E2B1-452F-A832-CE8BCB44CCC2}">
+                <File Id="fil3F4230037DAB6807AE21A9A5D779043C" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\4.ico" />
+            </Component>
+            <Component Id="cmp4032CCF818AFD47443E8414A902E57D2" Directory="dirE71E360A3C6CCA9551BB9A7E72792AFB" Guid="{69123648-4612-4232-A6CD-DC01E18F523A}">
+                <File Id="fil0C278D973C8DDEF7FF2B4E0E961A087C" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\5.ico" />
+            </Component>
+            <Component Id="cmpC8113D284E00667AB0CD38EEBAEDB498" Directory="dir2C7D115F00DA7A4184BEB0974D3066C1" Guid="{7EFE8D0F-8C3A-4CCA-9887-5AC6EB279CF3}">
+                <File Id="filAE1A8C7848F217CA65DA5A1D5D478ACA" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\background.png" />
+            </Component>
+            <Component Id="cmp5CC314EAA59A76EB2F6F840BABEB9F4B" Directory="dir2C7D115F00DA7A4184BEB0974D3066C1" Guid="{111F9B31-9D71-4132-AEDD-D68C57BDB5DE}">
+                <File Id="fil4442A8D83E2E93086B6A6545FED235F9" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\eject.png" />
+            </Component>
+            <Component Id="cmp0DCEEE76FA2B40EBBD41ED0AC4EDC7D5" Directory="dir2C7D115F00DA7A4184BEB0974D3066C1" Guid="{7DEC03CB-ACD9-43BD-A483-1552A28E27BE}">
+                <File Id="filA3CE292463794A89B1BA82F08CFB929B" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\meter.png" />
+            </Component>
+            <Component Id="cmpD1AA8C17C51FEA4FF3EACDDA59D8018C" Directory="dir2C7D115F00DA7A4184BEB0974D3066C1" Guid="{BC840A3F-57FC-4E24-AAE4-37E627A45919}">
+                <File Id="fil9DAA7AACFB4DD3090260D2ED38BD0B9E" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\mute.png" />
+            </Component>
+            <Component Id="cmp0D02EA6454024EA82D21AD6D5D61D395" Directory="dir2C7D115F00DA7A4184BEB0974D3066C1" Guid="{518A1DD1-4A9C-4B78-BC5A-127768EE145B}">
+                <File Id="filEA3B4BC16FCE26ACF6378A62DD05CF40" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\volumebg.png" />
+            </Component>
+            <Component Id="cmp8D51B96F1446F68E0577F3688EF4FD7A" Directory="dir9AF2C8DB05E6E54C10EBB7572501EBF9" Guid="{13F8A2DE-75CF-4C6F-932A-E58FA2A08ECE}">
+                <File Id="fil7257FAEA41DF31D0F736C8A66D938344" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Slider\bg.png" />
+            </Component>
+            <Component Id="cmp2FA9BEF5504C04A9FE2A054D062707CA" Directory="dir9AF2C8DB05E6E54C10EBB7572501EBF9" Guid="{B2377F9D-6A41-4A6B-8CE2-3A0AB5A56985}">
+                <File Id="fil433886A09B26D19970308A6484789321" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Slider\knob.png" />
+            </Component>
+            <Component Id="cmpDB4DABB9896E7A8AB2B61426E3BFE37C" Directory="dir9AF2C8DB05E6E54C10EBB7572501EBF9" Guid="{56A6CA54-C032-43B8-9192-7B54B0CF0F17}">
+                <File Id="filC52DBB19B2A335D1AE19DB1517E63B24" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Slider\meter.png" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirEDDF16F4CDFF5546295047720E1CA706">
+            <Directory Id="dir02569E529BD71158369D8B6FC6F4750F" Name="Controller" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir5A530A61B486A341F1B71BFF65AD3E55">
+            <Directory Id="dir0908DE24DD80FD5AD0E1F7C5D1A705E2" Name="Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir67A1474D375E45C62E554552D9682528">
+            <Directory Id="dir0B4C6F70C823CD59A09B4BDD55090B08" Name="Notification Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir67A1474D375E45C62E554552D9682528">
+            <Directory Id="dir122D76B7D69CA4601265F2D18F69782E" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir3497269C8C6DFBA28C185FB318DFAAD1">
+            <Directory Id="dir1F40F4F6859EA4EDCAB42207E2A1AB27" Name="Volume" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dir2BD16B1F3048189F510CF2B774F22482" Name="Small Glass" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dir2BE9487B15A75EF029DE1CF71C7327A3" Name="Yosemitesque" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2BE9487B15A75EF029DE1CF71C7327A3">
+            <Directory Id="dir2C7D115F00DA7A4184BEB0974D3066C1" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir53E8F0B3A536B1967D68E60322DA9845">
+            <Directory Id="dir2D4E254DF441C17F4D250FB82B3FC3A0" Name="Slider" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6DA5B9C179FFC4BE9DA523610F81E950">
+            <Directory Id="dir2D6220C58273555A69066BD04DC2E1DB" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2BD16B1F3048189F510CF2B774F22482">
+            <Directory Id="dir2DB54200EDCE093E1B4326B7BEAE914E" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir86F3F806FEF77C87F0FDB7EFE8260296">
+            <Directory Id="dir2FFF459D7EA6A0E175DB8F20A36C67C7" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirEDDF16F4CDFF5546295047720E1CA706">
+            <Directory Id="dir30A0C240DD71079E04CC0E46E728E65F" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir5A530A61B486A341F1B71BFF65AD3E55">
+            <Directory Id="dir32B69EEEF6FFC9480FF8245C4889B328" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirCF7607BE20F23FAD1BB966AAE60D3285">
+            <Directory Id="dir3497269C8C6DFBA28C185FB318DFAAD1" Name="Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir53E8F0B3A536B1967D68E60322DA9845">
+            <Directory Id="dir382474E8A2FBC200CE646AB93CDC6DBB" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dir3B292EE1A52199EC3F18ECEB61110AC8" Name="liquid" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirCF7607BE20F23FAD1BB966AAE60D3285">
+            <Directory Id="dir41EB02BFAEBE3F786FA68C9ACFA2149E" Name="Slider" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirC6BCFDEBACB5A9BA4821960C143D2348">
+            <Directory Id="dir46A6D92B835CBA9A033329B96DB5164B" Name="Volume" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir5A530A61B486A341F1B71BFF65AD3E55">
+            <Directory Id="dir4A5F8DB668005F65C81A096109F09632" Name="Slider" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dir53E8F0B3A536B1967D68E60322DA9845" Name="Ignition" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dir5A530A61B486A341F1B71BFF65AD3E55" Name="pix" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6DA5B9C179FFC4BE9DA523610F81E950">
+            <Directory Id="dir5EC72CAAF4EAC4F605FF06EBD504708B" Name="Slider" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dir67A1474D375E45C62E554552D9682528" Name="Ice" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirE921A038B8488A0C7F4CBA30F1449C78">
+            <Directory Id="dir6A74CABFC5DA4A0AC150A259382EA9B4" Name="Volume" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirCF7607BE20F23FAD1BB966AAE60D3285">
+            <Directory Id="dir6C5679730E6B21021F8041607FBB554E" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dir6DA5B9C179FFC4BE9DA523610F81E950" Name="Vista 808" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirCF7607BE20F23FAD1BB966AAE60D3285">
+            <Directory Id="dir71164AAF36B937E28DBF9B28193361CC" Name="Black Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2BE9487B15A75EF029DE1CF71C7327A3">
+            <Directory Id="dir8584C9DEF21272BA74201ECD0AD8B00D" Name="Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dir86F3F806FEF77C87F0FDB7EFE8260296" Name="mini" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirD88C5FA656FBB886D6B196D48D87F5C7">
+            <Directory Id="dir92B996C006E2564DCF68AC0FFF661717" Name="Volume" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2BE9487B15A75EF029DE1CF71C7327A3">
+            <Directory Id="dir9AF2C8DB05E6E54C10EBB7572501EBF9" Name="Slider" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirDA3B85E1CC746DB00C020140CAAD44AB">
+            <Directory Id="dir9C47FF7369A40980E2FDB7C943C4865F" Name="Volume" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir86F3F806FEF77C87F0FDB7EFE8260296">
+            <Directory Id="dirAEAD8C56EDDF2617CB9CF949FB4C9797" Name="Slider" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirB918116357CF8B670C0A53E8CE87F531">
+            <Directory Id="dirB2D2F1114AB0F6B6B205BB199AE04FEE" Name="Volume" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir53E8F0B3A536B1967D68E60322DA9845">
+            <Directory Id="dirB918116357CF8B670C0A53E8CE87F531" Name="Notification Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir0908DE24DD80FD5AD0E1F7C5D1A705E2">
+            <Directory Id="dirBED771303C8D828E71A452BAA5F5103F" Name="Volume" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirEDDF16F4CDFF5546295047720E1CA706">
+            <Directory Id="dirC6BCFDEBACB5A9BA4821960C143D2348" Name="Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dirCF7607BE20F23FAD1BB966AAE60D3285" Name="Classic" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir3B292EE1A52199EC3F18ECEB61110AC8">
+            <Directory Id="dirD3CB9A563B9B1107865C1FB6FFA06C80" Name="OSD" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2BD16B1F3048189F510CF2B774F22482">
+            <Directory Id="dirD56D5F9BF852FFCC14B14021FBBBA8EC" Name="Slider" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir67A1474D375E45C62E554552D9682528">
+            <Directory Id="dirD5C15F8FD9F622E89CF6B5315C4D2C97" Name="Control" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir6DA5B9C179FFC4BE9DA523610F81E950">
+            <Directory Id="dirD88C5FA656FBB886D6B196D48D87F5C7" Name="Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir2BD16B1F3048189F510CF2B774F22482">
+            <Directory Id="dirDA3B85E1CC746DB00C020140CAAD44AB" Name="Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir8584C9DEF21272BA74201ECD0AD8B00D">
+            <Directory Id="dirE71E360A3C6CCA9551BB9A7E72792AFB" Name="Volume" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir86F3F806FEF77C87F0FDB7EFE8260296">
+            <Directory Id="dirE921A038B8488A0C7F4CBA30F1449C78" Name="Icons" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dir9CB560686C187631667869F5F603EC69">
+            <Directory Id="dirEDDF16F4CDFF5546295047720E1CA706" Name="Notes" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirEDDF16F4CDFF5546295047720E1CA706">
+            <Directory Id="dirF27C3829FC726AD4005808E3598F6BCE" Name="Slider" />
+        </DirectoryRef>
+    </Fragment>
+</Wix>

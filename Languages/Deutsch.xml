@@ -2,287 +2,287 @@
 <ArrayOfWord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 <!-- General Words -->
- <word>
-   <key>Settings</key>
+ <string>
+   <original>Settings</original>
    <translation>Einstellungen</translation>
- </word>
- <word>
-   <key>Exit</key>
+ </string>
+ <string>
+   <original>Exit</original>
    <translation>Schließen</translation>
- </word>
+ </string>
 
 
 <!-- Settings Dialog Buttons -->
- <word>
-   <key>Defaults</key>
+ <string>
+   <original>Defaults</original>
    <translation>Standard</translation>
- </word>
- <word>
-   <key>Cancel</key>
+ </string>
+ <string>
+   <original>Cancel</original>
    <translation>Abbrechen</translation>
- </word>
- <word>
-   <key>Save</key>
+ </string>
+ <string>
+   <original>Save</original>
    <translation>Speichern</translation>
- </word>
- <word>
-   <key>Select Key...</key>
+ </string>
+ <string>
+   <original>Select Key...</original>
    <translation>Taste wählen...</translation>
- </word>
+ </string>
 
 
 <!-- Settings Tabs -->
- <word>
-   <key>General</key>
+ <string>
+   <original>General</original>
    <translation>Allgemein</translation>
- </word>
- <word>
-   <key>Display</key>
+ </string>
+ <string>
+   <original>Display</original>
    <translation>Anzeige</translation>
- </word>
- <word>
-   <key>Hotkey Setup</key>
+ </string>
+ <string>
+   <original>Hotkey Setup</original>
    <translation>Hotkey-Einstellungen</translation>
- </word>
- <word>
-   <key>Skin Chooser</key>
+ </string>
+ <string>
+   <original>Skin Chooser</original>
    <translation>Skinauswahl</translation>
- </word>
- <word>
-   <key>About</key>
+ </string>
+ <string>
+   <original>About</original>
    <translation>Über</translation>
- </word>
+ </string>
 
 
 <!-- General Tab -->
- <word>
-   <key>Behavior</key>
+ <string>
+   <original>Behavior</original>
    <translation>Verhalten</translation>
- </word>
- <word>
-   <key>Run on Windows startup</key>
+ </string>
+ <string>
+   <original>Run on Windows startup</original>
    <translation>Mit Windows starten</translation>
- </word>
- <word>
-   <key>Play sounds</key>
+ </string>
+ <string>
+   <original>Play sounds</original>
    <translation>Sounds abspielen</translation>
- </word>
- <word>
-   <key>Custom volume change amount:</key>
+ </string>
+ <string>
+   <original>Custom volume change amount:</original>
    <translation>Lautstärke ändern um:</translation>
- </word>
+ </string>
 
- <word>
-   <key>Mixer</key>
+ <string>
+   <original>Mixer</original>
    <translation>Mixer</translation>
- </word>
- <word>
-   <key>Control Wave instead of Master Volume</key>
+ </string>
+ <string>
+   <original>Control Wave instead of Master Volume</original>
    <translation>Wave anstelle von Masterlautstärke regeln</translation>
- </word>
- <word>
-   <key>Use custom mixer program on tray click</key>
+ </string>
+ <string>
+   <original>Use custom mixer program on tray click</original>
    <translation>Eigenes Mixerprogramm bei Tray-Klick benutzen</translation>
- </word>
- <word>
-   <key>Choose...</key>
+ </string>
+ <string>
+   <original>Choose...</original>
    <translation>Wählen...</translation>
- </word>
- <word>
-   <key>Filename: </key>
+ </string>
+ <string>
+   <original>Filename: </original>
    <translation>Dateiname: </translation>
- </word>
+ </string>
 
- <word>
-   <key>Language</key>
+ <string>
+   <original>Language</original>
    <translation>Sprache</translation>
- </word>
- <word>
-   <key>Load</key>
+ </string>
+ <string>
+   <original>Load</original>
    <translation>Laden</translation>
- </word>
+ </string>
 
 
 <!-- Display Tab -->
- <word>
-   <key>Visibility</key>
+ <string>
+   <original>Visibility</original>
    <translation>Sichtbarkeit</translation>
- </word>
- <word>
-   <key>Keep above other windows</key>
+ </string>
+ <string>
+   <original>Keep above other windows</original>
    <translation>Über anderen Fenstern anzeigen</translation>
- </word>
- <word>
-   <key>Display icon in system tray</key>
+ </string>
+ <string>
+   <original>Display icon in system tray</original>
    <translation>Symbol im Tray anzeigen</translation>
- </word>
-   <word>
-     <key>Hide when other programs are fullscreen</key>
+ </string>
+   <string>
+     <original>Hide when other programs are fullscreen</original>
      <translation>Verstecken, wenn ein Programm im Vollbild läuft</translation>
- </word>
- <word>
-     <key>Fade Delay:</key>
+ </string>
+ <string>
+     <original>Fade Delay:</original>
      <translation>Ausblendeverzögerung:</translation>
- </word>
- <word>
-     <key>Fade Speed:</key>
+ </string>
+ <string>
+     <original>Fade Speed:</original>
      <translation>Ausblendegeschwindigkeit:</translation>
- </word>
- <word>
-   <key>Position</key>
+ </string>
+ <string>
+   <original>Position</original>
    <translation>Position</translation>
- </word>
- <word>
-   <key>Display on Monitor:</key>
+ </string>
+ <string>
+   <original>Display on Monitor:</original>
    <translation>Anzeige auf Bildschirm:</translation>
- </word>
- <word>
-   <key>Default</key>
+ </string>
+ <string>
+   <original>Default</original>
    <translation>Standard</translation>
- </word>
- <word>
-   <key>Centered</key>
+ </string>
+ <string>
+   <original>Centered</original>
    <translation>Zentriert</translation>
- </word>
- <word>
-   <key>Custom Location:</key>
+ </string>
+ <string>
+   <original>Custom Location:</original>
    <translation>Eigene Position:</translation>
- </word>
+ </string>
 
 
 <!-- Hotkey tab -->
- <word>
-   <key>Function</key>
+ <string>
+   <original>Function</original>
    <translation>Funktion</translation>
- </word>
- <word>
-   <key>Keys</key>
+ </string>
+ <string>
+   <original>Keys</original>
    <translation>Tasten</translation>
- </word>
+ </string>
 
- <word>
-   <key>Add</key>
+ <string>
+   <original>Add</original>
    <translation>Hinzufügen</translation>
- </word>
- <word>
-   <key>Delete</key>
+ </string>
+ <string>
+   <original>Delete</original>
    <translation>Löschen</translation>
- </word>
+ </string>
 
- <word>
-   <key>Action:</key>
+ <string>
+   <original>Action:</original>
    <translation>Aktion:</translation>
- </word>
- <word>
-   <key>Volume Up</key>
+ </string>
+ <string>
+   <original>Volume Up</original>
    <translation>Lauter</translation>
- </word>
- <word>
-   <key>Volume Down</key>
+ </string>
+ <string>
+   <original>Volume Down</original>
    <translation>Leiser</translation>
- </word>
- <word>
-   <key>Mute</key>
+ </string>
+ <string>
+   <original>Mute</original>
    <translation>Stumm</translation>
- </word>
- <word>
-   <key>Eject</key>
+ </string>
+ <string>
+   <original>Eject</original>
    <translation>Auswerfen</translation>
- </word>
- <word>
-   <key>Settings Window</key>
+ </string>
+ <string>
+   <original>Settings Window</original>
    <translation>Einstellungsfenster</translation>
- </word>
+ </string>
 
- <word>
-   <key>Drive:</key>
+ <string>
+   <original>Drive:</original>
    <translation>Laufwerk:</translation>
- </word>
- <word>
-   <key>Hotkey Chooser</key>
+ </string>
+ <string>
+   <original>Hotkey Chooser</original>
    <translation>Hotkeyauswahl</translation>
- </word>
- <word>
-   <key>Key Combination:</key>
+ </string>
+ <string>
+   <original>Key Combination:</original>
    <translation>Tastenkombination:</translation>
- </word>
- <word>
-   <key>Press a key!</key>
+ </string>
+ <string>
+   <original>Press a key!</original>
    <translation>Drücke eine Taste!</translation>
- </word>
+ </string>
 
 
 <!-- Skin tab -->
- <word>
-   <key>Available Skins</key>
+ <string>
+   <original>Available Skins</original>
    <translation>Verfügbare Skins</translation>
- </word>
- <word>
-   <key>Open Skin Folder</key>
+ </string>
+ <string>
+   <original>Open Skin Folder</original>
    <translation>Skin-Ordner öffnen</translation>
- </word>
+ </string>
 
- <word>
-   <key>Skin Information</key>
+ <string>
+   <original>Skin Information</original>
    <translation>Skininformation</translation>
- </word>
- <word>
-   <key>Author:</key>
+ </string>
+ <string>
+   <original>Author:</original>
    <translation>Autor:</translation>
- </word>
- <word>
-   <key>Version:</key>
+ </string>
+ <string>
+   <original>Version:</original>
    <translation>Version:</translation>
- </word>
- <word>
-   <key>Skin Format Version:</key>
+ </string>
+ <string>
+   <original>Skin Format Version:</original>
    <translation>Skinformatversion:</translation>
- </word>
- <word>
-   <key>Author's Webpage</key>
+ </string>
+ <string>
+   <original>Author's Webpage</original>
    <translation>Webseite des Autors:</translation>
- </word>
+ </string>
 
 
 <!-- About tab -->
- <word>
-   <key>Version</key>
+ <string>
+   <original>Version</original>
    <translation>Version</translation>
- </word>
- <word>
-   <key>lang_author</key>
+ </string>
+ <string>
+   <original>lang_author</original>
    <translation>Matthias Strauch</translation>
- </word>
- <word>
-   <key>lang_module</key>
+ </string>
+ <string>
+   <original>lang_module</original>
    <translation>Deutsches Sprachmodul geladen.</translation>
- </word>
+ </string>
 
 
 <!-- Messages -->
- <word>
-   <key>Load Defaults</key>
+ <string>
+   <original>Load Defaults</original>
    <translation>Standardeinstellungen</translation>
- </word>
- <word>
-   <key>All settings will be lost.  Continue?</key>
+ </string>
+ <string>
+   <original>All settings will be lost.  Continue?</original>
    <translation>Alle Einstellungen gehen verloren. Weiter?</translation>
- </word>
- <word>
-   <key>Skin Error</key>
+ </string>
+ <string>
+   <original>Skin Error</original>
    <translation>Skin-Fehler</translation>
- </word>
- <word>
-   <key>Couldn't load skin.  Try loading the default skin?</key>
+ </string>
+ <string>
+   <original>Couldn't load skin.  Try loading the default skin?</original>
    <translation>Konnte gewählten Skin nicht laden. Standardskin laden?</translation>
- </word>
- <word>
-   <key>Couldn't load skin XML.  Check the file for syntax errors.</key>
+ </string>
+ <string>
+   <original>Couldn't load skin XML.  Check the file for syntax errors.</original>
    <translation>Konnte Skin-XML nicht laden. Überprüfe die Datei auf Syntaxfehler.</translation>
- </word>
- <word>
-   <key>Settings will be applied next time 3RVX starts.</key>
+ </string>
+ <string>
+   <original>Settings will be applied next time 3RVX starts.</original>
    <translation>Einstellungen werden beim nächsten Start von 3RVX wirksam.</translation>
- </word>
+ </string>
 
 </ArrayOfWord>

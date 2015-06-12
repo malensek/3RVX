@@ -2,6 +2,8 @@
 
 #include <sstream>
 #include "../../3RVX/Logger.h"
+#include "../../3RVX/Settings.h"
+#include "../../3RVX/LanguageTranslator.h"
 
 Control::Control() {
 
@@ -11,6 +13,13 @@ Control::Control(int id, HWND parent) :
 _id(id),
 _parent(parent) {
     _hWnd = GetDlgItem(parent, id);
+
+    /* Try to automatically translate the control's string */
+    Settings *settings = Settings::Instance();
+    LanguageTranslator *translator = settings->Translator();
+    std::wstring txt = Text();
+    std::wstring trans = translator->Translate(txt);
+    Text(trans);
 }
 
 Control::~Control() {

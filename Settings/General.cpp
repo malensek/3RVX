@@ -14,10 +14,12 @@ const wchar_t General::REGKEY_RUN[]
     = L"Software\\Microsoft\\Windows\\CurrentVersion\\Run";
 
 void General::Initialize() {
+    INIT_CONTROL(GRP_BEHAVIOR, GroupBox, _behaviorGroup);
     INIT_CONTROL(CHK_STARTUP, Checkbox, _startup);
     INIT_CONTROL(CHK_NOTIFY, Checkbox, _notifyIcon);
     INIT_CONTROL(CHK_SOUNDS, Checkbox, _sounds);
 
+    INIT_CONTROL(GRP_SKIN, GroupBox, _skinGroup);
     INIT_CONTROL(CMB_SKIN, ComboBox, _skin);
     _skin.OnSelectionChange = [this]() {
         LoadSkinInfo(_skin.Selection());
@@ -33,6 +35,7 @@ void General::Initialize() {
         return true;
     };
 
+    INIT_CONTROL(GRP_LANGUAGE, GroupBox, _languageGroup);
     INIT_CONTROL(CMB_LANG, ComboBox, _language);
     _language.OnSelectionChange = [this]() {
         // Handle language selection change 

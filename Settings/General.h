@@ -22,14 +22,17 @@ private:
 
 private:
     /* Controls: */
+    GroupBox _behaviorGroup;
     Checkbox _startup;
     Checkbox _notifyIcon;
     Checkbox _sounds;
 
+    GroupBox _skinGroup;
     ComboBox _skin;
     Label _author;
     Button _website;
 
+    GroupBox _languageGroup;
     ComboBox _language;
 
 private:

@@ -50,9 +50,9 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
         if (result == tinyxml2::XMLError::XML_ERROR_FILE_NOT_FOUND) {
-            //Error::ErrorMessageDie(SKINERR_INVALID_SKIN);
+            CLOG(L"File not found");
         }
-        throw std::logic_error("Failed to read XML file!");
+        return;
     }
 
     _root = _xml.GetDocument()->FirstChildElement("translation");
@@ -60,7 +60,10 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
         throw std::runtime_error("Could not find root XML element");
     }
 
+    /*
     _author = StringUtils::Widen(_root->Attribute("author", ""));
+    */
+
     tinyxml2::XMLElement *trans = _root->FirstChildElement("language");
     if (trans == NULL) {
         CLOG(L"No <language> tag.");

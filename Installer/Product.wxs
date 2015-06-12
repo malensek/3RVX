@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product
+    Id="*"
+    Name="3RVX"
+    Language="1033"
+    Version="3.0.0.0"
+    Manufacturer="Matthew Malensek"
+    UpgradeCode="8DF572AB-65FE-44FF-985C-A3440D59E4A0">
+
+		<Package
+      InstallerVersion="200"
+      Compressed="yes"
+      InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="Installer" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="3RVX" />
+      </Directory>
+    </Directory>
+    
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="TestComp" Guid="*">
+        <File Id="TestCompFile" Name=""
+      </Component>
+    </DirectoryRef>
+
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+		</ComponentGroup>
+
+  </Product>
+</Wix>

@@ -1,0 +1,562 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="TARGETDIR">
+            <Directory Id="dir99DE416F55C8960850D5A4FCA3758AD4" Name="Release">
+                <Component Id="cmpCB0C75EB2049C65B3F921910BB516230" Guid="*">
+                    <File Id="filC2391215A59626D1E169C3BA1B7B201A" KeyPath="yes" Source="SourceDir\3RVX-LogEnabled.exe" />
+                </Component>
+                <Component Id="cmpBBC310B240BA45B61450D824B0B041FE" Guid="*">
+                    <File Id="fil8D089A3A6988F422EC5EA16888E2FE0A" KeyPath="yes" Source="SourceDir\3RVX.exe" />
+                </Component>
+                <Component Id="cmp29F756D1D3B97AD36C83F74F4656A887" Guid="*">
+                    <File Id="fil170F4EC5EFA8B0AA75A553038063CA05" KeyPath="yes" Source="SourceDir\3RVX.pdb" />
+                </Component>
+                <Component Id="cmpBA2CAA02007444293DFA7BBE02981A61" Guid="*">
+                    <File Id="fil9F09CB9643E300C458F24C4C663D8B4C" KeyPath="yes" Source="SourceDir\3RVX3-B7-pre1.zip" />
+                </Component>
+                <Component Id="cmp6193F9000E169E173ED8D98B5BC8A4F6" Guid="*">
+                    <File Id="fil3254E459463C45E501C58F1689B8B593" KeyPath="yes" Source="SourceDir\3RVX3-B7-pre2.zip" />
+                </Component>
+                <Component Id="cmpC33A9747C5EE54A9B2A84590B79CA020" Guid="*">
+                    <File Id="fil35AFD725476DE459457FCF4CBCFCFE20" KeyPath="yes" Source="SourceDir\3RVX_Log.txt" />
+                </Component>
+                <Component Id="cmp2E6C1A5DEBA7178F865B7B95A9AA6998" Guid="*">
+                    <File Id="fil7022BCACB8CB42275650EF0A93A9F990" KeyPath="yes" Source="SourceDir\Settings.exe" />
+                </Component>
+                <Component Id="cmp619C8ECEB482D2565A4ED2FB8AFEDE13" Guid="*">
+                    <File Id="fil6C72AA216E9C7911C61EA8F6113815AF" KeyPath="yes" Source="SourceDir\Settings.pdb" />
+                </Component>
+                <Component Id="cmp255D0849C5F4676BFC01E2B51302000C" Guid="*">
+                    <File Id="fil401A19B648D43F0DA78C8091E7937734" KeyPath="yes" Source="SourceDir\Settings.xml" />
+                </Component>
+                <Directory Id="dirDEC19AD93D0356C5CAD4464A4611628A" Name="Languages">
+                    <Component Id="cmp6DCAE5F1996552FCFA4E31D246C4DA84" Guid="*">
+                        <File Id="fil3D13C94A51E76CB98FD043306F7292B2" KeyPath="yes" Source="SourceDir\Languages\ChineseSimplified.xml" />
+                    </Component>
+                    <Component Id="cmp2DC380E01927A1590528CF7E0F4CCBCD" Guid="*">
+                        <File Id="fil84A4017C4ED72FCDBF30897131ED424B" KeyPath="yes" Source="SourceDir\Languages\ChineseTraditional.xml" />
+                    </Component>
+                    <Component Id="cmp5472D8977B5F984DC739495629C8CB21" Guid="*">
+                        <File Id="fil580A71D35E1D3FCB7F246C2EC8589912" KeyPath="yes" Source="SourceDir\Languages\Deutsch.xml" />
+                    </Component>
+                    <Component Id="cmp62A8745B6A8F2CADA3BB172A56A1D3C4" Guid="*">
+                        <File Id="fil489BF4196A0668C0680BACCDF7AF3358" KeyPath="yes" Source="SourceDir\Languages\English.xml" />
+                    </Component>
+                    <Component Id="cmp691D369B5F736A37F54203CE7CCE043C" Guid="*">
+                        <File Id="filB8452608FB4744B085893F863CDBC239" KeyPath="yes" Source="SourceDir\Languages\Français.xml" />
+                    </Component>
+                    <Component Id="cmp63B2B7AEDC4774AF71CBF959022CCE84" Guid="*">
+                        <File Id="filB6EA830DA38023DFC286CFCEAE33B0BD" KeyPath="yes" Source="SourceDir\Languages\Italian.xml" />
+                    </Component>
+                    <Component Id="cmpA82C4DA35D4D9632BDB32F7CCB8C150D" Guid="*">
+                        <File Id="fil27EF0ADACFF80BB69AA0DA8F2C646716" KeyPath="yes" Source="SourceDir\Languages\PolishBETA2.xml" />
+                    </Component>
+                </Directory>
+                <Directory Id="dirF03065B652DB4EC6964809197C9A5C39" Name="Skins">
+                    <Directory Id="dir73DA1B9B5B64B225BD980E8CA4590DE0" Name="Classic">
+                        <Component Id="cmp7ED5870028826344E778861C6D1CC1D6" Guid="*">
+                            <File Id="fil9351B2D3150A9C1796240F7A15429451" KeyPath="yes" Source="SourceDir\Skins\Classic\skin.xml" />
+                        </Component>
+                        <Component Id="cmp5B6966D23DB219D17B716A9A75451D9A" Guid="*">
+                            <File Id="fil2A898E2D8AB4FE0AFFB4EEED43A1DC90" KeyPath="yes" Source="SourceDir\Skins\Classic\sound.wav" />
+                        </Component>
+                        <Directory Id="dir8B40D88E1CFBA9115918687BEEA3DE1E" Name="Black Icons">
+                            <Component Id="cmpD89034B428BD1E1B3E80FBC289765764" Guid="*">
+                                <File Id="filE5739C54F8616BAAC39A5A75B8F3E321" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\0.ico" />
+                            </Component>
+                            <Component Id="cmp319ACBBBE99C761266B6D1CD9AC86307" Guid="*">
+                                <File Id="filECCE3D2FE13D6E630E88FEEFCB8EA7C4" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\1.ico" />
+                            </Component>
+                            <Component Id="cmp37A07CCD88F5882175279C6FDFB46DB8" Guid="*">
+                                <File Id="filFC387D5C5014BCDCD790FA13739D9D5A" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\2.ico" />
+                            </Component>
+                            <Component Id="cmp744DA3EAC419D1F2CC07E9B4F7D81A88" Guid="*">
+                                <File Id="fil227936E55F14B5CF3827DBEA220FBEAF" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\3.ico" />
+                            </Component>
+                            <Component Id="cmp630EA2045BB33552C46E3A22EC777804" Guid="*">
+                                <File Id="fil498B9B6180A402885102B2168DD04E8E" KeyPath="yes" Source="SourceDir\Skins\Classic\Black Icons\4.ico" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dir76D1B4FE1BD2E9FDD768E53A4E8DA480" Name="Icons">
+                            <Directory Id="dirA63CD4CD16AC1E4613526E05D3B784DA" Name="Volume">
+                                <Component Id="cmpE38D52E1C4AEA008F0ACB400B578E792" Guid="*">
+                                    <File Id="fil9550EEE87FB197F0D1A0B67427B5D19C" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\0.ico" />
+                                </Component>
+                                <Component Id="cmpC4C6BCA56489D3810D63623ABE18CD5E" Guid="*">
+                                    <File Id="fil2900176169F041ADD2AF0925D88133D6" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\1.ico" />
+                                </Component>
+                                <Component Id="cmp51A133D5965C7B97114610F8947C4A2A" Guid="*">
+                                    <File Id="fil7A39B7473C935D76DE795DE4E884FC81" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\2.ico" />
+                                </Component>
+                                <Component Id="cmpB03B5C96FEEFEF620E1371755E8B1012" Guid="*">
+                                    <File Id="fil71CBAD6C5CABB51BA193DCB15720A832" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\3.ico" />
+                                </Component>
+                                <Component Id="cmp6EDB178BB8023F1FDCBEA9A83599CF84" Guid="*">
+                                    <File Id="fil9D91AFCE859207EED3F1D775FBBC611B" KeyPath="yes" Source="SourceDir\Skins\Classic\Icons\Volume\4.ico" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="dir075EEC0389FFD2B340690473BAC57ECF" Name="OSD">
+                            <Component Id="cmp6A258B8ADE81635D41C500DC5B6DF4AD" Guid="*">
+                                <File Id="fil3AF0412A748C321D0C42613F689E456B" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\eject.png" />
+                            </Component>
+                            <Component Id="cmp1E62B9E9708483C986E8C57E23BF69B1" Guid="*">
+                                <File Id="fil439B70FAE94781A9001D5E084EDE914E" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\meter.png" />
+                            </Component>
+                            <Component Id="cmp5F9D9BE6F6A31F964743E52ABA3A22F3" Guid="*">
+                                <File Id="filCD7A89E2153A8AC72E7D902CE13ABEB5" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\mute.png" />
+                            </Component>
+                            <Component Id="cmpBC13D11434FA10C0E55BF63C2CE47097" Guid="*">
+                                <File Id="fil4C147A2AF8C78F21F195D093097D277A" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\Thumbs.db" />
+                            </Component>
+                            <Component Id="cmp6C669CAA8DBA4265BBFBBBB762D60374" Guid="*">
+                                <File Id="fil8345AE7E5FAC359324C4E1145EF4C563" KeyPath="yes" Source="SourceDir\Skins\Classic\OSD\volume.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dir4CCF86EFC8F5A7249FCD165BA0A61556" Name="Slider">
+                            <Component Id="cmpA47E22139AF11A7BEE6EBF5B6D8CF668" Guid="*">
+                                <File Id="fil2B2BC43F05937FC4384C435896A637E2" KeyPath="yes" Source="SourceDir\Skins\Classic\Slider\background.png" />
+                            </Component>
+                            <Component Id="cmp3CC0A48579C75C7680B230F435EEDDD2" Guid="*">
+                                <File Id="fil1DFEF2CCD9DD35F701C58811E2F2D7AA" KeyPath="yes" Source="SourceDir\Skins\Classic\Slider\knob.png" />
+                            </Component>
+                            <Component Id="cmp884C1ECAB92770365A803EACEBB30E3A" Guid="*">
+                                <File Id="fil86D9BF215FBEF280C42345FA49F4C5DE" KeyPath="yes" Source="SourceDir\Skins\Classic\Slider\Thumbs.db" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dir4C0FB366E771D41C9B42951450553058" Name="Ice">
+                        <Component Id="cmp3F287AE263D066482B36169A576120D1" Guid="*">
+                            <File Id="fil313A1BD16925986F97476CAB25550BA3" KeyPath="yes" Source="SourceDir\Skins\Ice\skin.xml" />
+                        </Component>
+                        <Component Id="cmpBC9EB8306DC4DEE68503CEB050898B9D" Guid="*">
+                            <File Id="fil556C4EB1B359274D01D8E5403055E421" KeyPath="yes" Source="SourceDir\Skins\Ice\sound.wav" />
+                        </Component>
+                        <Directory Id="dir2BBCDE96E3780C586EA6E2B935BF72E1" Name="Control">
+                            <Component Id="cmpC4FF1ADA5FE5142F886472BBD33936B3" Guid="*">
+                                <File Id="fil9BE61A25D8ABF32F12E3F7B83ADF0BED" KeyPath="yes" Source="SourceDir\Skins\Ice\Control\back.png" />
+                            </Component>
+                            <Component Id="cmp2E5977F2980615320124EBB0B62A0982" Guid="*">
+                                <File Id="fil9CA94618DFD1FE14059443D1D12D64F6" KeyPath="yes" Source="SourceDir\Skins\Ice\Control\knob.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dir5D2854882ADAE4ABC0A035AAB66ADC51" Name="Notification Icons">
+                            <Component Id="cmp78D7085735CD2758E8F33B30BBFBAAF6" Guid="*">
+                                <File Id="filE033D412A666F9A78A12951338B5EA9E" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\0.ico" />
+                            </Component>
+                            <Component Id="cmp7853434282CC62E24A1F28B8A60BFBB5" Guid="*">
+                                <File Id="fil5CA17985B55D8D83739C88B6D549B71D" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\1.ico" />
+                            </Component>
+                            <Component Id="cmpF0ACA0461DD38A1824B192BEEC40AE83" Guid="*">
+                                <File Id="filE26F014A2D5F561FC2A50276A54440ED" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\2.ico" />
+                            </Component>
+                            <Component Id="cmpF1721FC402D8481D4A6AD8721CEA4752" Guid="*">
+                                <File Id="filC147867126F54B038F5D384C61AC50DD" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\3.ico" />
+                            </Component>
+                            <Component Id="cmp6302755DDE55F39CA52AE2AD7E8004E6" Guid="*">
+                                <File Id="fil1503FF614E047445D043CD62A823AB2D" KeyPath="yes" Source="SourceDir\Skins\Ice\Notification Icons\4.ico" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dirF27E94A68DDEB3F57181132BDD142A03" Name="OSD">
+                            <Component Id="cmpF470C61FAA29D44BFFF44AAFB66D4078" Guid="*">
+                                <File Id="fil97A12A71289CB5C80D05CBCAB4E0A1AA" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\background.png" />
+                            </Component>
+                            <Component Id="cmp74438042EE40B6A0740AFFF5EFC658C7" Guid="*">
+                                <File Id="filBCC36560DC9FBABC07C7CE70E8C1EF22" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\eject.png" />
+                            </Component>
+                            <Component Id="cmp9B6A1EB1276B2595F9C9B6E581180C50" Guid="*">
+                                <File Id="fil2E77F7D9FFD3D9509E863105162BC237" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\meter.png" />
+                            </Component>
+                            <Component Id="cmp3329891B1AB2BD0A53C73B2FA463F54C" Guid="*">
+                                <File Id="fil998F372667BBAA8806C2CE05C979CE6C" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\mute.png" />
+                            </Component>
+                            <Component Id="cmp7447448F420ACB81F005D5C2CA35B126" Guid="*">
+                                <File Id="fil0309873E09185F111A8BA72A7E857CB2" KeyPath="yes" Source="SourceDir\Skins\Ice\OSD\Thumbs.db" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dir515B8124332CFB45D213D81CBA1A2C30" Name="Ignition">
+                        <Component Id="cmp87D819AC234CE6B8F9F05893EBA73699" Guid="*">
+                            <File Id="filBAA511338A4FFB23A1D783885035BB42" KeyPath="yes" Source="SourceDir\Skins\Ignition\skin.xml" />
+                        </Component>
+                        <Component Id="cmpEF2C87DB9C6C8686A2432CB329F613F9" Guid="*">
+                            <File Id="filD38ADC8398EF7A2419ED02129AE6D21B" KeyPath="yes" Source="SourceDir\Skins\Ignition\sound.wav" />
+                        </Component>
+                        <Directory Id="dir900F7DF2F8A2962008D54C2467203CFC" Name="Notification Icons">
+                            <Directory Id="dirC4530BD96E8CBE5C51493CCD79121FC2" Name="Volume">
+                                <Component Id="cmp14DDDD0F08802CF61D69CC601CD7FFC0" Guid="*">
+                                    <File Id="filB96FE3E4346C9C60FC2ABDA6E0299659" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\0.ico" />
+                                </Component>
+                                <Component Id="cmp997FDC3DBA59070D232B18F2B840C5B4" Guid="*">
+                                    <File Id="filC000B7F0B57805F6FD754F2E50C711F4" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\1.ico" />
+                                </Component>
+                                <Component Id="cmpB7D2698F56B3917F2F0D60747A07AF5E" Guid="*">
+                                    <File Id="fil6E3D010D9CB55588FB1420E4B7DD6078" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\2.ico" />
+                                </Component>
+                                <Component Id="cmp6C40DA7A6379D6A80168965391AD6055" Guid="*">
+                                    <File Id="fil384DB4FC066AB3B07399ED8C4727BFC6" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\3.ico" />
+                                </Component>
+                                <Component Id="cmp46CEE16E19BB6CF35938D7F9054B0FC3" Guid="*">
+                                    <File Id="filD46062063A1203B7ABCCAC50CFBC303A" KeyPath="yes" Source="SourceDir\Skins\Ignition\Notification Icons\Volume\4.ico" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="dir1E4C4BACB0AEF3EBE9698A595E7BA5F3" Name="OSD">
+                            <Component Id="cmpC6DD6D167F10B90192ED9CC82B0E3F4D" Guid="*">
+                                <File Id="fil79121CA5C725FAA47E8EA029AFADC61C" KeyPath="yes" Source="SourceDir\Skins\Ignition\OSD\back.png" />
+                            </Component>
+                            <Component Id="cmpDC23B8D770EE1872AA64A1B3D7E749B3" Guid="*">
+                                <File Id="filD745721B91E618F02E0741E02F17811C" KeyPath="yes" Source="SourceDir\Skins\Ignition\OSD\eject.png" />
+                            </Component>
+                            <Component Id="cmp2B822E5742BE88ED46BB13BCA7983CB1" Guid="*">
+                                <File Id="fil5694467B5EAB5AA41D9B8A7C6BD17C3E" KeyPath="yes" Source="SourceDir\Skins\Ignition\OSD\meter.png" />
+                            </Component>
+                            <Component Id="cmpCC3D76075E4FAF333C1D1B65EAF7B3E0" Guid="*">
+                                <File Id="fil30C06C0750E05A28E2E186EA218CE78C" KeyPath="yes" Source="SourceDir\Skins\Ignition\OSD\mute.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dirDB581E9FF35340B0A11E38DDC39E48DD" Name="Slider">
+                            <Component Id="cmpDC0A7F3F9EF32AB9E21DACD57E559322" Guid="*">
+                                <File Id="filB0D6790DDEFE5E36D92D096E5E9B25C6" KeyPath="yes" Source="SourceDir\Skins\Ignition\Slider\back.png" />
+                            </Component>
+                            <Component Id="cmp8751AF2B73AD8CBB7206E5FDA102D8C1" Guid="*">
+                                <File Id="fil24CE6E207804E614B3618158D03638A5" KeyPath="yes" Source="SourceDir\Skins\Ignition\Slider\knob.png" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dir14EB0F957B05F3FF2889492A5E2CF11B" Name="liquid">
+                        <Component Id="cmp26D97AAEE17C7C8C35A2717DE00AD848" Guid="*">
+                            <File Id="fil1908F20D941DDF778386251FDC6E3FC4" KeyPath="yes" Source="SourceDir\Skins\liquid\skin.xml" />
+                        </Component>
+                        <Directory Id="dir5E0A5D8769F731CCDC12223C50D202F4" Name="OSD">
+                            <Component Id="cmp6189A68407DB8337C6888883A379994F" Guid="*">
+                                <File Id="fil69101C70C1189520D8211DC428F7954D" KeyPath="yes" Source="SourceDir\Skins\liquid\OSD\background.png" />
+                            </Component>
+                            <Component Id="cmpE5389E2C9A7A55EA760EC0E5FDFC7955" Guid="*">
+                                <File Id="fil965EECAE6B9BF01BA9C4903889435AF4" KeyPath="yes" Source="SourceDir\Skins\liquid\OSD\bitstrip.png" />
+                            </Component>
+                            <Component Id="cmp47BF8EF47934B149E24FB5E4A9BF3D00" Guid="*">
+                                <File Id="fil6B79EF3C828918D2EBD1FCF914DF6895" KeyPath="yes" Source="SourceDir\Skins\liquid\OSD\meter.png" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dir1962DA502EB9653500F092956E7A370E" Name="mini">
+                        <Component Id="cmp24CB56E6F3E2E4B3193B179126C1865F" Guid="*">
+                            <File Id="fil9E137CE5FF4705C1B67540CA47F40677" KeyPath="yes" Source="SourceDir\Skins\mini\skin.xml" />
+                        </Component>
+                        <Component Id="cmp940B4492009A34ADF4883A4238089FD9" Guid="*">
+                            <File Id="filF389FBC2CE7E7319F6896405973D0BD7" KeyPath="yes" Source="SourceDir\Skins\mini\Thumbs.db" />
+                        </Component>
+                        <Directory Id="dir61F1C20DB7FBA0CCFB9110F86FF6B486" Name="Icons">
+                            <Directory Id="dir224CED9C86C12CF4F875932CB85FD7FE" Name="Volume">
+                                <Component Id="cmp72FE4746AFC41669E3EBAA95D5108693" Guid="*">
+                                    <File Id="filACCAA2227049A43ECEED6A1DABFC04FC" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\0.ico" />
+                                </Component>
+                                <Component Id="cmpC0D681F5E0E3FAC66292CE19C137ADFB" Guid="*">
+                                    <File Id="filF90DD1989AC3BF7B2DB0427DA7F70037" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\1.ico" />
+                                </Component>
+                                <Component Id="cmp27CB9469D080DF0F44D0CB6B9D972669" Guid="*">
+                                    <File Id="filAD926ED3E58DCC9A5B8AA7C2EF81B7A3" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\2.ico" />
+                                </Component>
+                                <Component Id="cmp45AEDE61CAB0A955B62CF5268E22236E" Guid="*">
+                                    <File Id="filE70CF59D748748A365E47441FA32E3F8" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\3.ico" />
+                                </Component>
+                                <Component Id="cmp5FB6AD6B7EE05666247054EA5B846983" Guid="*">
+                                    <File Id="fil0CF7DAB9494695615FBC68E6E0060800" KeyPath="yes" Source="SourceDir\Skins\mini\Icons\Volume\4.ico" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="dir0190074C51D8E3C91369ED5DCE08FA83" Name="OSD">
+                            <Component Id="cmpB54670851AE358BF8ADC50DEFA21CF98" Guid="*">
+                                <File Id="fil83CA171B53BB31225C1EB55C29C39147" KeyPath="yes" Source="SourceDir\Skins\mini\OSD\eject.png" />
+                            </Component>
+                            <Component Id="cmpEDA584202B1A609158AC07B2EBB3E23A" Guid="*">
+                                <File Id="fil576A63DD74D36DAEE81E938F09EE7A8D" KeyPath="yes" Source="SourceDir\Skins\mini\OSD\meter.png" />
+                            </Component>
+                            <Component Id="cmpE62FD172584185EC74FECCB42CAC49B7" Guid="*">
+                                <File Id="fil3699982A5A0B48985D0DFDD8270EDB27" KeyPath="yes" Source="SourceDir\Skins\mini\OSD\mute.png" />
+                            </Component>
+                            <Component Id="cmp61ABA898DE8AE7EB182D1AB34C731387" Guid="*">
+                                <File Id="filB5FFD9FAB0CAD857738AE46BB1B8ED94" KeyPath="yes" Source="SourceDir\Skins\mini\OSD\volume.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dir36B0A128A787993016F23000B1DBA350" Name="Slider">
+                            <Component Id="cmpBD2548A871EE4197DE8E390838D6BC69" Guid="*">
+                                <File Id="fil1B3ED0D79B73CAC2AA04DE556394B3C2" KeyPath="yes" Source="SourceDir\Skins\mini\Slider\background.png" />
+                            </Component>
+                            <Component Id="cmpF14191046A2463F2BE1A128DE3FA1354" Guid="*">
+                                <File Id="fil902B7BA5C36A1FA0B6A0EC8CFE7C4E8D" KeyPath="yes" Source="SourceDir\Skins\mini\Slider\knob.png" />
+                            </Component>
+                            <Component Id="cmp727A4892D23E83FB9EB35CCE8BB69EBB" Guid="*">
+                                <File Id="filCAA1EDD8A3EC9236A18931E000A4B123" KeyPath="yes" Source="SourceDir\Skins\mini\Slider\Thumbs.db" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dir7141C180E83209D895D9F003B286F730" Name="Notes">
+                        <Component Id="cmp36705A7BB1E4B6E80915FBCD23F153C8" Guid="*">
+                            <File Id="filE601305D567CB6B5A846D9136D4E583D" KeyPath="yes" Source="SourceDir\Skins\Notes\skin.xml" />
+                        </Component>
+                        <Directory Id="dirC9B03AB3236F8D38CD7084EDF8594B39" Name="Controller">
+                            <Component Id="cmpED852C46AB04D67401D020DD56BA3719" Guid="*">
+                                <File Id="filC9A344C2AF91B52737391EC58FEDF205" KeyPath="yes" Source="SourceDir\Skins\Notes\Controller\Thumbs.db" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dir200A1BA1A59828CA163F908662B5B042" Name="Icons">
+                            <Component Id="cmpF4BD763012DD8FEBACAC4B2FF84C0618" Guid="*">
+                                <File Id="fil71BD7E72F82DBB38BC977A9E9F46173D" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Thumbs.db" />
+                            </Component>
+                            <Directory Id="dir3D80684F191E518B1E268F8253CECB7E" Name="Volume">
+                                <Component Id="cmp5E3B85F45AE6BACB2DC63374B97A864B" Guid="*">
+                                    <File Id="filEA4F5A667841674B427D526799734E4B" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\0.ico" />
+                                </Component>
+                                <Component Id="cmp6A96909E94B42A55188E0E9AB13AC229" Guid="*">
+                                    <File Id="filEC045FE1B8249F9ABAED2EB16D703E9A" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\1.ico" />
+                                </Component>
+                                <Component Id="cmp0892D8073B599201AFA8E3EFA1A889C8" Guid="*">
+                                    <File Id="fil74115E53F383FB56AA88AFD95A43A685" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\2.ico" />
+                                </Component>
+                                <Component Id="cmpA695380AAF563928CF6D9CFDCEE3A7CE" Guid="*">
+                                    <File Id="filA21D5E907090E754EC86B548DDC88565" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\3.ico" />
+                                </Component>
+                                <Component Id="cmp4474B744ECF8D5696DE391F7F8F8829B" Guid="*">
+                                    <File Id="fil2595081D4E08B0E13A05241CD2AC0235" KeyPath="yes" Source="SourceDir\Skins\Notes\Icons\Volume\4.ico" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="dir206F2B92DF011F64E51DF83B0BC6F0DF" Name="OSD">
+                            <Component Id="cmp542A40D2B3EA9A7BB011281A39199CA5" Guid="*">
+                                <File Id="fil33EA0305C2E43C4DE011BA492AEDC9F1" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\bars.png" />
+                            </Component>
+                            <Component Id="cmpBEC7101C0A5998AB94141C803D8335B8" Guid="*">
+                                <File Id="fil920373BD912024AE87EDB9DB328D3D0D" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\eject.png" />
+                            </Component>
+                            <Component Id="cmp8EF5CAA3940F2371EB8D919E94BAA651" Guid="*">
+                                <File Id="filBC4AA472B2C6D5FA76905259716BC087" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\mute.png" />
+                            </Component>
+                            <Component Id="cmpCDF9CD857E1933F939E03DE8AB8418A9" Guid="*">
+                                <File Id="fil0F4164CD951201E31AD552AA9FE86F9E" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\numbers.png" />
+                            </Component>
+                            <Component Id="cmpE166120379A6B1BF4ADEAC74E7DF27C5" Guid="*">
+                                <File Id="fil88AF4E5D574BCFA20DCB0ED2C83E7020" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\Thumbs.db" />
+                            </Component>
+                            <Component Id="cmpD4DE4896074485AC64581534D0139BF5" Guid="*">
+                                <File Id="fil294A5496A200B2E688AB55D7720781AF" KeyPath="yes" Source="SourceDir\Skins\Notes\OSD\volbg.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dir23A1C8EDB764900DFB01A190007D654B" Name="Slider">
+                            <Component Id="cmpC67BFD55D431A42F3AAE5FFEE7346CCC" Guid="*">
+                                <File Id="filB24C3E87CB2630E9F880EE8DDBF9260E" KeyPath="yes" Source="SourceDir\Skins\Notes\Slider\background.png" />
+                            </Component>
+                            <Component Id="cmp44979DF5C66C8C5154B354F1CF389904" Guid="*">
+                                <File Id="fil35595B5B6348BD897136954A39FF6DA2" KeyPath="yes" Source="SourceDir\Skins\Notes\Slider\knob.png" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dir7C8E17CA40FC177FFE84741A0B09CBD5" Name="pix">
+                        <Component Id="cmp2698E00E086BA800B8E7A7B1FB903A21" Guid="*">
+                            <File Id="fil6907B16A0CC4F438F5DC7C203BC9103D" KeyPath="yes" Source="SourceDir\Skins\pix\skin.xml" />
+                        </Component>
+                        <Directory Id="dir95D2132AE9A33269BB8477DB9DFFA965" Name="Icons">
+                            <Directory Id="dir1FD40221D94A271FD0883C787332C94A" Name="Volume">
+                                <Component Id="cmp8B426347B4A2921E7E7039B6582DB399" Guid="*">
+                                    <File Id="fil6989E9E1906AED7E6F89EA2BD405FD2F" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\0.ico" />
+                                </Component>
+                                <Component Id="cmp9AD6158D8CC42B5E5FF6A8B5BF321389" Guid="*">
+                                    <File Id="filAA3BAC11A8EB3E9EC1416559C73E59D2" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\1.ico" />
+                                </Component>
+                                <Component Id="cmp4402DB5B31B73DEF720BDBDEB47F8E96" Guid="*">
+                                    <File Id="filD9B1A4922CDE5F8E8DBD3D1C16D12D79" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\2.ico" />
+                                </Component>
+                                <Component Id="cmpC3055AF7A1DCECF604722CD4C32E89F1" Guid="*">
+                                    <File Id="fil9FFDC14BBB3D7B1ACF0629CDE69F8D59" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\3.ico" />
+                                </Component>
+                                <Component Id="cmp72F2A668E528B35D3C95E1FA54DF97B3" Guid="*">
+                                    <File Id="fil096CE4E24EA7404D07187E81004C0395" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\4.ico" />
+                                </Component>
+                                <Component Id="cmpAFCA2F3D0856989F5FD05D2C4A8468CA" Guid="*">
+                                    <File Id="fil6C9F258F41E2E6BA5C22103621D8A4F0" KeyPath="yes" Source="SourceDir\Skins\pix\Icons\Volume\5.ico" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="dir52A7D734E40A429D8BFE8C0D3C58874A" Name="OSD">
+                            <Component Id="cmp8F979D2EBD0C7965CA43932A288F7FA6" Guid="*">
+                                <File Id="filEC7B2CB1BFAD9516DC894251BCBD0D92" KeyPath="yes" Source="SourceDir\Skins\pix\OSD\eject.png" />
+                            </Component>
+                            <Component Id="cmpF96D98EBE462CCDA671441B0D6B41F0F" Guid="*">
+                                <File Id="fil8873883EC8C87DDE1AF59F81AE07B664" KeyPath="yes" Source="SourceDir\Skins\pix\OSD\meter.png" />
+                            </Component>
+                            <Component Id="cmp298A6BF499E626F840D0A23248C5315A" Guid="*">
+                                <File Id="filE40E94B8238AAE28163241F50AAE0B86" KeyPath="yes" Source="SourceDir\Skins\pix\OSD\mute.png" />
+                            </Component>
+                            <Component Id="cmp6AED032F2377AB916E1C9FC629BECA0F" Guid="*">
+                                <File Id="fil9326BDA9A00E5C697C4F9901C175AF99" KeyPath="yes" Source="SourceDir\Skins\pix\OSD\volume_background.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dir86BD8DB0469FA6DF38895F7A5F0272D2" Name="Slider">
+                            <Component Id="cmp4E53C1283A7BC2FDB990AF01F48617DC" Guid="*">
+                                <File Id="fil840EF9DC04DCF11C27937D88383A95EE" KeyPath="yes" Source="SourceDir\Skins\pix\Slider\background.png" />
+                            </Component>
+                            <Component Id="cmp6BE7656C54E366BF8617D45FC86A875A" Guid="*">
+                                <File Id="fil5D3157CFF31905AE45B7BEDA96BDA92C" KeyPath="yes" Source="SourceDir\Skins\pix\Slider\knob.png" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dir08CF23C1422B7C0ED30EFE8EDFD5B1C6" Name="Small Glass">
+                        <Component Id="cmp7A7555457D2AAA6B817A99654AB90764" Guid="*">
+                            <File Id="filE303D8A872CB6B6672A383D0EA54C7D9" KeyPath="yes" Source="SourceDir\Skins\Small Glass\skin.xml" />
+                        </Component>
+                        <Directory Id="dirE31250AFD540898C3BCA9DBD0A7C03F3" Name="Icons">
+                            <Directory Id="dirED87F7E35635C98710D790B27514FBE9" Name="Volume">
+                                <Component Id="cmp195417C3A29AB850578839F2A93854D6" Guid="*">
+                                    <File Id="fil0D36035E14BBB6D689772BF4F2F81298" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\0.ico" />
+                                </Component>
+                                <Component Id="cmp305900BEF3F18E10A9E1367C6D34F5F6" Guid="*">
+                                    <File Id="fil098E9F26136A443DBAF1513B4F24D6B7" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\1.ico" />
+                                </Component>
+                                <Component Id="cmp1E973ECE0DD08877AF0B8C5F7E31031A" Guid="*">
+                                    <File Id="fil95F3F673A8C8583E6AB7EA04D48329A8" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\2.ico" />
+                                </Component>
+                                <Component Id="cmpF74DFE99150F319EA41A3BDFC04D1391" Guid="*">
+                                    <File Id="fil90D301A6F5BBA443E4E745923848F7EA" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\3.ico" />
+                                </Component>
+                                <Component Id="cmp7FE87CC2F28EED152B9D3DEB8E97DF47" Guid="*">
+                                    <File Id="fil4516FE54692E6FD73C967D653BD7978C" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Icons\Volume\4.ico" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="dir7A06E0BA26BE662DB4F3FB3EFD82A11E" Name="OSD">
+                            <Component Id="cmpAF31D8B8BF26AB36791712C7A3938271" Guid="*">
+                                <File Id="fil3D97F6D0B619BE1A838E30725CC8382D" KeyPath="yes" Source="SourceDir\Skins\Small Glass\OSD\back.png" />
+                            </Component>
+                            <Component Id="cmpEC71E5DFC767CFD288E4B83D6B608A92" Guid="*">
+                                <File Id="fil2FACC245F5847C6EF6CE11FF5E932866" KeyPath="yes" Source="SourceDir\Skins\Small Glass\OSD\eject.png" />
+                            </Component>
+                            <Component Id="cmpCC402E690B9CF05238A9AC48C5E87B01" Guid="*">
+                                <File Id="fil4A7C579F29FB5BC7038656D4EE586A9E" KeyPath="yes" Source="SourceDir\Skins\Small Glass\OSD\meter.png" />
+                            </Component>
+                            <Component Id="cmpC0FC3D37EF5035A3B398955031B02E1C" Guid="*">
+                                <File Id="filFA5AD5DF731A7E149AF64E7802DD3DED" KeyPath="yes" Source="SourceDir\Skins\Small Glass\OSD\mute.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dir8BEC7DEDEE369E347117A6C8C032B7DC" Name="Slider">
+                            <Component Id="cmpA5B4D01F10B595D263AA148EDED46BD8" Guid="*">
+                                <File Id="fil361DBBD8F8716ACE651A7FFA8092CA72" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Slider\back.png" />
+                            </Component>
+                            <Component Id="cmp92F8D5E46DAADF863A95E1A4EE6F7C75" Guid="*">
+                                <File Id="filC1EF7691E306E7BAA9DA6F569EF50B90" KeyPath="yes" Source="SourceDir\Skins\Small Glass\Slider\knob.png" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dirF34365BA5172AFD451DFF52A9EEB4F3E" Name="Vista 808">
+                        <Component Id="cmp864837507E04896898A21818C2EA24F4" Guid="*">
+                            <File Id="filB99F41D52C3DBF0C3D0189D3A9613153" KeyPath="yes" Source="SourceDir\Skins\Vista 808\skin.xml" />
+                        </Component>
+                        <Directory Id="dir522B94B3D318B4FCEBA2F456C2FE0BEE" Name="Icons">
+                            <Directory Id="dirB37AA8D2911998081A4E6BD0AED5056F" Name="Volume">
+                                <Component Id="cmpB0EEB017F74D9A787DFD2149E785B9C1" Guid="*">
+                                    <File Id="fil547C7C072C95F617A4195D57386FC5E6" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\0.ico" />
+                                </Component>
+                                <Component Id="cmp29E6B6DB3543C9B50D3D01DA76E19A37" Guid="*">
+                                    <File Id="fil51BBF4289DA435B8076BE27E612AD92B" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\1.ico" />
+                                </Component>
+                                <Component Id="cmpDBFF1E7C62BD72B57035BDEBAEE6A9C8" Guid="*">
+                                    <File Id="fil8AE279826FD7F8171E816D4EE918D7E9" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\2.ico" />
+                                </Component>
+                                <Component Id="cmp1C8B8C22798986A9D85FF8AF8D763715" Guid="*">
+                                    <File Id="fil16D4B63D540186E2E472A0185C038412" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\3.ico" />
+                                </Component>
+                                <Component Id="cmp21566CF3D8935B59A2ECF7EE16F1D424" Guid="*">
+                                    <File Id="filD01669419CF3CD3F80A60C07AB2D9308" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Icons\Volume\4.ico" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="dir88C717ECD6927AE3CD0DA45B5A853FA5" Name="OSD">
+                            <Component Id="cmp4C6D690F78ACC79E90DD122E331F0274" Guid="*">
+                                <File Id="filBE178CEAF6C0A263CF62CE5E9792F030" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\back.png" />
+                            </Component>
+                            <Component Id="cmpC8F289B40DE6665D0D748B9796B71C01" Guid="*">
+                                <File Id="fil8F1A46AF7B16B16961EBB17788255C7B" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\eject.png" />
+                            </Component>
+                            <Component Id="cmp6417B6A3EC1E09F09CA8919000858191" Guid="*">
+                                <File Id="fil12E52266E298ACDCA9B037FC147451BA" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\glass.png" />
+                            </Component>
+                            <Component Id="cmp4238A2FBD08B81BED16A3069D9851F8B" Guid="*">
+                                <File Id="fil0E5A332A6AD27C427CDDED4D38DAD712" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\meter.png" />
+                            </Component>
+                            <Component Id="cmp2B508A68DC02CC145FE53C2B689F8DEC" Guid="*">
+                                <File Id="fil96D0107A92710BA78D77861030B2AAE4" KeyPath="yes" Source="SourceDir\Skins\Vista 808\OSD\mute.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dirB28744E4F18A3B2D40D8CA187287193D" Name="Slider">
+                            <Component Id="cmp36AC94C3F7A0F4BFABE365713352EBDF" Guid="*">
+                                <File Id="filF3E2DAC8DDA42262FE0C40F034AB155A" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Slider\back.png" />
+                            </Component>
+                            <Component Id="cmp4E4E8E6C05F25F04D2A43F0E78184774" Guid="*">
+                                <File Id="fil5D1A328E9CCEDCEFE6028152F3E7DA63" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Slider\glass.png" />
+                            </Component>
+                            <Component Id="cmpEF5733B2DCE8F8C3CFA98D48EAE7F2EF" Guid="*">
+                                <File Id="fil5D7ECB8FFA93493559DCDC4AEBA1D998" KeyPath="yes" Source="SourceDir\Skins\Vista 808\Slider\knob.png" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                    <Directory Id="dirF4B53055F3B4069263DCF00E2968BA0E" Name="Yosemitesque">
+                        <Component Id="cmpBCA14E1D54CFB1946362A541E784CBBF" Guid="*">
+                            <File Id="filC10948D067BE1D77F97BE12C996E0553" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\skin.xml" />
+                        </Component>
+                        <Directory Id="dir5232E71F3AA334E997604EBF767BC79C" Name="Icons">
+                            <Directory Id="dirC18B9A1F0727713149CE2F2F8222319B" Name="Volume">
+                                <Component Id="cmpA7E951827CF7C98616AE379A8E903F50" Guid="*">
+                                    <File Id="filC1C8314F9C1EFD004416FFBCE3711027" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\0.ico" />
+                                </Component>
+                                <Component Id="cmp68B564711DBCF78551201F29F90B00FE" Guid="*">
+                                    <File Id="fil3C38631574D11B2B9E46650D309399F4" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\1.ico" />
+                                </Component>
+                                <Component Id="cmp89D19F33D80FCA76C388565E41C2C4A0" Guid="*">
+                                    <File Id="fil708F599BF144252BA72D0F9BFE3661B8" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\2.ico" />
+                                </Component>
+                                <Component Id="cmpCD85210B2BB0F1D7414067763AFEE9B2" Guid="*">
+                                    <File Id="fil6BDA8A7FEDA9E1DF7ABFB5026DABA7FA" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\3.ico" />
+                                </Component>
+                                <Component Id="cmp55DFC24C6E2B72A085B742130A4690B1" Guid="*">
+                                    <File Id="fil92AFB3769AC8224F1FCA9F93C3C2B349" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\4.ico" />
+                                </Component>
+                                <Component Id="cmpA9BE4EBB73BF9DAC078CD095DB0F414A" Guid="*">
+                                    <File Id="fil98B22A679106BFDB0EF4600E921570EB" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Icons\Volume\5.ico" />
+                                </Component>
+                            </Directory>
+                        </Directory>
+                        <Directory Id="dir45CA62B8EA1A526CBE07C1CC0BB92154" Name="OSD">
+                            <Component Id="cmp249E2D28CD0D183A1493EAE22C5E14DB" Guid="*">
+                                <File Id="fil3BF9A265117D394752E8D725134261A5" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\background.png" />
+                            </Component>
+                            <Component Id="cmpF69B191DEF724A17C01A42EDE6BA9984" Guid="*">
+                                <File Id="fil1CD1B0D040202063BF2711F051D57E1F" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\eject.png" />
+                            </Component>
+                            <Component Id="cmpE26C1D517E84419C564F057D6F7A181A" Guid="*">
+                                <File Id="fil602F0E31D39042C7CEE732F92EC441E5" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\meter.png" />
+                            </Component>
+                            <Component Id="cmp6E12618BBEF4AC21BFEFFDDDF7157958" Guid="*">
+                                <File Id="fil69553653710609A92F27E23617CB02C7" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\mute.png" />
+                            </Component>
+                            <Component Id="cmp44C428B29D9281EDE6EBD0BF7EB78C82" Guid="*">
+                                <File Id="fil2A7411AAB62836E09939BE02B182DFAB" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\OSD\volumebg.png" />
+                            </Component>
+                        </Directory>
+                        <Directory Id="dirC376DA0F594A0390F5A69099C622A530" Name="Slider">
+                            <Component Id="cmp4B788491141CD4C4A90FA0FB901E3C7D" Guid="*">
+                                <File Id="filD12D4E2336757AF2688ACC9EAAFDA5E5" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Slider\bg.png" />
+                            </Component>
+                            <Component Id="cmp83C563F189F7EA40E55966276E931188" Guid="*">
+                                <File Id="filE3FDE1DEE9D6BF1BE3E7B6C2B0622CE3" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Slider\knob.png" />
+                            </Component>
+                            <Component Id="cmp8547EB70F9406D25D2234D753017F6E9" Guid="*">
+                                <File Id="fil4792C2844DCD008E6559B568B3E55D8A" KeyPath="yes" Source="SourceDir\Skins\Yosemitesque\Slider\meter.png" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+        </DirectoryRef>
+    </Fragment>
+</Wix>

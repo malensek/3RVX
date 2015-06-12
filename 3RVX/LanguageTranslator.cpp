@@ -90,6 +90,10 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
 }
 
 void LanguageTranslator::LoadTranslations() {
+    if (_root == NULL) {
+        return;
+    }
+
     tinyxml2::XMLElement *string = _root->FirstChildElement("string");
     for (; string != NULL; string = string->NextSiblingElement()) {
         const char *originalText = NULL;

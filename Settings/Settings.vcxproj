@@ -98,6 +98,7 @@
     <ClInclude Include="Controls\ComboBox.h" />
     <ClInclude Include="Controls\Control.h" />
     <ClInclude Include="Controls\Controls.h" />
+    <ClInclude Include="Controls\GroupBox.h" />
     <ClInclude Include="Controls\ListView.h" />
     <ClInclude Include="Controls\Spinner.h" />
     <ClInclude Include="Controls\EditBox.h" />

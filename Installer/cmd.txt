@@ -1,3 +1,0 @@
-heat.exe dir ..\Release -gg -srd -cg ProductComponents -dr INSTALLFOLDER -out a.wxs
-candle.exe .\a.wxs .\Product.wxs
-light.exe -b ../Release -ext WixUIExtension .\a.wixobj .\Product.wixobj -o xyz

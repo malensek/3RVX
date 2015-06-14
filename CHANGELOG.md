@@ -5,6 +5,9 @@ Beta 8
 ------
 * Full screen detection
 * UI Internationalization
+* Installer-based (non-portable) setup. Portable distributions will still be provided as well.
+* Bugfix: Corrupted "Run on Startup" registry entry
+* Bugfix: Play sound for custom volume increments
 
 Beta 7
 ------

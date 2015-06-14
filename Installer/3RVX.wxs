@@ -17,7 +17,7 @@
 		<MediaTemplate />
 
 		<Feature Id="ProductFeature" Title="Installer" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="3RVXComponents" />
 		</Feature>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
@@ -29,18 +29,26 @@
 
    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
    <UI>
-  <UIRef Id="WixUI_InstallDir" />
-  <Publish Dialog="WelcomeDlg"
-            Control="Next"
-            Event="NewDialog"
-            Value="InstallDirDlg"
-            Order="2">1</Publish>
-  <Publish Dialog="InstallDirDlg"
-            Control="Back"
-            Event="NewDialog"
-            Value="WelcomeDlg"
-            Order="2">1</Publish>
-</UI>
+     <UIRef Id="WixUI_InstallDir" />
 
-  </Product>
+     <Publish
+       Dialog="WelcomeDlg"
+       Control="Next"
+       Event="NewDialog"
+       Value="InstallDirDlg"
+       Order="2">
+       1
+     </Publish>
+
+     <Publish
+       Dialog="InstallDirDlg"
+       Control="Back"
+       Event="NewDialog"
+       Value="WelcomeDlg"
+       Order="2">
+       1
+     </Publish>
+   </UI>
+
+ </Product>
 </Wix>

@@ -184,6 +184,7 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
         break;
 
     case PSCB_INITIALIZED:
+        TranslateWindowText(hWnd);
         TranslateControlText(hWnd, IDOK);
         TranslateControlText(hWnd, IDCANCEL);
         TranslateControlText(hWnd, IDD_APPLYNOW);

@@ -23,6 +23,7 @@ typedef struct DLGTEMPLATEEX
 #define IDD_APPLYNOW 0x3021
 
 #include "../3RVX/3RVX.h"
+#include "../3RVX/LanguageTranslator.h"
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 
@@ -202,6 +203,14 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
     }
 
     return TRUE;
+}
+
+void TranslateControlText(HWND hWnd, int dlgItem) {
+    wchar_t text[1024];
+    GetDlgItemText(hWnd, dlgItem, text, 1024);
+    std::wstring str(text);
+    std::wstring trans = Settings::Instance()->Translator()->Translate(str);
+    SetDlgItemText(hWnd, dlgItem, trans.c_str());
 }
 
 DLGPROC GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {

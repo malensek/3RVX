@@ -27,6 +27,8 @@
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);
 
+void TranslateControlText(HWND hWnd, int dlgItem);
+
 DLGPROC GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 DLGPROC DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 DLGPROC HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);

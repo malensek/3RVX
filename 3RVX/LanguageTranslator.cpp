@@ -119,6 +119,13 @@ void LanguageTranslator::LoadTranslations() {
         if (originalText && translatedText) {
             std::wstring origStr = StringUtils::Widen(originalText);
             std::wstring transStr = StringUtils::Widen(translatedText);
+
+            if (_translations.find(origStr) != _translations.end()) {
+                CLOG(L"WARNING: Duplicate translation found!");
+                QCLOG(L"[%s] -> [%s]", origStr.c_str(), transStr.c_str());
+                return;
+            }
+
             _translations[origStr] = transStr;
         }
     }

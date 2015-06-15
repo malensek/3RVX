@@ -4,60 +4,35 @@
   <language name="Français" id="fr" regions=""/>
   <author name="Kokliko" email="kokliko35@yahoo.fr"/>
 
-  <!-- General Words -->
+  <!-- General Strings -->
   <string>
-    <original>Settings</original>
-		<translation>Réglages</translation>
+    <original>3RVX Settings</original>
+		<translation>Réglages 3RVX</translation>
   </string>
   <string>
     <original>Exit</original>
 		<translation>Quitter</translation>
   </string>
 
-
-<!-- Settings Dialog Buttons -->
-  <string>
-    <original>Defaults</original>
-		<translation>Défauts</translation>
-  </string>
-  <string>
-    <original>Cancel</original>
-		<translation>Annuler</translation>
-  </string>
-  <string>
-    <original>Save</original>
-		<translation>Valider</translation>
-  </string>
-  <string>
-    <original>Select Key...</original>
-		<translation>Appuyez sur une touche...</translation>
-  </string>
-
-
-<!-- Settings Tabs -->
+  <!-- Tab Names -->
   <string>
     <original>General</original>
-		<translation>Général</translation>
+    <translation>Général</translation>
   </string>
   <string>
     <original>Display</original>
-		<translation>Affichage</translation>
+    <translation>Affichage</translation>
   </string>
   <string>
-    <original>Hotkey Setup</original>
-		<translation>Raccourcis</translation>
-  </string>
-  <string>
-    <original>Skin Chooser</original>
-		<translation>Thèmes</translation>
+    <original>Hotkeys</original>
+    <translation>Raccourcis</translation>
   </string>
   <string>
     <original>About</original>
-		<translation>À propos</translation>
+    <translation>À propos</translation>
   </string>
 
-
-<!-- General Tab -->
+  <!-- General Tab -->
   <string>
     <original>Behavior</original>
 		<translation>Comportement</translation>
@@ -67,42 +42,30 @@
 		<translation>Démarrer avec Windows</translation>
   </string>
   <string>
-    <original>Play sounds</original>
-		<translation>Son actif</translation>
+    <original>Enable volume notification icon</original>
+		<translation>Afficher l’icône dans la zone de notification système</translation>
   </string>
   <string>
-    <original>Custom volume change amount:</original>
-		<translation>Personnaliser les variations de volume</translation>
+    <original>Enable sound effects</original>
+		<translation>Son actif</translation>
   </string>
 
   <string>
-    <original>Mixer</original>
-		<translation>Contrôle du volume</translation>
+    <original>Skin</original>
+		<translation>Thème</translation>
   </string>
   <string>
-    <original>Control Wave instead of Master Volume</original>
-		<translation>Contrôler "Sons wave" à la place du volume principal</translation>
+    <original>Author: {1}</original>
+		<translation>Auteur : {1}</translation>
   </string>
   <string>
-    <original>Use custom mixer program on tray click</original>
-		<translation>Utilise un mixer personnalisé</translation>
-  </string>
-  <string>
-    <original>Choose...</original>
-		<translation>Parcourir...</translation>
-  </string>
-  <string>
-    <original>Filename: </original>
-		<translation>Nom du fichier :</translation>
+    <original>Website</original>
+		<translation>Site de l’auteur</translation>
   </string>
 
   <string>
     <original>Language</original>
 		<translation>Langue</translation>
-  </string>
-  <string>
-    <original>Load</original>
-		<translation>Charger</translation>
   </string>
 
 
@@ -151,6 +114,25 @@
   <string>
     <original>Custom Location:</original>
 		<translation>Position personnalisée :</translation>
+  </string>
+
+
+<!-- Settings Dialog Buttons -->
+  <string>
+    <original>Defaults</original>
+		<translation>Défauts</translation>
+  </string>
+  <string>
+    <original>Cancel</original>
+		<translation>Annuler</translation>
+  </string>
+  <string>
+    <original>Save</original>
+		<translation>Valider</translation>
+  </string>
+  <string>
+    <original>Select Key...</original>
+		<translation>Appuyez sur une touche...</translation>
   </string>
 
 
@@ -213,76 +195,6 @@
   <string>
     <original>Press a key!</original>
 		<translation>Appuyez sur une touche !</translation>
-  </string>
-
-
-<!-- Skin tab -->
-  <string>
-    <original>Available Skins</original>
-		<translation>Thèmes disponibles</translation>
-  </string>
-  <string>
-    <original>Open Skin Folder</original>
-		<translation>Répertoire des thèmes</translation>
-  </string>
-
-  <string>
-    <original>Skin Information</original>
-		<translation>Informations du thème</translation>
-  </string>
-  <string>
-    <original>Author:</original>
-		<translation>Auteur :</translation>
-  </string>
-  <string>
-    <original>Version:</original>
-		<translation>Version :</translation>
-  </string>
-  <string>
-    <original>Skin Format Version:</original>
-		<translation>Version du format du thème :</translation>
-  </string>
-  <string>
-    <original>Author's Webpage</original>
-		<translation>Site de l’auteur</translation>
-  </string>
-
-
-<!-- About tab -->
-  <string>
-    <original>Version</original>
-		<translation>Version</translation>
-  </string>
-  <string>
-    <original>lang_author</original>
-		<translation>Traduction par Kokliko ~ kokliko35@yahoo.fr</translation>
-  </string>
-  <string>
-    <original>lang_module</original>
-		<translation>Module français chargé ~ 3RVX 2.0 beta ~ V2B3</translation>
-  </string>
-
-
-<!-- Messages -->
-  <string>
-    <original>Load Defaults</original>
-		<translation>Appliquer les paramètres par défaut</translation>
-  </string>
-  <string>
-    <original>All settings will be lost.  Continue?</original>
-		<translation>Tous les paramètres seront perdus. Continuer ?</translation>
-  </string>
-  <string>
-    <original>Skin Error</original>
-		<translation>Thème en erreur</translation>
-  </string>
-  <string>
-    <original>Couldn't load skin.  Try loading the default skin?</original>
-		<translation>Chargement du thème impossible.  Charger le thème par défaut ?</translation>
-  </string>
-  <string>
-    <original>Couldn't load skin XML.  Check the file for syntax errors.</original>
-		<translation>Chargement du thème XML impossible.  Vérifiez la syntaxe du fichier.</translation>
   </string>
 
 </translation>

@@ -219,6 +219,14 @@ void TranslateControlText(HWND hWnd, int dlgItem) {
     SetDlgItemText(hWnd, dlgItem, trans.c_str());
 }
 
+void TranslateWindowText(HWND hWnd) {
+    wchar_t text[1024];
+    GetWindowText(hWnd, text, 1024);
+    std::wstring str(text);
+    std::wstring trans = Settings::Instance()->Translator()->Translate(str);
+    SetWindowText(hWnd, trans.c_str());
+}
+
 DLGPROC GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     return general.TabProc(hDlg, message, wParam, lParam);
 }

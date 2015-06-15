@@ -158,9 +158,10 @@ void General::LoadSkinInfo(std::wstring skinName) {
     std::wstring skinXML = Settings::Instance()->SkinXML(skinName);
     SkinInfo s(skinXML);
 
-    std::wstring authorText(L"Author: ");
-    authorText.append(s.Author());
-    _author.Text(authorText);
+    std::wstring authorText(L"Author: {1}");
+    std::wstring transAuthor = Settings::Instance()->Translator()
+        ->TranslateAndReplace(authorText, s.Author());
+    _author.Text(transAuthor);
 
     std::wstring url = s.URL();
     if (url == L"") {

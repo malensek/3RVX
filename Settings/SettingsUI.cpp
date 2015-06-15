@@ -187,7 +187,7 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
             HWND hApply = GetDlgItem(hWnd, IDD_APPLYNOW);
             if (IsWindowEnabled(hApply)) {
                 /* Save settings*/
-                CLOG(L"Persisting settings...");
+                CLOG(L"Saving settings...");
                 for (Tab *tab : tabs) {
                     tab->SaveSettings();
                 }

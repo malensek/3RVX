@@ -46,12 +46,17 @@ LanguageTranslator::LanguageTranslator() {
 
 LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
     CLOG(L"Loading language XML: %s", langFileName.c_str());
-    std::string u8FileName = StringUtils::Narrow(langFileName);
-    tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
+
+    FILE *fp;
+    _wfopen_s(&fp, langFileName.c_str(), L"rb");
+    if (fp == NULL) {
+        CLOG(L"Failed to open file!");
+        return;
+    }
+
+    tinyxml2::XMLError result = _xml.LoadFile(fp);
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
-        if (result == tinyxml2::XMLError::XML_ERROR_FILE_NOT_FOUND) {
-            CLOG(L"File not found");
-        }
+        CLOG(L"Failed to read language file!");
         return;
     }
 

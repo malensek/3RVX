@@ -126,3 +126,15 @@ std::wstring &LanguageTranslator::Translate(std::wstring &str) {
     }
     return _translations[str];
 }
+
+std::wstring LanguageTranslator::TranslateAndReplace(
+        std::wstring &str, std::wstring &arg) {
+
+    std::wstring trans(Translate(str));
+    size_t strloc = trans.find(L"{1}");
+    if (strloc == std::wstring::npos) {
+        return trans;
+    }
+    trans.replace(strloc, 3, arg);
+    return trans;
+}

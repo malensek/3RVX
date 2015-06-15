@@ -13,6 +13,7 @@ public:
 
     void LoadTranslations();
     std::wstring &Translate(std::wstring &str);
+    std::wstring TranslateAndReplace(std::wstring &str, std::wstring &arg);
 
 public:
     static std::vector<std::wstring> CurrentLocale();

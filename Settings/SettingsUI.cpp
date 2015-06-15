@@ -183,6 +183,12 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
         ((LPDLGTEMPLATE) lParam)->dwExtendedStyle |= WS_EX_APPWINDOW;
         break;
 
+    case PSCB_INITIALIZED:
+        TranslateControlText(hWnd, IDOK);
+        TranslateControlText(hWnd, IDCANCEL);
+        TranslateControlText(hWnd, IDD_APPLYNOW);
+        break;
+
     case PSCB_BUTTONPRESSED:
         if (lParam == PSBTN_OK || lParam == PSBTN_APPLYNOW) {
             HWND hApply = GetDlgItem(hWnd, IDD_APPLYNOW);

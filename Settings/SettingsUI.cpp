@@ -216,6 +216,10 @@ void TranslateControlText(HWND hWnd, int dlgItem) {
     wchar_t text[1024];
     GetDlgItemText(hWnd, dlgItem, text, 1024);
     std::wstring str(text);
+    TranslateControlText(hWnd, dlgItem, str);
+}
+
+void TranslateControlText(HWND hWnd, int dlgItem, std::wstring &str) {
     std::wstring trans = Settings::Instance()->Translator()->Translate(str);
     SetDlgItemText(hWnd, dlgItem, trans.c_str());
 }

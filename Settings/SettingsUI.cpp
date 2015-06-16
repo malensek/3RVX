@@ -26,6 +26,7 @@ typedef struct DLGTEMPLATEEX
 #include "../3RVX/LanguageTranslator.h"
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
+#include "UITranslator.h"
 
 /* Tabs*/
 #include "Tab.h"
@@ -85,44 +86,50 @@ int APIENTRY wWinMain(
 
     PROPSHEETPAGE psp[4];
 
+    LanguageTranslator *lt = settings->Translator();
+    std::wstring genTitle = lt->Translate(std::wstring(L"General"));
+    std::wstring dispTitle = lt->Translate(std::wstring(L"Display"));
+    std::wstring hkTitle = lt->Translate(std::wstring(L"Hotkeys"));
+    std::wstring aboutTitle = lt->Translate(std::wstring(L"About"));
+
     psp[0] = { 0 };
     psp[0].dwSize = sizeof(PROPSHEETPAGE);
-    psp[0].dwFlags = NULL;
+    psp[0].dwFlags = PSP_USETITLE;
     psp[0].hInstance = hInstance;
     psp[0].pszTemplate = MAKEINTRESOURCE(IDD_GENERAL);
     psp[0].pszIcon = NULL;
     psp[0].pfnDlgProc = (DLGPROC) GeneralTabProc;
-    psp[0].pszTitle = NULL;
+    psp[0].pszTitle = &genTitle[0];
     psp[0].lParam = NULL;
 
     psp[1] = { 0 };
     psp[1].dwSize = sizeof(PROPSHEETPAGE);
-    psp[1].dwFlags = NULL;
+    psp[1].dwFlags = PSP_USETITLE;
     psp[1].hInstance = hInstance;
     psp[1].pszTemplate = MAKEINTRESOURCE(IDD_DISPLAY);
     psp[1].pszIcon = NULL;
     psp[1].pfnDlgProc = (DLGPROC) DisplayTabProc;
-    psp[1].pszTitle = NULL;
+    psp[1].pszTitle = &dispTitle[0];
     psp[1].lParam = 0;
 
     psp[2] = { 0 };
     psp[2].dwSize = sizeof(PROPSHEETPAGE);
-    psp[2].dwFlags = NULL;
+    psp[2].dwFlags = PSP_USETITLE;
     psp[2].hInstance = hInstance;
     psp[2].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
     psp[2].pszIcon = NULL;
     psp[2].pfnDlgProc = (DLGPROC) HotkeyTabProc;
-    psp[2].pszTitle = NULL;
+    psp[2].pszTitle = &hkTitle[0];
     psp[2].lParam = 0;
 
     psp[3] = { 0 };
     psp[3].dwSize = sizeof(PROPSHEETPAGE);
-    psp[3].dwFlags = NULL;
+    psp[3].dwFlags = PSP_USETITLE;
     psp[3].hInstance = hInstance;
     psp[3].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
     psp[3].pszIcon = NULL;
     psp[3].pfnDlgProc = (DLGPROC) AboutTabProc;
-    psp[3].pszTitle = NULL;
+    psp[3].pszTitle = &aboutTitle[0];
     psp[3].lParam = 0;
 
     PROPSHEETHEADER psh = { 0 };

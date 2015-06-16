@@ -185,9 +185,12 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
 
     case PSCB_INITIALIZED:
         TranslateWindowText(hWnd);
-        TranslateControlText(hWnd, IDOK);
-        TranslateControlText(hWnd, IDCANCEL);
-        TranslateControlText(hWnd, IDD_APPLYNOW);
+
+        /* These values are hard-coded in case the user has a non-english GUI
+           but wants to change the program language */
+        TranslateControlText(hWnd, IDOK, std::wstring(L"OK"));
+        TranslateControlText(hWnd, IDCANCEL, std::wstring(L"Cancel"));
+        TranslateControlText(hWnd, IDD_APPLYNOW, std::wstring(L"Apply"));
         break;
 
     case PSCB_BUTTONPRESSED:

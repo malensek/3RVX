@@ -184,13 +184,18 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
         break;
 
     case PSCB_INITIALIZED:
-        TranslateWindowText(hWnd);
+        UITranslator::TranslateWindowText(hWnd);
 
         /* These values are hard-coded in case the user has a non-english GUI
            but wants to change the program language */
-        TranslateControlText(hWnd, IDOK, std::wstring(L"OK"));
-        TranslateControlText(hWnd, IDCANCEL, std::wstring(L"Cancel"));
-        TranslateControlText(hWnd, IDD_APPLYNOW, std::wstring(L"Apply"));
+        UITranslator::TranslateControlText(
+            hWnd, IDOK, std::wstring(L"OK"));
+        UITranslator::TranslateControlText(
+            hWnd, IDCANCEL, std::wstring(L"Cancel"));
+        UITranslator::TranslateControlText(
+            hWnd, IDD_APPLYNOW, std::wstring(L"Apply"));
+
+        UITranslator::TranslateTab(hWnd);
         break;
 
     case PSCB_BUTTONPRESSED:
@@ -213,26 +218,6 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
     }
 
     return TRUE;
-}
-
-void TranslateControlText(HWND hWnd, int dlgItem) {
-    wchar_t text[1024];
-    GetDlgItemText(hWnd, dlgItem, text, 1024);
-    std::wstring str(text);
-    TranslateControlText(hWnd, dlgItem, str);
-}
-
-void TranslateControlText(HWND hWnd, int dlgItem, std::wstring &str) {
-    std::wstring trans = Settings::Instance()->Translator()->Translate(str);
-    SetDlgItemText(hWnd, dlgItem, trans.c_str());
-}
-
-void TranslateWindowText(HWND hWnd) {
-    wchar_t text[1024];
-    GetWindowText(hWnd, text, 1024);
-    std::wstring str(text);
-    std::wstring trans = Settings::Instance()->Translator()->Translate(str);
-    SetWindowText(hWnd, trans.c_str());
 }
 
 DLGPROC GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {

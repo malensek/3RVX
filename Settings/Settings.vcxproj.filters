@@ -105,6 +105,9 @@
     <ClInclude Include="Controls\GroupBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UITranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp">
@@ -180,6 +183,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controls\EditBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UITranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

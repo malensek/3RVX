@@ -41,10 +41,10 @@ private:
 
 private:
     /* Strings: */
-    std::wstring primaryMonitorStr = L"Primary Monitor";
-    std::wstring allMonitorStr = L"All Monitors";
-    std::wstring customPositionStr = L"Custom";
-    std::wstring noAnimStr = L"None";
+    std::wstring _allMonitorStr = L"All Monitors";
+    std::wstring _primaryMonitorStr = L"Primary Monitor";
+    std::wstring _customPositionStr = L"Custom";
+    std::wstring _noAnimStr = L"None";
 
 private:
     /* Constants: */

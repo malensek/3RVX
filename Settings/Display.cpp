@@ -47,6 +47,12 @@ void Display::LoadSettings() {
     Settings *settings = Settings::Instance();
     LanguageTranslator *translator = settings->Translator();
 
+    /* Translations */
+    _allMonitorStr = translator->Translate(_allMonitorStr);
+    _primaryMonitorStr = translator->Translate(_primaryMonitorStr);
+    _customPositionStr = translator->Translate(_customPositionStr);
+    _noAnimStr = translator->Translate(_noAnimStr);
+
     /* Visibility Settings */
     _onTop.Checked(settings->AlwaysOnTop());
     _hideFullscreen.Checked(settings->HideFullscreen());

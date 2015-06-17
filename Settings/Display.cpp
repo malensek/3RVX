@@ -89,7 +89,7 @@ void Display::LoadSettings() {
 
     /* Animation Settings */
     for (std::wstring anim : AnimationTypes::HideAnimationNames) {
-        _hideAnimation.AddItem(anim);
+        _hideAnimation.AddItem(translator->Translate(anim));
     }
     _hideAnimation.Select((int) settings->HideAnim());
     _hideDelay.Range(MIN_MS, MAX_MS);

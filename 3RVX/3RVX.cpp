@@ -149,7 +149,7 @@ HWND CreateMainWnd(HINSTANCE hInstance) {
     wcex.cbClsExtra = NULL;
     wcex.cbWndExtra = NULL;
     wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    wcex.hIcon = LoadIcon(NULL, MAKEINTRESOURCE(101));
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = NULL;

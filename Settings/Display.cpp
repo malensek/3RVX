@@ -72,8 +72,8 @@ void Display::LoadSettings() {
     _edgeSpinner.Range(MIN_EDGE, MAX_EDGE);
 
     /* Display Devices */
-    _displayDevice.AddItem(primaryMonitorStr);
-    _displayDevice.AddItem(allMonitorStr);
+    _displayDevice.AddItem(_primaryMonitorStr);
+    _displayDevice.AddItem(_allMonitorStr);
     std::list<DISPLAY_DEVICE> devices = DisplayManager::ListAllDevices();
     for (DISPLAY_DEVICE dev : devices) {
         std::wstring devString(dev.DeviceName);
@@ -81,9 +81,9 @@ void Display::LoadSettings() {
     }
     std::wstring monitorName = settings->Monitor();
     if (monitorName == L"") {
-        monitorName = primaryMonitorStr;
+        monitorName = _primaryMonitorStr;
     } else if (monitorName == L"*") {
-        monitorName = allMonitorStr;
+        monitorName = _allMonitorStr;
     }
     _displayDevice.Select(monitorName);
 
@@ -146,7 +146,7 @@ void Display::SaveSettings() {
 }
 
 bool Display::OnAnimationChange() {
-    _hideSpeed.Enabled(_hideAnimation.Selection() != noAnimStr);
+    _hideSpeed.Enabled(_hideAnimation.Selection() != _noAnimStr);
     return true;
 }
 
@@ -162,7 +162,7 @@ bool Display::OnCustomCheckChange() {
 }
 
 bool Display::OnPositionChange() {
-    bool isCustom = (_position.Selection() == customPositionStr);
+    bool isCustom = (_position.Selection() == _customPositionStr);
     _customX.Enabled(isCustom);
     _customY.Enabled(isCustom);
     _positionX.Enabled(isCustom);

@@ -201,8 +201,6 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
             hWnd, IDCANCEL, std::wstring(L"Cancel"));
         UITranslator::TranslateControlText(
             hWnd, IDD_APPLYNOW, std::wstring(L"Apply"));
-
-        UITranslator::TranslateTab(hWnd);
         break;
 
     case PSCB_BUTTONPRESSED:

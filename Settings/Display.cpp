@@ -59,7 +59,7 @@ void Display::LoadSettings() {
 
     /* Position on Screen*/
     for (std::wstring position : settings->OSDPosNames) {
-        _position.AddItem(position);
+        _position.AddItem(translator->Translate(position));
     }
     _position.Select((int) settings->OSDPosition());
 

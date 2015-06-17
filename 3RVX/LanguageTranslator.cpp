@@ -132,6 +132,10 @@ void LanguageTranslator::LoadTranslations() {
 }
 
 std::wstring &LanguageTranslator::Translate(std::wstring &str) {
+    if (str == L"") {
+        return str;
+    }
+
     if (_translations.find(str) == _translations.end()) {
         /* If the translation isn't found, return the original string. */
         CLOG(L"No translation found: [%s]", str.c_str());

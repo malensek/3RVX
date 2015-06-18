@@ -27,6 +27,8 @@
       </Directory>
     </Directory>
 
+    <Icon Id="icon.ico" SourceFile="../Assets/main_icon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     <WixVariable Id="WixUIBannerBmp" Value="../Assets/InstallBanner.jpg" />
     <WixVariable Id="WixUIDialogBmp" Value="../Assets/InstallSplash.jpg" />
 

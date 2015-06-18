@@ -13,7 +13,8 @@
       Compressed="yes"
       InstallScope="perMachine" />
 
-    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MajorUpgrade AllowSameVersionUpgrades="yes"
+                  DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <MediaTemplate EmbedCab="yes"/>
 
     <Feature Id="ProductFeature" Title="Installer" Level="1">
@@ -29,6 +30,7 @@
 
     <Icon Id="icon.ico" SourceFile="../Assets/main_icon.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
     <WixVariable Id="WixUIBannerBmp" Value="../Assets/InstallBanner.jpg" />
     <WixVariable Id="WixUIDialogBmp" Value="../Assets/InstallSplash.jpg" />
 

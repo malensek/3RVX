@@ -68,7 +68,7 @@ int APIENTRY wWinMain(
     wcex.cbClsExtra = NULL;
     wcex.cbWndExtra = NULL;
     wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    wcex.hIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_SETTINGS));
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
     wcex.lpszMenuName = NULL;
@@ -137,7 +137,7 @@ int APIENTRY wWinMain(
     psh.dwFlags = PSH_PROPSHEETPAGE | PSH_USEICONID | PSH_USECALLBACK;
     psh.hwndParent = mainWnd;
     psh.hInstance = hInstance;
-    psh.pszIcon = MAKEINTRESOURCE(COLOR_WINDOW);
+    psh.pszIcon = MAKEINTRESOURCE(IDI_SETTINGS);
     psh.pszCaption = L"3RVX Settings";
     psh.nStartPage = 0;
     psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);

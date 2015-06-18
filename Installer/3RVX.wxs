@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product
+  <Product
     Id="*"
     Name="3RVX"
     Language="1033"
@@ -8,17 +8,17 @@
     Manufacturer="Matthew Malensek"
     UpgradeCode="8DF572AB-65FE-44FF-985C-A3440D59E4A0">
 
-		<Package
+    <Package
       InstallerVersion="200"
       Compressed="yes"
       InstallScope="perMachine" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate EmbedCab="yes"/>
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes"/>
 
-		<Feature Id="ProductFeature" Title="Installer" Level="1">
-			<ComponentGroupRef Id="3RVXComponents" />
-		</Feature>
+    <Feature Id="ProductFeature" Title="Installer" Level="1">
+      <ComponentGroupRef Id="3RVXComponents" />
+    </Feature>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
@@ -27,28 +27,31 @@
       </Directory>
     </Directory>
 
-   <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
-   <UI>
-     <UIRef Id="WixUI_InstallDir" />
+    <WixVariable Id="WixUIBannerBmp" Value="../Assets/InstallBanner.jpg" />
+    <WixVariable Id="WixUIDialogBmp" Value="../Assets/InstallSplash.jpg" />
 
-     <Publish
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UI>
+      <UIRef Id="WixUI_InstallDir" />
+
+      <Publish
        Dialog="WelcomeDlg"
        Control="Next"
        Event="NewDialog"
        Value="InstallDirDlg"
        Order="2">
-       1
-     </Publish>
+        1
+      </Publish>
 
-     <Publish
-       Dialog="InstallDirDlg"
-       Control="Back"
-       Event="NewDialog"
-       Value="WelcomeDlg"
-       Order="2">
-       1
-     </Publish>
-   </UI>
+      <Publish
+        Dialog="InstallDirDlg"
+        Control="Back"
+        Event="NewDialog"
+        Value="WelcomeDlg"
+        Order="2">
+        1
+      </Publish>
+    </UI>
 
- </Product>
+  </Product>
 </Wix>

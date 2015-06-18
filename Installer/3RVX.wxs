@@ -4,7 +4,7 @@
     Id="*"
     Name="3RVX"
     Language="1033"
-    Version="3.0.0.0"
+    Version="$(var.ProductVersion)"
     Manufacturer="Matthew Malensek"
     UpgradeCode="8DF572AB-65FE-44FF-985C-A3440D59E4A0">
 

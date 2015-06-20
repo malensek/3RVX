@@ -123,5 +123,42 @@
     <original>Custom</original>
     <translation>XXXXXX</translation>
   </string>
+  <string>
+    <original>Custom distance from screen edge (px):</original>
+    <translation>XXXXXX XXXXXXXX XXXX XXXXXX XXXX XXXX:</translation>
+  </string>
+  <string>
+    <original>Display Device:</original>
+    <translation>XXXXXXX XXXXX:</translation>
+  </string>
+  <string>
+    <original>Primary Monitor</original>
+    <translation>XXXXXXX XXXXXXX</translation>
+  </string>
+  <string>
+    <original>All Monitors</original>
+    <translation>XXX XXXXXXXX</translation>
+  </string>
+
+  <string>
+    <original>Animation</original>
+    <translation>XXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>None</original>
+    <translation>XXXX</translation>
+  </string>
+  <string>
+    <original>Fade</original>
+    <translation>XXXX*</translation>
+  </string>
+  <string>
+    <original>Hide Delay (ms):</original>
+    <translation>XXXX XXXXX XXXX:</translation>
+  </string>
+  <string>
+    <original>Speed (ms):</original>
+    <translation>XXXXX XXXX:</translation>
+  </string>
 
 </translation>

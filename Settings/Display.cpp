@@ -12,9 +12,11 @@
 void Display::Initialize() {
     using std::placeholders::_1;
 
+    INIT_CONTROL(GRP_VISIBILITY, GroupBox, _visibilityGroup);
     INIT_CONTROL(CHK_ONTOP, Checkbox, _onTop);
     INIT_CONTROL(CHK_FULLSCREEN, Checkbox, _hideFullscreen);
 
+    INIT_CONTROL(GRP_POSITION, GroupBox, _positionGroup);
     INIT_CONTROL(CMB_POSITION, ComboBox, _position);
     _position.OnSelectionChange
         = std::bind(&Display::OnPositionChange, this);
@@ -26,10 +28,10 @@ void Display::Initialize() {
     _customDistance.OnClick = std::bind(&Display::OnCustomCheckChange, this);
     INIT_CONTROL(SP_EDGE, Spinner, _edgeSpinner);
     _edgeSpinner.Buddy(ED_EDGE);
-
     INIT_CONTROL(LBL_DISPLAYDEV, Label, _displayDevLabel);
     INIT_CONTROL(CMB_MONITOR, ComboBox, _displayDevice);
 
+    INIT_CONTROL(GRP_ANIMATION, GroupBox, _animationGroup);
     INIT_CONTROL(CMB_ANIMATION, ComboBox, _hideAnimation);
     _hideAnimation.OnSelectionChange
         = std::bind(&Display::OnAnimationChange, this);

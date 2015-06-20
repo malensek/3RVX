@@ -48,6 +48,7 @@ private:
     Button _keys;
     ComboBox _action;
 
+    GroupBox _editorGroup;
     Label _argLabel;
     Checkbox _argCheck;
     ComboBox _argCombo;

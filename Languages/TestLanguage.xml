@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<translation author="Uncle Sam" version="1">
+
+  <language name="Test" id="en" regions="us,uk,in"/>
+  <author name="Jane Doe" email=""/>
+
+  <!-- General Strings -->
+  <string>
+    <original>3RVX Settings</original>
+    <translation>XXXX XXXXXXXX</translation>
+  </string>
+
+  <!-- Tab Names -->
+  <string>
+    <original>General</original>
+    <translation>XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Display</original>
+    <translation>XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Hotkeys</original>
+    <translation>XXXXXXX</translation>
+  </string>
+  <string>
+    <original>About</original>
+    <translation>XXXXX</translation>
+  </string>
+
+  <!-- General Tab -->
+  <string>
+    <original>Behavior</original>
+		<translation>XXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Run on Windows startup</original>
+    <translation>XXX XX XXXXXXX XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Enable volume notification icon</original>
+    <translation>XXXXXX XXXXXX XXXXXXXXXXXX XXXX</translation>
+  </string>
+  <string>
+    <original>Enable sound effects</original>
+    <translation>XXXXXX XXXXX XXXXXXX</translation>
+  </string>
+
+  <string>
+    <original>Skin</original>
+		<translation>XXXX</translation>
+  </string>
+  <string>
+    <original>Author: {1}</original>
+		<translation>XXXXXX: {1}</translation>
+  </string>
+  <string>
+    <original>Website</original>
+		<translation>XXXXXXX</translation>
+  </string>
+
+  <string>
+    <original>Language</original>
+		<translation>XXXXXXXX</translation>
+  </string>
+
+  
+  <!-- Display Tab -->
+  <string>
+    <original>Visibility</original>
+    <translation>XXXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Keep on top of other windows</original>
+    <translation>XXXX XX XXX XX XXXXX XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Hide when other programs are fullscreen</original>
+    <translation>XXXX XXXX XXXXX XXXXXXXX XXX XXXXXXXXXX</translation>
+  </string>
+
+  <string>
+    <original>Position</original>
+    <translation>XXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Top</original>
+    <translation>XXX</translation>
+  </string>
+  <string>
+    <original>Left</original>
+    <translation>XXXX</translation>
+  </string>
+  <string>
+    <original>Right</original>
+    <translation>XXXXX</translation>
+  </string>
+  <string>
+    <original>Bottom</original>
+    <translation>XXXXXX</translation>
+  </string>
+  <string>
+    <original>Center</original>
+    <translation>XXXXXX</translation>
+  </string>
+  <string>
+    <original>Top-left</original>
+    <translation>XXX-XXXX</translation>
+  </string>
+  <string>
+    <original>Top-right</original>
+    <translation>XXX-XXXXX</translation>
+  </string>
+  <string>
+    <original>Bottom-left</original>
+    <translation>XXXXXX-XXXX</translation>
+  </string>
+  <string>
+    <original>Bottom-right</original>
+    <translation>XXXXXX-XXXXX</translation>
+  </string>
+  <string>
+    <original>Custom</original>
+    <translation>XXXXXX</translation>
+  </string>
+
+</translation>

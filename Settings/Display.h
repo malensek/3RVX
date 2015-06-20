@@ -20,9 +20,11 @@ private:
 
 private:
     /* Controls: */
+    GroupBox _visibilityGroup;;
     Checkbox _onTop;
     Checkbox _hideFullscreen;
 
+    GroupBox _positionGroup;
     ComboBox _position;
     Label _customX;
     EditBox _positionX;
@@ -33,6 +35,7 @@ private:
     Label _displayDevLabel;
     ComboBox _displayDevice;
 
+    GroupBox _animationGroup;
     ComboBox _hideAnimation;
     Label _hideDelayLabel;
     Spinner _hideDelay;

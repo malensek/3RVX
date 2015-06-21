@@ -9,6 +9,19 @@
     <original>3RVX Settings</original>
     <translation>XXXX XXXXXXXX</translation>
   </string>
+  <string>
+    <original>OK</original>
+    <translation>XX</translation>
+  </string>
+  <string>
+    <original>Cancel</original>
+    <translation>XXXXXX</translation>
+  </string>
+  <string>
+    <original>Apply</original>
+    <translation>XXXXX</translation>
+  </string>
+
 
   <!-- Tab Names -->
   <string>
@@ -159,6 +172,155 @@
   <string>
     <original>Speed (ms):</original>
     <translation>XXXXX XXXX:</translation>
+  </string>
+
+  
+  <!-- Hotkeys Tab -->
+  <string>
+    <original>Action</original>
+    <translation>XXXXXX</translation>
+  </string>
+  <string>
+    <original>Hotkey Editor</original>
+    <translation>XXXXXX XXXXXX</translation>
+  </string>
+  <string>
+    <original>Keys:</original>
+    <translation>XXXX:</translation>
+  </string>
+  <string>
+    <original>Hotkey Input</original>
+    <translation>XXXXXX XXXXX</translation>
+  </string>
+  <string>
+    <original>Enter hotkeys now...</original>
+    <translation>XXXXX XXXXXXX XXX...</translation>
+  </string>
+  <string>
+    <original>Action:</original>
+    <translation>XXXXXX:</translation>
+  </string>
+  <string>
+    <original>Amount:</original>
+    <translation>XXXXXX:</translation>
+  </string>
+  <string>
+    <original>Volume Units</original>
+    <translation>XXXXXX XXXXX</translation>
+  </string>
+  <string>
+    <original>Percent</original>
+    <translation>XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Drive:</original>
+    <translation>XXXXX:</translation>
+  </string>
+  <string>
+    <original>Key:</original>
+    <translation>XXX:</translation>
+  </string>
+  <string>
+    <original>Play/Pause</original>
+    <translation>XXXX/XXXXX</translation>
+  </string>
+  <string>
+    <original>Stop</original>
+    <translation>XXXX1</translation>
+  </string>
+  <string>
+    <original>Next</original>
+    <translation>XXXX2</translation>
+  </string>
+  <string>
+    <original>Previous</original>
+    <translation>XXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Path:</original>
+    <translation>XXXX:</translation>
+  </string>
+
+  <!-- Hotkey Actions -->
+  <string>
+    <original>Increase Volume</original>
+    <translation>XXXXXXXX XXXXXX</translation>
+  </string>
+  <string>
+    <original>Increase Volume {1}%</original>
+    <translation>XXXXXXXX XXXXXX {1}%</translation>
+  </string>
+  <string>
+    <original>Increase Volume {1} units</original>
+    <translation>XXXXXXXX XXXXXX {1} XXXXX</translation>
+  </string>
+  <string>
+    <original>Decrease Volume</original>
+    <translation>XXXXXXX XXXXXX</translation>
+  </string>
+  <string>
+    <original>Decrease Volume {1}%</original>
+    <translation>XXXXXXX XXXXXX {1}%</translation>
+  </string>
+  <string>
+    <original>Decrease Volume {1} units</original>
+    <translation>XXXXXXX XXXXXX {1} XXXXX</translation>
+  </string>
+  <string>
+    <original>Set Volume</original>
+    <translation>XXX XXXXXX</translation>
+  </string>
+  <string>
+    <original>Set Volume: {1}%</original>
+    <translation>XXX XXXXXX: {1}%</translation>
+  </string>
+  <string>
+    <original>Set Volume: {1} units</original>
+    <translation>XXX XXXXXX: {1} XXXXX</translation>
+  </string>
+  <string>
+    <original>Mute</original>
+    <translation>XXXX</translation>
+  </string>
+  <string>
+    <original>Show Volume Slider</original>
+    <translation>XXXX XXXXXX XXXXXX</translation>
+  </string>
+  <string>
+    <original>Eject Drive</original>
+    <translation>XXXXX XXXXX</translation>
+  </string>
+  <string>
+    <original>Eject Drive: {1}</original>
+    <translation>XXXXX XXXXX: {1}</translation>
+  </string>
+  <string>
+    <original>Eject Last Disk</original>
+    <translation>XXXXX XXXX XXXX</translation>
+  </string>
+  <string>
+    <original>Media Key</original>
+    <translation>XXXXX XXX</translation>
+  </string>
+  <string>
+    <original>Media Key: {1}</original>
+    <translation>XXXXX XXX: {1}</translation>
+  </string>
+  <string>
+    <original>Run</original>
+    <translation>XXX</translation>
+  </string>
+  <string>
+    <original>Run: {1}</original>
+    <translation>XXX: {1}</translation>
+  </string>
+  <string>
+    <original>Open Settings Dialog</original>
+    <translation>XXXX XXXXXXXX XXXXXX</translation>
+  </string>
+  <string>
+    <original>Exit 3RVX</original>
+    <translation>XXXX XXXX</translation>
   </string>
 
 </translation>

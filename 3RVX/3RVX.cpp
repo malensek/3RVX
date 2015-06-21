@@ -133,6 +133,9 @@ void init() {
 
     hotkeys = Settings::Instance()->Hotkeys();
     for (auto it = hotkeys.begin(); it != hotkeys.end(); ++it) {
+        /* Enable arg caching */
+        it->second.EnableArgCache();
+
         int combination = it->first;
         hkManager->Register(combination);
     }

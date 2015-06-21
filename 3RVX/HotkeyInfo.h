@@ -12,7 +12,7 @@ public:
         Mute,
         VolumeSlider,
         EjectDrive,
-        EjectLatestDrive,
+        EjectLastDisk,
         MediaKey,
         Run,
         Settings,

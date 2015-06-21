@@ -182,7 +182,7 @@ void ProcessHotkeys(HotkeyInfo &hki) {
         break;
 
     case HotkeyInfo::EjectDrive:
-    case HotkeyInfo::EjectLatestDrive:
+    case HotkeyInfo::EjectLastDisk:
         if (eOSD) {
             eOSD->ProcessHotkeys(hki);
         }

@@ -83,7 +83,7 @@ void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
         }
         break;
 
-    case HotkeyInfo::EjectLatestDrive:
+    case HotkeyInfo::EjectLastDisk:
         if (_latestDrive != 0) {
             wchar_t letter = MaskToDriveLetter(_latestDrive);
             std::wstring lStr(1, letter);

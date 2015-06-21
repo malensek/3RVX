@@ -11,7 +11,7 @@ std::vector<std::wstring> HotkeyInfo::ActionNames = {
     L"Mute",
     L"Show Volume Slider",
     L"Eject Drive",
-    L"Eject Latest Drive",
+    L"Eject Last Disk",
     L"Media Key",
     L"Run",
     L"Open Settings Dialog",

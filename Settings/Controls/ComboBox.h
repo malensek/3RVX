@@ -24,6 +24,7 @@ public:
     std::wstring Selection();
     int SelectionIndex();
     int Select(std::wstring item);
+    int SelectPrefix(std::wstring item);
     void Select(int itemIdx);
 
 

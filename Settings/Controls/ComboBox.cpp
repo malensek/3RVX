@@ -24,12 +24,20 @@ int ComboBox::Count() {
     return ComboBox_GetCount(_hWnd);
 }
 
-int ComboBox::Select(std::wstring item) {
-    return ComboBox_SelectString(_hWnd, -1, item.c_str());
-}
-
 void ComboBox::Select(int itemIdx) {
     ComboBox_SetCurSel(_hWnd, itemIdx);
+}
+
+int ComboBox::Select(std::wstring item) {
+    int idx = ComboBox_FindStringExact(_hWnd, -1, item.c_str());
+    if (idx != CB_ERR) {
+        Select(idx);
+    }
+    return idx;
+}
+
+int ComboBox::SelectPrefix(std::wstring item) {
+    return ComboBox_SelectString(_hWnd, -1, item.c_str());
 }
 
 std::wstring ComboBox::Selection() {

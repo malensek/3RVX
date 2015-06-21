@@ -4,6 +4,7 @@
 
 #include "../3RVX/HotkeyInfo.h"
 #include "../3RVX/HotkeyManager.h"
+#include "../3RVX/LanguageTranslator.h"
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "../3RVX/SkinInfo.h"
@@ -22,13 +23,15 @@ void Hotkeys::Initialize() {
     INIT_CONTROL(BTN_REMOVE, Button, _remove);
     _remove.OnClick = std::bind(&Hotkeys::OnRemoveButtonClick, this);
 
+    INIT_CONTROL(GRP_EDITOR, GroupBox, _editorGroup);
+    INIT_CONTROL(LBL_KEYS, Label, _keysLabel);
     INIT_CONTROL(BTN_KEYS, Button, _keys);
     _keys.OnClick = std::bind(&Hotkeys::OnKeysButtonClick, this);
 
+    INIT_CONTROL(LBL_ACTION, Label, _actionLabel);
     INIT_CONTROL(CMB_ACTION, ComboBox, _action);
     _action.OnSelectionChange = std::bind(&Hotkeys::OnActionChange, this);
 
-    INIT_CONTROL(GRP_EDITOR, GroupBox, _editorGroup);
     INIT_CONTROL(LBL_ARG, Label, _argLabel);
     INIT_CONTROL(CHK_ARG, Checkbox, _argCheck);
     _argCheck.OnClick = std::bind(&Hotkeys::OnArgCheckChange, this);
@@ -136,6 +139,8 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     bool showCombo = false;
     bool showEdit = false;
     bool showButton = false;
+
+    LanguageTranslator *translator = Settings::Instance()->Translator();
 
     /* Restore things to their default state */
     DefaultArgControlStates();

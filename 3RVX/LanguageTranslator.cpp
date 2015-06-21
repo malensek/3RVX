@@ -131,7 +131,7 @@ void LanguageTranslator::LoadTranslations() {
     }
 }
 
-std::wstring &LanguageTranslator::Translate(std::wstring &str) {
+const std::wstring &LanguageTranslator::Translate(const std::wstring &str) {
     if (str == L"") {
         return str;
     }
@@ -144,8 +144,8 @@ std::wstring &LanguageTranslator::Translate(std::wstring &str) {
     return _translations[str];
 }
 
-std::wstring LanguageTranslator::TranslateAndReplace(
-        std::wstring &str, std::wstring &arg) {
+const std::wstring LanguageTranslator::TranslateAndReplace(
+        const std::wstring &str, const std::wstring &arg) {
 
     std::wstring trans(Translate(str));
     size_t strloc = trans.find(L"{1}");

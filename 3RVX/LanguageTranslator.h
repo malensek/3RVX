@@ -12,8 +12,9 @@ public:
     LanguageTranslator(std::wstring langFileName);
 
     void LoadTranslations();
-    std::wstring &Translate(std::wstring &str);
-    std::wstring TranslateAndReplace(std::wstring &str, std::wstring &arg);
+    const std::wstring &Translate(const std::wstring &str);
+    const std::wstring TranslateAndReplace(
+        const std::wstring &str, const std::wstring &arg);
 
 public:
     static std::vector<std::wstring> CurrentLocale();

@@ -66,7 +66,7 @@ void Hotkeys::LoadSettings() {
     _keyList.AddColumn(_actionColumnStr, (int) (width * .445));
 
     for (std::wstring action : HotkeyInfo::ActionNames) {
-        _action.AddItem(action);
+        _action.AddItem(translator->Translate(action));
     }
 
     std::unordered_map<int, HotkeyInfo> hotkeys = settings->Hotkeys();

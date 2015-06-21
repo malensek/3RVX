@@ -167,7 +167,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
     case HotkeyInfo::MediaKey:
         _argLabel.Text(_keyArgStr);
         for (std::wstring keys : HotkeyInfo::MediaKeyNames) {
-            _argCombo.AddItem(keys);
+            _argCombo.AddItem(translator->Translate(keys));
         }
         if (selection.HasArgs()) {
             _argCombo.Select(selection.args[0]);

@@ -41,6 +41,17 @@ void Hotkeys::Initialize() {
 
 void Hotkeys::LoadSettings() {
     Settings *settings = Settings::Instance();
+    LanguageTranslator *translator = settings->Translator();
+
+    /* Translations */
+    _hotkeysColumnStr = translator->Translate(_hotkeysColumnStr);
+    _actionColumnStr = translator->Translate(_actionColumnStr);
+    _amountVolArgStr = translator->Translate(_amountVolArgStr);
+    _unitsVolArgStr = translator->Translate(_unitsVolArgStr);
+    _percentVolArgStr = translator->Translate(_percentVolArgStr);
+    _keyArgStr = translator->Translate(_keyArgStr);
+    _driveArgStr = translator->Translate(_driveArgStr);
+    _pathArgStr = translator->Translate(_pathArgStr);
 
     /* Make highlighted items span the entire row in the list view */
     _keyList.AddListExStyle(LVS_EX_FULLROWSELECT);

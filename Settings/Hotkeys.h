@@ -45,10 +45,13 @@ private:
     Button _add;
     Button _remove;
 
-    Button _keys;
-    ComboBox _action;
 
     GroupBox _editorGroup;
+    Label _keysLabel;
+    Button _keys;
+    Label _actionLabel;
+    ComboBox _action;
+
     Label _argLabel;
     Checkbox _argCheck;
     ComboBox _argCombo;
@@ -57,12 +60,12 @@ private:
 
 private:
     /* Strings: */
-    std::wstring hotkeysColumnStr = L"Hotkeys";
-    std::wstring actionColumnStr = L"Action";
-    std::wstring amountVolArgStr = L"Amount:";
-    std::wstring unitsVolArgStr = L"Volume Units";
-    std::wstring percentVolArgStr = L"Percent";
-    std::wstring keyArgStr = L"Key:";
-    std::wstring driveArgStr = L"Drive:";
-    std::wstring pathArgStr = L"Path:";
+    std::wstring _hotkeysColumnStr = L"Hotkeys";
+    std::wstring _actionColumnStr = L"Action";
+    std::wstring _amountVolArgStr = L"Amount:";
+    std::wstring _unitsVolArgStr = L"Volume Units";
+    std::wstring _percentVolArgStr = L"Percent";
+    std::wstring _keyArgStr = L"Key:";
+    std::wstring _driveArgStr = L"Drive:";
+    std::wstring _pathArgStr = L"Path:";
 };

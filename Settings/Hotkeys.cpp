@@ -48,8 +48,8 @@ void Hotkeys::LoadSettings() {
     RECT dims = _keyList.ScreenDimensions();
     int width = dims.right - dims.left;
 
-    _keyList.AddColumn(hotkeysColumnStr, (int) (width * .485));
-    _keyList.AddColumn(actionColumnStr, (int) (width * .445));
+    _keyList.AddColumn(_hotkeysColumnStr, (int) (width * .485));
+    _keyList.AddColumn(_actionColumnStr, (int) (width * .445));
 
     for (std::wstring action : HotkeyInfo::ActionNames) {
         _action.AddItem(action);
@@ -141,7 +141,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
 
     case HotkeyInfo::SetVolume:
         VolumeArgControlStates(selection);
-        _argLabel.Text(amountVolArgStr);
+        _argLabel.Text(_amountVolArgStr);
 
         showLabel = true;
         showCombo = true;
@@ -149,7 +149,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
         break;
 
     case HotkeyInfo::EjectDrive:
-        _argLabel.Text(driveArgStr);
+        _argLabel.Text(_driveArgStr);
         _argCombo.Width(_argCombo.EmSize() * 6);
         for (int i = 0; i < 26; ++i) {
             wchar_t ch = (wchar_t) i + 65;
@@ -165,7 +165,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
         break;
 
     case HotkeyInfo::MediaKey:
-        _argLabel.Text(keyArgStr);
+        _argLabel.Text(_keyArgStr);
         for (std::wstring keys : HotkeyInfo::MediaKeyNames) {
             _argCombo.AddItem(keys);
         }
@@ -428,15 +428,15 @@ void Hotkeys::DefaultArgControlStates() {
 }
 
 void Hotkeys::VolumeArgControlStates(HotkeyInfo &selection) {
-    _argCheck.Text(amountVolArgStr);
+    _argCheck.Text(_amountVolArgStr);
     _argCheck.Checked(selection.HasArgs());
     _argEdit.Enabled(_argCheck.Checked());
     _argEdit.Width(_argEdit.EmSize() * 6);
     _argEdit.PlaceRightOf(_argCheck);
     _argEdit.X(_action.X());
     _argCombo.Enabled(_argCheck.Checked());
-    _argCombo.AddItem(unitsVolArgStr);
-    _argCombo.AddItem(percentVolArgStr);
+    _argCombo.AddItem(_unitsVolArgStr);
+    _argCombo.AddItem(_percentVolArgStr);
     _argCombo.Select(0);
     _argCombo.PlaceRightOf(_argEdit);
     _argCombo.Width(_action.Width() - (_argCombo.X() - _action.X()));

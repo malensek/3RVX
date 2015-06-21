@@ -146,6 +146,7 @@
     <ResourceCompile Include="Settings.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\Assets\main_icon.ico" />
     <Image Include="..\Assets\settings_icon.ico" />
     <Image Include="Settings.ico" />
     <Image Include="small.ico" />

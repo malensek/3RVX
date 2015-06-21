@@ -204,6 +204,9 @@
     <Image Include="..\Assets\settings_icon.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\Assets\main_icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\3RVX\Settings.xml" />

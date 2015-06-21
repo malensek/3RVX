@@ -194,7 +194,7 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
         break;
 
     case HotkeyInfo::Run:
-        _argLabel.Text(pathArgStr);
+        _argLabel.Text(_pathArgStr);
         _argButton.Text(L"…");
         _argButton.Width(_argButton.EmSize() * 3);
         _argEdit.PlaceRightOf(_argLabel);

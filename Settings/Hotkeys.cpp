@@ -78,7 +78,7 @@ void Hotkeys::LoadSettings() {
         HotkeyInfo hki = _keyInfo[i];
         std::wstring hkStr = HotkeyManager::HotkeysToString(hki.keyCombination);
         int idx = _keyList.AddItem(hkStr);
-        _keyList.ItemText(idx, 1, HotkeyInfo::ActionNames[hki.action]);
+        LoadAction(idx, hki);
     }
 
     _keyList.Selection(0);
@@ -125,21 +125,117 @@ void Hotkeys::LoadSelection(int index) {
     _action.Select(-1);
     int action = selection.action;
     if (action >= 0) {
-        _keyList.ItemText(index, 1, HotkeyInfo::ActionNames[action]);
-        LoadActionParameters(action, selection);
+        LoadAction(index, selection);
+        LoadActionParameters(selection);
         _action.Select(action);
     } else {
         DefaultArgControlStates();
     }
 }
 
-void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
+void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
+    int action = selection.action;
+
+    if (action < 0) {
+        /* Selection has no action */
+        return;
+    }
+
+    LanguageTranslator *translator = Settings::Instance()->Translator();
+    /* Set to the default string (action with no parameters) */
+    std::wstring itemStr = translator->Translate(
+        HotkeyInfo::ActionNames[action]);
+
+    if (selection.HasArgs() == false) {
+        /* Start with the default string (no parameters) */
+        _keyList.ItemText(index, 1, itemStr);
+        return;
+    }
+
+    switch ((HotkeyInfo::HotkeyActions) action) {
+    case HotkeyInfo::IncreaseVolume:
+    case HotkeyInfo::DecreaseVolume:
+    case HotkeyInfo::SetVolume:
+    {
+        std::wstring arg0 = selection.args[0];
+        itemStr = translator->TranslateAndReplace(
+            VolumeActionString(selection), arg0);
+        break;
+    }
+
+    case HotkeyInfo::EjectDrive:
+        itemStr = translator->TranslateAndReplace(
+            L"Eject Drive: {1}",
+            selection.args[0]);
+        break;
+
+    case HotkeyInfo::MediaKey:
+        itemStr = translator->TranslateAndReplace(
+            L"Media Key: {1}",
+            translator->Translate(selection.args[0]));
+        break;
+
+    case HotkeyInfo::Run:
+        itemStr = translator->TranslateAndReplace(
+            L"Run: {1}",
+            selection.args[0]);
+        break;
+    }
+
+    _keyList.ItemText(index, 1, itemStr);
+}
+
+std::wstring Hotkeys::VolumeActionString(HotkeyInfo &selection) {
+    int action = selection.action;
+    HotkeyInfo::VolumeKeyArgTypes type = HotkeyInfo::VolumeArgType(selection);
+    if (type < 0) {
+        CLOG(L"ERROR: No args set!");
+        return L"";
+    }
+
+    std::wstring itemStr = HotkeyInfo::ActionNames[action];
+
+    if (selection.args[0] == L"") {
+        return itemStr;
+    }
+
+    switch ((HotkeyInfo::HotkeyActions) action) {
+    case HotkeyInfo::IncreaseVolume:
+        if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
+            itemStr = L"Increase Volume {1}%";
+        } else {
+            itemStr = L"Increase Volume {1} units";
+        }
+        break;
+
+    case HotkeyInfo::DecreaseVolume:
+        if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
+            itemStr = L"Decrease Volume {1}%";
+        } else {
+            itemStr = L"Decrease Volume {1} units";
+        }
+        break;
+
+    case HotkeyInfo::SetVolume:
+        if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
+            itemStr = L"Set Volume: {1}%";
+        } else {
+            itemStr = L"Set Volume: {1} units";
+        }
+        break;
+    }
+
+    return itemStr;
+}
+
+void Hotkeys::LoadActionParameters(HotkeyInfo &selection) {
     bool showLabel = false;
     bool showCheck = false;
     bool showCombo = false;
     bool showEdit = false;
     bool showButton = false;
 
+    int action = selection.action;
     LanguageTranslator *translator = Settings::Instance()->Translator();
 
     /* Restore things to their default state */
@@ -185,8 +281,9 @@ void Hotkeys::LoadActionParameters(int action, HotkeyInfo &selection) {
         for (std::wstring keys : HotkeyInfo::MediaKeyNames) {
             _argCombo.AddItem(translator->Translate(keys));
         }
+
         if (selection.HasArgs()) {
-            _argCombo.Select(selection.args[0]);
+            _argCombo.Select(translator->Translate(selection.args[0]));
         }
 
         showLabel = true;
@@ -332,9 +429,15 @@ bool Hotkeys::OnArgComboChange() {
         break;
 
     case HotkeyInfo::EjectDrive:
+        current->AllocateArg(0);
+        /* We can place the selected string directly into the args */
+        current->args[0] = _argCombo.Selection();
+        break;
+
     case HotkeyInfo::MediaKey:
         current->AllocateArg(0);
-        current->args[0] = _argCombo.Selection();
+        current->args[0]
+            = HotkeyInfo::MediaKeyNames[_argCombo.SelectionIndex()];
         break;
     }
 
@@ -418,6 +521,9 @@ void Hotkeys::UpdateEditArgument() {
         }
         break;
     }
+
+    /* Refresh the action display with the value that was entered */
+    LoadAction(_listSelection, *current);
 }
 
 void Hotkeys::DefaultArgControlStates() {

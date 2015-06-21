@@ -18,7 +18,9 @@ private:
 
     void LoadSelection();
     void LoadSelection(int index);
-    void LoadActionParameters(int action, HotkeyInfo &selection);
+    void LoadAction(int index, HotkeyInfo &selection);
+    void LoadActionParameters(HotkeyInfo &selection);
+    std::wstring VolumeActionString(HotkeyInfo &selection);
 
     void DefaultArgControlStates();
     void VolumeArgControlStates(HotkeyInfo &selection);

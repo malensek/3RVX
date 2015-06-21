@@ -32,6 +32,11 @@ std::vector<unsigned short> HotkeyInfo::MediaKeyVKs = {
     VK_MEDIA_PREV_TRACK,
 };
 
+HotkeyInfo::HotkeyInfo() :
+_cache(false) {
+
+}
+
 HotkeyInfo::VolumeKeyArgTypes HotkeyInfo::VolumeArgType(HotkeyInfo &hki) {
     if (hki.HasArgs() == false) {
         return VolumeKeyArgTypes::NoArgs;
@@ -47,7 +52,7 @@ HotkeyInfo::VolumeKeyArgTypes HotkeyInfo::VolumeArgType(HotkeyInfo &hki) {
 }
 
 int HotkeyInfo::ArgToInt(unsigned int argIdx) {
-    if (_intArgs.count(argIdx) > 0) {
+    if (_cache && _intArgs.count(argIdx) > 0) {
         return _intArgs[argIdx];
     }
 
@@ -55,13 +60,15 @@ int HotkeyInfo::ArgToInt(unsigned int argIdx) {
     int i;
     str >> i;
 
-    _intArgs[argIdx] = i;
+    if (_cache) {
+        _intArgs[argIdx] = i;
+    }
 
     return i;
 }
 
 double HotkeyInfo::ArgToDouble(unsigned int argIdx) {
-    if (_doubleArgs.count(argIdx) > 0) {
+    if (_cache && _doubleArgs.count(argIdx) > 0) {
         return _doubleArgs[argIdx];
     }
 
@@ -69,7 +76,9 @@ double HotkeyInfo::ArgToDouble(unsigned int argIdx) {
     double d;
     str >> d;
 
-    _doubleArgs[argIdx] = d;
+    if (_cache) {
+        _doubleArgs[argIdx] = d;
+    }
 
     return d;
 }
@@ -92,6 +101,14 @@ void HotkeyInfo::AllocateArg(unsigned int argIdx) {
         return;
     }
     args.resize(newSize);
+}
+
+void HotkeyInfo::EnableArgCache() {
+    _cache = true;
+}
+
+void HotkeyInfo::DisableArgCache() {
+    _cache = false;
 }
 
 void HotkeyInfo::ClearArgCache() {

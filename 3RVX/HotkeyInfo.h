@@ -39,6 +39,8 @@ public:
     static VolumeKeyArgTypes VolumeArgType(HotkeyInfo &hki);
 
 public:
+    HotkeyInfo();
+
     int keyCombination = 0;
     int action = -1;
     std::vector<std::wstring> args;
@@ -58,11 +60,15 @@ public:
     bool HasArgs();
     bool HasArg(unsigned int argIdx);
     void AllocateArg(unsigned int argIdx);
+
+    void EnableArgCache();
+    void DisableArgCache();
     void ClearArgCache();
 
     std::wstring ToString();
 
 private:
+    bool _cache;
     std::map<int, int> _intArgs;
     std::map<int, double> _doubleArgs;
 };

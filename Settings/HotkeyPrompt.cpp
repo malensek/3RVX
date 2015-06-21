@@ -1,7 +1,9 @@
 #include "HotkeyPrompt.h"
 
 #include "../3RVX/Error.h"
+#include "../3RVX/LanguageTranslator.h"
 #include "../3RVX/Logger.h"
+#include "../3RVX/Settings.h"
 
 #include "KeyGrabber.h"
 #include "resource.h"
@@ -57,12 +59,35 @@ void HotkeyPrompt::Show(HWND parent, HINSTANCE hInstance) {
         parent, &HotkeyPrompt::DialogProc);
 }
 
+void HotkeyPrompt::Translate(HWND hwndDlg) {
+    Settings *settings = Settings::Instance();
+    LanguageTranslator *translator = settings->Translator();
+    wchar_t text[1024];
+    std::wstring str;
+
+    GetWindowText(hwndDlg, text, 1024);
+    str = std::wstring(text);
+    str = translator->Translate(str);
+    SetWindowText(hwndDlg, str.c_str());
+
+    GetDlgItemText(hwndDlg, LBL_PROMPT, text, 1024);
+    str = std::wstring(text);
+    str = translator->Translate(str);
+    SetDlgItemText(hwndDlg, LBL_PROMPT, str.c_str());
+
+    GetDlgItemText(hwndDlg, BTN_CANCEL, text, 1024);
+    str = std::wstring(text);
+    str = translator->Translate(str);
+    SetDlgItemText(hwndDlg, BTN_CANCEL, str.c_str());
+}
+
 INT_PTR CALLBACK HotkeyPrompt::DialogProc(
         HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     unsigned short nCode, ctrlId;
 
     switch (uMsg) {
     case WM_INITDIALOG:
+        Translate(hwndDlg);
         KeyGrabber::Instance()->SetHwnd(hwndDlg);
         KeyGrabber::Instance()->Grab();
         break;

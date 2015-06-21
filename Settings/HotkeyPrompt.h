@@ -14,6 +14,8 @@ protected:
     static HWND _parent;
 
     HotkeyPrompt();
+    static void Translate(HWND hwndDlg);
+
     static INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg,
         WPARAM wParam, LPARAM lParam);
     static LRESULT CALLBACK WndProc(HWND hWnd, UINT message,

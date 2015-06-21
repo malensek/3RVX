@@ -51,8 +51,6 @@ void HotkeyPrompt::Show(HWND parent, HINSTANCE hInstance) {
         if (_hWnd == NULL) {
             throw SYSERR_CREATEWINDOW;
         }
-
-        EnableWindow(parent, FALSE);
     }
 
     DialogBox(_hInstance, MAKEINTRESOURCE(IDD_HOTKEYPROMPT),

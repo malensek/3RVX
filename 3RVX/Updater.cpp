@@ -11,8 +11,24 @@
 #include "Logger.h"
 
 bool Updater::NewerVersionAvailable() {
-    std::pair<int, int> version = RemoteVersion();
-    CLOG(L"Remote version: %d.%d", version.first, version.second);
+    std::pair<int, int> remote = RemoteVersion();
+    std::pair<int, int> local = MainAppVersion();
+    CLOG(L"Remote version: %d.%d\n Local version: %d.%d",
+        remote.first, remote.second,
+        local.first, local.second);
+
+    if (remote.first == 0 && remote.second == 0
+        || local.first == 0 && local.second == 0) {
+        /* One of the version checks failed, so say that there is no new
+         * version. No need to bother the user with (hopefully) temporary
+         * errors. */
+        return false;
+    }
+
+    if (remote.first > local.first || remote.second > local.second) {
+        return true;
+    }
+
     return false;
 }
 

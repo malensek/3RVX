@@ -1,10 +1,12 @@
 #include "Updater.h"
 
+#pragma comment(lib, "Version.lib")
 #pragma comment(lib, "wininet.lib")
 #include <Windows.h>
 #include <WinInet.h>
 #include <sstream>
 
+#include "Settings.h"
 #include "StringUtils.h"
 #include "Logger.h"
 
@@ -12,6 +14,49 @@ bool Updater::NewerVersionAvailable() {
     std::pair<int, int> version = RemoteVersion();
     CLOG(L"Remote version: %d.%d", version.first, version.second);
     return false;
+}
+
+std::pair<int, int> Updater::MainAppVersion() {
+    std::wstring mainExe = Settings::Instance()->MainApp();
+    BOOL result;
+    std::pair<int, int> version = std::pair<int, int>(0, 0);
+
+    DWORD size = GetFileVersionInfoSize(mainExe.c_str(), NULL);
+    if (size == 0) {
+        CLOG(L"Could not determine version info size");
+        return version;
+    }
+
+    unsigned char *block = new unsigned char[size];
+    result = GetFileVersionInfo(mainExe.c_str(), NULL, size, block);
+    if (result == 0) {
+        CLOG(L"Failed to retrieve file version info");
+        delete[] block;
+        return version;
+    }
+
+    unsigned int dataSz;
+    VS_FIXEDFILEINFO *vers;
+    result = VerQueryValue(block, L"\\", (void **) &vers, &dataSz);
+    if (result == 0) {
+        CLOG(L"Could not query root block for version info");
+        delete[] block;
+        return version;
+    }
+
+    if (vers->dwSignature != 0xFEEF04BD) {
+        CLOG(L"Invalid version signature");
+        delete[] block;
+        return version;
+    }
+
+    unsigned long verl = vers->dwProductVersionMS;
+    int hi = (verl >> 16) & 0xFF;
+    int lo = verl & 0xFF;
+    version = std::pair<int, int>(hi, lo);
+
+    delete[] block;
+    return version;
 }
 
 std::pair<int, int> Updater::RemoteVersion() {

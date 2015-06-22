@@ -126,6 +126,7 @@
     <ClInclude Include="OSD\VolumeOSD.h" />
     <ClInclude Include="Slider\VolumeSlider.h" />
     <ClInclude Include="LanguageTranslator.h" />
+    <ClInclude Include="Updater.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="OSD\VolumeOSD.cpp" />
     <ClCompile Include="Slider\VolumeSlider.cpp" />
     <ClCompile Include="LanguageTranslator.cpp" />
+    <ClCompile Include="Updater.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3RVX.rc" />

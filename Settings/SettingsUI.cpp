@@ -73,7 +73,6 @@ int APIENTRY wWinMain(
     wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
     wcex.lpszMenuName = NULL;
     wcex.lpszClassName = L"3RVX SettingsUI";
-    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
     if (!RegisterClassEx(&wcex)) {
         CLOG(L"Could not register class");

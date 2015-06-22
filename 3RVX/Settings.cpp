@@ -28,6 +28,7 @@
 #define XML_SKIN "skin"
 #define XML_SOUNDS "soundEffects"
 
+const std::wstring Settings::MAIN_APP = L"3RVX.exe";
 const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
 const std::wstring Settings::LANG_DIR = L"Languages";
 const std::wstring Settings::SKIN_DIR = L"Skins";
@@ -114,6 +115,10 @@ std::wstring Settings::AppDir() {
 
 std::wstring Settings::SkinDir() {
     return AppDir() + L"\\" + SKIN_DIR;
+}
+
+std::wstring Settings::MainApp() {
+    return Settings::AppDir() + L"\\" + MAIN_APP;
 }
 
 std::wstring Settings::SettingsApp() {

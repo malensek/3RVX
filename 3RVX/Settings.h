@@ -35,6 +35,7 @@ public:
 
     static std::wstring AppDir();
     static std::wstring SkinDir();
+    static std::wstring MainApp();
     static std::wstring SettingsApp();
     static void LaunchSettingsApp();
 
@@ -107,6 +108,7 @@ private:
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 
 public:
+    static const std::wstring MAIN_APP;
     static const std::wstring SETTINGS_APP;
     static const std::wstring LANG_DIR;
     static const std::wstring SKIN_DIR;

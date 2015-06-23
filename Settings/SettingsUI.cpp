@@ -59,7 +59,6 @@ int APIENTRY wWinMain(
     Settings *settings = Settings::Instance();
     settings->Load();
 
-    hInstance = hInstance;
 
     WNDCLASSEX wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);

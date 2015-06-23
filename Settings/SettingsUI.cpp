@@ -42,7 +42,6 @@ Tab *tabs[] = { &general, &display, &hotkeys };
 #define XOFFSET 70
 #define YOFFSET 20
 
-HINSTANCE hInstance = NULL;
 HWND mainWnd = NULL;
 
 int APIENTRY wWinMain(
@@ -59,22 +58,16 @@ int APIENTRY wWinMain(
     Settings *settings = Settings::Instance();
     settings->Load();
 
-
-    WNDCLASSEX wcex;
+    WNDCLASSEX wcex = { 0 };
     wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = NULL;
     wcex.lpfnWndProc = WndProc;
-    wcex.cbClsExtra = NULL;
-    wcex.cbWndExtra = NULL;
     wcex.hInstance = hInstance;
     wcex.hIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_SETTINGS));
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
-    wcex.lpszMenuName = NULL;
     wcex.lpszClassName = L"3RVX SettingsUI";
 
-    if (!RegisterClassEx(&wcex)) {
-        CLOG(L"Could not register class");
+    if (RegisterClassEx(&wcex) == 0) {
+        CLOG(L"Could not register class: %d", GetLastError());
         return EXIT_FAILURE;
     }
 

@@ -33,6 +33,22 @@ public:
     void LoadEmptySettings();
     int Save();
 
+    /// <summary>
+    /// Determines where program settings are stored. If this is an installed
+    /// version of the program, then the settings are in
+    /// %APPDATA%\3RVX\
+    /// <p>
+    /// If this is a portable installation of the program, the settings are
+    /// stored in the same directory as the program executable.
+    /// </summary>
+    std::wstring SettingsDir();
+
+    /// <summary>Ensures the settings directory has been created.</summary>
+    void CreateSettingsDir();
+
+    /// <summary>Retrieves the location of the settings file.</summary>
+    std::wstring SettingsFile();
+
     static std::wstring AppDir();
     static std::wstring SkinDir();
     static std::wstring MainApp();
@@ -110,12 +126,14 @@ private:
 public:
     static const std::wstring MAIN_APP;
     static const std::wstring SETTINGS_APP;
+    static const std::wstring SETTINGS_FILE;
     static const std::wstring LANG_DIR;
     static const std::wstring SKIN_DIR;
 
     /* Default settings */
     static const bool DefaultOnTop = true;
-    static const AnimationTypes::HideAnimation DefaultHideAnim = AnimationTypes::Fade;
+    static const AnimationTypes::HideAnimation DefaultHideAnim
+        = AnimationTypes::Fade;
     static const bool DefaultHideFullscreen = false;
     static const int DefaultHideSpeed = 765;
     static const int DefaultHideTime = 800;

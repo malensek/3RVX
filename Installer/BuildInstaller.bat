@@ -23,4 +23,19 @@ candle -pedantic -dProductVersion=%version%.0.0 ./3RVX.wxs ./3RVXComponents.wxs
 light -b ../Release -ext WixUIExtension ./3RVX.wixobj ./3RVXComponents.wixobj -o 3RVX.msi
 del 3RVX.wixobj 3RVX.wixpdb 3RVXComponents.wxs 3RVXComponents.wixobj
 
-@PAUSE
+@ECHO OFF
+ECHO.
+ECHO.
+IF EXIST "7za.exe" (
+	ECHO Creating .zip distribution...
+	ECHO.
+	ECHO ON
+	del 3RVX-%version%.zip
+	copy "..\Assets\EmptySettings.xml" "..\Release\Settings.xml"
+	7za a -tzip -mx9 3RVX-%version%.zip ../Release/*
+)
+
+@ECHO OFF
+ECHO.
+
+PAUSE

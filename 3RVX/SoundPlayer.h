@@ -9,12 +9,14 @@ struct IGraphBuilder;
 struct IMediaControl;
 struct IMediaEventEx;
 struct IMediaSeeking;
+struct IUnknown;
 
 class SoundPlayer {
 public:
     SoundPlayer(std::wstring filePath);
     ~SoundPlayer();
 
+    /// <summary>Plays the sound associated with this SoundPlayer.</summary>
     bool Play();
 
 private:
@@ -23,11 +25,15 @@ private:
     IMediaEventEx *_mediaEv;
     IMediaSeeking *_mediaSeek;
 
-    bool _playing;
+    bool _ready;
+
+    int _repeat;
+    std::mutex _repeatMutex;
 
     std::thread _thread;
     std::condition_variable _cv;
     std::mutex _mutex;
 
     void PlayerThread();
+    void SafeRelease(IUnknown *p);
 };

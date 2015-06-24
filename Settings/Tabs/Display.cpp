@@ -2,12 +2,12 @@
 
 #include <CommCtrl.h>
 
-#include "../3RVX/DisplayManager.h"
-#include "../3RVX/LanguageTranslator.h"
-#include "../3RVX/Logger.h"
-#include "../3RVX/Settings.h"
+#include "../../3RVX/DisplayManager.h"
+#include "../../3RVX/LanguageTranslator.h"
+#include "../../3RVX/Logger.h"
+#include "../../3RVX/Settings.h"
 
-#include "resource.h"
+#include "../resource.h"
 
 void Display::Initialize() {
     using std::placeholders::_1;

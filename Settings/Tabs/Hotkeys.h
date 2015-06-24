@@ -2,9 +2,13 @@
 
 #include "Tab.h"
 
-#include "../3RVX/HotkeyInfo.h"
+#include "../../3RVX/HotkeyInfo.h"
+#include "../HotkeySettings/HotkeySettings.h"
 
 class Hotkeys : public Tab {
+
+friend class HotkeySettings;
+
 public:
     virtual void SaveSettings();
 
@@ -12,8 +16,9 @@ protected:
     virtual void Initialize();
     virtual void LoadSettings();
 
-private:
+protected:
     int _listSelection = -1;
+    HotkeySettings *_currentHkSettings;
     std::vector<HotkeyInfo> _keyInfo;
 
     void LoadSelection();
@@ -23,6 +28,12 @@ private:
     std::wstring VolumeActionString(HotkeyInfo &selection);
 
     void DefaultArgControlStates();
+    void UpdateArgControlStates(
+        bool label = false,
+        bool check = false,
+        bool combo = false,
+        bool edit = false,
+        bool button = false);
     void VolumeArgControlStates(HotkeyInfo &selection);
     void UpdateEditArgument();
     std::wstring OpenFileDialog();
@@ -41,12 +52,11 @@ private:
     bool OnArgCheckChange();
     bool OnArgButtonClick();
 
-private:
+protected:
     /* Controls: */
     ListView _keyList;
     Button _add;
     Button _remove;
-
 
     GroupBox _editorGroup;
     Label _keysLabel;
@@ -60,7 +70,7 @@ private:
     EditBox _argEdit;
     Button _argButton;
 
-private:
+protected:
     /* Strings: */
     std::wstring _hotkeysColumnStr = L"Hotkeys";
     std::wstring _actionColumnStr = L"Action";

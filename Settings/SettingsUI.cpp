@@ -29,10 +29,10 @@ typedef struct DLGTEMPLATEEX
 #include "UITranslator.h"
 
 /* Tabs*/
-#include "Tab.h"
-#include "General.h"
-#include "Display.h"
-#include "Hotkeys.h"
+#include "Tabs/Tab.h"
+#include "Tabs/General.h"
+#include "Tabs/Display.h"
+#include "Tabs/Hotkeys.h"
 General general;
 Display display;
 Hotkeys hotkeys;

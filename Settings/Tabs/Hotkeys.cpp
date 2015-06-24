@@ -2,16 +2,16 @@
 
 #include <CommCtrl.h>
 
-#include "../3RVX/HotkeyInfo.h"
-#include "../3RVX/HotkeyManager.h"
-#include "../3RVX/LanguageTranslator.h"
-#include "../3RVX/Logger.h"
-#include "../3RVX/Settings.h"
-#include "../3RVX/SkinInfo.h"
+#include "../../3RVX/HotkeyInfo.h"
+#include "../../3RVX/HotkeyManager.h"
+#include "../../3RVX/LanguageTranslator.h"
+#include "../../3RVX/Logger.h"
+#include "../../3RVX/Settings.h"
+#include "../../3RVX/SkinInfo.h"
 
 #include "HotkeyPrompt.h"
 #include "KeyGrabber.h"
-#include "resource.h"
+#include "../resource.h"
 
 void Hotkeys::Initialize() {
     using std::placeholders::_1;
@@ -125,9 +125,10 @@ void Hotkeys::LoadSelection(int index) {
     _action.Select(-1);
     int action = selection.action;
     if (action >= 0) {
+        _action.Select(action);
+        //_currentHkSettings->LoadHotkeyInfo(selection);
         LoadAction(index, selection);
         LoadActionParameters(selection);
-        _action.Select(action);
     } else {
         DefaultArgControlStates();
     }
@@ -424,6 +425,7 @@ bool Hotkeys::OnArgComboChange() {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
     case HotkeyInfo::SetVolume:
+        UpdateEditArgument();
         current->AllocateArg(1);
         current->args[1] = std::to_wstring(_argCombo.SelectionIndex());
         break;

@@ -90,12 +90,6 @@
     <ClInclude Include="UITranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HotkeySettings\HotkeySettings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HotkeySettings\Eject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tabs\Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -112,6 +106,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tabs\Tab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\HotkeySettings\Eject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\HotkeySettings\HotkeySettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -176,12 +176,6 @@
     <ClCompile Include="UITranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HotkeySettings\Eject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HotkeySettings\HotkeySettings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Tabs\Display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -198,6 +192,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tabs\Tab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\HotkeySettings\Eject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\HotkeySettings\HotkeySettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

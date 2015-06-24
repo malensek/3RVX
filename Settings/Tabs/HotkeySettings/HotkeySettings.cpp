@@ -1,6 +1,6 @@
 #include "HotkeySettings.h"
 
-#include "../../3RVX/Settings.h"
+#include "../../../3RVX/Settings.h"
 
 HotkeySettings::HotkeySettings(Hotkeys *hk) {
     _hkTab = hk;

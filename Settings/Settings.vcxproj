@@ -103,8 +103,8 @@
     <ClInclude Include="Controls\ListView.h" />
     <ClInclude Include="Controls\Spinner.h" />
     <ClInclude Include="Controls\EditBox.h" />
-    <ClInclude Include="HotkeySettings\Eject.h" />
-    <ClInclude Include="HotkeySettings\HotkeySettings.h" />
+    <ClInclude Include="Tabs\HotkeySettings\Eject.h" />
+    <ClInclude Include="Tabs\HotkeySettings\HotkeySettings.h" />
     <ClInclude Include="Tabs\HotkeyPrompt.h" />
     <ClInclude Include="Tabs\KeyGrabber.h" />
     <ClInclude Include="targetver.h" />
@@ -140,8 +140,8 @@
     <ClCompile Include="Tabs\General.cpp" />
     <ClCompile Include="Tabs\HotkeyPrompt.cpp" />
     <ClCompile Include="Tabs\Hotkeys.cpp" />
-    <ClCompile Include="HotkeySettings\Eject.cpp" />
-    <ClCompile Include="HotkeySettings\HotkeySettings.cpp" />
+    <ClCompile Include="Tabs\HotkeySettings\Eject.cpp" />
+    <ClCompile Include="Tabs\HotkeySettings\HotkeySettings.cpp" />
     <ClCompile Include="Tabs\KeyGrabber.cpp" />
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="Tabs\Tab.cpp" />

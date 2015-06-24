@@ -16,5 +16,4 @@ void Eject::LoadHotkeyInfo(HotkeyInfo &hki) {
         ActionDescription(_translator->Translate(L"Eject Drive"));
     }
 
-
 }

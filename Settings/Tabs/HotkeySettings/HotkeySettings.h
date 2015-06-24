@@ -2,9 +2,9 @@
 
 #include <string>
 
-#include "../../3RVX/HotkeyInfo.h"
-#include "../../3RVX/LanguageTranslator.h"
-#include "../Tabs/Hotkeys.h"
+#include "../../../3RVX/HotkeyInfo.h"
+#include "../../../3RVX/LanguageTranslator.h"
+#include "../Hotkeys.h"
 
 class Hotkeys;
 

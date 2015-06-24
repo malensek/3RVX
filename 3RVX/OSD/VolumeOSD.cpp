@@ -182,9 +182,10 @@ void VolumeOSD::MeterLevels(float level) {
 }
 
 void VolumeOSD::MeterChangeCallback(int units) {
-    if (_soundPlayer) {
-        _soundPlayer->Play();
-    }
+    /* This method is called each time the callback meter changes by at least
+     * 1 volume unit (as defined by the skin's default unit amount). The
+     * callback meter is also used for incrementing/decrementing the volume by
+     * skin units. */
 }
 
 void VolumeOSD::Hide() {
@@ -369,6 +370,10 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 MeterLevels(v);
                 _mWnd.Show();
                 _muteWnd.Hide(false);
+
+                if (_soundPlayer) {
+                    _soundPlayer->Play();
+                }
             }
             HideOthers(Volume);
         }

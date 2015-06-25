@@ -112,8 +112,11 @@ HotkeyInfo *Hotkeys::CurrentHotkeyInfo() {
 void Hotkeys::LoadSelection() {
     int idx = _keyList.Selection();
     if (idx < 0) {
+        _keys.Text(L"");
         _keys.Disable();
+        _action.Select(-1);
         _action.Disable();
+        DefaultArgControlStates();
         return;
     }
     LoadSelection(idx);

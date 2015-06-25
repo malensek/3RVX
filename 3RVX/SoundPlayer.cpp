@@ -55,10 +55,10 @@ SoundPlayer::~SoundPlayer() {
     SafeRelease(_graphBuilder);
 }
 
-bool SoundPlayer::Play() {
+void SoundPlayer::Play() {
     if (!_ready) {
         CLOG(L"Error: sound player not ready");
-        return true;
+        return;
     }
 
     _repeatMutex.lock();

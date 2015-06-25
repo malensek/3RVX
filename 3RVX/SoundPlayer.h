@@ -17,7 +17,7 @@ public:
     ~SoundPlayer();
 
     /// <summary>Plays the sound associated with this SoundPlayer.</summary>
-    bool Play();
+    void Play();
 
 private:
     IGraphBuilder *_graphBuilder;

@@ -392,6 +392,10 @@ std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
             hki.args.push_back(StringUtils::Widen(argStr));
         }
 
+        if (hki.Valid() == false) {
+            continue;
+        }
+
         /* Whew, we made it! */
         CLOG(L"%s", hki.ToString().c_str());
         keyMappings[combination] = hki;

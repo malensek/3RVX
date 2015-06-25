@@ -392,6 +392,7 @@ std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
             hki.args.push_back(StringUtils::Widen(argStr));
         }
 
+        /* Do a validity check on the finished HKI object */
         if (hki.Valid() == false) {
             continue;
         }
@@ -409,6 +410,10 @@ void Settings::Hotkeys(std::vector<HotkeyInfo> hotkeys) {
     hkElem->DeleteChildren();
 
     for (HotkeyInfo hotkey : hotkeys) {
+        if (hotkey.Valid() == false) {
+            continue;
+        }
+
         tinyxml2::XMLElement *hk = _xml.NewElement("hotkey");
 
         hk->SetAttribute("combination", hotkey.keyCombination);

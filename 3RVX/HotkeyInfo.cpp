@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include "HotkeyManager.h"
+#include "Logger.h"
 
 std::vector<std::wstring> HotkeyInfo::ActionNames = {
     L"Increase Volume",
@@ -114,6 +115,61 @@ void HotkeyInfo::DisableArgCache() {
 void HotkeyInfo::ClearArgCache() {
     _intArgs.clear();
     _doubleArgs.clear();
+}
+
+bool HotkeyInfo::Valid() {
+    if (keyCombination <= 0) {
+        CLOG(L"Invalid hotkey: no key combination");
+        return false;
+    }
+    
+    if (action < 0 || action > (int) ActionNames.size()) {
+        CLOG(L"Invalid hotkey action");
+        return false;
+    }
+
+    switch (action) {
+    case HotkeyInfo::IncreaseVolume:
+    case HotkeyInfo::DecreaseVolume:
+    case HotkeyInfo::SetVolume: {
+        if (args[0] == L"") {
+            CLOG(L"Invalid hotkey: no first argument");
+            return false;
+        }
+
+        int amount = ArgToInt(0);
+        if (amount < 0 || amount > 100) {
+            /* Amounts of 0 - 100 volume units or % are allowed */
+            CLOG(L"Invalid hotkey: volume amount out of range");
+            return false;
+        }
+
+        if (action != HotkeyInfo::SetVolume && amount == 0) {
+            CLOG(L"Invalid hotkey: volume increment must be nonzero");
+            return false;
+        }
+
+        if (HasArg(1)) {
+            int type = ArgToInt(1);
+            if (type < 0 || type > 2) {
+                CLOG(L"Invalid hotkey: unknown increment type");
+                return false;
+            }
+        }
+            break;
+    }
+
+    case HotkeyInfo::EjectDrive:
+    case HotkeyInfo::MediaKey:
+    case HotkeyInfo::Run:
+        if (HasArgs() == false) {
+            CLOG(L"Invalid hotkey: argument required");
+            return false;
+        }
+        break;
+    }
+
+    return true;
 }
 
 std::wstring HotkeyInfo::ToString() {

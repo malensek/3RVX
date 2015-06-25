@@ -65,6 +65,8 @@ public:
     void DisableArgCache();
     void ClearArgCache();
 
+    bool Valid();
+
     std::wstring ToString();
 
 private:

@@ -15,7 +15,6 @@ protected:
     virtual void LoadSettings();
 
 protected:
-    int _listSelection = -1;
     std::vector<HotkeyInfo> _keyInfo;
     LanguageTranslator *_translator;
 
@@ -24,6 +23,7 @@ protected:
     void LoadSelection();
     void LoadSelection(int index);
     void LoadAction(int index, HotkeyInfo &selection);
+    std::wstring ActionString(HotkeyInfo &selection);
     std::wstring VolumeActionString(HotkeyInfo &selection);
 
     void DefaultArgControlStates();

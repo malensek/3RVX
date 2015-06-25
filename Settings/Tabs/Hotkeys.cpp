@@ -91,11 +91,9 @@ void Hotkeys::SaveSettings() {
         return;
     }
 
-    /* If the edit box was the last thing the user touched, then we need to
-     * manually sync the changes here. */
-    UpdateEditArgument();
-
     CLOG(L"Saving: Hotkeys");
+
+
     Settings *settings = Settings::Instance();
     settings->Hotkeys(_keyInfo);
 }
@@ -156,9 +154,8 @@ void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
         return;
     }
 
-    /* Set to the default string (action with no parameters) */
-    std::wstring actionStr = _translator->Translate(
-        HotkeyInfo::ActionNames[action]);
+    /* First, set the action description */
+    _keyList.ItemText(index, 1, ActionString(selection));
 
     /* Default visiblities */
     bool showLabel = false;
@@ -170,29 +167,16 @@ void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
     switch ((HotkeyInfo::HotkeyActions) action) {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
-    case HotkeyInfo::SetVolume: {
-        if (selection.HasArg(0)) {
-            std::wstring arg0 = selection.args[0];
-            actionStr = _translator->TranslateAndReplace(
-                VolumeActionString(selection), arg0);
-        }
-
         VolumeArgControlStates(selection);
         showCheck = true; showCombo = true; showEdit = true;
-
-        if (action == HotkeyInfo::SetVolume) {
-            /* Special case; no checkbox */
-            _argLabel.Text(_amountVolArgStr);
-            showLabel = true; showCheck = false;
-        }
         break;
-    }
 
-    case HotkeyInfo::EjectDrive: {
-        actionStr = _translator->TranslateAndReplace(
-            L"Eject Drive: {1}",
-            selection.args[0]);
-
+    case HotkeyInfo::SetVolume:
+        VolumeArgControlStates(selection);
+        showLabel = true; showCombo = true; showEdit = true;
+        break;
+ 
+    case HotkeyInfo::EjectDrive:
         _argLabel.Text(_driveArgStr);
         _argCombo.Width(_argCombo.EmSize() * 6);
         for (int i = 0; i < 26; ++i) {
@@ -206,13 +190,8 @@ void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
 
         showLabel = true; showCombo = true;
         break;
-    }
 
-    case HotkeyInfo::MediaKey: {
-        actionStr = _translator->TranslateAndReplace(
-            L"Media Key: {1}",
-            _translator->Translate(selection.args[0]));
-
+    case HotkeyInfo::MediaKey:
         _argLabel.Text(_keyArgStr);
         for (std::wstring keys : HotkeyInfo::MediaKeyNames) {
             _argCombo.AddItem(_translator->Translate(keys));
@@ -224,13 +203,8 @@ void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
 
         showLabel = true; showCombo = true;
         break;
-    }
 
-    case HotkeyInfo::Run: {
-        actionStr = _translator->TranslateAndReplace(
-            L"Run: {1}",
-            selection.args[0]);
-
+    case HotkeyInfo::Run:
         _argLabel.Text(_pathArgStr);
         _argButton.Text(L"…");
         _argButton.Width(_argButton.EmSize() * 3);
@@ -238,6 +212,7 @@ void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
         _argEdit.X(_action.X());
         _argEdit.Width(_keys.Width() - _argButton.Width() - _argEdit.EmSize());
         _argButton.PlaceRightOf(_argEdit);
+
         if (selection.HasArgs()) {
             _argEdit.Text(selection.args[0]);
         }
@@ -245,10 +220,6 @@ void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
         showLabel = true; showEdit = true; showButton = true;
         break;
     }
-    }
-
-    /* First, set the action description */
-    _keyList.ItemText(index, 1, actionStr);
 
     /* Update control visibility */
     _argLabel.Visible(showLabel);
@@ -266,83 +237,95 @@ void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
     }
 }
 
-std::wstring Hotkeys::VolumeActionString(HotkeyInfo &selection) {
-    int action = selection.action;
-    HotkeyInfo::VolumeKeyArgTypes type = HotkeyInfo::VolumeArgType(selection);
-    if (type < 0) {
-        CLOG(L"ERROR: No args set!");
+std::wstring Hotkeys::ActionString(HotkeyInfo &selection) {
+    HotkeyInfo::HotkeyActions action
+        = (HotkeyInfo::HotkeyActions) selection.action;
+
+    if (action < 0) {
+        /* Selection has no action */
         return L"";
     }
 
-    std::wstring itemStr = HotkeyInfo::ActionNames[action];
+    /* Set to the default string (action with no parameters) */
+    std::wstring actionStr = _translator->Translate(
+        HotkeyInfo::ActionNames[action]);
+
+    if (selection.HasArgs() == false) {
+        /* We're done */
+        return actionStr;
+    }
 
     if (selection.args[0] == L"") {
-        return itemStr;
+        /* Blank arg = no arg. */
+        return actionStr;
     }
 
-    switch ((HotkeyInfo::HotkeyActions) action) {
-    case HotkeyInfo::IncreaseVolume:
-        if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
-            itemStr = L"Increase Volume {1}%";
-        } else {
-            itemStr = L"Increase Volume {1} units";
-        }
-        break;
-
-    case HotkeyInfo::DecreaseVolume:
-        if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
-            itemStr = L"Decrease Volume {1}%";
-        } else {
-            itemStr = L"Decrease Volume {1} units";
-        }
-        break;
-
-    case HotkeyInfo::SetVolume:
-        if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
-            itemStr = L"Set Volume: {1}%";
-        } else {
-            itemStr = L"Set Volume: {1} units";
-        }
-        break;
-    }
-
-    return itemStr;
-}
-
-void Hotkeys::UpdateEditArgument() {
-    HotkeyInfo *current;
-    try {
-        current = &_keyInfo.at(_listSelection);
-    } catch (std::out_of_range e) {
-        return;
-    }
-
-    HotkeyInfo::HotkeyActions action
-        = (HotkeyInfo::HotkeyActions) _action.SelectionIndex();
-
-    switch (action) {
+    switch ((HotkeyInfo::HotkeyActions) selection.action) {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
     case HotkeyInfo::SetVolume:
-        if (_argEdit.Text() != L"") {
-            current->AllocateArg(0);
-            current->args[0] = _argEdit.Text();
-        }
+        actionStr = _translator->TranslateAndReplace(
+            VolumeActionString(selection),
+            selection.args[0]);
+        break;
+
+    case HotkeyInfo::EjectDrive:
+        actionStr = _translator->TranslateAndReplace(
+            L"Eject Drive: {1}",
+            selection.args[0]);
+        break;
+
+    case HotkeyInfo::MediaKey:
+        actionStr = _translator->TranslateAndReplace(
+            L"Media Key: {1}",
+            selection.args[0]);
         break;
 
     case HotkeyInfo::Run:
-        if (_argEdit.Text() != L"") {
-            current->AllocateArg(0);
-            current->args[0] = _argEdit.Text();
+        actionStr = _translator->TranslateAndReplace(
+            L"Run: {1}",
+            selection.args[0]);
+        break;
+    }
+
+    return actionStr;
+}
+
+std::wstring Hotkeys::VolumeActionString(HotkeyInfo &selection) {
+    std::wstring actionStr;
+    HotkeyInfo::VolumeKeyArgTypes type = HotkeyInfo::VolumeArgType(selection);
+
+    switch ((HotkeyInfo::HotkeyActions) selection.action) {
+    case HotkeyInfo::IncreaseVolume:
+        if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
+            actionStr = L"Increase Volume {1}%";
+        } else {
+            actionStr = L"Increase Volume {1} units";
+        }
+        break;
+
+    case HotkeyInfo::DecreaseVolume:
+        if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
+            actionStr = L"Decrease Volume {1}%";
+        } else {
+            actionStr = L"Decrease Volume {1} units";
+        }
+        break;
+
+    case HotkeyInfo::SetVolume:
+        if (type == HotkeyInfo::VolumeKeyArgTypes::Percentage) {
+            actionStr = L"Set Volume: {1}%";
+        } else {
+            actionStr = L"Set Volume: {1} units";
         }
         break;
     }
 
-    /* Refresh the action display with the value that was entered */
-    LoadAction(_listSelection, *current);
+    return actionStr;
 }
 
 void Hotkeys::DefaultArgControlStates() {
+    CLOG(L"Setting default control states");
     _argLabel.Visible(false);
     _argCheck.Visible(false);
     _argCombo.Visible(false);
@@ -422,14 +405,6 @@ void Hotkeys::OnKeyListItemChange(NMLISTVIEW *lv) {
 }
 
 void Hotkeys::OnKeyListSelectionChange(int index) {
-    if (_listSelection != -1) {
-        /* Update the edit control of the previously-selected item. This avoids
-         * constantly updating the key combination state as the user types. */
-        UpdateEditArgument();
-    }
-    /* Update with the new index */
-    _listSelection = index;
-
 #if ENABLE_3RVX_LOG != 0
     HotkeyInfo *current = &_keyInfo[index];
     CLOG(L"Selecting key combination %d:", index);
@@ -535,7 +510,6 @@ bool Hotkeys::OnArgComboChange() {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
     case HotkeyInfo::SetVolume:
-        UpdateEditArgument();
         current->AllocateArg(1);
         current->args[1] = std::to_wstring(_argCombo.SelectionIndex());
         break;
@@ -574,6 +548,7 @@ bool Hotkeys::OnArgCheckChange() {
         if (_argCheck.Checked() == false) {
             _argEdit.Clear();
             current->args.clear();
+            _keyList.ItemText(selectionIdx, 1, ActionString(*current));
         }
         break;
     }
@@ -585,9 +560,26 @@ bool Hotkeys::OnArgCheckChange() {
 }
 
 bool Hotkeys::OnArgEditTextChange() {
+    if (_argEdit.Enabled() == false || _argEdit.Visible() == false) {
+        return FALSE;
+    }
+
+    int currentIndex = _keyList.Selection();
     HotkeyInfo *current = CurrentHotkeyInfo();
     if (current == NULL) {
         return FALSE;
     }
 
+    switch ((HotkeyInfo::HotkeyActions) current->action) {
+    case HotkeyInfo::IncreaseVolume:
+    case HotkeyInfo::DecreaseVolume:
+    case HotkeyInfo::SetVolume:
+    case HotkeyInfo::Run:
+        current->AllocateArg(0);
+        current->args[0] = _argEdit.Text();
+        _keyList.ItemText(currentIndex, 1, ActionString(*current));
+        break;
+    }
+
+    return TRUE;
 }

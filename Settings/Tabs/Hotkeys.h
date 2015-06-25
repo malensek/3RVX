@@ -3,11 +3,9 @@
 #include "Tab.h"
 
 #include "../../3RVX/HotkeyInfo.h"
-#include "../HotkeySettings/HotkeySettings.h"
+#include "../../3RVX/LanguageTranslator.h"
 
 class Hotkeys : public Tab {
-
-friend class HotkeySettings;
 
 public:
     virtual void SaveSettings();
@@ -18,23 +16,19 @@ protected:
 
 protected:
     int _listSelection = -1;
-    HotkeySettings *_currentHkSettings;
     std::vector<HotkeyInfo> _keyInfo;
+    LanguageTranslator *_translator;
+
+    HotkeyInfo *CurrentHotkeyInfo();
 
     void LoadSelection();
     void LoadSelection(int index);
     void LoadAction(int index, HotkeyInfo &selection);
-    void LoadActionParameters(HotkeyInfo &selection);
     std::wstring VolumeActionString(HotkeyInfo &selection);
 
     void DefaultArgControlStates();
-    void UpdateArgControlStates(
-        bool label = false,
-        bool check = false,
-        bool combo = false,
-        bool edit = false,
-        bool button = false);
     void VolumeArgControlStates(HotkeyInfo &selection);
+
     void UpdateEditArgument();
     std::wstring OpenFileDialog();
 
@@ -48,9 +42,11 @@ private:
 
     bool OnKeysButtonClick();
     bool OnActionChange();
+
+    bool OnArgButtonClick();
     bool OnArgComboChange();
     bool OnArgCheckChange();
-    bool OnArgButtonClick();
+    bool OnArgEditTextChange();
 
 protected:
     /* Controls: */

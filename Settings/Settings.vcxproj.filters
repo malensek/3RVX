@@ -108,12 +108,6 @@
     <ClInclude Include="Tabs\Tab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tabs\HotkeySettings\Eject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tabs\HotkeySettings\HotkeySettings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp">
@@ -192,12 +186,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tabs\Tab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tabs\HotkeySettings\Eject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tabs\HotkeySettings\HotkeySettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

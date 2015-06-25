@@ -73,4 +73,6 @@ private:
     bool _cache;
     std::map<int, int> _intArgs;
     std::map<int, double> _doubleArgs;
+
+    void LogInvalid(std::wstring reason);
 };

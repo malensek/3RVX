@@ -119,12 +119,12 @@ void HotkeyInfo::ClearArgCache() {
 
 bool HotkeyInfo::Valid() {
     if (keyCombination <= 0) {
-        CLOG(L"Invalid hotkey: no key combination");
+        LogInvalid(L"No key combination");
         return false;
     }
     
     if (action < 0 || action > (int) ActionNames.size()) {
-        CLOG(L"Invalid hotkey action");
+        LogInvalid(L"Invalid action");
         return false;
     }
 
@@ -132,27 +132,31 @@ bool HotkeyInfo::Valid() {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
     case HotkeyInfo::SetVolume: {
+        if (HasArgs() == false) {
+            /* Don't do arg checking */
+            break;
+        }
+
         if (args[0] == L"") {
-            CLOG(L"Invalid hotkey: no first argument");
+            LogInvalid(L"No first argument");
             return false;
         }
 
         int amount = ArgToInt(0);
         if (amount < 0 || amount > 100) {
             /* Amounts of 0 - 100 volume units or % are allowed */
-            CLOG(L"Invalid hotkey: volume amount out of range");
+            LogInvalid(L"Volume amount out of range");
             return false;
         }
 
         if (action != HotkeyInfo::SetVolume && amount == 0) {
-            CLOG(L"Invalid hotkey: volume increment must be nonzero");
-            return false;
+            LogInvalid(L"Volume increment must be nonzero");
         }
 
         if (HasArg(1)) {
             int type = ArgToInt(1);
             if (type < 0 || type > 2) {
-                CLOG(L"Invalid hotkey: unknown increment type");
+                LogInvalid(L"Unknown volume increment type");
                 return false;
             }
         }
@@ -163,13 +167,17 @@ bool HotkeyInfo::Valid() {
     case HotkeyInfo::MediaKey:
     case HotkeyInfo::Run:
         if (HasArgs() == false) {
-            CLOG(L"Invalid hotkey: argument required");
+            LogInvalid(L"Argument required");
             return false;
         }
         break;
     }
 
     return true;
+}
+
+void HotkeyInfo::LogInvalid(std::wstring reason) {
+    CLOG(L"Invalid hotkey: %s\n%s", ToString().c_str(), reason.c_str());
 }
 
 std::wstring HotkeyInfo::ToString() {

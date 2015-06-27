@@ -88,6 +88,8 @@ void General::SaveSettings() {
     settings->SoundEffectsEnabled(_sounds.Checked());
 
     settings->CurrentSkin(_skin.Selection());
+
+    settings->LanguageName(_language.Selection());
 }
 
 bool General::RunOnStartup() {

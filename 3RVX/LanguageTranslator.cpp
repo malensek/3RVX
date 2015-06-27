@@ -154,4 +154,10 @@ const std::wstring LanguageTranslator::TranslateAndReplace(
     }
     trans.replace(strloc, 3, arg);
     return trans;
+}const std::wstring &LanguageTranslator::LanguageName() {
+    return _name;
+}
+
+const std::wstring &LanguageTranslator::Author() {
+    return _author;
 }

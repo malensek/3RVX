@@ -64,7 +64,12 @@ void General::LoadSettings() {
     std::list<std::wstring> languages = FindLanguages(
         settings->LanguagesDir().c_str());
     for (std::wstring language : languages) {
-        _language.AddItem(language);
+        int ext = language.find(L".xml");
+        if (ext == language.npos) {
+            continue;
+        }
+
+        _language.AddItem(language.substr(0, ext));
     }
     std::wstring currentLang = settings->LanguageName();
     _language.Select(currentLang);

@@ -102,6 +102,7 @@ bool DisplayManager::IsFullscreen(HWND hWnd) {
 
     CLOG(L"hresult: %d", hr);
 
+    return false;
 }
 
 MONITORINFO DisplayManager::Info(HMONITOR monitor) {

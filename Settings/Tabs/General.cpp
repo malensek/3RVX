@@ -37,10 +37,6 @@ void General::Initialize() {
 
     INIT_CONTROL(GRP_LANGUAGE, GroupBox, _languageGroup);
     INIT_CONTROL(CMB_LANG, ComboBox, _language);
-    _language.OnSelectionChange = [this]() {
-        // Handle language selection change 
-        return true;
-    };
 }
 
 void General::LoadSettings() {

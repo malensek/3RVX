@@ -43,6 +43,7 @@ public:
     void HideSpeed(int speed);
 
     std::wstring LanguageName();
+    void LanguageName(std::wstring name);
 
     std::wstring Monitor();
     void Monitor(std::wstring monitorName);

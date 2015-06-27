@@ -202,6 +202,11 @@ std::wstring Settings::LanguageName() {
     }
 }
 
+void Settings::LanguageName(std::wstring name) {
+    std::string nName = StringUtils::Narrow(name);
+    SetText(XML_LANGUAGE, nName);
+}
+
 bool Settings::AlwaysOnTop() {
     return GetEnabled(XML_ONTOP, DefaultOnTop);
 }

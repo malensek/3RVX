@@ -3,8 +3,6 @@
 #include "Logger.h"
 
 void FakeKeyboard::SimulateKeypress(unsigned short vk) {
-        vk = 'F';
-
         std::vector<unsigned short> mods = ModifiersDown();
 
         unsigned int inputs = mods.size() * 2 + 2;
@@ -26,7 +24,8 @@ void FakeKeyboard::SimulateKeypress(unsigned short vk) {
         }
 
         UINT result = SendInput(inputs, input, sizeof(INPUT));
-        CLOG(L"Simulated %d keyboard inputs", result);
+        CLOG(L"Simulating keypress: %x; %d keyboard inputs generated.",
+            vk, result);
         delete[] input;
 }
 
@@ -35,7 +34,7 @@ void FakeKeyboard::PopulateInput(INPUT &in, unsigned short vk, bool up) {
     in.type = INPUT_KEYBOARD;
     in.ki.wVk = vk;
     in.ki.wScan = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
-    in.ki.dwFlags = KEYEVENTF_SCANCODE;
+    in.ki.dwFlags = 0;
     in.ki.time = 0;
     in.ki.dwExtraInfo = GetMessageExtraInfo();
 

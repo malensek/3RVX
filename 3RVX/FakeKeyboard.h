@@ -6,6 +6,13 @@
 
 class FakeKeyboard {
 public:
+    /// <summary>
+    /// Simulates a keypress (key down, key up) of the given VK code. Any
+    /// modifier keys that are down when this method is called are synthetically
+    /// raised, the keypress is made, and then then modifiers are placed back
+    /// in their original state.
+    /// </summary>
+    /// <param name="vk">The virtual key code to 'press.'</param>
     static void SimulateKeypress(unsigned short vk);
 
 private:

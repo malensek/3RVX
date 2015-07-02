@@ -1,5 +1,6 @@
 #include "Settings.h"
 
+#include <ShlObj.h>
 #include <Shlwapi.h>
 #pragma comment(lib, "Shlwapi.lib")
 #include <algorithm>
@@ -28,7 +29,9 @@
 #define XML_SKIN "skin"
 #define XML_SOUNDS "soundEffects"
 
+const std::wstring Settings::MAIN_APP = L"3RVX.exe";
 const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
+const std::wstring Settings::SETTINGS_FILE = L"Settings.xml";
 const std::wstring Settings::LANG_DIR = L"Languages";
 const std::wstring Settings::SKIN_DIR = L"Skins";
 
@@ -62,13 +65,12 @@ void Settings::Load() {
     /* First, clean up (if needed) */
     delete _translator;
 
-    _file = AppDir() + L"\\Settings.xml";
+    _file = SettingsFile();
     CLOG(L"Loading settings: %s", _file.c_str());
 
     std::string u8FileName = StringUtils::Narrow(_file);
     tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
-        Error::ErrorMessage(GENERR_SETTINGSFILE, _file);
         LoadEmptySettings();
         return;
     }
@@ -79,7 +81,6 @@ void Settings::Load() {
         LoadEmptySettings();
         return;
     }
-
 }
 
 void Settings::LoadEmptySettings() {
@@ -90,6 +91,7 @@ void Settings::LoadEmptySettings() {
 }
 
 int Settings::Save() {
+    CreateSettingsDir();
     FILE *stream;
     errno_t err = _wfopen_s(&stream, _file.c_str(), L"w");
     if (err != 0 || stream == NULL) {
@@ -99,6 +101,52 @@ int Settings::Save() {
     tinyxml2::XMLError result = _xml.SaveFile(stream);
     fclose(stream);
     return result;
+}
+
+std::wstring Settings::SettingsDir() {
+    /* First, is this a portable installation? */
+    std::wstring portableSettings = AppDir() + L"\\" + SETTINGS_FILE;
+    if (PathFileExists(portableSettings.c_str()) == TRUE) {
+        return AppDir();
+    }
+
+    /* If the install isn't portable, use the roaming appdata directory. */
+    wchar_t appData[MAX_PATH];
+    HRESULT hr = SHGetFolderPath(NULL, CSIDL_APPDATA, NULL, NULL, appData);
+    if (FAILED(hr)) {
+        HRESULT hr = SHGetFolderPath(
+            NULL, CSIDL_LOCAL_APPDATA, NULL, NULL, appData);
+
+        if (FAILED(hr)) {
+            // TODO: This probably warrants an error message!
+            return AppDir();
+        }
+    }
+
+    return std::wstring(appData) + L"\\3RVX";
+}
+
+void Settings::CreateSettingsDir() {
+    std::wstring settingsDir = SettingsDir();
+    CLOG(L"Creating settings directory: %s", settingsDir.c_str());
+
+    settingsDir = L"\\\\?\\" + settingsDir; /* Use long file path (\\?\) */
+    BOOL result = CreateDirectory(settingsDir.c_str(), NULL);
+    if (result == FALSE) {
+        if (GetLastError() == ERROR_ALREADY_EXISTS) {
+            QCLOG(L"Directory already exists.");
+            return;
+        }
+
+        if (GetLastError() == ERROR_PATH_NOT_FOUND) {
+            QCLOG(L"Path not found!");
+            // TODO: error message?
+        }
+    }
+}
+
+std::wstring Settings::SettingsFile() {
+    return SettingsDir() + std::wstring(L"\\") + SETTINGS_FILE;
 }
 
 std::wstring Settings::AppDir() {
@@ -114,6 +162,10 @@ std::wstring Settings::AppDir() {
 
 std::wstring Settings::SkinDir() {
     return AppDir() + L"\\" + SKIN_DIR;
+}
+
+std::wstring Settings::MainApp() {
+    return Settings::AppDir() + L"\\" + MAIN_APP;
 }
 
 std::wstring Settings::SettingsApp() {
@@ -148,6 +200,11 @@ std::wstring Settings::LanguageName() {
     } else {
         return lang;
     }
+}
+
+void Settings::LanguageName(std::wstring name) {
+    std::string nName = StringUtils::Narrow(name);
+    SetText(XML_LANGUAGE, nName);
 }
 
 bool Settings::AlwaysOnTop() {
@@ -340,6 +397,11 @@ std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
             hki.args.push_back(StringUtils::Widen(argStr));
         }
 
+        /* Do a validity check on the finished HKI object */
+        if (hki.Valid() == false) {
+            continue;
+        }
+
         /* Whew, we made it! */
         CLOG(L"%s", hki.ToString().c_str());
         keyMappings[combination] = hki;
@@ -353,6 +415,10 @@ void Settings::Hotkeys(std::vector<HotkeyInfo> hotkeys) {
     hkElem->DeleteChildren();
 
     for (HotkeyInfo hotkey : hotkeys) {
+        if (hotkey.Valid() == false) {
+            continue;
+        }
+
         tinyxml2::XMLElement *hk = _xml.NewElement("hotkey");
 
         hk->SetAttribute("combination", hotkey.keyCombination);

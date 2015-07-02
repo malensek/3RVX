@@ -2,9 +2,11 @@
 
 #include "Tab.h"
 
-#include "../3RVX/HotkeyInfo.h"
+#include "../../3RVX/HotkeyInfo.h"
+#include "../../3RVX/LanguageTranslator.h"
 
 class Hotkeys : public Tab {
+
 public:
     virtual void SaveSettings();
 
@@ -12,18 +14,21 @@ protected:
     virtual void Initialize();
     virtual void LoadSettings();
 
-private:
-    int _listSelection = -1;
+protected:
     std::vector<HotkeyInfo> _keyInfo;
+    LanguageTranslator *_translator;
+
+    HotkeyInfo *CurrentHotkeyInfo();
 
     void LoadSelection();
     void LoadSelection(int index);
     void LoadAction(int index, HotkeyInfo &selection);
-    void LoadActionParameters(HotkeyInfo &selection);
+    std::wstring ActionString(HotkeyInfo &selection);
     std::wstring VolumeActionString(HotkeyInfo &selection);
 
     void DefaultArgControlStates();
     void VolumeArgControlStates(HotkeyInfo &selection);
+
     void UpdateEditArgument();
     std::wstring OpenFileDialog();
 
@@ -37,16 +42,17 @@ private:
 
     bool OnKeysButtonClick();
     bool OnActionChange();
+
+    bool OnArgButtonClick();
     bool OnArgComboChange();
     bool OnArgCheckChange();
-    bool OnArgButtonClick();
+    bool OnArgEditTextChange();
 
-private:
+protected:
     /* Controls: */
     ListView _keyList;
     Button _add;
     Button _remove;
-
 
     GroupBox _editorGroup;
     Label _keysLabel;
@@ -60,7 +66,7 @@ private:
     EditBox _argEdit;
     Button _argButton;
 
-private:
+protected:
     /* Strings: */
     std::wstring _hotkeysColumnStr = L"Hotkeys";
     std::wstring _actionColumnStr = L"Action";

@@ -3,8 +3,8 @@
 #include <Windows.h>
 #include <unordered_map>
 
-#include "Controls/Control.h"
-#include "Controls/Controls.h"
+#include "../Controls/Control.h"
+#include "../Controls/Controls.h"
 
 class UIContext;
 

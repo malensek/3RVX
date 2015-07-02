@@ -1,5 +1,9 @@
 #include "DisplayManager.h"
 
+#include <d3d9.h>
+#pragma comment(lib, "d3d9.lib")
+#include "Logger.h"
+
 static std::unordered_map<std::wstring, Monitor> monitorMap;
 
 std::unordered_map<std::wstring, Monitor> &DisplayManager::MonitorMap() {
@@ -50,7 +54,8 @@ RECT DisplayManager::Rect(HMONITOR monitor) {
     return Info(monitor).rcMonitor;
 }
 
-bool DisplayManager::IsFullscreen() {
+bool DisplayManager::IsFullscreen(HWND hWnd) {
+    /*
     HWND fg = GetForegroundWindow();
     if (fg == NULL) {
         return false;
@@ -70,6 +75,34 @@ bool DisplayManager::IsFullscreen() {
     GetWindowRect(fg, &wndRect);
     // check window dimensions vs screen dimensions
 
+    */
+    IDirect3D9Ex *pDirect3DEx;
+    LPDIRECT3DDEVICE9EX pDeviceEx;
+    DWORD behaviorFlags = D3DCREATE_HARDWARE_VERTEXPROCESSING;
+    D3DPRESENT_PARAMETERS d3dpp = { 0 };
+    d3dpp.Windowed = TRUE;
+    d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
+    //d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+
+    Direct3DCreate9Ex(D3D_SDK_VERSION, &pDirect3DEx);
+    HRESULT hr = pDirect3DEx->CreateDeviceEx(
+        D3DADAPTER_DEFAULT,
+        D3DDEVTYPE_HAL,
+        hWnd,
+        behaviorFlags,
+        &d3dpp,
+        NULL,
+        &pDeviceEx);
+
+    hr = pDeviceEx->CheckDeviceState(NULL);
+    if (hr == S_PRESENT_OCCLUDED) {
+        CLOG(L"FULLSCREEN");
+    }
+
+
+    CLOG(L"hresult: %d", hr);
+
+    return false;
 }
 
 MONITORINFO DisplayManager::Info(HMONITOR monitor) {

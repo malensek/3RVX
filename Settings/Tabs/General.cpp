@@ -2,12 +2,12 @@
 
 #include <shellapi.h>
 
-#include "../3RVX/LanguageTranslator.h"
-#include "../3RVX/Logger.h"
-#include "../3RVX/Settings.h"
-#include "../3RVX/SkinInfo.h"
+#include "../../3RVX/LanguageTranslator.h"
+#include "../../3RVX/Logger.h"
+#include "../../3RVX/Settings.h"
+#include "../../3RVX/SkinInfo.h"
 
-#include "resource.h"
+#include "../resource.h"
 
 const wchar_t General::REGKEY_NAME[] = L"3RVX";
 const wchar_t General::REGKEY_RUN[]
@@ -37,10 +37,6 @@ void General::Initialize() {
 
     INIT_CONTROL(GRP_LANGUAGE, GroupBox, _languageGroup);
     INIT_CONTROL(CMB_LANG, ComboBox, _language);
-    _language.OnSelectionChange = [this]() {
-        // Handle language selection change 
-        return true;
-    };
 }
 
 void General::LoadSettings() {
@@ -68,7 +64,12 @@ void General::LoadSettings() {
     std::list<std::wstring> languages = FindLanguages(
         settings->LanguagesDir().c_str());
     for (std::wstring language : languages) {
-        _language.AddItem(language);
+        int ext = language.find(L".xml");
+        if (ext == language.npos) {
+            continue;
+        }
+
+        _language.AddItem(language.substr(0, ext));
     }
     std::wstring currentLang = settings->LanguageName();
     _language.Select(currentLang);
@@ -87,6 +88,8 @@ void General::SaveSettings() {
     settings->SoundEffectsEnabled(_sounds.Checked());
 
     settings->CurrentSkin(_skin.Selection());
+
+    settings->LanguageName(_language.Selection());
 }
 
 bool General::RunOnStartup() {

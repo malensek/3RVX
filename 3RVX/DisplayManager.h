@@ -15,12 +15,12 @@ public:
     static Monitor MonitorAtPoint(POINT &pt, bool workingArea = false);
     static std::list<DISPLAY_DEVICE> ListAllDevices();
 
+    static bool IsFullscreen(HWND hWnd);
 private:
     static MONITORINFO Info(HMONITOR monitor);
     static const int Width(HMONITOR monitor);
     static const int Height(HMONITOR monitor);
     static RECT Rect(HMONITOR monitor);
-    static bool IsFullscreen();
 
     static BOOL CALLBACK MonitorEnumProc(
         HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM dwData);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<translation author="Uncle Sam" version="1">
+<translation version="1">
 
   <language name="English" id="en" regions="us,uk,in"/>
-  <author name="Jane Doe" email=""/>
+  <author name="Jane Doe" website="http://matthew.malensek.net/"/>
 
   <!--
     This file is simply a placeholder for the default language settings,
@@ -11,16 +11,5 @@
       Français.xml,
     etc.
   -->
-
-  <string>
-    <original>Settings</original>
-    <translation>Super Duper Settings</translation>
-  </string>
-
-  <string>
-    <original>Skin</original>
-    <translation>Super Duper Skin</translation>
-  </string>
-
 
 </translation>

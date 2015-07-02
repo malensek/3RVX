@@ -133,6 +133,7 @@
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />
+    <ClCompile Include="FakeKeyboard.cpp" />
     <ClCompile Include="HotkeyInfo.cpp" />
     <ClCompile Include="MediaKeys.cpp" />
     <ClCompile Include="MeterWnd\AnimationFactory.cpp" />

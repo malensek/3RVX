@@ -14,4 +14,10 @@ public:
     }
 
     void Clear();
+
+    virtual DLGPROC Command(unsigned short nCode);
+
+public:
+    /* Event Handlers */
+    std::function<bool()> OnTextChange;
 };

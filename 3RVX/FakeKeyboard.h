@@ -2,22 +2,29 @@
 
 #include <Windows.h>
 
+#include <vector>
+
 class FakeKeyboard {
 public:
-    static void SimulateKeypress(unsigned short vk) {
-        INPUT input = { 0 };
-        input.type = INPUT_KEYBOARD;
-        input.ki.wVk = vk;
-        input.ki.wScan = 0;
-        input.ki.dwFlags = 0;
-        input.ki.time = 0;
-        input.ki.dwExtraInfo = GetMessageExtraInfo();
+    /// <summary>
+    /// Simulates a keypress (key down, key up) of the given VK code. Any
+    /// modifier keys that are down when this method is called are synthetically
+    /// raised, the keypress is made, and then then modifiers are placed back
+    /// in their original state.
+    /// </summary>
+    /// <param name="vk">The virtual key code to 'press.'</param>
+    static void SimulateKeypress(unsigned short vk);
 
-        /* key down: */
-        SendInput(1, &input, sizeof(INPUT));
+private:
+    /// <summary>
+    /// Populates an INPUT struct with a VK code, scan code, appropriate flags,
+    /// etc for simulating keyboard events.
+    /// </summary>
+    static void PopulateInput(INPUT &in, unsigned short vk, bool up = false);
 
-        /* key up: */
-        input.ki.dwFlags = KEYEVENTF_KEYUP;
-        SendInput(1, &input, sizeof(INPUT));
-    }
+    /// <summary>
+    /// Retrieves a vector of the keyboard modifiers that are currently being
+    /// pressed.
+    /// </summary>
+    static std::vector<unsigned short> ModifiersDown();
 };

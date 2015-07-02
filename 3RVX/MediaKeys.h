@@ -11,6 +11,9 @@ public:
     static void ProcessHotkeys(HotkeyInfo &hki);
 
 private:
-    static std::unordered_map<std::wstring, unsigned short> CreateKeyMap();
+    /// <summary>Contains media key to VK mappings.</summary>
     static std::unordered_map<std::wstring, unsigned short> mediaKeyMap;
+
+    /// <summary>Creates the media key to VK map.</summary>
+    static std::unordered_map<std::wstring, unsigned short> CreateKeyMap();
 };

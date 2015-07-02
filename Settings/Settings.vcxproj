@@ -70,6 +70,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -102,16 +103,16 @@
     <ClInclude Include="Controls\ListView.h" />
     <ClInclude Include="Controls\Spinner.h" />
     <ClInclude Include="Controls\EditBox.h" />
-    <ClInclude Include="HotkeyPrompt.h" />
-    <ClInclude Include="KeyGrabber.h" />
+    <ClInclude Include="Tabs\HotkeyPrompt.h" />
+    <ClInclude Include="Tabs\KeyGrabber.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Display.h" />
-    <ClInclude Include="General.h" />
-    <ClInclude Include="Hotkeys.h" />
+    <ClInclude Include="Tabs\Display.h" />
+    <ClInclude Include="Tabs\General.h" />
+    <ClInclude Include="Tabs\Hotkeys.h" />
     <ClInclude Include="Controls\Label.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SettingsUI.h" />
-    <ClInclude Include="Tab.h" />
+    <ClInclude Include="Tabs\Tab.h" />
     <ClInclude Include="UITranslator.h" />
   </ItemGroup>
   <ItemGroup>
@@ -133,13 +134,13 @@
     <ClCompile Include="Controls\EditBox.cpp" />
     <ClCompile Include="Controls\ListView.cpp" />
     <ClCompile Include="Controls\Spinner.cpp" />
-    <ClCompile Include="Display.cpp" />
-    <ClCompile Include="General.cpp" />
-    <ClCompile Include="HotkeyPrompt.cpp" />
-    <ClCompile Include="Hotkeys.cpp" />
-    <ClCompile Include="KeyGrabber.cpp" />
+    <ClCompile Include="Tabs\Display.cpp" />
+    <ClCompile Include="Tabs\General.cpp" />
+    <ClCompile Include="Tabs\HotkeyPrompt.cpp" />
+    <ClCompile Include="Tabs\Hotkeys.cpp" />
+    <ClCompile Include="Tabs\KeyGrabber.cpp" />
     <ClCompile Include="SettingsUI.cpp" />
-    <ClCompile Include="Tab.cpp" />
+    <ClCompile Include="Tabs\Tab.cpp" />
     <ClCompile Include="UITranslator.cpp" />
   </ItemGroup>
   <ItemGroup>

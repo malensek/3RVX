@@ -16,6 +16,9 @@ public:
     const std::wstring TranslateAndReplace(
         const std::wstring &str, const std::wstring &arg);
 
+    const std::wstring &LanguageName();
+    const std::wstring &Author();
+
 public:
     static std::vector<std::wstring> CurrentLocale();
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Windows.h>
-#include "../3RVX/HotkeyManager.h"
+#include "../../3RVX/HotkeyManager.h"
 
 class KeyGrabber {
 public:

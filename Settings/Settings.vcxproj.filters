@@ -24,9 +24,6 @@
     <ClInclude Include="..\3RVX\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="General.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SettingsUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,13 +48,7 @@
     <ClInclude Include="..\3RVX\Error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Display.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\3RVX\DisplayManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hotkeys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Controls\Controls.h">
@@ -78,9 +69,6 @@
     <ClInclude Include="Controls\Label.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Controls\Spinner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -96,16 +84,28 @@
     <ClInclude Include="Controls\ListView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KeyGrabber.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HotkeyPrompt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Controls\GroupBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UITranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\Display.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\General.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\HotkeyPrompt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\Hotkeys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\KeyGrabber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\Tab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -114,9 +114,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\3RVX\Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="General.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SettingsUI.cpp">
@@ -143,13 +140,7 @@
     <ClCompile Include="..\3RVX\Error.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Display.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\3RVX\DisplayManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hotkeys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controls\Control.cpp">
@@ -164,9 +155,6 @@
     <ClCompile Include="Controls\ComboBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Controls\Spinner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -176,16 +164,28 @@
     <ClCompile Include="Controls\ListView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KeyGrabber.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HotkeyPrompt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Controls\EditBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UITranslator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\Display.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\General.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\HotkeyPrompt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\Hotkeys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\KeyGrabber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\Tab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

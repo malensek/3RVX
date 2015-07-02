@@ -1,12 +1,12 @@
 #include "HotkeyPrompt.h"
 
-#include "../3RVX/Error.h"
-#include "../3RVX/LanguageTranslator.h"
-#include "../3RVX/Logger.h"
-#include "../3RVX/Settings.h"
+#include "../../3RVX/Error.h"
+#include "../../3RVX/LanguageTranslator.h"
+#include "../../3RVX/Logger.h"
+#include "../../3RVX/Settings.h"
 
+#include "../resource.h"
 #include "KeyGrabber.h"
-#include "resource.h"
 
 HotkeyPrompt *HotkeyPrompt::_instance = NULL;
 const wchar_t *HotkeyPrompt::CLASS_NAME = L"3RVX Hotkey Input Dialog";

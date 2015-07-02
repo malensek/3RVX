@@ -33,11 +33,6 @@ public:
     void LoadEmptySettings();
     int Save();
 
-    static std::wstring AppDir();
-    static std::wstring SkinDir();
-    static std::wstring SettingsApp();
-    static void LaunchSettingsApp();
-
     std::wstring AudioDeviceID();
 
     AnimationTypes::HideAnimation HideAnim();
@@ -47,8 +42,8 @@ public:
     int HideSpeed();
     void HideSpeed(int speed);
 
-    std::wstring LanguagesDir();
     std::wstring LanguageName();
+    void LanguageName(std::wstring name);
 
     std::wstring Monitor();
     void Monitor(std::wstring monitorName);
@@ -81,6 +76,40 @@ public:
     std::unordered_map<int, HotkeyInfo> Hotkeys();
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
+public:
+    /* Static settings methods */
+
+    /// <summary>
+    /// Retrieves the location of the current executable. Both the main program
+    /// and settings application should be in the same directory, but this
+    /// method could return different directories if the executables are moved.
+    /// </summary>
+    static std::wstring AppDir();
+
+    /// <summary>
+    /// Determines where program settings are stored. If this is an installed
+    /// version of the program, then the settings are in
+    /// %APPDATA%\3RVX\
+    /// <p>
+    /// If this is a portable installation of the program, the settings are
+    /// stored in the same directory as the program executable.
+    /// </summary>
+    static std::wstring SettingsDir();
+
+    /// <summary>
+    /// Ensures the settings directory has been created. If the directory
+    /// already exists, calling this function has no effect.
+    /// </summary>
+    static void CreateSettingsDir();
+
+    static std::wstring SettingsFile();
+    static std::wstring SkinDir();
+    static std::wstring LanguagesDir();
+    static std::wstring MainApp();
+    static std::wstring SettingsApp();
+    static void LaunchSettingsApp();
+
+
 private:
     Settings() {
 
@@ -107,13 +136,16 @@ private:
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 
 public:
+    static const std::wstring MAIN_APP;
     static const std::wstring SETTINGS_APP;
+    static const std::wstring SETTINGS_FILE;
     static const std::wstring LANG_DIR;
     static const std::wstring SKIN_DIR;
 
     /* Default settings */
     static const bool DefaultOnTop = true;
-    static const AnimationTypes::HideAnimation DefaultHideAnim = AnimationTypes::Fade;
+    static const AnimationTypes::HideAnimation DefaultHideAnim
+        = AnimationTypes::Fade;
     static const bool DefaultHideFullscreen = false;
     static const int DefaultHideSpeed = 765;
     static const int DefaultHideTime = 800;

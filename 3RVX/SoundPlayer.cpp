@@ -1,5 +1,7 @@
 #include "SoundPlayer.h"
 
+#include "Logger.h" // <-- Has to be included here because DirectShow says so...
+
 #include <Windows.h>
 #include <dshow.h>
 #pragma comment(lib, "Strmiids.lib") 
@@ -16,34 +18,55 @@ SoundPlayer::SoundPlayer(std::wstring filePath) {
         (void **) &_graphBuilder);
 
     if (FAILED(hr)) {
-        OutputDebugString(L"gb failed");
+        CLOG(L"Failed to create GraphBuilder");
     }
     
-    hr = _graphBuilder->QueryInterface(IID_IMediaControl, (void **) &_mediaCtrl);
-    hr = _graphBuilder->QueryInterface(IID_IMediaEventEx, (void **) &_mediaEv);
-    hr = _graphBuilder->QueryInterface(IID_IMediaSeeking, (void **) &_mediaSeek);
-    hr = _graphBuilder->RenderFile(filePath.c_str(), NULL);
+    hr = _graphBuilder->QueryInterface(
+        IID_IMediaControl, (void **) &_mediaCtrl);
+    if (FAILED(hr)) {
+        return;
+    }
 
+    hr = _graphBuilder->QueryInterface(
+        IID_IMediaEventEx, (void **) &_mediaEv);
+    if (FAILED(hr)) {
+        return;
+    }
+
+    hr = _graphBuilder->QueryInterface(
+        IID_IMediaSeeking, (void **) &_mediaSeek);
+    if (FAILED(hr)) {
+        return;
+    }
+
+    hr = _graphBuilder->RenderFile(filePath.c_str(), NULL);
+    if (FAILED(hr)) {
+        return;
+    }
+
+    _ready = true;
     _thread = std::thread(&SoundPlayer::PlayerThread, this);
 }
 
 SoundPlayer::~SoundPlayer() {
-    _mediaSeek->Release();
-    _mediaEv->Release();
-    _mediaCtrl->Release();
-    _graphBuilder->Release();
+    SafeRelease(_mediaSeek);
+    SafeRelease(_mediaEv);
+    SafeRelease(_mediaCtrl);
+    SafeRelease(_graphBuilder);
 }
 
-bool SoundPlayer::Play() {
-    bool alreadyPlaying;
+void SoundPlayer::Play() {
+    if (!_ready) {
+        CLOG(L"Error: sound player not ready");
+        return;
+    }
 
-    _mutex.lock();
-    alreadyPlaying = _playing;
-    _playing = true;
-    _mutex.unlock();
-
+    _repeatMutex.lock();
+    if (_repeat < 4) {
+        ++_repeat;
+    }
+    _repeatMutex.unlock();
     _cv.notify_all();
-    return alreadyPlaying;
 }
 
 void SoundPlayer::PlayerThread() {
@@ -52,11 +75,14 @@ void SoundPlayer::PlayerThread() {
     std::unique_lock<std::mutex> lock(_mutex);
 
     while (true) {
-        _cv.wait(lock);
-
-        if (!_playing) {
+        _repeatMutex.lock();
+        if (_repeat == 0) {
+            _repeatMutex.unlock();
+            _cv.wait(lock);
+            /* To handle spurious wakeups, re-do the repeat check: */
             continue;
         }
+        _repeatMutex.unlock();
 
         _mediaCtrl->Run();
         _mediaEv->WaitForCompletion(INFINITE, &evCode);
@@ -65,6 +91,14 @@ void SoundPlayer::PlayerThread() {
             &start, AM_SEEKING_AbsolutePositioning,
             NULL, AM_SEEKING_NoPositioning);
 
-        _playing = false;
+        _repeatMutex.lock();
+        --_repeat;
+        _repeatMutex.unlock();
+    }
+}
+
+void SoundPlayer::SafeRelease(IUnknown *p) {
+    if (p) {
+        p->Release();
     }
 }

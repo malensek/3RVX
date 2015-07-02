@@ -1,4 +1,4 @@
-#include "MediaKeys.h"
+#include "KeyboardHotkeyProcessor.h"
 
 #include <string>
 
@@ -6,10 +6,10 @@
 #include "HotkeyInfo.h"
 #include "Logger.h"
 
-std::unordered_map<std::wstring, unsigned short> MediaKeys::mediaKeyMap
-    = MediaKeys::CreateKeyMap();
+std::unordered_map<std::wstring, unsigned short>
+    KeyboardHotkeyProcessor::mediaKeyMap = CreateKeyMap();
 
-void MediaKeys::ProcessHotkeys(HotkeyInfo &hki) {
+void KeyboardHotkeyProcessor::ProcessHotkeys(HotkeyInfo &hki) {
     if (hki.action != HotkeyInfo::MediaKey || hki.args.size() != 1) {
         return;
     }
@@ -20,7 +20,8 @@ void MediaKeys::ProcessHotkeys(HotkeyInfo &hki) {
     SyntheticKeyboard::SimulateKeypress(vk);
 }
 
-std::unordered_map<std::wstring, unsigned short> MediaKeys::CreateKeyMap() {
+std::unordered_map<std::wstring, unsigned short>
+        KeyboardHotkeyProcessor::CreateKeyMap() {
     std::unordered_map<std::wstring, unsigned short> map;
     for (unsigned int i = 0; i < HotkeyInfo::MediaKeyNames.size(); ++i) {
         map[HotkeyInfo::MediaKeyNames[i]] = HotkeyInfo::MediaKeyVKs[i];

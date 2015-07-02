@@ -6,9 +6,9 @@
 
 class HotkeyInfo;
 
-class MediaKeys {
+class KeyboardHotkeyProcessor : HotkeyProcessor {
 public:
-    static void ProcessHotkeys(HotkeyInfo &hki);
+    virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 private:
     /// <summary>Contains media key to VK mappings.</summary>

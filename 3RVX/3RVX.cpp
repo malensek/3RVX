@@ -11,8 +11,8 @@
 #include "DisplayManager.h"
 #include "HotkeyInfo.h"
 #include "HotkeyManager.h"
+#include "KeyboardHotkeyProcessor.h"
 #include "Logger.h"
-#include "MediaKeys.h"
 #include "OSD\EjectOSD.h"
 #include "OSD\VolumeOSD.h"
 #include "Settings.h"
@@ -27,6 +27,7 @@ VolumeOSD *vOSD;
 EjectOSD *eOSD;
 
 HotkeyManager *hkManager;
+KeyboardHotkeyProcessor kbHotkeyProcessor;
 std::unordered_map<int, HotkeyInfo> hotkeys;
 
 void init();
@@ -192,7 +193,7 @@ void ProcessHotkeys(HotkeyInfo &hki) {
         break;
 
     case HotkeyInfo::MediaKey:
-        MediaKeys::ProcessHotkeys(hki);
+        kbHotkeyProcessor.ProcessHotkeys(hki);
         break;
 
     case HotkeyInfo::Run:

@@ -144,9 +144,6 @@
     <ClInclude Include="MeterWnd\AnimationFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FakeKeyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeterWnd\LayeredWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -160,6 +157,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Updater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntheticKeyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -284,7 +284,7 @@
     <ClCompile Include="Updater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FakeKeyboard.cpp">
+    <ClCompile Include="SyntheticKeyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -83,7 +83,7 @@
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
-    <ClInclude Include="FakeKeyboard.h" />
+    <ClInclude Include="SyntheticKeyboard.h" />
     <ClInclude Include="HotkeyInfo.h" />
     <ClInclude Include="HotkeyProcessor.h" />
     <ClInclude Include="MediaKeys.h" />
@@ -133,7 +133,7 @@
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />
-    <ClCompile Include="FakeKeyboard.cpp" />
+    <ClCompile Include="SyntheticKeyboard.cpp" />
     <ClCompile Include="HotkeyInfo.cpp" />
     <ClCompile Include="MediaKeys.cpp" />
     <ClCompile Include="MeterWnd\AnimationFactory.cpp" />

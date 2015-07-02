@@ -4,7 +4,7 @@
 
 #include <vector>
 
-class FakeKeyboard {
+class SyntheticKeyboard {
 public:
     /// <summary>
     /// Simulates a keypress (key down, key up) of the given VK code. Any

@@ -1,8 +1,8 @@
-#include "FakeKeyboard.h"
+#include "SyntheticKeyboard.h"
 
 #include "Logger.h"
 
-void FakeKeyboard::SimulateKeypress(unsigned short vk) {
+void SyntheticKeyboard::SimulateKeypress(unsigned short vk) {
         std::vector<unsigned short> mods = ModifiersDown();
 
         unsigned int inputs = mods.size() * 2 + 2;
@@ -29,7 +29,7 @@ void FakeKeyboard::SimulateKeypress(unsigned short vk) {
         delete[] input;
 }
 
-void FakeKeyboard::PopulateInput(INPUT &in, unsigned short vk, bool up) {
+void SyntheticKeyboard::PopulateInput(INPUT &in, unsigned short vk, bool up) {
     in = { 0 };
     in.type = INPUT_KEYBOARD;
     in.ki.wVk = vk;
@@ -43,7 +43,7 @@ void FakeKeyboard::PopulateInput(INPUT &in, unsigned short vk, bool up) {
     }
 }
 
-std::vector<unsigned short> FakeKeyboard::ModifiersDown() {
+std::vector<unsigned short> SyntheticKeyboard::ModifiersDown() {
     std::vector<unsigned short> mods;
 
     unsigned short modList[] = {

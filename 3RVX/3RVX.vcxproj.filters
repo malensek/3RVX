@@ -159,7 +159,7 @@
     <ClInclude Include="SyntheticKeyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KeyboardHotkeyManager.h">
+    <ClInclude Include="KeyboardHotkeyProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -284,7 +284,7 @@
     <ClCompile Include="SyntheticKeyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardHotkeyManager.cpp">
+    <ClCompile Include="KeyboardHotkeyProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

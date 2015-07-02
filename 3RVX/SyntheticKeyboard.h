@@ -4,6 +4,10 @@
 
 #include <vector>
 
+/// <summary>
+/// Creates synthetic keyboard events, like activating a media key or virtual
+/// keycode.
+/// </summary>
 class SyntheticKeyboard {
 public:
     /// <summary>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<skin>
+  <info>
+    <author>Akensai</author>
+    <website>http://akensai.com</website>
+  </info>
+
+  <osds>
+    <volume background="OSD\vol.png" defaultUnits="60">
+      <meter
+        type="HorizontalTile"
+        image="OSD\bars.png"
+        x="0"
+        y="0"
+        units="37"
+      />
+      <meter
+        type="NumberStrip"
+        image="OSD\numbers.png"
+        align="right"
+        units="100"
+        x="-50"
+        y="31"
+      />
+      <iconset location="Icons\Volume"/>
+    </volume>
+
+    <mute background="OSD\mute.png"/>
+    <eject background="OSD\eject.png"/>
+  </osds>
+
+  <sliders>
+    <volume background="Slider\background.png">
+      <slider
+        type="vertical"
+        image="Slider\knob.png"
+        x="-50"
+        y="0"
+        width="5"
+        height="98"
+      />
+    </volume>
+  </sliders>
+</skin>

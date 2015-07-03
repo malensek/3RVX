@@ -56,10 +56,12 @@ void Hotkeys::LoadSettings() {
     _keyArgStr = _translator->Translate(_keyArgStr);
     _driveArgStr = _translator->Translate(_driveArgStr);
     _pathArgStr = _translator->Translate(_pathArgStr);
+    _vkArgStr = _translator->Translate(_vkArgStr);
 
     _ejectActionStr = _translator->Translate(_ejectActionStr);
     _mediaActionStr = _translator->Translate(_mediaActionStr);
     _runActionStr = _translator->Translate(_runActionStr);
+    _vkActionStr = _translator->Translate(_vkActionStr);
 
     /* Make highlighted items span the entire row in the list view */
     _keyList.AddListExStyle(LVS_EX_FULLROWSELECT);
@@ -208,6 +210,14 @@ void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
         showLabel = true; showCombo = true;
         break;
 
+    case HotkeyInfo::VirtualKey:
+        _argLabel.Text(_vkArgStr);
+        if (selection.HasArgs()) {
+            _argEdit.Text(selection.args[0]);
+        }
+        showLabel = true; showEdit = true;
+        break;
+
     case HotkeyInfo::Run:
         _argLabel.Text(_pathArgStr);
         _argButton.Text(L"…");
@@ -279,7 +289,10 @@ std::wstring Hotkeys::ActionString(HotkeyInfo &selection) {
 
     case HotkeyInfo::MediaKey:
         actionStr = _translator->Replace(_mediaActionStr, selection.args[0]);
+        break;
 
+    case HotkeyInfo::VirtualKey:
+        actionStr = _translator->Replace(_vkActionStr, selection.args[0]);
         break;
 
     case HotkeyInfo::Run:

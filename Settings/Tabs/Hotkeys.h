@@ -76,8 +76,10 @@ protected:
     std::wstring _keyArgStr = L"Key:";
     std::wstring _driveArgStr = L"Drive:";
     std::wstring _pathArgStr = L"Path:";
+    std::wstring _vkArgStr = L"VK Code (Hex):";
 
     std::wstring _ejectActionStr = L"Eject Drive: {1}";
     std::wstring _mediaActionStr = L"Media Key: {1}";
     std::wstring _runActionStr = L"Run: {1}";
+    std::wstring _vkActionStr = L"Virtual Key: 0x{1}";
 };

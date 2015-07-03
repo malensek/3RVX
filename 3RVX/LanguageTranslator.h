@@ -12,8 +12,21 @@ public:
     LanguageTranslator(std::wstring langFileName);
 
     void LoadTranslations();
+
+    /// <summary>
+    /// Translates the provided string to the current locale. If no translation
+    /// is available, the original string is returned.
+    /// </summary>
     const std::wstring &Translate(const std::wstring &str);
+
     const std::wstring TranslateAndReplace(
+        const std::wstring &str, const std::wstring &arg);
+
+    /// <summary>
+    /// Replaces the placeholder(s) in str with args, but does not perform a
+    /// translation lookup.
+    /// </summary>
+    const std::wstring Replace(
         const std::wstring &str, const std::wstring &arg);
 
     const std::wstring &LanguageName();

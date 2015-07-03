@@ -113,12 +113,19 @@ const std::wstring LanguageTranslator::TranslateAndReplace(
         const std::wstring &str, const std::wstring &arg) {
 
     std::wstring trans(Translate(str));
-    size_t strloc = trans.find(L"{1}");
+    return Replace(trans, arg);
+}
+
+const std::wstring LanguageTranslator::Replace(
+        const std::wstring &str, const std::wstring &arg) {
+
+    std::wstring repStr(str);
+    size_t strloc = repStr.find(L"{1}");
     if (strloc == std::wstring::npos) {
-        return trans;
+        return str;
     }
-    trans.replace(strloc, 3, arg);
-    return trans;
+    repStr.replace(strloc, 3, arg);
+    return repStr;
 }
 
 const std::wstring &LanguageTranslator::LanguageName() {

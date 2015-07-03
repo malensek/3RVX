@@ -237,6 +237,10 @@
     <translation>XXXXXXXX</translation>
   </string>
   <string>
+    <original>VK Code (Hex):</original>
+    <translation>XX XXXX (XXX):</translation>
+  </string>
+  <string>
     <original>Path:</original>
     <translation>XXXX:</translation>
   </string>
@@ -305,6 +309,14 @@
   <string>
     <original>Media Key: {1}</original>
     <translation>XXXXX XXX: {1}</translation>
+  </string>
+  <string>
+    <original>Virtual Key</original>
+    <translation>XXXXXXX XXX</translation>
+  </string>
+  <string>
+    <original>Virtual Key: 0x{1}</original>
+    <translation>XXXXXXX XXX: 0x{1}</translation>
   </string>
   <string>
     <original>Run</original>

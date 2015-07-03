@@ -361,6 +361,7 @@ void Hotkeys::DefaultArgControlStates() {
 }
 
 void Hotkeys::VolumeArgControlStates(HotkeyInfo &selection) {
+    _argLabel.Text(_amountVolArgStr);
     _argCheck.Text(_amountVolArgStr);
     _argCheck.Checked(selection.HasArgs());
     _argEdit.Enabled(_argCheck.Checked());

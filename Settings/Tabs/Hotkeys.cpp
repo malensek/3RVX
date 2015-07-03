@@ -392,7 +392,11 @@ std::wstring Hotkeys::OpenFileDialog() {
     ofn.nMaxFile = 1024;
     ofn.Flags = OFN_HIDEREADONLY | OFN_READONLY;
 
-    GetOpenFileName(&ofn);
+    BOOL result = GetOpenFileName(&ofn);
+    if (result == FALSE) {
+        /* User clicked cancel */
+        return L"";
+    }
 
     std::wstring fNameStr(fileName);
     if (fNameStr.back() == L' ') {
@@ -504,7 +508,9 @@ bool Hotkeys::OnArgButtonClick() {
     switch (action) {
     case HotkeyInfo::Run: 
         std::wstring fName = OpenFileDialog();
-        _argEdit.Text(fName);
+        if (fName != L"") {
+            _argEdit.Text(fName);
+        }
         break;
     }
 

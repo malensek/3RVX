@@ -193,6 +193,7 @@ void ProcessHotkeys(HotkeyInfo &hki) {
         break;
 
     case HotkeyInfo::MediaKey:
+    case HotkeyInfo::VirtualKey:
         kbHotkeyProcessor.ProcessHotkeys(hki);
         break;
 

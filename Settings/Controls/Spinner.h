@@ -30,7 +30,6 @@ public:
     void Range(int lo, int hi);
 
     std::wstring Text();
-    int TextAsInt();
     bool Text(std::wstring text);
     bool Text(int value);
 

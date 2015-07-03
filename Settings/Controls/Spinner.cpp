@@ -36,14 +36,6 @@ std::wstring Spinner::Text() {
     return std::wstring(text);
 }
 
-int Spinner::TextAsInt() {
-    std::wstring str = Text();
-    int num;
-    std::wistringstream wistr(str);
-    wistr >> num;
-    return num;
-}
-
 DLGPROC Spinner::Notification(NMHDR *nHdr) {
     switch (nHdr->code) {
     case UDN_DELTAPOS:

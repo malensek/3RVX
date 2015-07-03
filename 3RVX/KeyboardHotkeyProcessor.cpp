@@ -10,14 +10,25 @@ std::unordered_map<std::wstring, unsigned short>
     KeyboardHotkeyProcessor::mediaKeyMap = CreateKeyMap();
 
 void KeyboardHotkeyProcessor::ProcessHotkeys(HotkeyInfo &hki) {
-    if (hki.action != HotkeyInfo::MediaKey || hki.args.size() != 1) {
+    /* These hotkeys *require* exactly one argument: */
+    if (hki.args.size() != 1) {
         return;
     }
 
-    std::wstring arg = hki.args[0];
-    unsigned short vk = mediaKeyMap[arg];
-    CLOG(L"Simulating media keypress: %s", arg.c_str());
-    SyntheticKeyboard::SimulateKeypress(vk);
+    switch (hki.action) {
+    case HotkeyInfo::MediaKey: {
+        std::wstring &arg = hki.args[0];
+        unsigned short vk = mediaKeyMap[arg];
+        CLOG(L"Media key: %s", arg.c_str());
+        SyntheticKeyboard::SimulateKeypress(vk);
+        break;
+    }
+
+    case HotkeyInfo::VirtualKey: {
+
+        break;
+    }
+    }
 }
 
 std::unordered_map<std::wstring, unsigned short>

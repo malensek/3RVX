@@ -57,6 +57,10 @@ void Hotkeys::LoadSettings() {
     _driveArgStr = _translator->Translate(_driveArgStr);
     _pathArgStr = _translator->Translate(_pathArgStr);
 
+    _ejectActionStr = _translator->Translate(_ejectActionStr);
+    _mediaActionStr = _translator->Translate(_mediaActionStr);
+    _runActionStr = _translator->Translate(_runActionStr);
+
     /* Make highlighted items span the entire row in the list view */
     _keyList.AddListExStyle(LVS_EX_FULLROWSELECT);
 
@@ -175,7 +179,7 @@ void Hotkeys::LoadAction(int index, HotkeyInfo &selection) {
         VolumeArgControlStates(selection);
         showLabel = true; showCombo = true; showEdit = true;
         break;
- 
+
     case HotkeyInfo::EjectDrive:
         _argLabel.Text(_driveArgStr);
         _argCombo.Width(_argCombo.EmSize() * 6);
@@ -270,21 +274,16 @@ std::wstring Hotkeys::ActionString(HotkeyInfo &selection) {
         break;
 
     case HotkeyInfo::EjectDrive:
-        actionStr = _translator->TranslateAndReplace(
-            L"Eject Drive: {1}",
-            selection.args[0]);
+        actionStr = _translator->Replace(_ejectActionStr, selection.args[0]);
         break;
 
     case HotkeyInfo::MediaKey:
-        actionStr = _translator->TranslateAndReplace(
-            L"Media Key: {1}",
-            selection.args[0]);
+        actionStr = _translator->Replace(_mediaActionStr, selection.args[0]);
+
         break;
 
     case HotkeyInfo::Run:
-        actionStr = _translator->TranslateAndReplace(
-            L"Run: {1}",
-            selection.args[0]);
+        actionStr = _translator->Replace(_runActionStr, selection.args[0]);
         break;
     }
 

@@ -1,6 +1,5 @@
 #include "Control.h"
 
-#include <sstream>
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
 #include "../../3RVX/LanguageTranslator.h"
@@ -164,11 +163,7 @@ std::wstring Control::Text() {
 }
 
 int Control::TextAsInt() {
-    std::wstring str = Text();
-    int num;
-    std::wistringstream wistr(str);
-    wistr >> num;
-    return num;
+    return std::stoi(Text());
 }
 
 bool Control::Visible() {

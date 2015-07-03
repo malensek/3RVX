@@ -29,8 +29,16 @@ public:
     /// <param name="hi">Upper bound for the spinner.</param>
     void Range(int lo, int hi);
 
+    /// <summary>
+    /// Unlike the standard Control.Text() method, this uses the spinner buddy
+    /// to retrieve the text.
+    /// </summary>
     std::wstring Text();
+
+    /// <summary>Sets the buddy text.</summary>
     bool Text(std::wstring text);
+
+    /// <summary>Sets the buddy text.</summary>
     bool Text(int value);
 
     virtual DLGPROC Notification(NMHDR *nHdr);

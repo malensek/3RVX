@@ -11,13 +11,18 @@
 class SyntheticKeyboard {
 public:
     /// <summary>
-    /// Simulates a keypress (key down, key up) of the given VK code. Any
-    /// modifier keys that are down when this method is called are synthetically
-    /// raised, the keypress is made, and then then modifiers are placed back
-    /// in their original state.
+    /// Simulates a keypress (key down, key up) of the given VK code. If 
+    /// toggleModifiers is true, then any modifier keys that are down when this
+    /// method is called are synthetically raised, the keypress is made, and
+    /// then then modifiers are placed back in their original state.
     /// </summary>
     /// <param name="vk">The virtual key code to 'press.'</param>
-    static void SimulateKeypress(unsigned short vk);
+    /// <param name="handleModifiers">
+    /// Whether or not modifier keys should be raised and then re-lowered while
+    /// synthesizing the keypress.
+    /// </param>
+    static void SimulateKeypress(
+        unsigned short vk, bool handleModifiers = true);
 
 private:
     /// <summary>

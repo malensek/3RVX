@@ -2,31 +2,36 @@
 
 #include "Logger.h"
 
-void SyntheticKeyboard::SimulateKeypress(unsigned short vk) {
-        std::vector<unsigned short> mods = ModifiersDown();
+void SyntheticKeyboard::SimulateKeypress(
+        unsigned short vk, bool handleModifiers) {
 
-        unsigned int inputs = mods.size() * 2 + 2;
-        unsigned int currentInput = 0;
-        INPUT *input = new INPUT[inputs];
+    std::vector<unsigned short> mods;
+    if (handleModifiers) {
+        mods = ModifiersDown();
+    }
 
-        /* First, raise all modifier keys */
-        for (; currentInput < mods.size(); ++currentInput) {
-            PopulateInput(input[currentInput], mods[currentInput], true);
-        }
+    unsigned int inputs = mods.size() * 2 + 2;
+    unsigned int currentInput = 0;
+    INPUT *input = new INPUT[inputs];
 
-        /* Simulate the keypress */
-        PopulateInput(input[currentInput++], vk, false);
-        PopulateInput(input[currentInput++], vk, true);
+    /* First, raise all modifier keys */
+    for (; currentInput < mods.size(); ++currentInput) {
+        PopulateInput(input[currentInput], mods[currentInput], true);
+    }
 
-        /* Put modifier keys back to their original state */
-        for (int i = 0; currentInput < inputs; ++i, ++currentInput) {
-            PopulateInput(input[currentInput], mods[i], false);
-        }
+    /* Simulate the keypress */
+    PopulateInput(input[currentInput++], vk, false);
+    PopulateInput(input[currentInput++], vk, true);
 
-        UINT result = SendInput(inputs, input, sizeof(INPUT));
-        CLOG(L"Simulating keypress: %x; %d keyboard inputs generated.",
-            vk, result);
-        delete[] input;
+    /* Put modifier keys back to their original state */
+    for (int i = 0; currentInput < inputs; ++i, ++currentInput) {
+        PopulateInput(input[currentInput], mods[i], false);
+    }
+
+    UINT result = SendInput(inputs, input, sizeof(INPUT));
+    CLOG(L"Simulating keypress: %x; %d keyboard inputs generated.",
+        vk, result);
+    delete[] input;
 }
 
 void SyntheticKeyboard::PopulateInput(INPUT &in, unsigned short vk, bool up) {

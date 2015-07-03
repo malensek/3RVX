@@ -1,5 +1,7 @@
 #include "HotkeyManager.h"
+
 #include "Logger.h"
+#include "SyntheticKeyboard.h"
 
 HotkeyManager *HotkeyManager::instance = NULL;
 
@@ -121,23 +123,7 @@ HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 /* WIN+Mouse combination used; we need to prevent the
                  * system from only seeing a WIN keypress (and usually
                  * popping up the start menu).  We simulate WIN+VK_NONAME. */
-
-                INPUT input = { 0 };
-                input.type = INPUT_KEYBOARD;
-
-                input.ki.wVk = VK_NONAME;
-                input.ki.wScan = 0;
-                input.ki.dwFlags = 0;
-                input.ki.time = 1;
-                input.ki.dwExtraInfo = GetMessageExtraInfo();
-
-                /* key down: */
-                SendInput(1, &input, sizeof(INPUT));
-
-                /* key up: */
-                input.ki.dwFlags = KEYEVENTF_KEYUP;
-                SendInput(1, &input, sizeof(INPUT));
-
+                SyntheticKeyboard::SimulateKeypress(VK_NONAME, false);
                 _fixWin = false;
                 return CallNextHookEx(NULL, nCode, wParam, lParam);
             }

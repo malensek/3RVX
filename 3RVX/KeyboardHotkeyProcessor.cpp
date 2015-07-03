@@ -25,7 +25,12 @@ void KeyboardHotkeyProcessor::ProcessHotkeys(HotkeyInfo &hki) {
     }
 
     case HotkeyInfo::VirtualKey: {
-
+        unsigned short vk = (unsigned short) hki.HexArgToInt(0);
+        if (vk == 0) {
+            CLOG(L"Ignoring invalid VK value");
+            return;
+        }
+        SyntheticKeyboard::SimulateKeypress(vk);
         break;
     }
     }

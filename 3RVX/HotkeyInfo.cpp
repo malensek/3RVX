@@ -1,6 +1,6 @@
 #include "HotkeyInfo.h"
 
-#include <sstream>
+#include <string>
 
 #include "HotkeyManager.h"
 #include "Logger.h"
@@ -58,10 +58,7 @@ int HotkeyInfo::ArgToInt(unsigned int argIdx) {
         return _intArgs[argIdx];
     }
 
-    std::wistringstream str(args[argIdx]);
-    int i;
-    str >> i;
-
+    int i = std::stoi(args[argIdx]);
     if (_cache) {
         _intArgs[argIdx] = i;
     }
@@ -74,10 +71,7 @@ double HotkeyInfo::ArgToDouble(unsigned int argIdx) {
         return _doubleArgs[argIdx];
     }
 
-    std::wistringstream str(args[argIdx]);
-    double d;
-    str >> d;
-
+    double d = std::stod(args[argIdx]);
     if (_cache) {
         _doubleArgs[argIdx] = d;
     }

@@ -1,5 +1,6 @@
 #include "HotkeyInfo.h"
 
+#include <exception>
 #include <string>
 
 #include "HotkeyManager.h"
@@ -58,7 +59,13 @@ int HotkeyInfo::ArgToInt(unsigned int argIdx) {
         return _intArgs[argIdx];
     }
 
-    int i = std::stoi(args[argIdx]);
+    int i;
+    try {
+        i = std::stoi(args[argIdx]);
+    } catch (std::exception e) {
+        i = 0;
+    }
+
     if (_cache) {
         _intArgs[argIdx] = i;
     }
@@ -70,7 +77,13 @@ double HotkeyInfo::ArgToDouble(unsigned int argIdx) {
         return _doubleArgs[argIdx];
     }
 
-    double d = std::stod(args[argIdx]);
+    double d;
+    try {
+        d = std::stod(args[argIdx]);
+    } catch (std::exception e) {
+        d = 0;
+    }
+
     if (_cache) {
         _doubleArgs[argIdx] = d;
     }
@@ -82,7 +95,13 @@ int HotkeyInfo::HexArgToInt(unsigned int argIdx) {
         return _intArgs[argIdx];
     }
 
-    int i = std::stoi(args[argIdx], nullptr, 16);
+    int i;
+    try {
+        i = std::stoi(args[argIdx], nullptr, 16);
+    } catch (std::exception e) {
+        i = 0;
+    }
+
     if (_cache) {
         _intArgs[argIdx] = i;
     }

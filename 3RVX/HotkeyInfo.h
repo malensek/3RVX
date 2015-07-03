@@ -14,6 +14,7 @@ public:
         EjectDrive,
         EjectLastDisk,
         MediaKey,
+        VirtualKey,
         Run,
         Settings,
         Exit,

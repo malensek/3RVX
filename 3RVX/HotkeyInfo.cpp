@@ -14,6 +14,7 @@ std::vector<std::wstring> HotkeyInfo::ActionNames = {
     L"Eject Drive",
     L"Eject Last Disk",
     L"Media Key",
+    L"Virtual Key",
     L"Run",
     L"Open Settings Dialog",
     L"Exit 3RVX",

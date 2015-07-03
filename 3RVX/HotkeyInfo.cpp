@@ -62,7 +62,6 @@ int HotkeyInfo::ArgToInt(unsigned int argIdx) {
     if (_cache) {
         _intArgs[argIdx] = i;
     }
-
     return i;
 }
 
@@ -75,8 +74,19 @@ double HotkeyInfo::ArgToDouble(unsigned int argIdx) {
     if (_cache) {
         _doubleArgs[argIdx] = d;
     }
-
     return d;
+}
+
+int HotkeyInfo::HexArgToInt(unsigned int argIdx) {
+    if (_cache && _intArgs.count(argIdx) > 0) {
+        return _intArgs[argIdx];
+    }
+
+    int i = std::stoi(args[argIdx], nullptr, 16);
+    if (_cache) {
+        _intArgs[argIdx] = i;
+    }
+    return i;
 }
 
 bool HotkeyInfo::HasArgs() {

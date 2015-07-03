@@ -58,6 +58,12 @@ public:
     /// </summary>
     double ArgToDouble(unsigned int argIdx);
 
+    /// <summary>
+    /// Retrieves the argument string at the given index, treats it as a hex
+    /// string, and converts it to an integer.
+    /// </summary>
+    int HexArgToInt(unsigned int argIdx);
+
     bool HasArgs();
     bool HasArg(unsigned int argIdx);
     void AllocateArg(unsigned int argIdx);

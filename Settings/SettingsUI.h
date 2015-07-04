@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <tchar.h>
 
+#include "../3RVX/3RVX.h"
 #include "resource.h"
 
 /* Enable Visual Styles */

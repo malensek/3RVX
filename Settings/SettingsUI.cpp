@@ -1,6 +1,9 @@
 #include "SettingsUI.h"
-#include <CommCtrl.h>
+
 #pragma comment(lib, "comctl32.lib")
+
+#include <CommCtrl.h>
+#include <iostream>
 
 /* DLGTEMPLATEEX Structure */
 #include <pshpack1.h>
@@ -42,7 +45,9 @@ Tab *tabs[] = { &general, &display, &hotkeys };
 #define XOFFSET 70
 #define YOFFSET 20
 
+HANDLE mutex;
 HWND mainWnd = NULL;
+HWND tabWnd = NULL;
 
 int APIENTRY wWinMain(
         _In_ HINSTANCE hInstance,
@@ -55,6 +60,28 @@ int APIENTRY wWinMain(
 
     Logger::Start();
     CLOG(L"Starting SettingsUI...");
+
+    mutex = CreateMutex(NULL, FALSE, L"Local\\3RVXSettings");
+    if (GetLastError() == ERROR_ALREADY_EXISTS) {
+        if (mutex) {
+            ReleaseMutex(mutex);
+        }
+
+        HWND settingsWnd = FindWindow(CLASS_3RVX_SETTINGS, CLASS_3RVX_SETTINGS);
+
+        CLOG(L"A settings instance is already running. Moving window [%d] "
+            L"to the foreground.", (int) settingsWnd);
+        SetForegroundWindow(settingsWnd);
+        SendMessage(settingsWnd, WM_3RVX_SETTINGSCTRL, MSG_ACTIVATE, NULL);
+
+#if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
+        CLOG(L"Press [enter] to terminate");
+        std::cin.get();
+#endif
+
+        return EXIT_SUCCESS;
+    }
+
     Settings *settings = Settings::Instance();
     settings->Load();
 
@@ -64,7 +91,7 @@ int APIENTRY wWinMain(
     wcex.hInstance = hInstance;
     wcex.hIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_SETTINGS));
     wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
-    wcex.lpszClassName = L"3RVX SettingsUI";
+    wcex.lpszClassName = CLASS_3RVX_SETTINGS;
 
     if (RegisterClassEx(&wcex) == 0) {
         CLOG(L"Could not register class: %d", GetLastError());
@@ -72,7 +99,7 @@ int APIENTRY wWinMain(
     }
 
     mainWnd = CreateWindowEx(
-        NULL, L"3RVX SettingsUI", L"3RVX SettingsUI", NULL,
+        NULL, CLASS_3RVX_SETTINGS, CLASS_3RVX_SETTINGS, NULL,
         0, 0, 0, 0, NULL, NULL, hInstance, NULL);
 
     PROPSHEETPAGE psp[4];
@@ -159,12 +186,14 @@ LRESULT CALLBACK WndProc(
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
-
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
     }
 
-    return 0;
+    if (message == WM_3RVX_SETTINGSCTRL && wParam == MSG_ACTIVATE) {
+        CLOG(L"Received request to activate window from external program");
+        SetActiveWindow(tabWnd);
+    }
+
+    return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
 int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
@@ -183,6 +212,10 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
 
     case PSCB_INITIALIZED:
         UITranslator::TranslateWindowText(hWnd);
+
+        if (tabWnd == NULL) {
+            tabWnd = hWnd;
+        }
 
         /* These values are hard-coded in case the user has a non-english GUI
            but wants to change the program language */

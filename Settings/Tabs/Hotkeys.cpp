@@ -342,6 +342,7 @@ void Hotkeys::DefaultArgControlStates() {
     _argCheck.Visible(false);
     _argCombo.Visible(false);
     _argEdit.Visible(false);
+    _argButton.Visible(false);
 
     _argCombo.Enabled(false);
     _argEdit.Enabled(false);

@@ -8,6 +8,7 @@ Beta 8
 * Items in the settings hotkey list now show parameters (e.g., Increase Volume 3%)
 * Installer-based (non-portable) setup. Portable distributions will still be provided as well.
 * Update checking functionality
+* Launching multiple settings instances will now simply raise and activate the first instance
 * Bugfix: Corrupted "Run on Startup" registry entry
 * Bugfix: Play sound for custom volume increments
 

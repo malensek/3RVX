@@ -108,6 +108,9 @@
     <ClInclude Include="Tabs\Tab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\3RVX\SyntheticKeyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp">
@@ -186,6 +189,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tabs\Tab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3RVX\SyntheticKeyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

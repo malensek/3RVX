@@ -93,6 +93,7 @@
     <ClInclude Include="..\3RVX\Settings.h" />
     <ClInclude Include="..\3RVX\SkinInfo.h" />
     <ClInclude Include="..\3RVX\StringUtils.h" />
+    <ClInclude Include="..\3RVX\SyntheticKeyboard.h" />
     <ClInclude Include="..\3RVX\TinyXml2\tinyxml2.h" />
     <ClInclude Include="Controls\Button.h" />
     <ClInclude Include="Controls\Checkbox.h" />
@@ -126,6 +127,7 @@
     <ClCompile Include="..\3RVX\Settings.cpp" />
     <ClCompile Include="..\3RVX\SkinInfo.cpp" />
     <ClCompile Include="..\3RVX\StringUtils.cpp" />
+    <ClCompile Include="..\3RVX\SyntheticKeyboard.cpp" />
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp" />
     <ClCompile Include="Controls\Button.cpp" />
     <ClCompile Include="Controls\Checkbox.cpp" />

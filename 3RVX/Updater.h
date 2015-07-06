@@ -34,7 +34,8 @@ public:
 
     /// <summary>
     /// Retrieves the version number of the main application (3RVX.exe) as a 
-    /// string.
+    /// string in the format X.Y (where X is the major version number and Y
+    /// is the minor version number).
     /// </summary>
     static std::wstring MainAppVersionString();
 

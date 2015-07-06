@@ -75,6 +75,11 @@ std::pair<int, int> Updater::MainAppVersion() {
     return version;
 }
 
+std::wstring Updater::MainAppVersionString() {
+    std::pair<int, int> vers = MainAppVersion();
+    return std::to_wstring(vers.first) + L"." + std::to_wstring(vers.second);
+}
+
 std::pair<int, int> Updater::RemoteVersion() {
     HINTERNET internet = InternetOpen(
         L"3RVX Updater",

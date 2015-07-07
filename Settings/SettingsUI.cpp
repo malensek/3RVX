@@ -36,10 +36,12 @@ typedef struct DLGTEMPLATEEX
 #include "Tabs/General.h"
 #include "Tabs/Display.h"
 #include "Tabs/Hotkeys.h"
+#include "Tabs/About.h"
 General general;
 Display display;
 Hotkeys hotkeys;
-Tab *tabs[] = { &general, &display, &hotkeys };
+About about;
+Tab *tabs[] = { &general, &display, &hotkeys, &about };
 
 /* Startup x/y location offsets */
 #define XOFFSET 70
@@ -262,5 +264,5 @@ DLGPROC HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 }
 
 DLGPROC AboutTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-    return FALSE;
+    return about.TabProc(hDlg, message, wParam, lParam);
 }

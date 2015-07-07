@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <utility>
 
 /// <summary>
@@ -27,9 +28,16 @@ public:
     static bool NewerVersionAvailable();
 
     /// <summary>
-    /// Retrieves the version number of the main app (3RVX.exe).
+    /// Retrieves the version number of the main application (3RVX.exe).
     /// </summary>
     static std::pair<int, int> MainAppVersion();
+
+    /// <summary>
+    /// Retrieves the version number of the main application (3RVX.exe) as a 
+    /// string in the format X.Y (where X is the major version number and Y
+    /// is the minor version number).
+    /// </summary>
+    static std::wstring MainAppVersionString();
 
 private:
     /// <summary>

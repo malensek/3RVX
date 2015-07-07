@@ -19,14 +19,43 @@
 
     <Feature Id="ProductFeature" Title="Installer" Level="1">
       <ComponentGroupRef Id="3RVXComponents" />
+      <ComponentRef Id="ApplicationShortcut"/>
     </Feature>
 
+    <!-- Installation Directory -->
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLFOLDER" Name="3RVX">
-        </Directory>
+        <Directory Id="INSTALLFOLDER" Name="3RVX"/>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="3RVX"/>
       </Directory>
     </Directory>
+
+    <!-- Start menu entries -->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="*">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="3RVX"
+                  Description="Skinnable Volume Controller and OSD"
+                  Target="[INSTALLFOLDER]3RVX.exe"
+                  WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+        <Shortcut Id="SettingsStartMenuShortcut"
+                  Name="Settings"
+                  Description="3RVX Settings Editor"
+                  Target="[INSTALLFOLDER]Settings.exe"
+                  WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU"
+                       Key="Software\3RVX"
+                       Name="installed"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
 
     <Icon Id="icon.ico" SourceFile="../Assets/main_icon.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />

@@ -162,6 +162,9 @@
     <ClInclude Include="KeyboardHotkeyProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CommCtl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">

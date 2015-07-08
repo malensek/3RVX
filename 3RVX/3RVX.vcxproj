@@ -49,6 +49,7 @@
       </PrecompiledHeader>
       <PrecompiledHeaderOutputFile />
       <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -79,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="3RVX.h" />
+    <ClInclude Include="CommCtl.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="DisplayManager.h" />

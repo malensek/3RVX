@@ -1,9 +1,8 @@
 #include "SettingsUI.h"
 
-#pragma comment(lib, "comctl32.lib")
-
-#include <CommCtrl.h>
 #include <iostream>
+
+#include "../3RVX/CommCtl.h"
 
 /* DLGTEMPLATEEX Structure */
 #include <pshpack1.h>

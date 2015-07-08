@@ -1,10 +1,12 @@
 #include "Skin.h"
 
 #include <algorithm>
+#include <CommCtrl.h>
 #include <memory>
 #include <vector>
 #include <Shlwapi.h>
 
+#include "CommCtl.h"
 #include "Error.h"
 #include "MeterWnd/Meters/MeterTypes.h"
 #include "StringUtils.h"
@@ -170,19 +172,24 @@ std::vector<HICON> Skin::Iconset(char *osdName) {
             continue;
         }
 
-        QCLOG(L"%s", (iconDir + iconName).c_str());
-        Gdiplus::Bitmap *iconBmp = Gdiplus::Bitmap::FromFile(
-            (iconDir + iconName).c_str());
-        if (iconBmp == NULL) {
-            CLOG(L"Failed to load icon!");
+        std::wstring iconPath = iconDir + iconName;
+        std::wstring ext = StringUtils::FileExtension(iconName);
+        if (ext != L"ico") {
+            QCLOG(L"Ignoring non-ico file: %s", iconPath.c_str());
+            continue;
         }
 
-        HICON icon;
-        if (iconBmp->GetHICON(&icon) == Gdiplus::Status::Ok) {
+        HICON icon = NULL;
+        HRESULT hr = LoadIconMetric(
+            NULL,
+            iconPath.c_str(),
+            LIM_SMALL,
+            &icon);
+
+        if (icon != NULL) {
+            QCLOG(L"%s", iconPath.c_str());
             iconset.push_back(icon);
         }
-
-        delete iconBmp;
 
     } while (FindNextFile(hFind, &fd));
     FindClose(hFind);

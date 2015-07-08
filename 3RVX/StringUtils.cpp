@@ -24,3 +24,13 @@ std::string StringUtils::Narrow(std::wstring &str) {
         &buf[0], size, NULL, NULL);
     return buf;
 }
+
+std::wstring StringUtils::FileExtension(const std::wstring &fileName) {
+    size_t dot = fileName.find_last_of('.');
+
+    if (dot == std::wstring::npos || dot + 1 >= fileName.length()) {
+        return L"";
+    }
+
+    return fileName.substr(dot + 1, fileName.length());
+}

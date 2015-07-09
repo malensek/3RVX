@@ -17,6 +17,7 @@ Beta 8
 * Update checking functionality
 * Launching multiple settings instances will now simply raise and activate the first instance
 * Added content to the About tab
+* New default notification area icon
 * Bugfix: Corrupted "Run on Startup" registry entry
 * Bugfix: Play sound for custom volume increments
 * Bugfix: low-color icons were being loaded for the notification area

@@ -1,6 +1,13 @@
 3RVX3 Changelog
 ===============
 
+Beta 9
+------
+* Compatiblity mode for the old (v2) skin format
+* Automatic updates
+* Hotkey to disable/enable the OSD 
+* Option to temporarily disable the OSD when a DirectX application is running full screen
+
 Beta 8
 ------
 * Full screen detection
@@ -9,8 +16,10 @@ Beta 8
 * Installer-based (non-portable) setup. Portable distributions will still be provided as well.
 * Update checking functionality
 * Launching multiple settings instances will now simply raise and activate the first instance
+* Added content to the About tab
 * Bugfix: Corrupted "Run on Startup" registry entry
 * Bugfix: Play sound for custom volume increments
+* Bugfix: low-color icons were being loaded for the notification area
 
 Beta 7
 ------

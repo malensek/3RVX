@@ -5,6 +5,7 @@
 #include <string>
 
 #include "..\HotkeyInfo.h"
+#include "..\LanguageTranslator.h"
 #include "..\MeterWnd\Meters\CallbackMeter.h"
 #include "..\Monitor.h"
 #include "..\Skin.h"
@@ -44,13 +45,19 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
 
     /* Set up context menu */
     if (settings->NotifyIconEnabled()) {
+        LanguageTranslator *translator = settings->Translator();
+        _menuSetStr = translator->Translate(_menuSetStr);
+        _menuDevStr = translator->Translate(_menuDevStr);
+        _menuMixerStr = translator->Translate(_menuMixerStr);
+        _menuExitStr = translator->Translate(_menuExitStr);
+
         _menu = CreatePopupMenu();
         _deviceMenu = CreatePopupMenu();
 
-        InsertMenu(_menu, -1, MF_ENABLED, MENU_SETTINGS, L"Settings");
-        InsertMenu(_menu, -1, MF_POPUP, UINT(_deviceMenu), L"Audio Device");
-        InsertMenu(_menu, -1, MF_ENABLED, MENU_MIXER, L"Mixer");
-        InsertMenu(_menu, -1, MF_ENABLED, MENU_EXIT, L"Exit");
+        InsertMenu(_menu, -1, MF_ENABLED, MENU_SETTINGS, _menuSetStr.c_str());
+        InsertMenu(_menu, -1, MF_POPUP, UINT(_deviceMenu), _menuDevStr.c_str());
+        InsertMenu(_menu, -1, MF_ENABLED, MENU_MIXER, _menuMixerStr.c_str());
+        InsertMenu(_menu, -1, MF_ENABLED, MENU_EXIT, _menuExitStr.c_str());
 
         _menuFlags = TPM_RIGHTBUTTON;
         if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {

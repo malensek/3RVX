@@ -70,4 +70,10 @@ private:
 
     virtual LRESULT
         WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+private:
+    std::wstring _menuSetStr = L"Settings";
+    std::wstring _menuDevStr = L"Audio Device";
+    std::wstring _menuMixerStr = L"Mixer";
+    std::wstring _menuExitStr = L"Exit 3RVX";
 };

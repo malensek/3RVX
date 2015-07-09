@@ -22,6 +22,24 @@
     <translation>XXXXX</translation>
   </string>
 
+  <!-- Tray Menu Strings -->
+  <string>
+    <original>Settings</original>
+    <translation>XXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Audio Device</original>
+    <translation>XXXXX XXXXXX</translation>
+  </string>
+  <string>
+    <original>Mixer</original>
+    <translation>XXXXX</translation>
+  </string>
+  <string>
+    <original>Exit</original>
+    <original>XXXX</original>
+  </string>
+
 
   <!-- Tab Names -->
   <string>

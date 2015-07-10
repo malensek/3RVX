@@ -64,6 +64,7 @@ Settings *Settings::Instance() {
 void Settings::Load() {
     /* First, clean up (if needed) */
     delete _translator;
+    _translator = NULL;
 
     _file = SettingsFile();
     CLOG(L"Loading settings: %s", _file.c_str());

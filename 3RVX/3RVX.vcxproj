@@ -85,6 +85,8 @@
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="SkinV2.h" />
+    <ClInclude Include="SkinV3.h" />
     <ClInclude Include="SyntheticKeyboard.h" />
     <ClInclude Include="HotkeyInfo.h" />
     <ClInclude Include="HotkeyProcessor.h" />

@@ -165,6 +165,12 @@
     <ClInclude Include="CommCtl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SkinV2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinV3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">

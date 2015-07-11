@@ -14,8 +14,6 @@ class Meter;
 class SliderKnob;
 class SoundPlayer;
 
-#define SKINS_DIR L"Skins"
-#define SKIN_XML L"skin.xml"
 #define SKIN_DEFAULT_UNITS 10
 
 class Skin : SkinInfo {

@@ -8,8 +8,6 @@
 #include "..\HotkeyInfo.h"
 #include "..\Monitor.h"
 
-#define DISPLAY_EDGE_OFFSET 140
-
 OSD::OSD(LPCWSTR className, HINSTANCE hInstance) :
 _className(className) {
 

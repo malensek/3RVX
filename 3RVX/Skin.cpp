@@ -186,7 +186,7 @@ std::vector<HICON> Skin::Iconset(char *osdName) {
             LIM_SMALL,
             &icon);
 
-        if (icon != NULL) {
+        if (SUCCEEDED(hr) && icon != NULL) {
             QCLOG(L"%s", iconPath.c_str());
             iconset.push_back(icon);
         }

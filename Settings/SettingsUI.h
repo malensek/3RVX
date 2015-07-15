@@ -13,6 +13,7 @@
 #include "resource.h"
 
 /* Forward Declarations */
+INT_PTR LaunchPropertySheet();
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);
 

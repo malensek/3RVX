@@ -2,6 +2,7 @@
 
 #include <shellapi.h>
 
+#include "../../3RVX/3RVX.h"
 #include "../../3RVX/LanguageTranslator.h"
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
@@ -89,7 +90,11 @@ void General::SaveSettings() {
 
     settings->CurrentSkin(_skin.Selection());
 
-    settings->LanguageName(_language.Selection());
+    std::wstring lang = _language.Selection();
+    if (lang != settings->LanguageName()) {
+        settings->LanguageName(lang);
+        _3RVX::SettingsMessage(_3RVX::MSG_LANGCHANGE, NULL);
+    }
 }
 
 bool General::RunOnStartup() {

@@ -84,7 +84,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
 
     /* TODO: check whether we should show the OSD on startup or not. If so, post
      * a MSG_VOL_CHNG so that the volume level (or mute) is displayed: */
-    SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
+    SendMessage(_hWnd, VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
 }
 
 VolumeOSD::~VolumeOSD() {
@@ -268,12 +268,12 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
         }
     }
 
-        SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
+        SendMessage(_hWnd, VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
         break;
 
     case HotkeyInfo::Mute:
         _volumeCtrl->ToggleMute();
-        SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
+        SendMessage(_hWnd, VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
         break;
 
     case HotkeyInfo::VolumeSlider:
@@ -319,7 +319,7 @@ void VolumeOSD::ProcessVolumeHotkeys(HotkeyInfo &hki) {
     }
 
     /* Tell 3RVX that we changed the volume */
-    SendMessage(_hWnd, MSG_VOL_CHNG, NULL, (LPARAM) 1);
+    SendMessage(_hWnd, VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
 }
 
 void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
@@ -343,7 +343,7 @@ void VolumeOSD::UpdateVolumeState() {
 
 LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    if (message == MSG_VOL_CHNG) {
+    if (message == VolumeController::MSG_VOL_CHNG) {
         float v = _volumeCtrl->Volume();
         bool muteState = _volumeCtrl->Muted();
 
@@ -385,7 +385,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             HideOthers(Volume);
         }
 
-    } else if (message == MSG_VOL_DEVCHNG) {
+    } else if (message == VolumeController::MSG_VOL_DEVCHNG) {
         CLOG(L"Volume device change detected.");
         if (_selectedDevice == L"") {
             _volumeCtrl->SelectDefaultDevice();

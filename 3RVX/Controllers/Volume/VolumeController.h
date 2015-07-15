@@ -1,8 +1,5 @@
 #pragma once
 
-#define MSG_VOL_CHNG WM_APP + 1080
-#define MSG_VOL_DEVCHNG WM_APP + 1081
-
 class VolumeController {
 public:
     struct DeviceInfo {
@@ -18,4 +15,9 @@ public:
     virtual void ToggleMute() {
         (Muted() == true) ? Muted(false) : Muted(true);
     }
+
+public:
+    static const int MSG_VOL_CHNG = WM_APP + 1080;
+    static const int MSG_VOL_DEVCHNG = WM_APP + 1081;
+
 };

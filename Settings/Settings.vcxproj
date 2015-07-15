@@ -121,6 +121,7 @@
     <ClInclude Include="UITranslator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\3RVX\3RVXConsts.cpp" />
     <ClCompile Include="..\3RVX\DisplayManager.cpp" />
     <ClCompile Include="..\3RVX\Error.cpp" />
     <ClCompile Include="..\3RVX\HotkeyInfo.cpp" />

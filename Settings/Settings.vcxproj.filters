@@ -212,6 +212,9 @@
     <ClCompile Include="..\3RVX\Updater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\3RVX\3RVXConsts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Settings.rc">

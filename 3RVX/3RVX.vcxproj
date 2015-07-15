@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
+    <ClCompile Include="3RVXConsts.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />

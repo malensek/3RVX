@@ -68,12 +68,15 @@ int APIENTRY wWinMain(
             ReleaseMutex(mutex);
         }
 
-        HWND settingsWnd = FindWindow(CLASS_3RVX_SETTINGS, CLASS_3RVX_SETTINGS);
-
+        HWND settingsWnd = _3RVX::MasterSettingsHwnd();
         CLOG(L"A settings instance is already running. Moving window [%d] "
             L"to the foreground.", (int) settingsWnd);
         SetForegroundWindow(settingsWnd);
-        SendMessage(settingsWnd, WM_3RVX_SETTINGSCTRL, MSG_ACTIVATE, NULL);
+        SendMessage(
+            settingsWnd,
+            _3RVX::WM_3RVX_SETTINGSCTRL,
+            _3RVX::MSG_ACTIVATE,
+            NULL);
 
 #if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
         CLOG(L"Press [enter] to terminate");
@@ -92,7 +95,7 @@ int APIENTRY wWinMain(
     wcex.hInstance = hInstance;
     wcex.hIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_SETTINGS));
     wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
-    wcex.lpszClassName = CLASS_3RVX_SETTINGS;
+    wcex.lpszClassName = _3RVX::CLASS_3RVX_SETTINGS;
 
     if (RegisterClassEx(&wcex) == 0) {
         CLOG(L"Could not register class: %d", GetLastError());
@@ -100,8 +103,9 @@ int APIENTRY wWinMain(
     }
 
     mainWnd = CreateWindowEx(
-        NULL, CLASS_3RVX_SETTINGS, CLASS_3RVX_SETTINGS, NULL,
-        0, 0, 0, 0, NULL, NULL, hInstance, NULL);
+        NULL,
+        _3RVX::CLASS_3RVX_SETTINGS, _3RVX::CLASS_3RVX_SETTINGS,
+        NULL, 0, 0, 0, 0, NULL, NULL, hInstance, NULL);
 
     PROPSHEETPAGE psp[4];
 
@@ -189,9 +193,13 @@ LRESULT CALLBACK WndProc(
         break;
     }
 
-    if (message == WM_3RVX_SETTINGSCTRL && wParam == MSG_ACTIVATE) {
-        CLOG(L"Received request to activate window from external program");
-        SetActiveWindow(tabWnd);
+    if (message == _3RVX::WM_3RVX_SETTINGSCTRL) {
+        switch (wParam) {
+        case _3RVX::MSG_ACTIVATE:
+            CLOG(L"Received request to activate window from external program");
+            SetActiveWindow(tabWnd);
+            break;
+        }
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);
@@ -240,8 +248,7 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
                 Settings::Instance()->Save();
 
                 CLOG(L"Notifying 3RVX process of settings change");
-                HWND masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
-                SendMessage(masterWnd, WM_3RVX_CONTROL, MSG_LOAD, NULL);
+                _3RVX::Message(_3RVX::MSG_LOAD, NULL);
             }
         }
         break;

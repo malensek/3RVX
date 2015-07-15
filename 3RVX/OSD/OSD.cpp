@@ -43,7 +43,7 @@ _className(className) {
         throw SYSERR_CREATEWINDOW;
     }
 
-    _masterWnd = FindWindow(L"3RVXv3", L"3RVXv3");
+    _masterWnd = FindWindow(_3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX);
 }
 
 OSD::~OSD() {
@@ -52,7 +52,7 @@ OSD::~OSD() {
 }
 
 void OSD::HideOthers(OSDType except = All) {
-    SendMessage(_masterWnd, WM_3RVX_CONTROL, MSG_HIDEOSD, except);
+    SendMessage(_masterWnd, _3RVX::WM_3RVX_CTRL, _3RVX::MSG_HIDEOSD, except);
 }
 
 std::vector<Monitor> OSD::ActiveMonitors() {

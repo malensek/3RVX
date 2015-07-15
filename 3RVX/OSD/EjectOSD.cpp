@@ -12,7 +12,6 @@ OSD(L"3RVX-EjectDispatcher"),
 _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 
     Skin *skin = SkinManager::Instance()->CurrentSkin();
-
     if (skin->HasOSD("eject") == false) {
         return;
     }

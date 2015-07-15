@@ -1,13 +1,15 @@
-﻿#include <Windows.h>
-#include <gdiplus.h>
+﻿#include "3RVX.h"
+
 #pragma comment(lib, "gdiplus.lib")
+#pragma comment(lib, "Wtsapi32.lib")
+
+#include <Windows.h>
+#include <gdiplus.h>
 #include <iostream>
 #include <string>
 #include <unordered_map>
-#pragma comment(lib, "Wtsapi32.lib")
 #include <Wtsapi32.h>
 
-#include "3RVX.h"
 #include "DisplayManager.h"
 #include "HotkeyInfo.h"
 #include "HotkeyManager.h"
@@ -58,10 +60,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
             ReleaseMutex(mutex);
         }
 
-        HWND masterWnd = FindWindow(CLASS_3RVX, CLASS_3RVX);
         CLOG(L"A previous instance of the program is already running.\n"
-            L"Requesting Settings dialog from window: %d", (int) masterWnd);
-        SendMessage(masterWnd, WM_3RVX_CONTROL, MSG_SETTINGS, NULL);
+            L"Requesting Settings dialog.");
+        _3RVX::Message(_3RVX::MSG_SETTINGS, NULL);
 
 #if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
         CLOG(L"Press [enter] to terminate");
@@ -91,7 +92,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     }
 
     /* Tell the program to initialize */
-    PostMessage(mainWnd, WM_3RVX_CONTROL, MSG_LOAD, NULL);
+    PostMessage(mainWnd, _3RVX::WM_3RVX_CTRL, _3RVX::MSG_LOAD, NULL);
 
     /* Start the event loop */
     MSG msg;
@@ -157,7 +158,7 @@ HWND CreateMainWnd(HINSTANCE hInstance) {
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = CLASS_3RVX;
+    wcex.lpszClassName = _3RVX::CLASS_3RVX;
     wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
     if (!RegisterClassEx(&wcex)) {
@@ -166,7 +167,7 @@ HWND CreateMainWnd(HINSTANCE hInstance) {
 
     HWND hWnd = CreateWindowEx(
         NULL,
-        CLASS_3RVX, CLASS_3RVX,
+        _3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX,
         NULL, NULL, NULL, //your boat, gently down the stream
         NULL, NULL, NULL, NULL, hInstance, NULL);
 
@@ -245,17 +246,17 @@ LRESULT CALLBACK WndProc(
     }
     }
 
-    if (message == WM_3RVX_CONTROL) {
+    if (message == _3RVX::WM_3RVX_CTRL) {
         switch (wParam) {
-        case MSG_LOAD:
+        case _3RVX::MSG_LOAD:
             init();
             break;
 
-        case MSG_SETTINGS:
+        case _3RVX::MSG_SETTINGS:
             Settings::LaunchSettingsApp();
             break;
 
-        case MSG_HIDEOSD:
+        case _3RVX::MSG_HIDEOSD:
             int except = (OSDType) lParam;
             switch (except) {
             case Volume:

@@ -76,4 +76,13 @@ private:
     std::wstring _menuDevStr = L"Audio Device";
     std::wstring _menuMixerStr = L"Mixer";
     std::wstring _menuExitStr = L"Exit 3RVX";
+
+    std::wstring _iconMuteStr = L"Muted";
+
+private:
+    static const int MENU_SETTINGS = 0;
+    static const int MENU_MIXER = 1;
+    static const int MENU_EXIT = 2;
+    static const int MENU_DEVICE = 0xF000;
+
 };

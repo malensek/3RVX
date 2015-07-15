@@ -13,11 +13,6 @@
 #include "..\Slider\VolumeSlider.h"
 #include "..\MeterWnd\LayeredWnd.h"
 
-#define MENU_SETTINGS 0
-#define MENU_MIXER 1
-#define MENU_EXIT 2
-#define MENU_DEVICE 0xF000
-
 VolumeOSD::VolumeOSD() :
 OSD(L"3RVX-VolumeDispatcher"),
 _mWnd(L"3RVX-VolumeOSD", L"3RVX-VolumeOSD"),
@@ -50,6 +45,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
         _menuDevStr = translator->Translate(_menuDevStr);
         _menuMixerStr = translator->Translate(_menuMixerStr);
         _menuExitStr = translator->Translate(_menuExitStr);
+        _iconMuteStr = translator->Translate(_iconMuteStr);
 
         _menu = CreatePopupMenu();
         _deviceMenu = CreatePopupMenu();
@@ -232,7 +228,7 @@ void VolumeOSD::UpdateIconTip() {
     }
 
     if (_volumeCtrl->Muted()) {
-        _icon->UpdateToolTip(_selectedDesc + L": Muted");
+        _icon->UpdateToolTip(_selectedDesc + L": " + _iconMuteStr);
     } else {
         float v = _volumeCtrl->Volume();
         std::wstring perc = std::to_wstring((int) (v * 100.0f));

@@ -7,6 +7,8 @@ Beta 9
 * Automatic updates
 * Hotkey to disable/enable the OSD 
 * Option to temporarily disable the OSD when a DirectX application is running full screen
+* Bugfix: Translate 'Muted' for the notification icon
+* Bugfix: Settings dialog is now re-translated on 'Apply'
 
 Beta 8
 ------

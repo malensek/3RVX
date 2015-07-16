@@ -37,9 +37,12 @@
   </string>
   <string>
     <original>Exit</original>
-    <original>退出</original>
+    <translation>退出</translation>
   </string>
-
+  <string>
+    <original>Muted</original>
+    <translation>已静音</translation>
+  </string>
 
   <!-- Tab Names -->
   <string>

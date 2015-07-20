@@ -9,46 +9,13 @@
 #include "..\Monitor.h"
 
 OSD::OSD(LPCWSTR className, HINSTANCE hInstance) :
-_className(className) {
-
-    if (hInstance == NULL) {
-        hInstance = (HINSTANCE) GetModuleHandle(NULL);
-    }
-    _hInstance = hInstance;
-
-    WNDCLASSEX wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = NULL;
-    wcex.lpfnWndProc = &OSD::StaticWndProc;
-    wcex.cbClsExtra = NULL;
-    wcex.cbWndExtra = NULL;
-    wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = _className;
-    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-
-    if (!RegisterClassEx(&wcex)) {
-        throw SYSERR_REGISTERCLASS;
-    }
-
-    _hWnd = CreateWindowEx(NULL,
-        className, className,
-        NULL, NULL, NULL, NULL, NULL, NULL, NULL, hInstance, this);
-
-    if (_hWnd == NULL) {
-        throw SYSERR_CREATEWINDOW;
-    }
-
+Window(className, className, hInstance),
+_settings(Settings::Instance()) {
     _masterWnd = FindWindow(_3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX);
 }
 
 OSD::~OSD() {
-    DestroyWindow(_hWnd);
-    UnregisterClass(_className, _hInstance);
+
 }
 
 void OSD::HideOthers(OSDType except = All) {
@@ -166,25 +133,6 @@ void OSD::ProcessHotkeys(HotkeyInfo &hki) {
 
 }
 
-LRESULT CALLBACK
-OSD::StaticWndProc(
-HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    OSD *osd;
-
-    if (message == WM_CREATE) {
-        osd = (OSD *) ((LPCREATESTRUCT) lParam)->lpCreateParams;
-        SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR) osd);
-    } else {
-        osd = (OSD *) GetWindowLongPtr(hWnd, GWLP_USERDATA);
-        if (!osd) {
-            return DefWindowProc(hWnd, message, wParam, lParam);
-        }
-    }
-
-    return osd->WndProc(hWnd, message, wParam, lParam);
-}
-
-LRESULT
-OSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+LRESULT OSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     return DefWindowProc(hWnd, message, wParam, lParam);
 }

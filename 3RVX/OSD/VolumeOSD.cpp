@@ -19,11 +19,10 @@ _mWnd(L"3RVX-VolumeOSD", L"3RVX-VolumeOSD"),
 _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
 
     LoadSkin();
-    Settings *settings = Settings::Instance();
 
     /* Start the volume controller */
     _volumeCtrl = new CoreAudio(Window::Handle());
-    std::wstring device = settings->AudioDeviceID();
+    std::wstring device = _settings->AudioDeviceID();
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
 
@@ -31,7 +30,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     _lastVolume = _volumeCtrl->Volume();
     _muted = _volumeCtrl->Muted();
 
-    if (settings->SoundEffectsEnabled()) {
+    if (_settings->SoundEffectsEnabled()) {
         _sounds = true;
     }
 
@@ -39,8 +38,8 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     _volumeSlider = new VolumeSlider(*_volumeCtrl);
 
     /* Set up context menu */
-    if (settings->NotifyIconEnabled()) {
-        LanguageTranslator *translator = settings->Translator();
+    if (_settings->NotifyIconEnabled()) {
+        LanguageTranslator *translator = _settings->Translator();
         _menuSetStr = translator->Translate(_menuSetStr);
         _menuDevStr = translator->Translate(_menuDevStr);
         _menuMixerStr = translator->Translate(_menuMixerStr);
@@ -112,7 +111,6 @@ void VolumeOSD::UpdateDeviceMenu() {
 }
 
 void VolumeOSD::LoadSkin() {
-    Settings *settings = Settings::Instance();
     Skin *skin = SkinManager::Instance()->CurrentSkin();
 
     /* Volume OSD */
@@ -152,7 +150,7 @@ void VolumeOSD::LoadSkin() {
     OSD::InitMeterWnd(_muteWnd);
 
     /* Set up notification icon */
-    if (settings->NotifyIconEnabled()) {
+    if (_settings->NotifyIconEnabled()) {
         _iconImages = skin->volumeIconset;
         if (_iconImages.size() > 0) {
             _icon = new NotifyIcon(Window::Handle(), L"3RVX", _iconImages[0]);
@@ -160,7 +158,7 @@ void VolumeOSD::LoadSkin() {
     }
 
     /* Enable sound effects, if any */
-    if (settings->SoundEffectsEnabled()) {
+    if (_settings->SoundEffectsEnabled()) {
         if (skin->volumeSound) {
             _soundPlayer = skin->volumeSound;
         }

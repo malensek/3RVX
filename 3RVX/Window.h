@@ -19,12 +19,13 @@ public:
     HWND Handle();
 
 protected:
-    LPCWSTR _className;
-    HINSTANCE _hInstance;
-    HWND _hWnd;
-
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
+
+private:
+    LPCWSTR _className;
+    HINSTANCE _hInstance;
+    HWND _hWnd;
 };

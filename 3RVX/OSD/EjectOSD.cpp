@@ -25,12 +25,7 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 
     _mWnd.Update();
 
-    Settings *settings = Settings::Instance();
-    _mWnd.AlwaysOnTop(settings->AlwaysOnTop());
-    _mWnd.HideAnimation(settings->HideAnim(), settings->HideSpeed());
-    _mWnd.VisibleDuration(settings->HideDelay());
-
-    UpdateWindowPositions(ActiveMonitors());
+    OSD::InitMeterWnd(_mWnd);
 }
 
 EjectOSD::~EjectOSD() {

@@ -94,10 +94,6 @@ void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
     }
 }
 
-void EjectOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
-    PositionWindow(monitors[0], _mWnd);
-}
-
 LRESULT
 EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEREMOVECOMPLETE) {

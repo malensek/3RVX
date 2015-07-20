@@ -25,7 +25,6 @@ protected:
 
     void InitMeterWnd(MeterWnd &mWnd);
 
-    virtual void UpdateWindowPositions(std::vector<Monitor> &monitors) = 0;
     std::vector<Monitor> ActiveMonitors();
     void PositionWindow(Monitor monitor, LayeredWnd &lWnd);
     void CenterWindowX(Monitor monitor, LayeredWnd &lWnd);

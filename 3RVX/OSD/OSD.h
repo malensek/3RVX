@@ -13,7 +13,6 @@ class Monitor;
 class OSD : HotkeyProcessor, public Window {
 public:
     OSD(LPCWSTR className, HINSTANCE hInstance = NULL);
-    ~OSD();
 
     virtual void Hide() = 0;
     virtual void ProcessHotkeys(HotkeyInfo &hki);

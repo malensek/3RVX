@@ -14,10 +14,6 @@ _settings(Settings::Instance()) {
     _masterWnd = FindWindow(_3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX);
 }
 
-OSD::~OSD() {
-
-}
-
 void OSD::HideOthers(OSDType except = All) {
     SendMessage(_masterWnd, _3RVX::WM_3RVX_CTRL, _3RVX::MSG_HIDEOSD, except);
 }

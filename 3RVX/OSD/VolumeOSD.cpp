@@ -22,7 +22,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     Settings *settings = Settings::Instance();
 
     /* Start the volume controller */
-    _volumeCtrl = new CoreAudio(_hWnd);
+    _volumeCtrl = new CoreAudio(Window::Handle());
     std::wstring device = settings->AudioDeviceID();
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
@@ -80,7 +80,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
 
     /* TODO: check whether we should show the OSD on startup or not. If so, post
      * a MSG_VOL_CHNG so that the volume level (or mute) is displayed: */
-    SendMessage(_hWnd, VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
+    SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
 }
 
 VolumeOSD::~VolumeOSD() {
@@ -167,7 +167,7 @@ void VolumeOSD::LoadSkin() {
     if (settings->NotifyIconEnabled()) {
         _iconImages = skin->volumeIconset;
         if (_iconImages.size() > 0) {
-            _icon = new NotifyIcon(_hWnd, L"3RVX", _iconImages[0]);
+            _icon = new NotifyIcon(Window::Handle(), L"3RVX", _iconImages[0]);
         }
     }
 
@@ -264,12 +264,12 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
         }
     }
 
-        SendMessage(_hWnd, VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
+        SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
         break;
 
     case HotkeyInfo::Mute:
         _volumeCtrl->ToggleMute();
-        SendMessage(_hWnd, VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
+        SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
         break;
 
     case HotkeyInfo::VolumeSlider:
@@ -277,7 +277,7 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
             /* If the slider is already visible, user must want to close it. */
             _volumeSlider->Hide();
         } else {
-            SendMessage(_hWnd, MSG_NOTIFYICON, NULL, WM_LBUTTONUP);
+            SendMessage(Window::Handle(), MSG_NOTIFYICON, NULL, WM_LBUTTONUP);
         }
         break;
     }
@@ -328,6 +328,7 @@ void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
         PositionWindow(monitors[i], *meterClones[i - 1]);
         PositionWindow(monitors[i], *muteClones[i - 1]);
     }
+    SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
 }
 
 void VolumeOSD::UpdateVolumeState() {
@@ -403,7 +404,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             POINT p;
             GetCursorPos(&p);
             SetForegroundWindow(hWnd);
-            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y, _hWnd, NULL);
+            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y, Window::Handle(), NULL);
             PostMessage(hWnd, WM_NULL, 0, 0);
         }
 

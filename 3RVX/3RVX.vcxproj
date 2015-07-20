@@ -85,6 +85,8 @@
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="OSD\Brightness.h" />
+    <ClInclude Include="OSD\KeyboardOSD.h" />
     <ClInclude Include="SkinV2.h" />
     <ClInclude Include="SkinV3.h" />
     <ClInclude Include="SyntheticKeyboard.h" />
@@ -139,6 +141,8 @@
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />
+    <ClCompile Include="OSD\Brightness.cpp" />
+    <ClCompile Include="OSD\KeyboardOSD.cpp" />
     <ClCompile Include="SyntheticKeyboard.cpp" />
     <ClCompile Include="HotkeyInfo.cpp" />
     <ClCompile Include="KeyboardHotkeyProcessor.cpp" />

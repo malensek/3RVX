@@ -31,6 +31,11 @@ _className(className) {
         Error::ErrorMessageDie(SYSERR_CREATEWINDOW, title);
     }
 
+    LPCWSTR wndTitle = title;
+    if (lstrcmp(title, L"") == 0) {
+        wndTitle = className;
+    }
+
     _hWnd = CreateWindowEx(
         exStyle, className, title, style,
         x, y, width, height,

@@ -47,7 +47,6 @@ private:
     std::wstring _selectedDevice;
     std::wstring _selectedDesc;
 
-    bool _sounds;
     SoundPlayer *_soundPlayer;
 
     void LoadSkin();

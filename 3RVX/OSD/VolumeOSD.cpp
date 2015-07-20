@@ -29,10 +29,6 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     _lastVolume = _volumeCtrl->Volume();
     _muted = _volumeCtrl->Muted();
 
-    if (_settings->SoundEffectsEnabled()) {
-        _sounds = true;
-    }
-
     /* Create the slider */
     _volumeSlider = new VolumeSlider(*_volumeCtrl);
 

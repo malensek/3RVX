@@ -60,8 +60,6 @@ private:
     void UpdateDeviceMenu();
     void UnMute();
 
-    virtual void UpdateWindowPositions(std::vector<Monitor> &monitors);
-
     /// <summary>
     /// Re-initializes volume state variables (used after a device change
     /// occurs).

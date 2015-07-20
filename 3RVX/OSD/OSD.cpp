@@ -22,6 +22,23 @@ void OSD::HideOthers(OSDType except = All) {
     SendMessage(_masterWnd, _3RVX::WM_3RVX_CTRL, _3RVX::MSG_HIDEOSD, except);
 }
 
+void OSD::InitMeterWnd(MeterWnd &mWnd) {
+    mWnd.AlwaysOnTop(_settings->AlwaysOnTop());
+    mWnd.HideAnimation(_settings->HideAnim(), _settings->HideSpeed());
+    mWnd.VisibleDuration(_settings->HideDelay());
+
+    std::vector<Monitor> monitors = ActiveMonitors();
+    for (unsigned int i = 1; i < monitors.size(); ++i) {
+        mWnd.Clone();
+    }
+
+    PositionWindow(monitors[0], mWnd);
+    std::vector<LayeredWnd *> clones = mWnd.Clones();
+    for (unsigned int i = 1; i < monitors.size(); ++i) {
+        PositionWindow(monitors[i], *clones[i - 1]);
+    }
+}
+
 std::vector<Monitor> OSD::ActiveMonitors() {
     std::vector<Monitor> monitors;
     std::wstring monitorStr = _settings->Monitor();

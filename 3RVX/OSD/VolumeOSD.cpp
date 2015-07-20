@@ -65,14 +65,6 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
         UpdateDeviceMenu();
     }
 
-    _mWnd.AlwaysOnTop(settings->AlwaysOnTop());
-    _mWnd.HideAnimation(settings->HideAnim(), settings->HideSpeed());
-    _mWnd.VisibleDuration(settings->HideDelay());
-
-    _muteWnd.AlwaysOnTop(settings->AlwaysOnTop());
-    _muteWnd.HideAnimation(settings->HideAnim(), settings->HideSpeed());
-    _muteWnd.VisibleDuration(settings->HideDelay());
-
     UpdateIcon();
     float v = _volumeCtrl->Volume();
     MeterLevels(v);
@@ -155,13 +147,9 @@ void VolumeOSD::LoadSkin() {
     }
     _muteWnd.Update();
 
-    /* Create clones for additional monitors */
-    std::vector<Monitor> monitors = ActiveMonitors();
-    for (unsigned int i = 1; i < monitors.size(); ++i) {
-        _mWnd.Clone();
-        _muteWnd.Clone();
-    }
-    UpdateWindowPositions(monitors);
+    /* Now that everything is set up, initialize the meter windows. */
+    OSD::InitMeterWnd(_mWnd);
+    OSD::InitMeterWnd(_muteWnd);
 
     /* Set up notification icon */
     if (settings->NotifyIconEnabled()) {
@@ -315,19 +303,6 @@ void VolumeOSD::ProcessVolumeHotkeys(HotkeyInfo &hki) {
     }
 
     /* Tell 3RVX that we changed the volume */
-    SendMessage(_hWnd, VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
-}
-
-void VolumeOSD::UpdateWindowPositions(std::vector<Monitor> &monitors) {
-    PositionWindow(monitors[0], _mWnd);
-    PositionWindow(monitors[0], _muteWnd);
-
-    std::vector<LayeredWnd *> meterClones = _mWnd.Clones();
-    std::vector<LayeredWnd *> muteClones = _muteWnd.Clones();
-    for (unsigned int i = 1; i < monitors.size(); ++i) {
-        PositionWindow(monitors[i], *meterClones[i - 1]);
-        PositionWindow(monitors[i], *muteClones[i - 1]);
-    }
     SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
 }
 

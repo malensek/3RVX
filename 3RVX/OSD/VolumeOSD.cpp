@@ -71,7 +71,8 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
 
     /* TODO: check whether we should show the OSD on startup or not. If so, post
      * a MSG_VOL_CHNG so that the volume level (or mute) is displayed: */
-    SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
+    SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG,
+        NULL, (LPARAM) 1);
 }
 
 VolumeOSD::~VolumeOSD() {
@@ -250,12 +251,14 @@ void VolumeOSD::ProcessHotkeys(HotkeyInfo &hki) {
         }
     }
 
-        SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
+        SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG,
+            NULL, (LPARAM) 1);
         break;
 
     case HotkeyInfo::Mute:
         _volumeCtrl->ToggleMute();
-        SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
+        SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG,
+            NULL, (LPARAM) 1);
         break;
 
     case HotkeyInfo::VolumeSlider:
@@ -301,7 +304,8 @@ void VolumeOSD::ProcessVolumeHotkeys(HotkeyInfo &hki) {
     }
 
     /* Tell 3RVX that we changed the volume */
-    SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG, NULL, (LPARAM) 1);
+    SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG,
+        NULL, (LPARAM) 1);
 }
 
 void VolumeOSD::UpdateVolumeState() {
@@ -377,7 +381,8 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             POINT p;
             GetCursorPos(&p);
             SetForegroundWindow(hWnd);
-            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y, Window::Handle(), NULL);
+            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y,
+                Window::Handle(), NULL);
             PostMessage(hWnd, WM_NULL, 0, 0);
         }
 

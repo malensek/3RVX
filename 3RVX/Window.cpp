@@ -2,9 +2,8 @@
 
 #include "Error.h"
 
-Window::Window(LPCWSTR className, LPCWSTR title,
+Window::Window(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance,
         int x, int y, int width, int height,
-        HINSTANCE hInstance,
         UINT classStyle, DWORD style, DWORD exStyle,
         HWND parent, HMENU menu,
         HICON icon, HCURSOR cursor, HBRUSH background) :

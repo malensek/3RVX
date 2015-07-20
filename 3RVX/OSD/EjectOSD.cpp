@@ -28,10 +28,6 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     OSD::InitMeterWnd(_mWnd);
 }
 
-EjectOSD::~EjectOSD() {
-
-}
-
 void EjectOSD::EjectDrive(std::wstring driveLetter) {
     std::wstring name = L"\\\\.\\" + driveLetter + L":";
     CLOG(L"Ejecting %s", name.c_str());

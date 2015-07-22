@@ -17,6 +17,7 @@ public:
 
     LPCWSTR ClassName();
     HWND Handle();
+    HINSTANCE InstanceHandle();
 
 protected:
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,

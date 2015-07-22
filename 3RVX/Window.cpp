@@ -62,6 +62,9 @@ HWND Window::Handle() {
     return _hWnd;
 }
 
+HINSTANCE Window::InstanceHandle() {
+    return _hInstance;
+}
 LRESULT CALLBACK
 Window::StaticWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     Window *window;

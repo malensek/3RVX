@@ -14,6 +14,10 @@ _className(className) {
     }
     _hInstance = hInstance;
 
+    if (cursor == NULL) {
+        cursor = LoadCursor(NULL, IDC_ARROW);
+    }
+
     WNDCLASSEX wcex = { 0 };
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = classStyle;

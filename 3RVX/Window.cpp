@@ -69,6 +69,15 @@ HWND Window::Handle() {
 HINSTANCE Window::InstanceHandle() {
     return _hInstance;
 }
+
+std::wstring Window::Title() {
+    int len = GetWindowTextLength(_hWnd);
+    std::wstring str;
+    str.reserve(len);
+    GetWindowText(_hWnd, &str[0], len + 1);
+    return str;
+}
+
 LRESULT CALLBACK
 Window::StaticWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     Window *window;

@@ -18,7 +18,7 @@ public:
     LPCWSTR ClassName();
     HWND Handle();
     HINSTANCE InstanceHandle();
-    std::wstring Title();
+    LPCWSTR Title();
 
 protected:
     static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
@@ -30,4 +30,5 @@ private:
     LPCWSTR _className;
     HINSTANCE _hInstance;
     HWND _hWnd;
+    LPCWSTR _title;
 };

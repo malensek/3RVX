@@ -7,7 +7,8 @@ Window::Window(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance,
         UINT classStyle, DWORD style, DWORD exStyle,
         HWND parent, HMENU menu,
         HICON icon, HCURSOR cursor, HBRUSH background) :
-_className(className) {
+_className(className),
+_title(title) {
 
     if (hInstance == NULL) {
         hInstance = (HINSTANCE) GetModuleHandle(NULL);
@@ -70,12 +71,8 @@ HINSTANCE Window::InstanceHandle() {
     return _hInstance;
 }
 
-std::wstring Window::Title() {
-    int len = GetWindowTextLength(_hWnd);
-    std::wstring str;
-    str.reserve(len);
-    GetWindowText(_hWnd, &str[0], len + 1);
-    return str;
+LPCWSTR Window::Title() {
+    return _title;
 }
 
 LRESULT CALLBACK

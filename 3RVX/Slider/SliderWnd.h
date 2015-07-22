@@ -29,5 +29,6 @@ private:
     bool MouseOverTrack(int x, int y);
     void UpdateKnob(int x, int y);
 
-    virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
+    virtual LRESULT WndProc(HWND hWnd, UINT message,
+        WPARAM wParam, LPARAM lParam);
 };

@@ -10,16 +10,16 @@
 SliderWnd::SliderWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance) :
 MeterWnd(className, title, hInstance),
 _dragging(false) {
-    long styles = GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
+    long styles = GetWindowLongPtr(Window::Handle(), GWL_EXSTYLE);
     styles &= ~(WS_EX_NOACTIVATE | WS_EX_TRANSPARENT);
-    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, styles);
+    SetWindowLongPtr(Window::Handle(), GWL_EXSTYLE, styles);
 }
 
 void SliderWnd::Show() {
     PositionWindow();
     MeterWnd::Show(false);
     _ignoreInput = true;
-    SetTimer(_hWnd, TIMER_IGNORE_INPUT, IGNORE_DURATION, NULL);
+    SetTimer(Window::Handle(), TIMER_IGNORE_INPUT, IGNORE_DURATION, NULL);
 }
 
 void SliderWnd::Knob(SliderKnob *knob) {
@@ -119,11 +119,13 @@ void SliderWnd::UpdateKnob(int x, int y) {
     }
 }
 
-LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
+LRESULT SliderWnd::WndProc(
+        HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+
     switch (message) {
     case WM_TIMER:
         if (wParam == TIMER_IGNORE_INPUT) {
-            KillTimer(_hWnd, TIMER_IGNORE_INPUT);
+            KillTimer(hWnd, TIMER_IGNORE_INPUT);
             _ignoreInput = false;
         }
         break;
@@ -162,7 +164,7 @@ LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
             } else {
                 _dragOffset = x - _knob->X();
             }
-            SetCapture(_hWnd);
+            SetCapture(hWnd);
         } else if (MouseOverTrack(x, y)) {
             /* Simulate the mouse dragging to the clicked location: */
             UpdateKnob(x, y);
@@ -208,6 +210,6 @@ LRESULT SliderWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
         }
     }
 
-    return MeterWnd::WndProc(message, wParam, lParam);
+    return MeterWnd::WndProc(hWnd, message, wParam, lParam);
 }
 

@@ -64,7 +64,8 @@ protected:
     void HideClones();
     void ApplyClonesGlass();
 
-    virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
+    virtual LRESULT WndProc(HWND hWnd, UINT message,
+        WPARAM wParam, LPARAM lParam);
 
 private:
     /// <summary>Extended window styles for Meter windows.</summary>

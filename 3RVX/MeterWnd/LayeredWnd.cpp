@@ -8,53 +8,13 @@
 
 LayeredWnd::LayeredWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance,
     Gdiplus::Bitmap *bitmap, DWORD exStyles) :
-_className(className),
-_hInstance(hInstance),
-_title(title),
+Window(className, title, hInstance,
+    CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, NULL,
+    WS_POPUP, WS_EX_LAYERED | exStyles),
 _transparency(255),
 _visible(false) {
 
-    if (_hInstance == NULL) {
-        _hInstance = (HINSTANCE) GetModuleHandle(NULL);
-    }
-
-    WNDCLASSEX wcex;
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = 0;
-    wcex.lpfnWndProc = &LayeredWnd::StaticWndProc;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = _hInstance;
-    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = _className;
-    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-
-    if (!RegisterClassEx(&wcex)) {
-        throw SYSERR_REGISTERCLASS;
-    }
-
-    DWORD styles = WS_EX_LAYERED | exStyles;
-
-    _hWnd = CreateWindowEx(
-        styles,
-        _className, _title,
-        WS_POPUP, CW_USEDEFAULT, CW_USEDEFAULT,
-        _size.cx, _size.cy,
-        NULL, NULL, _hInstance, this);
-
-    if (_hWnd == NULL) {
-        throw SYSERR_CREATEWINDOW;
-    }
-
     Bitmap(bitmap);
-}
-
-LayeredWnd::~LayeredWnd() {
-    DestroyWindow(_hWnd);
-    UnregisterClass(_className, _hInstance);
 }
 
 void LayeredWnd::UpdateWindow(RECT *dirtyRect) {
@@ -86,7 +46,7 @@ void LayeredWnd::UpdateWindow(RECT *dirtyRect) {
     lwInfo.prcDirty = dirtyRect;
     lwInfo.psize = &size;
 
-    UpdateLayeredWindowIndirect(_hWnd, &lwInfo);
+    UpdateLayeredWindowIndirect(Window::Handle(), &lwInfo);
 
     SelectObject(sourceDc, hReplaced);
     DeleteDC(sourceDc);
@@ -113,7 +73,7 @@ void LayeredWnd::UpdateTransparency() {
     lwInfo.prcDirty = NULL;
     lwInfo.psize = NULL;
 
-    UpdateLayeredWindowIndirect(_hWnd, &lwInfo);
+    UpdateLayeredWindowIndirect(Window::Handle(), &lwInfo);
 }
 
 bool LayeredWnd::EnableGlass(Gdiplus::Bitmap *mask) {
@@ -176,7 +136,7 @@ bool LayeredWnd::EnableGlass(Gdiplus::Bitmap *mask) {
     Graphics g(_glassMask);
     blurBehind.hRgnBlur = glassRegion.GetHRGN(&g);
 
-    HRESULT hr = DwmEnableBlurBehindWindow(_hWnd, &blurBehind);
+    HRESULT hr = DwmEnableBlurBehindWindow(Window::Handle(), &blurBehind);
     return SUCCEEDED(hr);
 }
 
@@ -184,12 +144,13 @@ bool LayeredWnd::DisableGlass() {
     DWM_BLURBEHIND blurBehind = { 0 };
     blurBehind.dwFlags = DWM_BB_ENABLE;
     blurBehind.fEnable = FALSE;
-    HRESULT hr = DwmEnableBlurBehindWindow(_hWnd, &blurBehind);
+    HRESULT hr = DwmEnableBlurBehindWindow(Window::Handle(), &blurBehind);
     return SUCCEEDED(hr);
 }
 
 void LayeredWnd::UpdateWindowPosition() {
-    MoveWindow(_hWnd, _location.x, _location.y, _size.cx, _size.cy, FALSE);
+    MoveWindow(Window::Handle(),
+        _location.x, _location.y, _size.cx, _size.cy, FALSE);
 }
 
 void LayeredWnd::Show() {
@@ -198,7 +159,7 @@ void LayeredWnd::Show() {
     }
 
     UpdateWindow();
-    ShowWindow(_hWnd, SW_SHOW);
+    ShowWindow(Window::Handle(), SW_SHOW);
     _visible = true;
 }
 
@@ -207,7 +168,7 @@ void LayeredWnd::Hide() {
         return;
     }
 
-    ShowWindow(_hWnd, SW_HIDE);
+    ShowWindow(Window::Handle(), SW_HIDE);
     _visible = false;
 }
 
@@ -227,14 +188,16 @@ void LayeredWnd::Bitmap(Gdiplus::Bitmap *bitmap) {
 }
 
 bool LayeredWnd::AlwaysOnTop() {
-    return (GetWindowLong(_hWnd, GWL_EXSTYLE) & WS_EX_TOPMOST) != 0;
+    return (GetWindowLong(Window::Handle(), GWL_EXSTYLE) & WS_EX_TOPMOST) != 0;
 }
 
 void LayeredWnd::AlwaysOnTop(bool onTop) {
     if (onTop) {
-        SetWindowPos(_hWnd, HWND_TOPMOST, X(), Y(), Width(), Height(), NULL);
+        SetWindowPos(Window::Handle(), HWND_TOPMOST,
+            X(), Y(), Width(), Height(), NULL);
     } else {
-        SetWindowPos(_hWnd, HWND_NOTOPMOST, X(), Y(), Width(), Height(), NULL);
+        SetWindowPos(Window::Handle(), HWND_NOTOPMOST,
+            X(), Y(), Width(), Height(), NULL);
     }
 }
 
@@ -281,25 +244,9 @@ void LayeredWnd::Position(int x, int y) {
     UpdateWindowPosition();
 }
 
-LRESULT CALLBACK
-LayeredWnd::StaticWndProc(
+LRESULT LayeredWnd::WndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    LayeredWnd* wnd;
 
-    if (message == WM_CREATE) {
-        wnd = (LayeredWnd *) ((LPCREATESTRUCT) lParam)->lpCreateParams;
-        SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR) wnd);
-    } else {
-        wnd = (LayeredWnd *) GetWindowLongPtr(hWnd, GWLP_USERDATA);
-        if (!wnd) {
-            return DefWindowProc(hWnd, message, wParam, lParam);
-        }
-    }
-
-    return wnd->WndProc(message, wParam, lParam);
-}
-
-LRESULT LayeredWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
     if (_glassMask && message == WM_DWMCOMPOSITIONCHANGED) {
         BOOL compositionEnabled = FALSE;
         HRESULT hr = DwmIsCompositionEnabled(&compositionEnabled);
@@ -313,5 +260,5 @@ LRESULT LayeredWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
         }
     }
 
-    return DefWindowProc(_hWnd, message, wParam, lParam);
+    return Window::WndProc(hWnd, message, wParam, lParam);
 }

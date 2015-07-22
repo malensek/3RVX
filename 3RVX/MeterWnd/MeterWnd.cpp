@@ -87,15 +87,15 @@ bool MeterWnd::EnableGlass(Gdiplus::Bitmap *mask) {
 void MeterWnd::Show(bool animate) {
     if (_visible == false) {
         UpdateWindowPosition();
-        ShowWindow(_hWnd, SW_SHOW);
+        ShowWindow(Window::Handle(), SW_SHOW);
         _visible = true;
     }
 
     ShowClones();
 
     if (_visibleDuration > 0) {
-        SetTimer(_hWnd, TIMER_HIDE, _visibleDuration, NULL);
-        KillTimer(_hWnd, TIMER_OUT);
+        SetTimer(Window::Handle(), TIMER_HIDE, _visibleDuration, NULL);
+        KillTimer(Window::Handle(), TIMER_OUT);
 
         if (_hideAnimation) {
             _hideAnimation->Reset(this);
@@ -109,9 +109,10 @@ void MeterWnd::Hide(bool animate) {
     }
 
     if (animate && _hideAnimation) {
-        SetTimer(_hWnd, TIMER_OUT, _hideAnimation->UpdateInterval(), NULL);
+        SetTimer(Window::Handle(),
+            TIMER_OUT, _hideAnimation->UpdateInterval(), NULL);
     } else {
-        ShowWindow(_hWnd, SW_HIDE);
+        ShowWindow(Window::Handle(), SW_HIDE);
         _visible = false;
         HideClones();
     }
@@ -121,8 +122,8 @@ void MeterWnd::AnimateOut() {
     bool animOver = _hideAnimation->Animate(this);
     if (animOver) {
         CLOG(L"Finished hide animation.");
-        KillTimer(_hWnd, TIMER_OUT);
-        ShowWindow(_hWnd, SW_HIDE);
+        KillTimer(Window::Handle(), TIMER_OUT);
+        ShowWindow(Window::Handle(), SW_HIDE);
         _visible = false;
         HideClones();
     }
@@ -140,16 +141,16 @@ void MeterWnd::Transparency(byte transparency) {
 LayeredWnd *MeterWnd::Clone() {
     int numClones = _clones.size() + 1;
     std::wstringstream cloneClass;
-    cloneClass << _className << L":" << numClones;
+    cloneClass << Window::ClassName() << L":" << numClones;
     std::wstringstream cloneTitle;
-    cloneTitle << _title << L":" << numClones;
+    cloneTitle << Window::Title() << L":" << numClones;
 
     LayeredWnd *clone = new LayeredWnd(
         cloneClass.str().c_str(),
         cloneTitle.str().c_str(),
-        _hInstance,
+        Window::InstanceHandle(),
         _composite,
-        GetWindowLong(_hWnd, GWL_EXSTYLE));
+        GetWindowLong(Window::Handle(), GWL_EXSTYLE));
 
     if (_glassMask) {
         clone->EnableGlass(_glassMask);
@@ -199,13 +200,15 @@ void MeterWnd::ApplyClonesGlass() {
     }
 }
 
-LRESULT MeterWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
+LRESULT MeterWnd::WndProc(
+        HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+
     if (message == WM_TIMER) {
         switch (wParam) {
         case TIMER_HIDE:
             CLOG(L"Display duration has elapsed. Hiding window.");
             Hide();
-            KillTimer(_hWnd, TIMER_HIDE);
+            KillTimer(hWnd, TIMER_HIDE);
             break;
 
         case TIMER_OUT:
@@ -214,6 +217,6 @@ LRESULT MeterWnd::WndProc(UINT message, WPARAM wParam, LPARAM lParam) {
         }
     }
 
-    return LayeredWnd::WndProc(message, wParam, lParam);
+    return LayeredWnd::WndProc(hWnd, message, wParam, lParam);
 }
 

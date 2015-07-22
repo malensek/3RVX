@@ -4,11 +4,12 @@
 #include <gdiplus.h>
 #pragma comment(lib, "gdiplus.lib")
 
-class LayeredWnd {
+#include "../Window.h"
+
+class LayeredWnd : protected Window {
 public:
     LayeredWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL,
         Gdiplus::Bitmap *bitmap = NULL, DWORD exStyles = NULL);
-    ~LayeredWnd();
 
     virtual bool AlwaysOnTop();
     virtual void AlwaysOnTop(bool onTop);
@@ -49,11 +50,6 @@ public:
     void Position(int x, int y);
 
 protected:
-    HINSTANCE _hInstance;
-    LPCWSTR _className;
-    LPCWSTR _title;
-    HWND _hWnd;
-
     bool _visible;
     POINT _location;
     SIZE _size;
@@ -78,7 +74,6 @@ protected:
     void UpdateTransparency();
     void UpdateWindowPosition();
 
-    static LRESULT CALLBACK StaticWndProc(HWND hWnd, UINT message,
+    virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
-    virtual LRESULT WndProc(UINT message, WPARAM wParam, LPARAM lParam);
 };

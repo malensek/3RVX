@@ -10,7 +10,7 @@
 
 class Monitor;
 
-class OSD : HotkeyProcessor, public Window {
+class OSD : HotkeyProcessor, protected Window {
 public:
     OSD(LPCWSTR className, HINSTANCE hInstance = NULL);
 

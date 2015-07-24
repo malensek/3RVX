@@ -18,7 +18,14 @@ struct IUnknown;
 /// </summary>
 class SoundPlayer {
 public:
-    SoundPlayer(std::wstring filePath);
+    /// <summary>
+    /// Creates a new SoundPlayer for the given audio file path.
+    /// </summary>
+    /// <param name="filePath>Path to an audio file to play.</param>
+    /// <param name="repeatLimit">
+    /// Restricts the maximum number of plays that can queued up.
+    /// </param>
+    SoundPlayer(std::wstring filePath, int repeatLimit = 4);
     ~SoundPlayer();
 
     /// <summary>Plays the sound associated with this SoundPlayer.</summary>
@@ -33,6 +40,7 @@ private:
     bool _ready;
 
     int _repeat;
+    int _repeatLimit;
     std::mutex _repeatMutex;
 
     std::thread _thread;

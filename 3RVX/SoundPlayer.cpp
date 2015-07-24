@@ -1,12 +1,14 @@
 #include "SoundPlayer.h"
 
+#pragma comment(lib, "Strmiids.lib") 
+
 #include "Logger.h" // <-- Has to be included here because DirectShow says so...
 
 #include <Windows.h>
 #include <dshow.h>
-#pragma comment(lib, "Strmiids.lib") 
 
-SoundPlayer::SoundPlayer(std::wstring filePath) {
+SoundPlayer::SoundPlayer(std::wstring filePath, int repeatLimit) :
+_repeatLimit(repeatLimit) {
 
     HRESULT hr;
 
@@ -62,7 +64,7 @@ void SoundPlayer::Play() {
     }
 
     _repeatMutex.lock();
-    if (_repeat < 4) {
+    if (_repeat < _repeatLimit) {
         ++_repeat;
     }
     _repeatMutex.unlock();

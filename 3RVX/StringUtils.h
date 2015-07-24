@@ -5,8 +5,20 @@
 
 class StringUtils {
 public:
+    /// <summary>
+    /// Converts a standard character string to a wide string. This is required
+    /// to properly convert strings from UTF-8 sources to Windows-compatible
+    /// strings.
+    /// </summary>
     static std::wstring Widen(const char *str);
+
+    /// <summary>Converts a standard string to a wide string.</summary>
     static std::wstring Widen(const std::string &str);
+
+    /// <summary>
+    /// Converts a wide string to a standard string. Required for exporting
+    /// Windows strings to UTF-8 sources.
+    /// </summary>
     static std::string Narrow(const std::wstring &str);
 
     /// <summary>

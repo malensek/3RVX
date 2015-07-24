@@ -33,7 +33,7 @@ _title(title) {
     wcex.hIconSm = NULL;
 
     if (!RegisterClassEx(&wcex)) {
-        Error::ErrorMessageDie(SYSERR_CREATEWINDOW, title);
+        throw std::runtime_error("Could not register window class");
     }
 
     LPCWSTR wndTitle = title;
@@ -50,7 +50,7 @@ _title(title) {
         this);
 
     if (_hWnd == NULL) {
-        Error::ErrorMessageDie(SYSERR_CREATEWINDOW, title);
+        throw std::runtime_error("Could not create window");
     }
 }
 

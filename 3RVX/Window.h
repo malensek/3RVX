@@ -6,7 +6,6 @@
 /// <summary>
 /// Abstracts away the underlying win32 API details for creating and managing
 /// windows.
-/// <author>malensek</author>
 /// </summary>
 class Window {
 public:

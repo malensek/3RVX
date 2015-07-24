@@ -3,6 +3,12 @@
 #include <Windows.h>
 #include <string>
 
+/// <summary>
+/// Contains functionality for manipulating and converting strings. One
+/// important function provided by this class is converting standard C++ strings
+/// to and from Windows' wide character strings -- especially useful for reading
+/// XML.
+/// </summary>
 class StringUtils {
 public:
     /// <summary>

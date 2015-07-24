@@ -11,6 +11,11 @@ struct IMediaEventEx;
 struct IMediaSeeking;
 struct IUnknown;
 
+/// <summary>
+/// Handles playback of sounds using DirectShow. We use DirectShow here instead
+/// of the PlaySound API because performance seems better and more consistent
+/// overall.
+/// </summary>
 class SoundPlayer {
 public:
     SoundPlayer(std::wstring filePath);

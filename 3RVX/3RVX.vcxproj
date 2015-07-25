@@ -87,9 +87,11 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="OSD\Brightness.h" />
     <ClInclude Include="OSD\KeyboardOSD.h" />
-    <ClInclude Include="Skin\OSDSkin.h" />
+    <ClInclude Include="Skin\OSDComponent.h" />
+    <ClInclude Include="Skin\SkinComponent.h" />
     <ClInclude Include="Skin\SkinV2.h" />
     <ClInclude Include="Skin\SkinV3.h" />
+    <ClInclude Include="Skin\SliderComponent.h" />
     <ClInclude Include="SyntheticKeyboard.h" />
     <ClInclude Include="HotkeyInfo.h" />
     <ClInclude Include="HotkeyProcessor.h" />
@@ -144,6 +146,7 @@
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="OSD\Brightness.cpp" />
     <ClCompile Include="OSD\KeyboardOSD.cpp" />
+    <ClCompile Include="Skin\SkinV3.cpp" />
     <ClCompile Include="SyntheticKeyboard.cpp" />
     <ClCompile Include="HotkeyInfo.cpp" />
     <ClCompile Include="KeyboardHotkeyProcessor.cpp" />

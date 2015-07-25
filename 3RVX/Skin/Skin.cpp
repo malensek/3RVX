@@ -5,11 +5,6 @@ SkinInfo(skinXML) {
 
 }
 
-Skin::Skin(const SkinInfo &info) :
-SkinInfo(info) {
-
-}
-
 XMLElement *Skin::SubElement(char *parent, char *child) {
     tinyxml2::XMLHandle xmlHandle(_root);
     tinyxml2::XMLElement *elem = xmlHandle

@@ -10,6 +10,7 @@
 class SkinInfo {
 public:
     SkinInfo(std::wstring skinName);
+
     std::wstring Author();
     std::wstring URL();
     int FormatVersion();

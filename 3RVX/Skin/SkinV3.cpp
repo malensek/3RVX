@@ -17,15 +17,6 @@
 
 SkinV3::SkinV3(std::wstring skinXML) :
 Skin(skinXML) {
-
-}
-
-SkinV3::SkinV3(const SkinInfo &info) :
-Skin(info) {
-
-}
-
-void SkinV3::Initialize() {
     _volumeOSD = new OSDComponent;
     XMLElement *volOSDElem = SubElement("osds", "volume");
     PopulateComponent(_volumeOSD, volOSDElem);

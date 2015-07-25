@@ -19,7 +19,6 @@ using tinyxml2::XMLElement;
 class Skin : public SkinInfo {
 public:
     Skin(std::wstring skinXML);
-    Skin(const SkinInfo &info);
 
 public:
     virtual OSDComponent *VolumeOSD() = 0;

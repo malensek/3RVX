@@ -18,7 +18,6 @@ class SoundPlayer;
 class SkinV3 : public Skin {
 public:
     SkinV3(std::wstring skinXML);
-    SkinV3(const SkinInfo &info);
     ~SkinV3();
 
     virtual OSDComponent *VolumeOSD();
@@ -30,8 +29,6 @@ public:
     virtual SliderComponent *VolumeSlider();
 
 private:
-    void Initialize();
-
     OSDComponent *_volumeOSD;
     OSDComponent *_muteOSD;
     OSDComponent *_ejectOSD;

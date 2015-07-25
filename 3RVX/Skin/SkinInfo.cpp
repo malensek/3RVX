@@ -1,9 +1,9 @@
 #include "SkinInfo.h"
 
-#include "Error.h"
-#include "Logger.h"
-#include "Settings.h"
-#include "StringUtils.h"
+#include "../Error.h"
+#include "../Logger.h"
+#include "../Settings.h"
+#include "../StringUtils.h"
 
 SkinInfo::SkinInfo(std::wstring skinFile) :
 _skinFile(skinFile) {

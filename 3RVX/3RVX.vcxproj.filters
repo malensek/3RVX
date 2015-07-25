@@ -48,9 +48,6 @@
     <ClInclude Include="MeterWnd\Meters\HorizontalTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Skin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeterWnd\Meters\Bitstrip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -79,9 +76,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeterWnd\Meters\VerticalTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SkinInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NotifyIcon.h">
@@ -132,9 +126,6 @@
     <ClInclude Include="MeterWnd\MeterCallbackReceiver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SkinManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DisplayManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -165,12 +156,6 @@
     <ClInclude Include="CommCtl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SkinV2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SkinV3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -178,6 +163,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OSD\Brightness.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\Skin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\SkinInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\SkinManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\SkinV2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\SkinV3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -212,9 +212,6 @@
     <ClCompile Include="MeterWnd\Meters\HorizontalTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Skin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MeterWnd\Meters\Bitstrip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -234,9 +231,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\VerticalTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SkinInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NotifyIcon.cpp">
@@ -273,9 +267,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\CallbackMeter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SkinManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DisplayManager.cpp">
@@ -315,6 +306,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OSD\Brightness.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skin\Skin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skin\SkinInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skin\SkinManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

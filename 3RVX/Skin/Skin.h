@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "SkinInfo.h"
-#include "TinyXml2/tinyxml2.h"
+#include "../TinyXml2/tinyxml2.h"
 
 class Meter;
 class SliderKnob;

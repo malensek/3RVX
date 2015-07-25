@@ -2,7 +2,7 @@
 
 #include <Windows.h>
 #include <list>
-#include "TinyXml2\tinyxml2.h"
+#include "../TinyXml2/tinyxml2.h"
 
 #define SKINS_DIR L"Skins"
 #define SKIN_XML L"skin.xml"
@@ -12,6 +12,7 @@ public:
     SkinInfo(std::wstring skinName);
     std::wstring Author();
     std::wstring URL();
+    int FormatVersion();
 
 protected:
     std::wstring _skinFile;

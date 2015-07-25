@@ -4,8 +4,8 @@
 
 #include "..\HotkeyInfo.h"
 #include "..\Monitor.h"
-#include "..\Skin.h"
-#include "..\SkinManager.h"
+#include "..\Skin\Skin.h"
+#include "..\Skin\SkinManager.h"
 
 EjectOSD::EjectOSD() :
 OSD(L"3RVX-EjectDispatcher"),

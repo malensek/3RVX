@@ -1,10 +1,10 @@
 #include "VolumeSlider.h"
 
-#include "..\Controllers\Volume\CoreAudio.h"
-#include "..\Error.h"
-#include "..\Settings.h"
-#include "..\Skin.h"
-#include "..\SkinManager.h"
+#include "../Controllers/Volume/CoreAudio.h"
+#include "../Error.h"
+#include "../Settings.h"
+#include "../Skin/Skin.h"
+#include "../Skin/SkinManager.h"
 #include "SliderKnob.h"
 
 #define SCROLL_INCREMENT 0.05f

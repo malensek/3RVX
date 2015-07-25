@@ -6,12 +6,12 @@
 #include <vector>
 #include <Shlwapi.h>
 
-#include "CommCtl.h"
-#include "Error.h"
-#include "MeterWnd/Meters/MeterTypes.h"
-#include "StringUtils.h"
-#include "Slider/SliderKnob.h"
-#include "SoundPlayer.h"
+#include "../CommCtl.h"
+#include "../Error.h"
+#include "../MeterWnd/Meters/MeterTypes.h"
+#include "../StringUtils.h"
+#include "../Slider/SliderKnob.h"
+#include "../SoundPlayer.h"
 
 Skin::Skin(std::wstring skinXML) :
 SkinInfo(skinXML) {

@@ -2,15 +2,15 @@
 
 #include <string>
 
-#include "..\HotkeyInfo.h"
-#include "..\LanguageTranslator.h"
-#include "..\MeterWnd\LayeredWnd.h"
-#include "..\MeterWnd\Meters\CallbackMeter.h"
-#include "..\Monitor.h"
-#include "..\Skin.h"
-#include "..\SkinManager.h"
-#include "..\Slider\VolumeSlider.h"
-#include "..\SoundPlayer.h"
+#include "../HotkeyInfo.h"
+#include "../LanguageTranslator.h"
+#include "../MeterWnd/LayeredWnd.h"
+#include "../MeterWnd/Meters/CallbackMeter.h"
+#include "../Monitor.h"
+#include "../Skin/Skin.h"
+#include "../Skin/SkinManager.h"
+#include "../Slider/VolumeSlider.h"
+#include "../SoundPlayer.h"
 
 VolumeOSD::VolumeOSD() :
 OSD(L"3RVX-VolumeDispatcher"),

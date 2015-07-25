@@ -15,10 +15,10 @@
 #include "HotkeyManager.h"
 #include "KeyboardHotkeyProcessor.h"
 #include "Logger.h"
-#include "OSD\EjectOSD.h"
-#include "OSD\VolumeOSD.h"
+#include "OSD/EjectOSD.h"
+#include "OSD/VolumeOSD.h"
 #include "Settings.h"
-#include "SkinManager.h"
+#include "Skin/SkinManager.h"
 
 HANDLE mutex;
 HINSTANCE hInst;

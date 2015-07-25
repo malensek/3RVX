@@ -10,7 +10,7 @@
 #include "LanguageTranslator.h"
 #include "Logger.h"
 #include "Monitor.h"
-#include "Skin.h"
+#include "Skin/Skin.h"
 #include "StringUtils.h"
 
 #define XML_AUDIODEV "audioDeviceID"

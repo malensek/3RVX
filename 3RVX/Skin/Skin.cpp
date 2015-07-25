@@ -29,7 +29,7 @@ SkinInfo(skinXML) {
 
     volumeSliderBackground = SliderBgImg("volume");
     volumeSliderMask = SliderMask("volume");
-    volumeSliderMeters = Meters(SliderXMLElement("volume"));
+    volumeSliderMeters = Meters(SubElement("sliders", "volume"));
     volumeSliderKnob = Knob("volume");
 }
 
@@ -64,7 +64,7 @@ int Skin::DefaultVolumeUnits() {
 int Skin::DefaultOSDUnits(char *osdName) {
     int defaultUnits = SKIN_DEFAULT_UNITS;
 
-    tinyxml2::XMLElement *osdElem = OSDXMLElement(osdName);
+    tinyxml2::XMLElement *osdElem = SubElement("osds", osdName);
     if (osdElem == NULL) {
         return defaultUnits;
     }
@@ -74,11 +74,11 @@ int Skin::DefaultOSDUnits(char *osdName) {
 }
 
 bool Skin::HasOSD(char *osdName) {
-    return (OSDXMLElement(osdName) != NULL);
+    return (SubElement("osds", osdName) != NULL);
 }
 
 Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
-    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    tinyxml2::XMLElement *osd = SubElement("osds", osdName);
     if (osd == NULL) {
         Error::ErrorMessageDie(SKINERR_INVALID_OSD,
             StringUtils::Widen(osdName));
@@ -87,7 +87,7 @@ Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
 }
 
 Gdiplus::Bitmap *Skin::OSDMask(char *osdName) {
-    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    tinyxml2::XMLElement *osd = SubElement("osds", osdName);
     if (osd == NULL) {
         return NULL;
     }
@@ -96,7 +96,7 @@ Gdiplus::Bitmap *Skin::OSDMask(char *osdName) {
 }
 
 Gdiplus::Bitmap *Skin::SliderBgImg(char *sliderName) {
-    tinyxml2::XMLElement *sliderElement = SliderXMLElement(sliderName);
+    tinyxml2::XMLElement *sliderElement = SubElement("sliders", sliderName);
     if (sliderElement == NULL) {
         Error::ErrorMessageDie(
             SKINERR_INVALID_BG, StringUtils::Widen(sliderName));
@@ -105,7 +105,7 @@ Gdiplus::Bitmap *Skin::SliderBgImg(char *sliderName) {
 }
 
 Gdiplus::Bitmap *Skin::SliderMask(char *sliderName) {
-    tinyxml2::XMLElement *slider = SliderXMLElement(sliderName);
+    tinyxml2::XMLElement *slider = SubElement("sliders", sliderName);
     if (slider == NULL) {
         return NULL;
     }
@@ -114,7 +114,6 @@ Gdiplus::Bitmap *Skin::SliderMask(char *sliderName) {
 }
 
 Gdiplus::Bitmap *Skin::Image(tinyxml2::XMLElement *elem, char *attName) {
-
     if (elem == NULL) {
         CLOG(L"XML Element is NULL!");
         return NULL;
@@ -139,7 +138,7 @@ Gdiplus::Bitmap *Skin::Image(tinyxml2::XMLElement *elem, char *attName) {
 std::vector<HICON> Skin::Iconset(char *osdName) {
     std::vector<HICON> iconset;
 
-    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    tinyxml2::XMLElement *osd = SubElement("osds", osdName);
     if (osd == NULL) {
         Error::ErrorMessageDie(SKINERR_INVALID_OSD);
     }
@@ -198,7 +197,7 @@ std::vector<HICON> Skin::Iconset(char *osdName) {
 }
 
 SoundPlayer *Skin::OSDSound(char *osdName) {
-    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
+    tinyxml2::XMLElement *osd = SubElement("osds", osdName);
     if (osd == NULL) {
         Error::ErrorMessageDie(SKINERR_INVALID_OSD,
             StringUtils::Widen(osdName));
@@ -402,7 +401,7 @@ Skin::Alignment(tinyxml2::XMLElement *meterXMLElement) {
 }
 
 SliderKnob *Skin::Knob(char *sliderName) {
-    tinyxml2::XMLElement *controller = SliderXMLElement(sliderName);
+    tinyxml2::XMLElement *controller = SubElement("sliders", sliderName);
     if (controller == NULL) {
         Error::ErrorMessageDie(
             SKINERR_INVALID_SLIDER, StringUtils::Widen(sliderName));
@@ -455,20 +454,11 @@ std::wstring Skin::ImageName(tinyxml2::XMLElement *meterXMLElement) {
     return _skinDir + L"\\" + StringUtils::Widen(imgName);
 }
 
-tinyxml2::XMLElement *Skin::OSDXMLElement(char *osdName) {
+tinyxml2::XMLElement *Skin::SubElement(char *parent, char *child) {
     tinyxml2::XMLHandle xmlHandle(_root);
-    tinyxml2::XMLElement *osd = xmlHandle
-        .FirstChildElement("osds")
-        .FirstChildElement(osdName)
+    tinyxml2::XMLElement *elem = xmlHandle
+        .FirstChildElement(parent)
+        .FirstChildElement(child)
         .ToElement();
-    return osd;
-}
-
-tinyxml2::XMLElement *Skin::SliderXMLElement(char *sliderName) {
-    tinyxml2::XMLHandle xmlHandle(_root);
-    tinyxml2::XMLElement *controller = xmlHandle
-        .FirstChildElement("sliders")
-        .FirstChildElement(sliderName)
-        .ToElement();
-    return controller;
+    return elem;
 }

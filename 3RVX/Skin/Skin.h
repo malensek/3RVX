@@ -46,14 +46,12 @@ public:
 private:
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     Gdiplus::Bitmap *OSDMask(char *osdName);
-    tinyxml2::XMLElement *OSDXMLElement(char *osdName);
     SoundPlayer *OSDSound(char *osdName);
 
     std::vector<HICON> Iconset(char *osdName);
 
     Gdiplus::Bitmap *SliderBgImg(char *sliderName);
     Gdiplus::Bitmap *SliderMask(char *sliderName);
-    tinyxml2::XMLElement *SliderXMLElement(char *sliderName);
     SliderKnob *Knob(char *sliderName);
 
     std::vector<Meter *> Meters(tinyxml2::XMLElement *parentElement);
@@ -63,6 +61,8 @@ private:
     std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::Font *Font(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::StringAlignment Alignment(tinyxml2::XMLElement *meterXMLElement);
+
+    tinyxml2::XMLElement *SubElement(char *parent, char *child);
 
     int DefaultOSDUnits(char *osdName);
 };

@@ -5,6 +5,7 @@
 #include "../Settings.h"
 #include "../Skin/Skin.h"
 #include "../Skin/SkinManager.h"
+#include "../Skin/SliderComponent.h"
 #include "SliderKnob.h"
 
 #define SCROLL_INCREMENT 0.05f
@@ -14,19 +15,14 @@ SliderWnd(L"3RVX-VolumeSlider", L"3RVX Volume Slider"),
 _volumeCtrl(volumeCtrl) {
 
     Skin *skin = SkinManager::Instance()->CurrentSkin();
+    BackgroundImage(skin->VolumeSlider()->background);
+    EnableGlass(skin->VolumeSlider()->mask);
 
     /* TODO NULL check */
-    BackgroundImage(skin->volumeSliderBackground);
-
-    if (skin->volumeSliderMask != NULL) {
-        EnableGlass(skin->volumeSliderMask);
-    }
-
-    /* TODO NULL check */
-    _knob = skin->volumeSliderKnob;
+    _knob = skin->VolumeSlider()->knob;
     _vertical = _knob->Vertical();
 
-    for (Meter *m : skin->volumeSliderMeters) {
+    for (Meter *m : skin->VolumeSlider()->meters) {
         AddMeter(m);
     }
 

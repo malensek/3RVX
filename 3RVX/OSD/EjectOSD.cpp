@@ -2,18 +2,19 @@
 
 #include <Dbt.h>
 
-#include "..\HotkeyInfo.h"
-#include "..\Monitor.h"
-#include "..\Skin\Skin.h"
-#include "..\Skin\SkinManager.h"
+#include "../HotkeyInfo.h"
+#include "../Monitor.h"
+#include "../Skin/OSDComponent.h"
+#include "../Skin/Skin.h"
+#include "../Skin/SkinManager.h"
 
 EjectOSD::EjectOSD() :
 OSD(L"3RVX-EjectDispatcher"),
 _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 
     Skin *skin = SkinManager::Instance()->CurrentSkin();
-    _mWnd.BackgroundImage(skin->ejectBackground);
-    _mWnd.EnableGlass(skin->ejectMask);
+    _mWnd.BackgroundImage(skin->EjectOSD()->background);
+    _mWnd.EnableGlass(skin->EjectOSD()->mask);
     _mWnd.Update();
 
     OSD::InitMeterWnd(_mWnd);

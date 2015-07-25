@@ -8,8 +8,9 @@
 #include <list>
 #include <vector>
 
-#include "SkinInfo.h"
 #include "../TinyXml2/tinyxml2.h"
+#include "OSDSkin.h" // forward declare this later??
+#include "SkinInfo.h"
 
 class Meter;
 class SliderKnob;
@@ -26,11 +27,7 @@ public:
     int DefaultVolumeUnits();
 
 public:
-    Gdiplus::Bitmap *volumeBackground;
-    Gdiplus::Bitmap *volumeMask;
-    std::vector<Meter *> volumeMeters;
-    std::vector<HICON> volumeIconset;
-    SoundPlayer *volumeSound;
+    OSDSkin *VolumeOSD();
 
     Gdiplus::Bitmap *muteBackground;
     Gdiplus::Bitmap *muteMask;
@@ -44,6 +41,8 @@ public:
     SliderKnob *volumeSliderKnob;
 
 private:
+    OSDSkin *_volumeOSD;
+
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     Gdiplus::Bitmap *OSDMask(char *osdName);
     SoundPlayer *OSDSound(char *osdName);

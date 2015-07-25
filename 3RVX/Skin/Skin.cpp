@@ -12,14 +12,16 @@
 #include "../StringUtils.h"
 #include "../Slider/SliderKnob.h"
 #include "../SoundPlayer.h"
+#include "OSDSkin.h"
 
 Skin::Skin(std::wstring skinXML) :
 SkinInfo(skinXML) {
-    volumeBackground = OSDBgImg("volume");
-    volumeMask = OSDMask("volume");
-    volumeMeters = Meters(OSDXMLElement("volume"));
-    volumeIconset = Iconset("volume");
-    volumeSound = OSDSound("volume");
+    _volumeOSD = new OSDSkin(
+        OSDBgImg("volume"),
+        OSDMask("volume"),
+        Meters(SubElement("osds", "volume")),
+        Iconset("volume"),
+        OSDSound("volume"));
 
     muteBackground = OSDBgImg("mute");
     muteMask = OSDMask("mute");
@@ -34,7 +36,8 @@ SkinInfo(skinXML) {
 }
 
 Skin::~Skin() {
-    delete volumeBackground;
+    delete _volumeOSD;
+    /*
     delete volumeMask;
     for (Meter *meter : volumeMeters) {
         delete meter;
@@ -42,6 +45,7 @@ Skin::~Skin() {
     for (HICON icon : volumeIconset) {
         DestroyIcon(icon);
     }
+    */
 
     delete muteBackground;
     delete muteMask;
@@ -55,6 +59,10 @@ Skin::~Skin() {
         delete meter;
     }
     delete volumeSliderKnob;
+}
+
+OSDSkin *Skin::VolumeOSD() {
+    return _volumeOSD;
 }
 
 int Skin::DefaultVolumeUnits() {

@@ -6,8 +6,8 @@
 #include <gdiplus.h>
 #include <vector>
 
-#include "../MeterWnd/Meter.h"
-#include "../SoundPlayer.h"
+class Meter;
+class SoundPlayer;
 
 class OSDSkin {
 public:

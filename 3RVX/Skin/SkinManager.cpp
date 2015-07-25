@@ -1,6 +1,7 @@
 #include "SkinManager.h"
 
 #include "Skin.h"
+#include "SkinV3.h"
 
 SkinManager *SkinManager::instance;
 
@@ -17,7 +18,7 @@ SkinManager::~SkinManager() {
 
 void SkinManager::LoadSkin(std::wstring skinXML) {
     delete _skin;
-    _skin = new Skin(skinXML);
+    _skin = new SkinV3(skinXML);
 }
 
 Skin *SkinManager::CurrentSkin() {

@@ -87,6 +87,7 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="OSD\Brightness.h" />
     <ClInclude Include="OSD\KeyboardOSD.h" />
+    <ClInclude Include="Skin\OSDSkin.h" />
     <ClInclude Include="Skin\SkinV2.h" />
     <ClInclude Include="Skin\SkinV3.h" />
     <ClInclude Include="SyntheticKeyboard.h" />

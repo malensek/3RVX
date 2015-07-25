@@ -7,6 +7,7 @@
 #include "../MeterWnd/LayeredWnd.h"
 #include "../MeterWnd/Meters/CallbackMeter.h"
 #include "../Monitor.h"
+#include "../Skin/OSDComponent.h"
 #include "../Skin/Skin.h"
 #include "../Skin/SkinManager.h"
 #include "../Slider/VolumeSlider.h"
@@ -110,7 +111,7 @@ void VolumeOSD::LoadSkin() {
     Skin *skin = SkinManager::Instance()->CurrentSkin();
 
     /* Volume OSD */
-    OSDSkin *volumeOSD = skin->VolumeOSD();
+    OSDComponent *volumeOSD = skin->VolumeOSD();
     _mWnd.BackgroundImage(volumeOSD->background);
     _mWnd.EnableGlass(volumeOSD->mask);
     for (Meter *m : volumeOSD->meters) {
@@ -118,18 +119,18 @@ void VolumeOSD::LoadSkin() {
     }
 
     /* Add a callback meter with the default volume increment for sounds */
-    _callbackMeter = new CallbackMeter(skin->DefaultVolumeUnits(), *this);
+    _callbackMeter = new CallbackMeter(volumeOSD->defaultUnits, *this);
     _mWnd.AddMeter(_callbackMeter);
 
     /* Default volume increment */
-    _defaultIncrement = (float) (10000 / skin->DefaultVolumeUnits()) / 10000.0f;
+    _defaultIncrement = (float) (10000 / volumeOSD->defaultUnits) / 10000.0f;
     CLOG(L"Default volume increment: %f", _defaultIncrement);
 
     _mWnd.Update();
 
     /* Mute OSD */
-    _muteWnd.BackgroundImage(skin->muteBackground);
-    _muteWnd.EnableGlass(skin->muteMask);
+    _muteWnd.BackgroundImage(skin->MuteOSD()->background);
+    _muteWnd.EnableGlass(skin->MuteOSD()->mask);
     _muteWnd.Update();
 
     /* Now that everything is set up, initialize the meter windows. */
@@ -138,7 +139,7 @@ void VolumeOSD::LoadSkin() {
 
     /* Set up notification icon */
     if (_settings->NotifyIconEnabled()) {
-        _iconImages = volumeOSD->iconset;
+        _iconImages = skin->VolumeIconset();
         if (_iconImages.size() > 0) {
             _icon = new NotifyIcon(Window::Handle(), L"3RVX", _iconImages[0]);
         }

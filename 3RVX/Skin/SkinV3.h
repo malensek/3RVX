@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-#include "../TinyXml2/tinyxml2.h"
 #include "Skin.h"
 
 class Meter;
@@ -19,11 +18,41 @@ class SoundPlayer;
 class SkinV3 : public Skin {
 public:
     SkinV3(std::wstring skinXML);
+    SkinV3(const SkinInfo &info);
     ~SkinV3();
 
+    virtual OSDComponent *VolumeOSD();
+    virtual OSDComponent *MuteOSD();
+    virtual OSDComponent *EjectOSD();
+
+    virtual std::vector<HICON> VolumeIconset();
+
+    virtual SliderComponent *VolumeSlider();
+
 private:
+    void Initialize();
+
     OSDComponent *_volumeOSD;
     OSDComponent *_muteOSD;
     OSDComponent *_ejectOSD;
 
+    std::vector<HICON> _volumeIcons;
+
+    SliderComponent *_volumeSlider;
+
+    void PopulateComponent(SkinComponent *component, XMLElement *elem);
+    void DestroyComponent(SkinComponent *component);
+
+    int DefaultUnits(XMLElement *elem);
+    Gdiplus::Bitmap *Image(XMLElement *element, char *attrName);
+    std::wstring ImageName(XMLElement *elem);
+
+    std::vector<HICON> Iconset(XMLElement *elem);
+    SliderKnob *Knob(XMLElement *elem);
+    SoundPlayer *Sound(XMLElement *elem);
+
+    std::vector<Meter *> Meters(XMLElement *parentElement);
+    Meter *LoadMeter(XMLElement *meterXMLElement);
+    Gdiplus::Font *Font(XMLElement *meterXMLElement);
+    Gdiplus::StringAlignment Alignment(XMLElement *meterXMLElement);
 };

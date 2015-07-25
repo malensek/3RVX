@@ -4,6 +4,6 @@
 
 class SliderKnob;
 
-struct OSDComponent : public SkinComponent {
+struct SliderComponent : public SkinComponent {
     SliderKnob *knob;
 };

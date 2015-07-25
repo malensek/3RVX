@@ -230,8 +230,8 @@ SoundPlayer *Skin::OSDSound(char *osdName) {
     return player;
 }
 
-std::list<Meter *> Skin::OSDMeters(char *osdName) {
-    std::list<Meter*> meters;
+std::vector<Meter *> Skin::OSDMeters(char *osdName) {
+    std::vector<Meter*> meters;
 
     tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
     tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");
@@ -245,8 +245,8 @@ std::list<Meter *> Skin::OSDMeters(char *osdName) {
     return meters;
 }
 
-std::list<Meter *> Skin::SliderMeters(char *osdName) {
-    std::list<Meter *> meters;
+std::vector<Meter *> Skin::SliderMeters(char *osdName) {
+    std::vector<Meter *> meters;
 
     tinyxml2::XMLElement *osd = SliderXMLElement(osdName);
     tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");

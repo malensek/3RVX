@@ -1,8 +1,9 @@
 #pragma once
 
+#pragma comment(lib, "gdiplus.lib")
+
 #include <Windows.h>
 #include <gdiplus.h>
-#pragma comment(lib, "gdiplus.lib")
 
 #include <list>
 #include <vector>
@@ -27,7 +28,7 @@ public:
 public:
     Gdiplus::Bitmap *volumeBackground;
     Gdiplus::Bitmap *volumeMask;
-    std::list<Meter *> volumeMeters;
+    std::vector<Meter *> volumeMeters;
     std::vector<HICON> volumeIconset;
     SoundPlayer *volumeSound;
 
@@ -39,13 +40,13 @@ public:
 
     Gdiplus::Bitmap *volumeSliderBackground;
     Gdiplus::Bitmap *volumeSliderMask;
-    std::list<Meter *> volumeSliderMeters;
+    std::vector<Meter *> volumeSliderMeters;
     SliderKnob *volumeSliderKnob;
 
 private:
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     Gdiplus::Bitmap *OSDMask(char *osdName);
-    std::list<Meter *> OSDMeters(char *osdName);
+    std::vector<Meter *> OSDMeters(char *osdName);
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);
     SoundPlayer *OSDSound(char *osdName);
 
@@ -53,7 +54,7 @@ private:
 
     Gdiplus::Bitmap *SliderBgImg(char *sliderName);
     Gdiplus::Bitmap *SliderMask(char *sliderName);
-    std::list<Meter *> SliderMeters(char *osdName);   
+    std::vector<Meter *> SliderMeters(char *osdName);   
     tinyxml2::XMLElement *SliderXMLElement(char *sliderName);
     SliderKnob *Knob(char *sliderName);
 

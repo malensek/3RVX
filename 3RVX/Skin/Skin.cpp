@@ -12,27 +12,27 @@
 #include "../StringUtils.h"
 #include "../Slider/SliderKnob.h"
 #include "../SoundPlayer.h"
-#include "OSDSkin.h"
+#include "OSDComponent.h"
+#include "SkinComponent.h"
+#include "SliderComponent.h"
 
 Skin::Skin(std::wstring skinXML) :
 SkinInfo(skinXML) {
-    _volumeOSD = new OSDSkin(
-        OSDBgImg("volume"),
-        OSDMask("volume"),
-        Meters(SubElement("osds", "volume")),
-        Iconset("volume"),
-        OSDSound("volume"));
+    _volumeOSD = new OSDComponent;
+    PopulateComponent(_volumeOSD, "osds", "volume");
+    _volumeOSD->defaultUnits = DefaultUnits("osds", "volume");
 
-    muteBackground = OSDBgImg("mute");
-    muteMask = OSDMask("mute");
+    _muteOSD = new OSDComponent;
+    PopulateComponent(_muteOSD, "osds", "mute");
 
-    ejectBackground = OSDBgImg("eject");
-    ejectMask = OSDMask("eject");
+    _ejectOSD = new OSDComponent;
+    PopulateComponent(_ejectOSD, "osds", "eject");
 
-    volumeSliderBackground = SliderBgImg("volume");
-    volumeSliderMask = SliderMask("volume");
-    volumeSliderMeters = Meters(SubElement("sliders", "volume"));
-    volumeSliderKnob = Knob("volume");
+    _volumeIcons = Iconset("volume");
+
+    _volumeSlider = new SliderComponent;
+    PopulateComponent(_volumeSlider, "sliders", "volume");
+    _volumeSlider->knob = Knob("volume");
 }
 
 Skin::~Skin() {
@@ -45,7 +45,6 @@ Skin::~Skin() {
     for (HICON icon : volumeIconset) {
         DestroyIcon(icon);
     }
-    */
 
     delete muteBackground;
     delete muteMask;
@@ -59,20 +58,40 @@ Skin::~Skin() {
         delete meter;
     }
     delete volumeSliderKnob;
+    */
 }
 
-OSDSkin *Skin::VolumeOSD() {
+void Skin::PopulateComponent(SkinComponent *component, char *componentClass, char *componentName) {
+    component->background = BackgroundImage(componentClass, componentName);
+    component->mask = MaskImage(componentClass, componentName);
+    component->meters = Meters(SubElement(componentClass, componentName));
+    component->sound = Sound(componentClass, componentName);
+}
+
+OSDComponent *Skin::VolumeOSD() {
     return _volumeOSD;
 }
 
-int Skin::DefaultVolumeUnits() {
-    return DefaultOSDUnits("volume");
+OSDComponent *Skin::MuteOSD() {
+    return _muteOSD;
 }
 
-int Skin::DefaultOSDUnits(char *osdName) {
-    int defaultUnits = SKIN_DEFAULT_UNITS;
+OSDComponent *Skin::EjectOSD() {
+    return _ejectOSD;
+}
 
-    tinyxml2::XMLElement *osdElem = SubElement("osds", osdName);
+std::vector<HICON> Skin::VolumeIconset() {
+    return _volumeIcons;
+}
+
+SliderComponent *Skin::VolumeSlider() {
+    return _volumeSlider;
+}
+
+int Skin::DefaultUnits(char *parent, char *child) {
+    int defaultUnits = DEFAULT_UNITS;
+
+    tinyxml2::XMLElement *osdElem = SubElement(parent, child);
     if (osdElem == NULL) {
         return defaultUnits;
     }
@@ -81,44 +100,23 @@ int Skin::DefaultOSDUnits(char *osdName) {
     return defaultUnits;
 }
 
-bool Skin::HasOSD(char *osdName) {
-    return (SubElement("osds", osdName) != NULL);
-}
-
-Gdiplus::Bitmap *Skin::OSDBgImg(char *osdName) {
-    tinyxml2::XMLElement *osd = SubElement("osds", osdName);
-    if (osd == NULL) {
+Gdiplus::Bitmap *Skin::BackgroundImage(char *parent, char *child) {
+    tinyxml2::XMLElement *elem = SubElement(parent, child);
+    if (elem == NULL) {
+        // TODO FIX THIS ERROR MESSAGE
         Error::ErrorMessageDie(SKINERR_INVALID_OSD,
-            StringUtils::Widen(osdName));
+            StringUtils::Widen(child));
     }
-    return Image(osd, "background");
+    return Image(elem, "background");
 }
 
-Gdiplus::Bitmap *Skin::OSDMask(char *osdName) {
-    tinyxml2::XMLElement *osd = SubElement("osds", osdName);
-    if (osd == NULL) {
+Gdiplus::Bitmap *Skin::MaskImage(char *parent, char *child) {
+    tinyxml2::XMLElement *elem = SubElement(parent, child);
+    if (elem == NULL) {
         return NULL;
     }
 
-    return Image(osd, "mask");
-}
-
-Gdiplus::Bitmap *Skin::SliderBgImg(char *sliderName) {
-    tinyxml2::XMLElement *sliderElement = SubElement("sliders", sliderName);
-    if (sliderElement == NULL) {
-        Error::ErrorMessageDie(
-            SKINERR_INVALID_BG, StringUtils::Widen(sliderName));
-    }
-    return Image(sliderElement, "background");
-}
-
-Gdiplus::Bitmap *Skin::SliderMask(char *sliderName) {
-    tinyxml2::XMLElement *slider = SubElement("sliders", sliderName);
-    if (slider == NULL) {
-        return NULL;
-    }
-
-    return Image(slider, "mask");
+    return Image(elem, "mask");
 }
 
 Gdiplus::Bitmap *Skin::Image(tinyxml2::XMLElement *elem, char *attName) {
@@ -204,11 +202,11 @@ std::vector<HICON> Skin::Iconset(char *osdName) {
     return iconset;
 }
 
-SoundPlayer *Skin::OSDSound(char *osdName) {
-    tinyxml2::XMLElement *osd = SubElement("osds", osdName);
+SoundPlayer *Skin::Sound(char *parent, char *child) {
+    tinyxml2::XMLElement *osd = SubElement(parent, child);
     if (osd == NULL) {
         Error::ErrorMessageDie(SKINERR_INVALID_OSD,
-            StringUtils::Widen(osdName));
+            StringUtils::Widen(child));
     }
 
     tinyxml2::XMLElement *sound = osd->FirstChildElement("sound");

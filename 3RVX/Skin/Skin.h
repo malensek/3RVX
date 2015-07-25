@@ -9,59 +9,60 @@
 #include <vector>
 
 #include "../TinyXml2/tinyxml2.h"
-#include "OSDSkin.h" // forward declare this later??
 #include "SkinInfo.h"
 
 class Meter;
 class SliderKnob;
 class SoundPlayer;
 
-#define SKIN_DEFAULT_UNITS 10
+struct OSDComponent;
+struct SkinComponent;
+struct SliderComponent;
 
 class Skin : SkinInfo {
 public:
     Skin(std::wstring skinXML);
     ~Skin();
 
-    bool HasOSD(char *osdName);
-    int DefaultVolumeUnits();
-
 public:
-    OSDSkin *VolumeOSD();
+    virtual OSDComponent *VolumeOSD();
+    virtual OSDComponent *MuteOSD();
+    virtual OSDComponent *EjectOSD();
 
-    Gdiplus::Bitmap *muteBackground;
-    Gdiplus::Bitmap *muteMask;
+    virtual std::vector<HICON> VolumeIconset();
 
-    Gdiplus::Bitmap *ejectBackground;
-    Gdiplus::Bitmap *ejectMask;
-
-    Gdiplus::Bitmap *volumeSliderBackground;
-    Gdiplus::Bitmap *volumeSliderMask;
-    std::vector<Meter *> volumeSliderMeters;
-    SliderKnob *volumeSliderKnob;
+    virtual SliderComponent *VolumeSlider();
 
 private:
-    OSDSkin *_volumeOSD;
+    OSDComponent *_volumeOSD;
+    OSDComponent *_muteOSD;
+    OSDComponent *_ejectOSD;
 
-    Gdiplus::Bitmap *OSDBgImg(char *osdName);
-    Gdiplus::Bitmap *OSDMask(char *osdName);
-    SoundPlayer *OSDSound(char *osdName);
+    std::vector<HICON> _volumeIcons;
 
+    SliderComponent *_volumeSlider;
+
+    void PopulateComponent(
+        SkinComponent *component, char *componentClass, char *componentName);
+    void DestroyComponent(SkinComponent *component);
+
+    Gdiplus::Bitmap *BackgroundImage(char *parent, char *child);
+    Gdiplus::Bitmap *MaskImage(char *parent, char *child);
+    Gdiplus::Bitmap *Image(tinyxml2::XMLElement *element, char *attrName);
+    std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
+
+    int DefaultUnits(char *parent, char *child);
     std::vector<HICON> Iconset(char *osdName);
-
-    Gdiplus::Bitmap *SliderBgImg(char *sliderName);
-    Gdiplus::Bitmap *SliderMask(char *sliderName);
     SliderKnob *Knob(char *sliderName);
+    SoundPlayer *Sound(char *parent, char *child);
 
     std::vector<Meter *> Meters(tinyxml2::XMLElement *parentElement);
     Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
-
-    Gdiplus::Bitmap *Image(tinyxml2::XMLElement *element, char *attrName);
-    std::wstring ImageName(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::Font *Font(tinyxml2::XMLElement *meterXMLElement);
     Gdiplus::StringAlignment Alignment(tinyxml2::XMLElement *meterXMLElement);
 
     tinyxml2::XMLElement *SubElement(char *parent, char *child);
 
-    int DefaultOSDUnits(char *osdName);
+protected:
+    static const int DEFAULT_UNITS = 10;
 };

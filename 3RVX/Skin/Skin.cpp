@@ -17,7 +17,7 @@ Skin::Skin(std::wstring skinXML) :
 SkinInfo(skinXML) {
     volumeBackground = OSDBgImg("volume");
     volumeMask = OSDMask("volume");
-    volumeMeters = OSDMeters("volume");
+    volumeMeters = Meters(OSDXMLElement("volume"));
     volumeIconset = Iconset("volume");
     volumeSound = OSDSound("volume");
 
@@ -29,7 +29,7 @@ SkinInfo(skinXML) {
 
     volumeSliderBackground = SliderBgImg("volume");
     volumeSliderMask = SliderMask("volume");
-    volumeSliderMeters = SliderMeters("volume");
+    volumeSliderMeters = Meters(SliderXMLElement("volume"));
     volumeSliderKnob = Knob("volume");
 }
 
@@ -113,14 +113,14 @@ Gdiplus::Bitmap *Skin::SliderMask(char *sliderName) {
     return Image(slider, "mask");
 }
 
-Gdiplus::Bitmap *Skin::Image(tinyxml2::XMLElement *element, char *attName) {
+Gdiplus::Bitmap *Skin::Image(tinyxml2::XMLElement *elem, char *attName) {
 
-    if (element == NULL) {
+    if (elem == NULL) {
         CLOG(L"XML Element is NULL!");
         return NULL;
     }
 
-    const char *imgFile = element->Attribute(attName);
+    const char *imgFile = elem->Attribute(attName);
     if (imgFile == NULL) {
         std::wstring aName = StringUtils::Widen(attName);
         CLOG(L"Could not find XML attribute: %s", aName.c_str());
@@ -230,26 +230,10 @@ SoundPlayer *Skin::OSDSound(char *osdName) {
     return player;
 }
 
-std::vector<Meter *> Skin::OSDMeters(char *osdName) {
+std::vector<Meter *> Skin::Meters(tinyxml2::XMLElement *parentElement) {
     std::vector<Meter*> meters;
 
-    tinyxml2::XMLElement *osd = OSDXMLElement(osdName);
-    tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");
-    for (; meter != NULL; meter = meter->NextSiblingElement("meter")) {
-        Meter *m = LoadMeter(meter);
-        if (m != NULL) {
-            meters.push_back(m);
-        }
-    }
-
-    return meters;
-}
-
-std::vector<Meter *> Skin::SliderMeters(char *osdName) {
-    std::vector<Meter *> meters;
-
-    tinyxml2::XMLElement *osd = SliderXMLElement(osdName);
-    tinyxml2::XMLElement *meter = osd->FirstChildElement("meter");
+    tinyxml2::XMLElement *meter = parentElement->FirstChildElement("meter");
     for (; meter != NULL; meter = meter->NextSiblingElement("meter")) {
         Meter *m = LoadMeter(meter);
         if (m != NULL) {

@@ -46,7 +46,6 @@ public:
 private:
     Gdiplus::Bitmap *OSDBgImg(char *osdName);
     Gdiplus::Bitmap *OSDMask(char *osdName);
-    std::vector<Meter *> OSDMeters(char *osdName);
     tinyxml2::XMLElement *OSDXMLElement(char *osdName);
     SoundPlayer *OSDSound(char *osdName);
 
@@ -54,10 +53,10 @@ private:
 
     Gdiplus::Bitmap *SliderBgImg(char *sliderName);
     Gdiplus::Bitmap *SliderMask(char *sliderName);
-    std::vector<Meter *> SliderMeters(char *osdName);   
     tinyxml2::XMLElement *SliderXMLElement(char *sliderName);
     SliderKnob *Knob(char *sliderName);
 
+    std::vector<Meter *> Meters(tinyxml2::XMLElement *parentElement);
     Meter *LoadMeter(tinyxml2::XMLElement *meterXMLElement);
 
     Gdiplus::Bitmap *Image(tinyxml2::XMLElement *element, char *attrName);

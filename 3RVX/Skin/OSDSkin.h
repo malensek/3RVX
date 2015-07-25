@@ -7,20 +7,24 @@
 #include <vector>
 
 #include "../MeterWnd/Meter.h"
+#include "../SoundPlayer.h"
 
 class OSDSkin {
 public:
     OSDSkin(Gdiplus::Bitmap *background, Gdiplus::Bitmap *mask,
-        std::vector<Meter *> meters, std::vector<HICON> iconset) :
+        std::vector<Meter *> meters, std::vector<HICON> iconset,
+        SoundPlayer *sound) :
     background(background),
     mask(mask),
     meters(meters),
-    iconset(iconset) {
+    iconset(iconset),
+    sound(sound) {
 
     }
 
-    const Gdiplus::Bitmap *background;
-    const Gdiplus::Bitmap *mask;
-    const std::vector<Meter *> meters;
-    const std::vector<HICON> iconset;
+    Gdiplus::Bitmap *background;
+    Gdiplus::Bitmap *mask;
+    std::vector<Meter *> meters;
+    std::vector<HICON> iconset;
+    SoundPlayer *sound = NULL;
 };

@@ -3,4 +3,4 @@
 3RVX
 ----
 
-Homepage: http://matthew.malensek.net/projects/3RVX
+Homepage: http://3RVX.com/

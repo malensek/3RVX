@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- General Words -->
+  <word>
+    <key>Settings</key>
+    <translation>Inställningar</translation>
+  </word>
+  <word>
+    <key>Exit</key>
+    <translation>Avsluta</translation>
+  </word>
+
+
+<!-- Settings Dialog Buttons -->
+  <word>
+    <key>Defaults</key>
+    <translation>Standard</translation>
+  </word>
+  <word>
+    <key>Cancel</key>
+    <translation>Avbryt</translation>
+  </word>
+  <word>
+    <key>Save</key>
+    <translation>Spara</translation>
+  </word>
+  <word>
+    <key>Select Key...</key>
+    <translation>Välj tangent...</translation>
+  </word>
+
+
+<!-- Settings Tabs -->
+  <word>
+    <key>General</key>
+    <translation>Allmänt</translation>
+  </word>
+  <word>
+    <key>Display</key>
+    <translation>Utseende</translation>
+  </word>
+  <word>
+    <key>Hotkey Setup</key>
+    <translation>Hotkey-inställning</translation>
+  </word>
+  <word>
+    <key>Skin Chooser</key>
+    <translation>Välj tema</translation>
+  </word>
+  <word>
+    <key>About</key>
+    <translation>Om</translation>
+  </word>
+
+
+<!-- General Tab -->
+  <word>
+    <key>Behavior</key>
+    <translation>Beteende</translation>
+  </word>
+  <word>
+    <key>Run on Windows startup</key>
+    <translation>Starta när Windows startar</translation>
+  </word>
+  <word>
+    <key>Play sounds</key>
+    <translation>Spela programljud (3RVX)</translation>
+  </word>
+  <word>
+    <key>Custom volume change amount:</key>
+    <translation>Användardefinierade volymsteg:</translation>
+  </word>
+
+  <word>
+    <key>Mixer</key>
+    <translation>Mixer</translation>
+  </word>
+  <word>
+    <key>Control Wave instead of Master Volume</key>
+    <translation>Styr wave-volym istället för huvudvolym</translation>
+  </word>
+  <word>
+    <key>Use custom mixer program on tray click</key>
+    <translation>Använd detta mixerprogram när du klickar på 3RVXs ikon</translation>
+  </word>
+  <word>
+    <key>Choose...</key>
+    <translation>Välj...</translation>
+  </word>
+  <word>
+    <key>Filename: </key>
+    <translation>Filnamn: </translation>
+  </word>
+
+  <word>
+    <key>Language</key>
+    <translation>Språk</translation>
+  </word>
+  <word>
+    <key>Load</key>
+    <translation>Öppna</translation>
+  </word>
+
+
+<!-- Display Tab -->
+  <word>
+    <key>Visibility</key>
+    <translation>Utseende</translation>
+  </word>
+  <word>
+    <key>Keep above other windows</key>
+    <translation>Visa överst</translation>
+  </word>
+  <word>
+    <key>Display icon in system tray</key>
+    <translation>Visa ikon i systemfältet</translation>
+  </word>
+  <word>
+    <key>Hide when other programs are fullscreen</key>
+    <translation>Dölj vid fullskärmsläge</translation>
+  </word>
+  <word>
+    <key>Fade Delay:</key>
+    <translation>Fördröjning innan borttoning:</translation>
+  </word>
+  <word>
+    <key>Fade Speed:</key>
+    <translation>Borttoningshastighet:</translation>
+  </word>
+
+  <word>
+    <key>Position</key>
+    <translation>Position</translation>
+  </word>
+  <word>
+    <key>Display on Monitor:</key>
+    <translation>Visa på skärm:</translation>
+  </word>
+  <word>
+    <key>Default</key>
+    <translation>Standard</translation>
+  </word>
+  <word>
+    <key>Centered</key>
+    <translation>Centrerad</translation>
+  </word>
+  <word>
+    <key>Custom Location:</key>
+    <translation>Användardefinierad placering:</translation>
+  </word>
+
+
+<!-- Hotkey tab -->
+  <word>
+    <key>Function</key>
+    <translation>Funktion</translation>
+  </word>
+  <word>
+    <key>Keys</key>
+    <translation>Tangent:</translation>
+  </word>
+
+  <word>
+    <key>Add</key>
+    <translation>Lägg till</translation>
+  </word>
+  <word>
+    <key>Delete</key>
+    <translation>Radera</translation>
+  </word>
+
+  <word>
+    <key>Action:</key>
+    <translation>Händelse:</translation>
+  </word>
+  <word>
+    <key>Volume Up</key>
+    <translation>Volym upp</translation>
+  </word>
+  <word>
+    <key>Volume Down</key>
+    <translation>Volym ner</translation>
+  </word>
+  <word>
+    <key>Mute</key>
+    <translation>Stäng av ljud</translation>
+  </word>
+  <word>
+    <key>Eject</key>
+    <translation>Mata ut</translation>
+  </word>
+  <word>
+    <key>Settings Window</key>
+    <translation>Inställningar</translation>
+  </word>
+
+  <word>
+    <key>Drive:</key>
+    <translation>Enhet:</translation>
+  </word>
+  <word>
+    <key>Hotkey Chooser</key>
+    <translation>Välj hotkey</translation>
+  </word>
+  <word>
+    <key>Key Combination:</key>
+    <translation>Tangentkombination</translation>
+  </word>
+  <word>
+    <key>Press a key!</key>
+    <translation>Tryck på en tangent!</translation>
+  </word>
+
+
+<!-- Skin tab -->
+  <word>
+    <key>Available Skins</key>
+    <translation>Tillgängliga teman</translation>
+  </word>
+  <word>
+    <key>Open Skin Folder</key>
+    <translation>Öppna temamapp</translation>
+  </word>
+
+  <word>
+    <key>Skin Information</key>
+    <translation>Information om tema</translation>
+  </word>
+  <word>
+    <key>Author:</key>
+    <translation>Utgivare:</translation>
+  </word>
+  <word>
+    <key>Version:</key>
+    <translation>Version:</translation>
+  </word>
+  <word>
+    <key>Skin Format Version:</key>
+    <translation>Temats formatversion:</translation>
+  </word>
+  <word>
+    <key>Author's Webpage</key>
+    <translation>Öppna websida >></translation>
+  </word>
+
+
+<!-- About tab -->
+  <word>
+    <key>Version</key>
+    <translation>Version</translation>
+  </word>
+  <word>
+    <key>lang_author</key>
+    <translation>Translated by zii</translation>
+  </word>
+  <word>
+    <key>lang_module</key>
+    <translation>Svensk språkmodul inläst.</translation>
+  </word>
+
+
+<!-- Messages -->
+  <word>
+    <key>Load Defaults</key>
+    <translation>Läs in standardvärden</translation>
+  </word>
+  <word>
+    <key>All settings will be lost.  Continue?</key>
+    <translation>Alla inställningar kommer att gå förlorade. Fortsätta?</translation>
+  </word>
+  <word>
+    <key>Skin Error</key>
+    <translation>Fel i tema</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin.  Try loading the default skin?</key>
+    <translation>Kunde inte ladda tema. Ladda standardtema istället?</translation>
+  </word>
+  <word>
+    <key>>Couldn't load skin XML.  Check the file for syntax errors.</key>
+    <translation>Kunde inte ladda temats XML-fil. Kontrollera syntax.</translation>
+  </word>
+ <word>
+    <key>Press hotkey/mouse combo...</key>
+    <translation>Välj tangent-/mus-kombination...</translation>
+  </word>
+
+</ArrayOfWord>

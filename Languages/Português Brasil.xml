@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!-- Language File Author: xxxxx    -->
+<!-- Supported version of 3RVX: 2.3 -->
+<!-- General Words -->
+  <word>
+    <key>Settings</key>
+    <translation>Configurações</translation>
+  </word>
+  <word>
+    <key>Exit</key>
+    <translation>Sair</translation>
+  </word>
+
+
+<!-- Settings Dialog Buttons -->
+  <word>
+    <key>Defaults</key>
+    <translation>Padrões</translation>
+  </word>
+  <word>
+    <key>Cancel</key>
+    <translation>Cancelar</translation>
+  </word>
+  <word>
+    <key>Save</key>
+    <translation>Salvar</translation>
+  </word>
+  <word>
+    <key>Select Key...</key>
+    <translation>Selecionar botão...</translation>
+  </word>
+
+
+<!-- Settings Tabs -->
+  <word>
+    <key>General</key>
+    <translation>Geral</translation>
+  </word>
+  <word>
+    <key>Display</key>
+    <translation>Display</translation>
+  </word>
+  <word>
+    <key>Hotkey Setup</key>
+    <translation>Teclas de atalho</translation>
+  </word>
+  <word>
+    <key>Skin Chooser</key>
+    <translation>Temas</translation>
+  </word>
+  <word>
+    <key>About</key>
+    <translation>Sobre</translation>
+  </word>
+
+
+<!-- General Tab -->
+  <word>
+    <key>Behavior</key>
+    <translation>Comportamento</translation>
+  </word>
+  <word>
+    <key>Run on Windows startup</key>
+    <translation>Iniciar com Windows</translation>
+  </word>
+  <word>
+    <key>Play sounds</key>
+    <translation>Tocar sons</translation>
+  </word>
+  <word>
+    <key>Custom volume change amount:</key>
+    <translation>Taxa de volume personalizado:</translation>
+  </word>
+
+  <word>
+    <key>Mixer</key>
+    <translation>Mixer</translation>
+  </word>
+  <word>
+    <key>Control Wave instead of Master Volume</key>
+    <translation>Controlar onda no botão mestre</translation>
+  </word>
+  <word>
+    <key>Use custom mixer program on tray click</key>
+    <translation>Usar mixer personalizado na área de notificação</translation>
+  </word>
+  <word>
+    <key>Choose...</key>
+    <translation>Escolher...</translation>
+  </word>
+  <word>
+    <key>Filename: </key>
+    <translation>Nome do arquivo: </translation>
+  </word>
+
+  <word>
+    <key>Language</key>
+    <translation>Idioma</translation>
+  </word>
+  <word>
+    <key>Load</key>
+    <translation>Carregar</translation>
+  </word>
+
+
+<!-- Display Tab -->
+  <word>
+    <key>Visibility</key>
+    <translation>Visibilidade</translation>
+  </word>
+  <word>
+    <key>Keep above other windows</key>
+    <translation>Manter sobre outras janelas</translation>
+  </word>
+  <word>
+    <key>Display icon in system tray</key>
+    <translation>Mostrar icone na área de notificação</translation>
+  </word>
+  <word>
+    <key>Hide when other programs are fullscreen</key>
+    <translation>Esconder quando outros programas estiverem em tela cheia</translation>
+  </word>
+  <word>
+    <key>Fade Delay:</key>
+    <translation>Tempo de esmaecimento:</translation>
+  </word>
+  <word>
+    <key>Fade Speed:</key>
+    <translation>Velocidade de esmaecimento:</translation>
+  </word>
+
+  <word>
+    <key>Position</key>
+    <translation>Posição</translation>
+  </word>
+  <word>
+    <key>Display on Monitor:</key>
+    <translation>Display no monitor</translation>
+  </word>
+  <word>
+    <key>Default</key>
+    <translation>Padrões</translation>
+  </word>
+  <word>
+    <key>Centered</key>
+    <translation>Centralizado</translation>
+  </word>
+  <word>
+    <key>Custom Location:</key>
+    <translation>Posição personalizada:</translation>
+  </word>
+
+
+<!-- Hotkey tab -->
+  <word>
+    <key>Function</key>
+    <translation>Função</translation>
+  </word>
+  <word>
+    <key>Keys</key>
+    <translation>Teclas</translation>
+  </word>
+
+  <word>
+    <key>Add</key>
+    <translation>Adicionar</translation>
+  </word>
+  <word>
+    <key>Delete</key>
+    <translation>Deletar</translation>
+  </word>
+
+  <word>
+    <key>Action:</key>
+    <translation>Ação:</translation>
+  </word>
+  <word>
+    <key>Volume Up</key>
+    <translation>Aumentar volume:</translation>
+  </word>
+  <word>
+    <key>Volume Down</key>
+    <translation>Diminuir volume:</translation>
+  </word>
+  <word>
+    <key>Mute</key>
+    <translation>Mudo</translation>
+  </word>
+  <word>
+    <key>Eject</key>
+    <translation>Ejetar</translation>
+  </word>
+  <word>
+    <key>Settings Window</key>
+    <translation>Configuração da janela</translation>
+  </word>
+
+  <word>
+    <key>Drive:</key>
+    <translation>Dispositivo:s</translation>
+  </word>
+  <word>
+    <key>Hotkey Chooser</key>
+    <translation>Seletor de tecla de atalho</translation>
+  </word>
+  <word>
+    <key>Key Combination:</key>
+    <translation>Combinações de teclas:</translation>
+  </word>
+  <word>
+    <key>Done</key>
+    <translation>Fim</translation>
+  </word>
+
+
+<!-- Skin tab -->
+  <word>
+    <key>Available Skins</key>
+    <translation>Skins disponíveis</translation>
+  </word>
+  <word>
+    <key>Open Skin Folder</key>
+    <translation>Abrir pasta de skins</translation>
+  </word>
+
+  <word>
+    <key>Skin Information</key>
+    <translation>Informação de skin</translation>
+  </word>
+  <word>
+    <key>Author:</key>
+    <translation>Autor:</translation>
+  </word>
+  <word>
+    <key>Version:</key>
+    <translation>Versão:</translation>
+  </word>
+  <word>
+    <key>Skin Format Version:</key>
+    <translation>Versão e formato da skin:</translation>
+  </word>
+  <word>
+    <key>Author's Webpage</key>
+    <translation>Webpage do autor</translation>
+  </word>
+
+
+<!-- About tab -->
+  <word>
+    <key>Version</key>
+    <translation>Versão</translation>
+  </word>
+  <word>
+    <key>lang_author</key>
+    <translation>Idioma: Português Brasil - PT-BR</translation>
+  </word>
+  <word>
+    <key>lang_module</key>
+    <translation>Tradução Português Brasil - PT-BR: Johnny Wolinger</translation>
+  </word>
+
+
+<!-- Messages -->
+  <word>
+    <key>Load Defaults</key>
+    <translation>Carregar Padrões</translation>
+  </word>
+  <word>
+    <key>All settings will be lost.  Continue?</key>
+    <translation>Todas as configurações serão perdidas. Continuar?</translation>
+  </word>
+  <word>
+    <key>Skin Error</key>
+    <translation>Erro na skin</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin.  Try loading the default skin?</key>
+    <translation>A skin não pode ser carregada. Tentar carregar a skin padrão?</translation>
+  </word>
+  <word>
+    <key>Couldn't load skin XML.  Check the file for syntax errors.</key>
+    <translation>A skin XML não pode ser carregada. Verifique erros de sintaxe no arquivo.</translation>
+  </word>
+  <word>
+    <key>Press hotkey/mouse combo...</key>
+    <translation>Pressione tecla de atalhos/mouse combo...</translation>
+  </word>
+
+</ArrayOfWord>

@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- General Words -->
+ <word>
+   <key>Settings</key>
+   <translation>Instellingen</translation>
+ </word>
+ <word>
+   <key>Exit</key>
+   <translation>Sluiten</translation>
+ </word>
+
+
+<!-- Settings Dialog Buttons -->
+ <word>
+   <key>Defaults</key>
+   <translation>Standaard</translation>
+ </word>
+ <word>
+   <key>Cancel</key>
+   <translation>Annuleren</translation>
+ </word>
+ <word>
+   <key>Save</key>
+   <translation>Opslaan</translation>
+ </word>
+ <word>
+   <key>Select Key...</key>
+   <translation>Kies toets...</translation>
+ </word>
+
+
+<!-- Settings Tabs -->
+ <word>
+   <key>General</key>
+   <translation>Algemeen</translation>
+ </word>
+ <word>
+   <key>Weergave</key>
+   <translation>Display</translation>
+ </word>
+ <word>
+   <key>Hotkey Setup</key>
+   <translation>Hotkey-instellingen</translation>
+ </word>
+ <word>
+   <key>Skin Chooser</key>
+   <translation>Skin-keuze</translation>
+ </word>
+ <word>
+   <key>About</key>
+   <translation>Over</translation>
+ </word>
+
+
+<!-- General Tab -->
+ <word>
+   <key>Behavior</key>
+   <translation>Werking</translation>
+ </word>
+ <word>
+   <key>Run on Windows startup</key>
+   <translation>Samen met Windows starten</translation>
+ </word>
+ <word>
+   <key>Play sounds</key>
+   <translation>Geluiden afspelen</translation>
+ </word>
+ <word>
+   <key>Custom volume change amount:</key>
+   <translation>Volume regelen met:</translation>
+ </word>
+
+ <word>
+   <key>Mixer</key>
+   <translation>Mixer</translation>
+ </word>
+ <word>
+   <key>Control Wave instead of Master Volume</key>
+   <translation>Control Wave ipv Mastervolume regelen</translation>
+ </word>
+ <word>
+   <key>Use custom mixer program on tray click</key>
+   <translation>Eigen mixerprogramma gebruiken bij aanklikken icoon</translation>
+ </word>
+ <word>
+   <key>Choose...</key>
+   <translation>Kies...</translation>
+ </word>
+ <word>
+   <key>Filename: </key>
+   <translation>Bestandsnaam: </translation>
+ </word>
+
+ <word>
+   <key>Language</key>
+   <translation>Taal</translation>
+ </word>
+ <word>
+   <key>Load</key>
+   <translation>Laden</translation>
+ </word>
+
+
+<!-- Display Tab -->
+ <word>
+   <key>Visibility</key>
+   <translation>Zichtbaarheid</translation>
+ </word>
+ <word>
+   <key>Keep above other windows</key>
+   <translation>Boven andere vensters houden</translation>
+ </word>
+ <word>
+   <key>Display icon in system tray</key>
+   <translation>Icoon in de taakbalk tonen</translation>
+ </word>
+   <word>
+     <key>Hide when other programs are fullscreen</key>
+     <translation>Verbergen als een ander programma fullscreen draait</translation>
+ </word>
+ <word>
+     <key>Fade Delay:</key>
+     <translation>Fade-vertraging:</translation>
+ </word>
+ <word>
+     <key>Fade Speed:</key>
+     <translation>Fade-snelheid:</translation>
+ </word>
+ <word>
+   <key>Position</key>
+   <translation>Positionering</translation>
+ </word>
+ <word>
+   <key>Display on Monitor:</key>
+   <translation>Weergave op beeldscherm:</translation>
+ </word>
+ <word>
+   <key>Default</key>
+   <translation>Standaard</translation>
+ </word>
+ <word>
+   <key>Centered</key>
+   <translation>Gecentreerd</translation>
+ </word>
+ <word>
+   <key>Custom Location:</key>
+   <translation>Eigen coördinaten:</translation>
+ </word>
+
+
+<!-- Hotkey tab -->
+ <word>
+   <key>Function</key>
+   <translation>Functie</translation>
+ </word>
+ <word>
+   <key>Keys</key>
+   <translation>Toetsen</translation>
+ </word>
+
+ <word>
+   <key>Add</key>
+   <translation>Toevoegen</translation>
+ </word>
+ <word>
+   <key>Delete</key>
+   <translation>Wissen</translation>
+ </word>
+
+ <word>
+   <key>Action:</key>
+   <translation>Actie:</translation>
+ </word>
+ <word>
+   <key>Volume Up</key>
+   <translation>Luider</translation>
+ </word>
+ <word>
+   <key>Volume Down</key>
+   <translation>Zachter</translation>
+ </word>
+ <word>
+   <key>Mute</key>
+   <translation>Dempen</translation>
+ </word>
+ <word>
+   <key>Eject</key>
+   <translation>Uitwerpen</translation>
+ </word>
+ <word>
+   <key>Settings Window</key>
+   <translation>Instellingsvenster</translation>
+ </word>
+
+ <word>
+   <key>Drive:</key>
+   <translation>Drive:</translation>
+ </word>
+ <word>
+   <key>Hotkey Chooser</key>
+   <translation>Sneltoets selecteren</translation>
+ </word>
+ <word>
+   <key>Key Combination:</key>
+   <translation>Toetscombinatie:</translation>
+ </word>
+ <word>
+   <key>Press a key!</key>
+   <translation>Druk op een toets!</translation>
+ </word>
+
+
+<!-- Skin tab -->
+ <word>
+   <key>Available Skins</key>
+   <translation>Beschikbare Skins</translation>
+ </word>
+ <word>
+   <key>Open Skin Folder</key>
+   <translation>Skin-map openen</translation>
+ </word>
+
+ <word>
+   <key>Skin Information</key>
+   <translation>Skin-informatie</translation>
+ </word>
+ <word>
+   <key>Author:</key>
+   <translation>Auteur:</translation>
+ </word>
+ <word>
+   <key>Version:</key>
+   <translation>Versie:</translation>
+ </word>
+ <word>
+   <key>Skin Format Version:</key>
+   <translation>Skinformatversie:</translation>
+ </word>
+ <word>
+   <key>Author's Webpage</key>
+   <translation>Website van de Auteur:</translation>
+ </word>
+
+
+<!-- About tab -->
+ <word>
+   <key>Version</key>
+   <translation>Versie</translation>
+ </word>
+ <word>
+   <key>lang_author</key>
+   <translation>Vertaald door: Tim Tyteca - 2014</translation>
+ </word>
+ <word>
+   <key>lang_module</key>
+   <translation>Nederlandstalige taalmodule geladen.</translation>
+ </word>
+
+
+<!-- Messages -->
+ <word>
+   <key>Load Defaults</key>
+   <translation>Standaardinstellingen</translation>
+ </word>
+ <word>
+   <key>All settings will be lost.  Continue?</key>
+   <translation>Alle instellingen worden gewist. Verdergaan?</translation>
+ </word>
+ <word>
+   <key>Skin Error</key>
+   <translation>Skin-fout</translation>
+ </word>
+ <word>
+   <key>Couldn't load skin.  Try loading the default skin?</key>
+   <translation>De geselecteerde skin kon niet geladen worden. Standaardskin laden?</translation>
+ </word>
+ <word>
+   <key>Couldn't load skin XML.  Check the file for syntax errors.</key>
+   <translation>Kan Skin-XML niet laden. Controleer het bestand op syntaxfouten.</translation>
+ </word>
+ <word>
+   <key>Settings will be applied next time 3RVX starts.</key>
+   <translation>Instellingen worden toegepast bij de volgende start van 3RVX.</translation>
+ </word>
+
+</ArrayOfWord>

@@ -12,34 +12,16 @@
 #include "../Slider/SliderKnob.h"
 #include "../SoundPlayer.h"
 #include "OSDComponent.h"
-#include "SkinComponent.h"
+#include "MeterComponent.h"
 #include "SliderComponent.h"
 
 SkinV3::SkinV3(std::wstring skinXML) :
 Skin(skinXML) {
-    _volumeOSD = new OSDComponent;
-    XMLElement *volOSDElem = SubElement("osds", "volume");
-    PopulateComponent(_volumeOSD, volOSDElem);
-    _volumeOSD->defaultUnits = DefaultUnits(volOSDElem);
 
-    XMLElement *volumeIconElem = SubElement("osds", "volume");
-    _volumeIcons = Iconset(volumeIconElem);
-
-    _muteOSD = new OSDComponent;
-    XMLElement *muteOSDElem = SubElement("osds", "mute");
-    PopulateComponent(_muteOSD, muteOSDElem);
-
-    _ejectOSD = new OSDComponent;
-    XMLElement *ejectOSDElem = SubElement("osds", "eject");
-    PopulateComponent(_ejectOSD, ejectOSDElem);
-
-    _volumeSlider = new SliderComponent;
-    XMLElement *volSliderElem = SubElement("sliders", "volume");
-    PopulateComponent(_volumeSlider, volSliderElem);
-    _volumeSlider->knob = Knob(volSliderElem);
 }
 
 SkinV3::~SkinV3() {
+    /*
     DestroyComponent(_volumeOSD);
     DestroyComponent(_muteOSD);
     DestroyComponent(_ejectOSD);
@@ -50,42 +32,83 @@ SkinV3::~SkinV3() {
 
     delete _volumeSlider->knob;
     DestroyComponent(_volumeSlider);
+    */
 }
 
 OSDComponent *SkinV3::VolumeOSD() {
-    return _volumeOSD;
+    return CreateOSDComponent("volume");
 }
 
 OSDComponent *SkinV3::MuteOSD() {
-    return _muteOSD;
+    return CreateOSDComponent("mute");
 }
 
 OSDComponent *SkinV3::EjectOSD() {
-    return _ejectOSD;
+    return CreateOSDComponent("eject");
 }
 
 std::vector<HICON> SkinV3::VolumeIconset() {
-    return _volumeIcons;
+    std::vector<HICON> iconList;
+
+    XMLElement *volumeIconElem = SubElement("osds", "volume");
+    if (volumeIconElem == NULL) {
+        return iconList;
+    }
+
+    return Iconset(volumeIconElem);
 }
 
 SliderComponent *SkinV3::VolumeSlider() {
-    return _volumeSlider;
+    return CreateSliderComponent("volume");
 }
 
-void SkinV3::PopulateComponent(SkinComponent *component, XMLElement *elem) {
+OSDComponent *SkinV3::CreateOSDComponent(char *osdName) {
+    XMLElement *osdElem = SubElement("osds", osdName);
+    if (osdElem == NULL) {
+        return NULL;
+    }
+
+    OSDComponent *osd = new OSDComponent;
+    if (PopulateMeterComponent(osd, osdElem) == false) {
+        /* Could not fully populate the OSD */
+        delete osd;
+        return NULL;
+    }
+    osd->defaultUnits = DefaultUnits(osdElem);
+
+    return osd;
+}
+
+SliderComponent *SkinV3::CreateSliderComponent(char *sliderName) {
+    XMLElement *sliderElem = SubElement("sliders", sliderName);
+    if (sliderElem == NULL) {
+        return NULL;
+    }
+
+    SliderComponent *slider = new SliderComponent;
+    if (PopulateMeterComponent(slider, sliderElem) == false) {
+        /* Could not fully populate the slider */
+        delete slider;
+        return NULL;
+    }
+    slider->knob = Knob(sliderElem);
+
+    return slider;
+}
+
+bool SkinV3::PopulateMeterComponent(
+        MeterComponent *component, XMLElement *elem) {
     component->background = Image(elem, "background");
     component->mask = Image(elem, "mask");
     component->meters = Meters(elem);
     component->sound = Sound(elem);
-}
 
-void SkinV3::DestroyComponent(SkinComponent *component) {
-    delete component->background;
-    delete component->mask;
-    for (Meter *meter : component->meters) {
-        delete meter;
+    if (component->background == NULL) {
+        /* A meter skin component has to have a background image */
+        return false;
     }
-    delete component->sound;
+
+    return true;
 }
 
 int SkinV3::DefaultUnits(XMLElement *elem) {

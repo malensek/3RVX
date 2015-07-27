@@ -11,7 +11,7 @@
 #include "Skin.h"
 
 class Meter;
-class OSDSkin;
+class MeterComponent;
 class SliderKnob;
 class SoundPlayer;
 
@@ -29,16 +29,9 @@ public:
     virtual SliderComponent *VolumeSlider();
 
 private:
-    OSDComponent *_volumeOSD;
-    OSDComponent *_muteOSD;
-    OSDComponent *_ejectOSD;
-
-    std::vector<HICON> _volumeIcons;
-
-    SliderComponent *_volumeSlider;
-
-    void PopulateComponent(SkinComponent *component, XMLElement *elem);
-    void DestroyComponent(SkinComponent *component);
+    OSDComponent *CreateOSDComponent(char *osdType);
+    SliderComponent *CreateSliderComponent(char *sliderType);
+    bool PopulateMeterComponent(MeterComponent *component, XMLElement *elem);
 
     int DefaultUnits(XMLElement *elem);
     Gdiplus::Bitmap *Image(XMLElement *element, char *attrName);

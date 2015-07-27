@@ -1,7 +1,7 @@
 #pragma once
 
-#include "SkinComponent.h"
+#include "MeterComponent.h"
 
-struct OSDComponent : public SkinComponent {
+struct OSDComponent : public MeterComponent {
     int defaultUnits;
 };

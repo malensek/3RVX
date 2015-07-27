@@ -9,9 +9,18 @@
 class Meter;
 class SoundPlayer;
 
-struct SkinComponent {
+struct MeterComponent {
     Gdiplus::Bitmap *background;
     Gdiplus::Bitmap *mask;
     std::vector<Meter *> meters;
     SoundPlayer *sound = NULL;
+
+    virtual ~MeterComponent() {
+        delete background;
+        delete mask;
+        for (Meter *meter : meters) {
+            delete meter;
+        }
+        delete sound;
+    }
 };

@@ -26,6 +26,8 @@ void SkinManager::LoadSkin(std::wstring skinXML) {
     _volumeSlider = skin->VolumeSlider();
     _muteOSD = skin->MuteOSD();
     _ejectOSD = skin->EjectOSD();
+
+    delete skin;
 }
 
 OSDComponent *SkinManager::VolumeOSD() {

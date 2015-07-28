@@ -87,6 +87,7 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="OSD\Brightness.h" />
     <ClInclude Include="OSD\KeyboardOSD.h" />
+    <ClInclude Include="Skin\MultiSkin.h" />
     <ClInclude Include="Skin\OSDComponent.h" />
     <ClInclude Include="Skin\MeterComponent.h" />
     <ClInclude Include="Skin\SkinV2.h" />
@@ -172,7 +173,6 @@
     <ClCompile Include="NotifyIcon.cpp" />
     <ClCompile Include="OSD\OSD.cpp" />
     <ClCompile Include="Settings.cpp" />
-    <ClCompile Include="Skin\Skin.cpp" />
     <ClCompile Include="Skin\SkinInfo.cpp" />
     <ClCompile Include="Skin\SkinManager.cpp" />
     <ClCompile Include="Slider\SliderKnob.cpp" />

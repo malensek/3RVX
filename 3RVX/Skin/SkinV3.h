@@ -8,7 +8,9 @@
 #include <string>
 #include <vector>
 
+#include "../TinyXml2/tinyxml2.h"
 #include "Skin.h"
+#include "SkinInfo.h"
 
 class Meter;
 class SliderKnob;
@@ -16,7 +18,9 @@ class SoundPlayer;
 
 struct MeterComponent;
 
-class SkinV3 : public Skin {
+using tinyxml2::XMLElement;
+
+class SkinV3 : public Skin, public SkinInfo {
 public:
     SkinV3(std::wstring skinXML);
     ~SkinV3();

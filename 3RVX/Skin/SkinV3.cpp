@@ -16,23 +16,12 @@
 #include "SliderComponent.h"
 
 SkinV3::SkinV3(std::wstring skinXML) :
-Skin(skinXML) {
+SkinInfo(skinXML) {
 
 }
 
 SkinV3::~SkinV3() {
-    /*
-    DestroyComponent(_volumeOSD);
-    DestroyComponent(_muteOSD);
-    DestroyComponent(_ejectOSD);
 
-    for (HICON icon : _volumeIcons) {
-        DestroyIcon(icon);
-    }
-
-    delete _volumeSlider->knob;
-    DestroyComponent(_volumeSlider);
-    */
 }
 
 OSDComponent *SkinV3::VolumeOSD() {

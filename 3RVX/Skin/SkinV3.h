@@ -11,9 +11,10 @@
 #include "Skin.h"
 
 class Meter;
-class MeterComponent;
 class SliderKnob;
 class SoundPlayer;
+
+struct MeterComponent;
 
 class SkinV3 : public Skin {
 public:

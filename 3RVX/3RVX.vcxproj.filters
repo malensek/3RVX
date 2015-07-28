@@ -180,13 +180,13 @@
     <ClInclude Include="Skin\SkinV3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Skin\SkinComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Skin\OSDComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Skin\SliderComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\MeterComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

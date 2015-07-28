@@ -34,6 +34,7 @@ const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
 const std::wstring Settings::SETTINGS_FILE = L"Settings.xml";
 const std::wstring Settings::LANG_DIR = L"Languages";
 const std::wstring Settings::SKIN_DIR = L"Skins";
+const std::wstring Settings::SKIN_XML = L"Skin.xml";
 
 const std::wstring Settings::DefaultLanguage = L"English";
 const std::wstring Settings::DefaultSkin = L"Classic";
@@ -339,8 +340,8 @@ std::wstring Settings::SkinXML() {
 }
 
 std::wstring Settings::SkinXML(std::wstring skinName) {
-    std::wstring skinXML = Settings::AppDir() + L"\\" + SKINS_DIR L"\\"
-        + skinName + L"\\" SKIN_XML;
+    std::wstring skinXML = Settings::AppDir() + L"\\" + SKIN_DIR + L"\\"
+        + skinName + L"\\" + SKIN_XML;
     return skinXML;
 }
 

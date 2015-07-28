@@ -4,9 +4,6 @@
 #include <list>
 #include "../TinyXml2/tinyxml2.h"
 
-#define SKINS_DIR L"Skins"
-#define SKIN_XML L"skin.xml"
-
 class SkinInfo {
 public:
     SkinInfo(std::wstring skinName);

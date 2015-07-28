@@ -6,8 +6,8 @@
 #include <gdiplus.h>
 #include <vector>
 
-class Meter;
-class SoundPlayer;
+#include "../MeterWnd/Meter.h"
+#include "../SoundPlayer.h"
 
 struct MeterComponent {
     Gdiplus::Bitmap *background;

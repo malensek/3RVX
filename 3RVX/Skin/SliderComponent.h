@@ -2,7 +2,7 @@
 
 #include "MeterComponent.h"
 
-class SliderKnob;
+#include "../Slider/SliderKnob.h"
 
 struct SliderComponent : public MeterComponent {
     SliderKnob *knob;

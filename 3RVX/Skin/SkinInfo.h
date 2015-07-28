@@ -20,4 +20,5 @@ protected:
     std::wstring _skinDir;
     tinyxml2::XMLDocument _xml;
     tinyxml2::XMLElement *_root;
+    tinyxml2::XMLElement *SubElement(char *parent, char *child);
 };

@@ -56,3 +56,12 @@ std::wstring SkinInfo::URL() {
     }
     return std::wstring(StringUtils::Widen(text));
 }
+
+tinyxml2::XMLElement *SkinInfo::SubElement(char *parent, char *child) {
+    tinyxml2::XMLHandle xmlHandle(_root);
+    tinyxml2::XMLElement *elem = xmlHandle
+        .FirstChildElement(parent)
+        .FirstChildElement(child)
+        .ToElement();
+    return elem;
+}

@@ -270,7 +270,7 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
                 Settings::Instance()->Save();
 
                 CLOG(L"Notifying 3RVX process of settings change");
-                _3RVX::Message(_3RVX::MSG_LOAD, NULL);
+                _3RVX::Message(_3RVX::MSG_LOAD, NULL, true);
 
                 if (lParam == PSBTN_APPLYNOW && relaunch == true) {
                     /* Language was changed */

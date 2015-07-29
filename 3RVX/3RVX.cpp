@@ -186,7 +186,6 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         CLOG(L"Shutting down");
         HotkeyManager::Instance()->Shutdown();
         _vOSD->HideIcon();
-        DestroyWindow(Handle());
         break;
     }
 

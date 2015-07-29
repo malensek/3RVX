@@ -38,14 +38,25 @@ public:
         return FindWindow(CLASS_3RVX_SETTINGS, CLASS_3RVX_SETTINGS);
     }
 
-    static void Message(WPARAM wParam, LPARAM lParam) {
+    static void Message(WPARAM wParam, LPARAM lParam, bool post = false) {
         HWND masterWnd = MasterHwnd();
-        SendMessage(masterWnd, WM_3RVX_CTRL, wParam, lParam);
+
+        if (post) {
+            PostMessage(masterWnd, WM_3RVX_CTRL, wParam, lParam);
+        } else {
+            SendMessage(masterWnd, WM_3RVX_CTRL, wParam, lParam);
+        }
     }
 
-    static void SettingsMessage(WPARAM wParam, LPARAM lParam) {
+    static void SettingsMessage(
+            WPARAM wParam, LPARAM lParam, bool post = false) {
         HWND masterWnd = MasterSettingsHwnd();
-        SendMessage(masterWnd, WM_3RVX_SETTINGSCTRL, wParam, lParam);
+
+        if (post) {
+            PostMessage(masterWnd, WM_3RVX_SETTINGSCTRL, wParam, lParam);
+        } else {
+            SendMessage(masterWnd, WM_3RVX_SETTINGSCTRL, wParam, lParam);
+        }
     }
 
 public:

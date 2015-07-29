@@ -51,6 +51,9 @@ _repeatLimit(repeatLimit) {
 }
 
 SoundPlayer::~SoundPlayer() {
+    _ready = false;
+    _cv.notify_all();
+    _thread.join();
     SafeRelease(_mediaSeek);
     SafeRelease(_mediaEv);
     SafeRelease(_mediaCtrl);
@@ -76,7 +79,7 @@ void SoundPlayer::PlayerThread() {
     REFERENCE_TIME start = 0;
     std::unique_lock<std::mutex> lock(_mutex);
 
-    while (true) {
+    while (_ready == true) {
         _repeatMutex.lock();
         if (_repeat == 0) {
             _repeatMutex.unlock();
@@ -102,5 +105,6 @@ void SoundPlayer::PlayerThread() {
 void SoundPlayer::SafeRelease(IUnknown *p) {
     if (p) {
         p->Release();
+        p = NULL;
     }
 }

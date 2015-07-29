@@ -29,7 +29,7 @@
   </string>
   <string>
     <original>Audio Device</original>
-    <translation>播放设备</translation>
+    <translation>音频设备</translation>
   </string>
   <string>
     <original>Mixer</original>
@@ -223,7 +223,7 @@
   </string>
   <string>
     <original>Amount:</original>
-    <translation>总数:</translation>
+    <translation>幅度:</translation>
   </string>
   <string>
     <original>Volume Units</original>
@@ -277,7 +277,7 @@
   </string>
   <string>
     <original>Increase Volume {1} units</original>
-    <translation>增加音量 {1} 单位</translation>
+    <translation>增加音量单位 {1}</translation>
   </string>
   <string>
     <original>Decrease Volume</original>
@@ -289,7 +289,7 @@
   </string>
   <string>
     <original>Decrease Volume {1} units</original>
-    <translation>降低音量 {1} 单位</translation>
+    <translation>降低音量单位 {1}</translation>
   </string>
   <string>
     <original>Set Volume</original>
@@ -301,7 +301,7 @@
   </string>
   <string>
     <original>Set Volume: {1} units</original>
-    <translation>设置音量: {1} 单位</translation>
+    <translation>设置音量单位: {1}</translation>
   </string>
   <string>
     <original>Mute</original>

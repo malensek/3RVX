@@ -6,42 +6,18 @@
 #include <Windows.h>
 #include <gdiplus.h>
 #include <iostream>
-#include <string>
-#include <unordered_map>
 #include <Wtsapi32.h>
 
 #include "DisplayManager.h"
-#include "HotkeyInfo.h"
 #include "HotkeyManager.h"
-#include "KeyboardHotkeyProcessor.h"
 #include "Logger.h"
 #include "OSD/EjectOSD.h"
 #include "OSD/VolumeOSD.h"
 #include "Settings.h"
 #include "Skin/SkinManager.h"
 
-HANDLE mutex;
-HINSTANCE hInst;
-ULONG_PTR gdiplusToken;
-HWND mainWnd;
-
-VolumeOSD *vOSD;
-EjectOSD *eOSD;
-
-HotkeyManager *hkManager;
-KeyboardHotkeyProcessor kbHotkeyProcessor;
-std::unordered_map<int, HotkeyInfo> hotkeys;
-
-void init();
-HWND CreateMainWnd(HINSTANCE hInstance);
-void ProcessHotkeys(HotkeyInfo &hki);
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-
-
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPWSTR lpCmdLine, _In_ int nShowCmd) {
-
-    hInst = hInstance;
 
     Logger::Start();
 
@@ -54,6 +30,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     QCLOG(L"Starting up...");
 
+    HANDLE mutex;
     mutex = CreateMutex(NULL, FALSE, L"Local\\3RVX");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
         if (mutex) {
@@ -75,14 +52,11 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     CLOG(L"App directory: %s", Settings::AppDir().c_str());
 
     using namespace Gdiplus;
+    ULONG_PTR gdiplusToken;
     GdiplusStartupInput gdiplusStartupInput;
     GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
-    mainWnd = CreateMainWnd(hInstance);
-    if (mainWnd == NULL) {
-        CLOG(L"Could not create main window");
-        return EXIT_FAILURE;
-    }
+    _3RVX mainWnd(hInstance);
 
     HRESULT hr = CoInitializeEx(NULL,
         COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -92,7 +66,10 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     }
 
     /* Tell the program to initialize */
-    PostMessage(mainWnd, _3RVX::WM_3RVX_CTRL, _3RVX::MSG_LOAD, NULL);
+    PostMessage(mainWnd.Handle(), _3RVX::WM_3RVX_CTRL, _3RVX::MSG_LOAD, NULL);
+
+    /* Register for session change notifications */
+    WTSRegisterSessionNotification(mainWnd.Handle(), NOTIFY_FOR_THIS_SESSION);
 
     /* Start the event loop */
     MSG msg;
@@ -109,11 +86,16 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     return (int) msg.wParam;
 }
 
-void init() {
+_3RVX::_3RVX(HINSTANCE hInstance) :
+Window(_3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX, hInstance) {
+
+}
+
+void _3RVX::Initialize() {
     CLOG(L"Initializing...");
 
-    delete vOSD;
-    delete eOSD;
+    delete _vOSD;
+    delete _eOSD;
 
     Settings *settings = Settings::Instance();
     settings->Load();
@@ -124,78 +106,48 @@ void init() {
     DisplayManager::UpdateMonitorMap();
 
     /* OSDs */
-    eOSD = new EjectOSD();
-    vOSD = new VolumeOSD();
+    _eOSD = new EjectOSD();
+    _vOSD = new VolumeOSD();
 
     /* Hotkey setup */
-    if (hkManager != NULL) {
-        hkManager->Shutdown();
+    if (_hkManager != NULL) {
+        _hkManager->Shutdown();
     }
-    hkManager = HotkeyManager::Instance(mainWnd);
+    _hkManager = HotkeyManager::Instance(Handle());
 
-    hotkeys = Settings::Instance()->Hotkeys();
-    for (auto it = hotkeys.begin(); it != hotkeys.end(); ++it) {
+    _hotkeys = Settings::Instance()->Hotkeys();
+    for (auto it = _hotkeys.begin(); it != _hotkeys.end(); ++it) {
         /* Enable arg caching */
         it->second.EnableArgCache();
 
         int combination = it->first;
-        hkManager->Register(combination);
+        _hkManager->Register(combination);
     }
 
-    WTSRegisterSessionNotification(mainWnd, NOTIFY_FOR_THIS_SESSION);
 }
 
-HWND CreateMainWnd(HINSTANCE hInstance) {
-    WNDCLASSEX wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.style = NULL;
-    wcex.lpfnWndProc = WndProc;
-    wcex.cbClsExtra = NULL;
-    wcex.cbWndExtra = NULL;
-    wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(NULL, MAKEINTRESOURCE(101));
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName = _3RVX::CLASS_3RVX;
-    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-
-    if (!RegisterClassEx(&wcex)) {
-        return NULL;
-    }
-
-    HWND hWnd = CreateWindowEx(
-        NULL,
-        _3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX,
-        NULL, NULL, NULL, //your boat, gently down the stream
-        NULL, NULL, NULL, NULL, hInstance, NULL);
-
-    return hWnd;
-}
-
-void ProcessHotkeys(HotkeyInfo &hki) {
+void _3RVX::ProcessHotkeys(HotkeyInfo &hki) {
     switch (hki.action) {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
     case HotkeyInfo::SetVolume:
     case HotkeyInfo::Mute:
     case HotkeyInfo::VolumeSlider:
-        if (vOSD) {
-            vOSD->ProcessHotkeys(hki);
+        if (_vOSD) {
+            _vOSD->ProcessHotkeys(hki);
         }
         break;
 
     case HotkeyInfo::EjectDrive:
     case HotkeyInfo::EjectLastDisk:
-        if (eOSD) {
-            eOSD->ProcessHotkeys(hki);
+        if (_eOSD) {
+            _eOSD->ProcessHotkeys(hki);
         }
         break;
 
     case HotkeyInfo::MediaKey:
     case HotkeyInfo::VirtualKey:
-        kbHotkeyProcessor.ProcessHotkeys(hki);
+        _kbHotkeyProcessor.ProcessHotkeys(hki);
         break;
 
     case HotkeyInfo::Run:
@@ -211,18 +163,16 @@ void ProcessHotkeys(HotkeyInfo &hki) {
         break;
 
     case HotkeyInfo::Exit:
-        SendMessage(mainWnd, WM_CLOSE, NULL, NULL);
+        SendMessage(Handle(), WM_CLOSE, NULL, NULL);
         break;
     }
 }
 
-LRESULT CALLBACK WndProc(
-    HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-
+LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     switch (message) {
     case WM_HOTKEY: {
         CLOG(L"Hotkey: %d", (int) wParam);
-        HotkeyInfo hki = hotkeys[(int) wParam];
+        HotkeyInfo hki = _hotkeys[(int) wParam];
         ProcessHotkeys(hki);
         break;
     }
@@ -235,8 +185,8 @@ LRESULT CALLBACK WndProc(
     case WM_CLOSE: {
         CLOG(L"Shutting down");
         HotkeyManager::Instance()->Shutdown();
-        vOSD->HideIcon();
-        DestroyWindow(mainWnd);
+        _vOSD->HideIcon();
+        DestroyWindow(Handle());
         break;
     }
 
@@ -249,7 +199,7 @@ LRESULT CALLBACK WndProc(
     if (message == _3RVX::WM_3RVX_CTRL) {
         switch (wParam) {
         case _3RVX::MSG_LOAD:
-            init();
+            Initialize();
             break;
 
         case _3RVX::MSG_SETTINGS:
@@ -260,14 +210,14 @@ LRESULT CALLBACK WndProc(
             int except = (OSDType) lParam;
             switch (except) {
             case Volume:
-                if (eOSD) {
-                    eOSD->Hide();
+                if (_eOSD) {
+                    _eOSD->Hide();
                 }
                 break;
 
             case Eject:
-                if (vOSD) {
-                    vOSD->Hide();
+                if (_vOSD) {
+                    _vOSD->Hide();
                 }
                 break;
             }
@@ -276,5 +226,5 @@ LRESULT CALLBACK WndProc(
         }
     }
 
-    return DefWindowProc(hWnd, message, wParam, lParam);
+    return Window::WndProc(hWnd, message, wParam, lParam);
 }

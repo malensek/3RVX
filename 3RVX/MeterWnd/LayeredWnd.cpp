@@ -32,7 +32,10 @@ void LayeredWnd::UpdateWindow(RECT *dirtyRect) {
     HGDIOBJ hReplaced = SelectObject(sourceDc, hBmp);
 
     POINT pt = { 0, 0 };
-    SIZE size = { _bitmap->GetWidth(), _bitmap->GetHeight() };
+    SIZE size = {
+        static_cast<LONG>(_bitmap->GetWidth()),
+        static_cast<LONG>(_bitmap->GetHeight())
+    };
 
     UPDATELAYEREDWINDOWINFO lwInfo;
     lwInfo.cbSize = sizeof(UPDATELAYEREDWINDOWINFO);

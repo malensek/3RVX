@@ -62,6 +62,7 @@ void SkinManager::DisposeComponents() {
     }
     _volumeIconset.clear();
     delete _volumeSlider;
+    _volumeSlider = NULL;
 
     delete _muteOSD;
     _muteOSD = NULL;

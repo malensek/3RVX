@@ -3,6 +3,7 @@
 #include "Skin.h"
 #include "SkinV3.h"
 
+#include "../Settings.h"
 #include "MeterComponent.h"
 #include "OSDComponent.h"
 #include "SliderComponent.h"
@@ -19,15 +20,35 @@ SkinManager *SkinManager::Instance() {
 void SkinManager::LoadSkin(std::wstring skinXML) {
     DisposeComponents();
 
-    Skin *skin = new SkinV3(skinXML);
+    std::vector<Skin *> skins;
+    skins.push_back(new SkinV3(skinXML));
+    skins.push_back(new SkinV3(Settings::Instance()->SkinXML(L"Classic")));
 
-    _volumeOSD = skin->VolumeOSD();
-    _volumeIconset = skin->VolumeIconset();
-    _volumeSlider = skin->VolumeSlider();
-    _muteOSD = skin->MuteOSD();
-    _ejectOSD = skin->EjectOSD();
+    for (Skin *skin : skins) {
+        if (_volumeOSD == NULL) {
+            _volumeOSD = skin->VolumeOSD();
+        }
 
-    delete skin;
+        if (_volumeIconset.size() == 0) {
+            _volumeIconset = skin->VolumeIconset();
+        }
+
+        if (_volumeSlider == NULL) {
+            _volumeSlider = skin->VolumeSlider();
+        }
+
+        if (_muteOSD == NULL) {
+            _muteOSD = skin->MuteOSD();
+        }
+
+        if (_ejectOSD == NULL) {
+            _ejectOSD = skin->EjectOSD();
+        }
+    }
+
+    for (Skin *skin : skins) {
+        delete skin;
+    }
 }
 
 OSDComponent *SkinManager::VolumeOSD() {

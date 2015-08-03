@@ -8,14 +8,19 @@
 #include <string>
 #include <vector>
 
+#include "../TinyXml2/tinyxml2.h"
 #include "Skin.h"
+#include "SkinInfo.h"
 
 class Meter;
-class OSDSkin;
 class SliderKnob;
 class SoundPlayer;
 
-class SkinV3 : public Skin {
+struct MeterComponent;
+
+using tinyxml2::XMLElement;
+
+class SkinV3 : public Skin, public SkinInfo {
 public:
     SkinV3(std::wstring skinXML);
     ~SkinV3();
@@ -29,16 +34,9 @@ public:
     virtual SliderComponent *VolumeSlider();
 
 private:
-    OSDComponent *_volumeOSD;
-    OSDComponent *_muteOSD;
-    OSDComponent *_ejectOSD;
-
-    std::vector<HICON> _volumeIcons;
-
-    SliderComponent *_volumeSlider;
-
-    void PopulateComponent(SkinComponent *component, XMLElement *elem);
-    void DestroyComponent(SkinComponent *component);
+    OSDComponent *CreateOSDComponent(char *osdType);
+    SliderComponent *CreateSliderComponent(char *sliderType);
+    bool PopulateMeterComponent(MeterComponent *component, XMLElement *elem);
 
     int DefaultUnits(XMLElement *elem);
     Gdiplus::Bitmap *Image(XMLElement *element, char *attrName);

@@ -108,7 +108,7 @@ void VolumeOSD::UpdateDeviceMenu() {
 }
 
 void VolumeOSD::LoadSkin() {
-    Skin *skin = SkinManager::Instance()->CurrentSkin();
+    SkinManager *skin = SkinManager::Instance();
 
     /* Volume OSD */
     OSDComponent *volumeOSD = skin->VolumeOSD();

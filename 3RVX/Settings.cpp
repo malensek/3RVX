@@ -34,6 +34,7 @@ const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
 const std::wstring Settings::SETTINGS_FILE = L"Settings.xml";
 const std::wstring Settings::LANG_DIR = L"Languages";
 const std::wstring Settings::SKIN_DIR = L"Skins";
+const std::wstring Settings::SKIN_XML = L"Skin.xml";
 
 const std::wstring Settings::DefaultLanguage = L"English";
 const std::wstring Settings::DefaultSkin = L"Classic";
@@ -69,8 +70,15 @@ void Settings::Load() {
     _file = SettingsFile();
     CLOG(L"Loading settings: %s", _file.c_str());
 
-    std::string u8FileName = StringUtils::Narrow(_file);
-    tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
+    FILE *fp;
+    _wfopen_s(&fp, _file.c_str(), L"rb");
+    if (fp == NULL) {
+        QCLOG(L"Failed to open file!");
+        return;
+    }
+
+    tinyxml2::XMLError result = _xml.LoadFile(fp);
+    fclose(fp);
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
         LoadEmptySettings();
         return;
@@ -339,8 +347,8 @@ std::wstring Settings::SkinXML() {
 }
 
 std::wstring Settings::SkinXML(std::wstring skinName) {
-    std::wstring skinXML = Settings::AppDir() + L"\\" + SKINS_DIR L"\\"
-        + skinName + L"\\" SKIN_XML;
+    std::wstring skinXML = Settings::AppDir() + L"\\" + SKIN_DIR + L"\\"
+        + skinName + L"\\" + SKIN_XML;
     return skinXML;
 }
 

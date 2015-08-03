@@ -4,9 +4,6 @@
 #include <list>
 #include "../TinyXml2/tinyxml2.h"
 
-#define SKINS_DIR L"Skins"
-#define SKIN_XML L"skin.xml"
-
 class SkinInfo {
 public:
     SkinInfo(std::wstring skinName);
@@ -20,4 +17,9 @@ protected:
     std::wstring _skinDir;
     tinyxml2::XMLDocument _xml;
     tinyxml2::XMLElement *_root;
+
+    tinyxml2::XMLElement *SubElement(char *parent, char *child);
+
+protected:
+    static const int DEFAULT_UNITS = 10;
 };

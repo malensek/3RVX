@@ -14,7 +14,7 @@ VolumeSlider::VolumeSlider(CoreAudio &volumeCtrl) :
 SliderWnd(L"3RVX-VolumeSlider", L"3RVX Volume Slider"),
 _volumeCtrl(volumeCtrl) {
 
-    Skin *skin = SkinManager::Instance()->CurrentSkin();
+    SkinManager *skin = SkinManager::Instance();
     BackgroundImage(skin->VolumeSlider()->background);
     EnableGlass(skin->VolumeSlider()->mask);
 

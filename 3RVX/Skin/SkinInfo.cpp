@@ -10,11 +10,18 @@ _skinFile(skinFile) {
     CLOG(L"Loading skin XML: %s", _skinFile.c_str());
 
     /* Remove the '/skin.xml' portion from the file name to get the dir name. */
-    std::wstring xmlName = std::wstring(SKIN_XML);
+    std::wstring xmlName = std::wstring(Settings::SKIN_XML);
     _skinDir = _skinFile.substr(0, _skinFile.length() - (xmlName.length() + 1));
 
-    std::string u8FileName = StringUtils::Narrow(_skinFile);
-    tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
+    FILE *fp;
+    _wfopen_s(&fp, _skinFile.c_str(), L"rb");
+    if (fp == NULL) {
+        QCLOG(L"Failed to open file!");
+        return;
+    }
+
+    tinyxml2::XMLError result = _xml.LoadFile(fp);
+    fclose(fp);
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
         if (result == tinyxml2::XMLError::XML_ERROR_FILE_NOT_FOUND) {
             Error::ErrorMessageDie(SKINERR_INVALID_SKIN);
@@ -55,4 +62,13 @@ std::wstring SkinInfo::URL() {
         return L"";
     }
     return std::wstring(StringUtils::Widen(text));
+}
+
+tinyxml2::XMLElement *SkinInfo::SubElement(char *parent, char *child) {
+    tinyxml2::XMLHandle xmlHandle(_root);
+    tinyxml2::XMLElement *elem = xmlHandle
+        .FirstChildElement(parent)
+        .FirstChildElement(child)
+        .ToElement();
+    return elem;
 }

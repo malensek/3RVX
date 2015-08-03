@@ -1,9 +1,13 @@
 #pragma once
 
-#include "SkinComponent.h"
+#include "MeterComponent.h"
 
-class SliderKnob;
+#include "../Slider/SliderKnob.h"
 
-struct SliderComponent : public SkinComponent {
+struct SliderComponent : public MeterComponent {
     SliderKnob *knob;
+
+    virtual ~SliderComponent() {
+        delete knob;
+    }
 };

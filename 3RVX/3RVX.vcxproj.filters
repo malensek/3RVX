@@ -180,13 +180,16 @@
     <ClInclude Include="Skin\SkinV3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Skin\SkinComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Skin\OSDComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Skin\SliderComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\MeterComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\MultiSkin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -315,9 +318,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OSD\Brightness.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Skin\Skin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Skin\SkinInfo.cpp">

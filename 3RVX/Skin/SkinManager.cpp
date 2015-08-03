@@ -3,6 +3,11 @@
 #include "Skin.h"
 #include "SkinV3.h"
 
+#include "../Settings.h"
+#include "MeterComponent.h"
+#include "OSDComponent.h"
+#include "SliderComponent.h"
+
 SkinManager *SkinManager::instance;
 
 SkinManager *SkinManager::Instance() {
@@ -12,15 +17,77 @@ SkinManager *SkinManager::Instance() {
     return instance;
 }
 
-SkinManager::~SkinManager() {
-    delete _skin;
-}
-
 void SkinManager::LoadSkin(std::wstring skinXML) {
-    delete _skin;
-    _skin = new SkinV3(skinXML);
+    DisposeComponents();
+
+    std::vector<Skin *> skins;
+    skins.push_back(new SkinV3(skinXML));
+    skins.push_back(new SkinV3(Settings::Instance()->SkinXML(L"Classic")));
+
+    for (Skin *skin : skins) {
+        if (_volumeOSD == NULL) {
+            _volumeOSD = skin->VolumeOSD();
+        }
+
+        if (_volumeIconset.size() == 0) {
+            _volumeIconset = skin->VolumeIconset();
+        }
+
+        if (_volumeSlider == NULL) {
+            _volumeSlider = skin->VolumeSlider();
+        }
+
+        if (_muteOSD == NULL) {
+            _muteOSD = skin->MuteOSD();
+        }
+
+        if (_ejectOSD == NULL) {
+            _ejectOSD = skin->EjectOSD();
+        }
+    }
+
+    for (Skin *skin : skins) {
+        delete skin;
+    }
 }
 
-Skin *SkinManager::CurrentSkin() {
-    return _skin;
+OSDComponent *SkinManager::VolumeOSD() {
+    return _volumeOSD;
+}
+
+std::vector<HICON> &SkinManager::VolumeIconset() {
+    return _volumeIconset;
+}
+
+SliderComponent *SkinManager::VolumeSlider() {
+    return _volumeSlider;
+}
+
+OSDComponent *SkinManager::MuteOSD() {
+    return _muteOSD;
+}
+
+OSDComponent *SkinManager::EjectOSD() {
+    return _ejectOSD;
+}
+
+SkinManager::~SkinManager() {
+    DisposeComponents();
+}
+
+void SkinManager::DisposeComponents() {
+    delete _volumeOSD;
+    _volumeOSD = NULL;
+    for (HICON icon : _volumeIconset) {
+        DestroyIcon(icon);
+    }
+    _volumeIconset.clear();
+    delete _volumeSlider;
+    _volumeSlider = NULL;
+
+    delete _muteOSD;
+    _muteOSD = NULL;
+
+    delete _ejectOSD;
+    _ejectOSD = NULL;
 }

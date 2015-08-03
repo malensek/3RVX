@@ -1,8 +1,34 @@
 #pragma once
 
 #include <Windows.h>
+#include <unordered_map>
 
-class _3RVX {
+#include "HotkeyInfo.h"
+#include "KeyboardHotkeyProcessor.h"
+#include "Window.h"
+
+class EjectOSD;
+class VolumeOSD;
+
+class HotkeyManager;
+
+class _3RVX : public Window {
+public:
+    _3RVX(HINSTANCE hInstance);
+
+private:
+    VolumeOSD *_vOSD;
+    EjectOSD *_eOSD;
+
+    HotkeyManager *_hkManager;
+    KeyboardHotkeyProcessor _kbHotkeyProcessor;
+    std::unordered_map<int, HotkeyInfo> _hotkeys;
+
+    void Initialize();
+    void ProcessHotkeys(HotkeyInfo &hki);
+    virtual LRESULT WndProc(HWND hWnd, UINT message,
+        WPARAM wParam, LPARAM lParam);
+
 public:
     static HWND MasterHwnd() {
         return FindWindow(CLASS_3RVX, CLASS_3RVX);
@@ -12,14 +38,25 @@ public:
         return FindWindow(CLASS_3RVX_SETTINGS, CLASS_3RVX_SETTINGS);
     }
 
-    static void Message(WPARAM wParam, LPARAM lParam) {
+    static void Message(WPARAM wParam, LPARAM lParam, bool post = false) {
         HWND masterWnd = MasterHwnd();
-        SendMessage(masterWnd, WM_3RVX_CTRL, wParam, lParam);
+
+        if (post) {
+            PostMessage(masterWnd, WM_3RVX_CTRL, wParam, lParam);
+        } else {
+            SendMessage(masterWnd, WM_3RVX_CTRL, wParam, lParam);
+        }
     }
 
-    static void SettingsMessage(WPARAM wParam, LPARAM lParam) {
+    static void SettingsMessage(
+            WPARAM wParam, LPARAM lParam, bool post = false) {
         HWND masterWnd = MasterSettingsHwnd();
-        SendMessage(masterWnd, WM_3RVX_SETTINGSCTRL, wParam, lParam);
+
+        if (post) {
+            PostMessage(masterWnd, WM_3RVX_SETTINGSCTRL, wParam, lParam);
+        } else {
+            SendMessage(masterWnd, WM_3RVX_SETTINGSCTRL, wParam, lParam);
+        }
     }
 
 public:

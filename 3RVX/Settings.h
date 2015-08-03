@@ -141,6 +141,7 @@ public:
     static const std::wstring SETTINGS_FILE;
     static const std::wstring LANG_DIR;
     static const std::wstring SKIN_DIR;
+    static const std::wstring SKIN_XML;
 
     /* Default settings */
     static const bool DefaultOnTop = true;

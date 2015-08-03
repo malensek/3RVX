@@ -20,6 +20,7 @@ LanguageTranslator::LanguageTranslator(std::wstring langFileName) {
     }
 
     tinyxml2::XMLError result = _xml.LoadFile(fp);
+    fclose(fp);
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
         CLOG(L"Failed to read language file!");
         return;

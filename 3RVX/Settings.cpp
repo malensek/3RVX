@@ -70,8 +70,15 @@ void Settings::Load() {
     _file = SettingsFile();
     CLOG(L"Loading settings: %s", _file.c_str());
 
-    std::string u8FileName = StringUtils::Narrow(_file);
-    tinyxml2::XMLError result = _xml.LoadFile(u8FileName.c_str());
+    FILE *fp;
+    _wfopen_s(&fp, _file.c_str(), L"rb");
+    if (fp == NULL) {
+        QCLOG(L"Failed to open file!");
+        return;
+    }
+
+    tinyxml2::XMLError result = _xml.LoadFile(fp);
+    fclose(fp);
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
         LoadEmptySettings();
         return;

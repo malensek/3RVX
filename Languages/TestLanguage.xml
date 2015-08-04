@@ -66,7 +66,7 @@
   <!-- General Tab -->
   <string>
     <original>Behavior</original>
-		<translation>XXXXXXXX</translation>
+    <translation>XXXXXXXX</translation>
   </string>
   <string>
     <original>Run on Windows startup</original>
@@ -83,23 +83,23 @@
 
   <string>
     <original>Skin</original>
-		<translation>XXXX</translation>
+    <translation>XXXX</translation>
   </string>
   <string>
     <original>Author: {1}</original>
-		<translation>XXXXXX: {1}</translation>
+    <translation>XXXXXX: {1}</translation>
   </string>
   <string>
     <original>Website</original>
-		<translation>XXXXXXX</translation>
+    <translation>XXXXXXX</translation>
   </string>
 
   <string>
     <original>Language</original>
-		<translation>XXXXXXXX</translation>
+    <translation>XXXXXXXX</translation>
   </string>
 
-  
+
   <!-- Display Tab -->
   <string>
     <original>Visibility</original>
@@ -196,7 +196,7 @@
     <translation>XXXXX XXXX:</translation>
   </string>
 
-  
+
   <!-- Hotkeys Tab -->
   <string>
     <original>Action</original>

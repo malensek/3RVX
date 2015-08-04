@@ -17,10 +17,10 @@ std::wstring StringUtils::Widen(const std::string &str) {
 }
 
 std::string StringUtils::Narrow(const std::wstring &str) {
-    int size = WideCharToMultiByte(CP_UTF8, 0, &str[0], (int) str.size(),
+    int size = WideCharToMultiByte(CP_ACP, 0, &str[0], (int) str.size(),
         NULL, 0, NULL, NULL);
     std::string buf(size, 0);
-    WideCharToMultiByte(CP_UTF8, 0, &str[0], (int) str.size(),
+    WideCharToMultiByte(CP_ACP, 0, &str[0], (int) str.size(),
         &buf[0], size, NULL, NULL);
     return buf;
 }

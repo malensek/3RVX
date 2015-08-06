@@ -9,6 +9,7 @@ Beta 9
 * Option to temporarily disable the OSD when a DirectX application is running full screen
 * Bugfix: Translate 'Muted' for the notification icon
 * Bugfix: Settings dialog is now re-translated on 'Apply'
+* Bugfix: Settings not read if username contains non-ASCII characters
 
 Beta 8
 ------

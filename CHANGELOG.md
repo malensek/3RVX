@@ -3,6 +3,8 @@
 
 Beta 9
 ------
+* Custom volume curves
+* Custom volume limits
 * Compatiblity mode for the old (v2) skin format
 * Automatic updates
 * Hotkey to disable/enable the OSD 

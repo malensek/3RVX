@@ -147,6 +147,7 @@
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="OSD\Brightness.cpp" />
     <ClCompile Include="OSD\KeyboardOSD.cpp" />
+    <ClCompile Include="Skin\MultiSkin.cpp" />
     <ClCompile Include="Skin\SkinV3.cpp" />
     <ClCompile Include="SyntheticKeyboard.cpp" />
     <ClCompile Include="HotkeyInfo.cpp" />

@@ -329,6 +329,9 @@
     <ClCompile Include="Skin\SkinV3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Skin\MultiSkin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3RVX.rc">

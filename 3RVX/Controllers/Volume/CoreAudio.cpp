@@ -12,7 +12,7 @@ HRESULT CoreAudio::Init() {
 
     hr = CoCreateInstance(
         __uuidof(MMDeviceEnumerator),
-        NULL,
+        nullptr,
         CLSCTX_INPROC_SERVER,
         IID_PPV_ARGS(&_devEnumerator));
 
@@ -45,7 +45,7 @@ HRESULT CoreAudio::AttachDevice() {
         hr = _devEnumerator->GetDefaultAudioEndpoint(eRender,
             eMultimedia, &_device);
         if (SUCCEEDED(hr)) {
-            LPWSTR id = NULL;
+            LPWSTR id = nullptr;
             hr = _device->GetId(&id);
             if (SUCCEEDED(hr) && id) {
                 _devId = std::wstring(id);
@@ -58,7 +58,7 @@ HRESULT CoreAudio::AttachDevice() {
 
     if (SUCCEEDED(hr)) {
         hr = _device->Activate(__uuidof(_volumeControl),
-            CLSCTX_INPROC_SERVER, NULL, (void **) &_volumeControl);
+            CLSCTX_INPROC_SERVER, nullptr, (void **) &_volumeControl);
 
         CLOG(L"Attached to audio device: [%s]", DeviceName().c_str());
 
@@ -74,7 +74,7 @@ HRESULT CoreAudio::AttachDevice() {
 }
 
 void CoreAudio::DetachDevice() {
-    if (_volumeControl != NULL) {
+    if (_volumeControl != nullptr) {
 
         if (_registeredNotifications) {
             _volumeControl->UnregisterControlChangeNotify(this);
@@ -84,16 +84,16 @@ void CoreAudio::DetachDevice() {
         _volumeControl->Release();
     }
 
-    if (_device != NULL) {
+    if (_device != nullptr) {
         _device->Release();
     }
 }
 
 HRESULT CoreAudio::OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) {
     if (pNotify->guidEventContext == G3RVXCoreAudioEvent) {
-        PostMessage(_notifyHwnd, MSG_VOL_CHNG, (WPARAM) 1, NULL);
+        PostMessage(_notifyHwnd, MSG_VOL_CHNG, (WPARAM) 1, 0);
     } else {
-        PostMessage(_notifyHwnd, MSG_VOL_CHNG, NULL, NULL);
+        PostMessage(_notifyHwnd, MSG_VOL_CHNG, 0, 0);
     }
 
     return S_OK;
@@ -126,7 +126,7 @@ HRESULT CoreAudio::SelectDefaultDevice() {
 
 std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
     std::list<VolumeController::DeviceInfo> devList;
-    IMMDeviceCollection *devices = NULL;
+    IMMDeviceCollection *devices = nullptr;
 
     HRESULT hr = _devEnumerator->EnumAudioEndpoints(
         eRender,
@@ -144,7 +144,7 @@ std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
     }
     LPWSTR devId;
     for (unsigned int i = 0; i < numDevices; ++i) {
-        IMMDevice *device = NULL;
+        IMMDevice *device = nullptr;
         HRESULT hr = devices->Item(i, &device);
         if (FAILED(hr)) {
             continue;
@@ -210,11 +210,11 @@ std::wstring CoreAudio::DeviceDesc(std::wstring deviceId) {
 }
 
 std::wstring CoreAudio::DeviceName(IMMDevice *device) {
-    if (device == NULL) {
+    if (device == nullptr) {
         return L"";
     }
 
-    IPropertyStore *props = NULL;
+    IPropertyStore *props = nullptr;
     HRESULT hr = device->OpenPropertyStore(STGM_READ, &props);
     if (FAILED(hr)) {
         return L"";
@@ -238,11 +238,11 @@ std::wstring CoreAudio::DeviceName(IMMDevice *device) {
 std::wstring CoreAudio::DeviceDesc(IMMDevice *device) {
     HRESULT hr;
 
-    if (device == NULL) {
+    if (device == nullptr) {
         return L"";
     }
 
-    IPropertyStore *props = NULL;
+    IPropertyStore *props = nullptr;
     hr = device->OpenPropertyStore(STGM_READ, &props);
     if (FAILED(hr)) {
         return L"";
@@ -288,7 +288,7 @@ void CoreAudio::Volume(float vol) {
 }
 
 bool CoreAudio::Muted() {
-    if (_volumeControl == NULL) {
+    if (_volumeControl == nullptr) {
         return true;
     }
 
@@ -326,7 +326,7 @@ HRESULT CoreAudio::QueryInterface(REFIID iid, void **ppUnk) {
     } else if (iid == __uuidof(IAudioEndpointVolumeCallback)) {
         *ppUnk = static_cast<IAudioEndpointVolumeCallback*>(this);
     } else {
-        *ppUnk = NULL;
+        *ppUnk = nullptr;
         return E_NOINTERFACE;
     }
 

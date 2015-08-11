@@ -1,6 +1,6 @@
 #include "MultiSkin.h"
 
-OSDComponent * MultiSkin::VolumeOSD() {
+OSDComponent *MultiSkin::VolumeOSD() {
     return nullptr;
 }
 
@@ -8,7 +8,7 @@ OSDComponent *MultiSkin::MuteOSD() {
     return nullptr;
 }
 
-OSDComponent * MultiSkin::EjectOSD() {
+OSDComponent *MultiSkin::EjectOSD() {
     return nullptr;
 }
 
@@ -16,6 +16,6 @@ std::vector<HICON> MultiSkin::VolumeIconset() {
     return std::vector<HICON>();
 }
 
-SliderComponent * MultiSkin::VolumeSlider() {
+SliderComponent *MultiSkin::VolumeSlider() {
     return nullptr;
 }

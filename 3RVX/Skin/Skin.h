@@ -1,5 +1,10 @@
 #pragma once
 
+#pragma comment(lib, "gdiplus.lib")
+
+#include <Windows.h>
+#include <gdiplus.h>
+
 #include <list>
 #include <vector>
 
@@ -15,4 +20,6 @@ public:
     virtual OSDComponent *MuteOSD() = 0;
 
     virtual OSDComponent *EjectOSD() = 0;
+
+    static Gdiplus::Bitmap *LoadImg(std::wstring fileName);
 };

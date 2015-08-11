@@ -67,8 +67,10 @@ OSDComponent *SkinV2::VolumeOSD() {
         volume->meters.push_back(
             new VerticalBar(meterImg, x, y, units));
     } else if (meterType == "bitstrip") {
+        /* For some reason, the number of units in v2 for bit strips was
+         * (meterMax + 1), so we update the number of units here. */
         volume->meters.push_back(
-            new Bitstrip(meterImg, x, y, units));
+            new Bitstrip(meterImg, x, y, units + 1));
     } else {
         /* Horizontal meter is the default */
         volume->meters.push_back(

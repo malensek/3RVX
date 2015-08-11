@@ -85,7 +85,10 @@ OSDComponent *SkinV2::MuteOSD() {
 }
 
 OSDComponent *SkinV2::EjectOSD() {
-    return nullptr;
+    OSDComponent *eject = new OSDComponent;
+    eject->background = LoadImg(_skinDir + L"\\OSD\\eject.png");
+    eject->mask = LoadImg(_skinDir + L"\\OSD\\glassMask.png");
+    return eject;
 }
 
 std::vector<HICON> SkinV2::VolumeIconset() {

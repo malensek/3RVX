@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLskinSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <info>
+    <author>5HORiZONS</author>
+    <website>http://matt.malensek.net/</website>
+
+    <skinVersion>1</skinVersion>
+    <formatVersion>1</formatVersion>
+  </info>
+
+  <osd>
+    <meterOrientation>horizontal</meterOrientation>
+
+    <meterPosition>
+      <X>78</X>
+      <Y>13</Y>
+    </meterPosition>
+
+    <meterMax>10</meterMax>
+
+    <fadeStepping>45</fadeStepping>
+  </osd>
+
+  <control>
+    <orientation>vertical</orientation>
+
+    <sliderPosition>
+      <Location>
+        <X>23</X>
+        <Y>16</Y>
+      </Location>
+      <Size>
+        <Width>17</Width>
+        <Height>98</Height>
+      </Size>
+    </sliderPosition>
+  </control>
+</XMLskinSettings>

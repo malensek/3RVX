@@ -90,6 +90,7 @@
     <ClInclude Include="Skin\MultiSkin.h" />
     <ClInclude Include="Skin\OSDComponent.h" />
     <ClInclude Include="Skin\MeterComponent.h" />
+    <ClInclude Include="Skin\SkinUtils.h" />
     <ClInclude Include="Skin\SkinV2.h" />
     <ClInclude Include="Skin\SkinV3.h" />
     <ClInclude Include="Skin\SliderComponent.h" />
@@ -148,6 +149,8 @@
     <ClCompile Include="OSD\Brightness.cpp" />
     <ClCompile Include="OSD\KeyboardOSD.cpp" />
     <ClCompile Include="Skin\MultiSkin.cpp" />
+    <ClCompile Include="Skin\SkinUtils.cpp" />
+    <ClCompile Include="Skin\SkinV2.cpp" />
     <ClCompile Include="Skin\SkinV3.cpp" />
     <ClCompile Include="SyntheticKeyboard.cpp" />
     <ClCompile Include="HotkeyInfo.cpp" />

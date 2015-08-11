@@ -17,6 +17,7 @@ protected:
     std::wstring _skinDir;
     tinyxml2::XMLDocument _xml;
     tinyxml2::XMLElement *_root;
+    int _version;
 
     tinyxml2::XMLElement *SubElement(char *parent, char *child);
 

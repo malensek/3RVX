@@ -30,8 +30,16 @@ _skinFile(skinFile) {
     }
 
     _root = _xml.GetDocument()->FirstChildElement("skin");
-    if (_root == NULL) {
-        throw std::runtime_error("Could not find root XML element");
+    if (_root != NULL) {
+        _version = 3;
+    } else {
+        _root = _xml.GetDocument()->FirstChildElement("XMLskinSettings");
+
+        if (_root != NULL) {
+            _version = 2;
+        } else {
+            throw std::runtime_error("Could not find root XML element");
+        }
     }
 }
 
@@ -62,6 +70,10 @@ std::wstring SkinInfo::URL() {
         return L"";
     }
     return std::wstring(StringUtils::Widen(text));
+}
+
+int SkinInfo::FormatVersion() {
+    return _version;
 }
 
 tinyxml2::XMLElement *SkinInfo::SubElement(char *parent, char *child) {

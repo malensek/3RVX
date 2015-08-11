@@ -2,8 +2,13 @@
 
 #include <Windows.h>
 
+#include "../TinyXml2/tinyxml2.h"
 #include "Skin.h"
 #include "SkinInfo.h"
+
+struct MeterComponent;
+
+using tinyxml2::XMLElement;
 
 class SkinV2 : public Skin, public SkinInfo {
 public:
@@ -20,5 +25,6 @@ public:
 
 private:
     OSDComponent *CreateOSDComponent(char *osdType);
+    bool PopulateMeterComponent(MeterComponent *component, XMLElement *elem);
 
 };

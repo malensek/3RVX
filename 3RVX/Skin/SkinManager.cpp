@@ -1,6 +1,7 @@
 #include "SkinManager.h"
 
 #include "Skin.h"
+#include "SkinV2.h"
 #include "SkinV3.h"
 
 #include "../Settings.h"
@@ -20,8 +21,16 @@ SkinManager *SkinManager::Instance() {
 void SkinManager::LoadSkin(std::wstring skinXML) {
     DisposeComponents();
 
+    Skin *skin;
+    SkinInfo info(skinXML);
+    if (info.FormatVersion() == 2) {
+        skin = new SkinV2(skinXML);
+    } else {
+        skin = new SkinV3(skinXML);
+    }
+
     std::vector<Skin *> skins;
-    skins.push_back(new SkinV3(skinXML));
+    skins.push_back(skin);
     skins.push_back(new SkinV3(Settings::Instance()->SkinXML(L"Classic")));
 
     for (Skin *skin : skins) {

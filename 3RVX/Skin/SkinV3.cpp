@@ -165,11 +165,11 @@ SoundPlayer *SkinV3::Sound(XMLElement *elem) {
         Error::ErrorMessage(SKINERR_NOTFOUND, wFileName);
     }
 
-    SoundPlayer *player = NULL;
-    try {
-        player = new SoundPlayer(wFileName);
-    } catch (std::runtime_error e) {
-        Error::ErrorMessage(SKINERR_READERR, wFileName);
+    SoundPlayer *player = new SoundPlayer(wFileName);
+    if (player->Ready() == false) {
+        CLOG(L"Failed to initialize sound player");
+        delete player;
+        return NULL;
     }
 
     return player;

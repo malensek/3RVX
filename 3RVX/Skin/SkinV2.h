@@ -23,8 +23,4 @@ public:
 
     virtual SliderComponent *VolumeSlider();
 
-private:
-    OSDComponent *CreateOSDComponent(char *osdType);
-    bool PopulateMeterComponent(MeterComponent *component, XMLElement *elem);
-
 };

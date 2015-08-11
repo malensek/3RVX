@@ -1,8 +1,10 @@
 #include "SkinV2.h"
 
 #include "../Logger.h"
+#include "../MeterWnd/Meters/MeterTypes.h"
 #include "../StringUtils.h"
 #include "MeterComponent.h"
+#include "OSDComponent.h"
 #include "SkinUtils.h"
 
 SkinV2::SkinV2(std::wstring skinXML) :
@@ -15,7 +17,64 @@ SkinV2::~SkinV2() {
 }
 
 OSDComponent *SkinV2::VolumeOSD() {
-    return nullptr;
+    OSDComponent *volume = new OSDComponent;
+
+    /* Images */
+    volume->background = LoadImg(_skinDir + L"\\OSD\\back.png");
+    volume->mask = LoadImg(_skinDir + L"\\OSD\\glassMask.png");
+
+    /* Sound */
+    std::wstring soundName = _skinDir + L"\\sound.wav";
+    SoundPlayer *player = new SoundPlayer(soundName);
+    if (player->Ready() == false) {
+        delete player;
+        player = NULL;
+    }
+    volume->sound = player;
+
+    /* Determine the number of units */
+    int units = 10;
+    tinyxml2::XMLElement *meterMax = SubElement("osd", "meterMax");
+    if (meterMax) {
+        meterMax->QueryIntText(&units);
+    }
+    volume->defaultUnits = units;
+
+    /* Load the meter(s) */
+    const char *meterType = nullptr;
+    tinyxml2::XMLElement *meterOrientation
+        = SubElement("osd", "meterOrientation");
+    if (meterOrientation) {
+        meterType = meterOrientation->GetText();
+    }
+    int x = 0;
+    int y = 0;
+    tinyxml2::XMLElement *pos = SubElement("osd", "meterPosition");
+    if (pos) {
+        tinyxml2::XMLElement *xelem = pos->FirstChildElement("X");
+        tinyxml2::XMLElement *yelem = pos->FirstChildElement("Y");
+        if (xelem) {
+            xelem->QueryIntText(&x);
+        }
+        if (yelem) {
+            yelem->QueryIntText(&y);
+        }
+    }
+
+    std::wstring meterImg = _skinDir + L"\\OSD\\meter.png";
+    if (meterType == "vertical") {
+        volume->meters.push_back(
+            new VerticalBar(meterImg, x, y, units));
+    } else if (meterType == "bitstrip") {
+        volume->meters.push_back(
+            new Bitstrip(meterImg, x, y, units));
+    } else {
+        /* Horizontal meter is the default */
+        volume->meters.push_back(
+            new HorizontalBar(meterImg, x, y, units));
+    }
+
+    return volume;
 }
 
 OSDComponent *SkinV2::MuteOSD() {
@@ -34,44 +93,3 @@ std::vector<HICON> SkinV2::VolumeIconset() {
 SliderComponent *SkinV2::VolumeSlider() {
     return nullptr;
 }
-
-OSDComponent *SkinV2::CreateOSDComponent(char *osdName) {
-//    XMLElement *osdElem = SubElement("osds", osdName);
-//    if (osdElem == NULL) {
-//        return NULL;
-//    }
-
-//    OSDComponent *osd = new OSDComponent;
-//    if (PopulateMeterComponent(osd, osdElem) == false) {
-//        /* Could not fully populate the OSD */
-//        delete osd;
-//        return NULL;
-//    }
-//    osd->defaultUnits = DefaultUnits(osdElem);
-
-//    return osd;
-    return nullptr;
-}
-
-bool SkinV2::PopulateMeterComponent(
-        MeterComponent *component, XMLElement *elem) {
-//    component->background = Image(elem, "background");
-//    component->mask = Image(elem, "mask");
-//    component->meters = Meters(elem);
-
-    std::wstring soundName = _skinDir + L"\\sound.wav";
-    SoundPlayer *player = new SoundPlayer(soundName);
-    if (player->Ready() == false) {
-        delete player;
-        player = NULL;
-    }
-    component->sound = player;
-
-    if (component->background == NULL) {
-        /* A meter skin component has to have a background image */
-        return false;
-    }
-
-    return true;
-}
-

@@ -14,6 +14,7 @@
 #include "OSDComponent.h"
 #include "MeterComponent.h"
 #include "SliderComponent.h"
+#include "SkinUtils.h"
 
 SkinV3::SkinV3(std::wstring skinXML) :
 SkinInfo(skinXML) {
@@ -132,59 +133,19 @@ std::wstring SkinV3::ImageName(XMLElement *meterXMLElement) {
 }
 
 std::vector<HICON> SkinV3::Iconset(XMLElement *elem) {
-    std::vector<HICON> iconset;
-
     XMLElement *set = elem->FirstChildElement("iconset");
     if (set == NULL) {
-        return iconset;
+        return std::vector<HICON>();
     }
 
     const char *loc = set->Attribute("location");
     if (loc == NULL) {
         CLOG(L"Unknown iconset location");
-        return iconset;
+        return std::vector<HICON>();
     }
 
     std::wstring iconDir = _skinDir + L"\\" + StringUtils::Widen(loc) + L"\\";
-    CLOG(L"Reading icons from: %s", iconDir.c_str());
-
-    HANDLE hFind;
-    WIN32_FIND_DATA fd = {};
-    hFind = FindFirstFile((iconDir + L"*").c_str(), &fd);
-    if (hFind == INVALID_HANDLE_VALUE) {
-        CLOG(L"Could not read icon directory");
-        return iconset;
-    }
-
-    do {
-        std::wstring iconName(fd.cFileName);
-        if (iconName == L"." || iconName == L"..") {
-            continue;
-        }
-
-        std::wstring iconPath = iconDir + iconName;
-        std::wstring ext = StringUtils::FileExtension(iconName);
-        if (ext != L"ico") {
-            QCLOG(L"Ignoring non-ico file: %s", iconPath.c_str());
-            continue;
-        }
-
-        HICON icon = NULL;
-        HRESULT hr = LoadIconMetric(
-            NULL,
-            iconPath.c_str(),
-            LIM_SMALL,
-            &icon);
-
-        if (SUCCEEDED(hr) && icon != NULL) {
-            QCLOG(L"%s", iconPath.c_str());
-            iconset.push_back(icon);
-        }
-
-    } while (FindNextFile(hFind, &fd));
-    FindClose(hFind);
- 
-    return iconset;
+    return SkinUtils::ReadIconDirectory(iconDir);
 }
 
 SoundPlayer *SkinV3::Sound(XMLElement *elem) {

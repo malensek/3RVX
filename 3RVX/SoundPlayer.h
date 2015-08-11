@@ -31,6 +31,13 @@ public:
     /// <summary>Plays the sound associated with this SoundPlayer.</summary>
     void Play();
 
+    /// <summary>
+    /// Retrieves the sound player state (whether or not it is ready to play
+    /// sound). Note that a SoundPlayer that failed to construct will not be
+    /// considered ready.
+    /// </summary>
+    bool Ready();
+
 private:
     IGraphBuilder *_graphBuilder;
     IMediaControl *_mediaCtrl;

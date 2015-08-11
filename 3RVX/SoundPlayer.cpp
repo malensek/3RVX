@@ -105,6 +105,10 @@ void SoundPlayer::PlayerThread() {
     }
 }
 
+bool SoundPlayer::Ready() {
+    return _ready;
+}
+
 void SoundPlayer::SafeRelease(IUnknown *p) {
     if (p) {
         p->Release();

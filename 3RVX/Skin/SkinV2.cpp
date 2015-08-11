@@ -41,11 +41,11 @@ OSDComponent *SkinV2::VolumeOSD() {
     volume->defaultUnits = units;
 
     /* Load the meter(s) */
-    const char *meterType = nullptr;
+    const char *type = nullptr;
     tinyxml2::XMLElement *meterOrientation
         = SubElement("osd", "meterOrientation");
     if (meterOrientation) {
-        meterType = meterOrientation->GetText();
+        type = meterOrientation->GetText();
     }
     int x = 0;
     int y = 0;
@@ -62,6 +62,7 @@ OSDComponent *SkinV2::VolumeOSD() {
     }
 
     std::wstring meterImg = _skinDir + L"\\OSD\\meter.png";
+    std::string meterType(type);
     if (meterType == "vertical") {
         volume->meters.push_back(
             new VerticalBar(meterImg, x, y, units));

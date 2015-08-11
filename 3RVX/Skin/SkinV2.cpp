@@ -78,7 +78,10 @@ OSDComponent *SkinV2::VolumeOSD() {
 }
 
 OSDComponent *SkinV2::MuteOSD() {
-    return nullptr;
+    OSDComponent *mute = new OSDComponent;
+    mute->background = LoadImg(_skinDir + L"\\OSD\\mute.png");
+    mute->mask = LoadImg(_skinDir + L"\\OSD\\glassMask.png");
+    return mute;
 }
 
 OSDComponent *SkinV2::EjectOSD() {

@@ -1,12 +1,6 @@
 #pragma once
 
-#pragma comment(lib, "gdiplus.lib")
-
-#include <Windows.h>
-#include <gdiplus.h>
-
 #include <string>
-#include <vector>
 
 #include "../TinyXml2/tinyxml2.h"
 #include "Skin.h"

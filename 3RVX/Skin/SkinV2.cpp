@@ -10,6 +10,7 @@
 #include "MeterComponent.h"
 #include "OSDComponent.h"
 #include "SkinUtils.h"
+#include "SliderComponent.h"
 
 SkinV2::SkinV2(std::wstring skinXML) :
 SkinInfo(skinXML) {
@@ -177,10 +178,7 @@ Text *SkinV2::CreateText(Gdiplus::Bitmap *baseBitmap) {
     float size = 10.0f;
     tinyxml2::XMLElement *sizeTag = fontTag->FirstChildElement("fontSize");
     if (sizeTag) {
-        try {
-            std::string sz(sizeTag->GetText());
-            size = std::stof(sz);
-        } catch (std::exception) { }
+        sizeTag->QueryFloatText(&size);
     }
 
     tinyxml2::XMLHandle fontHandle(fontTag);
@@ -190,9 +188,7 @@ Text *SkinV2::CreateText(Gdiplus::Bitmap *baseBitmap) {
         .FirstChildElement("X")
         .ToElement();
     if (xt) {
-        try {
-            x = std::stoi(xt->GetText());
-        } catch (std::exception) { }
+        xt->QueryIntText(&x);
     }
 
     int y = 0;
@@ -201,9 +197,7 @@ Text *SkinV2::CreateText(Gdiplus::Bitmap *baseBitmap) {
         .FirstChildElement("Y")
         .ToElement();
     if (yt) {
-        try {
-            y = std::stoi(yt->GetText());
-        } catch (std::exception) { }
+        yt->QueryIntText(&y);
     }
 
     /* v2 didn't support text alignment, so we assume left alignment and then
@@ -216,7 +210,9 @@ Text *SkinV2::CreateText(Gdiplus::Bitmap *baseBitmap) {
     Text *text = new Text(x, y, width, height,
         &font, align, hexColor, transparency, L"[[PERC]]%");
     return text;
-}SliderKnob *SkinV2::CreateKnob() {
+}
+
+SliderKnob *SkinV2::CreateKnob() {
     tinyxml2::XMLElement *controlTag = _root->FirstChildElement("control");
     if (controlTag == nullptr) {
         return nullptr;

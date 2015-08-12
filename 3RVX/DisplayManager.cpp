@@ -55,9 +55,8 @@ RECT DisplayManager::Rect(HMONITOR monitor) {
 }
 
 bool DisplayManager::IsFullscreen(HWND hWnd) {
-    /*
     HWND fg = GetForegroundWindow();
-    if (fg == NULL) {
+    if (hWnd == NULL || fg == NULL) {
         return false;
     }
 
@@ -75,7 +74,9 @@ bool DisplayManager::IsFullscreen(HWND hWnd) {
     GetWindowRect(fg, &wndRect);
     // check window dimensions vs screen dimensions
 
-    */
+    return false;
+}
+
 bool DisplayManager::Direct3DOccluded(HWND hWnd) {
 
     IDirect3D9Ex *pDirect3DEx;

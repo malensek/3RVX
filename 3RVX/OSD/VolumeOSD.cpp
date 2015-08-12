@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include "../3RVX.h"
 #include "../HotkeyInfo.h"
 #include "../LanguageTranslator.h"
 #include "../MeterWnd/LayeredWnd.h"
@@ -330,12 +331,16 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
         if (_volumeSlider->Visible() == false) {
             if (_volumeCtrl->Muted() || v == 0.0f) {
-                _muteWnd.Show();
-                _mWnd.Hide(false);
+                if (OSD::Enabled()) {
+                    _muteWnd.Show();
+                    _mWnd.Hide(false);
+                }
             } else {
                 MeterLevels(v);
-                _mWnd.Show();
-                _muteWnd.Hide(false);
+                if (OSD::Enabled()) {
+                    _mWnd.Show();
+                    _muteWnd.Hide(false);
+                }
 
                 if (_soundPlayer) {
                     _soundPlayer->Play();

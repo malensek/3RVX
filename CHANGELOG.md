@@ -1,12 +1,18 @@
 3RVX3 Changelog
 ===============
 
-Beta 9
-------
+Beta 10
+-------
 * Custom volume curves
 * Custom volume limits
-* Compatiblity mode for the old (v2) skin format
+* Brightness OSD
+* Keyboard OSD
 * Automatic updates
+
+Beta 9
+------
+* Compatiblity mode for the old (v2) skin format
+* Skin fallback: resources that aren't found will be loaded from the default skin
 * Hotkey to disable/enable the OSD 
 * Option to temporarily disable the OSD when a DirectX application is running full screen
 * Bugfix: Translate 'Muted' for the notification icon

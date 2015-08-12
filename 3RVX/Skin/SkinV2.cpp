@@ -117,7 +117,12 @@ std::vector<HICON> SkinV2::VolumeIconset() {
 }
 
 SliderComponent *SkinV2::VolumeSlider() {
-    return nullptr;
+    SliderComponent *slider = new SliderComponent;
+    slider->background = LoadImg(_skinDir + L"\\Control\\back.png");
+    slider->mask = LoadImg(_skinDir + L"\\Control\\glassMask.png");
+    slider->knob = CreateKnob();
+
+    return slider;
 }
 
 Text *SkinV2::CreateText(Gdiplus::Bitmap *baseBitmap) {

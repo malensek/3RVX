@@ -216,4 +216,69 @@ Text *SkinV2::CreateText(Gdiplus::Bitmap *baseBitmap) {
     Text *text = new Text(x, y, width, height,
         &font, align, hexColor, transparency, L"[[PERC]]%");
     return text;
+}SliderKnob *SkinV2::CreateKnob() {
+    tinyxml2::XMLElement *controlTag = _root->FirstChildElement("control");
+    if (controlTag == nullptr) {
+        return nullptr;
+    }
+    tinyxml2::XMLHandle controlHandle(controlTag);
+
+    bool vertical = true;
+    const char *orientation = "vertical";
+    tinyxml2::XMLElement *orTag = controlHandle
+        .FirstChildElement("orientation")
+        .ToElement();
+    if (orTag) {
+        orientation = orTag->GetText();
+    }
+    std::string orStr(orientation);
+    if (orStr == "horizontal") {
+        vertical = false;
+    }
+
+    int x;
+    tinyxml2::XMLElement *xt = controlHandle
+        .FirstChildElement("sliderPosition")
+        .FirstChildElement("Location")
+        .FirstChildElement("X")
+        .ToElement();
+    if (xt) {
+        xt->QueryIntText(&x);
+    }
+
+    int y;
+    tinyxml2::XMLElement *yt = controlHandle
+        .FirstChildElement("sliderPosition")
+        .FirstChildElement("Location")
+        .FirstChildElement("Y")
+        .ToElement();
+    if (yt) {
+        yt->QueryIntText(&y);
+    }
+
+    int w;
+    tinyxml2::XMLElement *wt = controlHandle
+        .FirstChildElement("sliderPosition")
+        .FirstChildElement("Size")
+        .FirstChildElement("Width")
+        .ToElement();
+    if (wt) {
+        wt->QueryIntText(&w);
+    }
+
+    int h;
+    tinyxml2::XMLElement *ht = controlHandle
+        .FirstChildElement("sliderPosition")
+        .FirstChildElement("Size")
+        .FirstChildElement("Height")
+        .ToElement();
+    if (ht) {
+        ht->QueryIntText(&h);
+    }
+
+    SliderKnob *knob = new SliderKnob(
+        _skinDir + L"\\Control\\knob.png",
+        x, y, w, h,
+        vertical);
+    return knob;
 }

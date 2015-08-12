@@ -6,6 +6,7 @@
 #include "Skin.h"
 #include "SkinInfo.h"
 
+class SliderKnob;
 class Text;
 
 struct MeterComponent;
@@ -27,4 +28,5 @@ public:
 
 private:
     Text *CreateText(Gdiplus::Bitmap *baseBitmap);
+    SliderKnob *CreateKnob();
 };

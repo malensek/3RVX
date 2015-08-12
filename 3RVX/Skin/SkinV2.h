@@ -26,5 +26,5 @@ public:
     virtual SliderComponent *VolumeSlider();
 
 private:
-    Text *CreateText();
+    Text *CreateText(Gdiplus::Bitmap *baseBitmap);
 };

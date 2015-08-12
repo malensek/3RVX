@@ -86,7 +86,7 @@ OSDComponent *SkinV2::VolumeOSD() {
         bool textEnabled = false;
         drawText->QueryBoolText(&textEnabled);
         if (textEnabled) {
-            Text *t = CreateText();
+            Text *t = CreateText(volume->background);
             if (t) {
                 volume->meters.push_back(t);
             }
@@ -119,7 +119,7 @@ SliderComponent *SkinV2::VolumeSlider() {
     return nullptr;
 }
 
-Text *SkinV2::CreateText() {
+Text *SkinV2::CreateText(Gdiplus::Bitmap *baseBitmap) {
     tinyxml2::XMLElement *fontTag = SubElement("osd", "font");
     if (fontTag == nullptr) {
         return nullptr;
@@ -209,9 +209,11 @@ Text *SkinV2::CreateText() {
     /* v2 didn't support text alignment, so we assume left alignment and then
      * expand the text's bounding box to stretch to the edges of the OSD. */
     Gdiplus::StringAlignment align = Gdiplus::StringAlignmentNear;
+    int width = baseBitmap->GetWidth() - x;
+    int height = baseBitmap->GetHeight() - y;
 
     Gdiplus::Font font(StringUtils::Widen(fontName).c_str(), size, styleFlags);
-    Text *t = new Text(x, y, 300, 300,
+    Text *text = new Text(x, y, width, height,
         &font, align, hexColor, transparency, L"[[PERC]]%");
-    return t;
+    return text;
 }

@@ -16,6 +16,7 @@ public:
     static std::list<DISPLAY_DEVICE> ListAllDevices();
 
     static bool IsFullscreen(HWND hWnd);
+    static bool Direct3DOccluded(HWND hWnd);
 private:
     static MONITORINFO Info(HMONITOR monitor);
     static const int Width(HMONITOR monitor);

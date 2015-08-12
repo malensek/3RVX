@@ -76,13 +76,14 @@ bool DisplayManager::IsFullscreen(HWND hWnd) {
     // check window dimensions vs screen dimensions
 
     */
+bool DisplayManager::Direct3DOccluded(HWND hWnd) {
+
     IDirect3D9Ex *pDirect3DEx;
     LPDIRECT3DDEVICE9EX pDeviceEx;
     DWORD behaviorFlags = D3DCREATE_HARDWARE_VERTEXPROCESSING;
     D3DPRESENT_PARAMETERS d3dpp = { 0 };
     d3dpp.Windowed = TRUE;
     d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-    //d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
 
     Direct3DCreate9Ex(D3D_SDK_VERSION, &pDirect3DEx);
     HRESULT hr = pDirect3DEx->CreateDeviceEx(
@@ -95,14 +96,7 @@ bool DisplayManager::IsFullscreen(HWND hWnd) {
         &pDeviceEx);
 
     hr = pDeviceEx->CheckDeviceState(NULL);
-    if (hr == S_PRESENT_OCCLUDED) {
-        CLOG(L"FULLSCREEN");
-    }
-
-
-    CLOG(L"hresult: %d", hr);
-
-    return false;
+    return (hr == S_PRESENT_OCCLUDED);
 }
 
 MONITORINFO DisplayManager::Info(HMONITOR monitor) {

@@ -6,6 +6,8 @@
 #include "Skin.h"
 #include "SkinInfo.h"
 
+class Text;
+
 struct MeterComponent;
 
 using tinyxml2::XMLElement;
@@ -23,4 +25,6 @@ public:
 
     virtual SliderComponent *VolumeSlider();
 
+private:
+    Text *CreateText();
 };

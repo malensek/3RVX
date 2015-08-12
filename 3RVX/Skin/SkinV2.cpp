@@ -1,5 +1,9 @@
 #include "SkinV2.h"
 
+#include <algorithm>
+#include <iomanip>
+#include <sstream>
+
 #include "../Logger.h"
 #include "../MeterWnd/Meters/MeterTypes.h"
 #include "../StringUtils.h"
@@ -77,6 +81,18 @@ OSDComponent *SkinV2::VolumeOSD() {
             new HorizontalBar(meterImg, x, y, units));
     }
 
+    tinyxml2::XMLElement *drawText = SubElement("osd", "drawPercentage");
+    if (drawText) {
+        bool textEnabled = false;
+        drawText->QueryBoolText(&textEnabled);
+        if (textEnabled) {
+            Text *t = CreateText();
+            if (t) {
+                volume->meters.push_back(t);
+            }
+        }
+    }
+
     return volume;
 }
 
@@ -101,4 +117,101 @@ std::vector<HICON> SkinV2::VolumeIconset() {
 
 SliderComponent *SkinV2::VolumeSlider() {
     return nullptr;
+}
+
+Text *SkinV2::CreateText() {
+    tinyxml2::XMLElement *fontTag = SubElement("osd", "font");
+    if (fontTag == nullptr) {
+        return nullptr;
+    }
+
+    const char *fontName = "Arial";
+    tinyxml2::XMLElement *nameTag = fontTag->FirstChildElement("fontName");
+    if (nameTag) {
+        fontName = nameTag->GetText();
+        if (fontName == nullptr) {
+            fontName = "Arial";
+        }
+    }
+
+    int styleFlags = 0;
+    tinyxml2::XMLElement *styleTag = fontTag->FirstChildElement("fontStyle");
+    if (styleTag) {
+        std::string style(styleTag->GetText());
+        std::transform(style.begin(), style.end(), style.begin(), ::tolower);
+        /* Only one font style can be applied (ie no bold-italic, etc) */
+        if (style == "bold") {
+            styleFlags = Gdiplus::FontStyleBold;
+        } else if (style == "italic") {
+            styleFlags = Gdiplus::FontStyleItalic;
+        }
+    }
+
+    std::wstring hexColor = L"000000";
+    int transparency = 255;
+    tinyxml2::XMLElement *colorTag = fontTag->FirstChildElement("fontColor");
+    if (colorTag) {
+        const char *color = colorTag->GetText();
+        if (color == nullptr) {
+            color = "255,0,0,0";
+        }
+
+        std::string cc;
+        std::istringstream iss(color);
+        std::stringstream ss;
+        std::getline(iss, cc, ',');
+        try {
+            transparency = std::stoi(cc);
+        } catch (std::exception) { }
+        ss << std::hex << std::setfill('0') << std::setw(2);
+        while (std::getline(iss, cc, ',')) {
+            int byte = 0;
+            try {
+                byte = std::stoi(cc);
+            } catch (std::exception) { }
+            ss << byte << std::setw(2);
+        }
+        hexColor = StringUtils::Widen(ss.str());
+    }
+
+    float size = 10.0f;
+    tinyxml2::XMLElement *sizeTag = fontTag->FirstChildElement("fontSize");
+    if (sizeTag) {
+        try {
+            std::string sz(sizeTag->GetText());
+            size = std::stof(sz);
+        } catch (std::exception) { }
+    }
+
+    tinyxml2::XMLHandle fontHandle(fontTag);
+    int x = 0;
+    tinyxml2::XMLElement *xt = fontHandle
+        .FirstChildElement("fontLocation")
+        .FirstChildElement("X")
+        .ToElement();
+    if (xt) {
+        try {
+            x = std::stoi(xt->GetText());
+        } catch (std::exception) { }
+    }
+
+    int y = 0;
+    tinyxml2::XMLElement *yt = fontHandle
+        .FirstChildElement("fontLocation")
+        .FirstChildElement("Y")
+        .ToElement();
+    if (yt) {
+        try {
+            y = std::stoi(yt->GetText());
+        } catch (std::exception) { }
+    }
+
+    /* v2 didn't support text alignment, so we assume left alignment and then
+     * expand the text's bounding box to stretch to the edges of the OSD. */
+    Gdiplus::StringAlignment align = Gdiplus::StringAlignmentNear;
+
+    Gdiplus::Font font(StringUtils::Widen(fontName).c_str(), size, styleFlags);
+    Text *t = new Text(x, y, 300, 300,
+        &font, align, hexColor, transparency, L"[[PERC]]%");
+    return t;
 }

@@ -17,6 +17,11 @@ public:
     virtual void Hide() = 0;
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
+    bool Enabled();
+    bool Disabled();
+    void Enable();
+    void Disable();
+
 protected:
     HWND _masterWnd;
     Settings *_settings;
@@ -32,4 +37,7 @@ protected:
 
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
+
+private:
+    bool _disabled;
 };

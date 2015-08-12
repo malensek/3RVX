@@ -14,6 +14,22 @@ _settings(Settings::Instance()) {
     _masterWnd = FindWindow(_3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX);
 }
 
+bool OSD::Enabled() {
+    return _disabled == false;
+}
+
+bool OSD::Disabled() {
+    return _disabled;
+}
+
+void OSD::Enable() {
+    _disabled = false;
+}
+
+void OSD::Disable() {
+    _disabled = true;
+}
+
 void OSD::HideOthers(OSDType except = All) {
     SendMessage(_masterWnd, _3RVX::WM_3RVX_CTRL, _3RVX::MSG_HIDEOSD, except);
 }

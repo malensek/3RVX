@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLskinSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <info>
+    <author>Matthew Malensek</author>
+    <website>http://matt.malensek.net</website>
+
+    <skinVersion>1</skinVersion>
+    <formatVersion>2</formatVersion>
+  </info>
+
+  <osd>
+    <meterOrientation>vertical</meterOrientation>
+
+    <meterPosition>
+      <X>253</X>
+      <Y>26</Y>
+    </meterPosition>
+
+    <meterMax>10</meterMax>
+
+    <drawPercentage>true</drawPercentage>
+    <font>
+      <fontName>Calibri</fontName>
+      <fontStyle>Normal</fontStyle>
+      <fontColor>180,0,0,0</fontColor>
+      <fontSize>20</fontSize>
+      <fontLocation>
+        <X>185</X>
+        <Y>48</Y>
+      </fontLocation>
+    </font>
+  </osd>
+
+  <control>
+    <orientation>vertical</orientation>
+
+    <sliderPosition>
+      <Location>
+        <X>39</X>
+        <Y>38</Y>
+      </Location>
+      <Size>
+        <Width>14</Width>
+        <Height>108</Height>
+      </Size>
+    </sliderPosition>
+  </control>
+</XMLskinSettings>

@@ -10,24 +10,17 @@
 
 OSD::OSD(LPCWSTR className, HINSTANCE hInstance) :
 Window(className, className, hInstance),
-_settings(Settings::Instance()) {
+_settings(Settings::Instance()),
+_enabled(true) {
     _masterWnd = FindWindow(_3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX);
 }
 
 bool OSD::Enabled() {
-    return _disabled == false;
+    return _enabled;
 }
 
-bool OSD::Disabled() {
-    return _disabled;
-}
-
-void OSD::Enable() {
-    _disabled = false;
-}
-
-void OSD::Disable() {
-    _disabled = true;
+void OSD::Enabled(bool enabled) {
+    _enabled = enabled;
 }
 
 void OSD::HideOthers(OSDType except = All) {

@@ -18,9 +18,7 @@ public:
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
     bool Enabled();
-    bool Disabled();
-    void Enable();
-    void Disable();
+    void Enabled(bool enabled);
 
 protected:
     HWND _masterWnd;
@@ -39,5 +37,5 @@ protected:
         WPARAM wParam, LPARAM lParam);
 
 private:
-    bool _disabled;
+    bool _enabled;
 };

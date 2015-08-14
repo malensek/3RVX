@@ -288,7 +288,8 @@ std::wstring Hotkeys::ActionString(HotkeyInfo &selection) {
         break;
 
     case HotkeyInfo::MediaKey:
-        actionStr = _translator->Replace(_mediaActionStr, selection.args[0]);
+        actionStr = _translator->Replace(_mediaActionStr,
+            _translator->Translate(selection.args[0]));
         break;
 
     case HotkeyInfo::VirtualKey:

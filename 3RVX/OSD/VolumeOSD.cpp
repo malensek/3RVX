@@ -169,6 +169,20 @@ void VolumeOSD::Hide() {
     _muteWnd.Hide(false);
 }
 
+void VolumeOSD::Show(bool mute) {
+    if (OSD::Enabled() == false) {
+        return;
+    }
+
+    if (mute) {
+        _muteWnd.Show();
+        _mWnd.Hide(false);
+    } else {
+        _mWnd.Show();
+        _muteWnd.Hide(false);
+    }
+}
+
 void VolumeOSD::HideIcon() {
     delete _icon;
 }
@@ -331,16 +345,10 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
         if (_volumeSlider->Visible() == false) {
             if (_volumeCtrl->Muted() || v == 0.0f) {
-                if (OSD::Enabled()) {
-                    _muteWnd.Show();
-                    _mWnd.Hide(false);
-                }
+                Show(true);
             } else {
                 MeterLevels(v);
-                if (OSD::Enabled()) {
-                    _mWnd.Show();
-                    _muteWnd.Hide(false);
-                }
+                Show();
 
                 if (_soundPlayer) {
                     _soundPlayer->Play();

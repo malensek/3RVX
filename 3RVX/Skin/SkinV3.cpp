@@ -348,8 +348,9 @@ SkinV3::Alignment(XMLElement *meterXMLElement) {
 
 SliderKnob *SkinV3::Knob(XMLElement *elem) {
     XMLElement *slider = elem->FirstChildElement("slider");
-    if (slider == NULL) {
+    if (slider == nullptr) {
         Error::ErrorMessageDie(SKINERR_MISSING_XML, L"<slider>");
+        return nullptr;
     }
 
     std::wstring img = ImageName(slider);
@@ -358,7 +359,7 @@ SliderKnob *SkinV3::Knob(XMLElement *elem) {
     }
 
     const char *type = slider->Attribute("type");
-    if (type == NULL) {
+    if (type == nullptr) {
         type = "vertical";
     }
 

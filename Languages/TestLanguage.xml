@@ -113,6 +113,11 @@
     <original>Hide when other programs are fullscreen</original>
     <translation>XXXX XXXX XXXXX XXXXXXXX XXX XXXXXXXXXX</translation>
   </string>
+  <string>
+    <original>Hide when DirectX applications are fullscreen</original>
+    <translation>XXXX XXXX XXXXXXX XXXXXXXXXXXX XXX XXXXXXXXXX</translation>
+  </string>
+
 
   <string>
     <original>Position</original>
@@ -347,6 +352,10 @@
   <string>
     <original>Run: {1}</original>
     <translation>XXX: {1}</translation>
+  </string>
+  <string>
+    <original>Enable/Disable OSD</original>
+    <translation>XXXXXX/XXXXXXX XXX</translation>
   </string>
   <string>
     <original>Open Settings Dialog</original>

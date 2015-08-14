@@ -19,6 +19,7 @@ Beta 9
 * Bugfix: Translate 'Muted' for the notification icon
 * Bugfix: Settings dialog is now re-translated on 'Apply'
 * Bugfix: Settings not read if username contains non-ASCII characters
+* Bugfix: Media keys in the hotkey list view are now translated properly
 
 Beta 8
 ------

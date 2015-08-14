@@ -14,7 +14,8 @@ Beta 9
 * Compatiblity mode for the old (v2) skin format
 * Skin fallback: resources that aren't found will be loaded from the default skin
 * Hotkey to disable/enable the OSD 
-* Option to temporarily disable the OSD when a DirectX application is running full screen
+* Option to disable the OSD when another application is full screen
+* Option to disable the OSD when a DirectX application has exclusive control of the screen
 * Bugfix: Translate 'Muted' for the notification icon
 * Bugfix: Settings dialog is now re-translated on 'Apply'
 * Bugfix: Settings not read if username contains non-ASCII characters

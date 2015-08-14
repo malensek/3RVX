@@ -87,13 +87,15 @@ bool DisplayManager::IsFullscreen(HWND hWnd) {
 
     RECT wndRect = { 0 };
     GetWindowRect(fg, &wndRect);
-    // check window dimensions vs screen dimensions
-
+    Monitor wm = MonitorAtWindow(hWnd);
+    if ((wndRect.bottom - wndRect.top) == wm.Height() &&
+            (wndRect.right - wndRect.left) == wm.Width()) {
+        return true;
+    }
     return false;
 }
 
 bool DisplayManager::Direct3DOccluded(HWND hWnd) {
-
     IDirect3D9Ex *pDirect3DEx;
     LPDIRECT3DDEVICE9EX pDeviceEx;
     DWORD behaviorFlags = D3DCREATE_HARDWARE_VERTEXPROCESSING;

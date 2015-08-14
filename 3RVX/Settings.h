@@ -52,6 +52,8 @@ public:
     void AlwaysOnTop(bool enable);
     bool HideFullscreen();
     void HideFullscreen(bool enable);
+    bool HideDirectX();
+    void HideDirectX(bool enable);
     OSDPos OSDPosition();
     void OSDPosition(OSDPos pos);
     int OSDEdgeOffset();
@@ -148,6 +150,7 @@ public:
     static const AnimationTypes::HideAnimation DefaultHideAnim
         = AnimationTypes::Fade;
     static const bool DefaultHideFullscreen = false;
+    static const bool DefaultHideDirectX = false;
     static const int DefaultHideSpeed = 765;
     static const int DefaultHideTime = 800;
     static const std::wstring DefaultLanguage;

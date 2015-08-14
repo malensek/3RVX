@@ -15,6 +15,7 @@
 
 #define XML_AUDIODEV "audioDeviceID"
 #define XML_HIDE_WHENFULL "hideFullscreen"
+#define XML_HIDE_DIRECTX "hideDirectX"
 #define XML_HIDEANIM "hideAnimation"
 #define XML_HIDETIME "hideDelay"
 #define XML_HIDESPEED "hideSpeed"
@@ -230,6 +231,14 @@ bool Settings::HideFullscreen() {
 
 void Settings::HideFullscreen(bool enable) {
     SetEnabled(XML_HIDE_WHENFULL, enable);
+}
+
+bool Settings::HideDirectX() {
+    return GetEnabled(XML_HIDE_DIRECTX, DefaultHideDirectX);
+}
+
+void Settings::HideDirectX(bool enable) {
+    SetEnabled(XML_HIDE_DIRECTX, enable);
 }
 
 std::wstring Settings::Monitor() {

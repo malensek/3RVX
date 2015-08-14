@@ -23,6 +23,7 @@ private:
     GroupBox _visibilityGroup;;
     Checkbox _onTop;
     Checkbox _hideFullscreen;
+    Checkbox _hideDirectX;
 
     GroupBox _positionGroup;
     ComboBox _position;

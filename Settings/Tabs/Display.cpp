@@ -15,6 +15,7 @@ void Display::Initialize() {
     INIT_CONTROL(GRP_VISIBILITY, GroupBox, _visibilityGroup);
     INIT_CONTROL(CHK_ONTOP, Checkbox, _onTop);
     INIT_CONTROL(CHK_FULLSCREEN, Checkbox, _hideFullscreen);
+    INIT_CONTROL(CHK_DIRECTX, Checkbox, _hideDirectX);
 
     INIT_CONTROL(GRP_POSITION, GroupBox, _positionGroup);
     INIT_CONTROL(CMB_POSITION, ComboBox, _position);
@@ -58,6 +59,7 @@ void Display::LoadSettings() {
     /* Visibility Settings */
     _onTop.Checked(settings->AlwaysOnTop());
     _hideFullscreen.Checked(settings->HideFullscreen());
+    _hideDirectX.Checked(settings->HideDirectX());
 
     /* Position on Screen*/
     for (std::wstring position : settings->OSDPosNames) {
@@ -115,6 +117,7 @@ void Display::SaveSettings() {
 
     settings->AlwaysOnTop(_onTop.Checked());
     settings->HideFullscreen(_hideFullscreen.Checked());
+    settings->HideDirectX(_hideDirectX.Checked());
 
     Settings::OSDPos pos = (Settings::OSDPos) _position.SelectionIndex();
     settings->OSDPosition(pos);

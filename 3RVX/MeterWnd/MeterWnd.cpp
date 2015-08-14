@@ -6,6 +6,7 @@
 
 #include "Animation.h"
 #include "AnimationFactory.h"
+#include "../DisplayManager.h"
 
 MeterWnd::MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance) :
 LayeredWnd(className, title, hInstance, NULL, WINDOW_STYLES) {
@@ -74,6 +75,22 @@ void MeterWnd::VisibleDuration(int duration) {
     _visibleDuration = duration;
 }
 
+bool MeterWnd::DisableFullscreen() {
+    return _disableFullscreen;
+}
+
+void MeterWnd::DisableFullscreen(bool disable) {
+    _disableFullscreen = disable;
+}
+
+bool MeterWnd::DisableDirectX() {
+    return _disableDirectX;
+}
+
+void MeterWnd::DisableDirectX(bool disable) {
+    _disableDirectX = disable;
+}
+
 void MeterWnd::BackgroundImage(Gdiplus::Bitmap *background) {
     _background = background;
 }
@@ -87,8 +104,23 @@ bool MeterWnd::EnableGlass(Gdiplus::Bitmap *mask) {
 void MeterWnd::Show(bool animate) {
     if (_visible == false) {
         UpdateWindowPosition();
-        ShowWindow(Window::Handle(), SW_SHOW);
-        _visible = true;
+
+        bool disabled = false;
+        if (_disableFullscreen
+                && DisplayManager::IsFullscreen(Window::Handle())) {
+            disabled = true;
+        }
+
+        if (_disableDirectX
+                && DisplayManager::Direct3DOccluded(Window::Handle())) {
+            disabled = true;
+        }
+
+
+        if (disabled == false) {
+            ShowWindow(Window::Handle(), SW_SHOW);
+            _visible = true;
+        }
     }
 
     ShowClones();
@@ -180,6 +212,15 @@ void MeterWnd::UpdateClonesTransparency(byte transparency) {
 
 void MeterWnd::ShowClones() {
     for (LayeredWnd *clone : _clones) {
+        if (_disableFullscreen
+                && DisplayManager::IsFullscreen(clone->Handle())) {
+            continue;
+        }
+        if (_disableDirectX
+                && DisplayManager::Direct3DOccluded(clone->Handle())) {
+            continue;
+        }
+
         clone->Show();
     }
 }

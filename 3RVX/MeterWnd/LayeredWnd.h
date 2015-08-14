@@ -6,7 +6,7 @@
 
 #include "../Window.h"
 
-class LayeredWnd : protected Window {
+class LayeredWnd : public Window {
 public:
     LayeredWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL,
         Gdiplus::Bitmap *bitmap = NULL, DWORD exStyles = NULL);

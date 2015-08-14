@@ -237,7 +237,7 @@ SliderKnob *SkinV2::CreateKnob() {
         vertical = false;
     }
 
-    int x;
+    int x = 0;
     tinyxml2::XMLElement *xt = controlHandle
         .FirstChildElement("sliderPosition")
         .FirstChildElement("Location")
@@ -247,7 +247,7 @@ SliderKnob *SkinV2::CreateKnob() {
         xt->QueryIntText(&x);
     }
 
-    int y;
+    int y = 0;
     tinyxml2::XMLElement *yt = controlHandle
         .FirstChildElement("sliderPosition")
         .FirstChildElement("Location")

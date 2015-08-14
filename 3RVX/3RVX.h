@@ -26,6 +26,7 @@ private:
 
     void Initialize();
     void ProcessHotkeys(HotkeyInfo &hki);
+    void ToggleOSDs();
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 

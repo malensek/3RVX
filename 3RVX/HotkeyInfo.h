@@ -16,6 +16,7 @@ public:
         MediaKey,
         VirtualKey,
         Run,
+        DisableOSD,
         Settings,
         Exit,
     };

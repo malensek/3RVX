@@ -157,6 +157,10 @@ void _3RVX::ProcessHotkeys(HotkeyInfo &hki) {
         }
         break;
 
+    case HotkeyInfo::DisableOSD:
+        ToggleOSDs();
+        break;
+
     case HotkeyInfo::Settings:
         ShellExecute(NULL, L"open", Settings::SettingsApp().c_str(),
             NULL, NULL, SW_SHOWNORMAL);
@@ -166,6 +170,11 @@ void _3RVX::ProcessHotkeys(HotkeyInfo &hki) {
         SendMessage(Handle(), WM_CLOSE, NULL, NULL);
         break;
     }
+}
+
+void _3RVX::ToggleOSDs() {
+    _eOSD->Enabled(!(_eOSD->Enabled()));
+    _vOSD->Enabled(!(_vOSD->Enabled()));
 }
 
 LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {

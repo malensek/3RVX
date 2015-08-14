@@ -17,6 +17,7 @@ std::vector<std::wstring> HotkeyInfo::ActionNames = {
     L"Media Key",
     L"Virtual Key",
     L"Run",
+    L"Enable/Disable OSD",
     L"Open Settings Dialog",
     L"Exit 3RVX",
 };

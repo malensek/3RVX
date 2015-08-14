@@ -13,6 +13,7 @@ public:
     static void UpdateMonitorMap();
     static Monitor Primary();
     static Monitor MonitorAtPoint(POINT &pt, bool workingArea = false);
+    static Monitor MonitorAtWindow(HWND hWnd, bool workingArea = false);
     static std::list<DISPLAY_DEVICE> ListAllDevices();
 
     static bool IsFullscreen(HWND hWnd);

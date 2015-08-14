@@ -38,6 +38,21 @@ Monitor DisplayManager::MonitorAtPoint(POINT &pt, bool workingArea) {
     return m;
 }
 
+Monitor DisplayManager::MonitorAtWindow(HWND hWnd, bool workingArea) {
+    Monitor m;
+    HMONITOR monitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTONULL);
+    if (monitor != NULL) {
+        MONITORINFO mInfo = Info(monitor);
+        if (workingArea) {
+            return Monitor(L"Monitor@Window", mInfo.rcWork);
+        } else {
+            return Monitor(L"Monitor@Window", mInfo.rcMonitor);
+        }
+    }
+
+    return m;
+}
+
 const int DisplayManager::Width(HMONITOR monitor) {
     MONITORINFO mInfo = Info(monitor);
     RECT mDims = mInfo.rcMonitor;

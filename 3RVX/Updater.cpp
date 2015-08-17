@@ -10,6 +10,9 @@
 #include "StringUtils.h"
 #include "Logger.h"
 
+const std::wstring Updater::LATEST_URL
+    = L"https://3rvx.com/releases/latest_version";
+
 bool Updater::NewerVersionAvailable() {
     std::pair<int, int> remote = RemoteVersion();
     std::pair<int, int> local = MainAppVersion();
@@ -90,7 +93,7 @@ std::pair<int, int> Updater::RemoteVersion() {
 
     HINTERNET connection = InternetOpenUrl(
         internet,
-        L"http://matthew.malensek.net/projects/3RVX/latest_version",
+        LATEST_URL.c_str(),
         NULL,
         0,
         INTERNET_FLAG_NO_CACHE_WRITE | INTERNET_FLAG_PRAGMA_NOCACHE,

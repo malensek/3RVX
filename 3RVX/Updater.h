@@ -45,4 +45,10 @@ private:
     /// </summary>
     static std::pair<int, int> RemoteVersion();
 
+    /// <summary>
+    /// Specifies the URL to check to determine the latest version online. The
+    /// file at this address is a plain text file that contains a single line
+    /// with the currently-available version number (example: 3.2).
+    /// </summary>
+    static const std::wstring LATEST_URL;
 };

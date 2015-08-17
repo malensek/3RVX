@@ -69,7 +69,8 @@ bool Meter::Dirty() {
 }
 
 int Meter::CalcUnits() {
-    return (int) ceil(_value * _units - 0.00001f);
+    //return (int) ceil(_value * _units - 0.00001f);
+    return (int) round(_value * _units - 0.00001f);
 }
 
 std::wstring Meter::ToString() {

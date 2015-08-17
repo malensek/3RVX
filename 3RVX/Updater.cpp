@@ -13,6 +13,9 @@
 const std::wstring Updater::LATEST_URL
     = L"https://3rvx.com/releases/latest_version";
 
+const std::wstring Updater::DOWNLOAD_URL
+    = L"https://3rvx.com/releases/";
+
 bool Updater::NewerVersionAvailable() {
     std::pair<int, int> remote = RemoteVersion();
     std::pair<int, int> local = MainAppVersion();

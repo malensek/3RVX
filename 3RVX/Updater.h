@@ -51,4 +51,10 @@ private:
     /// with the currently-available version number (example: 3.2).
     /// </summary>
     static const std::wstring LATEST_URL;
+
+    /// <summary>
+    /// Specifies the base URL to use when downloading new versions of the
+    /// program.
+    /// </summary>
+    static const std::wstring DOWNLOAD_URL;
 };

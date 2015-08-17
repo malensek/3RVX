@@ -11,7 +11,7 @@
 #include "Logger.h"
 
 const std::wstring Updater::LATEST_URL
-    = L"https://3rvx.com/releases/latest_version";
+    = DOWNLOAD_URL + L"latest_version";
 
 const std::wstring Updater::DOWNLOAD_URL
     = L"https://3rvx.com/releases/";

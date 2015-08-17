@@ -46,6 +46,9 @@ private:
     static std::pair<int, int> RemoteVersion();
 
     /// <summary>
+    /// Retrieves the string-based representation of a version number.
+    /// </summary>
+    static std::wstring VersionToString(std::pair<int, int> version);
     /// Specifies the URL to check to determine the latest version online. The
     /// file at this address is a plain text file that contains a single line
     /// with the currently-available version number (example: 3.2).

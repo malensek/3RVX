@@ -83,7 +83,14 @@ std::pair<int, int> Updater::MainAppVersion() {
 
 std::wstring Updater::MainAppVersionString() {
     std::pair<int, int> vers = MainAppVersion();
-    return std::to_wstring(vers.first) + L"." + std::to_wstring(vers.second);
+    return VersionToString(vers);
+}
+
+std::wstring Updater::VersionToString(std::pair<int, int> version) {
+    return std::to_wstring(version.first)
+        + L"."
+        + std::to_wstring(version.second);
+}
 }
 
 std::pair<int, int> Updater::RemoteVersion() {

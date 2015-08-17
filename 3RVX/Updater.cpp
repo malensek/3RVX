@@ -1,7 +1,9 @@
 #include "Updater.h"
 
+#pragma comment(lib, "Urlmon.lib")
 #pragma comment(lib, "Version.lib")
 #pragma comment(lib, "wininet.lib")
+
 #include <Windows.h>
 #include <WinInet.h>
 #include <sstream>
@@ -91,6 +93,27 @@ std::wstring Updater::VersionToString(std::pair<int, int> version) {
         + L"."
         + std::to_wstring(version.second);
 }
+
+void Updater::DownloadVersion(std::pair<int, int> version) {
+    wchar_t path[MAX_PATH];
+    DWORD result = GetTempPath(MAX_PATH, path);
+    if (result == 0) {
+        CLOG(L"Could not get temp download path");
+        return;
+    }
+
+    std::wstring tempDir(path);
+    std::wstring fname = DownloadFileName(version);
+    std::wstring url = DOWNLOAD_URL + fname;
+    std::wstring localFile = tempDir + L"\\" + fname;
+
+    CLOG(L"Downloading %s to %s...", url.c_str(), localFile.c_str());
+    URLDownloadToFile(NULL, url.c_str(), localFile.c_str(), 0, NULL);
+}
+
+std::wstring Updater::DownloadFileName(std::pair<int, int> version) {
+    std::wstring verStr = VersionToString(version);
+    return std::wstring(L"3RVX-" + verStr + L".msi");
 }
 
 std::pair<int, int> Updater::RemoteVersion() {

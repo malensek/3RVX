@@ -39,6 +39,8 @@ public:
     /// </summary>
     static std::wstring MainAppVersionString();
 
+    static void DownloadVersion(std::pair<int, int> version);
+
 private:
     /// <summary>
     /// Retrieves the latest version of the program availabile online.
@@ -49,6 +51,15 @@ private:
     /// Retrieves the string-based representation of a version number.
     /// </summary>
     static std::wstring VersionToString(std::pair<int, int> version);
+
+    /// <summary>
+    /// Retrieves the file name of the specified version of the program stored
+    /// on the remote server (example: 3RVX-3.4.msi).
+    /// </summary>
+    static std::wstring DownloadFileName(std::pair<int, int> version);
+
+private:
+    /// <summary>
     /// Specifies the URL to check to determine the latest version online. The
     /// file at this address is a plain text file that contains a single line
     /// with the currently-available version number (example: 3.2).

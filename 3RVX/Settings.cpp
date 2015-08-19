@@ -29,6 +29,7 @@
 #define XML_OSD_Y "osdY"
 #define XML_SKIN "skin"
 #define XML_SOUNDS "soundEffects"
+#define XML_UPDATECHECKTIME "lastUpdateCheck"
 
 const std::wstring Settings::MAIN_APP = L"3RVX.exe";
 const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
@@ -573,4 +574,19 @@ tinyxml2::XMLElement *Settings::GetOrCreateElement(std::string elementName) {
         _root->InsertEndChild(el);
     }
     return el;
+}
+
+long long Settings::UpdateCheckTime() {
+    tinyxml2::XMLElement *el = _root->FirstChildElement(XML_UPDATECHECKTIME);
+    if (el == NULL) {
+        return 0;
+    }
+
+    const char *timeStr;
+    timeStr = el->GetText();
+    if (timeStr == NULL) {
+        return 0;
+    }
+
+    return std::stoll(timeStr);
 }

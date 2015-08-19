@@ -1,3 +1,6 @@
+// Copyright (c) 2015, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
 #include "3RVX.h"
 
 const wchar_t *_3RVX::CLASS_3RVX = L"3RVXv3";

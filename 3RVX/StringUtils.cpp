@@ -1,3 +1,6 @@
+// Copyright (c) 2015, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
 #include "StringUtils.h"
 
 std::wstring StringUtils::Widen(const char *str) {

@@ -13,8 +13,8 @@ void SyntheticKeyboard::SimulateKeypress(
         mods = ModifiersDown();
     }
 
-    unsigned int inputs = mods.size() * 2 + 2;
-    unsigned int currentInput = 0;
+    size_t inputs = mods.size() * 2 + 2;
+    size_t currentInput = 0;
     INPUT *input = new INPUT[inputs];
 
     /* First, raise all modifier keys */
@@ -31,7 +31,7 @@ void SyntheticKeyboard::SimulateKeypress(
         PopulateInput(input[currentInput], mods[i], false);
     }
 
-    UINT result = SendInput(inputs, input, sizeof(INPUT));
+    UINT result = SendInput(static_cast<UINT>(inputs), input, sizeof(INPUT));
     CLOG(L"Simulating keypress: %x; %d keyboard inputs generated.",
         vk, result);
     delete[] input;

@@ -202,7 +202,7 @@ void VolumeOSD::UpdateIconImage() {
 
     int icon = 0;
     if (_volumeCtrl->Muted() == false) {
-        int vUnits = _iconImages.size() - 1;
+        size_t vUnits = _iconImages.size() - 1;
         icon = (int) ceil(_volumeCtrl->Volume() * vUnits);
     }
 

@@ -150,7 +150,7 @@ std::pair<int, int> Updater::RemoteVersion() {
     /* Only consider the first line */
     str.erase(str.find('\n'), str.size() - 1);
 
-    int dot = str.find('.');
+    size_t dot = str.find('.');
     std::string major = str.substr(0, dot);
     std::string minor = str.substr(dot + 1, str.size());
 

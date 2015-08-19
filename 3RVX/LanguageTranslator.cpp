@@ -148,7 +148,7 @@ std::vector<std::wstring> LanguageTranslator::CurrentLocale() {
     std::wstring locale(buf);
 
     /* Remove custom supplemental locales */
-    int custom = locale.find(L"-x-");
+    size_t custom = locale.find(L"-x-");
     if (custom > 0) {
         locale.erase(custom, locale.size() - 1);
     }
@@ -164,7 +164,7 @@ std::vector<std::wstring> LanguageTranslator::CurrentLocale() {
     std::vector<std::wstring> finalLocale;
     for (std::wstring sub : parts) {
         /* Remove sort orders */
-        int sort = sub.find(L"_");
+        size_t sort = sub.find(L"_");
         if (sort > 0) {
             sub.erase(sort, sub.size() - 1);
         }

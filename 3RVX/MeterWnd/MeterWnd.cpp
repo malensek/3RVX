@@ -174,7 +174,7 @@ void MeterWnd::Transparency(byte transparency) {
 }
 
 LayeredWnd *MeterWnd::Clone() {
-    int numClones = _clones.size() + 1;
+    size_t numClones = _clones.size() + 1;
     std::wstringstream cloneClass;
     cloneClass << Window::ClassName() << L":" << numClones;
     std::wstringstream cloneTitle;

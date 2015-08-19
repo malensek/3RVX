@@ -21,5 +21,5 @@ protected:
     Gdiplus::SolidBrush *_fontColor;
     Gdiplus::StringFormat _strFormat;
     std::wstring _formatString;
-    int _replaceIndex; // index of [[PERC]] string
+    size_t _replaceIndex; // index of [[PERC]] string
 };

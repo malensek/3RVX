@@ -78,6 +78,8 @@ public:
     std::unordered_map<int, HotkeyInfo> Hotkeys();
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
+    long long UpdateCheckTime();
+
 public:
     /* Static settings methods */
 

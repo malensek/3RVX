@@ -62,6 +62,11 @@ int APIENTRY wWinMain(
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
+    std::wstring cmdLine(lpCmdLine);
+    if (cmdLine.find(L"-update") != std::wstring::npos) {
+        return 0;
+    }
+
     Logger::Start();
     CLOG(L"Starting SettingsUI...");
 

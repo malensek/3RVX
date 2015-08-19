@@ -78,4 +78,10 @@ public:
     static const int MSG_ACTIVATE = WM_APP + 200;
     static const int MSG_LANGCHANGE = WM_APP + 201;
 
+private:
+    static const int TIMER_FIRSTUPDATE = 100;
+    static const int TIMER_UPDATE = 101;
+
+    static const int FIRSTUPDATE_INTERVAL = 1800000; /* 30 minutes (ms) */
+    static const int UPDATE_INTERVAL = 86410000; /* 24 hours, 10 secs (ms) */
 };

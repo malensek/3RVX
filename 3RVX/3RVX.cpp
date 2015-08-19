@@ -4,6 +4,7 @@
 #pragma comment(lib, "Wtsapi32.lib")
 
 #include <Windows.h>
+#include <ctime>
 #include <gdiplus.h>
 #include <iostream>
 #include <Wtsapi32.h>
@@ -88,7 +89,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
 _3RVX::_3RVX(HINSTANCE hInstance) :
 Window(_3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX, hInstance) {
-
+    SetTimer(Window::Handle(), TIMER_FIRSTUPDATE, FIRSTUPDATE_INTERVAL, NULL);
 }
 
 void _3RVX::Initialize() {
@@ -202,6 +203,30 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         PostQuitMessage(0);
         break;
     }
+
+    case WM_TIMER:
+        if (wParam == TIMER_FIRSTUPDATE || wParam == TIMER_UPDATE) {
+            Settings *settings = Settings::Instance();
+            long long checkTime = settings->UpdateCheckTime();
+            if ((std::time(nullptr) - checkTime) > (UPDATE_INTERVAL / 1000)) {
+                /* Enough time has elapsed since the last update check */
+                std::wstring settingsApp = Settings::SettingsApp();
+                CLOG(L"Launching update task: %s %s",
+                    settingsApp.c_str(), L"-update");
+                ShellExecute(NULL, L"open",
+                    Settings::SettingsApp().c_str(), L"-update", NULL, SW_HIDE);
+
+                if (wParam == TIMER_FIRSTUPDATE) {
+                    /* If this was the first update check (30 min after launch),
+                     * then kill the first update timer and start the main timer
+                     * (checks on 24-hour intervals) */
+                    KillTimer(Window::Handle(), TIMER_FIRSTUPDATE);
+                    SetTimer(Window::Handle(), TIMER_UPDATE,
+                        UPDATE_INTERVAL, NULL);
+                }
+            }
+        }
+        break;
     }
 
     if (message == _3RVX::WM_3RVX_CTRL) {

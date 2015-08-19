@@ -1,4 +1,7 @@
-﻿#include "3RVX.h"
+﻿// Copyright (c) 2015, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
+#include "3RVX.h"
 
 #pragma comment(lib, "gdiplus.lib")
 #pragma comment(lib, "Wtsapi32.lib")

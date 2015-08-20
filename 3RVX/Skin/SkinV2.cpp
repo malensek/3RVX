@@ -12,7 +12,6 @@
 #include "../StringUtils.h"
 #include "MeterComponent.h"
 #include "OSDComponent.h"
-#include "SkinUtils.h"
 #include "SliderComponent.h"
 
 SkinV2::SkinV2(std::wstring skinXML) :
@@ -116,7 +115,7 @@ OSDComponent *SkinV2::EjectOSD() {
 
 std::vector<HICON> SkinV2::VolumeIconset() {
     std::wstring iconDir = _skinDir + L"\\Notification Icons\\";
-    return SkinUtils::ReadIconDirectory(iconDir);
+    return Skin::ReadIconDirectory(iconDir);
 }
 
 SliderComponent *SkinV2::VolumeSlider() {

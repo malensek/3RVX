@@ -1,7 +1,6 @@
 #include "About.h"
 
-#include "../../3RVX/Updater.h"
-
+#include "../Updater.h"
 #include "../resource.h"
 
 void About::Initialize() {

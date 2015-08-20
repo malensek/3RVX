@@ -17,7 +17,6 @@
 #include "OSDComponent.h"
 #include "MeterComponent.h"
 #include "SliderComponent.h"
-#include "SkinUtils.h"
 
 SkinV3::SkinV3(std::wstring skinXML) :
 SkinInfo(skinXML) {
@@ -148,7 +147,7 @@ std::vector<HICON> SkinV3::Iconset(XMLElement *elem) {
     }
 
     std::wstring iconDir = _skinDir + L"\\" + StringUtils::Widen(loc) + L"\\";
-    return SkinUtils::ReadIconDirectory(iconDir);
+    return Skin::ReadIconDirectory(iconDir);
 }
 
 SoundPlayer *SkinV3::Sound(XMLElement *elem) {

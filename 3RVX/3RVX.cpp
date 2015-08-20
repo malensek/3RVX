@@ -92,7 +92,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
 _3RVX::_3RVX(HINSTANCE hInstance) :
 Window(_3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX, hInstance) {
-    SetTimer(Window::Handle(), TIMER_FIRSTUPDATE, FIRSTUPDATE_INTERVAL, NULL);
 }
 
 void _3RVX::Initialize() {
@@ -103,6 +102,16 @@ void _3RVX::Initialize() {
 
     Settings *settings = Settings::Instance();
     settings->Load();
+
+    KillTimer(Window::Handle(), TIMER_FIRSTUPDATE);
+    KillTimer(Window::Handle(), TIMER_UPDATE);
+    if (settings->AutoUpdateEnabled()) {
+        SetTimer(
+            Window::Handle(),
+            TIMER_FIRSTUPDATE,
+            FIRSTUPDATE_INTERVAL,
+            NULL);
+    }
 
     SkinManager::Instance()->LoadSkin(settings->SkinXML());
 

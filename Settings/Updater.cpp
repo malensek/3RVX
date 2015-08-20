@@ -15,11 +15,12 @@
 #include "../3RVX/StringUtils.h"
 #include "../3RVX/Logger.h"
 
-const std::wstring Updater::LATEST_URL
-    = DOWNLOAD_URL + L"latest_version";
-
 const std::wstring Updater::DOWNLOAD_URL
     = L"https://3rvx.com/releases/";
+
+/* Since this const depends on DOWNLOAD_URL, it needs to be defined after it. */
+const std::wstring Updater::LATEST_URL
+    = Updater::DOWNLOAD_URL + L"latest_version";
 
 bool Updater::NewerVersionAvailable() {
     std::pair<int, int> remote = RemoteVersion();
@@ -127,6 +128,7 @@ std::pair<int, int> Updater::RemoteVersion() {
         NULL,
         NULL);
 
+    CLOG(L"Opening URL: %s", LATEST_URL.c_str());
     HINTERNET connection = InternetOpenUrl(
         internet,
         LATEST_URL.c_str(),

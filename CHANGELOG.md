@@ -16,6 +16,7 @@ Beta 9
 * Hotkey to disable/enable the OSD 
 * Option to disable the OSD when another application is full screen
 * Option to disable the OSD when a DirectX application has exclusive control of the screen
+* Preliminary 64 bit support
 * Bugfix: Translate 'Muted' for the notification icon
 * Bugfix: Settings dialog is now re-translated on 'Apply'
 * Bugfix: Settings not read if username contains non-ASCII characters

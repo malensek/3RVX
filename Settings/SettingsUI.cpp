@@ -29,6 +29,7 @@ typedef struct DLGTEMPLATEEX
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "UITranslator.h"
+#include "Updater.h"
 
 /* Tabs*/
 #include "Tabs/Tab.h"
@@ -62,13 +63,22 @@ int APIENTRY wWinMain(
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
-    std::wstring cmdLine(lpCmdLine);
-    if (cmdLine.find(L"-update") != std::wstring::npos) {
-        return 0;
-    }
-
     Logger::Start();
     CLOG(L"Starting SettingsUI...");
+
+    std::wstring cmdLine(lpCmdLine);
+    if (cmdLine.find(L"-update") != std::wstring::npos) {
+        if (Updater::NewerVersionAvailable()) {
+            CLOG(L"An update is available. Showing update icon.");
+
+        } else {
+#if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
+            CLOG(L"No update available. Press [enter] to terminate");
+            std::cin.get();
+#endif
+        }
+        return 0;
+    }
 
     mutex = CreateMutex(NULL, FALSE, L"Local\\3RVXSettings");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {

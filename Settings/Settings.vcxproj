@@ -226,6 +226,7 @@
     <ClInclude Include="..\3RVX\LanguageTranslator.h" />
     <ClInclude Include="..\3RVX\Logger.h" />
     <ClInclude Include="..\3RVX\MeterWnd\Animations\AnimationTypes.h" />
+    <ClInclude Include="..\3RVX\NotifyIcon.h" />
     <ClInclude Include="..\3RVX\Settings.h" />
     <ClInclude Include="..\3RVX\Skin\SkinInfo.h" />
     <ClInclude Include="..\3RVX\StringUtils.h" />
@@ -263,6 +264,7 @@
     <ClCompile Include="..\3RVX\LanguageTranslator.cpp" />
     <ClCompile Include="..\3RVX\Logger.cpp" />
     <ClCompile Include="..\3RVX\MeterWnd\Animations\AnimationTypes.cpp" />
+    <ClCompile Include="..\3RVX\NotifyIcon.cpp" />
     <ClCompile Include="..\3RVX\Settings.cpp" />
     <ClCompile Include="..\3RVX\Skin\SkinInfo.cpp" />
     <ClCompile Include="..\3RVX\StringUtils.cpp" />

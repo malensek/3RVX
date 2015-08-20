@@ -189,9 +189,6 @@
     <ClInclude Include="Skin\MultiSkin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Skin\SkinUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -330,9 +327,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Skin\SkinV2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Skin\SkinUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Skin\Skin.cpp">

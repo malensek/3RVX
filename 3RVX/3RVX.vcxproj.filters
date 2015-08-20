@@ -144,9 +144,6 @@
     <ClInclude Include="LanguageTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Updater.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SyntheticKeyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -300,9 +297,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LanguageTranslator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Updater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SyntheticKeyboard.cpp">

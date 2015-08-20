@@ -114,13 +114,13 @@
     <ClInclude Include="Tabs\About.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\3RVX\Updater.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\3RVX\CommCtl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\3RVX\Skin\SkinInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Updater.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -206,13 +206,13 @@
     <ClCompile Include="Tabs\About.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\3RVX\Updater.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\3RVX\3RVXConsts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\3RVX\Skin\SkinInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Updater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,9 +11,9 @@
 #include <WinInet.h>
 #include <sstream>
 
-#include "Settings.h"
-#include "StringUtils.h"
-#include "Logger.h"
+#include "../3RVX/Settings.h"
+#include "../3RVX/StringUtils.h"
+#include "../3RVX/Logger.h"
 
 const std::wstring Updater::LATEST_URL
     = DOWNLOAD_URL + L"latest_version";

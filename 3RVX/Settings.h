@@ -81,6 +81,7 @@ public:
     std::unordered_map<int, HotkeyInfo> Hotkeys();
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
+    bool AutoUpdateEnabled();
     long long UpdateCheckTime();
 
 public:
@@ -164,5 +165,6 @@ public:
     static const int DefaultOSDOffset = 140;
     static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
     static const std::wstring DefaultSkin;
+    static const bool DefaultAutoUpdate = false;
 
 };

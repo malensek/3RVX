@@ -32,6 +32,7 @@
 #define XML_OSD_Y "osdY"
 #define XML_SKIN "skin"
 #define XML_SOUNDS "soundEffects"
+#define XML_UPDATEAUTO "automaticUpdates"
 #define XML_UPDATECHECKTIME "lastUpdateCheck"
 
 const std::wstring Settings::MAIN_APP = L"3RVX.exe";
@@ -577,6 +578,10 @@ tinyxml2::XMLElement *Settings::GetOrCreateElement(std::string elementName) {
         _root->InsertEndChild(el);
     }
     return el;
+}
+
+bool Settings::AutoUpdateEnabled() {
+    return GetEnabled(XML_UPDATEAUTO, DefaultAutoUpdate);
 }
 
 long long Settings::UpdateCheckTime() {

@@ -232,6 +232,7 @@
     <ClInclude Include="..\3RVX\StringUtils.h" />
     <ClInclude Include="..\3RVX\SyntheticKeyboard.h" />
     <ClInclude Include="..\3RVX\TinyXml2\tinyxml2.h" />
+    <ClInclude Include="..\3RVX\Window.h" />
     <ClInclude Include="Controls\Button.h" />
     <ClInclude Include="Controls\Checkbox.h" />
     <ClInclude Include="Controls\ComboBox.h" />
@@ -254,6 +255,7 @@
     <ClInclude Include="Tabs\Tab.h" />
     <ClInclude Include="UITranslator.h" />
     <ClInclude Include="Updater.h" />
+    <ClInclude Include="UpdaterWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\3RVXConsts.cpp" />
@@ -270,6 +272,7 @@
     <ClCompile Include="..\3RVX\StringUtils.cpp" />
     <ClCompile Include="..\3RVX\SyntheticKeyboard.cpp" />
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp" />
+    <ClCompile Include="..\3RVX\Window.cpp" />
     <ClCompile Include="Controls\Button.cpp" />
     <ClCompile Include="Controls\Checkbox.cpp" />
     <ClCompile Include="Controls\ComboBox.cpp" />
@@ -287,6 +290,7 @@
     <ClCompile Include="Tabs\Tab.cpp" />
     <ClCompile Include="UITranslator.cpp" />
     <ClCompile Include="Updater.cpp" />
+    <ClCompile Include="UpdaterWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Settings.rc" />

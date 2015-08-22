@@ -126,6 +126,12 @@
     <ClInclude Include="..\3RVX\NotifyIcon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\3RVX\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdaterWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp">
@@ -219,6 +225,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\3RVX\NotifyIcon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3RVX\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdaterWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

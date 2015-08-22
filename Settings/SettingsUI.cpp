@@ -30,6 +30,7 @@ typedef struct DLGTEMPLATEEX
 #include "../3RVX/Settings.h"
 #include "UITranslator.h"
 #include "Updater.h"
+#include "UpdaterWindow.h"
 
 /* Tabs*/
 #include "Tabs/Tab.h"
@@ -70,7 +71,17 @@ int APIENTRY wWinMain(
     if (cmdLine.find(L"-update") != std::wstring::npos) {
         if (Updater::NewerVersionAvailable()) {
             CLOG(L"An update is available. Showing update icon.");
-
+            UpdaterWindow uw;
+            PostMessage(
+                uw.Handle(),
+                _3RVX::WM_3RVX_SETTINGSCTRL,
+                _3RVX::MSG_UPDATEICON,
+                NULL);
+            MSG msg;
+            while (GetMessage(&msg, NULL, 0, 0)) {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         } else {
 #if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
             CLOG(L"No update available. Press [enter] to terminate");

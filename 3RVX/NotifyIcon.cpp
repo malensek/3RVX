@@ -18,7 +18,7 @@ _tip(tip) {
 
     _id = NotifyIcon::ids++;
 
-    _nid = {};
+    _nid = { 0 };
     _nid.cbSize = { sizeof(_nid) };
     _nid.hWnd = hWnd;
     _nid.uID = _id;
@@ -30,7 +30,7 @@ _tip(tip) {
 
     Shell_NotifyIcon(NIM_ADD, &_nid);
 
-    _nii = {};
+    _nii = { 0 };
     _nii.cbSize = { sizeof(_nii) };
     _nii.hWnd = hWnd;
     _nii.uID = _id;

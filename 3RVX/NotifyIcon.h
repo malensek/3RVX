@@ -5,6 +5,7 @@
 
 #include <Windows.h>
 #include <string>
+#include <shellapi.h>
 
 #define MSG_NOTIFYICON WM_APP + 200
 

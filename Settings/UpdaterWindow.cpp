@@ -26,6 +26,7 @@ LRESULT UpdaterWindow::WndProc(
             break;
         }
 
-        return Window::WndProc(hWnd, message, wParam, lParam);
     }
+
+    return Window::WndProc(hWnd, message, wParam, lParam);
 }

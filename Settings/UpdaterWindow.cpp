@@ -21,7 +21,7 @@ LRESULT UpdaterWindow::WndProc(
     if (message == _3RVX::WM_3RVX_SETTINGSCTRL) {
         switch (wParam) {
         case _3RVX::MSG_UPDATEICON:
-            CLOG(L"Received request to activate window from external program");
+            CLOG(L"Creating update icon");
             new NotifyIcon(Window::Handle(), L"Update Available", _icon);
             break;
         }

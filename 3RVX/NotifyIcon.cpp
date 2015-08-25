@@ -3,9 +3,6 @@
 
 #include "NotifyIcon.h"
 
-#include <gdiplus.h>
-#pragma comment(lib, "gdiplus.lib")
-
 #include "Logger.h"
 
 int NotifyIcon::ids = 0;
@@ -13,8 +10,6 @@ int NotifyIcon::ids = 0;
 NotifyIcon::NotifyIcon(HWND hWnd, std::wstring tip, HICON icon) :
 _icon(icon),
 _tip(tip) {
-
-    using Gdiplus::Bitmap;
 
     _id = NotifyIcon::ids++;
 

@@ -26,6 +26,19 @@ Window(L"3RVX-UpdateWindow") {
     if (hr != S_OK) {
         CLOG(L"Could not load large notification icon");
     }
+
+    _menu = CreatePopupMenu();
+
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_INSTALL, L"Install");
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_IGNORE, L"Ignore version");
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_REMIND, L"Remind me later");
+
+    _menuFlags = TPM_RIGHTBUTTON;
+    if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
+        _menuFlags |= TPM_RIGHTALIGN;
+    } else {
+        _menuFlags |= TPM_LEFTALIGN;
+    }
 }
 
 LRESULT UpdaterWindow::WndProc(

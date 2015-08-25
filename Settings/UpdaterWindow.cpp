@@ -17,6 +17,15 @@ Window(L"3RVX-UpdateWindow") {
     if (hr != S_OK) {
         CLOG(L"Could not load notification icon");
     }
+
+    hr = LoadIconMetric(
+        Window::InstanceHandle(),
+        MAKEINTRESOURCE(IDI_MAINICON),
+        LIM_LARGE,
+        &_largeIcon);
+    if (hr != S_OK) {
+        CLOG(L"Could not load large notification icon");
+    }
 }
 
 LRESULT UpdaterWindow::WndProc(

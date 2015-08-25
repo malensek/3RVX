@@ -8,6 +8,7 @@ public:
 
 private:
     HICON _icon;
+    HICON _largeIcon;
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 

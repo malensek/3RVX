@@ -17,6 +17,7 @@ public:
     NOTIFYICONDATA IconData();
     NOTIFYICONIDENTIFIER IconID();
 
+    void Balloon(std::wstring title, std::wstring text, HICON icon = nullptr);
     void UpdateIcon(HICON icon);
     void UpdateToolTip(std::wstring newTip);
 

@@ -31,6 +31,20 @@ _tip(tip) {
     _nii.uID = _id;
 }
 
+void NotifyIcon::Balloon(std::wstring title, std::wstring text, HICON icon) {
+    _nid.uFlags = _nid.uFlags | NIF_INFO;
+    _nid.dwInfoFlags = NIIF_RESPECT_QUIET_TIME;
+    if (icon != nullptr) {
+        _nid.dwInfoFlags = _nid.dwInfoFlags | NIIF_USER | NIIF_LARGE_ICON;
+        _nid.hBalloonIcon = icon;
+    }
+
+    wcscpy_s(_nid.szInfoTitle, 64, title.c_str());
+    wcscpy_s(_nid.szInfo, 256, text.c_str());
+
+    Shell_NotifyIcon(NIM_MODIFY, &_nid);
+}
+
 void NotifyIcon::UpdateIcon(HICON icon) {
     _nid.hIcon = icon;
     Shell_NotifyIcon(NIM_MODIFY, &_nid);

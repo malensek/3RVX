@@ -8,11 +8,15 @@
 
 UpdaterWindow::UpdaterWindow() :
 Window(L"3RVX-UpdateWindow") {
-    HRESULT hr = LoadIconMetric(
+    HRESULT hr;
+    hr = LoadIconMetric(
         Window::InstanceHandle(),
         MAKEINTRESOURCE(IDI_MAINICON),
         LIM_SMALL,
         &_icon);
+    if (hr != S_OK) {
+        CLOG(L"Could not load notification icon");
+    }
 }
 
 LRESULT UpdaterWindow::WndProc(

@@ -22,6 +22,8 @@ private:
 
     Settings *_settings;
 
+    std::wstring _versionString;
+
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 

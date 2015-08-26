@@ -57,6 +57,8 @@ LRESULT UpdaterWindow::WndProc(
         case _3RVX::MSG_UPDATEICON:
             _settings = Settings::Instance();
             _settings->Load();
+            std::pair<int, int> newVersion = Updater::RemoteVersion();
+            _versionString = Updater::VersionToString(newVersion);
             CLOG(L"Creating update icon");
             _notifyIcon = new NotifyIcon(
                 Window::Handle(),

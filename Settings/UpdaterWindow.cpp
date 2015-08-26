@@ -49,6 +49,14 @@ UpdaterWindow::~UpdaterWindow() {
     DestroyIcon(_largeIcon);
 }
 
+void UpdaterWindow::InstallUpdate() {
+    std::wstring dl = Updater::DownloadVersion(_version);
+    if (dl != L"") {
+        ShellExecute(NULL, L"open", dl.c_str(), NULL, NULL, SW_SHOWNORMAL);
+        SendMessage(Window::Handle(), WM_CLOSE, NULL, NULL);
+    }
+}
+
 LRESULT UpdaterWindow::WndProc(
     HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
@@ -96,7 +104,7 @@ LRESULT UpdaterWindow::WndProc(
         int menuItem = LOWORD(wParam);
         switch (menuItem) {
         case MENU_INSTALL:
-
+            InstallUpdate();
             break;
 
         case MENU_IGNORE:

@@ -25,6 +25,8 @@ private:
     std::pair<int, int> _version;
     std::wstring _versionString;
 
+    void InstallUpdate();
+
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 

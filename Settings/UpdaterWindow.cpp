@@ -81,6 +81,17 @@ LRESULT UpdaterWindow::WndProc(
                 L"3RVX " + _versionString, _largeIcon);
             break;
         }
+    } else if (message == MSG_NOTIFYICON) {
+        if (lParam == WM_LBUTTONUP
+            || lParam == WM_RBUTTONUP
+            || lParam == NIN_BALLOONUSERCLICK) {
+            POINT p;
+            GetCursorPos(&p);
+            SetForegroundWindow(hWnd);
+            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y,
+                Window::Handle(), NULL);
+            PostMessage(hWnd, WM_NULL, 0, 0);
+        }
 
     }
 

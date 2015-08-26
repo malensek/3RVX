@@ -67,30 +67,6 @@ int APIENTRY wWinMain(
     Logger::Start();
     CLOG(L"Starting SettingsUI...");
 
-    std::wstring cmdLine(lpCmdLine);
-    if (cmdLine.find(L"-update") != std::wstring::npos) {
-        if (Updater::NewerVersionAvailable()) {
-            CLOG(L"An update is available. Showing update icon.");
-            UpdaterWindow uw;
-            PostMessage(
-                uw.Handle(),
-                _3RVX::WM_3RVX_SETTINGSCTRL,
-                _3RVX::MSG_UPDATEICON,
-                NULL);
-            MSG msg;
-            while (GetMessage(&msg, NULL, 0, 0)) {
-                TranslateMessage(&msg);
-                DispatchMessage(&msg);
-            }
-        } else {
-#if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
-            CLOG(L"No update available. Press [enter] to terminate");
-            std::cin.get();
-#endif
-        }
-        return 0;
-    }
-
     mutex = CreateMutex(NULL, FALSE, L"Local\\3RVXSettings");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
         if (mutex) {
@@ -113,6 +89,38 @@ int APIENTRY wWinMain(
 #endif
 
         return EXIT_SUCCESS;
+    }
+
+    /* Inspect command line parameters to determine whether this settings
+     * instance is being launched as an update checker.  We do this *after* the
+     * mutex check to avoid situations where the updater and usual settings app
+     * are writing to the settings file at the same time. */
+    std::wstring cmdLine(lpCmdLine);
+    if (cmdLine.find(L"-update") != std::wstring::npos) {
+        if (Updater::NewerVersionAvailable()) {
+            CLOG(L"An update is available. Showing update icon.");
+            UpdaterWindow uw;
+            PostMessage(
+                uw.Handle(),
+                _3RVX::WM_3RVX_SETTINGSCTRL,
+                _3RVX::MSG_UPDATEICON,
+                NULL);
+
+            /* Do the standard message pump */
+            MSG msg;
+            while (GetMessage(&msg, NULL, 0, 0)) {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        } else {
+#if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
+            CLOG(L"No update available. Press [enter] to terminate");
+            std::cin.get();
+#endif
+        }
+
+        /* Process was used for updates; time to quit. */
+        return 0;
     }
 
     WNDCLASSEX wcex = { 0 };

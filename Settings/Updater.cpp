@@ -103,7 +103,7 @@ std::wstring Updater::DownloadVersion(std::pair<int, int> version) {
     DWORD result = GetTempPath(MAX_PATH, path);
     if (result == 0) {
         CLOG(L"Could not get temp download path");
-        return;
+        return L"";
     }
 
     std::wstring tempDir(path);
@@ -112,8 +112,19 @@ std::wstring Updater::DownloadVersion(std::pair<int, int> version) {
     std::wstring localFile = tempDir + L"\\" + fname;
 
     CLOG(L"Downloading %s to %s...", url.c_str(), localFile.c_str());
-    URLDownloadToFile(NULL, url.c_str(), localFile.c_str(), 0, NULL);
-    return localFile;
+    DeleteUrlCacheEntry(url.c_str());
+    HRESULT hr = URLDownloadToFile(
+        NULL,
+        url.c_str(),
+        localFile.c_str(),
+        0,
+        NULL);
+
+    if (hr == S_OK) {
+        return localFile;
+    } else {
+        return L"";
+    }
 }
 
 std::wstring Updater::DownloadFileName(std::pair<int, int> version) {

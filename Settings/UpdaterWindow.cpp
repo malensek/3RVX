@@ -92,7 +92,25 @@ LRESULT UpdaterWindow::WndProc(
                 Window::Handle(), NULL);
             PostMessage(hWnd, WM_NULL, 0, 0);
         }
+    } else if (message == WM_COMMAND) {
+        int menuItem = LOWORD(wParam);
+        switch (menuItem) {
+        case MENU_INSTALL:
 
+            break;
+
+        case MENU_IGNORE:
+            _settings->IgnoreUpdate(_versionString);
+            _settings->Save();
+            SendMessage(Window::Handle(), WM_CLOSE, NULL, NULL);
+            break;
+
+        case MENU_REMIND:
+            SendMessage(Window::Handle(), WM_CLOSE, NULL, NULL);
+            break;
+        }
+    } else if (message == WM_DESTROY) {
+        PostQuitMessage(0);
     }
 
     return Window::WndProc(hWnd, message, wParam, lParam);

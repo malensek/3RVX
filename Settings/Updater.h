@@ -10,11 +10,11 @@
 /// Handles update functionality: checking for updates online, and downloading
 /// new versions of the software.
 /// <p>
-/// The latest version number of 3RVX can be retrieved from:
-/// http://matthew.malensek.net/projects/3RVX/latest_version
+/// The latest version number of 3RVX can be retrieved from the URL specified
+/// by the LATEST_URL constant string.
 /// <p>
 /// Versions can be downloaded from:
-/// http://matthew.malensek.net/projects/3RVX/3RVX-X.Y.{zip, msi}
+/// DOWNLOAD_URL + "3RVX-X.Y.{zip, msi}"
 /// Where X is the major version, Y is the minor version, and the type of
 /// installation is determined by the package extension:
 /// <ul>

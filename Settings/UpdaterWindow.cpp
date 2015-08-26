@@ -59,3 +59,11 @@ LRESULT UpdaterWindow::WndProc(
 
     return Window::WndProc(hWnd, message, wParam, lParam);
 }
+
+void UpdaterWindow::DoModal() {
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+}

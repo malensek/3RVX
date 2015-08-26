@@ -5,6 +5,7 @@
 class UpdaterWindow : public Window {
 public:
     UpdaterWindow();
+    void DoModal();
 
 private:
     HICON _icon;

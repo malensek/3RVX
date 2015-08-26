@@ -105,13 +105,7 @@ int APIENTRY wWinMain(
                 _3RVX::WM_3RVX_SETTINGSCTRL,
                 _3RVX::MSG_UPDATEICON,
                 NULL);
-
-            /* Do the standard message pump */
-            MSG msg;
-            while (GetMessage(&msg, NULL, 0, 0)) {
-                TranslateMessage(&msg);
-                DispatchMessage(&msg);
-            }
+            uw.DoModal();
         } else {
 #if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
             CLOG(L"No update available. Press [enter] to terminate");

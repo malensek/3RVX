@@ -98,7 +98,7 @@ std::wstring Updater::VersionToString(std::pair<int, int> version) {
         + std::to_wstring(version.second);
 }
 
-void Updater::DownloadVersion(std::pair<int, int> version) {
+std::wstring Updater::DownloadVersion(std::pair<int, int> version) {
     wchar_t path[MAX_PATH];
     DWORD result = GetTempPath(MAX_PATH, path);
     if (result == 0) {
@@ -113,6 +113,7 @@ void Updater::DownloadVersion(std::pair<int, int> version) {
 
     CLOG(L"Downloading %s to %s...", url.c_str(), localFile.c_str());
     URLDownloadToFile(NULL, url.c_str(), localFile.c_str(), 0, NULL);
+    return localFile;
 }
 
 std::wstring Updater::DownloadFileName(std::pair<int, int> version) {

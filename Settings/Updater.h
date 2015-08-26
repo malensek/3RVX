@@ -52,7 +52,7 @@ public:
     /// </summary>
     static std::wstring MainAppVersionString();
 
-    static void DownloadVersion(std::pair<int, int> version);
+    static std::wstring DownloadVersion(std::pair<int, int> version);
 
 private:
     /// <summary>

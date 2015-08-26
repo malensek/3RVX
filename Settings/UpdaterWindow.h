@@ -22,6 +22,7 @@ private:
 
     Settings *_settings;
 
+    std::pair<int, int> _version;
     std::wstring _versionString;
 
     virtual LRESULT WndProc(HWND hWnd, UINT message,

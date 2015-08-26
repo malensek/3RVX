@@ -62,9 +62,9 @@ LRESULT UpdaterWindow::WndProc(
             _settings->LastUpdateCheckNow();
             _settings->Save();
 
-            std::pair<int, int> newVersion = Updater::RemoteVersion();
-            _versionString = Updater::VersionToString(newVersion);
-            if (newVersion.first <= 0
+            _version = Updater::RemoteVersion();
+            _versionString = Updater::VersionToString(_version);
+            if (_version.first <= 0
                     || _versionString == _settings->IgnoreUpdate()) {
                 SendMessage(Window::Handle(), WM_CLOSE, NULL, NULL);
                 break;

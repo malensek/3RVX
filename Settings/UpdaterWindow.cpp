@@ -13,7 +13,7 @@ Window(L"3RVX-UpdateWindow") {
         Window::InstanceHandle(),
         MAKEINTRESOURCE(IDI_MAINICON),
         LIM_SMALL,
-        &_icon);
+        &_smallIcon);
     if (hr != S_OK) {
         CLOG(L"Could not load notification icon");
     }

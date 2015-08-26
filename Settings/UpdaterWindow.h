@@ -8,7 +8,7 @@ public:
     void DoModal();
 
 private:
-    HICON _icon;
+    HICON _smallIcon;
     HICON _largeIcon;
 
     HMENU _menu;

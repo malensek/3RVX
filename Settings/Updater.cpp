@@ -117,7 +117,13 @@ void Updater::DownloadVersion(std::pair<int, int> version) {
 
 std::wstring Updater::DownloadFileName(std::pair<int, int> version) {
     std::wstring verStr = VersionToString(version);
-    return std::wstring(L"3RVX-" + verStr + L".msi");
+    std::wstring ext;
+    if (Settings::Portable()) {
+        ext = L".zip";
+    } else {
+        ext = L".msi";
+    }
+    return std::wstring(L"3RVX-" + verStr + ext);
 }
 
 std::pair<int, int> Updater::RemoteVersion() {

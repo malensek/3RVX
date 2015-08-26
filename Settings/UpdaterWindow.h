@@ -10,6 +10,7 @@ public:
 private:
     HICON _smallIcon;
     HICON _largeIcon;
+    NotifyIcon *_notifyIcon;
 
     HMENU _menu;
     UINT _menuFlags;

@@ -4,7 +4,9 @@
 #include "../3RVX/Logger.h"
 #include "../3RVX/CommCtl.h"
 #include "../3RVX/NotifyIcon.h"
+#include "../3RVX/Settings.h"
 #include "resource.h"
+#include "Updater.h"
 
 UpdaterWindow::UpdaterWindow() :
 Window(L"3RVX-UpdateWindow") {
@@ -39,6 +41,12 @@ Window(L"3RVX-UpdateWindow") {
     } else {
         _menuFlags |= TPM_LEFTALIGN;
     }
+}
+
+UpdaterWindow::~UpdaterWindow() {
+    delete _notifyIcon;
+    DestroyIcon(_smallIcon);
+    DestroyIcon(_largeIcon);
 }
 
 LRESULT UpdaterWindow::WndProc(

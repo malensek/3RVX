@@ -8,6 +8,8 @@ class Settings;
 class UpdaterWindow : public Window {
 public:
     UpdaterWindow();
+    ~UpdaterWindow();
+
     void DoModal();
 
 private:

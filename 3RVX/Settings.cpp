@@ -83,6 +83,7 @@ void Settings::Load() {
     _wfopen_s(&fp, _file.c_str(), L"rb");
     if (fp == NULL) {
         QCLOG(L"Failed to open file!");
+        LoadEmptySettings();
         return;
     }
 

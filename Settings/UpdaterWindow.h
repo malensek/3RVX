@@ -15,6 +15,8 @@ private:
     HMENU _menu;
     UINT _menuFlags;
 
+    Settings *_settings;
+
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 

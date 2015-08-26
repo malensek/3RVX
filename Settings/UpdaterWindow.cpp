@@ -47,6 +47,8 @@ LRESULT UpdaterWindow::WndProc(
     if (message == _3RVX::WM_3RVX_SETTINGSCTRL) {
         switch (wParam) {
         case _3RVX::MSG_UPDATEICON:
+            _settings = Settings::Instance();
+            _settings->Load();
             CLOG(L"Creating update icon");
             _notifyIcon = new NotifyIcon(
                 Window::Handle(),

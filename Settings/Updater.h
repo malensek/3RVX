@@ -31,6 +31,16 @@ public:
     static bool NewerVersionAvailable();
 
     /// <summary>
+    /// Retrieves the latest version of the program availabile online.
+    /// </summary>
+    static std::pair<int, int> RemoteVersion();
+
+    /// <summary>
+    /// Retrieves the string-based representation of a version number.
+    /// </summary>
+    static std::wstring VersionToString(std::pair<int, int> version);
+
+    /// <summary>
     /// Retrieves the version number of the main application (3RVX.exe).
     /// </summary>
     static std::pair<int, int> MainAppVersion();
@@ -45,16 +55,6 @@ public:
     static void DownloadVersion(std::pair<int, int> version);
 
 private:
-    /// <summary>
-    /// Retrieves the latest version of the program availabile online.
-    /// </summary>
-    static std::pair<int, int> RemoteVersion();
-
-    /// <summary>
-    /// Retrieves the string-based representation of a version number.
-    /// </summary>
-    static std::wstring VersionToString(std::pair<int, int> version);
-
     /// <summary>
     /// Retrieves the file name of the specified version of the program stored
     /// on the remote server (example: 3RVX-3.4.msi).

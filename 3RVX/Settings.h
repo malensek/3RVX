@@ -82,7 +82,9 @@ public:
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
     bool AutoUpdateEnabled();
-    long long UpdateCheckTime();
+    void LastUpdateCheckNow();
+    void LastUpdateCheck(long long time);
+    long long LastUpdateCheck();
 
 public:
     /* Static settings methods */

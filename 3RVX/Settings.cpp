@@ -3,10 +3,12 @@
 
 #include "Settings.h"
 
+#pragma comment(lib, "Shlwapi.lib")
+
+#include <algorithm>
+#include <ctime>
 #include <ShlObj.h>
 #include <Shlwapi.h>
-#pragma comment(lib, "Shlwapi.lib")
-#include <algorithm>
 
 #include "Error.h"
 #include "HotkeyInfo.h"
@@ -592,7 +594,15 @@ bool Settings::AutoUpdateEnabled() {
     return GetEnabled(XML_UPDATEAUTO, DefaultAutoUpdate);
 }
 
-long long Settings::UpdateCheckTime() {
+void Settings::LastUpdateCheckNow() {
+    LastUpdateCheck(std::time(nullptr));
+}
+
+void Settings::LastUpdateCheck(long long time) {
+    SetText(XML_UPDATECHECKTIME, std::to_string((long long) time));
+}
+
+long long Settings::LastUpdateCheck() {
     tinyxml2::XMLElement *el = _root->FirstChildElement(XML_UPDATECHECKTIME);
     if (el == NULL) {
         return 0;

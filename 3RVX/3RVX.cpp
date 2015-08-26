@@ -219,7 +219,7 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     case WM_TIMER:
         if (wParam == TIMER_FIRSTUPDATE || wParam == TIMER_UPDATE) {
             Settings *settings = Settings::Instance();
-            long long checkTime = settings->UpdateCheckTime();
+            long long checkTime = settings->LastUpdateCheck();
             if ((std::time(nullptr) - checkTime) > (UPDATE_INTERVAL / 1000)) {
                 /* Enough time has elapsed since the last update check */
                 std::wstring settingsApp = Settings::SettingsApp();

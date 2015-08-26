@@ -95,6 +95,11 @@ public:
     static std::wstring AppDir();
 
     /// <summary>
+    /// Determines whether this installation is portable or not.
+    /// </summary>
+    static bool Portable();
+
+    /// <summary>
     /// Determines where program settings are stored. If this is an installed
     /// version of the program, then the settings are in
     /// %APPDATA%\3RVX\

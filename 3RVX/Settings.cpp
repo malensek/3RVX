@@ -118,10 +118,18 @@ int Settings::Save() {
     return result;
 }
 
-std::wstring Settings::SettingsDir() {
-    /* First, is this a portable installation? */
+bool Settings::Portable() {
     std::wstring portableSettings = AppDir() + L"\\" + SETTINGS_FILE;
     if (PathFileExists(portableSettings.c_str()) == TRUE) {
+        return true;
+    }
+
+    return false;
+}
+
+std::wstring Settings::SettingsDir() {
+    /* First, is this a portable installation? */
+    if (Portable()) {
         return AppDir();
     }
 

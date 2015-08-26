@@ -85,6 +85,8 @@ public:
     void LastUpdateCheckNow();
     void LastUpdateCheck(long long time);
     long long LastUpdateCheck();
+    std::wstring IgnoreUpdate();
+    void IgnoreUpdate(std::wstring versionString);
 
 public:
     /* Static settings methods */

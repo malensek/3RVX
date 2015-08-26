@@ -36,6 +36,7 @@
 #define XML_SOUNDS "soundEffects"
 #define XML_UPDATEAUTO "automaticUpdates"
 #define XML_UPDATECHECKTIME "lastUpdateCheck"
+#define XML_IGNOREUPDATE "ignoreUpdateVersion"
 
 const std::wstring Settings::MAIN_APP = L"3RVX.exe";
 const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
@@ -615,4 +616,12 @@ long long Settings::LastUpdateCheck() {
     }
 
     return std::stoll(timeStr);
+}
+
+std::wstring Settings::IgnoreUpdate() {
+    return GetText(XML_IGNOREUPDATE);
+}
+
+void Settings::IgnoreUpdate(std::wstring versionString) {
+    SetText(XML_IGNOREUPDATE, StringUtils::Narrow(versionString));
 }

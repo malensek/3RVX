@@ -64,6 +64,12 @@ LRESULT UpdaterWindow::WndProc(
 
             std::pair<int, int> newVersion = Updater::RemoteVersion();
             _versionString = Updater::VersionToString(newVersion);
+            if (newVersion.first <= 0
+                    || _versionString == _settings->IgnoreUpdate()) {
+                SendMessage(Window::Handle(), WM_CLOSE, NULL, NULL);
+                break;
+            }
+
             CLOG(L"Creating update icon");
             _notifyIcon = new NotifyIcon(
                 Window::Handle(),
@@ -71,7 +77,8 @@ LRESULT UpdaterWindow::WndProc(
                 _smallIcon);
 
             CLOG(L"Launching balloon notification");
-            _notifyIcon->Balloon(L"Update Available", L"3RVX 3.2", _largeIcon);
+            _notifyIcon->Balloon(L"Update Available",
+                L"3RVX " + _versionString, _largeIcon);
             break;
         }
 

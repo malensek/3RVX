@@ -2,6 +2,9 @@
 
 #include "../3RVX/Window.h"
 
+class NotifyIcon;
+class Settings;
+
 class UpdaterWindow : public Window {
 public:
     UpdaterWindow();

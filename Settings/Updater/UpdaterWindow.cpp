@@ -1,11 +1,11 @@
 #include "UpdaterWindow.h"
 
-#include "../3RVX/3RVX.h"
-#include "../3RVX/Logger.h"
-#include "../3RVX/CommCtl.h"
-#include "../3RVX/NotifyIcon.h"
-#include "../3RVX/Settings.h"
-#include "resource.h"
+#include "../../3RVX/3RVX.h"
+#include "../../3RVX/Logger.h"
+#include "../../3RVX/CommCtl.h"
+#include "../../3RVX/NotifyIcon.h"
+#include "../../3RVX/Settings.h"
+#include "../resource.h"
 #include "Updater.h"
 
 UpdaterWindow::UpdaterWindow() :
@@ -71,9 +71,8 @@ LRESULT UpdaterWindow::WndProc(
             _settings->Save();
 
             _version = Updater::RemoteVersion();
-            _versionString = Updater::VersionToString(_version);
-            if (_version.first <= 0
-                    || _versionString == _settings->IgnoreUpdate()) {
+            if (_version.Major() <= 0
+                    || _version.ToString() == _settings->IgnoreUpdate()) {
                 SendMessage(Window::Handle(), WM_CLOSE, NULL, NULL);
                 break;
             }
@@ -86,7 +85,7 @@ LRESULT UpdaterWindow::WndProc(
 
             CLOG(L"Launching balloon notification");
             _notifyIcon->Balloon(L"Update Available",
-                L"3RVX " + _versionString, _largeIcon);
+                L"3RVX " + _version.ToString(), _largeIcon);
             break;
         }
     } else if (message == MSG_NOTIFYICON) {
@@ -108,7 +107,7 @@ LRESULT UpdaterWindow::WndProc(
             break;
 
         case MENU_IGNORE:
-            _settings->IgnoreUpdate(_versionString);
+            _settings->IgnoreUpdate(_version.ToString());
             _settings->Save();
             SendMessage(Window::Handle(), WM_CLOSE, NULL, NULL);
             break;

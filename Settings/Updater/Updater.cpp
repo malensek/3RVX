@@ -24,14 +24,11 @@ const std::wstring Updater::LATEST_URL
     = Updater::DOWNLOAD_URL + L"latest_version";
 
 bool Updater::NewerVersionAvailable() {
-    std::pair<int, int> remote = RemoteVersion();
-    std::pair<int, int> local = MainAppVersion();
-    CLOG(L"Remote version: %d.%d\n Local version: %d.%d",
-        remote.first, remote.second,
-        local.first, local.second);
-
-    if (remote.first == 0 && remote.second == 0
-        || local.first == 0 && local.second == 0) {
+    Version remote = RemoteVersion();
+    Version local = MainAppVersion();
+    CLOG(L"Remote version: %s\n Local version: %s",
+        remote.ToString().c_str(),
+        local.ToString().c_str());
         /* One of the version checks failed, so say that there is no new
          * version. No need to bother the user with (hopefully) temporary
          * errors. */
@@ -125,7 +122,7 @@ std::wstring Updater::DownloadFileName(std::pair<int, int> version) {
     } else {
         ext = L".msi";
     }
-    return std::wstring(L"3RVX-" + verStr + ext);
+    return std::wstring(L"3RVX-" + version.ToString() + ext);
 }
 
 Version Updater::RemoteVersion() {

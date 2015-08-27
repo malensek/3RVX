@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../3RVX/Window.h"
+#include "../../3RVX/Window.h"
+#include "Version.h"
 
 class NotifyIcon;
 class Settings;
@@ -22,8 +23,7 @@ private:
 
     Settings *_settings;
 
-    std::pair<int, int> _version;
-    std::wstring _versionString;
+    Version _version;
 
     void InstallUpdate();
 

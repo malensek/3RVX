@@ -45,15 +45,14 @@ bool Updater::NewerVersionAvailable() {
     return false;
 }
 
-std::pair<int, int> Updater::MainAppVersion() {
+Version Updater::MainAppVersion() {
     std::wstring mainExe = Settings::Instance()->MainApp();
     BOOL result;
-    std::pair<int, int> version = std::pair<int, int>(0, 0);
 
     DWORD size = GetFileVersionInfoSize(mainExe.c_str(), NULL);
     if (size == 0) {
         CLOG(L"Could not determine version info size");
-        return version;
+        return { 0, 0, 0 };
     }
 
     unsigned char *block = new unsigned char[size];
@@ -61,7 +60,7 @@ std::pair<int, int> Updater::MainAppVersion() {
     if (result == 0) {
         CLOG(L"Failed to retrieve file version info");
         delete[] block;
-        return version;
+        return { 0, 0, 0 };
     }
 
     unsigned int dataSz;
@@ -70,27 +69,23 @@ std::pair<int, int> Updater::MainAppVersion() {
     if (result == 0) {
         CLOG(L"Could not query root block for version info");
         delete[] block;
-        return version;
+        return { 0, 0, 0 };
     }
 
     if (vers->dwSignature != 0xFEEF04BD) {
         CLOG(L"Invalid version signature");
         delete[] block;
-        return version;
+        return { 0, 0, 0 };
     }
 
-    unsigned long verl = vers->dwProductVersionMS;
-    int hi = (verl >> 16) & 0xFF;
-    int lo = verl & 0xFF;
-    version = std::pair<int, int>(hi, lo);
+    unsigned long verms = vers->dwProductVersionMS;
+    int hi = (verms >> 16) & 0xFF;
+    int lo = verms & 0xFF;
+    unsigned long verls = vers->dwProductVersionLS;
+    int rev = (verls >> 16) & 0xFF;
 
     delete[] block;
-    return version;
-}
-
-std::wstring Updater::MainAppVersionString() {
-    std::pair<int, int> vers = MainAppVersion();
-    return VersionToString(vers);
+    return Version(hi, lo, rev);
 }
 
 std::wstring Updater::DownloadVersion(std::pair<int, int> version) {

@@ -1,7 +1,8 @@
 #include "About.h"
 
-#include "../Updater.h"
 #include "../resource.h"
+#include "../Updater/Updater.h"
+#include "../Updater/Version.h"
 
 void About::Initialize() {
     INIT_CONTROL(LBL_TITLE, Label, _title);

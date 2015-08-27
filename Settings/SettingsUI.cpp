@@ -29,8 +29,8 @@ typedef struct DLGTEMPLATEEX
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "UITranslator.h"
-#include "Updater.h"
-#include "UpdaterWindow.h"
+#include "Updater/Updater.h"
+#include "Updater/UpdaterWindow.h"
 
 /* Tabs*/
 #include "Tabs/Tab.h"

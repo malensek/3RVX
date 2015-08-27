@@ -15,6 +15,8 @@ public:
     const int Minor() { return _minor; }
     const int Revision() { return _revision; }
 
+    unsigned int ToInt() {
+        return (_major << 16) | (_minor << 8) | (_revision);
     }
 
     std::wstring ToString() {

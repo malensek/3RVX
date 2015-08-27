@@ -4,18 +4,16 @@
 #pragma once
 
 #include <string>
-#include <utility>
-#include <tuple>
 
 struct Version;
 
 /// <summary>
 /// Handles update functionality: checking for updates online, and downloading
 /// new versions of the software.
-/// <p>
+/// <p />
 /// The latest version number of 3RVX can be retrieved from the URL specified
 /// by the LATEST_URL constant string.
-/// <p>
+/// <p />
 /// Versions can be downloaded from:
 /// DOWNLOAD_URL + "3RVX-X.Y.{zip, msi}"
 /// Where X is the major version, Y is the minor version, and the type of

@@ -11,9 +11,10 @@
 #include <WinInet.h>
 #include <sstream>
 
-#include "../3RVX/Settings.h"
-#include "../3RVX/StringUtils.h"
-#include "../3RVX/Logger.h"
+#include "../../3RVX/Settings.h"
+#include "../../3RVX/StringUtils.h"
+#include "../../3RVX/Logger.h"
+#include "Version.h"
 
 const std::wstring Updater::DOWNLOAD_URL
     = L"https://3rvx.com/releases/";
@@ -92,12 +93,6 @@ std::wstring Updater::MainAppVersionString() {
     return VersionToString(vers);
 }
 
-std::wstring Updater::VersionToString(std::pair<int, int> version) {
-    return std::to_wstring(version.first)
-        + L"."
-        + std::to_wstring(version.second);
-}
-
 std::wstring Updater::DownloadVersion(std::pair<int, int> version) {
     wchar_t path[MAX_PATH];
     DWORD result = GetTempPath(MAX_PATH, path);
@@ -138,7 +133,7 @@ std::wstring Updater::DownloadFileName(std::pair<int, int> version) {
     return std::wstring(L"3RVX-" + verStr + ext);
 }
 
-std::pair<int, int> Updater::RemoteVersion() {
+Version Updater::RemoteVersion() {
     HINTERNET internet = InternetOpen(
         L"3RVX Updater",
         INTERNET_OPEN_TYPE_PRECONFIG,
@@ -157,7 +152,7 @@ std::pair<int, int> Updater::RemoteVersion() {
 
     if (connection == NULL) {
         CLOG(L"Could not connect to URL!");
-        return std::pair<int, int>(0, 0);
+        return { 0, 0, 0 };
     }
 
     std::string str("");
@@ -171,16 +166,9 @@ std::pair<int, int> Updater::RemoteVersion() {
     str.erase(str.find('\n'), str.size() - 1);
 
     size_t dot = str.find('.');
+    size_t dot2 = str.find('.', dot);
     std::string major = str.substr(0, dot);
-    std::string minor = str.substr(dot + 1, str.size());
-
-    std::pair<int, int> version;
-    std::istringstream ss;
-
-    ss = std::istringstream(major);
-    ss >> version.first;
-    ss = std::istringstream(minor);
-    ss >> version.second;
-
-    return version;
+    std::string minor = str.substr(dot + 1, dot2);
+    std::string rev = str.substr(dot2 + 1, str.size());
+    return Version(std::stoi(major), std::stoi(minor), std::stoi(rev));
 }

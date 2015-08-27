@@ -5,6 +5,9 @@
 
 #include <string>
 #include <utility>
+#include <tuple>
+
+struct Version;
 
 /// <summary>
 /// Handles update functionality: checking for updates online, and downloading
@@ -33,12 +36,7 @@ public:
     /// <summary>
     /// Retrieves the latest version of the program availabile online.
     /// </summary>
-    static std::pair<int, int> RemoteVersion();
-
-    /// <summary>
-    /// Retrieves the string-based representation of a version number.
-    /// </summary>
-    static std::wstring VersionToString(std::pair<int, int> version);
+    static Version RemoteVersion();
 
     /// <summary>
     /// Retrieves the version number of the main application (3RVX.exe).

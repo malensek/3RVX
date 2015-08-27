@@ -8,7 +8,6 @@
 // {EC9CB649-7E84-4B42-B367-7FC39BE17806}
 static const GUID G3RVXCoreAudioEvent = { 0xec9cb649, 0x7e84, 0x4b42,
     { 0xb3, 0x67, 0x7f, 0xc3, 0x9b, 0xe1, 0x78, 0x6 } };
-
  
 HRESULT CoreAudio::Init() {
     HRESULT hr;

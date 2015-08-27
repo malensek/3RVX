@@ -120,16 +120,19 @@
     <ClInclude Include="..\3RVX\Skin\SkinInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Updater.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\3RVX\NotifyIcon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\3RVX\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UpdaterWindow.h">
+    <ClInclude Include="Updater\UpdaterWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Updater\Updater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Updater\Version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -221,16 +224,16 @@
     <ClCompile Include="..\3RVX\Skin\SkinInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Updater.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\3RVX\NotifyIcon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\3RVX\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UpdaterWindow.cpp">
+    <ClCompile Include="Updater\Updater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Updater\UpdaterWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

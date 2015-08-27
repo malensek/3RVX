@@ -254,8 +254,9 @@
     <ClInclude Include="SettingsUI.h" />
     <ClInclude Include="Tabs\Tab.h" />
     <ClInclude Include="UITranslator.h" />
-    <ClInclude Include="Updater.h" />
-    <ClInclude Include="UpdaterWindow.h" />
+    <ClInclude Include="Updater\Updater.h" />
+    <ClInclude Include="Updater\UpdaterWindow.h" />
+    <ClInclude Include="Updater\Version.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\3RVXConsts.cpp" />
@@ -289,8 +290,8 @@
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="Tabs\Tab.cpp" />
     <ClCompile Include="UITranslator.cpp" />
-    <ClCompile Include="Updater.cpp" />
-    <ClCompile Include="UpdaterWindow.cpp" />
+    <ClCompile Include="Updater\Updater.cpp" />
+    <ClCompile Include="Updater\UpdaterWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Settings.rc" />

@@ -29,17 +29,19 @@ bool Updater::NewerVersionAvailable() {
     CLOG(L"Remote version: %s\n Local version: %s",
         remote.ToString().c_str(),
         local.ToString().c_str());
+
+    if (remote.ToInt() == 0 || local.ToInt() == 0) {
         /* One of the version checks failed, so say that there is no new
          * version. No need to bother the user with (hopefully) temporary
          * errors. */
         return false;
     }
 
-    if (remote.first > local.first || remote.second > local.second) {
+    if (remote.ToInt() > local.ToInt()) {
         return true;
+    } else {
+        return false;
     }
-
-    return false;
 }
 
 Version Updater::MainAppVersion() {
@@ -78,6 +80,7 @@ Version Updater::MainAppVersion() {
     unsigned long verms = vers->dwProductVersionMS;
     int hi = (verms >> 16) & 0xFF;
     int lo = verms & 0xFF;
+
     unsigned long verls = vers->dwProductVersionLS;
     int rev = (verls >> 16) & 0xFF;
 
@@ -85,7 +88,7 @@ Version Updater::MainAppVersion() {
     return Version(hi, lo, rev);
 }
 
-std::wstring Updater::DownloadVersion(std::pair<int, int> version) {
+std::wstring Updater::DownloadVersion(Version version) {
     wchar_t path[MAX_PATH];
     DWORD result = GetTempPath(MAX_PATH, path);
     if (result == 0) {
@@ -114,8 +117,7 @@ std::wstring Updater::DownloadVersion(std::pair<int, int> version) {
     }
 }
 
-std::wstring Updater::DownloadFileName(std::pair<int, int> version) {
-    std::wstring verStr = VersionToString(version);
+std::wstring Updater::DownloadFileName(Version version) {
     std::wstring ext;
     if (Settings::Portable()) {
         ext = L".zip";

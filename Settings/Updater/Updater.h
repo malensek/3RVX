@@ -41,14 +41,14 @@ public:
     /// </summary>
     static Version MainAppVersion();
 
-    static std::wstring DownloadVersion(std::pair<int, int> version);
+    static std::wstring DownloadVersion(Version version);
 
 private:
     /// <summary>
     /// Retrieves the file name of the specified version of the program stored
     /// on the remote server (example: 3RVX-3.4.msi).
     /// </summary>
-    static std::wstring DownloadFileName(std::pair<int, int> version);
+    static std::wstring DownloadFileName(Version version);
 
 private:
     /// <summary>

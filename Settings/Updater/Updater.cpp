@@ -161,7 +161,7 @@ Version Updater::RemoteVersion() {
     str.erase(str.find('\n'), str.size() - 1);
 
     size_t dot = str.find('.');
-    size_t dot2 = str.find('.', dot);
+    size_t dot2 = str.find('.', dot + 1);
     std::string major = str.substr(0, dot);
     std::string minor = str.substr(dot + 1, dot2);
     std::string rev = str.substr(dot2 + 1, str.size());

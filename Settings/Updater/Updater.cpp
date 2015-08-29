@@ -15,6 +15,7 @@
 #include "../../3RVX/StringUtils.h"
 #include "../../3RVX/Logger.h"
 #include "Version.h"
+#include "DownloadStatus.h"
 
 const std::wstring Updater::DOWNLOAD_URL
     = L"https://3rvx.com/releases/";
@@ -88,7 +89,7 @@ Version Updater::MainAppVersion() {
     return Version(hi, lo, rev);
 }
 
-std::wstring Updater::DownloadVersion(Version version) {
+std::wstring Updater::DownloadVersion(Version version, DownloadStatus *ds) {
     wchar_t path[MAX_PATH];
     DWORD result = GetTempPath(MAX_PATH, path);
     if (result == 0) {
@@ -108,7 +109,7 @@ std::wstring Updater::DownloadVersion(Version version) {
         url.c_str(),
         localFile.c_str(),
         0,
-        NULL);
+        ds);
 
     if (hr == S_OK) {
         return localFile;

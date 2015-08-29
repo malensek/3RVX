@@ -5,6 +5,8 @@
 
 #include <string>
 
+class DownloadStatus;
+
 struct Version;
 
 /// <summary>
@@ -41,7 +43,19 @@ public:
     /// </summary>
     static Version MainAppVersion();
 
-    static std::wstring DownloadVersion(Version version);
+    /// <summary>
+    /// Downloads the specified version of the software. If a DownloadStatus
+    /// is provided, the download will be performed asynchronously and updates
+    /// will be sent to the DownloadStatus instance. Otherwise, this function is
+    /// synchronous.
+    /// <summary>
+    /// <param name="version">Version to download</param>
+    /// <param name="ds">
+    /// The DownloadStatus instance to report progress to. If this parameter is
+    /// specified, the method will run asynchronously.
+    /// </param>
+    static std::wstring DownloadVersion(
+        Version version, DownloadStatus *ds = nullptr);
 
 private:
     /// <summary>

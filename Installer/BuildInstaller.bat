@@ -17,7 +17,7 @@ ECHO "  |____/|_| \_\ \_/   /_/\_\____/   "
 ECHO "                                    "
 
 ECHO This script will generate a 3RVX installer.
-set /p version= "Enter 3RVX Version (X.X): "
+set /p version= "Enter 3RVX Version (X.X.X): "
 ECHO.
 
 ECHO Setting Version: %version%
@@ -28,7 +28,7 @@ ECHO ON
 
 set PATH=%PATH%;%WIX%\bin
 heat dir ../Release -gg -srd -cg 3RVXComponents -dr INSTALLFOLDER -out 3RVXComponents.wxs
-candle -pedantic -dProductVersion=%version%.0.0 ./3RVX.wxs ./3RVXComponents.wxs
+candle -pedantic -dProductVersion=%version%.0 ./3RVX.wxs ./3RVXComponents.wxs
 light -b ../Release -ext WixUIExtension ./3RVX.wixobj ./3RVXComponents.wixobj -o 3RVX-%version%.msi
 del 3RVX.wixobj 3RVX.wixpdb 3RVXComponents.wxs 3RVXComponents.wixobj
 

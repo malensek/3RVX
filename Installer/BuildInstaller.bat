@@ -1,6 +1,10 @@
 @REM
-@REM To build the installer, you will need to the WiX Toolset, available at
+@REM To build the installer, you will need the WiX Toolset, available at
 @REM http://wixtoolset.org/
+@REM
+@REM To build the zip distribution, the 7za command line utility (7za.exe) from
+@REM the 7-Zip Extra package must be present in this script's folder:
+@REM http://www.7-zip.org/download.html
 @REM
 
 @ECHO OFF

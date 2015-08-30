@@ -61,7 +61,7 @@ public:
     virtual bool Visible();
     virtual void Visible(bool visible);
 
-    void WindowExStyle();
+    long WindowExStyle();
     void WindowExStyle(long exStyle);
     void AddWindowExStyle(long exStyle);
     void RemoveWindowExStyle(long exStyle);

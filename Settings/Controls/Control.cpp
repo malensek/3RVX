@@ -175,6 +175,14 @@ void Control::Visible(bool visible) {
     ShowWindow(_hWnd, visible ? SW_SHOW : SW_HIDE);
 }
 
+long Control::WindowExStyle() {
+    return GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
+}
+
+void Control::WindowExStyle(long exStyle) {
+    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exStyle);
+}
+
 void Control::AddWindowExStyle(long exStyle) {
     long exs = GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
     exs |= exStyle;

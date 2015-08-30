@@ -1,13 +1,14 @@
 #include "Dialog.h"
 
-Dialog::Dialog(LPCWSTR className, LPCWSTR title, LPCWSTR dlgTemplate) :
-Window(className, title) {
-    CreateDialog(
+Dialog::Dialog(LPCWSTR className, LPCWSTR dlgTemplate) :
+Window(className) {
+    _dlgHwnd = CreateDialogParam(
         Window::InstanceHandle(),
         dlgTemplate,
         Window::Handle(),
         StaticDialogProc,
-        this);
+        (LPARAM) this);
+}
 }
 
 INT_PTR Dialog::StaticDialogProc(HWND hwndDlg, UINT uMsg,

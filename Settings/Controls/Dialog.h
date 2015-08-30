@@ -4,7 +4,7 @@
 
 class Dialog : public Window {
 public:
-    Dialog(LPCWSTR className, LPCWSTR title, LPCWSTR dlgTemplate);
+    Dialog(LPCWSTR className, LPCWSTR dlgTemplate);
 
 protected:
     static INT_PTR CALLBACK StaticDialogProc(HWND hwndDlg, UINT uMsg,

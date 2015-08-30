@@ -238,6 +238,7 @@
     <ClInclude Include="Controls\ComboBox.h" />
     <ClInclude Include="Controls\Control.h" />
     <ClInclude Include="Controls\Controls.h" />
+    <ClInclude Include="Controls\Dialog.h" />
     <ClInclude Include="Controls\GroupBox.h" />
     <ClInclude Include="Controls\ListView.h" />
     <ClInclude Include="Controls\Spinner.h" />
@@ -255,6 +256,7 @@
     <ClInclude Include="Tabs\Tab.h" />
     <ClInclude Include="UITranslator.h" />
     <ClInclude Include="Updater\DownloadStatus.h" />
+    <ClInclude Include="Updater\ProgressWindow.h" />
     <ClInclude Include="Updater\Updater.h" />
     <ClInclude Include="Updater\UpdaterWindow.h" />
     <ClInclude Include="Updater\Version.h" />
@@ -279,6 +281,7 @@
     <ClCompile Include="Controls\Checkbox.cpp" />
     <ClCompile Include="Controls\ComboBox.cpp" />
     <ClCompile Include="Controls\Control.cpp" />
+    <ClCompile Include="Controls\Dialog.cpp" />
     <ClCompile Include="Controls\EditBox.cpp" />
     <ClCompile Include="Controls\ListView.cpp" />
     <ClCompile Include="Controls\Spinner.cpp" />

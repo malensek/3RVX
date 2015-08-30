@@ -138,6 +138,12 @@
     <ClInclude Include="Updater\DownloadStatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Updater\ProgressWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls\Dialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp">
@@ -240,6 +246,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Updater\DownloadStatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controls\Dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

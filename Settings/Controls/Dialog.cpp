@@ -9,6 +9,9 @@ Window(className) {
         StaticDialogProc,
         (LPARAM) this);
 }
+
+HWND Dialog::DialogHandle() {
+    return _dlgHwnd;
 }
 
 INT_PTR Dialog::StaticDialogProc(HWND hwndDlg, UINT uMsg,
@@ -21,7 +24,7 @@ INT_PTR Dialog::StaticDialogProc(HWND hwndDlg, UINT uMsg,
     } else {
         dlg = (Dialog *) GetWindowLongPtr(hwndDlg, DWLP_USER);
         if (!dlg) {
-            return DefDlgProc(hwndDlg, uMsg, wParam, lParam);
+            return FALSE;
         }
     }
 
@@ -31,5 +34,5 @@ INT_PTR Dialog::StaticDialogProc(HWND hwndDlg, UINT uMsg,
 INT_PTR Dialog::DialogProc(HWND hwndDlg, UINT uMsg,
         WPARAM wParam, LPARAM lParam) {
 
-    return INT_PTR();
+    return FALSE;
 }

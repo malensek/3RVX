@@ -6,10 +6,16 @@ class Dialog : public Window {
 public:
     Dialog(LPCWSTR className, LPCWSTR dlgTemplate);
 
+    HWND DialogHandle();
+
 protected:
     static INT_PTR CALLBACK StaticDialogProc(HWND hwndDlg, UINT uMsg,
         WPARAM wParam, LPARAM lParam);
 
     virtual INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg,
         WPARAM wParam, LPARAM lParam);
+
+private:
+    HWND _dlgHwnd;
+
 };

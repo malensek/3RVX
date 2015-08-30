@@ -1,3 +1,8 @@
+@REM
+@REM To build the installer, you will need to the WiX Toolset, available at
+@REM http://wixtoolset.org/
+@REM
+
 @ECHO OFF
 TITLE 3RVX Installer Builder
 ECHO "   _____ ______     ____  _______   "

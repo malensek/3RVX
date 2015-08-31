@@ -1,7 +1,9 @@
 #pragma once
 
+#include <unordered_map>
 #include "../../3RVX/Window.h"
 
+#include "Control.h"
 class Dialog : public Window {
 public:
     Dialog(LPCWSTR className, LPCWSTR dlgTemplate);
@@ -15,7 +17,9 @@ protected:
     virtual INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg,
         WPARAM wParam, LPARAM lParam);
 
-private:
     HWND _dlgHwnd;
+
+    /// <summary>Maps control IDs to their respective instances.</summary>
+    std::unordered_map<int, Control *> _controlMap;
 
 };

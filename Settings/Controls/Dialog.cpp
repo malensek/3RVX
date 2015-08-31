@@ -34,5 +34,32 @@ INT_PTR Dialog::StaticDialogProc(HWND hwndDlg, UINT uMsg,
 INT_PTR Dialog::DialogProc(HWND hwndDlg, UINT uMsg,
         WPARAM wParam, LPARAM lParam) {
 
+    unsigned short nCode, ctrlId;
+
+    switch (uMsg) {
+    case WM_INITDIALOG:
+        return FALSE;
+
+    case WM_COMMAND:
+        nCode = HIWORD(wParam);
+        ctrlId = LOWORD(wParam);
+        if (_controlMap.count(ctrlId) > 0) {
+            CLOG(L"yes");
+            return _controlMap[ctrlId]->Command(nCode);
+        } else {
+            return FALSE;
+        }
+
+    case WM_NOTIFY:
+        NMHDR *nHdr = (NMHDR *) lParam;
+        ctrlId = nHdr->idFrom;
+        if (_controlMap.count(ctrlId) > 0) {
+            return _controlMap[ctrlId]->Notification(nHdr);
+        } else {
+            return FALSE;
+        }
+    }
+
+
     return FALSE;
 }

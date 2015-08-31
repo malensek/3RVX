@@ -8,7 +8,7 @@ Tab::~Tab() {
 
 }
 
-DLGPROC Tab::TabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+BOOL CALLBACK Tab::TabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     unsigned short nCode, ctrlId;
 
     switch (message) {

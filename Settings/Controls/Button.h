@@ -13,7 +13,7 @@ public:
 
     }
 
-    virtual DLGPROC Command(unsigned short nCode);
+    virtual BOOL CALLBACK Command(unsigned short nCode);
 
 public:
     /* Event Handlers */

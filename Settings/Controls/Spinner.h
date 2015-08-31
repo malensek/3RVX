@@ -41,7 +41,7 @@ public:
     /// <summary>Sets the buddy text.</summary>
     bool Text(int value);
 
-    virtual DLGPROC Notification(NMHDR *nHdr);
+    virtual BOOL CALLBACK Notification(NMHDR *nHdr);
 
 public:
     /* Event Handlers */

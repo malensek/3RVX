@@ -21,7 +21,7 @@ public:
     ~Tab();
 
     /// <summary>Processes messages sent to the tab page.</summary>
-    virtual DLGPROC TabProc(
+    virtual BOOL CALLBACK TabProc(
         HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
     /// <summary>Persists changes made on the tab page</summary>

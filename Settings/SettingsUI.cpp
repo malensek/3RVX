@@ -161,7 +161,7 @@ INT_PTR LaunchPropertySheet() {
     psp[0].hInstance = hInst;
     psp[0].pszTemplate = MAKEINTRESOURCE(IDD_GENERAL);
     psp[0].pszIcon = NULL;
-    psp[0].pfnDlgProc = (DLGPROC) GeneralTabProc;
+    psp[0].pfnDlgProc = GeneralTabProc;
     psp[0].pszTitle = &genTitle[0];
     psp[0].lParam = NULL;
 
@@ -171,7 +171,7 @@ INT_PTR LaunchPropertySheet() {
     psp[1].hInstance = hInst;
     psp[1].pszTemplate = MAKEINTRESOURCE(IDD_DISPLAY);
     psp[1].pszIcon = NULL;
-    psp[1].pfnDlgProc = (DLGPROC) DisplayTabProc;
+    psp[1].pfnDlgProc = DisplayTabProc;
     psp[1].pszTitle = &dispTitle[0];
     psp[1].lParam = 0;
 
@@ -181,7 +181,7 @@ INT_PTR LaunchPropertySheet() {
     psp[2].hInstance = hInst;
     psp[2].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
     psp[2].pszIcon = NULL;
-    psp[2].pfnDlgProc = (DLGPROC) HotkeyTabProc;
+    psp[2].pfnDlgProc = HotkeyTabProc;
     psp[2].pszTitle = &hkTitle[0];
     psp[2].lParam = 0;
 
@@ -191,7 +191,7 @@ INT_PTR LaunchPropertySheet() {
     psp[3].hInstance = hInst;
     psp[3].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
     psp[3].pszIcon = NULL;
-    psp[3].pfnDlgProc = (DLGPROC) AboutTabProc;
+    psp[3].pfnDlgProc = AboutTabProc;
     psp[3].pszTitle = &aboutTitle[0];
     psp[3].lParam = 0;
 
@@ -205,7 +205,7 @@ INT_PTR LaunchPropertySheet() {
     psh.nStartPage = 0;
     psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);
     psh.ppsp = (LPCPROPSHEETPAGE) &psp;
-    psh.pfnCallback = (PFNPROPSHEETCALLBACK) PropSheetProc;
+    psh.pfnCallback = PropSheetProc;
 
     tabWnd = NULL;
 

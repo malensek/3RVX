@@ -195,12 +195,12 @@ void Control::RemoveWindowExStyle(long exStyle) {
     SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exs);
 }
 
-DLGPROC Control::Command(unsigned short nCode) {
+BOOL CALLBACK Control::Command(unsigned short nCode) {
     /* By default, indicate that we did not process the message: */
     return FALSE;
 }
 
-DLGPROC Control::Notification(NMHDR *nHdr) {
+BOOL CALLBACK Control::Notification(NMHDR *nHdr) {
     /* By default, indicate that we did not process the message: */
     return FALSE;
 }

@@ -68,11 +68,11 @@ public:
 
     /// <summary>Handles WM_COMMAND messages.</summary>
     /// <param name="nCode">Control-defined notification code</param>
-    virtual DLGPROC Command(unsigned short nCode);
+    virtual BOOL CALLBACK Command(unsigned short nCode);
 
     /// <summary>Handles WM_NOTIFY messages.</summary>
     /// <param name="nHdr">Notification header structure</param>
-    virtual DLGPROC Notification(NMHDR *nHdr);
+    virtual BOOL CALLBACK Notification(NMHDR *nHdr);
 
 protected:
     int _id;

@@ -13,7 +13,8 @@ void UITranslator::TranslateControlText(HWND hWnd, int dlgItem) {
     TranslateControlText(hWnd, dlgItem, str);
 }
 
-void UITranslator::TranslateControlText(HWND hWnd, int dlgItem, std::wstring &str) {
+void UITranslator::TranslateControlText(
+        HWND hWnd, int dlgItem, std::wstring &str) {
     std::wstring trans = Settings::Instance()->Translator()->Translate(str);
     SetDlgItemText(hWnd, dlgItem, trans.c_str());
 }

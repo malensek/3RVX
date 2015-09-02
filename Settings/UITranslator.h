@@ -17,5 +17,10 @@ public:
     /// Sets a control's text to the translation of the provided string.
     /// </summary>
     static void TranslateControlText(HWND hWnd, int dlgItem, std::wstring &str);
+
+    /// <summary>
+    /// Retrieves a window's text, translates, and then updates the text with
+    /// the translated string.
+    /// </summary>
     static void TranslateWindowText(HWND hWnd);
 };

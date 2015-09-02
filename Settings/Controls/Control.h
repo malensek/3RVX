@@ -61,9 +61,16 @@ public:
     virtual bool Visible();
     virtual void Visible(bool visible);
 
+    /// <summary>Retrieve the extended styles for this control.</summary>
     long WindowExStyle();
+
+    /// <summary>Set the extended styles for this control.</summary>
     void WindowExStyle(long exStyle);
+
+    /// <summary>Adds an extended style to this control.</summary>
     void AddWindowExStyle(long exStyle);
+
+    /// <summary>Removes an extended style from this control.</summary>
     void RemoveWindowExStyle(long exStyle);
 
     /// <summary>Handles WM_COMMAND messages.</summary>

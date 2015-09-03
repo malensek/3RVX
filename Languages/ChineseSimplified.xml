@@ -44,6 +44,7 @@
     <translation>已静音</translation>
   </string>
 
+
   <!-- Tab Names -->
   <string>
     <original>General</original>
@@ -112,6 +113,11 @@
     <original>Hide when other programs are fullscreen</original>
     <translation>在其它程序全屏的情况下隐藏</translation>
   </string>
+    <string>
+    <original>Hide when DirectX applications are fullscreen</original>
+    <translation>在 DirectX 程序全屏的情况下隐藏</translation>
+  </string>
+
 
   <string>
     <original>Position</original>
@@ -346,6 +352,10 @@
   <string>
     <original>Run: {1}</original>
     <translation>运行: {1}</translation>
+  </string>
+  <string>
+    <original>Enable/Disable OSD</original>
+    <translation>启用/禁用 OSD</translation>
   </string>
   <string>
     <original>Open Settings Dialog</original>

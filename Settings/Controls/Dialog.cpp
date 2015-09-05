@@ -1,5 +1,6 @@
 #include "Dialog.h"
 
+#include "Control.h"
 Dialog::Dialog(LPCWSTR className, LPCWSTR dlgTemplate) :
 Window(className) {
     _dlgHwnd = CreateDialogParam(

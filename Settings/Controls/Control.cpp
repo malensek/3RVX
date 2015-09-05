@@ -9,12 +9,14 @@ Control::Control() {
 
 }
 
-Control::Control(int id, HWND parent) :
+Control::Control(int id, HWND parent, bool translate) :
 _id(id),
 _parent(parent) {
     _hWnd = GetDlgItem(parent, id);
 
+    if (translate) {
         Translate();
+    }
 }
 
 Control::Control(int id, Dialog &parent, bool translate) :

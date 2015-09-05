@@ -15,7 +15,7 @@ class Dialog;
 class Control {
 public:
     Control();
-    Control(int id, HWND parent);
+    Control(int id, HWND parent, bool translate = true);
     Control(int id, Dialog &parent, bool translate = true);
     ~Control();
 

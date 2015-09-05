@@ -10,6 +10,16 @@ Window(className) {
         (LPARAM) this);
 }
 
+void Dialog::AddControl(Control *control) {
+    if (control == nullptr) {
+        return;
+    }
+
+    CLOG(L"Adding control id: %d", control->ID());
+    int id = control->ID();
+    _controlMap[id] = control;
+}
+
 HWND Dialog::DialogHandle() {
     return _dlgHwnd;
 }

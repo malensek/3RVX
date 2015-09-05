@@ -1,12 +1,15 @@
 #pragma once
 
 #include <unordered_map>
+
 #include "../../3RVX/Window.h"
 
 #include "Control.h"
 class Dialog : public Window {
 public:
     Dialog(LPCWSTR className, LPCWSTR dlgTemplate);
+
+    void AddControl(Control *control);
 
     HWND DialogHandle();
 

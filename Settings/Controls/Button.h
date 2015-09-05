@@ -8,8 +8,13 @@ public:
 
     }
 
-    Button(int id, HWND parent) :
-    Control(id, parent) {
+    Button(int id, HWND parent, bool translate = true) :
+    Control(id, parent, translate) {
+
+    }
+
+    Button(int id, Dialog &parent, bool translate = true) :
+    Control(id, parent, translate) {
 
     }
 

@@ -54,7 +54,6 @@ INT_PTR Dialog::DialogProc(HWND hwndDlg, UINT uMsg,
         nCode = HIWORD(wParam);
         ctrlId = LOWORD(wParam);
         if (_controlMap.count(ctrlId) > 0) {
-            CLOG(L"yes");
             return _controlMap[ctrlId]->Command(nCode);
         } else {
             return FALSE;

@@ -59,6 +59,8 @@ public:
     virtual bool Text(std::wstring text);
     virtual bool Text(int value);
 
+    virtual void Translate();
+
     virtual bool Visible();
     virtual void Visible(bool visible);
 

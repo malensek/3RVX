@@ -13,12 +13,7 @@ _id(id),
 _parent(parent) {
     _hWnd = GetDlgItem(parent, id);
 
-    /* Try to automatically translate the control's string */
-    Settings *settings = Settings::Instance();
-    LanguageTranslator *translator = settings->Translator();
-    std::wstring txt = Text();
-    std::wstring trans = translator->Translate(txt);
-    Text(trans);
+        Translate();
 }
 
 Control::~Control() {
@@ -158,6 +153,15 @@ bool Control::Text(std::wstring text) {
 
 bool Control::Text(int value) {
     return SetDlgItemInt(_parent, _id, value, TRUE) == TRUE;
+}
+
+void Control::Translate() {
+    /* Try to automatically translate the control's string */
+    Settings *settings = Settings::Instance();
+    LanguageTranslator *translator = settings->Translator();
+    std::wstring txt = Text();
+    std::wstring trans = translator->Translate(txt);
+    Text(trans);
 }
 
 std::wstring Control::Text() {

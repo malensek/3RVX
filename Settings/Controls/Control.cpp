@@ -25,6 +25,10 @@ Control::~Control() {
 
 }
 
+int Control::ID() {
+    return _id;
+}
+
 RECT Control::ScreenDimensions() {
     RECT r;
     GetWindowRect(_hWnd, &r);

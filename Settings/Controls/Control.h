@@ -16,6 +16,7 @@ public:
     Control(int id, HWND parent);
     ~Control();
 
+    int ID();
     /// <summary>
     /// Retrieves the dimensions of this control's window based on screen
     /// coordinates.

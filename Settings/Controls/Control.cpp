@@ -3,6 +3,7 @@
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
 #include "../../3RVX/LanguageTranslator.h"
+#include "Dialog.h"
 
 Control::Control() {
 
@@ -14,6 +15,19 @@ _parent(parent) {
     _hWnd = GetDlgItem(parent, id);
 
         Translate();
+}
+
+Control::Control(int id, Dialog &parent, bool translate) :
+_id(id),
+_parentDlg(&parent) {
+    _parent = _parentDlg->DialogHandle();
+    _hWnd = GetDlgItem(_parent, id);
+
+    _parentDlg->AddControl(this);
+
+    if (translate) {
+        Translate();
+    }
 }
 
 Control::~Control() {

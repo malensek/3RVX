@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+class Dialog;
+
 /// <summary>
 /// Base class for Windows forms control implementations (buttons, checkboxes,
 /// etc). Many common features, like control dimensions, window text, and styles
@@ -14,9 +16,11 @@ class Control {
 public:
     Control();
     Control(int id, HWND parent);
+    Control(int id, Dialog &parent, bool translate = true);
     ~Control();
 
     int ID();
+
     /// <summary>
     /// Retrieves the dimensions of this control's window based on screen
     /// coordinates.
@@ -88,6 +92,7 @@ protected:
     int _id;
     HWND _hWnd;
     HWND _parent;
+    Dialog *_parentDlg;
 
 protected:
     static const int MAX_EDITSTR = 4096;

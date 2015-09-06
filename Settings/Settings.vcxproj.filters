@@ -135,13 +135,16 @@
     <ClInclude Include="Updater\Version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Updater\DownloadStatus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Updater\ProgressWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Controls\Dialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls\ProgressBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls\StatusCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -245,10 +248,13 @@
     <ClCompile Include="Updater\UpdaterWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Updater\DownloadStatus.cpp">
+    <ClCompile Include="Controls\Dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls\Dialog.cpp">
+    <ClCompile Include="Updater\ProgressWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controls\StatusCallback.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

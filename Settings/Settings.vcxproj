@@ -241,6 +241,7 @@
     <ClInclude Include="Controls\Dialog.h" />
     <ClInclude Include="Controls\GroupBox.h" />
     <ClInclude Include="Controls\ListView.h" />
+    <ClInclude Include="Controls\ProgressBar.h" />
     <ClInclude Include="Controls\Spinner.h" />
     <ClInclude Include="Controls\EditBox.h" />
     <ClInclude Include="Tabs\About.h" />
@@ -255,7 +256,7 @@
     <ClInclude Include="SettingsUI.h" />
     <ClInclude Include="Tabs\Tab.h" />
     <ClInclude Include="UITranslator.h" />
-    <ClInclude Include="Updater\DownloadStatus.h" />
+    <ClInclude Include="Controls\StatusCallback.h" />
     <ClInclude Include="Updater\ProgressWindow.h" />
     <ClInclude Include="Updater\Updater.h" />
     <ClInclude Include="Updater\UpdaterWindow.h" />
@@ -294,7 +295,8 @@
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="Tabs\Tab.cpp" />
     <ClCompile Include="UITranslator.cpp" />
-    <ClCompile Include="Updater\DownloadStatus.cpp" />
+    <ClCompile Include="Controls\StatusCallback.cpp" />
+    <ClCompile Include="Updater\ProgressWindow.cpp" />
     <ClCompile Include="Updater\Updater.cpp" />
     <ClCompile Include="Updater\UpdaterWindow.cpp" />
   </ItemGroup>

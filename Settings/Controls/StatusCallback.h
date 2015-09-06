@@ -1,10 +1,9 @@
-
 #pragma once
 
 #include <Windows.h>
 #include <urlmon.h>
 
-class DownloadStatus : public IBindStatusCallback {
+class StatusCallback : public IBindStatusCallback {
 public:
     /* IBindStatusCallback */
     IFACEMETHODIMP GetBindInfo(DWORD *grfBINDF, BINDINFO *pbindinfo) {
@@ -28,7 +27,7 @@ public:
         return E_NOTIMPL;
     }
 
-    IFACEMETHODIMP OnProgress(
+    virtual IFACEMETHODIMP OnProgress(
         unsigned long ulProgress,
         unsigned long ulProgressMax,
         unsigned long ulStatusCode,

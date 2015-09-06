@@ -5,7 +5,7 @@
 
 #include <string>
 
-class DownloadStatus;
+class StatusCallback;
 
 struct Version;
 
@@ -55,7 +55,7 @@ public:
     /// specified, the method will run asynchronously.
     /// </param>
     static std::wstring DownloadVersion(
-        Version version, DownloadStatus *ds = nullptr);
+        Version version, StatusCallback *ds = nullptr);
 
 private:
     /// <summary>

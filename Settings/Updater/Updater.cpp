@@ -14,8 +14,8 @@
 #include "../../3RVX/Settings.h"
 #include "../../3RVX/StringUtils.h"
 #include "../../3RVX/Logger.h"
+#include "../Controls/StatusCallback.h"
 #include "Version.h"
-#include "DownloadStatus.h"
 
 const std::wstring Updater::DOWNLOAD_URL
     = L"https://3rvx.com/releases/";

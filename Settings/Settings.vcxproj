@@ -285,6 +285,7 @@
     <ClCompile Include="Controls\Dialog.cpp" />
     <ClCompile Include="Controls\EditBox.cpp" />
     <ClCompile Include="Controls\ListView.cpp" />
+    <ClCompile Include="Controls\ProgressBar.cpp" />
     <ClCompile Include="Controls\Spinner.cpp" />
     <ClCompile Include="Tabs\About.cpp" />
     <ClCompile Include="Tabs\Display.cpp" />

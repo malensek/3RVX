@@ -200,11 +200,11 @@ void Control::Visible(bool visible) {
 }
 
 long Control::WindowExStyle() {
-    return GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
+    return WindowAttributes(GWL_EXSTYLE);
 }
 
 void Control::WindowExStyle(long exStyle) {
-    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exStyle);
+    WindowAttributes(GWL_EXSTYLE, exStyle);
 }
 
 void Control::AddWindowExStyle(long exStyle) {
@@ -227,4 +227,24 @@ BOOL CALLBACK Control::Command(unsigned short nCode) {
 BOOL CALLBACK Control::Notification(NMHDR *nHdr) {
     /* By default, indicate that we did not process the message: */
     return FALSE;
+}
+
+long Control::WindowAttributes(int index) {
+    return GetWindowLongPtr(_hWnd, index);
+}
+
+void Control::WindowAttributes(int index, long value) {
+    SetWindowLongPtr(_hWnd, index, value);
+}
+
+void Control::AddWindowAttribute(int index, long value) {
+    long attr = WindowAttributes(index);
+    attr |= value;
+    WindowAttributes(index, attr);
+}
+
+void Control::RemoveWindowAttribute(int index, long value) {
+    long attr = WindowAttributes(GWL_EXSTYLE);
+    attr &= ~value;
+    WindowAttributes(index, attr);
 }

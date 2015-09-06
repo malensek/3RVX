@@ -94,6 +94,11 @@ protected:
     HWND _parent;
     Dialog *_parentDlg;
 
+    long WindowAttributes(int index);
+    void WindowAttributes(int index, long value);
+    void AddWindowAttribute(int index, long value);
+    void RemoveWindowAttribute(int index, long value);
+
 protected:
     static const int MAX_EDITSTR = 4096;
 };

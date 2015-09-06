@@ -89,7 +89,7 @@ Version Updater::MainAppVersion() {
     return Version(hi, lo, rev);
 }
 
-std::wstring Updater::DownloadVersion(Version version, DownloadStatus *ds) {
+std::wstring Updater::DownloadVersion(Version version, StatusCallback *cb) {
     wchar_t path[MAX_PATH];
     DWORD result = GetTempPath(MAX_PATH, path);
     if (result == 0) {
@@ -109,7 +109,7 @@ std::wstring Updater::DownloadVersion(Version version, DownloadStatus *ds) {
         url.c_str(),
         localFile.c_str(),
         0,
-        ds);
+        cb);
 
     if (hr == S_OK) {
         return localFile;

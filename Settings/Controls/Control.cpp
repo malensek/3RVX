@@ -199,26 +199,6 @@ void Control::Visible(bool visible) {
     ShowWindow(_hWnd, visible ? SW_SHOW : SW_HIDE);
 }
 
-long Control::WindowExStyle() {
-    return WindowAttributes(GWL_EXSTYLE);
-}
-
-void Control::WindowExStyle(long exStyle) {
-    WindowAttributes(GWL_EXSTYLE, exStyle);
-}
-
-void Control::AddWindowExStyle(long exStyle) {
-    long exs = GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
-    exs |= exStyle;
-    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exs);
-}
-
-void Control::RemoveWindowExStyle(long exStyle) {
-    long exs = GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
-    exs &= ~exStyle;
-    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exs);
-}
-
 BOOL CALLBACK Control::Command(unsigned short nCode) {
     /* By default, indicate that we did not process the message: */
     return FALSE;

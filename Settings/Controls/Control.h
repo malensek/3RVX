@@ -68,9 +68,17 @@ public:
     virtual bool Visible();
     virtual void Visible(bool visible);
 
+    /// <summary>Retrieve the window attributes of this control.</summary>
+    long WindowAttributes(int index);
 
+    /// <summary>Set the window attributes for this control.</summary>
+    void WindowAttributes(int index, long value);
 
+    /// <summary>Adds a window attribute to this control.</summary>
+    void AddWindowAttribute(int index, long value);
 
+    /// <summary>Removes a window attribute from this control.</summary>
+    void RemoveWindowAttribute(int index, long value);
 
     /// <summary>Handles WM_COMMAND messages.</summary>
     /// <param name="nCode">Control-defined notification code</param>
@@ -85,11 +93,6 @@ protected:
     HWND _hWnd;
     HWND _parent;
     Dialog *_parentDlg;
-
-    long WindowAttributes(int index);
-    void WindowAttributes(int index, long value);
-    void AddWindowAttribute(int index, long value);
-    void RemoveWindowAttribute(int index, long value);
 
 protected:
     static const int MAX_EDITSTR = 4096;

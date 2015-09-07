@@ -217,14 +217,14 @@ void Control::WindowAttributes(int index, long value) {
     SetWindowLongPtr(_hWnd, index, value);
 }
 
-void Control::AddWindowAttribute(int index, long value) {
+void Control::AddWindowAttribute(int index, long attribute) {
     long attr = WindowAttributes(index);
-    attr |= value;
+    attr |= attribute;
     WindowAttributes(index, attr);
 }
 
-void Control::RemoveWindowAttribute(int index, long value) {
+void Control::RemoveWindowAttribute(int index, long attribute) {
     long attr = WindowAttributes(GWL_EXSTYLE);
-    attr &= ~value;
+    attr &= ~attribute;
     WindowAttributes(index, attr);
 }

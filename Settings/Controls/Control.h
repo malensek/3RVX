@@ -68,17 +68,40 @@ public:
     virtual bool Visible();
     virtual void Visible(bool visible);
 
-    /// <summary>Retrieve the window attributes of this control.</summary>
+    /// <summary>
+    /// Retrieve the window attributes of this control. See the GetWindowLongPtr
+    /// Win32 function for index values.
+    /// </summary>
+    /// <param name="index">
+    /// The index of the attribute to retrieve. Common indexes include
+    /// GWL_STYLE, GWL_EXSTYLE, etc.
+    /// </param>
     long WindowAttributes(int index);
 
-    /// <summary>Set the window attributes for this control.</summary>
+    /// <summary>
+    /// Sets the window attributes of this control. See the SetWindowLongPtr
+    /// Win32 function for index values.
+    /// </summary>
+    /// <param name="index">
+    /// The index of the attribute to retrieve. Common indexes include
+    /// GWL_STYLE, GWL_EXSTYLE, etc.
+    /// </param>
+    /// <param name="value">New value of the attribute</param>
     void WindowAttributes(int index, long value);
 
-    /// <summary>Adds a window attribute to this control.</summary>
-    void AddWindowAttribute(int index, long value);
+    /// <summary>
+    /// Adds a window attribute to this control; same as retrieving the window
+    /// attributes, ORing the attribute with the original value, and then
+    /// updating with the new window attributes.
+    /// </summary>
+    void AddWindowAttribute(int index, long attribute);
 
-    /// <summary>Removes a window attribute from this control.</summary>
-    void RemoveWindowAttribute(int index, long value);
+    /// <summary>
+    /// Removes a window attribute from this control; same as retrieving the
+    /// window attributes, NOTing the attribute with the original value, and
+    /// then updating with the new window attributes.
+    /// </summary>
+    void RemoveWindowAttribute(int index, long attribute);
 
     /// <summary>Handles WM_COMMAND messages.</summary>
     /// <param name="nCode">Control-defined notification code</param>

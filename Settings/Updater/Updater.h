@@ -49,12 +49,11 @@ public:
     /// progress is made.
     /// <summary>
     /// <param name="version">Version to download</param>
-    /// <param name="ds">
-    /// The DownloadStatus instance to report progress to. If this parameter is
-    /// specified, the method will run asynchronously.
+    /// <param name="cb">
+    /// StatusCallback instance to report progress to.
     /// </param>
     static std::wstring DownloadVersion(
-        Version version, StatusCallback *ds = nullptr);
+        Version version, StatusCallback *cb = nullptr);
 
 private:
     /// <summary>

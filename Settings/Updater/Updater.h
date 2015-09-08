@@ -44,10 +44,9 @@ public:
     static Version MainAppVersion();
 
     /// <summary>
-    /// Downloads the specified version of the software. If a DownloadStatus
-    /// is provided, the download will be performed asynchronously and updates
-    /// will be sent to the DownloadStatus instance. Otherwise, this function is
-    /// synchronous.
+    /// Downloads the specified version of the software. If a StatusCallback
+    /// implementation is provided, updates will be sent to it as download
+    /// progress is made.
     /// <summary>
     /// <param name="version">Version to download</param>
     /// <param name="ds">

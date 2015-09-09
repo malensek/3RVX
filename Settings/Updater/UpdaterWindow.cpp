@@ -9,6 +9,7 @@
 #include "../../3RVX/NotifyIcon.h"
 #include "../../3RVX/Settings.h"
 #include "../resource.h"
+#include "ProgressWindow.h"
 #include "Updater.h"
 
 UpdaterWindow::UpdaterWindow() :
@@ -53,11 +54,10 @@ UpdaterWindow::~UpdaterWindow() {
 }
 
 void UpdaterWindow::InstallUpdate() {
-    std::wstring dl = Updater::DownloadVersion(_version);
-    if (dl != L"") {
-        ShellExecute(NULL, L"open", dl.c_str(), NULL, NULL, SW_SHOWNORMAL);
-        SendMessage(Window::Handle(), WM_CLOSE, NULL, NULL);
-    }
+    delete _notifyIcon;
+    _notifyIcon = nullptr;
+
+    ProgressWindow *pw = new ProgressWindow(_version);
 }
 
 LRESULT UpdaterWindow::WndProc(

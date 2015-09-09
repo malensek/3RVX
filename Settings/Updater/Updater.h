@@ -52,6 +52,10 @@ public:
     /// <param name="cb">
     /// StatusCallback instance to report progress to.
     /// </param>
+    /// <returns>
+    /// Path of the downloaded file, represented as a string, or an empty
+    /// string if the file could not be downloaded.
+    /// </returns>
     static std::wstring DownloadVersion(
         Version version, StatusCallback *cb = nullptr);
 

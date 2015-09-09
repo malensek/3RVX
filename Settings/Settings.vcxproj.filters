@@ -251,13 +251,13 @@
     <ClCompile Include="Controls\Dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Updater\ProgressWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Controls\StatusCallback.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controls\ProgressBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Updater\ProgressWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

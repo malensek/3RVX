@@ -321,14 +321,14 @@ ULONG CoreAudio::Release() {
     return lRef;
 }
 
-HRESULT CoreAudio::QueryInterface(REFIID iid, void **ppUnk) {
+HRESULT CoreAudio::QueryInterface(REFIID iid, void **ppvObject) {
     if ((iid == __uuidof(IUnknown)) ||
         (iid == __uuidof(IMMNotificationClient))) {
-        *ppUnk = static_cast<IMMNotificationClient*>(this);
+        *ppvObject = static_cast<IMMNotificationClient*>(this);
     } else if (iid == __uuidof(IAudioEndpointVolumeCallback)) {
-        *ppUnk = static_cast<IAudioEndpointVolumeCallback*>(this);
+        *ppvObject = static_cast<IAudioEndpointVolumeCallback*>(this);
     } else {
-        *ppUnk = nullptr;
+        *ppvObject = nullptr;
         return E_NOINTERFACE;
     }
 

@@ -97,7 +97,5 @@ private:
     }
 
     /* IUnknown */
-    IFACEMETHODIMP QueryInterface(const IID& iid, void** ppUnk) {
-        return E_NOTIMPL;
-    }
+    IFACEMETHODIMP QueryInterface(REFIID iid, void **ppvObject);
 };

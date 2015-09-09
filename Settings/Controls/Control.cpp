@@ -224,7 +224,7 @@ void Control::AddWindowAttribute(int index, long attribute) {
 }
 
 void Control::RemoveWindowAttribute(int index, long attribute) {
-    long attr = WindowAttributes(GWL_EXSTYLE);
+    long attr = WindowAttributes(index);
     attr &= ~attribute;
     WindowAttributes(index, attr);
 }

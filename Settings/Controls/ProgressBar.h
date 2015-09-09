@@ -11,17 +11,9 @@ public:
 
     }
 
-    void Range(int min, int max) {
-        SendMessage(_hWnd, PBM_SETRANGE32, min, max);
-    }
-
-    void Position(int pos) {
-        SendMessage(_hWnd, PBM_SETPOS, pos, 0);
-    }
-
-    void Marquee(bool enabled, int refresh = 30) {
-        SendMessage(_hWnd, PBM_SETMARQUEE, enabled, refresh);
-    }
+    void Range(long min, long max);
+    void Position(long pos);
+    void Marquee(bool enabled, int refresh = 30);
 
 protected:
     virtual IFACEMETHODIMP OnProgress(
@@ -30,4 +22,7 @@ protected:
         unsigned long ulStatusCode,
         LPCWSTR szStatusText
     );
+
+private:
+    unsigned long _progressMax;
 };

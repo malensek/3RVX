@@ -8,6 +8,7 @@
 #pragma comment(lib, "wininet.lib")
 
 #include <Windows.h>
+#include <Shlobj.h> // Has to be included before WinInet to avoid warning
 #include <WinInet.h>
 #include <sstream>
 
@@ -90,17 +91,31 @@ Version Updater::MainAppVersion() {
 }
 
 std::wstring Updater::DownloadVersion(Version version, StatusCallback *cb) {
-    wchar_t path[MAX_PATH];
-    DWORD result = GetTempPath(MAX_PATH, path);
-    if (result == 0) {
-        CLOG(L"Could not get temp download path");
+    std::wstring localDir = L"";
+
+    if (Settings::Portable()) {
+        PWSTR dlPath = nullptr;
+        SHGetKnownFolderPath(FOLDERID_Downloads, 0, NULL, &dlPath);
+        localDir = std::wstring(dlPath);
+        CoTaskMemFree(dlPath);
+    } else {
+        wchar_t tmpPath[MAX_PATH];
+        DWORD result = GetTempPath(MAX_PATH, tmpPath);
+        if (result == 0) {
+            CLOG(L"Could not get temp download path");
+            return L"";
+        }
+        localDir = std::wstring(tmpPath);
+    }
+
+    if (localDir == L"") {
+        CLOG(L"Could not determine local download directory");
         return L"";
     }
 
-    std::wstring tempDir(path);
     std::wstring fname = DownloadFileName(version);
     std::wstring url = DOWNLOAD_URL + fname;
-    std::wstring localFile = tempDir + L"\\" + fname;
+    std::wstring localFile = localDir + L"\\" + fname;
 
     CLOG(L"Downloading %s to %s...", url.c_str(), localFile.c_str());
     DeleteUrlCacheEntry(url.c_str());

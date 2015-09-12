@@ -6,6 +6,7 @@
 #include <chrono>
 
 #include "../../3RVX/Logger.h"
+#include "../../3RVX/StringUtils.h"
 #include "../Controls/Controls.h"
 #include "../resource.h"
 
@@ -26,7 +27,6 @@ _version(version) {
     _dlThread = std::thread(&ProgressWindow::Download, this);
 }
 
-
 void ProgressWindow::Download() {
     CLOG(L"Starting download thread");
     std::wstring path = Updater::DownloadVersion(_version, _progress);
@@ -37,7 +37,19 @@ void ProgressWindow::Download() {
         using namespace std::literals;
         std::this_thread::sleep_for(250ms);
 
-        ShellExecute(NULL, L"open", path.c_str(), 0, 0, SW_SHOWNORMAL);
+        std::wstring ext = StringUtils::FileExtension(path);
+        CLOG(L"File extension: %s", ext.c_str());
+        if (ext == L"zip") {
+            size_t slash = path.find_last_of(L"/\\");
+            if (slash != std::wstring::npos) {
+                std::wstring dir = path.substr(0, slash);
+                CLOG(L"Launching download folder: %s", dir.c_str());
+                ShellExecute(NULL, L"open", dir.c_str(), 0, 0, SW_SHOWNORMAL);
+            }
+        } else {
+            ShellExecute(NULL, L"open", path.c_str(), 0, 0, SW_SHOWNORMAL);
+        }
+
         SendMessage(Window::Handle(), WM_CLOSE, 0, 0);
     }
 }

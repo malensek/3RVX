@@ -139,7 +139,7 @@ int APIENTRY wWinMain(
     INT_PTR result;
     do {
         result = LaunchPropertySheet();
-        CLOG(L"RL: %s", relaunch ? L"TRUE" : L"FALSE");
+        CLOG(L"Relaunch: %s", relaunch ? L"TRUE" : L"FALSE");
     } while (relaunch == true);
 
     return result;

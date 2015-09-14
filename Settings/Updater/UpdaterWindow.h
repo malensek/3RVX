@@ -30,6 +30,8 @@ private:
 
     void InstallUpdate();
 
+    void CreateMenu();
+
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 

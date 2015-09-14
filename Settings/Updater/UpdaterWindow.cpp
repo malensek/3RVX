@@ -4,6 +4,7 @@
 #include "UpdaterWindow.h"
 
 #include "../../3RVX/3RVX.h"
+#include "../../3RVX/LanguageTranslator.h"
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/CommCtl.h"
 #include "../../3RVX/NotifyIcon.h"
@@ -32,19 +33,6 @@ Window(L"3RVX-UpdateWindow") {
     if (hr != S_OK) {
         CLOG(L"Could not load large notification icon");
     }
-
-    _menu = CreatePopupMenu();
-
-    InsertMenu(_menu, -1, MF_ENABLED, MENU_INSTALL, L"Install");
-    InsertMenu(_menu, -1, MF_ENABLED, MENU_IGNORE, L"Ignore version");
-    InsertMenu(_menu, -1, MF_ENABLED, MENU_REMIND, L"Remind me later");
-
-    _menuFlags = TPM_RIGHTBUTTON;
-    if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
-        _menuFlags |= TPM_RIGHTALIGN;
-    } else {
-        _menuFlags |= TPM_LEFTALIGN;
-    }
 }
 
 UpdaterWindow::~UpdaterWindow() {
@@ -58,6 +46,26 @@ void UpdaterWindow::InstallUpdate() {
     _notifyIcon = nullptr;
 
     ProgressWindow *pw = new ProgressWindow(_version);
+}
+
+void UpdaterWindow::CreateMenu() {
+    _menu = CreatePopupMenu();
+
+    LanguageTranslator *translator = _settings->Translator();
+    _menuInstallStr = translator->Translate(_menuInstallStr);
+    _menuIgnoreStr = translator->Translate(_menuIgnoreStr);
+    _menuRemindStr = translator->Translate(_menuRemindStr);
+
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_INSTALL, _menuInstallStr.c_str());
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_IGNORE, _menuIgnoreStr.c_str());
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_REMIND, _menuRemindStr.c_str());
+
+    _menuFlags = TPM_RIGHTBUTTON;
+    if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
+        _menuFlags |= TPM_RIGHTALIGN;
+    } else {
+        _menuFlags |= TPM_LEFTALIGN;
+    }
 }
 
 LRESULT UpdaterWindow::WndProc(

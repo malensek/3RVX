@@ -567,7 +567,7 @@ bool Settings::AutomaticUpdates() {
 }
 
 void Settings::AutomaticUpdates(bool enabled) {
-    SetEnabled(XML_UPDATEAUTO, DefaultAutoUpdate);
+    SetEnabled(XML_UPDATEAUTO, enabled);
 }
 
 void Settings::LastUpdateCheckNow() {

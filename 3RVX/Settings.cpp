@@ -562,8 +562,12 @@ tinyxml2::XMLElement *Settings::GetOrCreateElement(std::string elementName) {
     return el;
 }
 
-bool Settings::AutoUpdateEnabled() {
+bool Settings::AutomaticUpdates() {
     return GetEnabled(XML_UPDATEAUTO, DefaultAutoUpdate);
+}
+
+void Settings::AutomaticUpdates(bool enabled) {
+    SetEnabled(XML_UPDATEAUTO, DefaultAutoUpdate);
 }
 
 void Settings::LastUpdateCheckNow() {

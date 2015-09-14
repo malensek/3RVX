@@ -81,7 +81,8 @@ public:
     std::unordered_map<int, HotkeyInfo> Hotkeys();
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
-    bool AutoUpdateEnabled();
+    bool AutomaticUpdates();
+    void AutomaticUpdates(bool enabled);
     void LastUpdateCheckNow();
     void LastUpdateCheck(long long time);
     long long LastUpdateCheck();

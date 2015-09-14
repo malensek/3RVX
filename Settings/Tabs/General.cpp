@@ -17,8 +17,10 @@ const wchar_t General::REGKEY_RUN[]
 void General::Initialize() {
     INIT_CONTROL(GRP_BEHAVIOR, GroupBox, _behaviorGroup);
     INIT_CONTROL(CHK_STARTUP, Checkbox, _startup);
-    INIT_CONTROL(CHK_NOTIFY, Checkbox, _notifyIcon);
+    INIT_CONTROL(CHK_SHOWSTARTUP, Checkbox, _showStartup);
     INIT_CONTROL(CHK_SOUNDS, Checkbox, _sounds);
+    INIT_CONTROL(CHK_NOTIFY, Checkbox, _notifyIcon);
+    INIT_CONTROL(CHK_AUTOUPDATE, Checkbox, _autoUpdate);
 
     INIT_CONTROL(GRP_SKIN, GroupBox, _skinGroup);
     INIT_CONTROL(CMB_SKIN, ComboBox, _skin);
@@ -44,8 +46,10 @@ void General::LoadSettings() {
     Settings *settings = Settings::Instance();
     LanguageTranslator *lt = settings->Translator();
     _startup.Checked(RunOnStartup());
+    _showStartup.Checked(settings->ShowOnStartup());
     _notifyIcon.Checked(settings->NotifyIconEnabled());
     _sounds.Checked(settings->SoundEffectsEnabled());
+    _autoUpdate.Checked(settings->AutomaticUpdates());
 
     /* Determine which skins are available */
     std::list<std::wstring> skins = FindSkins(Settings::SkinDir().c_str());
@@ -85,8 +89,10 @@ void General::SaveSettings() {
     Settings *settings = Settings::Instance();
 
     RunOnStartup(_startup.Checked());
+    settings->ShowOnStartup(_showStartup.Checked());
     settings->NotifyIconEnabled(_notifyIcon.Checked());
     settings->SoundEffectsEnabled(_sounds.Checked());
+    settings->AutomaticUpdates(_autoUpdate.Checked());
 
     settings->CurrentSkin(_skin.Selection());
 

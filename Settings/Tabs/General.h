@@ -24,8 +24,10 @@ private:
     /* Controls: */
     GroupBox _behaviorGroup;
     Checkbox _startup;
-    Checkbox _notifyIcon;
+    Checkbox _showStartup;
     Checkbox _sounds;
+    Checkbox _notifyIcon;
+    Checkbox _autoUpdate;
 
     GroupBox _skinGroup;
     ComboBox _skin;

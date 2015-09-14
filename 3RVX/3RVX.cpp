@@ -105,7 +105,7 @@ void _3RVX::Initialize() {
 
     KillTimer(Window::Handle(), TIMER_FIRSTUPDATE);
     KillTimer(Window::Handle(), TIMER_UPDATE);
-    if (settings->AutoUpdateEnabled()) {
+    if (settings->AutomaticUpdates()) {
         SetTimer(
             Window::Handle(),
             TIMER_FIRSTUPDATE,

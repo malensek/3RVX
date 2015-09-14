@@ -218,6 +218,7 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     case WM_TIMER:
         if (wParam == TIMER_FIRSTUPDATE || wParam == TIMER_UPDATE) {
+            CLOG(L"Received updater timer notification");
             Settings *settings = Settings::Instance();
             long long checkTime = settings->LastUpdateCheck();
             if ((std::time(nullptr) - checkTime) > (UPDATE_INTERVAL / 1000)) {
@@ -230,6 +231,7 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             }
 
             if (wParam == TIMER_FIRSTUPDATE) {
+                CLOG(L"Starting long-term update timer");
                 /* If this was the first update check (30 min after launch),
                  * then kill the first update timer and start the main timer
                  * (checks on 24-hour intervals) */

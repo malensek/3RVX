@@ -176,4 +176,24 @@ public:
     static const std::wstring DefaultSkin;
     static const bool DefaultAutoUpdate = false;
 
+    static constexpr const char *XML_AUDIODEV = "audioDeviceID";
+    static constexpr const char *XML_HIDE_WHENFULL = "hideFullscreen";
+    static constexpr const char *XML_HIDE_DIRECTX = "hideDirectX";
+    static constexpr const char *XML_HIDEANIM = "hideAnimation";
+    static constexpr const char *XML_HIDETIME = "hideDelay";
+    static constexpr const char *XML_HIDESPEED = "hideSpeed";
+    static constexpr const char *XML_IGNOREUPDATE = "ignoreUpdateVersion";
+    static constexpr const char *XML_LANGUAGE = "language";
+    static constexpr const char *XML_MONITOR = "monitor";
+    static constexpr const char *XML_NOTIFYICON = "notifyIcon";
+    static constexpr const char *XML_ONTOP = "onTop";
+    static constexpr const char *XML_OSD_OFFSET = "osdEdgeOffset";
+    static constexpr const char *XML_OSD_POS = "osdPosition";
+    static constexpr const char *XML_OSD_X = "osdX";
+    static constexpr const char *XML_OSD_Y = "osdY";
+    static constexpr const char *XML_SHOWONSTART = "showOnStartup";
+    static constexpr const char *XML_SKIN = "skin";
+    static constexpr const char *XML_SOUNDS = "soundEffects";
+    static constexpr const char *XML_UPDATEAUTO = "automaticUpdates";
+    static constexpr const char *XML_UPDATECHECKTIME = "lastUpdateCheck";
 };

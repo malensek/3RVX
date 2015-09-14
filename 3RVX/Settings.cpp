@@ -18,26 +18,6 @@
 #include "Skin/Skin.h"
 #include "StringUtils.h"
 
-#define XML_AUDIODEV "audioDeviceID"
-#define XML_HIDE_WHENFULL "hideFullscreen"
-#define XML_HIDE_DIRECTX "hideDirectX"
-#define XML_HIDEANIM "hideAnimation"
-#define XML_HIDETIME "hideDelay"
-#define XML_HIDESPEED "hideSpeed"
-#define XML_LANGUAGE "language"
-#define XML_MONITOR "monitor"
-#define XML_NOTIFYICON "notifyIcon"
-#define XML_ONTOP "onTop"
-#define XML_OSD_OFFSET "osdEdgeOffset"
-#define XML_OSD_POS "osdPosition"
-#define XML_OSD_X "osdX"
-#define XML_OSD_Y "osdY"
-#define XML_SKIN "skin"
-#define XML_SOUNDS "soundEffects"
-#define XML_UPDATEAUTO "automaticUpdates"
-#define XML_UPDATECHECKTIME "lastUpdateCheck"
-#define XML_IGNOREUPDATE "ignoreUpdateVersion"
-
 const std::wstring Settings::MAIN_APP = L"3RVX.exe";
 const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
 const std::wstring Settings::SETTINGS_FILE = L"Settings.xml";

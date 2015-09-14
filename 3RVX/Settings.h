@@ -88,6 +88,9 @@ public:
     std::wstring IgnoreUpdate();
     void IgnoreUpdate(std::wstring versionString);
 
+    bool ShowOnStartup();
+    void ShowOnStartup(bool show);
+
 public:
     /* Static settings methods */
 
@@ -162,6 +165,7 @@ public:
     static const int DefaultHideSpeed = 765;
     static const int DefaultHideTime = 800;
     static const bool DefaultNotifyIcon = true;
+    static const bool DefaultShowOnStartup = true;
     static const bool DefaultSoundsEnabled = true;
     static const int DefaultOSDOffset = 140;
     static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;

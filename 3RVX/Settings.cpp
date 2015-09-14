@@ -596,3 +596,11 @@ std::wstring Settings::IgnoreUpdate() {
 void Settings::IgnoreUpdate(std::wstring versionString) {
     SetText(XML_IGNOREUPDATE, StringUtils::Narrow(versionString));
 }
+
+bool Settings::ShowOnStartup() {
+    return GetEnabled(XML_SHOWONSTART, DefaultShowOnStartup);
+}
+
+void Settings::ShowOnStartup(bool show) {
+    SetEnabled(XML_SHOWONSTART, show);
+}

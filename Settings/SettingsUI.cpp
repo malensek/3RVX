@@ -98,6 +98,7 @@ int APIENTRY wWinMain(
     std::wstring cmdLine(lpCmdLine);
     if (cmdLine.find(L"-update") != std::wstring::npos) {
         if (Updater::NewerVersionAvailable()) {
+            Settings::Instance()->Load();
             CLOG(L"An update is available. Showing update icon.");
             UpdaterWindow uw;
             PostMessage(

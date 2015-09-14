@@ -67,7 +67,6 @@ LRESULT UpdaterWindow::WndProc(
         switch (wParam) {
         case _3RVX::MSG_UPDATEICON:
             _settings = Settings::Instance();
-            _settings->Load();
 
             /* Set that we just checked for updates now */
             _settings->LastUpdateCheckNow();

@@ -30,10 +30,18 @@ private:
 
     void InstallUpdate();
 
+    void CreateMenu();
+
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 
-public:
+private:
+    std::wstring _availableStr = L"Update Available";
+    std::wstring _updateVersStr = L"3RVX {1}";
+    std::wstring _menuInstallStr = L"Install";
+    std::wstring _menuIgnoreStr = L"Ignore version";
+    std::wstring _menuRemindStr = L"Remind me later";
+
     static const int MENU_INSTALL = 0;
     static const int MENU_IGNORE = 1;
     static const int MENU_REMIND = 2;

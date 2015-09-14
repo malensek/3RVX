@@ -227,15 +227,15 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                     settingsApp.c_str(), L"-update");
                 ShellExecute(NULL, L"open",
                     Settings::SettingsApp().c_str(), L"-update", NULL, SW_HIDE);
+            }
 
-                if (wParam == TIMER_FIRSTUPDATE) {
-                    /* If this was the first update check (30 min after launch),
-                     * then kill the first update timer and start the main timer
-                     * (checks on 24-hour intervals) */
-                    KillTimer(Window::Handle(), TIMER_FIRSTUPDATE);
-                    SetTimer(Window::Handle(), TIMER_UPDATE,
-                        UPDATE_INTERVAL, NULL);
-                }
+            if (wParam == TIMER_FIRSTUPDATE) {
+                /* If this was the first update check (30 min after launch),
+                 * then kill the first update timer and start the main timer
+                 * (checks on 24-hour intervals) */
+                KillTimer(Window::Handle(), TIMER_FIRSTUPDATE);
+                SetTimer(Window::Handle(), TIMER_UPDATE,
+                    UPDATE_INTERVAL, NULL);
             }
         }
         break;

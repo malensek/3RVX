@@ -366,4 +366,29 @@
     <translation>XXXX XXXX</translation>
   </string>
 
+  <!-- Update Strings -->
+  <string>
+    <original>Update Available</original>
+    <translation>XXXXXX XXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>3RVX {1}</original>
+    <translation>XXXX {1}</translation>
+  </string>
+  <string>
+    <original>Install</original>
+    <translation>XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Ignore version</original>
+    <translation>XXXXXX XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Remind me later</original>
+    <translation>XXXXXX XX XXXXX</translation>
+  </string>
+  <string>
+    <original>Downloading...</original>
+    <translation>XXXXXXXXXXX...</translation>
+  </string>
 </translation>

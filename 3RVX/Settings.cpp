@@ -18,16 +18,6 @@
 #include "Skin/Skin.h"
 #include "StringUtils.h"
 
-const std::wstring Settings::MAIN_APP = L"3RVX.exe";
-const std::wstring Settings::SETTINGS_APP = L"Settings.exe";
-const std::wstring Settings::SETTINGS_FILE = L"Settings.xml";
-const std::wstring Settings::LANG_DIR = L"Languages";
-const std::wstring Settings::SKIN_DIR = L"Skins";
-const std::wstring Settings::SKIN_XML = L"Skin.xml";
-
-const std::wstring Settings::DefaultLanguage = L"English";
-const std::wstring Settings::DefaultSkin = L"Classic";
-
 std::wstring Settings::_appDir(L"");
 Settings *Settings::instance;
 

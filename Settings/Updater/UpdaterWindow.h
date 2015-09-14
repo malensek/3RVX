@@ -33,7 +33,7 @@ private:
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 
-public:
+private:
     static const int MENU_INSTALL = 0;
     static const int MENU_IGNORE = 1;
     static const int MENU_REMIND = 2;

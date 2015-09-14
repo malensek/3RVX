@@ -132,7 +132,8 @@ public:
 
 private:
     Settings() {
-
+        /* Don't allow instantiation for this Singleton class; see the
+         * Instance() method to retrieve an instance instead. */
     }
 
     static Settings *instance;

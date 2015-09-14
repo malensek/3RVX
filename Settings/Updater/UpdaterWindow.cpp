@@ -87,15 +87,22 @@ LRESULT UpdaterWindow::WndProc(
                 break;
             }
 
+            CLOG(L"Creating menu");
+            CreateMenu();
+
+            LanguageTranslator *translator = _settings->Translator();
+            _availableStr = translator->Translate(_availableStr);
+            _updateVersStr = translator->TranslateAndReplace(
+                _updateVersStr, _version.ToString());
+
             CLOG(L"Creating update icon");
             _notifyIcon = new NotifyIcon(
                 Window::Handle(),
-                L"Update Available",
+                _availableStr,
                 _smallIcon);
 
             CLOG(L"Launching balloon notification");
-            _notifyIcon->Balloon(L"Update Available",
-                L"3RVX " + _version.ToString(), _largeIcon);
+            _notifyIcon->Balloon(_availableStr, _updateVersStr, _largeIcon);
             break;
         }
     } else if (message == MSG_NOTIFYICON) {

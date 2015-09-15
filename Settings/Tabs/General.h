@@ -28,6 +28,7 @@ private:
     Checkbox _sounds;
     Checkbox _notifyIcon;
     Checkbox _autoUpdate;
+    Button _checkNow;
 
     GroupBox _skinGroup;
     ComboBox _skin;

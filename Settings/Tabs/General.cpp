@@ -7,8 +7,9 @@
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
 #include "../../3RVX/Skin/SkinInfo.h"
-
 #include "../resource.h"
+#include "../Updater/ProgressWindow.h"
+#include "../Updater/Updater.h"
 
 const wchar_t General::REGKEY_NAME[] = L"3RVX";
 const wchar_t General::REGKEY_RUN[]
@@ -21,6 +22,29 @@ void General::Initialize() {
     INIT_CONTROL(CHK_SOUNDS, Checkbox, _sounds);
     INIT_CONTROL(CHK_NOTIFY, Checkbox, _notifyIcon);
     INIT_CONTROL(CHK_AUTOUPDATE, Checkbox, _autoUpdate);
+    INIT_CONTROL(BTN_CHECK, Button, _checkNow);
+    _checkNow.OnClick = [this]() {
+        if (Updater::NewerVersionAvailable()) {
+            int msgResult = MessageBox(
+                _hWnd,
+                L"3RVX X.X.X is available. Install now?",
+                L"Update Available",
+                MB_YESNO | MB_ICONQUESTION);
+
+            if (msgResult == IDYES) {
+                Version vers = Updater::RemoteVersion();
+                ProgressWindow *pw = new ProgressWindow(vers);
+            }
+        } else {
+            MessageBox(
+                _hWnd,
+                L"Your copy of 3RVX is up-to-date.",
+                L"Update Check",
+                MB_OK | MB_ICONINFORMATION);
+        }
+
+        return true;
+    };
 
     INIT_CONTROL(GRP_SKIN, GroupBox, _skinGroup);
     INIT_CONTROL(CMB_SKIN, ComboBox, _skin);

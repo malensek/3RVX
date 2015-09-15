@@ -14,7 +14,7 @@
 #include "Updater.h"
 
 UpdaterWindow::UpdaterWindow() :
-Window(L"3RVX-UpdateWindow") {
+Window(_3RVX::CLASS_3RVX_UPDATER, _3RVX::CLASS_3RVX_UPDATER) {
     HRESULT hr;
     hr = LoadIconMetric(
         Window::InstanceHandle(),

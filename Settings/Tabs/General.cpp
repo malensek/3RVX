@@ -25,16 +25,22 @@ void General::Initialize() {
     INIT_CONTROL(BTN_CHECK, Button, _checkNow);
     _checkNow.OnClick = [this]() {
         if (Updater::NewerVersionAvailable()) {
+            Settings *settings = Settings::Instance();
+            LanguageTranslator *translator = settings->Translator();
+            Version vers = Updater::RemoteVersion();
+
             int msgResult = MessageBox(
                 _hWnd,
-                L"3RVX X.X.X is available. Install now?",
-                L"Update Available",
+                translator->TranslateAndReplace(
+                    L"A new version of 3RVX ({1}) is available. Install now?",
+                    vers.ToString()).c_str(),
+                translator->Translate(L"Update Available").c_str(),
                 MB_YESNO | MB_ICONQUESTION);
 
             if (msgResult == IDYES) {
-                Version vers = Updater::RemoteVersion();
                 ProgressWindow *pw = new ProgressWindow(vers);
             }
+
         } else {
             MessageBox(
                 _hWnd,

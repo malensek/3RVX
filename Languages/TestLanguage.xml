@@ -73,12 +73,24 @@
     <translation>XXX XX XXXXXXX XXXXXXX</translation>
   </string>
   <string>
+    <original>Show volume OSD on startup</original>
+    <translation>XXXX XXXXXX XXX XX XXXXXXX</translation>
+  </string>
+  <string>
     <original>Enable volume notification icon</original>
     <translation>XXXXXX XXXXXX XXXXXXXXXXXX XXXX</translation>
   </string>
   <string>
     <original>Enable sound effects</original>
     <translation>XXXXXX XXXXX XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Automatic updates</original>
+    <translation>XXXXXXXXX XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Check Now</original>
+    <translation>XXXXX XXX</translation>
   </string>
 
   <string>

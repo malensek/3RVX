@@ -42,6 +42,10 @@ public:
         return FindWindow(CLASS_3RVX_SETTINGS, CLASS_3RVX_SETTINGS);
     }
 
+    static HWND UpdaterHwnd() {
+        return FindWindow(CLASS_3RVX_UPDATER, CLASS_3RVX_UPDATER);
+    }
+
     static void Message(WPARAM wParam, LPARAM lParam, bool post = false) {
         HWND masterWnd = MasterHwnd();
 

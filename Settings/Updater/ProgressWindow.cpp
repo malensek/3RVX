@@ -17,7 +17,6 @@ _version(version) {
 
     _cancel = new Button(BTN_CANCEL, *this);
     _progress = new ProgressBar(PRG_DOWNLOAD, *this);
-    _progress->Marquee(true);
 
     _cancel->OnClick = [this]() {
         SendMessage(Window::Handle(), WM_CLOSE, 0, 0);

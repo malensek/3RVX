@@ -8,7 +8,7 @@ Beta 10
 * Brightness OSD
 * Keyboard OSD
 
-Beta 9
+Beta 9 (2.9.1)
 ------
 * Automatic updates
 * Compatiblity mode for the old (v2) skin format

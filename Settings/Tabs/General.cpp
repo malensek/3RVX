@@ -7,8 +7,9 @@
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
 #include "../../3RVX/Skin/SkinInfo.h"
-
 #include "../resource.h"
+#include "../Updater/ProgressWindow.h"
+#include "../Updater/Updater.h"
 
 const wchar_t General::REGKEY_NAME[] = L"3RVX";
 const wchar_t General::REGKEY_RUN[]
@@ -17,8 +18,39 @@ const wchar_t General::REGKEY_RUN[]
 void General::Initialize() {
     INIT_CONTROL(GRP_BEHAVIOR, GroupBox, _behaviorGroup);
     INIT_CONTROL(CHK_STARTUP, Checkbox, _startup);
-    INIT_CONTROL(CHK_NOTIFY, Checkbox, _notifyIcon);
+    INIT_CONTROL(CHK_SHOWSTARTUP, Checkbox, _showStartup);
     INIT_CONTROL(CHK_SOUNDS, Checkbox, _sounds);
+    INIT_CONTROL(CHK_NOTIFY, Checkbox, _notifyIcon);
+    INIT_CONTROL(CHK_AUTOUPDATE, Checkbox, _autoUpdate);
+    INIT_CONTROL(BTN_CHECK, Button, _checkNow);
+    _checkNow.OnClick = [this]() {
+        if (Updater::NewerVersionAvailable()) {
+            Settings *settings = Settings::Instance();
+            LanguageTranslator *translator = settings->Translator();
+            Version vers = Updater::RemoteVersion();
+
+            int msgResult = MessageBox(
+                _hWnd,
+                translator->TranslateAndReplace(
+                    L"A new version of 3RVX ({1}) is available. Install now?",
+                    vers.ToString()).c_str(),
+                translator->Translate(L"Update Available").c_str(),
+                MB_YESNO | MB_ICONQUESTION);
+
+            if (msgResult == IDYES) {
+                ProgressWindow *pw = new ProgressWindow(vers);
+            }
+
+        } else {
+            MessageBox(
+                _hWnd,
+                L"Your copy of 3RVX is up-to-date.",
+                L"Update Check",
+                MB_OK | MB_ICONINFORMATION);
+        }
+
+        return true;
+    };
 
     INIT_CONTROL(GRP_SKIN, GroupBox, _skinGroup);
     INIT_CONTROL(CMB_SKIN, ComboBox, _skin);
@@ -44,8 +76,10 @@ void General::LoadSettings() {
     Settings *settings = Settings::Instance();
     LanguageTranslator *lt = settings->Translator();
     _startup.Checked(RunOnStartup());
+    _showStartup.Checked(settings->ShowOnStartup());
     _notifyIcon.Checked(settings->NotifyIconEnabled());
     _sounds.Checked(settings->SoundEffectsEnabled());
+    _autoUpdate.Checked(settings->AutomaticUpdates());
 
     /* Determine which skins are available */
     std::list<std::wstring> skins = FindSkins(Settings::SkinDir().c_str());
@@ -85,8 +119,10 @@ void General::SaveSettings() {
     Settings *settings = Settings::Instance();
 
     RunOnStartup(_startup.Checked());
+    settings->ShowOnStartup(_showStartup.Checked());
     settings->NotifyIconEnabled(_notifyIcon.Checked());
     settings->SoundEffectsEnabled(_sounds.Checked());
+    settings->AutomaticUpdates(_autoUpdate.Checked());
 
     settings->CurrentSkin(_skin.Selection());
 

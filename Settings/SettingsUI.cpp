@@ -48,6 +48,7 @@ Tab *tabs[] = { &general, &display, &hotkeys, &about };
 #define XOFFSET 70
 #define YOFFSET 20
 
+const wchar_t *MUTEX_NAME = L"Local\\3RVXSettings";
 HANDLE mutex;
 HWND mainWnd = NULL;
 HWND tabWnd = NULL;
@@ -67,36 +68,31 @@ int APIENTRY wWinMain(
     Logger::Start();
     CLOG(L"Starting SettingsUI...");
 
-    mutex = CreateMutex(NULL, FALSE, L"Local\\3RVXSettings");
+    bool alreadyRunning = false;
+    mutex = CreateMutex(NULL, FALSE, MUTEX_NAME);
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
         if (mutex) {
             ReleaseMutex(mutex);
+            CloseHandle(mutex);
         }
-
-        HWND settingsWnd = _3RVX::MasterSettingsHwnd();
-        CLOG(L"A settings instance is already running. Moving window [%d] "
-            L"to the foreground.", (int) settingsWnd);
-        SetForegroundWindow(settingsWnd);
-        SendMessage(
-            settingsWnd,
-            _3RVX::WM_3RVX_SETTINGSCTRL,
-            _3RVX::MSG_ACTIVATE,
-            NULL);
-
-#if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
-        CLOG(L"Press [enter] to terminate");
-        std::cin.get();
-#endif
-
-        return EXIT_SUCCESS;
+        alreadyRunning = true;
     }
 
     /* Inspect command line parameters to determine whether this settings
-     * instance is being launched as an update checker.  We do this *after* the
-     * mutex check to avoid situations where the updater and usual settings app
-     * are writing to the settings file at the same time. */
+     * instance is being launched as an update checker. */
     std::wstring cmdLine(lpCmdLine);
     if (cmdLine.find(L"-update") != std::wstring::npos) {
+        if (alreadyRunning) {
+            return EXIT_SUCCESS;
+        } else {
+            /* If this is the only settings instance running, we release the 
+             * mutex so that the user can launch the settings app. If this
+             * happens, the updater is closed to prevent settings file race
+             * conditions. */
+            ReleaseMutex(mutex);
+            CloseHandle(mutex);
+        }
+
         if (Updater::NewerVersionAvailable()) {
             Settings::Instance()->Load();
             CLOG(L"An update is available. Showing update icon.");
@@ -115,7 +111,32 @@ int APIENTRY wWinMain(
         }
 
         /* Process was used for updates; time to quit. */
-        return 0;
+        return EXIT_SUCCESS;
+    }
+
+    if (alreadyRunning) {
+        HWND settingsWnd = _3RVX::MasterSettingsHwnd();
+        CLOG(L"A settings instance is already running. Moving window [%d] "
+            L"to the foreground.", (int) settingsWnd);
+        SetForegroundWindow(settingsWnd);
+        SendMessage(
+            settingsWnd,
+            _3RVX::WM_3RVX_SETTINGSCTRL,
+            _3RVX::MSG_ACTIVATE,
+            NULL);
+
+#if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
+        CLOG(L"Press [enter] to terminate");
+        std::cin.get();
+#endif
+
+        return EXIT_SUCCESS;
+    }
+
+    HWND updater = _3RVX::UpdaterHwnd();
+    if (updater != 0) {
+        CLOG(L"Telling updater to close");
+        SendMessage(updater, WM_CLOSE, 0, 0);
     }
 
     WNDCLASSEX wcex = { 0 };
@@ -139,7 +160,7 @@ int APIENTRY wWinMain(
     INT_PTR result;
     do {
         result = LaunchPropertySheet();
-        CLOG(L"RL: %s", relaunch ? L"TRUE" : L"FALSE");
+        CLOG(L"Relaunch: %s", relaunch ? L"TRUE" : L"FALSE");
     } while (relaunch == true);
 
     return result;

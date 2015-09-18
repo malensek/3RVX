@@ -42,6 +42,10 @@ public:
         return FindWindow(CLASS_3RVX_SETTINGS, CLASS_3RVX_SETTINGS);
     }
 
+    static HWND UpdaterHwnd() {
+        return FindWindow(CLASS_3RVX_UPDATER, CLASS_3RVX_UPDATER);
+    }
+
     static void Message(WPARAM wParam, LPARAM lParam, bool post = false) {
         HWND masterWnd = MasterHwnd();
 
@@ -64,8 +68,9 @@ public:
     }
 
 public:
-    static const wchar_t *CLASS_3RVX;
-    static const wchar_t *CLASS_3RVX_SETTINGS;
+    static constexpr const wchar_t *CLASS_3RVX = L"3RVXv3";
+    static constexpr const wchar_t *CLASS_3RVX_SETTINGS = L"3RVXv3-Settings";
+    static constexpr const wchar_t *CLASS_3RVX_UPDATER = L"3RVXv3-Updater";
 
     static const UINT WM_3RVX_CTRL;
     static const UINT WM_3RVX_SETTINGSCTRL;

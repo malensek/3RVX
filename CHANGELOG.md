@@ -7,15 +7,16 @@ Beta 10
 * Custom volume limits
 * Brightness OSD
 * Keyboard OSD
-* Automatic updates
 
-Beta 9
+Beta 9 (2.9.1)
 ------
+* Automatic updates
 * Compatiblity mode for the old (v2) skin format
 * Skin fallback: resources that aren't found will be loaded from the default skin
 * Hotkey to disable/enable the OSD 
 * Option to disable the OSD when another application is full screen
 * Option to disable the OSD when a DirectX application has exclusive control of the screen
+* Option to not show the volume OSD on startup
 * Preliminary 64 bit support
 * Bugfix: Translate 'Muted' for the notification icon
 * Bugfix: Settings dialog is now re-translated on 'Apply'

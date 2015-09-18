@@ -4,6 +4,7 @@
 #include "Dialog.h"
 
 #include "../../3RVX/Logger.h"
+#include "../UITranslator.h"
 #include "Control.h"
 
 Dialog::Dialog(LPCWSTR className, LPCWSTR dlgTemplate) :
@@ -14,6 +15,8 @@ Window(className) {
         Window::Handle(),
         StaticDialogProc,
         (LPARAM) this);
+
+    UITranslator::TranslateWindowText(_dlgHwnd);
 }
 
 void Dialog::AddControl(Control *control) {

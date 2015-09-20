@@ -159,9 +159,6 @@
     <ClInclude Include="OSD\KeyboardOSD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OSD\Brightness.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Skin\Skin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -187,6 +184,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Skin\MultiSkin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OSD\BrightnessOSD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -311,9 +311,6 @@
     <ClCompile Include="OSD\KeyboardOSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OSD\Brightness.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Skin\SkinInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -330,6 +327,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Skin\Skin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OSD\BrightnessOSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

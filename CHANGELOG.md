@@ -7,6 +7,7 @@ Beta 10
 * Custom volume limits
 * Brightness OSD
 * Keyboard OSD
+* Bugfix: Hotkey argument range validation
 
 Beta 9 (2.9.1)
 ------

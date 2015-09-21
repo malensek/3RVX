@@ -3,6 +3,8 @@
 
 #include "BrightnessOSD.h"
 
+#include "../Controllers/BrightnessController.h"
+#include "../DisplayManager.h"
 #include "../HotkeyInfo.h"
 #include "../Skin/OSDComponent.h"
 #include "../Skin/Skin.h"
@@ -26,7 +28,17 @@ void BrightnessOSD::Hide() {
 
 void BrightnessOSD::ProcessHotkeys(HotkeyInfo &hki) {
     switch (hki.action) {
+    case HotkeyInfo::IncreaseBrightness:
 
+        break;
+
+    case HotkeyInfo::DecreaseBrightness:
+
+        break;
+
+    case HotkeyInfo::SetBrightness:
+
+        break;
     }
 }
 

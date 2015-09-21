@@ -14,7 +14,9 @@ public:
 
     }
 
-    Monitor(std::wstring name, int x, int y, int width, int height) :
+    Monitor(HMONITOR handle, std::wstring name,
+        int x, int y, int width, int height) :
+    _handle(handle),
     _name(name),
     _x(x),
     _y(y),
@@ -23,7 +25,8 @@ public:
 
     }
 
-    Monitor(std::wstring name, RECT rect) :
+    Monitor(HMONITOR handle, std::wstring name, RECT rect) :
+    _handle(handle),
     _name(name),
     _x(rect.left),
     _y(rect.top),
@@ -48,7 +51,16 @@ public:
         return _height;
     }
 
+    HMONITOR Handle() {
+        return _handle;
+    }
+
+    std::wstring Name() {
+        return _name;
+    }
+
 private:
+    HMONITOR _handle;
     std::wstring _name;
     int _x;
     int _y;

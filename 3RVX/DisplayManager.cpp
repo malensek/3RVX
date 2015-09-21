@@ -23,7 +23,7 @@ Monitor DisplayManager::Primary() {
     const POINT p = { 0, 0 };
     HMONITOR monitor = MonitorFromPoint(p, MONITOR_DEFAULTTOPRIMARY);
     MONITORINFO mInfo = Info(monitor);
-    return Monitor(L"Primary", mInfo.rcMonitor);
+    return Monitor(monitor, L"Primary", mInfo.rcMonitor);
 }
 
 Monitor DisplayManager::MonitorAtPoint(POINT &pt, bool workingArea) {
@@ -32,9 +32,9 @@ Monitor DisplayManager::MonitorAtPoint(POINT &pt, bool workingArea) {
     if (monitor != NULL) {
         MONITORINFO mInfo = Info(monitor);
         if (workingArea) {
-            return Monitor(L"Monitor@Point", mInfo.rcWork);
+            return Monitor(monitor, L"Monitor@Point", mInfo.rcWork);
         } else {
-            return Monitor(L"Monitor@Point", mInfo.rcMonitor);
+            return Monitor(monitor, L"Monitor@Point", mInfo.rcMonitor);
         }
     }
 
@@ -47,9 +47,9 @@ Monitor DisplayManager::MonitorAtWindow(HWND hWnd, bool workingArea) {
     if (monitor != NULL) {
         MONITORINFO mInfo = Info(monitor);
         if (workingArea) {
-            return Monitor(L"Monitor@Window", mInfo.rcWork);
+            return Monitor(monitor, L"Monitor@Window", mInfo.rcWork);
         } else {
-            return Monitor(L"Monitor@Window", mInfo.rcMonitor);
+            return Monitor(monitor, L"Monitor@Window", mInfo.rcMonitor);
         }
     }
 
@@ -147,7 +147,7 @@ BOOL CALLBACK DisplayManager::MonitorEnumProc(
     GetMonitorInfo(hMonitor, &mInfo);
 
     std::wstring monitorName = std::wstring(mInfo.szDevice);
-    Monitor mon(monitorName, mInfo.rcMonitor);
+    Monitor mon(hMonitor, monitorName, mInfo.rcMonitor);
     monitorMap[monitorName] = mon;
 
     return TRUE;

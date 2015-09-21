@@ -24,6 +24,7 @@ public:
     virtual OSDComponent *VolumeOSD();
     virtual OSDComponent *MuteOSD();
     virtual OSDComponent *EjectOSD();
+    virtual OSDComponent *BrightnessOSD();
 
     virtual std::vector<HICON> VolumeIconset();
 

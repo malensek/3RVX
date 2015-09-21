@@ -32,6 +32,9 @@ public:
     /// <summary>Loads and instantiates the Eject OSD.</summary>
     virtual OSDComponent *EjectOSD() = 0;
 
+    /// <summary>Loads and instantiates the Brightness OSD.</summary>
+    virtual OSDComponent *BrightnessOSD() = 0;
+
     /// <summary>
     /// Creates a Bitmap instance from a file on disk.
     /// </summary>

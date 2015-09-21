@@ -56,6 +56,10 @@ void SkinManager::LoadSkin(std::wstring skinXML) {
         if (_ejectOSD == NULL) {
             _ejectOSD = skin->EjectOSD();
         }
+
+        if (_brightnessOSD == nullptr) {
+            _brightnessOSD = skin->BrightnessOSD();
+        }
     }
 
     for (Skin *skin : skins) {

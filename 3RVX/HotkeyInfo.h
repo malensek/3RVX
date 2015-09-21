@@ -15,8 +15,14 @@
  *     list need to match.
  * 3.) Update the HotkeyInfo::Valid() method to validate hotkey arguments
  */
+
+/// <summary>
+/// Encapsulates hotkey information: physical keys involved, the action taken
+/// when the keys are pressed, and any arguments the hotkey might have.
+/// </summary>
 class HotkeyInfo {
 public:
+
     enum HotkeyActions {
         IncreaseVolume,
         DecreaseVolume,

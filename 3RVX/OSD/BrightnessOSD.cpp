@@ -12,12 +12,10 @@ BrightnessOSD::BrightnessOSD() :
 OSD(L"3RVX-BrightnessDispatcher"),
 _mWnd(L"3RVX-BrightnessOSD", L"3RVX-BrightnessOSD") {
 
-    /*
     SkinManager *skin = SkinManager::Instance();
-    _mWnd.BackgroundImage(skin->EjectOSD()->background);
-    _mWnd.EnableGlass(skin->EjectOSD()->mask);
+    _mWnd.BackgroundImage(skin->BrightnessOSD()->background);
+    _mWnd.EnableGlass(skin->BrightnessOSD()->mask);
     _mWnd.Update();
-    */
 
     OSD::InitMeterWnd(_mWnd);
 }

@@ -183,6 +183,7 @@ bool HotkeyInfo::Valid() {
 
         if (action != HotkeyInfo::SetVolume && amount == 0) {
             LogInvalid(L"Volume increment must be nonzero");
+                return false;
         }
 
         if (HasArg(1)) {

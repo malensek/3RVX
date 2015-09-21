@@ -5,7 +5,7 @@
 
 #include "OSD.h"
 
-class BrightnessOSD : OSD {
+class BrightnessOSD : public OSD {
 public:
     BrightnessOSD();
 

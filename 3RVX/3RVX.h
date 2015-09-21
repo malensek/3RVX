@@ -10,6 +10,7 @@
 #include "KeyboardHotkeyProcessor.h"
 #include "Window.h"
 
+class BrightnessOSD;
 class EjectOSD;
 class VolumeOSD;
 
@@ -22,6 +23,7 @@ public:
 private:
     VolumeOSD *_vOSD;
     EjectOSD *_eOSD;
+    BrightnessOSD *_bOSD;
 
     HotkeyManager *_hkManager;
     KeyboardHotkeyProcessor _kbHotkeyProcessor;

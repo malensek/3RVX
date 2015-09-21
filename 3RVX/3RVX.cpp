@@ -15,6 +15,7 @@
 #include "DisplayManager.h"
 #include "HotkeyManager.h"
 #include "Logger.h"
+#include "OSD/BrightnessOSD.h"
 #include "OSD/EjectOSD.h"
 #include "OSD/VolumeOSD.h"
 #include "Settings.h"
@@ -99,6 +100,7 @@ void _3RVX::Initialize() {
 
     delete _vOSD;
     delete _eOSD;
+    delete _bOSD;
 
     Settings *settings = Settings::Instance();
     settings->Load();
@@ -121,6 +123,7 @@ void _3RVX::Initialize() {
     /* OSDs */
     _eOSD = new EjectOSD();
     _vOSD = new VolumeOSD();
+    _bOSD = new BrightnessOSD();
 
     /* Hotkey setup */
     if (_hkManager != NULL) {
@@ -158,6 +161,14 @@ void _3RVX::ProcessHotkeys(HotkeyInfo &hki) {
         }
         break;
 
+    case HotkeyInfo::IncreaseBrightness:
+    case HotkeyInfo::DecreaseBrightness:
+    case HotkeyInfo::SetBrightness:
+        if (_bOSD) {
+            _bOSD->ProcessHotkeys(hki);
+        }
+        break;
+
     case HotkeyInfo::MediaKey:
     case HotkeyInfo::VirtualKey:
         _kbHotkeyProcessor.ProcessHotkeys(hki);
@@ -188,6 +199,7 @@ void _3RVX::ProcessHotkeys(HotkeyInfo &hki) {
 void _3RVX::ToggleOSDs() {
     _eOSD->Enabled(!(_eOSD->Enabled()));
     _vOSD->Enabled(!(_vOSD->Enabled()));
+    _bOSD->Enabled(!(_bOSD->Enabled()));
 }
 
 LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -257,16 +269,18 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             int except = (OSDType) lParam;
             switch (except) {
             case Volume:
-                if (_eOSD) {
-                    _eOSD->Hide();
-                }
+                if (_eOSD) { _eOSD->Hide(); }
+                if (_bOSD) { _bOSD->Hide(); }
                 break;
 
             case Eject:
-                if (_vOSD) {
-                    _vOSD->Hide();
-                }
+                if (_vOSD) { _vOSD->Hide(); }
+                if (_bOSD) { _bOSD->Hide(); }
                 break;
+
+            case Brightness:
+                if (_vOSD) { _vOSD->Hide(); }
+                if (_eOSD) { _eOSD->Hide(); }
             }
 
             break;

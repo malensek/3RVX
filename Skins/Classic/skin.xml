@@ -15,6 +15,11 @@
 
     <mute background="OSD\mute.png"/>
     <eject background="OSD\eject.png"/>
+
+    <brightness background="OSD\brightness.png" defaultUnits="16">
+    <meter type ="HorizontalBar" image="OSD\meter.png"
+           x="33" y="165" units="16"/>
+    </brightness>
   </osds>
 
   <sliders>

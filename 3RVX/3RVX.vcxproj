@@ -215,6 +215,7 @@
   <ItemGroup>
     <ClInclude Include="3RVX.h" />
     <ClInclude Include="CommCtl.h" />
+    <ClInclude Include="Controllers\BrightnessController.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="DisplayManager.h" />
@@ -275,6 +276,7 @@
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="3RVXConsts.cpp" />
+    <ClCompile Include="Controllers\BrightnessController.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />

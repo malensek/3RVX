@@ -189,6 +189,9 @@
     <ClInclude Include="OSD\BrightnessOSD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Controllers\BrightnessController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -330,6 +333,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OSD\BrightnessOSD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\BrightnessController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

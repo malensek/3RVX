@@ -1,8 +1,8 @@
 3RVX Changelog
 ==============
 
-Beta 10
------------
+Beta 10 (2.9.2)
+---------------
 * Custom volume curves
 * Custom volume limits
 * Brightness OSD

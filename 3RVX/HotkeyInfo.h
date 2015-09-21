@@ -6,6 +6,15 @@
 #include <map>
 #include <vector>
 
+/* HOW TO ADD NEW HOTKEY ACTIONS
+ * -----------------------------
+ * 1.) Update the HotkeyActions enum below.
+ * 2.) Modify HotkeyInfo::ActionNames (see HotkeyInfo.cpp) with 
+ *     user-friendly names for the hotkey actions.
+ *     NOTE: The array index positions of items in the enum and items in the
+ *     list need to match.
+ * 3.) Update the HotkeyInfo::Valid() method to validate hotkey arguments
+ */
 class HotkeyInfo {
 public:
     enum HotkeyActions {

@@ -3,3 +3,18 @@
 
 #pragma once
 
+#include "OSD.h"
+
+class BrightnessOSD : OSD {
+public:
+    BrightnessOSD();
+
+    virtual void Hide();
+    virtual void ProcessHotkeys(HotkeyInfo &hki);
+
+private:
+    MeterWnd _mWnd;
+
+    virtual LRESULT WndProc(HWND hWnd, UINT message,
+        WPARAM wParam, LPARAM lParam);
+};

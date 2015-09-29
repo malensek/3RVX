@@ -24,6 +24,9 @@ public:
     float Volume();
     void Volume(float vol);
 
+    float VolumeDB();
+    void VolumeDB(float volDB);
+
     bool Muted();
     void Muted(bool mute);
 

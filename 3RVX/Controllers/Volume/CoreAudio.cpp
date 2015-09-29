@@ -289,6 +289,20 @@ void CoreAudio::Volume(float vol) {
     }
 }
 
+float CoreAudio::VolumeDB() {
+    float vol = 0.0f;
+    if (_volumeControl) {
+        _volumeControl->GetMasterVolumeLevel(&vol);
+    }
+    return vol;
+}
+
+void CoreAudio::VolumeDB(float volDB) {
+    if (_volumeControl) {
+        _volumeControl->SetMasterVolumeLevel(volDB, &G3RVXCoreAudioEvent);
+    }
+}
+
 bool CoreAudio::Muted() {
     if (_volumeControl == nullptr) {
         return true;

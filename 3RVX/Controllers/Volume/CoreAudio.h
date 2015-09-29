@@ -30,6 +30,8 @@ public:
     bool Muted();
     void Muted(bool mute);
 
+    void CurveInfo();
+
     std::wstring DeviceId();
     std::wstring DeviceName();
     std::wstring DeviceName(std::wstring deviceId);

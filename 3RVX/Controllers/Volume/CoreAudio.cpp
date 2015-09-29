@@ -2,6 +2,9 @@
 // Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
 
 #include "CoreAudio.h"
+
+#include <stdlib.h>
+
 #include "Functiondiscoverykeys_devpkey.h"
 #include "../../Logger.h"
 
@@ -318,6 +321,25 @@ void CoreAudio::Muted(bool muted) {
     if (_volumeControl) {
         _volumeControl->SetMute(muted, &G3RVXCoreAudioEvent);
     }
+}
+
+void CoreAudio::CurveInfo() {
+    if (_volumeControl == nullptr) {
+        return;
+    }
+
+    float min, max, inc;
+    _volumeControl->GetVolumeRange(&min, &max, &inc);
+    CLOG(L"Volume Range (min, max, increment): %f, %f, %f", min, max, inc);
+    float range = abs(max - min);
+    float steps = range / inc;
+    CLOG(L"Full range: %f (%f steps)", range, steps);
+    float orig = Volume();
+    for (float f = 0; f < 100.1f; ++f) {
+        Volume(f / 100.0f);
+        QCLOG("%f    %f", Volume(), VolumeDB());
+    }
+    Volume(orig);
 }
 
 ULONG CoreAudio::AddRef() {

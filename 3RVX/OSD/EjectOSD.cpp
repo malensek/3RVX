@@ -135,3 +135,7 @@ DWORD EjectOSD::DriveLetterToMask(wchar_t letter) {
 wchar_t EjectOSD::MaskToDriveLetter(DWORD mask) {
     return (wchar_t) (log2(mask) + 65);
 }
+
+void EjectOSD::OnDisplayChange() {
+    InitMeterWnd(_mWnd);
+}

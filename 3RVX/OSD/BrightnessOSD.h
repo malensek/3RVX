@@ -15,6 +15,8 @@ public:
 private:
     MeterWnd _mWnd;
 
+    virtual void OnDisplayChange();
+
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 };

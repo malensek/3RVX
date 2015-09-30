@@ -24,6 +24,8 @@ private:
     DWORD DriveLetterToMask(wchar_t letter);
     wchar_t MaskToDriveLetter(DWORD mask);
 
+    virtual void OnDisplayChange();
+
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 };

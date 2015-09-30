@@ -318,6 +318,11 @@ void VolumeOSD::UpdateVolumeState() {
     UpdateIcon();
 }
 
+void VolumeOSD::OnDisplayChange() {
+    InitMeterWnd(_mWnd);
+    InitMeterWnd(_muteWnd);
+}
+
 LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == VolumeController::MSG_VOL_CHNG) {

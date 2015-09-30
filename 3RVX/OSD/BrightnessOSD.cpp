@@ -42,6 +42,10 @@ void BrightnessOSD::ProcessHotkeys(HotkeyInfo &hki) {
     }
 }
 
+void BrightnessOSD::OnDisplayChange() {
+    InitMeterWnd(_mWnd);
+}
+
 LRESULT
 BrightnessOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     return OSD::WndProc(hWnd, message, wParam, lParam);

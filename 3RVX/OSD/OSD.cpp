@@ -38,6 +38,7 @@ void OSD::InitMeterWnd(MeterWnd &mWnd) {
     mWnd.DisableFullscreen(_settings->HideFullscreen());
     mWnd.DisableDirectX(_settings->HideDirectX());
 
+    mWnd.DeleteClones();
     std::vector<Monitor> monitors = ActiveMonitors();
     for (unsigned int i = 1; i < monitors.size(); ++i) {
         mWnd.Clone();

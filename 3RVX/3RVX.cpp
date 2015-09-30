@@ -15,6 +15,7 @@
 #include "DisplayManager.h"
 #include "HotkeyManager.h"
 #include "Logger.h"
+#include "OSD/OSD.h"
 #include "OSD/BrightnessOSD.h"
 #include "OSD/EjectOSD.h"
 #include "OSD/VolumeOSD.h"

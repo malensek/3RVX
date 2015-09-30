@@ -10,6 +10,7 @@
 #include "KeyboardHotkeyProcessor.h"
 #include "Window.h"
 
+class OSD;
 class BrightnessOSD;
 class EjectOSD;
 class VolumeOSD;

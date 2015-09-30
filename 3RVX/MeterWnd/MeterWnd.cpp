@@ -19,10 +19,7 @@ LayeredWnd(className, title, hInstance, NULL, WINDOW_STYLES) {
 MeterWnd::~MeterWnd() {
     delete _hideAnimation;
     delete _composite;
-
-    for (LayeredWnd *clone : _clones) {
-        delete clone;
-    }
+    DeleteClones();
 }
 
 void MeterWnd::Update() {
@@ -199,6 +196,13 @@ LayeredWnd *MeterWnd::Clone() {
 
 std::vector<LayeredWnd *> MeterWnd::Clones() {
     return _clones;
+}
+
+void MeterWnd::DeleteClones() {
+    for (LayeredWnd *clone : _clones) {
+        delete clone;
+    }
+    _clones.clear();
 }
 
 void MeterWnd::UpdateClones() {

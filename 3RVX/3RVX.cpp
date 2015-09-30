@@ -200,9 +200,9 @@ void _3RVX::ProcessHotkeys(HotkeyInfo &hki) {
 }
 
 void _3RVX::ToggleOSDs() {
-    _eOSD->Enabled(!(_eOSD->Enabled()));
-    _vOSD->Enabled(!(_vOSD->Enabled()));
-    _bOSD->Enabled(!(_bOSD->Enabled()));
+    for (OSD *osd : _osds) {
+        osd->Enabled(!(osd->Enabled()));
+    }
 }
 
 LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {

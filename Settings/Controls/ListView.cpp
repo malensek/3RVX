@@ -72,7 +72,7 @@ void ListView::Selection(int index) {
     ListView_EnsureVisible(_hWnd, index, FALSE);
 }
 
-DLGPROC ListView::Notification(NMHDR *nHdr) {
+BOOL CALLBACK ListView::Notification(NMHDR *nHdr) {
     switch (nHdr->code) {
     case LVN_ITEMCHANGED:
         if (OnItemChange) {

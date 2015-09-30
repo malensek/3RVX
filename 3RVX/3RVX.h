@@ -10,6 +10,8 @@
 #include "KeyboardHotkeyProcessor.h"
 #include "Window.h"
 
+class OSD;
+class BrightnessOSD;
 class EjectOSD;
 class VolumeOSD;
 
@@ -20,8 +22,10 @@ public:
     _3RVX(HINSTANCE hInstance);
 
 private:
+    std::vector<OSD *> _osds;
     VolumeOSD *_vOSD;
     EjectOSD *_eOSD;
+    BrightnessOSD *_bOSD;
 
     HotkeyManager *_hkManager;
     KeyboardHotkeyProcessor _kbHotkeyProcessor;
@@ -40,6 +44,10 @@ public:
 
     static HWND MasterSettingsHwnd() {
         return FindWindow(CLASS_3RVX_SETTINGS, CLASS_3RVX_SETTINGS);
+    }
+
+    static HWND UpdaterHwnd() {
+        return FindWindow(CLASS_3RVX_UPDATER, CLASS_3RVX_UPDATER);
     }
 
     static void Message(WPARAM wParam, LPARAM lParam, bool post = false) {
@@ -64,8 +72,9 @@ public:
     }
 
 public:
-    static const wchar_t *CLASS_3RVX;
-    static const wchar_t *CLASS_3RVX_SETTINGS;
+    static constexpr const wchar_t *CLASS_3RVX = L"3RVXv3";
+    static constexpr const wchar_t *CLASS_3RVX_SETTINGS = L"3RVXv3-Settings";
+    static constexpr const wchar_t *CLASS_3RVX_UPDATER = L"3RVXv3-Updater";
 
     static const UINT WM_3RVX_CTRL;
     static const UINT WM_3RVX_SETTINGSCTRL;
@@ -80,6 +89,7 @@ public:
     /* Settings App Messages */
     static const int MSG_ACTIVATE = WM_APP + 200;
     static const int MSG_LANGCHANGE = WM_APP + 201;
+    static const int MSG_UPDATEICON = WM_APP + 202;
 
 private:
     static const int TIMER_FIRSTUPDATE = 100;

@@ -6,8 +6,6 @@
 #include "../Controls/Control.h"
 #include "../Controls/Controls.h"
 
-class UIContext;
-
 #define INIT_CONTROL(ctrlId, ctrlType, var) { \
     var = ctrlType(ctrlId, _hWnd); \
     _controlMap[ctrlId] = &var; \
@@ -23,7 +21,7 @@ public:
     ~Tab();
 
     /// <summary>Processes messages sent to the tab page.</summary>
-    virtual DLGPROC TabProc(
+    virtual BOOL CALLBACK TabProc(
         HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
     /// <summary>Persists changes made on the tab page</summary>

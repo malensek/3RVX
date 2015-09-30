@@ -44,6 +44,7 @@
     <translation>已静音</translation>
   </string>
 
+
   <!-- Tab Names -->
   <string>
     <original>General</original>
@@ -71,6 +72,10 @@
     <original>Run on Windows startup</original>
     <translation>启动 Windows 时自动运行</translation>
   </string>
+    <string>
+    <original>Show volume OSD on startup</original>
+    <translation>启动时显示音量 OSD</translation>
+  </string>
   <string>
     <original>Enable volume notification icon</original>
     <translation>在通知区域显示音量图标</translation>
@@ -78,6 +83,14 @@
   <string>
     <original>Enable sound effects</original>
     <translation>声音效果</translation>
+  </string>
+    <string>
+    <original>Automatic updates</original>
+    <translation>自动更新</translation>
+  </string>
+  <string>
+    <original>Check Now</original>
+    <translation>马上检查更新</translation>
   </string>
 
   <string>
@@ -112,6 +125,11 @@
     <original>Hide when other programs are fullscreen</original>
     <translation>在其它程序全屏的情况下隐藏</translation>
   </string>
+    <string>
+    <original>Hide when DirectX applications are fullscreen</original>
+    <translation>在 DirectX 程序全屏的情况下隐藏</translation>
+  </string>
+
 
   <string>
     <original>Position</original>
@@ -348,6 +366,10 @@
     <translation>运行: {1}</translation>
   </string>
   <string>
+    <original>Enable/Disable OSD</original>
+    <translation>启用/禁用 OSD</translation>
+  </string>
+  <string>
     <original>Open Settings Dialog</original>
     <translation>打开设置窗口</translation>
   </string>
@@ -356,4 +378,29 @@
     <translation>退出 3RVX</translation>
   </string>
 
+  <!-- Update Strings -->
+  <string>
+    <original>Update Available</original>
+    <translation>有新的更新</translation>
+  </string>
+  <string>
+    <original>3RVX {1}</original>
+    <translation>3RVX {1}</translation>
+  </string>
+  <string>
+    <original>Install</original>
+    <translation>安装</translation>
+  </string>
+  <string>
+    <original>Ignore version</original>
+    <translation>忽略此版本</translation>
+  </string>
+  <string>
+    <original>Remind me later</original>
+    <translation>下次再提醒我</translation>
+  </string>
+  <string>
+    <original>Downloading...</original>
+    <translation>下载中...</translation>
+  </string>
 </translation>

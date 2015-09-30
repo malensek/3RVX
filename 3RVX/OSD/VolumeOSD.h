@@ -69,6 +69,8 @@ private:
     /// </summary>
     void UpdateVolumeState();
 
+    virtual void OnDisplayChange();
+
     virtual LRESULT
         WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 

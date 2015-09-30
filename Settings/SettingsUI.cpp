@@ -29,6 +29,8 @@ typedef struct DLGTEMPLATEEX
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
 #include "UITranslator.h"
+#include "Updater/Updater.h"
+#include "Updater/UpdaterWindow.h"
 
 /* Tabs*/
 #include "Tabs/Tab.h"
@@ -46,6 +48,7 @@ Tab *tabs[] = { &general, &display, &hotkeys, &about };
 #define XOFFSET 70
 #define YOFFSET 20
 
+const wchar_t *MUTEX_NAME = L"Local\\3RVXSettings";
 HANDLE mutex;
 HWND mainWnd = NULL;
 HWND tabWnd = NULL;
@@ -62,20 +65,56 @@ int APIENTRY wWinMain(
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
-    std::wstring cmdLine(lpCmdLine);
-    if (cmdLine.find(L"-update") != std::wstring::npos) {
-        return 0;
-    }
-
     Logger::Start();
     CLOG(L"Starting SettingsUI...");
 
-    mutex = CreateMutex(NULL, FALSE, L"Local\\3RVXSettings");
+    bool alreadyRunning = false;
+    mutex = CreateMutex(NULL, FALSE, MUTEX_NAME);
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
         if (mutex) {
             ReleaseMutex(mutex);
+            CloseHandle(mutex);
+        }
+        alreadyRunning = true;
+    }
+
+    /* Inspect command line parameters to determine whether this settings
+     * instance is being launched as an update checker. */
+    std::wstring cmdLine(lpCmdLine);
+    if (cmdLine.find(L"-update") != std::wstring::npos) {
+        if (alreadyRunning) {
+            return EXIT_SUCCESS;
+        } else {
+            /* If this is the only settings instance running, we release the 
+             * mutex so that the user can launch the settings app. If this
+             * happens, the updater is closed to prevent settings file race
+             * conditions. */
+            ReleaseMutex(mutex);
+            CloseHandle(mutex);
         }
 
+        if (Updater::NewerVersionAvailable()) {
+            Settings::Instance()->Load();
+            CLOG(L"An update is available. Showing update icon.");
+            UpdaterWindow uw;
+            PostMessage(
+                uw.Handle(),
+                _3RVX::WM_3RVX_SETTINGSCTRL,
+                _3RVX::MSG_UPDATEICON,
+                NULL);
+            uw.DoModal();
+        } else {
+#if defined(ENABLE_3RVX_LOG) && (defined(ENABLE_3RVX_LOGTOFILE) == FALSE)
+            CLOG(L"No update available. Press [enter] to terminate");
+            std::cin.get();
+#endif
+        }
+
+        /* Process was used for updates; time to quit. */
+        return EXIT_SUCCESS;
+    }
+
+    if (alreadyRunning) {
         HWND settingsWnd = _3RVX::MasterSettingsHwnd();
         CLOG(L"A settings instance is already running. Moving window [%d] "
             L"to the foreground.", (int) settingsWnd);
@@ -92,6 +131,12 @@ int APIENTRY wWinMain(
 #endif
 
         return EXIT_SUCCESS;
+    }
+
+    HWND updater = _3RVX::UpdaterHwnd();
+    if (updater != 0) {
+        CLOG(L"Telling updater to close");
+        SendMessage(updater, WM_CLOSE, 0, 0);
     }
 
     WNDCLASSEX wcex = { 0 };
@@ -115,7 +160,7 @@ int APIENTRY wWinMain(
     INT_PTR result;
     do {
         result = LaunchPropertySheet();
-        CLOG(L"RL: %s", relaunch ? L"TRUE" : L"FALSE");
+        CLOG(L"Relaunch: %s", relaunch ? L"TRUE" : L"FALSE");
     } while (relaunch == true);
 
     return result;
@@ -138,7 +183,7 @@ INT_PTR LaunchPropertySheet() {
     psp[0].hInstance = hInst;
     psp[0].pszTemplate = MAKEINTRESOURCE(IDD_GENERAL);
     psp[0].pszIcon = NULL;
-    psp[0].pfnDlgProc = (DLGPROC) GeneralTabProc;
+    psp[0].pfnDlgProc = GeneralTabProc;
     psp[0].pszTitle = &genTitle[0];
     psp[0].lParam = NULL;
 
@@ -148,7 +193,7 @@ INT_PTR LaunchPropertySheet() {
     psp[1].hInstance = hInst;
     psp[1].pszTemplate = MAKEINTRESOURCE(IDD_DISPLAY);
     psp[1].pszIcon = NULL;
-    psp[1].pfnDlgProc = (DLGPROC) DisplayTabProc;
+    psp[1].pfnDlgProc = DisplayTabProc;
     psp[1].pszTitle = &dispTitle[0];
     psp[1].lParam = 0;
 
@@ -158,7 +203,7 @@ INT_PTR LaunchPropertySheet() {
     psp[2].hInstance = hInst;
     psp[2].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
     psp[2].pszIcon = NULL;
-    psp[2].pfnDlgProc = (DLGPROC) HotkeyTabProc;
+    psp[2].pfnDlgProc = HotkeyTabProc;
     psp[2].pszTitle = &hkTitle[0];
     psp[2].lParam = 0;
 
@@ -168,7 +213,7 @@ INT_PTR LaunchPropertySheet() {
     psp[3].hInstance = hInst;
     psp[3].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
     psp[3].pszIcon = NULL;
-    psp[3].pfnDlgProc = (DLGPROC) AboutTabProc;
+    psp[3].pfnDlgProc = AboutTabProc;
     psp[3].pszTitle = &aboutTitle[0];
     psp[3].lParam = 0;
 
@@ -182,7 +227,7 @@ INT_PTR LaunchPropertySheet() {
     psh.nStartPage = 0;
     psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);
     psh.ppsp = (LPCPROPSHEETPAGE) &psp;
-    psh.pfnCallback = (PFNPROPSHEETCALLBACK) PropSheetProc;
+    psh.pfnCallback = PropSheetProc;
 
     tabWnd = NULL;
 
@@ -291,18 +336,18 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
     return TRUE;
 }
 
-DLGPROC GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+BOOL CALLBACK GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     return general.TabProc(hDlg, message, wParam, lParam);
 }
 
-DLGPROC DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+BOOL CALLBACK DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     return display.TabProc(hDlg, message, wParam, lParam);
 }
 
-DLGPROC HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+BOOL CALLBACK HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     return hotkeys.TabProc(hDlg, message, wParam, lParam);
 }
 
-DLGPROC AboutTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+BOOL CALLBACK AboutTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     return about.TabProc(hDlg, message, wParam, lParam);
 }

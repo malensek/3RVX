@@ -37,7 +37,7 @@ void SkinManager::LoadSkin(std::wstring skinXML) {
     skins.push_back(new SkinV3(Settings::Instance()->SkinXML(L"Classic")));
 
     for (Skin *skin : skins) {
-        if (_volumeOSD == NULL) {
+        if (_volumeOSD == nullptr) {
             _volumeOSD = skin->VolumeOSD();
         }
 
@@ -45,16 +45,20 @@ void SkinManager::LoadSkin(std::wstring skinXML) {
             _volumeIconset = skin->VolumeIconset();
         }
 
-        if (_volumeSlider == NULL) {
+        if (_volumeSlider == nullptr) {
             _volumeSlider = skin->VolumeSlider();
         }
 
-        if (_muteOSD == NULL) {
+        if (_muteOSD == nullptr) {
             _muteOSD = skin->MuteOSD();
         }
 
-        if (_ejectOSD == NULL) {
+        if (_ejectOSD == nullptr) {
             _ejectOSD = skin->EjectOSD();
+        }
+
+        if (_brightnessOSD == nullptr) {
+            _brightnessOSD = skin->BrightnessOSD();
         }
     }
 
@@ -83,6 +87,10 @@ OSDComponent *SkinManager::EjectOSD() {
     return _ejectOSD;
 }
 
+OSDComponent * SkinManager::BrightnessOSD() {
+    return _brightnessOSD;
+}
+
 SkinManager::~SkinManager() {
     DisposeComponents();
 }
@@ -102,4 +110,7 @@ void SkinManager::DisposeComponents() {
 
     delete _ejectOSD;
     _ejectOSD = NULL;
+
+    delete _brightnessOSD;
+    _brightnessOSD = NULL;
 }

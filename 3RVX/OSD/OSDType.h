@@ -6,5 +6,6 @@
 enum OSDType {
     All = 0,
     Volume,
-    Eject
+    Eject,
+    Brightness
 };

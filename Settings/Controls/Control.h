@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+class Dialog;
+
 /// <summary>
 /// Base class for Windows forms control implementations (buttons, checkboxes,
 /// etc). Many common features, like control dimensions, window text, and styles
@@ -13,8 +15,11 @@
 class Control {
 public:
     Control();
-    Control(int id, HWND parent);
+    Control(int id, HWND parent, bool translate = true);
+    Control(int id, Dialog &parent, bool translate = true);
     ~Control();
+
+    int ID();
 
     /// <summary>
     /// Retrieves the dimensions of this control's window based on screen
@@ -58,26 +63,59 @@ public:
     virtual bool Text(std::wstring text);
     virtual bool Text(int value);
 
+    virtual void Translate();
+
     virtual bool Visible();
     virtual void Visible(bool visible);
 
-    void WindowExStyle();
-    void WindowExStyle(long exStyle);
-    void AddWindowExStyle(long exStyle);
-    void RemoveWindowExStyle(long exStyle);
+    /// <summary>
+    /// Retrieve the window attributes of this control. See the GetWindowLongPtr
+    /// Win32 function for index values.
+    /// </summary>
+    /// <param name="index">
+    /// The index of the attribute to retrieve. Common indexes include
+    /// GWL_STYLE, GWL_EXSTYLE, etc.
+    /// </param>
+    long WindowAttributes(int index);
+
+    /// <summary>
+    /// Sets the window attributes of this control. See the SetWindowLongPtr
+    /// Win32 function for index values.
+    /// </summary>
+    /// <param name="index">
+    /// The index of the attribute to retrieve. Common indexes include
+    /// GWL_STYLE, GWL_EXSTYLE, etc.
+    /// </param>
+    /// <param name="value">New value of the attribute</param>
+    void WindowAttributes(int index, long value);
+
+    /// <summary>
+    /// Adds a window attribute to this control; same as retrieving the window
+    /// attributes, ORing the attribute with the original value, and then
+    /// updating with the new window attributes.
+    /// </summary>
+    void AddWindowAttribute(int index, long attribute);
+
+    /// <summary>
+    /// Removes a window attribute from this control; same as retrieving the
+    /// window attributes, NOTing the attribute with the original value, and
+    /// then updating with the new window attributes.
+    /// </summary>
+    void RemoveWindowAttribute(int index, long attribute);
 
     /// <summary>Handles WM_COMMAND messages.</summary>
     /// <param name="nCode">Control-defined notification code</param>
-    virtual DLGPROC Command(unsigned short nCode);
+    virtual BOOL CALLBACK Command(unsigned short nCode);
 
     /// <summary>Handles WM_NOTIFY messages.</summary>
     /// <param name="nHdr">Notification header structure</param>
-    virtual DLGPROC Notification(NMHDR *nHdr);
+    virtual BOOL CALLBACK Notification(NMHDR *nHdr);
 
 protected:
     int _id;
     HWND _hWnd;
     HWND _parent;
+    Dialog *_parentDlg;
 
 protected:
     static const int MAX_EDITSTR = 4096;

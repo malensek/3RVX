@@ -4,17 +4,20 @@
 #pragma once
 
 #include <string>
-#include <utility>
+
+class StatusCallback;
+
+struct Version;
 
 /// <summary>
 /// Handles update functionality: checking for updates online, and downloading
 /// new versions of the software.
-/// <p>
-/// The latest version number of 3RVX can be retrieved from:
-/// http://matthew.malensek.net/projects/3RVX/latest_version
-/// <p>
+/// <p />
+/// The latest version number of 3RVX can be retrieved from the URL specified
+/// by the LATEST_URL constant string.
+/// <p />
 /// Versions can be downloaded from:
-/// http://matthew.malensek.net/projects/3RVX/3RVX-X.Y.{zip, msi}
+/// DOWNLOAD_URL + "3RVX-X.Y.{zip, msi}"
 /// Where X is the major version, Y is the minor version, and the type of
 /// installation is determined by the package extension:
 /// <ul>
@@ -31,35 +34,37 @@ public:
     static bool NewerVersionAvailable();
 
     /// <summary>
-    /// Retrieves the version number of the main application (3RVX.exe).
-    /// </summary>
-    static std::pair<int, int> MainAppVersion();
-
-    /// <summary>
-    /// Retrieves the version number of the main application (3RVX.exe) as a 
-    /// string in the format X.Y (where X is the major version number and Y
-    /// is the minor version number).
-    /// </summary>
-    static std::wstring MainAppVersionString();
-
-    static void DownloadVersion(std::pair<int, int> version);
-
-private:
-    /// <summary>
     /// Retrieves the latest version of the program availabile online.
     /// </summary>
-    static std::pair<int, int> RemoteVersion();
+    static Version RemoteVersion();
 
     /// <summary>
-    /// Retrieves the string-based representation of a version number.
+    /// Retrieves the version number of the main application (3RVX.exe).
     /// </summary>
-    static std::wstring VersionToString(std::pair<int, int> version);
+    static Version MainAppVersion();
 
+    /// <summary>
+    /// Downloads the specified version of the software. If a StatusCallback
+    /// implementation is provided, updates will be sent to it as download
+    /// progress is made.
+    /// <summary>
+    /// <param name="version">Version to download</param>
+    /// <param name="cb">
+    /// StatusCallback instance to report progress to.
+    /// </param>
+    /// <returns>
+    /// Path of the downloaded file, represented as a string, or an empty
+    /// string if the file could not be downloaded.
+    /// </returns>
+    static std::wstring DownloadVersion(
+        Version version, StatusCallback *cb = nullptr);
+
+private:
     /// <summary>
     /// Retrieves the file name of the specified version of the program stored
     /// on the remote server (example: 3RVX-3.4.msi).
     /// </summary>
-    static std::wstring DownloadFileName(std::pair<int, int> version);
+    static std::wstring DownloadFileName(Version version);
 
 private:
     /// <summary>

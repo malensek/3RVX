@@ -32,20 +32,19 @@ _title(title) {
     wcex.hIcon = icon;
     wcex.hCursor = cursor;
     wcex.hbrBackground = background;
-    wcex.lpszClassName = _className;
+    wcex.lpszClassName = _className.c_str();
     wcex.hIconSm = NULL;
 
     if (!RegisterClassEx(&wcex)) {
         throw std::runtime_error("Could not register window class");
     }
 
-    LPCWSTR wndTitle = title;
-    if (lstrcmp(title, L"") == 0) {
-        wndTitle = className;
+    if (_title == L"") {
+        _title = std::wstring(className);
     }
 
     _hWnd = CreateWindowEx(
-        exStyle, className, title, style,
+        exStyle, className, _title.c_str(), style,
         x, y, width, height,
         parent,
         menu,
@@ -59,11 +58,11 @@ _title(title) {
 
 Window::~Window() {
     DestroyWindow(_hWnd);
-    UnregisterClass(_className, _hInstance);
+    UnregisterClass(_className.c_str(), _hInstance);
 }
 
 LPCWSTR Window::ClassName() {
-    return _className;
+    return _className.c_str();
 }
 
 HWND Window::Handle() {
@@ -75,7 +74,7 @@ HINSTANCE Window::InstanceHandle() {
 }
 
 LPCWSTR Window::Title() {
-    return _title;
+    return _title.c_str();
 }
 
 LRESULT CALLBACK

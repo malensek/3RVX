@@ -36,12 +36,12 @@ std::wstring Spinner::Text() {
     return std::wstring(text);
 }
 
-DLGPROC Spinner::Notification(NMHDR *nHdr) {
+BOOL CALLBACK Spinner::Notification(NMHDR *nHdr) {
     switch (nHdr->code) {
     case UDN_DELTAPOS:
         if (OnSpin) {
             NMUPDOWN *ud = (NMUPDOWN *) nHdr;
-            return (DLGPROC) OnSpin(ud);
+            return OnSpin(ud);
         } else {
             return FALSE;
         }

@@ -73,12 +73,24 @@
     <translation>XXX XX XXXXXXX XXXXXXX</translation>
   </string>
   <string>
+    <original>Show volume OSD on startup</original>
+    <translation>XXXX XXXXXX XXX XX XXXXXXX</translation>
+  </string>
+  <string>
     <original>Enable volume notification icon</original>
     <translation>XXXXXX XXXXXX XXXXXXXXXXXX XXXX</translation>
   </string>
   <string>
     <original>Enable sound effects</original>
     <translation>XXXXXX XXXXX XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Automatic updates</original>
+    <translation>XXXXXXXXX XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Check Now</original>
+    <translation>XXXXX XXX</translation>
   </string>
 
   <string>
@@ -366,4 +378,29 @@
     <translation>XXXX XXXX</translation>
   </string>
 
+  <!-- Update Strings -->
+  <string>
+    <original>Update Available</original>
+    <translation>XXXXXX XXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>3RVX {1}</original>
+    <translation>XXXX {1}</translation>
+  </string>
+  <string>
+    <original>Install</original>
+    <translation>XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Ignore version</original>
+    <translation>XXXXXX XXXXXXX</translation>
+  </string>
+  <string>
+    <original>Remind me later</original>
+    <translation>XXXXXX XX XXXXX</translation>
+  </string>
+  <string>
+    <original>Downloading...</original>
+    <translation>XXXXXXXXXXX...</translation>
+  </string>
 </translation>

@@ -3,26 +3,41 @@
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
 #include "../../3RVX/LanguageTranslator.h"
+#include "Dialog.h"
 
 Control::Control() {
 
 }
 
-Control::Control(int id, HWND parent) :
+Control::Control(int id, HWND parent, bool translate) :
 _id(id),
 _parent(parent) {
     _hWnd = GetDlgItem(parent, id);
 
-    /* Try to automatically translate the control's string */
-    Settings *settings = Settings::Instance();
-    LanguageTranslator *translator = settings->Translator();
-    std::wstring txt = Text();
-    std::wstring trans = translator->Translate(txt);
-    Text(trans);
+    if (translate) {
+        Translate();
+    }
+}
+
+Control::Control(int id, Dialog &parent, bool translate) :
+_id(id),
+_parentDlg(&parent) {
+    _parent = _parentDlg->DialogHandle();
+    _hWnd = GetDlgItem(_parent, id);
+
+    _parentDlg->AddControl(this);
+
+    if (translate) {
+        Translate();
+    }
 }
 
 Control::~Control() {
 
+}
+
+int Control::ID() {
+    return _id;
 }
 
 RECT Control::ScreenDimensions() {
@@ -156,6 +171,15 @@ bool Control::Text(int value) {
     return SetDlgItemInt(_parent, _id, value, TRUE) == TRUE;
 }
 
+void Control::Translate() {
+    /* Try to automatically translate the control's string */
+    Settings *settings = Settings::Instance();
+    LanguageTranslator *translator = settings->Translator();
+    std::wstring txt = Text();
+    std::wstring trans = translator->Translate(txt);
+    Text(trans);
+}
+
 std::wstring Control::Text() {
     wchar_t text[MAX_EDITSTR];
     GetDlgItemText(_parent, _id, text, MAX_EDITSTR);
@@ -175,24 +199,32 @@ void Control::Visible(bool visible) {
     ShowWindow(_hWnd, visible ? SW_SHOW : SW_HIDE);
 }
 
-void Control::AddWindowExStyle(long exStyle) {
-    long exs = GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
-    exs |= exStyle;
-    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exs);
-}
-
-void Control::RemoveWindowExStyle(long exStyle) {
-    long exs = GetWindowLongPtr(_hWnd, GWL_EXSTYLE);
-    exs &= ~exStyle;
-    SetWindowLongPtr(_hWnd, GWL_EXSTYLE, exs);
-}
-
-DLGPROC Control::Command(unsigned short nCode) {
+BOOL CALLBACK Control::Command(unsigned short nCode) {
     /* By default, indicate that we did not process the message: */
     return FALSE;
 }
 
-DLGPROC Control::Notification(NMHDR *nHdr) {
+BOOL CALLBACK Control::Notification(NMHDR *nHdr) {
     /* By default, indicate that we did not process the message: */
     return FALSE;
+}
+
+long Control::WindowAttributes(int index) {
+    return GetWindowLongPtr(_hWnd, index);
+}
+
+void Control::WindowAttributes(int index, long value) {
+    SetWindowLongPtr(_hWnd, index, value);
+}
+
+void Control::AddWindowAttribute(int index, long attribute) {
+    long attr = WindowAttributes(index);
+    attr |= attribute;
+    WindowAttributes(index, attr);
+}
+
+void Control::RemoveWindowAttribute(int index, long attribute) {
+    long attr = WindowAttributes(index);
+    attr &= ~attribute;
+    WindowAttributes(index, attr);
 }

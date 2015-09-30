@@ -10,7 +10,12 @@ public:
         std::wstring id;
     };
 
+    /// <summary>
+    /// Retrieves the current volume level as a float, ranging from 0.0 - 1.0
+    /// </summary>
     virtual float Volume() = 0;
+
+    /// <summary>Sets the volume level. Valid range: 0.0 - 1.0</summary>
     virtual void Volume(float vol) = 0;
 
     virtual bool Muted() = 0;

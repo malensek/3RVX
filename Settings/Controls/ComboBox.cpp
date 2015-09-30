@@ -50,11 +50,11 @@ int ComboBox::SelectionIndex() {
     return ComboBox_GetCurSel(_hWnd);
 }
 
-DLGPROC ComboBox::Command(unsigned short nCode) {
+BOOL CALLBACK ComboBox::Command(unsigned short nCode) {
     switch (nCode) {
     case CBN_SELCHANGE:
         if (OnSelectionChange) {
-            return (DLGPROC) OnSelectionChange();
+            return OnSelectionChange();
         }
     }
 

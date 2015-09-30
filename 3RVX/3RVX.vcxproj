@@ -29,6 +29,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC4D05DB-E255-4F26-B71C-455CC100ED54}</ProjectGuid>
     <RootNamespace>My3RVX</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -214,16 +215,16 @@
   <ItemGroup>
     <ClInclude Include="3RVX.h" />
     <ClInclude Include="CommCtl.h" />
+    <ClInclude Include="Controllers\BrightnessController.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
-    <ClInclude Include="OSD\Brightness.h" />
+    <ClInclude Include="OSD\BrightnessOSD.h" />
     <ClInclude Include="OSD\KeyboardOSD.h" />
     <ClInclude Include="Skin\MultiSkin.h" />
     <ClInclude Include="Skin\OSDComponent.h" />
     <ClInclude Include="Skin\MeterComponent.h" />
-    <ClInclude Include="Skin\SkinUtils.h" />
     <ClInclude Include="Skin\SkinV2.h" />
     <ClInclude Include="Skin\SkinV3.h" />
     <ClInclude Include="Skin\SliderComponent.h" />
@@ -270,20 +271,19 @@
     <ClInclude Include="OSD\VolumeOSD.h" />
     <ClInclude Include="Slider\VolumeSlider.h" />
     <ClInclude Include="LanguageTranslator.h" />
-    <ClInclude Include="Updater.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="3RVXConsts.cpp" />
+    <ClCompile Include="Controllers\BrightnessController.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />
-    <ClCompile Include="OSD\Brightness.cpp" />
+    <ClCompile Include="OSD\BrightnessOSD.cpp" />
     <ClCompile Include="OSD\KeyboardOSD.cpp" />
     <ClCompile Include="Skin\MultiSkin.cpp" />
     <ClCompile Include="Skin\Skin.cpp" />
-    <ClCompile Include="Skin\SkinUtils.cpp" />
     <ClCompile Include="Skin\SkinV2.cpp" />
     <ClCompile Include="Skin\SkinV3.cpp" />
     <ClCompile Include="SyntheticKeyboard.cpp" />
@@ -321,7 +321,6 @@
     <ClCompile Include="OSD\VolumeOSD.cpp" />
     <ClCompile Include="Slider\VolumeSlider.cpp" />
     <ClCompile Include="LanguageTranslator.cpp" />
-    <ClCompile Include="Updater.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>

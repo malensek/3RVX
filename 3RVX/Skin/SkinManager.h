@@ -25,6 +25,8 @@ public:
 
     OSDComponent *EjectOSD();
 
+    OSDComponent *BrightnessOSD();
+
 private:
     OSDComponent *_volumeOSD;
     std::vector<HICON> _volumeIconset;
@@ -32,6 +34,8 @@ private:
     OSDComponent *_muteOSD;
 
     OSDComponent *_ejectOSD;
+
+    OSDComponent *_brightnessOSD;
 
     ~SkinManager();
     void DisposeComponents();

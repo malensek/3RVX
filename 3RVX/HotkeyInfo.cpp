@@ -17,6 +17,10 @@ std::vector<std::wstring> HotkeyInfo::ActionNames = {
     L"Show Volume Slider",
     L"Eject Drive",
     L"Eject Last Disk",
+    L"Increase Brightness",
+    L"Decrease Brightness",
+    L"Set Brightness",
+    L"Brightness Slider",
     L"Media Key",
     L"Virtual Key",
     L"Run",
@@ -159,7 +163,10 @@ bool HotkeyInfo::Valid() {
     switch (action) {
     case HotkeyInfo::IncreaseVolume:
     case HotkeyInfo::DecreaseVolume:
-    case HotkeyInfo::SetVolume: {
+    case HotkeyInfo::SetVolume:
+    case HotkeyInfo::IncreaseBrightness:
+    case HotkeyInfo::DecreaseBrightness:
+    case HotkeyInfo::SetBrightness: {
         if (HasArgs() == false) {
             /* Don't do arg checking */
             break;
@@ -172,19 +179,24 @@ bool HotkeyInfo::Valid() {
 
         int amount = ArgToInt(0);
         if (amount < 0 || amount > 100) {
-            /* Amounts of 0 - 100 volume units or % are allowed */
-            LogInvalid(L"Volume amount out of range");
+            /* Amounts of 0 - 100 units or % are allowed */
+            LogInvalid(L"Argument amount out of range");
             return false;
         }
 
-        if (action != HotkeyInfo::SetVolume && amount == 0) {
-            LogInvalid(L"Volume increment must be nonzero");
+        if (amount == 0) {
+            if (action != HotkeyInfo::SetVolume
+                && action != HotkeyInfo::SetBrightness) {
+
+                LogInvalid(L"Argument increment must be nonzero");
+                return false;
+            }
         }
 
         if (HasArg(1)) {
             int type = ArgToInt(1);
             if (type < 0 || type > 2) {
-                LogInvalid(L"Unknown volume increment type");
+                LogInvalid(L"Unknown increment type");
                 return false;
             }
         }

@@ -12,7 +12,6 @@
 #include "../StringUtils.h"
 #include "MeterComponent.h"
 #include "OSDComponent.h"
-#include "SkinUtils.h"
 #include "SliderComponent.h"
 
 SkinV2::SkinV2(std::wstring skinXML) :
@@ -114,9 +113,14 @@ OSDComponent *SkinV2::EjectOSD() {
     return eject;
 }
 
+OSDComponent *SkinV2::BrightnessOSD() {
+    /* Brightness OSDs were not supported by the v2 skin format. */
+    return nullptr;
+}
+
 std::vector<HICON> SkinV2::VolumeIconset() {
     std::wstring iconDir = _skinDir + L"\\Notification Icons\\";
-    return SkinUtils::ReadIconDirectory(iconDir);
+    return Skin::ReadIconDirectory(iconDir);
 }
 
 SliderComponent *SkinV2::VolumeSlider() {
@@ -260,7 +264,7 @@ SliderKnob *SkinV2::CreateKnob() {
         yt->QueryIntText(&y);
     }
 
-    int w;
+    int w = 0;
     tinyxml2::XMLElement *wt = controlHandle
         .FirstChildElement("sliderPosition")
         .FirstChildElement("Size")
@@ -270,7 +274,7 @@ SliderKnob *SkinV2::CreateKnob() {
         wt->QueryIntText(&w);
     }
 
-    int h;
+    int h = 0;
     tinyxml2::XMLElement *ht = controlHandle
         .FirstChildElement("sliderPosition")
         .FirstChildElement("Size")

@@ -20,6 +20,7 @@ public:
 
     LayeredWnd *Clone();
     std::vector<LayeredWnd *> Clones();
+    void DeleteClones();
 
     virtual void Show(bool animate = true);
     virtual void Hide(bool animate = true);

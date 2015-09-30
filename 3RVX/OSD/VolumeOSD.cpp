@@ -69,10 +69,10 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     MeterLevels(v);
     _volumeSlider->MeterLevels(v);
 
-    /* TODO: check whether we should show the OSD on startup or not. If so, post
-     * a MSG_VOL_CHNG so that the volume level (or mute) is displayed: */
-    SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG,
-        NULL, (LPARAM) 1);
+    if (_settings->ShowOnStartup()) {
+        SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG,
+            NULL, (LPARAM) 1);
+    }
 }
 
 VolumeOSD::~VolumeOSD() {
@@ -316,6 +316,11 @@ void VolumeOSD::UpdateVolumeState() {
     MeterLevels(v);
     _volumeSlider->MeterLevels(v);
     UpdateIcon();
+}
+
+void VolumeOSD::OnDisplayChange() {
+    InitMeterWnd(_mWnd);
+    InitMeterWnd(_muteWnd);
 }
 
 LRESULT

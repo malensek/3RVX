@@ -32,6 +32,9 @@ public:
     /// <summary>Loads and instantiates the Eject OSD.</summary>
     virtual OSDComponent *EjectOSD() = 0;
 
+    /// <summary>Loads and instantiates the Brightness OSD.</summary>
+    virtual OSDComponent *BrightnessOSD() = 0;
+
     /// <summary>
     /// Creates a Bitmap instance from a file on disk.
     /// </summary>
@@ -42,4 +45,17 @@ public:
     /// instance when finished with it.
     /// </returns>
     static Gdiplus::Bitmap *LoadImg(std::wstring fileName);
+
+    /// <summary>
+    /// Loads an iconset (represented as a vector of HICONs) from a directory.
+    /// In 3RVX, iconset ordering is defined by file names; 0.ico is the first
+    /// icon, 1.ico is the second, and so on.
+    /// </summary>
+    /// <param name="iconDir">Name of the directory to scan for icons</param>
+    /// <returns>
+    /// An iconset, represented as a vector of HICON instances. Note that these
+    /// icons will have to be cleaned up when they are no longer needed (use the
+    /// DestroyIcon() function).
+    /// </returns>
+    static std::vector<HICON> ReadIconDirectory(std::wstring iconDir);
 };

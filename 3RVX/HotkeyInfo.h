@@ -6,8 +6,23 @@
 #include <map>
 #include <vector>
 
+/* HOW TO ADD NEW HOTKEY ACTIONS
+ * -----------------------------
+ * 1.) Update the HotkeyActions enum below.
+ * 2.) Modify HotkeyInfo::ActionNames (see HotkeyInfo.cpp) with 
+ *     user-friendly names for the hotkey actions.
+ *     NOTE: The array index positions of items in the enum and items in the
+ *     list need to match.
+ * 3.) Update the HotkeyInfo::Valid() method to validate hotkey arguments
+ */
+
+/// <summary>
+/// Encapsulates hotkey information: physical keys involved, the action taken
+/// when the keys are pressed, and any arguments the hotkey might have.
+/// </summary>
 class HotkeyInfo {
 public:
+
     enum HotkeyActions {
         IncreaseVolume,
         DecreaseVolume,
@@ -16,6 +31,10 @@ public:
         VolumeSlider,
         EjectDrive,
         EjectLastDisk,
+        IncreaseBrightness,
+        DecreaseBrightness,
+        SetBrightness,
+        BrightnessSlider,
         MediaKey,
         VirtualKey,
         Run,

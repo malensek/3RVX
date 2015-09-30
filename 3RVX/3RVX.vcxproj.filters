@@ -144,9 +144,6 @@
     <ClInclude Include="LanguageTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Updater.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SyntheticKeyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -160,9 +157,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OSD\KeyboardOSD.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OSD\Brightness.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Skin\Skin.h">
@@ -192,7 +186,10 @@
     <ClInclude Include="Skin\MultiSkin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Skin\SkinUtils.h">
+    <ClInclude Include="OSD\BrightnessOSD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\BrightnessController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -302,9 +299,6 @@
     <ClCompile Include="LanguageTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Updater.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SyntheticKeyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -318,9 +312,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OSD\KeyboardOSD.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OSD\Brightness.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Skin\SkinInfo.cpp">
@@ -338,10 +329,13 @@
     <ClCompile Include="Skin\SkinV2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Skin\SkinUtils.cpp">
+    <ClCompile Include="Skin\Skin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Skin\Skin.cpp">
+    <ClCompile Include="OSD\BrightnessOSD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\BrightnessController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

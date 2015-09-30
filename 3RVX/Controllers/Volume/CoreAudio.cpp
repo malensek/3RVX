@@ -2,13 +2,15 @@
 // Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
 
 #include "CoreAudio.h"
+
+#include <stdlib.h>
+
 #include "Functiondiscoverykeys_devpkey.h"
 #include "../../Logger.h"
 
 // {EC9CB649-7E84-4B42-B367-7FC39BE17806}
 static const GUID G3RVXCoreAudioEvent = { 0xec9cb649, 0x7e84, 0x4b42,
     { 0xb3, 0x67, 0x7f, 0xc3, 0x9b, 0xe1, 0x78, 0x6 } };
-
  
 HRESULT CoreAudio::Init() {
     HRESULT hr;
@@ -268,10 +270,7 @@ std::wstring CoreAudio::DeviceDesc(IMMDevice *device) {
 float CoreAudio::Volume() {
     float vol = 0.0f;
     if (_volumeControl) {
-        HRESULT hr = _volumeControl->GetMasterVolumeLevelScalar(&vol);
-        if (FAILED(hr)) {
-            return 0;
-        }
+        _volumeControl->GetMasterVolumeLevelScalar(&vol);
     }
     return vol;
 }
@@ -287,6 +286,20 @@ void CoreAudio::Volume(float vol) {
 
     if (_volumeControl) {
         _volumeControl->SetMasterVolumeLevelScalar(vol, &G3RVXCoreAudioEvent);
+    }
+}
+
+float CoreAudio::VolumeDB() {
+    float vol = 0.0f;
+    if (_volumeControl) {
+        _volumeControl->GetMasterVolumeLevel(&vol);
+    }
+    return vol;
+}
+
+void CoreAudio::VolumeDB(float volDB) {
+    if (_volumeControl) {
+        _volumeControl->SetMasterVolumeLevel(volDB, &G3RVXCoreAudioEvent);
     }
 }
 
@@ -310,6 +323,25 @@ void CoreAudio::Muted(bool muted) {
     }
 }
 
+void CoreAudio::CurveInfo() {
+    if (_volumeControl == nullptr) {
+        return;
+    }
+
+    float min, max, inc;
+    _volumeControl->GetVolumeRange(&min, &max, &inc);
+    CLOG(L"Volume Range (min, max, increment): %f, %f, %f", min, max, inc);
+    float range = abs(max - min);
+    float steps = range / inc;
+    CLOG(L"Full range: %f (%f steps)", range, steps);
+    float orig = Volume();
+    for (float f = 0; f < 100.1f; ++f) {
+        Volume(f / 100.0f);
+        QCLOG("%f    %f", Volume(), VolumeDB());
+    }
+    Volume(orig);
+}
+
 ULONG CoreAudio::AddRef() {
     return InterlockedIncrement(&_refCount);
 }
@@ -322,14 +354,14 @@ ULONG CoreAudio::Release() {
     return lRef;
 }
 
-HRESULT CoreAudio::QueryInterface(REFIID iid, void **ppUnk) {
+HRESULT CoreAudio::QueryInterface(REFIID iid, void **ppvObject) {
     if ((iid == __uuidof(IUnknown)) ||
         (iid == __uuidof(IMMNotificationClient))) {
-        *ppUnk = static_cast<IMMNotificationClient*>(this);
+        *ppvObject = static_cast<IMMNotificationClient*>(this);
     } else if (iid == __uuidof(IAudioEndpointVolumeCallback)) {
-        *ppUnk = static_cast<IAudioEndpointVolumeCallback*>(this);
+        *ppvObject = static_cast<IAudioEndpointVolumeCallback*>(this);
     } else {
-        *ppUnk = nullptr;
+        *ppvObject = nullptr;
         return E_NOINTERFACE;
     }
 

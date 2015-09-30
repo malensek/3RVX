@@ -81,7 +81,16 @@ public:
     std::unordered_map<int, HotkeyInfo> Hotkeys();
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
-    long long UpdateCheckTime();
+    bool AutomaticUpdates();
+    void AutomaticUpdates(bool enabled);
+    void LastUpdateCheckNow();
+    void LastUpdateCheck(long long time);
+    long long LastUpdateCheck();
+    std::wstring IgnoreUpdate();
+    void IgnoreUpdate(std::wstring versionString);
+
+    bool ShowOnStartup();
+    void ShowOnStartup(bool show);
 
 public:
     /* Static settings methods */
@@ -92,6 +101,11 @@ public:
     /// method could return different directories if the executables are moved.
     /// </summary>
     static std::wstring AppDir();
+
+    /// <summary>
+    /// Determines whether this installation is portable or not.
+    /// </summary>
+    static bool Portable();
 
     /// <summary>
     /// Determines where program settings are stored. If this is an installed
@@ -119,7 +133,8 @@ public:
 
 private:
     Settings() {
-
+        /* Don't allow instantiation for this Singleton class; see the
+         * Instance() method to retrieve an instance instead. */
     }
 
     static Settings *instance;
@@ -143,13 +158,6 @@ private:
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 
 public:
-    static const std::wstring MAIN_APP;
-    static const std::wstring SETTINGS_APP;
-    static const std::wstring SETTINGS_FILE;
-    static const std::wstring LANG_DIR;
-    static const std::wstring SKIN_DIR;
-    static const std::wstring SKIN_XML;
-
     /* Default settings */
     static const bool DefaultOnTop = true;
     static const AnimationTypes::HideAnimation DefaultHideAnim
@@ -158,11 +166,42 @@ public:
     static const bool DefaultHideDirectX = false;
     static const int DefaultHideSpeed = 765;
     static const int DefaultHideTime = 800;
-    static const std::wstring DefaultLanguage;
     static const bool DefaultNotifyIcon = true;
+    static const bool DefaultShowOnStartup = true;
     static const bool DefaultSoundsEnabled = true;
     static const int DefaultOSDOffset = 140;
     static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
-    static const std::wstring DefaultSkin;
+    static const bool DefaultAutoUpdate = false;
 
+    static constexpr const wchar_t *MAIN_APP = L"3RVX.exe";
+    static constexpr const wchar_t *SETTINGS_APP = L"Settings.exe";
+    static constexpr const wchar_t *SETTINGS_FILE = L"Settings.xml";
+    static constexpr const wchar_t *LANG_DIR = L"Languages";
+    static constexpr const wchar_t *SKIN_DIR = L"Skins";
+    static constexpr const wchar_t *SKIN_XML = L"Skin.xml";
+
+    static constexpr const wchar_t *DefaultLanguage = L"English";
+    static constexpr const wchar_t *DefaultSkin = L"Classic";
+
+    /* XML tag names */
+    static constexpr const char *XML_AUDIODEV = "audioDeviceID";
+    static constexpr const char *XML_HIDE_WHENFULL = "hideFullscreen";
+    static constexpr const char *XML_HIDE_DIRECTX = "hideDirectX";
+    static constexpr const char *XML_HIDEANIM = "hideAnimation";
+    static constexpr const char *XML_HIDETIME = "hideDelay";
+    static constexpr const char *XML_HIDESPEED = "hideSpeed";
+    static constexpr const char *XML_IGNOREUPDATE = "ignoreUpdateVersion";
+    static constexpr const char *XML_LANGUAGE = "language";
+    static constexpr const char *XML_MONITOR = "monitor";
+    static constexpr const char *XML_NOTIFYICON = "notifyIcon";
+    static constexpr const char *XML_ONTOP = "onTop";
+    static constexpr const char *XML_OSD_OFFSET = "osdEdgeOffset";
+    static constexpr const char *XML_OSD_POS = "osdPosition";
+    static constexpr const char *XML_OSD_X = "osdX";
+    static constexpr const char *XML_OSD_Y = "osdY";
+    static constexpr const char *XML_SHOWONSTART = "showOnStartup";
+    static constexpr const char *XML_SKIN = "skin";
+    static constexpr const char *XML_SOUNDS = "soundEffects";
+    static constexpr const char *XML_UPDATEAUTO = "automaticUpdates";
+    static constexpr const char *XML_UPDATECHECKTIME = "lastUpdateCheck";
 };

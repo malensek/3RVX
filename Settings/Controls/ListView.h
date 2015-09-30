@@ -35,7 +35,7 @@ public:
     int Selection();
     void Selection(int index);
 
-    virtual DLGPROC Notification(NMHDR *nHdr);
+    virtual BOOL CALLBACK Notification(NMHDR *nHdr);
 
 public:
     /* Event Handlers */

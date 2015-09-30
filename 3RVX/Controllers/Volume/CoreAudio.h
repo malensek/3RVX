@@ -24,8 +24,13 @@ public:
     float Volume();
     void Volume(float vol);
 
+    float VolumeDB();
+    void VolumeDB(float volDB);
+
     bool Muted();
     void Muted(bool mute);
+
+    void CurveInfo();
 
     std::wstring DeviceId();
     std::wstring DeviceName();
@@ -97,5 +102,5 @@ private:
     }
 
     /* IUnknown */
-    IFACEMETHODIMP QueryInterface(const IID& iid, void** ppUnk);
+    IFACEMETHODIMP QueryInterface(REFIID iid, void **ppvObject);
 };

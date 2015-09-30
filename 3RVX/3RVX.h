@@ -21,6 +21,7 @@ public:
     _3RVX(HINSTANCE hInstance);
 
 private:
+    std::vector<OSD *> _osds;
     VolumeOSD *_vOSD;
     EjectOSD *_eOSD;
     BrightnessOSD *_bOSD;

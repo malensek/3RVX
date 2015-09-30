@@ -124,6 +124,11 @@ void _3RVX::Initialize() {
     _vOSD = new VolumeOSD();
     _bOSD = new BrightnessOSD();
 
+    _osds.clear();
+    _osds.push_back(_eOSD);
+    _osds.push_back(_vOSD);
+    _osds.push_back(_bOSD);
+
     /* Hotkey setup */
     if (_hkManager != NULL) {
         _hkManager->Shutdown();
@@ -138,7 +143,6 @@ void _3RVX::Initialize() {
         int combination = it->first;
         _hkManager->Register(combination);
     }
-
 }
 
 void _3RVX::ProcessHotkeys(HotkeyInfo &hki) {

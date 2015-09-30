@@ -23,6 +23,12 @@ public:
     bool Enabled();
     void Enabled(bool enabled);
 
+    /// <summary>
+    /// This method is called when the system display configuration has changed,
+    /// which includes monitors being removed or plugged in.
+    /// </summary>
+    virtual void OnDisplayChange() = 0;
+
 protected:
     HWND _masterWnd;
     Settings *_settings;

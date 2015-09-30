@@ -117,7 +117,6 @@ void _3RVX::Initialize() {
 
     SkinManager::Instance()->LoadSkin(settings->SkinXML());
 
-    /* TODO: Detect monitor changes, update this map, and reload/reorg OSDs */
     DisplayManager::UpdateMonitorMap();
 
     /* OSDs */

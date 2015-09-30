@@ -32,7 +32,7 @@ _title(title) {
     wcex.hIcon = icon;
     wcex.hCursor = cursor;
     wcex.hbrBackground = background;
-    wcex.lpszClassName = _className;
+    wcex.lpszClassName = _className.c_str();
     wcex.hIconSm = NULL;
 
     if (!RegisterClassEx(&wcex)) {
@@ -58,11 +58,11 @@ _title(title) {
 
 Window::~Window() {
     DestroyWindow(_hWnd);
-    UnregisterClass(_className, _hInstance);
+    UnregisterClass(_className.c_str(), _hInstance);
 }
 
 LPCWSTR Window::ClassName() {
-    return _className;
+    return _className.c_str();
 }
 
 HWND Window::Handle() {

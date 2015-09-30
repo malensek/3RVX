@@ -60,7 +60,7 @@ protected:
         WPARAM wParam, LPARAM lParam);
 
 private:
-    LPCWSTR _className;
+    std::wstring _className;
     HINSTANCE _hInstance;
     HWND _hWnd;
     std::wstring _title;

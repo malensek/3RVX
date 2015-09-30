@@ -39,13 +39,12 @@ _title(title) {
         throw std::runtime_error("Could not register window class");
     }
 
-    LPCWSTR wndTitle = title;
-    if (lstrcmp(title, L"") == 0) {
-        wndTitle = className;
+    if (_title == L"") {
+        _title = std::wstring(className);
     }
 
     _hWnd = CreateWindowEx(
-        exStyle, className, title, style,
+        exStyle, className, _title.c_str(), style,
         x, y, width, height,
         parent,
         menu,
@@ -75,7 +74,7 @@ HINSTANCE Window::InstanceHandle() {
 }
 
 LPCWSTR Window::Title() {
-    return _title;
+    return _title.c_str();
 }
 
 LRESULT CALLBACK

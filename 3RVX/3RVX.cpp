@@ -214,6 +214,15 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         break;
     }
 
+    case WM_DISPLAYCHANGE: {
+        CLOG(L"Detected display change here");
+        DisplayManager::UpdateMonitorMap();
+        for (OSD *osd : _osds) {
+            osd->OnDisplayChange();
+        }
+        break;
+    }
+
     case WM_WTSSESSION_CHANGE: {
         CLOG(L"Detected session change");
         break;

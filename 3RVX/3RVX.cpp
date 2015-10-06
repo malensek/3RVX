@@ -102,6 +102,9 @@ void _3RVX::Initialize() {
     delete _vOSD;
     delete _eOSD;
     delete _bOSD;
+    _vOSD = nullptr;
+    _eOSD = nullptr;
+    _bOSD = nullptr;
 
     Settings *settings = Settings::Instance();
     settings->Load();

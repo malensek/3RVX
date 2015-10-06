@@ -27,22 +27,38 @@ void EjectOSD::EjectDrive(std::wstring driveLetter) {
     std::wstring name = L"\\\\.\\" + driveLetter + L":";
     CLOG(L"Ejecting %s", name.c_str());
 
-    HANDLE dev = CreateFile(name.c_str(),
-        GENERIC_READ, FILE_SHARE_WRITE, NULL, OPEN_EXISTING, NULL, NULL);
+    HANDLE dev = CreateFile(
+        name.c_str(),
+        GENERIC_READ | GENERIC_WRITE,
+        FILE_SHARE_READ | FILE_SHARE_WRITE,
+        NULL,
+        OPEN_EXISTING,
+        NULL,
+        NULL);
+
     if (dev == INVALID_HANDLE_VALUE) {
         CLOG(L"Failed to get device handle");
         return;
     }
 
     DWORD bytesReturned = 0;
-    bool success = DeviceIoControl(dev, FSCTL_LOCK_VOLUME,
-        NULL, NULL, NULL, NULL, &bytesReturned, NULL)
-    && DeviceIoControl(dev, FSCTL_DISMOUNT_VOLUME,
-        NULL, NULL, NULL, NULL, &bytesReturned, NULL)
-    && DeviceIoControl(dev, IOCTL_STORAGE_EJECT_MEDIA,
+
+    DeviceIoControl(dev, FSCTL_LOCK_VOLUME,
         NULL, NULL, NULL, NULL, &bytesReturned, NULL);
 
-    if (success) {
+    PREVENT_MEDIA_REMOVAL pmr = { 0 };
+    pmr.PreventMediaRemoval = FALSE;
+    DeviceIoControl(dev, IOCTL_STORAGE_MEDIA_REMOVAL,
+        &pmr, sizeof(PREVENT_MEDIA_REMOVAL), NULL, 0, &bytesReturned, NULL);
+
+    DeviceIoControl(dev, FSCTL_DISMOUNT_VOLUME,
+        NULL, NULL, NULL, NULL, &bytesReturned, NULL);
+
+    BOOL ejected = FALSE;
+    ejected = DeviceIoControl(dev, IOCTL_STORAGE_EJECT_MEDIA,
+        NULL, NULL, NULL, NULL, &bytesReturned, NULL);
+
+    if (ejected != FALSE) {
         std::wstring rootPath = driveLetter + L":\\";
         if (GetDriveType(rootPath.c_str()) != DRIVE_CDROM) {
             int driveBit = (int) pow(2, (driveLetter.at(0) - 65));

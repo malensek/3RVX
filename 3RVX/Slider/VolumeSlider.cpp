@@ -21,7 +21,6 @@ _volumeCtrl(volumeCtrl) {
     BackgroundImage(skin->VolumeSlider()->background);
     EnableGlass(skin->VolumeSlider()->mask);
 
-    /* TODO NULL check */
     _knob = skin->VolumeSlider()->knob;
     _vertical = _knob->Vertical();
 

@@ -11,8 +11,6 @@
 #include "../Skin/SliderComponent.h"
 #include "SliderKnob.h"
 
-#define SCROLL_INCREMENT 0.05f
-
 VolumeSlider::VolumeSlider(CoreAudio &volumeCtrl) :
 SliderWnd(L"3RVX-VolumeSlider", L"3RVX Volume Slider"),
 _volumeCtrl(volumeCtrl) {

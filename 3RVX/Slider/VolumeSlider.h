@@ -31,4 +31,6 @@ private:
     SliderKnob *_knob;
     float _level;
     CoreAudio &_volumeCtrl;
+
+    static constexpr const float SCROLL_INCREMENT = 0.05f;
 };

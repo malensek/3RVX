@@ -32,6 +32,10 @@ _volumeCtrl(volumeCtrl) {
 }
 
 void VolumeSlider::SliderChanged() {
+    if (_volumeCtrl.Muted()) {
+        _volumeCtrl.Muted(false);
+    }
+
     _volumeCtrl.Volume(_knob->Value());
 }
 

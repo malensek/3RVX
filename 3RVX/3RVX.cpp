@@ -126,12 +126,12 @@ void _3RVX::Initialize() {
     /* OSDs */
     _eOSD = new EjectOSD();
     _vOSD = new VolumeOSD();
-    _bOSD = new BrightnessOSD();
+    //_bOSD = new BrightnessOSD();
 
     _osds.clear();
     _osds.push_back(_eOSD);
     _osds.push_back(_vOSD);
-    _osds.push_back(_bOSD);
+    //_osds.push_back(_bOSD);
 
     /* Hotkey setup */
     if (_hkManager != NULL) {

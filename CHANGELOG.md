@@ -8,6 +8,8 @@ Beta 10 (2.9.2)
 * Brightness OSD
 * Keyboard OSD
 * Bugfix: Hotkey argument range validation
+* Bugfix: Changing the volume slider while muted now unmutes the volume
+* Bugfix: Display changes are monitored and accounted for (multi-monitor setups) [#36]
 
 Beta 9 (2.9.1)
 ------

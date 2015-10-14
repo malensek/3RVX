@@ -66,7 +66,7 @@ void Settings::Load() {
 
     _root = _xml.GetDocument()->FirstChildElement("settings");
     if (_root == NULL) {
-        Error::ErrorMessage(GENERR_MISSING_XML, L"<settings>");
+        Error::ErrorMessage(Error::GENERR_MISSING_XML, L"<settings>");
         LoadEmptySettings();
         return;
     }
@@ -181,7 +181,7 @@ void Settings::LaunchSettingsApp() {
         NULL, L"open", app.c_str(), NULL, NULL, SW_SHOWNORMAL);
 
     if (exec <= 32) {
-        Error::ErrorMessage(GENERR_NOTFOUND, app);
+        Error::ErrorMessage(Error::GENERR_NOTFOUND, app);
     }
 }
 

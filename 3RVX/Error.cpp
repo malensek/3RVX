@@ -20,8 +20,8 @@ std::unordered_map<int, std::wstring> Error::errorMap = {
         "available skins." },
     { SKINERR_SKINDIR, L"Could not locate skin directory:\n{1}" },
     { SKINERR_XMLPARSE, L"Failed to parse skin XML file:\n{1}" },
-    { SYSERR_REGISTERCLASS, L"Could not register window class." },
-    { SYSERR_CREATEWINDOW, L"Could not create window." },
+    { SYSERR_REGISTERCLASS, L"Could not register window class: {1}" },
+    { SYSERR_CREATEWINDOW, L"Could not create window: {1}" },
 };
 
 void Error::ErrorMessage(unsigned int error, std::wstring detail) {

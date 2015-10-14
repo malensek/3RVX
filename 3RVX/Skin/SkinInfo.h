@@ -9,7 +9,7 @@
 
 class SkinInfo {
 public:
-    SkinInfo(std::wstring skinName);
+    SkinInfo(std::wstring skinName, bool reportErrors = true);
 
     std::wstring Author();
     std::wstring URL();

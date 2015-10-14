@@ -8,7 +8,7 @@
 #include "../Settings.h"
 #include "../StringUtils.h"
 
-SkinInfo::SkinInfo(std::wstring skinFile) :
+SkinInfo::SkinInfo(std::wstring skinFile, bool reportErrors) :
 _skinFile(skinFile) {
     CLOG(L"Loading skin XML: %s", _skinFile.c_str());
 
@@ -19,17 +19,19 @@ _skinFile(skinFile) {
     FILE *fp;
     _wfopen_s(&fp, _skinFile.c_str(), L"rb");
     if (fp == NULL) {
-        QCLOG(L"Failed to open file!");
+        if (reportErrors) {
+            Error::ErrorMessage(Error::SKINERR_INVALID_SKIN, _skinFile.c_str());
+        }
         return;
     }
 
     tinyxml2::XMLError result = _xml.LoadFile(fp);
     fclose(fp);
     if (result != tinyxml2::XMLError::XML_SUCCESS) {
-        if (result == tinyxml2::XMLError::XML_ERROR_FILE_NOT_FOUND) {
-            Error::ErrorMessageDie(SKINERR_INVALID_SKIN);
+        if (reportErrors) {
+            Error::ErrorMessage(Error::SKINERR_XMLPARSE, _skinFile.c_str());
         }
-        throw std::logic_error("Failed to read XML file!");
+        return;
     }
 
     _root = _xml.GetDocument()->FirstChildElement("skin");
@@ -41,7 +43,10 @@ _skinFile(skinFile) {
         if (_root != NULL) {
             _version = 2;
         } else {
-            throw std::runtime_error("Could not find root XML element");
+            if (reportErrors) {
+                Error::ErrorMessage(Error::SKINERR_MISSING_XMLROOT);
+            }
+            return;
         }
     }
 }

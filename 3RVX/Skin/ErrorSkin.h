@@ -17,8 +17,8 @@ using tinyxml2::XMLElement;
 /// <summary>
 /// This skin implementation serves as a last resort in the skin loader
 /// pipeline. If no suitable resources have been found in any of the other skins
-/// in the pipeline, then the ErrorSkin throws an error message to let the user
-/// know something went wrong.
+/// in the pipeline, then the ErrorSkin displays an error message to let the
+/// user know something went wrong.
 /// </summary>
 class ErrorSkin : public Skin {
 public:

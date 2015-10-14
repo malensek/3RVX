@@ -5,6 +5,9 @@
 
 #include <Windows.h>
 
+#include "LanguageTranslator.h"
+#include "Settings.h"
+
 std::unordered_map<int, std::wstring> Error::errorMap = {
     { GENERR_NOTFOUND, L"File not found:\n{1}" },
     { GENERR_MISSING_XML, L"Could not locate XML tag: {1}" },
@@ -22,14 +25,27 @@ std::unordered_map<int, std::wstring> Error::errorMap = {
 };
 
 void Error::ErrorMessage(unsigned int error, std::wstring detail) {
-    std::wstring msg(L"");
+    std::wstring errType = ErrorType(error);
+    std::wstring errMsg = errorMap[error];
 
-    msg = msg + L"Unknown error occurred: " + std::to_wstring(error);
-    if (detail != L"") {
-        msg = msg + L"\n" + detail;
+    if (errMsg == L"") {
+        errMsg = errorMap[GENERR_UNKNOWN];
+        detail = std::to_wstring(error);
     }
 
-    MessageBox(NULL, msg.c_str(), Error::ErrorType(error), MB_ICONERROR);
+    /* Check if a translator instance is available; if so, use it.
+     * Otherwise, we keep the original english message. */
+    Settings *settings = Settings::Instance();
+    LanguageTranslator *translator = nullptr;
+    if (settings) {
+        translator = settings->Translator();
+    }
+    if (translator) {
+        errMsg = translator->TranslateAndReplace(errMsg, detail);
+        errType = translator->Translate(errType);
+    }
+
+    MessageBox(NULL, errMsg.c_str(), errType.c_str(), MB_ICONERROR);
 }
 
 void Error::ErrorMessageDie(unsigned int error, std::wstring detail) {
@@ -38,13 +54,11 @@ void Error::ErrorMessageDie(unsigned int error, std::wstring detail) {
 }
 
 wchar_t *Error::ErrorType(unsigned int error) {
-    if (error & GENERR) {
-        return L"3RVX Error";
-    } else if (error & SKINERR) {
-        return L"Skin Error";
+    if (error & SKINERR) {
+        return L"3RVX Skin Error";
     } else if (error & SYSERR) {
-        return L"System Error";
+        return L"3RVX System Error";
     }
 
-    return L"Error";
+    return L"3RVX Error";
 }

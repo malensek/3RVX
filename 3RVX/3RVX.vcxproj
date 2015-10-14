@@ -222,6 +222,7 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="OSD\BrightnessOSD.h" />
     <ClInclude Include="OSD\KeyboardOSD.h" />
+    <ClInclude Include="Skin\ErrorSkin.h" />
     <ClInclude Include="Skin\MultiSkin.h" />
     <ClInclude Include="Skin\OSDComponent.h" />
     <ClInclude Include="Skin\MeterComponent.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="OSD\BrightnessOSD.cpp" />
     <ClCompile Include="OSD\KeyboardOSD.cpp" />
+    <ClCompile Include="Skin\ErrorSkin.cpp" />
     <ClCompile Include="Skin\MultiSkin.cpp" />
     <ClCompile Include="Skin\Skin.cpp" />
     <ClCompile Include="Skin\SkinV2.cpp" />

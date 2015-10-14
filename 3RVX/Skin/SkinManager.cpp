@@ -3,13 +3,14 @@
 
 #include "SkinManager.h"
 
+#include "../Settings.h"
+
+#include "ErrorSkin.h"
+#include "MeterComponent.h"
+#include "OSDComponent.h"
 #include "Skin.h"
 #include "SkinV2.h"
 #include "SkinV3.h"
-
-#include "../Settings.h"
-#include "MeterComponent.h"
-#include "OSDComponent.h"
 #include "SliderComponent.h"
 
 SkinManager *SkinManager::instance;
@@ -35,6 +36,7 @@ void SkinManager::LoadSkin(std::wstring skinXML) {
     std::vector<Skin *> skins;
     skins.push_back(skin);
     skins.push_back(new SkinV3(Settings::Instance()->SkinXML(L"Classic")));
+    skins.push_back(new ErrorSkin());
 
     for (Skin *skin : skins) {
         if (_volumeOSD == nullptr) {

@@ -25,7 +25,7 @@ void SkinManager::LoadSkin(std::wstring skinXML) {
     DisposeComponents();
 
     Skin *skin;
-    SkinInfo info(skinXML);
+    SkinInfo info(skinXML, false);
     if (info.FormatVersion() == 2) {
         skin = new SkinV2(skinXML);
     } else {

@@ -6,6 +6,17 @@
 #include <Windows.h>
 
 std::unordered_map<int, std::wstring> Error::errorMap = {
+    { GENERR_NOTFOUND, L"File not found:\n{1}" },
+    { GENERR_MISSING_XML, L"Could not locate XML tag: {1}" },
+    { GENERR_UNKNOWN, L"An unknown error occurred: ID #{1}"},
+    { SKINERR_INVALID_SKIN, L"Could not find specified skin:\n{1}" },
+    { SKINERR_INVALID_SLIDERTYPE, L"Invalid slider type: {1}" },
+    { SKINERR_MISSING_XML, L"Could not locate required skin XML tag: {1}" },
+    { SKINERR_MISSING_XMLROOT, L"Could not locate root XML element" },
+    { SKINERR_NO_RESOURCE, L"Skin resource '{1}' was not found in any of the "
+        "available skins." },
+    { SKINERR_SKINDIR, L"Could not locate skin directory:\n{1}" },
+    { SKINERR_XMLPARSE, L"Failed to parse skin XML file:\n{1}" },
     { SYSERR_REGISTERCLASS, L"Could not register window class." },
     { SYSERR_CREATEWINDOW, L"Could not create window." },
 };

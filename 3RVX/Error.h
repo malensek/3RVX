@@ -21,15 +21,19 @@ public:
     static const int SKINERR = 0x200;
     static const int SYSERR = 0x300;
 
-    static const int GENERR_NOTFOUND = GENERR + 1;
-    static const int GENERR_MISSING_XML = GENERR + 3;
+    static const int GENERR_NOTFOUND    = GENERR + 1;
+    static const int GENERR_MISSING_XML = GENERR + 2;
+    static const int GENERR_UNKNOWN     = GENERR + 3;
 
-    static const int SKINERR_INVALID_SKIN = SKINERR + 1;
-    static const int SKINERR_INVALID_SLIDERTYPE = SKINERR + 7;
-    static const int SKINERR_NOTFOUND = SKINERR + 8;
-    static const int SKINERR_MISSING_XML = SKINERR + 9;
-    static const int SKINERR_XMLPARSE = SKINERR + 10;
+    static const int SKINERR_NOTFOUND           = SKINERR + 1;
+    static const int SKINERR_INVALID_SKIN       = SKINERR + 2;
+    static const int SKINERR_INVALID_SLIDERTYPE = SKINERR + 3;
+    static const int SKINERR_MISSING_XML        = SKINERR + 4;
+    static const int SKINERR_MISSING_XMLROOT    = SKINERR + 5;
+    static const int SKINERR_XMLPARSE           = SKINERR + 6;
+    static const int SKINERR_NO_RESOURCE        = SKINERR + 7;
+    static const int SKINERR_SKINDIR            = SKINERR + 8;
 
     static const int SYSERR_REGISTERCLASS = SYSERR + 1;
-    static const int SYSERR_CREATEWINDOW = SYSERR + 2;
+    static const int SYSERR_CREATEWINDOW  = SYSERR + 2;
 };

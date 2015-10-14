@@ -3,6 +3,9 @@
 
 #include "SkinManager.h"
 
+#include "Shlwapi.h"
+
+#include "../Error.h"
 #include "../Settings.h"
 
 #include "ErrorSkin.h"
@@ -25,6 +28,13 @@ SkinManager *SkinManager::Instance() {
 void SkinManager::LoadSkin(std::wstring skinXML) {
     DisposeComponents();
 
+    /* First, make sure the skin directory exists. */
+    Settings *settings = Settings::Instance();
+    std::wstring skinDir = settings->SkinDir();
+    if (PathFileExists(skinDir.c_str()) == FALSE) {
+        Error::ErrorMessageDie(Error::SKINERR_SKINDIR, skinDir);
+    }
+
     Skin *skin;
     SkinInfo info(skinXML, false);
     if (info.FormatVersion() == 2) {
@@ -35,7 +45,7 @@ void SkinManager::LoadSkin(std::wstring skinXML) {
 
     std::vector<Skin *> skins;
     skins.push_back(skin);
-    skins.push_back(new SkinV3(Settings::Instance()->SkinXML(L"Classic")));
+    skins.push_back(new SkinV3(settings->SkinXML(L"Classic")));
     skins.push_back(new ErrorSkin());
 
     for (Skin *skin : skins) {

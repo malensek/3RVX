@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <string>
 
+// TODO: this should extend Window
 class HotkeyPrompt {
 public:
     static void Show(HWND parent, HINSTANCE hInstance = NULL);

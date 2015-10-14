@@ -36,7 +36,7 @@ _title(title) {
     wcex.hIconSm = NULL;
 
     if (!RegisterClassEx(&wcex)) {
-        throw std::runtime_error("Could not register window class");
+        Error::ErrorMessage(Error::SYSERR_REGISTERCLASS, _className);
     }
 
     if (_title == L"") {
@@ -52,7 +52,7 @@ _title(title) {
         this);
 
     if (_hWnd == NULL) {
-        throw std::runtime_error("Could not create window");
+        Error::ErrorMessage(Error::SYSERR_CREATEWINDOW, _title);
     }
 }
 

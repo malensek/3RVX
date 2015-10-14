@@ -14,10 +14,9 @@ class Window {
 public:
     /// <summary>
     /// Creates a window and registers a class for it. If the window cannot be
-    /// created or the class cannot be registered, a std::runtime_error
-    /// exception will be thrown. Only the window title is required; if not
-    /// provided, the rest of the window parameters take on their default
-    /// values.
+    /// created or the class cannot be registered, an error message will be
+    /// displayed. Only the window title is required; if not provided, the rest
+    /// of the window parameters take on their default values.
     /// </summary>
     Window(LPCWSTR className, LPCWSTR title = L"",
         HINSTANCE hInstance = NULL,

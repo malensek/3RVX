@@ -42,14 +42,14 @@ void HotkeyPrompt::Show(HWND parent, HINSTANCE hInstance) {
         wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
         if (!RegisterClassEx(&wcex)) {
-            throw SYSERR_REGISTERCLASS;
+            Error::ErrorMessage(Error::SYSERR_REGISTERCLASS, CLASS_NAME);
         }
 
         _hWnd = CreateWindowEx(NULL, CLASS_NAME, CLASS_NAME, NULL, NULL, NULL,
             NULL, NULL, parent, NULL, _hInstance, NULL);
 
         if (_hWnd == NULL) {
-            throw SYSERR_CREATEWINDOW;
+            Error::ErrorMessage(Error::SYSERR_CREATEWINDOW, CLASS_NAME);
         }
     }
 

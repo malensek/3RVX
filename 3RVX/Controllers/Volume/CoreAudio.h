@@ -30,6 +30,9 @@ public:
     bool Muted();
     void Muted(bool mute);
 
+    virtual void Transformation(VolumeTransformation *transform);
+    virtual VolumeTransformation* Transformation();
+
     void CurveInfo();
 
     std::wstring DeviceId();
@@ -51,6 +54,7 @@ private:
     HWND _notifyHwnd;
     long _refCount;
     bool _registeredNotifications;
+    VolumeTransformation *_transform;
 
     IMMDevice *_device;
     IMMDeviceEnumerator *_devEnumerator;

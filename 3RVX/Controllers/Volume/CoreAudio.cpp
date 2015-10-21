@@ -3,10 +3,12 @@
 
 #include "CoreAudio.h"
 
+#include <math.h>
 #include <stdlib.h>
 
-#include "Functiondiscoverykeys_devpkey.h"
 #include "../../Logger.h"
+#include "Functiondiscoverykeys_devpkey.h"
+#include "VolumeTransformation.h"
 
 // {EC9CB649-7E84-4B42-B367-7FC39BE17806}
 static const GUID G3RVXCoreAudioEvent = { 0xec9cb649, 0x7e84, 0x4b42,
@@ -285,6 +287,10 @@ void CoreAudio::Volume(float vol) {
     }
 
     if (_volumeControl) {
+        if (_transform) {
+            vol = _transform->Transform(vol);
+        }
+
         _volumeControl->SetMasterVolumeLevelScalar(vol, &G3RVXCoreAudioEvent);
     }
 }
@@ -321,6 +327,14 @@ void CoreAudio::Muted(bool muted) {
     if (_volumeControl) {
         _volumeControl->SetMute(muted, &G3RVXCoreAudioEvent);
     }
+}
+
+void CoreAudio::Transformation(VolumeTransformation* transform) {
+    _transform = transform;
+}
+
+VolumeTransformation* CoreAudio::Transformation() {
+    return _transform;
 }
 
 void CoreAudio::CurveInfo() {

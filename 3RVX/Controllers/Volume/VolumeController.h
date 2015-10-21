@@ -3,6 +3,8 @@
 
 #pragma once
 
+class VolumeTransformation;
+
 class VolumeController {
 public:
     struct DeviceInfo {
@@ -23,6 +25,9 @@ public:
     virtual void ToggleMute() {
         (Muted() == true) ? Muted(false) : Muted(true);
     }
+
+    virtual void Transformation(VolumeTransformation *transform) = 0;
+    virtual VolumeTransformation* Transformation() = 0;
 
 public:
     static const int MSG_VOL_CHNG = WM_APP + 1080;

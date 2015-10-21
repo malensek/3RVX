@@ -23,7 +23,7 @@ BrightnessController::BrightnessController(HMONITOR monitor) {
 
     PHYSICAL_MONITOR *pm = new PHYSICAL_MONITOR[physicalMonitors];
     result = GetPhysicalMonitorsFromHMONITOR(monitor, physicalMonitors, pm);
-    CLOG(L"phys handle: %d", pm[0].hPhysicalMonitor);
+    //CLOG(L"phys handle: %d", pm[0].hPhysicalMonitor);
     CLOG(L"monitor: %s", pm[0].szPhysicalMonitorDescription);
 
     DWORD cap;

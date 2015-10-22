@@ -245,7 +245,7 @@ int Settings::OSDEdgeOffset() {
 }
 
 void Settings::OSDEdgeOffset(int offset) {
-    SetInt(XML_OSD_OFFSET, offset);
+    SetElementValue(XML_OSD_OFFSET, offset);
 }
 
 Settings::OSDPos Settings::OSDPosition() {
@@ -271,7 +271,7 @@ int Settings::OSDX() {
 }
 
 void Settings::OSDX(int x) {
-    SetInt(XML_OSD_X, x);
+    SetElementValue(XML_OSD_X, x);
 }
 
 int Settings::OSDY() {
@@ -279,7 +279,7 @@ int Settings::OSDY() {
 }
 
 void Settings::OSDY(int y) {
-    SetInt(XML_OSD_Y, y);
+    SetElementValue(XML_OSD_Y, y);
 }
 
 AnimationTypes::HideAnimation Settings::HideAnim() {
@@ -306,7 +306,7 @@ int Settings::HideDelay() {
 }
 
 void Settings::HideDelay(int delay) {
-    SetInt(XML_HIDETIME, delay);
+    SetElementValue(XML_HIDETIME, delay);
 }
 
 int Settings::HideSpeed() {
@@ -314,7 +314,7 @@ int Settings::HideSpeed() {
 }
 
 void Settings::HideSpeed(int speed) {
-    SetInt(XML_HIDESPEED, speed);
+    SetElementValue(XML_HIDESPEED, speed);
 }
 
 bool Settings::CurrentSkin(std::wstring skinName) {

@@ -20,11 +20,11 @@ public:
         logBase = log(base);
     }
 
-    virtual float ToVirtual(float vol) {
+    virtual float Apply(float vol) {
         return (pow(base, vol) - 1) / (base - 1);
     }
 
-    virtual float FromVirtual(float vol) {
+    virtual float Revert(float vol) {
         return log(vol * (base - 1) + 1) / logBase;
     }
 

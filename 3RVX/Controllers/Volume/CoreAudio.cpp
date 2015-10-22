@@ -273,6 +273,10 @@ float CoreAudio::Volume() {
     float vol = 0.0f;
     if (_volumeControl) {
         _volumeControl->GetMasterVolumeLevelScalar(&vol);
+
+        if (_transform) {
+            vol = _transform->FromVirtual(vol);
+        }
     }
     return vol;
 }

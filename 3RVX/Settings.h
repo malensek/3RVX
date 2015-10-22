@@ -154,6 +154,11 @@ private:
     void SetText(std::string elementName, std::string text);
     int GetInt(std::string elementName, const int defaultValue = 0);
     void SetInt(std::string elementName, int value);
+    template<typename T> void SetElementValue(
+            std::string elementName, T value) {
+        tinyxml2::XMLElement *el = GetOrCreateElement(elementName);
+        el->SetText(value);
+    }
 
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 

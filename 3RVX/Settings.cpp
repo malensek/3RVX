@@ -351,10 +351,6 @@ std::wstring Settings::SkinXML(std::wstring skinName) {
 std::unordered_map<int, HotkeyInfo> Settings::Hotkeys() {
     std::unordered_map<int, HotkeyInfo> keyMappings;
 
-    if (_root == NULL) {
-        return keyMappings;
-    }
-
     tinyxml2::XMLElement *hotkeys = _root->FirstChildElement("hotkeys");
     if (hotkeys == NULL) {
         return keyMappings;
@@ -476,19 +472,11 @@ void Settings::SoundEffectsEnabled(bool enable) {
 }
 
 bool Settings::HasSetting(std::string elementName) {
-    if (_root == NULL) {
-        return false;
-    }
-
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     return (el != NULL);
 }
 
 bool Settings::GetEnabled(std::string elementName, const bool defaultSetting) {
-    if (_root == NULL) {
-        return defaultSetting;
-    }
-
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
         std::wstring elStr = StringUtils::Widen(elementName);
@@ -507,10 +495,6 @@ void Settings::SetEnabled(std::string elementName, bool enabled) {
 }
 
 std::wstring Settings::GetText(std::string elementName) {
-    if (_root == NULL) {
-        return L"";
-    }
-
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
         CLOG(L"Warning: XML element %s not found",
@@ -532,10 +516,6 @@ void Settings::SetText(std::string elementName, std::string text) {
 }
 
 int Settings::GetInt(std::string elementName, const int defaultValue) {
-    if (_root == NULL) {
-        return defaultValue;
-    }
-
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
         std::wstring elStr = StringUtils::Widen(elementName);

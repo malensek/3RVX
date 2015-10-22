@@ -38,6 +38,12 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
         _volumeCtrl->AddTransformation(ct);
     }
 
+    float volumeLimiter = _settings->VolumeLimiter();
+    if (volumeLimiter > 0.0f && volumeLimiter < 1.0f) {
+        CLOG(L"Using volume limiter: %f", volumeLimiter);
+        //TODO: limiter
+    }
+
     /* Set up volume state variables */
     _lastVolume = _volumeCtrl->Volume();
     _muted = _volumeCtrl->Muted();

@@ -189,6 +189,14 @@ std::wstring Settings::AudioDeviceID() {
     return GetText(XML_AUDIODEV);
 }
 
+int Settings::VolumeCurveAdjustment() {
+    return GetInt(XML_CURVE_ADJUST);
+}
+
+float Settings::VolumeLimiter() {
+    return GetFloat(XML_VOLUME_LIMITER);
+}
+
 std::wstring Settings::LanguageName() {
     std::wstring lang = GetText(XML_LANGUAGE);
 

@@ -274,8 +274,8 @@ float CoreAudio::Volume() {
     if (_volumeControl) {
         _volumeControl->GetMasterVolumeLevelScalar(&vol);
 
-        if (_transform) {
-            vol = _transform->FromVirtual(vol);
+        if (_transforms.size() > 0) {
+            vol = VolumeTransformation::RevertTransformations(_transforms, vol);
         }
     }
     return vol;
@@ -291,8 +291,8 @@ void CoreAudio::Volume(float vol) {
     }
 
     if (_volumeControl) {
-        if (_transform) {
-            vol = _transform->ToVirtual(vol);
+        if (_transforms.size() > 0) {
+            vol = VolumeTransformation::ApplyTransformations(_transforms, vol);
         }
 
         _volumeControl->SetMasterVolumeLevelScalar(vol, &G3RVXCoreAudioEvent);
@@ -333,12 +333,15 @@ void CoreAudio::Muted(bool muted) {
     }
 }
 
-void CoreAudio::Transformation(VolumeTransformation* transform) {
-    _transform = transform;
+void CoreAudio::AddTransformation(VolumeTransformation *transform) {
+    _transforms.push_back(transform);
 }
 
-VolumeTransformation* CoreAudio::Transformation() {
-    return _transform;
+void CoreAudio::RemoveTransformation(VolumeTransformation *transform) {
+    auto it = std::find(_transforms.begin(), _transforms.end(), transform);
+    if (it != _transforms.end()) {
+        _transforms.erase(it);
+    }
 }
 
 void CoreAudio::CurveInfo() {

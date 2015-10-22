@@ -7,6 +7,7 @@
 #include <list>
 #include <Mmdeviceapi.h>
 #include <string>
+#include <vector>
 
 #include "VolumeController.h"
 
@@ -30,8 +31,8 @@ public:
     bool Muted();
     void Muted(bool mute);
 
-    virtual void Transformation(VolumeTransformation *transform);
-    virtual VolumeTransformation* Transformation();
+    virtual void AddTransformation(VolumeTransformation *transform);
+    virtual void RemoveTransformation(VolumeTransformation *transform);
 
     void CurveInfo();
 
@@ -54,7 +55,7 @@ private:
     HWND _notifyHwnd;
     long _refCount;
     bool _registeredNotifications;
-    VolumeTransformation *_transform;
+    std::vector<VolumeTransformation *> _transforms;
 
     IMMDevice *_device;
     IMMDeviceEnumerator *_devEnumerator;

@@ -153,7 +153,8 @@ private:
     std::wstring GetText(std::string elementName);
     void SetText(std::string elementName, std::string text);
     int GetInt(std::string elementName, const int defaultValue = 0);
-    void SetInt(std::string elementName, int value);
+    float GetFloat(std::string elementName, const float defaultValue = 0.0f);
+
     template<typename T> void SetElementValue(
             std::string elementName, T value) {
         tinyxml2::XMLElement *el = GetOrCreateElement(elementName);

@@ -534,9 +534,19 @@ int Settings::GetInt(std::string elementName, const int defaultValue) {
     return val;
 }
 
-void Settings::SetInt(std::string elementName, int value) {
-    tinyxml2::XMLElement *el = GetOrCreateElement(elementName);
-    el->SetText(value);
+float Settings::GetFloat(std::string elementName, const float defaultValue) {
+    tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
+    if (el == NULL) {
+        if (ENABLE_3RVX_LOG) {
+            std::wstring elStr = StringUtils::Widen(elementName);
+            CLOG(L"Warning: XML element '%s' not found", elStr.c_str());
+        }
+        return defaultValue;
+    }
+
+    float val = defaultValue;
+    el->QueryFloatText(&val);
+    return val;
 }
 
 tinyxml2::XMLElement *Settings::GetOrCreateElement(std::string elementName) {

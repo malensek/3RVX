@@ -190,7 +190,7 @@ std::wstring Settings::AudioDeviceID() {
 }
 
 int Settings::VolumeCurveAdjustment() {
-    return GetFloat(XML_CURVE_ADJUST);
+    return GetInt(XML_CURVE_ADJUST);
 }
 
 void Settings::VolumeCurveAdjustment(int value) {

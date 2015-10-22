@@ -6,6 +6,7 @@
 #include <string>
 
 #include "../3RVX.h"
+#include "../Controllers/Volume/CurveTransformer.h"
 #include "../HotkeyInfo.h"
 #include "../LanguageTranslator.h"
 #include "../MeterWnd/LayeredWnd.h"
@@ -29,6 +30,13 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     std::wstring device = _settings->AudioDeviceID();
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
+
+    int curveAdjust = _settings->VolumeCurveAdjustment();
+    if (curveAdjust > 0) {
+        CLOG(L"Using curve adjust factor: %d", curveAdjust);
+        CurveTransformer *ct = new CurveTransformer((float) curveAdjust);
+        _volumeCtrl->AddTransformation(ct);
+    }
 
     /* Set up volume state variables */
     _lastVolume = _volumeCtrl->Volume();

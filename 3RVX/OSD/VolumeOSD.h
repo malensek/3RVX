@@ -34,6 +34,7 @@ private:
     float _defaultIncrement;
     float _lastVolume;
     bool _muted;
+    std::vector<VolumeTransformation *> _volumeTransformations;
 
     MeterWnd _mWnd;
     CallbackMeter *_callbackMeter;

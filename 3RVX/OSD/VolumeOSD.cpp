@@ -36,6 +36,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
         CLOG(L"Using curve adjust factor: %d", curveAdjust);
         CurveTransformer *ct = new CurveTransformer((float) curveAdjust);
         _volumeCtrl->AddTransformation(ct);
+        _volumeTransformations.push_back(ct);
     }
 
     float volumeLimiter = _settings->VolumeLimiter();
@@ -95,6 +96,10 @@ VolumeOSD::~VolumeOSD() {
     delete _icon;
     delete _volumeSlider;
     delete _callbackMeter;
+    for (VolumeTransformation *trans : _volumeTransformations) {
+        delete trans;
+    }
+    _volumeTransformations.clear();
     _volumeCtrl->Dispose();
 }
 

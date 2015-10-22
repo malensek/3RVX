@@ -190,6 +190,7 @@ public:
 
     /* XML tag names */
     static constexpr const char *XML_AUDIODEV = "audioDeviceID";
+    static constexpr const char *XML_CURVE_ADJUST = "curveAdjust";
     static constexpr const char *XML_HIDE_WHENFULL = "hideFullscreen";
     static constexpr const char *XML_HIDE_DIRECTX = "hideDirectX";
     static constexpr const char *XML_HIDEANIM = "hideAnimation";
@@ -209,4 +210,5 @@ public:
     static constexpr const char *XML_SOUNDS = "soundEffects";
     static constexpr const char *XML_UPDATEAUTO = "automaticUpdates";
     static constexpr const char *XML_UPDATECHECKTIME = "lastUpdateCheck";
+    static constexpr const char *XML_VOLUME_LIMITER = "volumeLimiter";
 };

@@ -292,7 +292,7 @@ void CoreAudio::Volume(float vol) {
 
     if (_volumeControl) {
         if (_transform) {
-            vol = _transform->Transform(vol);
+            vol = _transform->ToVirtual(vol);
         }
 
         _volumeControl->SetMasterVolumeLevelScalar(vol, &G3RVXCoreAudioEvent);

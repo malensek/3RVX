@@ -34,8 +34,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     QCLOG(L" |____/|_| \\_\\ \\_/   /_/\\_\\____/ ");
     QCLOG(L"");
 
-    QCLOG(L"Starting up...");
-
     HANDLE mutex;
     mutex = CreateMutex(NULL, FALSE, L"Local\\3RVX");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {

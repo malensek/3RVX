@@ -38,7 +38,9 @@ public:
 
     std::wstring AudioDeviceID();
     int VolumeCurveAdjustment();
+    void VolumeCurveAdjustment(int value);
     float VolumeLimiter();
+    void VolumeLimiter(float limit);
 
     AnimationTypes::HideAnimation HideAnim();
     void HideAnim(AnimationTypes::HideAnimation anim);

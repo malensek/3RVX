@@ -190,11 +190,19 @@ std::wstring Settings::AudioDeviceID() {
 }
 
 int Settings::VolumeCurveAdjustment() {
-    return GetInt(XML_CURVE_ADJUST);
+    return GetFloat(XML_CURVE_ADJUST);
+}
+
+void Settings::VolumeCurveAdjustment(int value) {
+    SetElementValue(XML_CURVE_ADJUST, value);
 }
 
 float Settings::VolumeLimiter() {
     return GetFloat(XML_VOLUME_LIMITER);
+}
+
+void Settings::VolumeLimiter(float limit) {
+    SetElementValue(XML_VOLUME_LIMITER, limit);
 }
 
 std::wstring Settings::LanguageName() {

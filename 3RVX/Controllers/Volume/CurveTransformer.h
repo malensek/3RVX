@@ -4,17 +4,31 @@
 
 #include "VolumeTransformation.h"
 
+/// <summary>
+/// Transforms volume inputs to adjust for the system/hardware audio taper.
+/// </summary>
 class CurveTransformer : public VolumeTransformation {
 public:
 
-    CurveTransformer(float exp) {
-        base = pow(2.0f, exp);
+    /// <summary>
+    /// Creates a new CurveTransformer with the given scale factor. The scale
+    /// determines the exponent used when reshaping the volume curve:
+    /// base = 2^scale
+    /// </summary>
+    CurveTransformer(float scale) {
+        base = pow(2.0f, scale);
+        logBase = log(base);
     }
 
-    virtual float Transform(float vol) {
+    virtual float ToVirtual(float vol) {
         return (pow(base, vol) - 1) / (base - 1);
+    }
+
+    virtual float FromVirtual(float vol) {
+        return log(vol * (base - 1) + 1) / logBase;
     }
 
 private:
     float base;
+    float logBase;
 };

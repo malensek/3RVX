@@ -479,8 +479,10 @@ bool Settings::HasSetting(std::string elementName) {
 bool Settings::GetEnabled(std::string elementName, const bool defaultSetting) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
-        std::wstring elStr = StringUtils::Widen(elementName);
-        CLOG(L"Warning: XML element '%s' not found", elStr.c_str());
+        if (ENABLE_3RVX_LOG) {
+            std::wstring elStr = StringUtils::Widen(elementName);
+            CLOG(L"Warning: XML element '%s' not found", elStr.c_str());
+        }
         return defaultSetting;
     } else {
         bool val = false;
@@ -497,8 +499,10 @@ void Settings::SetEnabled(std::string elementName, bool enabled) {
 std::wstring Settings::GetText(std::string elementName) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
-        CLOG(L"Warning: XML element %s not found",
-            StringUtils::Widen(elementName).c_str());
+        if (ENABLE_3RVX_LOG) {
+            CLOG(L"Warning: XML element %s not found",
+                StringUtils::Widen(elementName).c_str());
+        }
         return L"";
     }
 
@@ -518,8 +522,10 @@ void Settings::SetText(std::string elementName, std::string text) {
 int Settings::GetInt(std::string elementName, const int defaultValue) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     if (el == NULL) {
-        std::wstring elStr = StringUtils::Widen(elementName);
-        CLOG(L"Warning: XML element '%s' not found", elStr.c_str());
+        if (ENABLE_3RVX_LOG) {
+            std::wstring elStr = StringUtils::Widen(elementName);
+            CLOG(L"Warning: XML element '%s' not found", elStr.c_str());
+        }
         return defaultValue;
     }
 

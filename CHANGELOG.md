@@ -1,16 +1,20 @@
 3RVX Changelog
 ==============
 
+Beta 11 (2.9.3)
+---------------
+* Brightness OSD
+* Keyboard OSD
+
 Beta 10 (2.9.2)
 ---------------
 * Custom volume curves
 * Custom volume limits
-* Brightness OSD
-* Keyboard OSD
 * Detailed error messages
 * Bugfix: Hotkey argument range validation
 * Bugfix: Changing the volume slider while muted now unmutes the volume
 * Bugfix: Display changes are monitored and accounted for (multi-monitor setups) [#36]
+* Bugfix: Intermittent optical disk eject failure [#37]
 
 Beta 9 (2.9.1)
 ------

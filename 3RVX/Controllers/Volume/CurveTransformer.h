@@ -9,7 +9,6 @@
 /// </summary>
 class CurveTransformer : public VolumeTransformation {
 public:
-
     /// <summary>
     /// Creates a new CurveTransformer with the given scale factor. The scale
     /// determines the exponent used when reshaping the volume curve:

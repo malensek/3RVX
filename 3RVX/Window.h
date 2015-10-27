@@ -12,6 +12,8 @@
 /// </summary>
 class Window {
 public:
+    class Builder;
+
     /// <summary>
     /// Creates a window and registers a class for it. If the window cannot be
     /// created or the class cannot be registered, an error message will be
@@ -63,4 +65,117 @@ private:
     HINSTANCE _hInstance;
     HWND _hWnd;
     std::wstring _title;
+};
+
+class Window::Builder {
+public:
+    Builder(LPCWSTR className) :
+    _className(className),
+    _title(L""),
+    _hInstance(NULL),
+    _x(CW_USEDEFAULT),
+    _y(CW_USEDEFAULT),
+    _width(0),
+    _height(0),
+    _classStyle(NULL),
+    _style(NULL),
+    _exStyle(NULL),
+    _parent(NULL),
+    _menu(NULL),
+    _icon(NULL),
+    _cursor(NULL),
+    _background((HBRUSH) (COLOR_WINDOW + 1)) {
+
+    }
+
+    Builder &Title(LPCWSTR title) {
+        _title = title;
+        return *this;
+    }
+
+    Builder &InstanceHandle(HINSTANCE hInstance) {
+        _hInstance = hInstance;
+        return *this;
+    }
+
+    Builder &X(int x) {
+        _x = x;
+        return *this;
+    }
+
+    Builder &Y(int y) {
+        _y = y;
+        return *this;
+    }
+
+    Builder &Width(int width) {
+        _width = width;
+        return *this;
+    }
+
+    Builder &Height(int height) {
+        _height = height;
+        return *this;
+    }
+
+    Builder &ClassStyle(UINT classStyle) {
+        _classStyle = classStyle;
+        return *this;
+    }
+
+    Builder &WindowStyle(DWORD style) {
+        _style = style;
+        return *this;
+    }
+
+    Builder &ExtendedStyle(DWORD exStyle) {
+        _exStyle = exStyle;
+        return *this;
+    }
+
+    Builder &Parent(HWND parent) {
+        _parent = parent;
+        return *this;
+    }
+
+    Builder &Menu(HMENU menu) {
+        _menu = menu;
+        return *this;
+    }
+
+    Builder &Icon(HICON icon) {
+        _icon = icon;
+        return *this;
+    }
+
+    Builder &Cursor(HCURSOR cursor) {
+        _cursor = cursor;
+        return *this;
+    }
+
+    Builder &Background(HBRUSH bgBrush) {
+        _background = bgBrush;
+        return *this;
+    }
+
+    Window Build() {
+        return Window(_className, _title, _hInstance,
+            _x, _y, _width, _height,
+            _classStyle, _style, _exStyle,
+            _parent,
+            _menu, _icon, _cursor, _background);
+    }
+
+private:
+    LPCWSTR _className;
+    LPCWSTR _title;
+    HINSTANCE _hInstance;
+    int _x, _y, _width, _height;
+    UINT _classStyle;
+    DWORD _style, _exStyle;
+    HWND _parent;
+    HMENU _menu;
+    HICON _icon;
+    HCURSOR _cursor;
+    HBRUSH _background;
 };

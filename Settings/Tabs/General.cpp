@@ -20,7 +20,6 @@ void General::Initialize() {
     INIT_CONTROL(CHK_STARTUP, Checkbox, _startup);
     INIT_CONTROL(CHK_SHOWSTARTUP, Checkbox, _showStartup);
     INIT_CONTROL(CHK_SOUNDS, Checkbox, _sounds);
-    INIT_CONTROL(CHK_NOTIFY, Checkbox, _notifyIcon);
     INIT_CONTROL(CHK_AUTOUPDATE, Checkbox, _autoUpdate);
     INIT_CONTROL(BTN_CHECK, Button, _checkNow);
     _checkNow.OnClick = [this]() {
@@ -88,7 +87,6 @@ void General::LoadSettings() {
     LanguageTranslator *lt = settings->Translator();
     _startup.Checked(RunOnStartup());
     _showStartup.Checked(settings->ShowOnStartup());
-    _notifyIcon.Checked(settings->NotifyIconEnabled());
     _sounds.Checked(settings->SoundEffectsEnabled());
     _autoUpdate.Checked(settings->AutomaticUpdates());
 
@@ -131,7 +129,6 @@ void General::SaveSettings() {
 
     RunOnStartup(_startup.Checked());
     settings->ShowOnStartup(_showStartup.Checked());
-    settings->NotifyIconEnabled(_notifyIcon.Checked());
     settings->SoundEffectsEnabled(_sounds.Checked());
     settings->AutomaticUpdates(_autoUpdate.Checked());
 

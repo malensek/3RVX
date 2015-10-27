@@ -27,7 +27,6 @@ private:
     Checkbox _startup;
     Checkbox _showStartup;
     Checkbox _sounds;
-    Checkbox _notifyIcon;
     Checkbox _autoUpdate;
     Button _checkNow;
 

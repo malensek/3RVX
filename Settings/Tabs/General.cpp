@@ -25,6 +25,11 @@ void General::Initialize() {
     INIT_CONTROL(BTN_CHECK, Button, _checkNow);
     _checkNow.OnClick = [this]() {
         _checkNow.Enabled(false);
+        HCURSOR waitCursor = LoadCursor(NULL, IDC_WAIT);
+        if (waitCursor) {
+            SetCursor(waitCursor);
+        }
+
         if (Updater::NewerVersionAvailable()) {
             Settings *settings = Settings::Instance();
             LanguageTranslator *translator = settings->Translator();
@@ -50,6 +55,10 @@ void General::Initialize() {
                 MB_OK | MB_ICONINFORMATION);
         }
 
+        HCURSOR arrowCursor = LoadCursor(NULL, IDC_ARROW);
+        if (arrowCursor) {
+            SetCursor(arrowCursor);
+        }
         _checkNow.Enabled(true);
         return true;
     };

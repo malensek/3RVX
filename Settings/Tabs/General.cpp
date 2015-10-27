@@ -24,6 +24,7 @@ void General::Initialize() {
     INIT_CONTROL(CHK_AUTOUPDATE, Checkbox, _autoUpdate);
     INIT_CONTROL(BTN_CHECK, Button, _checkNow);
     _checkNow.OnClick = [this]() {
+        _checkNow.Enabled(false);
         if (Updater::NewerVersionAvailable()) {
             Settings *settings = Settings::Instance();
             LanguageTranslator *translator = settings->Translator();
@@ -49,6 +50,7 @@ void General::Initialize() {
                 MB_OK | MB_ICONINFORMATION);
         }
 
+        _checkNow.Enabled(true);
         return true;
     };
 

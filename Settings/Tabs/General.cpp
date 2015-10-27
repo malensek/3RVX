@@ -99,7 +99,7 @@ void General::SaveSettings() {
     std::wstring lang = _language.Selection();
     if (lang != settings->LanguageName()) {
         settings->LanguageName(lang);
-        _3RVX::SettingsMessage(_3RVX::MSG_LANGCHANGE, NULL);
+        _3RVX::SettingsMessage(_3RVX::MSG_MUSTRESTART, NULL);
     }
 }
 

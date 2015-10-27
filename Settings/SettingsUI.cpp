@@ -281,7 +281,7 @@ LRESULT CALLBACK WndProc(
             SetActiveWindow(tabWnd);
             break;
 
-        case _3RVX::MSG_LANGCHANGE:
+        case _3RVX::MSG_MUSTRESTART:
             relaunch = true;
             break;
         }

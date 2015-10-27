@@ -218,6 +218,7 @@
     <ClInclude Include="Controllers\BrightnessController.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\CurveTransformer.h" />
+    <ClInclude Include="Controllers\Volume\VolumeLimiter.h" />
     <ClInclude Include="Controllers\Volume\VolumeTransformation.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
     <ClInclude Include="DisplayManager.h" />

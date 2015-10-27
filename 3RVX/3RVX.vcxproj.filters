@@ -201,6 +201,9 @@
     <ClInclude Include="Controllers\Volume\CurveTransformer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Controllers\Volume\VolumeLimiter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">

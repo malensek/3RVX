@@ -20,6 +20,7 @@ private:
     void LoadSkinInfo(std::wstring skinName);
     bool RunOnStartup();
     bool RunOnStartup(bool enable);
+    bool CheckForUpdates();
 
 private:
     /* Controls: */

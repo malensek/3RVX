@@ -22,45 +22,7 @@ void General::Initialize() {
     INIT_CONTROL(CHK_SOUNDS, Checkbox, _sounds);
     INIT_CONTROL(CHK_AUTOUPDATE, Checkbox, _autoUpdate);
     INIT_CONTROL(BTN_CHECK, Button, _checkNow);
-    _checkNow.OnClick = [this]() {
-        _checkNow.Enabled(false);
-        HCURSOR waitCursor = LoadCursor(NULL, IDC_WAIT);
-        if (waitCursor) {
-            SetCursor(waitCursor);
-        }
-
-        if (Updater::NewerVersionAvailable()) {
-            Settings *settings = Settings::Instance();
-            LanguageTranslator *translator = settings->Translator();
-            Version vers = Updater::RemoteVersion();
-
-            int msgResult = MessageBox(
-                _hWnd,
-                translator->TranslateAndReplace(
-                    L"A new version of 3RVX ({1}) is available. Install now?",
-                    vers.ToString()).c_str(),
-                translator->Translate(L"Update Available").c_str(),
-                MB_YESNO | MB_ICONQUESTION);
-
-            if (msgResult == IDYES) {
-                ProgressWindow *pw = new ProgressWindow(vers);
-            }
-
-        } else {
-            MessageBox(
-                _hWnd,
-                L"Your copy of 3RVX is up-to-date.",
-                L"Update Check",
-                MB_OK | MB_ICONINFORMATION);
-        }
-
-        HCURSOR arrowCursor = LoadCursor(NULL, IDC_ARROW);
-        if (arrowCursor) {
-            SetCursor(arrowCursor);
-        }
-        _checkNow.Enabled(true);
-        return true;
-    };
+    _checkNow.OnClick = std::bind(&General::CheckForUpdates, this);
 
     INIT_CONTROL(GRP_SKIN, GroupBox, _skinGroup);
     INIT_CONTROL(CMB_SKIN, ComboBox, _skin);
@@ -254,4 +216,44 @@ std::list<std::wstring> General::FindLanguages(std::wstring dir) {
     FindClose(hFind);
 
     return languages;
+}
+
+bool General::CheckForUpdates() {
+    _checkNow.Enabled(false);
+    HCURSOR waitCursor = LoadCursor(NULL, IDC_WAIT);
+    if (waitCursor) {
+        SetCursor(waitCursor);
+    }
+
+    if (Updater::NewerVersionAvailable()) {
+        Settings *settings = Settings::Instance();
+        LanguageTranslator *translator = settings->Translator();
+        Version vers = Updater::RemoteVersion();
+
+        int msgResult = MessageBox(
+            _hWnd,
+            translator->TranslateAndReplace(
+                L"A new version of 3RVX ({1}) is available. Install now?",
+                vers.ToString()).c_str(),
+            translator->Translate(L"Update Available").c_str(),
+            MB_YESNO | MB_ICONQUESTION);
+
+        if (msgResult == IDYES) {
+            ProgressWindow *pw = new ProgressWindow(vers);
+        }
+
+    } else {
+        MessageBox(
+            _hWnd,
+            L"Your copy of 3RVX is up-to-date.",
+            L"Update Check",
+            MB_OK | MB_ICONINFORMATION);
+    }
+
+    HCURSOR arrowCursor = LoadCursor(NULL, IDC_ARROW);
+    if (arrowCursor) {
+        SetCursor(arrowCursor);
+    }
+    _checkNow.Enabled(true);
+    return true;
 }

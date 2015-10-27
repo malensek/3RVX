@@ -19,5 +19,6 @@ int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);
 
 BOOL CALLBACK GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK OSDTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK AboutTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);

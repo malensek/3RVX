@@ -36,13 +36,15 @@ typedef struct DLGTEMPLATEEX
 #include "Tabs/Tab.h"
 #include "Tabs/General.h"
 #include "Tabs/Display.h"
+#include "Tabs/OSD.h"
 #include "Tabs/Hotkeys.h"
 #include "Tabs/About.h"
 General general;
 Display display;
+OSD osd;
 Hotkeys hotkeys;
 About about;
-Tab *tabs[] = { &general, &display, &hotkeys, &about };
+Tab *tabs[] = { &general, &display, &osd, &hotkeys, &about };
 
 /* Startup x/y location offsets */
 #define XOFFSET 70
@@ -169,11 +171,12 @@ int APIENTRY wWinMain(
 INT_PTR LaunchPropertySheet() {
     Settings *settings = Settings::Instance();
     settings->Load();
-    PROPSHEETPAGE psp[4];
+    PROPSHEETPAGE psp[5];
 
     LanguageTranslator *lt = settings->Translator();
     std::wstring genTitle = lt->Translate(std::wstring(L"General"));
     std::wstring dispTitle = lt->Translate(std::wstring(L"Display"));
+    std::wstring osdTitle = lt->Translate(std::wstring(L"OSD"));
     std::wstring hkTitle = lt->Translate(std::wstring(L"Hotkeys"));
     std::wstring aboutTitle = lt->Translate(std::wstring(L"About"));
 
@@ -201,21 +204,31 @@ INT_PTR LaunchPropertySheet() {
     psp[2].dwSize = sizeof(PROPSHEETPAGE);
     psp[2].dwFlags = PSP_USETITLE;
     psp[2].hInstance = hInst;
-    psp[2].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
+    psp[2].pszTemplate = MAKEINTRESOURCE(IDD_OSD);
     psp[2].pszIcon = NULL;
-    psp[2].pfnDlgProc = HotkeyTabProc;
-    psp[2].pszTitle = &hkTitle[0];
+    psp[2].pfnDlgProc = OSDTabProc;
+    psp[2].pszTitle = &osdTitle[0];
     psp[2].lParam = 0;
 
     psp[3] = { 0 };
     psp[3].dwSize = sizeof(PROPSHEETPAGE);
     psp[3].dwFlags = PSP_USETITLE;
     psp[3].hInstance = hInst;
-    psp[3].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
+    psp[3].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
     psp[3].pszIcon = NULL;
-    psp[3].pfnDlgProc = AboutTabProc;
-    psp[3].pszTitle = &aboutTitle[0];
+    psp[3].pfnDlgProc = HotkeyTabProc;
+    psp[3].pszTitle = &hkTitle[0];
     psp[3].lParam = 0;
+
+    psp[4] = { 0 };
+    psp[4].dwSize = sizeof(PROPSHEETPAGE);
+    psp[4].dwFlags = PSP_USETITLE;
+    psp[4].hInstance = hInst;
+    psp[4].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
+    psp[4].pszIcon = NULL;
+    psp[4].pfnDlgProc = AboutTabProc;
+    psp[4].pszTitle = &aboutTitle[0];
+    psp[4].lParam = 0;
 
     PROPSHEETHEADER psh = { 0 };
     psh.dwSize = sizeof(PROPSHEETHEADER);
@@ -342,6 +355,10 @@ BOOL CALLBACK GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 
 BOOL CALLBACK DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
     return display.TabProc(hDlg, message, wParam, lParam);
+}
+
+BOOL CALLBACK OSDTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+    return osd.TabProc(hDlg, message, wParam, lParam);
 }
 
 BOOL CALLBACK HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {

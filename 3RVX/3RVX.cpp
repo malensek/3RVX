@@ -92,6 +92,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
 _3RVX::_3RVX(HINSTANCE hInstance) :
 Window(_3RVX::CLASS_3RVX, _3RVX::CLASS_3RVX, hInstance) {
+
 }
 
 void _3RVX::Initialize() {

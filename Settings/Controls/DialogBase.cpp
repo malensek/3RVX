@@ -15,7 +15,8 @@ HWND DialogBase::DialogHandle() {
     return _dlgHwnd;
 }
 
-INT_PTR DialogBase::StaticDialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+INT_PTR DialogBase::StaticDialogProc(
+        HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     DialogBase *dlg;
 
     if (uMsg == WM_INITDIALOG) {

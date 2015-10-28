@@ -52,9 +52,7 @@ Tab *tabs[] = { &general, &display, &osd, &hotkeys, &about };
 
 const wchar_t *MUTEX_NAME = L"Local\\3RVXSettings";
 HANDLE mutex;
-HWND mainWnd = NULL;
 HWND tabWnd = NULL;
-HINSTANCE hInst;
 bool relaunch = false;
 
 int APIENTRY wWinMain(
@@ -63,7 +61,6 @@ int APIENTRY wWinMain(
         _In_ LPTSTR lpCmdLine,
         _In_ int nCmdShow) {
 
-    hInst = hInstance;
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
@@ -141,34 +138,27 @@ int APIENTRY wWinMain(
         SendMessage(updater, WM_CLOSE, 0, 0);
     }
 
-    WNDCLASSEX wcex = { 0 };
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.lpfnWndProc = WndProc;
-    wcex.hInstance = hInst;
-    wcex.hIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_SETTINGS));
-    wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW);
-    wcex.lpszClassName = _3RVX::CLASS_3RVX_SETTINGS;
-
-    if (RegisterClassEx(&wcex) == 0) {
-        CLOG(L"Could not register class: %d", GetLastError());
-        return EXIT_FAILURE;
-    }
-
-    mainWnd = CreateWindowEx(
-        NULL,
-        _3RVX::CLASS_3RVX_SETTINGS, _3RVX::CLASS_3RVX_SETTINGS,
-        NULL, 0, 0, 0, 0, NULL, NULL, hInst, NULL);
-
+    SettingsUI mainWnd(hInstance);
     INT_PTR result;
     do {
-        result = LaunchPropertySheet();
+        result = mainWnd.LaunchPropertySheet();
         CLOG(L"Relaunch: %s", relaunch ? L"TRUE" : L"FALSE");
     } while (relaunch == true);
 
     return result;
 }
 
-INT_PTR LaunchPropertySheet() {
+SettingsUI::SettingsUI(HINSTANCE hInstance) :
+Window(
+        Window::Builder(_3RVX::CLASS_3RVX_SETTINGS)
+        .Title(_3RVX::CLASS_3RVX_SETTINGS)
+        .InstanceHandle(hInstance)
+        .Icon(LoadIcon(NULL, MAKEINTRESOURCE(IDI_SETTINGS)))
+        .Build()) {
+
+}
+
+INT_PTR SettingsUI::LaunchPropertySheet() {
     Settings *settings = Settings::Instance();
     settings->Load();
     PROPSHEETPAGE psp[5];
@@ -183,7 +173,7 @@ INT_PTR LaunchPropertySheet() {
     psp[0] = { 0 };
     psp[0].dwSize = sizeof(PROPSHEETPAGE);
     psp[0].dwFlags = PSP_USETITLE;
-    psp[0].hInstance = hInst;
+    psp[0].hInstance = Window::InstanceHandle();
     psp[0].pszTemplate = MAKEINTRESOURCE(IDD_GENERAL);
     psp[0].pszIcon = NULL;
     psp[0].pfnDlgProc = GeneralTabProc;
@@ -193,7 +183,7 @@ INT_PTR LaunchPropertySheet() {
     psp[1] = { 0 };
     psp[1].dwSize = sizeof(PROPSHEETPAGE);
     psp[1].dwFlags = PSP_USETITLE;
-    psp[1].hInstance = hInst;
+    psp[1].hInstance = Window::InstanceHandle();
     psp[1].pszTemplate = MAKEINTRESOURCE(IDD_DISPLAY);
     psp[1].pszIcon = NULL;
     psp[1].pfnDlgProc = DisplayTabProc;
@@ -203,7 +193,7 @@ INT_PTR LaunchPropertySheet() {
     psp[2] = { 0 };
     psp[2].dwSize = sizeof(PROPSHEETPAGE);
     psp[2].dwFlags = PSP_USETITLE;
-    psp[2].hInstance = hInst;
+    psp[2].hInstance = Window::InstanceHandle();
     psp[2].pszTemplate = MAKEINTRESOURCE(IDD_OSD);
     psp[2].pszIcon = NULL;
     psp[2].pfnDlgProc = OSDTabProc;
@@ -213,7 +203,7 @@ INT_PTR LaunchPropertySheet() {
     psp[3] = { 0 };
     psp[3].dwSize = sizeof(PROPSHEETPAGE);
     psp[3].dwFlags = PSP_USETITLE;
-    psp[3].hInstance = hInst;
+    psp[3].hInstance = Window::InstanceHandle();
     psp[3].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
     psp[3].pszIcon = NULL;
     psp[3].pfnDlgProc = HotkeyTabProc;
@@ -223,7 +213,7 @@ INT_PTR LaunchPropertySheet() {
     psp[4] = { 0 };
     psp[4].dwSize = sizeof(PROPSHEETPAGE);
     psp[4].dwFlags = PSP_USETITLE;
-    psp[4].hInstance = hInst;
+    psp[4].hInstance = Window::InstanceHandle();
     psp[4].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
     psp[4].pszIcon = NULL;
     psp[4].pfnDlgProc = AboutTabProc;
@@ -233,8 +223,8 @@ INT_PTR LaunchPropertySheet() {
     PROPSHEETHEADER psh = { 0 };
     psh.dwSize = sizeof(PROPSHEETHEADER);
     psh.dwFlags = PSH_PROPSHEETPAGE | PSH_USEICONID | PSH_USECALLBACK;
-    psh.hwndParent = mainWnd;
-    psh.hInstance = hInst;
+    psh.hwndParent = Window::Handle();
+    psh.hInstance = Window::InstanceHandle();
     psh.pszIcon = MAKEINTRESOURCE(IDI_SETTINGS);
     psh.pszCaption = L"3RVX Settings";
     psh.nStartPage = 0;
@@ -248,7 +238,8 @@ INT_PTR LaunchPropertySheet() {
     if (relaunch == false) {
         POINT pt = { 0 };
         GetCursorPos(&pt);
-        MoveWindow(mainWnd, pt.x - XOFFSET, pt.y - YOFFSET, 0, 0, TRUE);
+        MoveWindow(Window::Handle(),
+            pt.x - XOFFSET, pt.y - YOFFSET, 0, 0, TRUE);
     }
 
     relaunch = false;
@@ -257,7 +248,7 @@ INT_PTR LaunchPropertySheet() {
     return PropertySheet(&psh);
 }
 
-LRESULT CALLBACK WndProc(
+LRESULT SettingsUI::WndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     PAINTSTRUCT ps;

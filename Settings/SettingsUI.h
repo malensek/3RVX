@@ -12,8 +12,22 @@
 #include "../3RVX/3RVX.h"
 #include "resource.h"
 
+
+class SettingsUI : public Window {
+public:
+    SettingsUI(HINSTANCE hInstance);
+
+    INT_PTR LaunchPropertySheet();
+
+    virtual LRESULT WndProc(HWND hWnd, UINT message,
+        WPARAM wParam, LPARAM lParam);
+
+
+private:
+
+};
+
 /* Forward Declarations */
-INT_PTR LaunchPropertySheet();
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);
 

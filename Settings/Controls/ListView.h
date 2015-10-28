@@ -18,6 +18,12 @@ public:
 
     }
 
+    ListView(int id, DialogBase &parent) :
+    Control(id, parent, false),
+    _columns(0) {
+
+    }
+
     void AddListExStyle(DWORD style);
 
     void AddColumn(std::wstring name, int width);

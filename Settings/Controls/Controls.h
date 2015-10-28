@@ -8,6 +8,7 @@
 #include "EditBox.h"
 #include "GroupBox.h"
 #include "Label.h"
+#include "ListBox.h"
 #include "ListView.h"
 #include "ProgressBar.h"
 #include "Spinner.h"

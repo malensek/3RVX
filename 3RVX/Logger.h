@@ -60,6 +60,8 @@ public:
     static void Start();
     static void Stop();
 
+    static void LogLastError();
+
 private:
     static FILE *in, *out, *err;
 };

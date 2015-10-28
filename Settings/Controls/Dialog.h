@@ -10,20 +10,7 @@
 
 class Control;
 
-class Dialog : DialogBase, public Window {
+class Dialog : public DialogBase, public Window {
 public:
     Dialog(LPCWSTR className, LPCWSTR dlgTemplate);
-
-    void AddControl(Control *control);
-
-    HWND DialogHandle();
-
-protected:
-    HWND _dlgHwnd;
-
-    /// <summary>Maps control IDs to their respective instances.</summary>
-    std::unordered_map<int, Control *> _controlMap;
-
-    virtual INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg,
-        WPARAM wParam, LPARAM lParam);
 };

@@ -1,9 +1,11 @@
 #pragma once
 
-#include "Tab.h"
+#include "../Controls/Controls.h"
+#include "SettingsTab.h"
 
-class OSD : public Tab {
+class OSD : public SettingsTab {
 public:
+    OSD(HINSTANCE hInstance, LPCWSTR tabTemplate, LPCWSTR title = L"");
     virtual void SaveSettings();
 
 protected:

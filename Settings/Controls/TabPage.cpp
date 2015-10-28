@@ -17,8 +17,30 @@ _title(title) {
     psp.hInstance = _hInstance;
     psp.pszTemplate = tabTemplate;
     psp.pszIcon = NULL;
-    psp.pfnDlgProc = StaticDialogProc;
+    psp.pfnDlgProc = StaticTabProc;
     psp.lParam = (LPARAM) this;
 
     _pageHandle = CreatePropertySheetPage(&psp);
+}
+
+INT_PTR TabPage::StaticTabProc(
+        HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    TabPage *tab;
+
+    if (uMsg == WM_INITDIALOG) {
+        tab = (TabPage *) ((LPPROPSHEETPAGE) lParam)->lParam;
+        SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR) tab);
+    } else {
+        tab = (TabPage *) GetWindowLongPtr(hwndDlg, GWLP_USERDATA);
+        if (!tab) {
+            return FALSE;
+        }
+    }
+
+    tab->DialogProc(hwndDlg, uMsg, wParam, lParam);
+}
+
+
+HPROPSHEETPAGE TabPage::PageHandle() {
+    return _pageHandle;
 }

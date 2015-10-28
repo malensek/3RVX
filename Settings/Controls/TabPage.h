@@ -12,9 +12,13 @@ class TabPage : public DialogBase {
 public:
     TabPage(HINSTANCE hInstance, LPCWSTR tabTemplate, LPCWSTR title = L"");
 
+    HPROPSHEETPAGE PageHandle();
+
 protected:
-    HWND _hWnd;
     HINSTANCE _hInstance;
     HPROPSHEETPAGE _pageHandle;
     std::wstring _title;
+
+    static INT_PTR CALLBACK StaticTabProc(HWND hwndDlg, UINT uMsg,
+        WPARAM wParam, LPARAM lParam);
 };

@@ -19,7 +19,7 @@ _parent(parent) {
     }
 }
 
-Control::Control(int id, Dialog &parent, bool translate) :
+Control::Control(int id, DialogBase &parent, bool translate) :
 _id(id),
 _parentDlg(&parent) {
     _parent = _parentDlg->DialogHandle();

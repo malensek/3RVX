@@ -16,7 +16,7 @@ public:
 
     }
 
-    Button(int id, Dialog &parent, bool translate = true) :
+    Button(int id, DialogBase &parent, bool translate = true) :
     Control(id, parent, translate) {
 
     }

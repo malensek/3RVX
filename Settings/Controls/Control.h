@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-class Dialog;
+class DialogBase;
 
 /// <summary>
 /// Base class for Windows forms control implementations (buttons, checkboxes,
@@ -16,7 +16,7 @@ class Control {
 public:
     Control();
     Control(int id, HWND parent, bool translate = true);
-    Control(int id, Dialog &parent, bool translate = true);
+    Control(int id, DialogBase &parent, bool translate = true);
     ~Control();
 
     int ID();
@@ -115,7 +115,7 @@ protected:
     int _id;
     HWND _hWnd;
     HWND _parent;
-    Dialog *_parentDlg;
+    DialogBase *_parentDlg;
 
 protected:
     static const int MAX_EDITSTR = 4096;

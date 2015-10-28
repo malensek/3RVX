@@ -102,9 +102,6 @@
     <ClInclude Include="Tabs\KeyGrabber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tabs\Tab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\3RVX\SyntheticKeyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -148,6 +145,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tabs\OSD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\SettingsTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tabs\Tab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls\TabPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controls\DialogBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -224,9 +233,6 @@
     <ClCompile Include="Tabs\KeyGrabber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tabs\Tab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\3RVX\SyntheticKeyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -264,6 +270,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tabs\OSD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\SettingsTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tabs\Tab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controls\TabPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controls\DialogBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

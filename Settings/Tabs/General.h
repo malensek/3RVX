@@ -1,12 +1,17 @@
 #pragma once
 
-#include "Tab.h"
+#include "SettingsTab.h"
 
 #include <list>
 #include <string>
 
-class General : public Tab {
+class General : public SettingsTab {
 public:
+    General() :
+    SettingsTab(NULL, MAKEINTRESOURCE(IDD_GENERAL), L"General") {
+
+    }
+
     virtual void SaveSettings();
 
 private:
@@ -24,20 +29,20 @@ private:
 
 private:
     /* Controls: */
-    GroupBox _behaviorGroup;
-    Checkbox _startup;
-    Checkbox _showStartup;
-    Checkbox _sounds;
-    Checkbox _autoUpdate;
-    Button _checkNow;
+    GroupBox *_behaviorGroup;
+    Checkbox *_startup;
+    Checkbox *_showStartup;
+    Checkbox *_sounds;
+    Checkbox *_autoUpdate;
+    Button *_checkNow;
 
-    GroupBox _skinGroup;
-    ComboBox _skin;
-    Label _author;
-    Button _website;
+    GroupBox *_skinGroup;
+    ComboBox *_skin;
+    Label *_author;
+    Button *_website;
 
-    GroupBox _languageGroup;
-    ComboBox _language;
+    GroupBox *_languageGroup;
+    ComboBox *_language;
 
 private:
     static const wchar_t REGKEY_NAME[];

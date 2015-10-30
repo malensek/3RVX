@@ -16,23 +16,23 @@ const wchar_t General::REGKEY_RUN[]
     = L"Software\\Microsoft\\Windows\\CurrentVersion\\Run";
 
 void General::Initialize() {
-    INIT_CONTROL(GRP_BEHAVIOR, GroupBox, _behaviorGroup);
-    INIT_CONTROL(CHK_STARTUP, Checkbox, _startup);
-    INIT_CONTROL(CHK_SHOWSTARTUP, Checkbox, _showStartup);
-    INIT_CONTROL(CHK_SOUNDS, Checkbox, _sounds);
-    INIT_CONTROL(CHK_AUTOUPDATE, Checkbox, _autoUpdate);
-    INIT_CONTROL(BTN_CHECK, Button, _checkNow);
-    _checkNow.OnClick = std::bind(&General::CheckForUpdates, this);
+    _behaviorGroup = new GroupBox(GRP_BEHAVIOR, *this);
+    _startup = new Checkbox(CHK_STARTUP, *this);
+    _showStartup = new Checkbox(CHK_SHOWSTARTUP, *this);
+    _sounds = new Checkbox(CHK_SOUNDS, *this);
+    _autoUpdate = new Checkbox(CHK_AUTOUPDATE, *this);
+    _checkNow = new Button(BTN_CHECK, *this);
+    _checkNow->OnClick = std::bind(&General::CheckForUpdates, this);
 
-    INIT_CONTROL(GRP_SKIN, GroupBox, _skinGroup);
-    INIT_CONTROL(CMB_SKIN, ComboBox, _skin);
-    _skin.OnSelectionChange = [this]() {
-        LoadSkinInfo(_skin.Selection());
+    _skinGroup = new GroupBox(GRP_SKIN, *this);
+    _skin = new ComboBox(CMB_SKIN, *this);
+    _skin->OnSelectionChange = [this]() {
+        LoadSkinInfo(_skin->Selection());
         return true;
     };
-    INIT_CONTROL(LBL_AUTHOR, Label, _author);
-    INIT_CONTROL(BTN_WEBSITE, Button, _website);
-    _website.OnClick = [this]() {
+    _author = new Label(LBL_AUTHOR, *this);
+    _website = new Button(BTN_WEBSITE, *this);
+    _website->OnClick = [this]() {
         if (_url != L"") {
             ShellExecute(NULL, L"open", _url.c_str(),
                 NULL, NULL, SW_SHOWNORMAL);
@@ -40,29 +40,29 @@ void General::Initialize() {
         return true;
     };
 
-    INIT_CONTROL(GRP_LANGUAGE, GroupBox, _languageGroup);
-    INIT_CONTROL(CMB_LANG, ComboBox, _language);
+    _languageGroup = new GroupBox(GRP_LANGUAGE, *this);
+    _language = new ComboBox(CMB_LANG, *this);
 }
 
 void General::LoadSettings() {
     Settings *settings = Settings::Instance();
     LanguageTranslator *lt = settings->Translator();
-    _startup.Checked(RunOnStartup());
-    _showStartup.Checked(settings->ShowOnStartup());
-    _sounds.Checked(settings->SoundEffectsEnabled());
-    _autoUpdate.Checked(settings->AutomaticUpdates());
+    _startup->Checked(RunOnStartup());
+    _showStartup->Checked(settings->ShowOnStartup());
+    _sounds->Checked(settings->SoundEffectsEnabled());
+    _autoUpdate->Checked(settings->AutomaticUpdates());
 
     /* Determine which skins are available */
     std::list<std::wstring> skins = FindSkins(Settings::SkinDir().c_str());
     for (std::wstring skin : skins) {
-        _skin.AddItem(skin);
+        _skin->AddItem(skin);
     }
 
     /* Update the combo box with the current skin */
     std::wstring current = settings->CurrentSkin();
-    int idx = _skin.Select(current);
+    int idx = _skin->Select(current);
     if (idx == CB_ERR) {
-        _skin.Select(Settings::DefaultSkin);
+        _skin->Select(Settings::DefaultSkin);
     }
     LoadSkinInfo(current);
 
@@ -75,28 +75,28 @@ void General::LoadSettings() {
             continue;
         }
 
-        _language.AddItem(language.substr(0, ext));
+        _language->AddItem(language.substr(0, ext));
     }
     std::wstring currentLang = settings->LanguageName();
-    _language.Select(currentLang);
+    _language->Select(currentLang);
 }
 
 void General::SaveSettings() {
-    if (_hWnd == NULL) {
+    if (DialogHandle() == NULL) {
         return;
     }
 
     CLOG(L"Saving: General");
     Settings *settings = Settings::Instance();
 
-    RunOnStartup(_startup.Checked());
-    settings->ShowOnStartup(_showStartup.Checked());
-    settings->SoundEffectsEnabled(_sounds.Checked());
-    settings->AutomaticUpdates(_autoUpdate.Checked());
+    RunOnStartup(_startup->Checked());
+    settings->ShowOnStartup(_showStartup->Checked());
+    settings->SoundEffectsEnabled(_sounds->Checked());
+    settings->AutomaticUpdates(_autoUpdate->Checked());
 
-    settings->CurrentSkin(_skin.Selection());
+    settings->CurrentSkin(_skin->Selection());
 
-    std::wstring lang = _language.Selection();
+    std::wstring lang = _language->Selection();
     if (lang != settings->LanguageName()) {
         settings->LanguageName(lang);
         _3RVX::SettingsMessage(_3RVX::MSG_MUSTRESTART, NULL);
@@ -175,14 +175,14 @@ void General::LoadSkinInfo(std::wstring skinName) {
     std::wstring transAuthor
         = Settings::Instance()->Translator()->TranslateAndReplace(
         L"Author: {1}", s.Author());
-    _author.Text(transAuthor);
+    _author->Text(transAuthor);
 
     std::wstring url = s.URL();
     if (url == L"") {
-        _website.Disable();
+        _website->Disable();
     } else {
         _url = s.URL();
-        _website.Enable();
+        _website->Enable();
     }
 }
 
@@ -219,7 +219,7 @@ std::list<std::wstring> General::FindLanguages(std::wstring dir) {
 }
 
 bool General::CheckForUpdates() {
-    _checkNow.Enabled(false);
+    _checkNow->Enabled(false);
     HCURSOR waitCursor = LoadCursor(NULL, IDC_WAIT);
     if (waitCursor) {
         SetCursor(waitCursor);
@@ -231,7 +231,7 @@ bool General::CheckForUpdates() {
         Version vers = Updater::RemoteVersion();
 
         int msgResult = MessageBox(
-            _hWnd,
+            DialogHandle(),
             translator->TranslateAndReplace(
                 L"A new version of 3RVX ({1}) is available. Install now?",
                 vers.ToString()).c_str(),
@@ -244,7 +244,7 @@ bool General::CheckForUpdates() {
 
     } else {
         MessageBox(
-            _hWnd,
+            DialogHandle(),
             L"Your copy of 3RVX is up-to-date.",
             L"Update Check",
             MB_OK | MB_ICONINFORMATION);
@@ -254,6 +254,6 @@ bool General::CheckForUpdates() {
     if (arrowCursor) {
         SetCursor(arrowCursor);
     }
-    _checkNow.Enabled(true);
+    _checkNow->Enabled(true);
     return true;
 }

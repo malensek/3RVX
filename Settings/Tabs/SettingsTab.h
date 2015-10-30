@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Controls/Controls.h"
 #include "../Controls/TabPage.h"
 
 /// <summary>

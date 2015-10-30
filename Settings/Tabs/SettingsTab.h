@@ -2,6 +2,7 @@
 
 #include "../Controls/Controls.h"
 #include "../Controls/TabPage.h"
+#include "../resource.h"
 
 /// <summary>
 /// Abstract class that encapsulates functionality for dealing with

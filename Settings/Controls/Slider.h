@@ -1,5 +1,8 @@
 #pragma once
 
+#include <Windows.h>
+#include <CommCtrl.h>
+
 #include "Control.h"
 
 class Slider : public Control {
@@ -8,6 +11,8 @@ public:
     Control(id, parent, false) {
 
     }
+
+    void Buddy(int buddyId, int position = 0);
 
     int Position();
     void Position(int position);

@@ -4,8 +4,8 @@
 
 class About : public SettingsTab {
 public:
-    About(HINSTANCE hInstance, LPCWSTR tabTemplate, LPCWSTR title = L"") :
-    SettingsTab(hInstance, tabTemplate, title) {
+    About() :
+    SettingsTab(NULL, MAKEINTRESOURCE(IDD_ABOUT), L"About") {
 
     }
 

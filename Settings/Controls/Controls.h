@@ -11,4 +11,5 @@
 #include "ListBox.h"
 #include "ListView.h"
 #include "ProgressBar.h"
+#include "Slider.h"
 #include "Spinner.h"

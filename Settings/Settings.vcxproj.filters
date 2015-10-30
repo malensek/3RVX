@@ -162,6 +162,9 @@
     <ClInclude Include="Controls\ListBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Controls\Slider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\TinyXml2\tinyxml2.cpp">
@@ -288,6 +291,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controls\ListBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controls\Slider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

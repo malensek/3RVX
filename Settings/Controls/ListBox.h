@@ -12,4 +12,9 @@ public:
     int AddItem(std::wstring item);
     int InsertItem(int index, std::wstring item);
 
+    virtual BOOL CALLBACK Command(unsigned short nCode);
+
+public:
+    /* Event Handlers */
+    std::function<bool()> OnSelectionChange;
 };

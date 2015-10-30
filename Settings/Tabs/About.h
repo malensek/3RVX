@@ -1,9 +1,14 @@
 #pragma once
 
-#include "Tab.h"
+#include "SettingsTab.h"
 
-class About : public Tab {
+class About : public SettingsTab {
 public:
+    About(HINSTANCE hInstance, LPCWSTR tabTemplate, LPCWSTR title = L"") :
+    SettingsTab(hInstance, tabTemplate, title) {
+
+    }
+
     virtual void SaveSettings();
 
 protected:
@@ -12,5 +17,5 @@ protected:
 
 private:
     /* Controls: */
-    Label _title;
+    Label *_title;
 };

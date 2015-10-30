@@ -5,10 +5,9 @@
 #include "../Updater/Version.h"
 
 void About::Initialize() {
-    INIT_CONTROL(LBL_TITLE, Label, _title);
-
+    _title = new Label(LBL_TITLE, *this, false);
     std::wstring version = Updater::MainAppVersion().ToString();
-    _title.Text(L"3RVX " + version);
+    _title->Text(L"3RVX " + version);
 }
 
 void About::LoadSettings() {

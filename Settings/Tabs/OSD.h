@@ -4,7 +4,12 @@
 
 class OSD : public SettingsTab {
 public:
-    OSD(HINSTANCE hInstance, LPCWSTR tabTemplate, LPCWSTR title = L"");
+    OSD() :
+    SettingsTab(NULL, MAKEINTRESOURCE(IDD_OSD), L"OSD") {
+
+    }
+
+
     virtual void SaveSettings();
 
 protected:

@@ -2,11 +2,6 @@
 
 #include "../resource.h"
 
-OSD::OSD(HINSTANCE hInstance, LPCWSTR tabTemplate, LPCWSTR title) :
-SettingsTab(hInstance, tabTemplate, title) {
-
-}
-
 void OSD::Initialize() {
     ListBox *lb = new ListBox(LST_OSDS, *this);
     lb->AddItem(L"Volume");

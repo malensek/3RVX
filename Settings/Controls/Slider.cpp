@@ -13,6 +13,10 @@ void Slider::Position(int position) {
     SendMessage(_hWnd, TBM_SETPOS, (WPARAM) TRUE, (LPARAM) position);
 }
 
+void Slider::Range(int lo, int hi) {
+    SendMessage(_hWnd, TBM_SETRANGE, (WPARAM) TRUE, MAKELPARAM(lo, hi));
+}
+
 BOOL Slider::Notification(NMHDR *nHdr) {
     switch (nHdr->code) {
     case TRBN_THUMBPOSCHANGING:

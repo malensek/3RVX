@@ -13,4 +13,9 @@ public:
     Control(id, parent) {
 
     }
+
+    Label(int id, DialogBase &parent, bool translate = true) :
+    Control(id, parent, false) {
+
+    }
 };

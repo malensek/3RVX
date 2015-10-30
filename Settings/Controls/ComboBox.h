@@ -6,12 +6,8 @@
 
 class ComboBox : public Control {
 public:
-    ComboBox() {
-
-    }
-
-    ComboBox(int id, HWND parent) :
-    Control(id, parent) {
+    ComboBox(int id, DialogBase &parent) :
+    Control(id, parent, false) {
 
     }
 

@@ -7,15 +7,6 @@
 
 class Button : public Control {
 public:
-    Button() {
-
-    }
-
-    Button(int id, HWND parent, bool translate = true) :
-    Control(id, parent, translate) {
-
-    }
-
     Button(int id, DialogBase &parent, bool translate = true) :
     Control(id, parent, translate) {
 

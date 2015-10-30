@@ -4,12 +4,8 @@
 
 class GroupBox : public Control {
 public:
-    GroupBox() {
-
-    }
-
-    GroupBox(int id, HWND parent) :
-    Control(id, parent) {
+    GroupBox(int id, DialogBase &parent, bool translate = true) :
+    Control(id, parent, translate) {
 
     }
 };

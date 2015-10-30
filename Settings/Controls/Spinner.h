@@ -10,12 +10,8 @@
 /// </summary>
 class Spinner : public Control {
 public:
-    Spinner() {
-
-    }
-
-    Spinner(int id, HWND parent) :
-    Control(id, parent) {
+    Spinner(int id, DialogBase &parent) :
+    Control(id, parent, false) {
 
     }
 

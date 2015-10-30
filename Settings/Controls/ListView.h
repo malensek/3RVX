@@ -7,17 +7,6 @@
 
 class ListView : public Control {
 public:
-    ListView() :
-    _columns(0) {
-
-    }
-
-    ListView(int id, HWND parent) :
-    Control(id, parent),
-    _columns(0) {
-
-    }
-
     ListView(int id, DialogBase &parent) :
     Control(id, parent, false),
     _columns(0) {

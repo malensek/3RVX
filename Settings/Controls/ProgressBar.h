@@ -6,8 +6,8 @@
 
 class ProgressBar : public Control, public StatusCallback {
 public:
-    ProgressBar(int id, DialogBase &parent, bool translate = true) :
-    Control(id, parent, translate) {
+    ProgressBar(int id, DialogBase &parent) :
+    Control(id, parent, false) {
 
     }
 

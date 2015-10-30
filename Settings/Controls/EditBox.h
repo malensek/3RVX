@@ -4,12 +4,8 @@
 
 class EditBox : public Control {
 public:
-    EditBox() {
-
-    }
-
-    EditBox(int id, HWND parent) :
-    Control(id, parent) {
+    EditBox(int id, DialogBase &parent) :
+    Control(id, parent, false) {
 
     }
 

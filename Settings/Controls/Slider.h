@@ -9,6 +9,8 @@ public:
 
     }
 
+    int Position();
+    void Position(int position);
     virtual BOOL CALLBACK Notification(NMHDR *nHdr);
 
 public:

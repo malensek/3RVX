@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Controls/Controls.h"
 #include "SettingsTab.h"
 
 class OSD : public SettingsTab {

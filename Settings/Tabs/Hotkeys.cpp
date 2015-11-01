@@ -93,7 +93,7 @@ void Hotkeys::LoadSettings() {
 }
 
 void Hotkeys::SaveSettings() {
-    if (_hWnd == NULL) {
+    if (DialogHandle() == NULL) {
         return;
     }
 

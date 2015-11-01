@@ -8,10 +8,17 @@
 #include <prsht.h>
 #include <stdlib.h>
 #include <tchar.h>
+#include <vector>
 
 #include "../3RVX/3RVX.h"
 #include "resource.h"
 
+class About;
+class Display;
+class General;
+class Hotkeys;
+class OSD;
+class TabPage;
 
 class SettingsUI : public Window {
 public:
@@ -22,17 +29,21 @@ public:
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
 
+private:
+    std::vector<TabPage *> _tabs;
+    General *_general;
+    Display *_display;
+    OSD *_osd;
+    Hotkeys *_hotkeys;
+    About *_about;
 
 private:
+    /* Startup x/y location offsets */
+    static const int XOFFSET = 70;
+    static const int YOFFSET = 20;
 
 };
 
 /* Forward Declarations */
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);
-
-BOOL CALLBACK GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK OSDTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK AboutTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);

@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-#include "../3RVX/CommCtl.h"
-
 /* DLGTEMPLATEEX Structure */
 #include <pshpack1.h>
 typedef struct DLGTEMPLATEEX
@@ -21,34 +19,22 @@ typedef struct DLGTEMPLATEEX
 } DLGTEMPLATEEX, *LPDLGTEMPLATEEX;
 #include <poppack.h>
 
-/* Needed to determine whether the Apply button is enabled/disabled */
-#define IDD_APPLYNOW 0x3021
-
 #include "../3RVX/3RVX.h"
+#include "../3RVX/CommCtl.h"
 #include "../3RVX/LanguageTranslator.h"
 #include "../3RVX/Logger.h"
 #include "../3RVX/Settings.h"
-#include "UITranslator.h"
-#include "Updater/Updater.h"
-#include "Updater/UpdaterWindow.h"
-
-/* Tabs*/
-#include "Tabs/Tab.h"
 #include "Tabs/General.h"
 #include "Tabs/Display.h"
 #include "Tabs/OSD.h"
 #include "Tabs/Hotkeys.h"
 #include "Tabs/About.h"
-General general;
-Display display;
-OSD osd;
-Hotkeys hotkeys;
-About about;
-Tab *tabs[] = { &general, &display, &osd, &hotkeys, &about };
+#include "UITranslator.h"
+#include "Updater/Updater.h"
+#include "Updater/UpdaterWindow.h"
 
-/* Startup x/y location offsets */
-#define XOFFSET 70
-#define YOFFSET 20
+/* Needed to determine whether the Apply button is enabled/disabled */
+static const int IDD_APPLYNOW = 0x3021;
 
 const wchar_t *MUTEX_NAME = L"Local\\3RVXSettings";
 HANDLE mutex;
@@ -156,80 +142,31 @@ Window(
         .Icon(LoadIcon(NULL, MAKEINTRESOURCE(IDI_SETTINGS)))
         .Build()) {
 
+    Settings::Instance()->Load();
+
+    _tabs.push_back((_general = new General));
+    _tabs.push_back((_display = new Display));
+    _tabs.push_back((_osd = new OSD));
+    _tabs.push_back((_hotkeys = new Hotkeys));
+    _tabs.push_back((_about = new About));
 }
 
 INT_PTR SettingsUI::LaunchPropertySheet() {
-    Settings *settings = Settings::Instance();
-    settings->Load();
-    PROPSHEETPAGE psp[5];
-
-    LanguageTranslator *lt = settings->Translator();
-    std::wstring genTitle = lt->Translate(std::wstring(L"General"));
-    std::wstring dispTitle = lt->Translate(std::wstring(L"Display"));
-    std::wstring osdTitle = lt->Translate(std::wstring(L"OSD"));
-    std::wstring hkTitle = lt->Translate(std::wstring(L"Hotkeys"));
-    std::wstring aboutTitle = lt->Translate(std::wstring(L"About"));
-
-    psp[0] = { 0 };
-    psp[0].dwSize = sizeof(PROPSHEETPAGE);
-    psp[0].dwFlags = PSP_USETITLE;
-    psp[0].hInstance = Window::InstanceHandle();
-    psp[0].pszTemplate = MAKEINTRESOURCE(IDD_GENERAL);
-    psp[0].pszIcon = NULL;
-    psp[0].pfnDlgProc = GeneralTabProc;
-    psp[0].pszTitle = &genTitle[0];
-    psp[0].lParam = NULL;
-
-    psp[1] = { 0 };
-    psp[1].dwSize = sizeof(PROPSHEETPAGE);
-    psp[1].dwFlags = PSP_USETITLE;
-    psp[1].hInstance = Window::InstanceHandle();
-    psp[1].pszTemplate = MAKEINTRESOURCE(IDD_DISPLAY);
-    psp[1].pszIcon = NULL;
-    psp[1].pfnDlgProc = DisplayTabProc;
-    psp[1].pszTitle = &dispTitle[0];
-    psp[1].lParam = 0;
-
-    psp[2] = { 0 };
-    psp[2].dwSize = sizeof(PROPSHEETPAGE);
-    psp[2].dwFlags = PSP_USETITLE;
-    psp[2].hInstance = Window::InstanceHandle();
-    psp[2].pszTemplate = MAKEINTRESOURCE(IDD_OSD);
-    psp[2].pszIcon = NULL;
-    psp[2].pfnDlgProc = OSDTabProc;
-    psp[2].pszTitle = &osdTitle[0];
-    psp[2].lParam = 0;
-
-    psp[3] = { 0 };
-    psp[3].dwSize = sizeof(PROPSHEETPAGE);
-    psp[3].dwFlags = PSP_USETITLE;
-    psp[3].hInstance = Window::InstanceHandle();
-    psp[3].pszTemplate = MAKEINTRESOURCE(IDD_HOTKEYS);
-    psp[3].pszIcon = NULL;
-    psp[3].pfnDlgProc = HotkeyTabProc;
-    psp[3].pszTitle = &hkTitle[0];
-    psp[3].lParam = 0;
-
-    psp[4] = { 0 };
-    psp[4].dwSize = sizeof(PROPSHEETPAGE);
-    psp[4].dwFlags = PSP_USETITLE;
-    psp[4].hInstance = Window::InstanceHandle();
-    psp[4].pszTemplate = MAKEINTRESOURCE(IDD_ABOUT);
-    psp[4].pszIcon = NULL;
-    psp[4].pfnDlgProc = AboutTabProc;
-    psp[4].pszTitle = &aboutTitle[0];
-    psp[4].lParam = 0;
+    HPROPSHEETPAGE *pages = new HPROPSHEETPAGE[_tabs.size()];
+    for (size_t i = 0; i < _tabs.size(); ++i) {
+        pages[i] = _tabs[i]->PageHandle();
+    }
 
     PROPSHEETHEADER psh = { 0 };
     psh.dwSize = sizeof(PROPSHEETHEADER);
-    psh.dwFlags = PSH_PROPSHEETPAGE | PSH_USEICONID | PSH_USECALLBACK;
+    psh.dwFlags = PSH_USEICONID | PSH_USECALLBACK;
     psh.hwndParent = Window::Handle();
     psh.hInstance = Window::InstanceHandle();
     psh.pszIcon = MAKEINTRESOURCE(IDI_SETTINGS);
     psh.pszCaption = L"3RVX Settings";
     psh.nStartPage = 0;
-    psh.nPages = sizeof(psp) / sizeof(PROPSHEETPAGE);
-    psh.ppsp = (LPCPROPSHEETPAGE) &psp;
+    psh.nPages = _tabs.size();
+    psh.phpage = pages;
     psh.pfnCallback = PropSheetProc;
 
     tabWnd = NULL;
@@ -318,9 +255,9 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
             if (IsWindowEnabled(hApply)) {
                 /* Save settings*/
                 CLOG(L"Saving settings...");
-                for (Tab *tab : tabs) {
-                    tab->SaveSettings();
-                }
+//                for (SettingsTab *tab : _tabs) {
+//                    tab->SaveSettings();
+//                }
                 Settings::Instance()->Save();
 
                 CLOG(L"Notifying 3RVX process of settings change");
@@ -338,24 +275,4 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
     }
 
     return TRUE;
-}
-
-BOOL CALLBACK GeneralTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-    return general.TabProc(hDlg, message, wParam, lParam);
-}
-
-BOOL CALLBACK DisplayTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-    return display.TabProc(hDlg, message, wParam, lParam);
-}
-
-BOOL CALLBACK OSDTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-    return osd.TabProc(hDlg, message, wParam, lParam);
-}
-
-BOOL CALLBACK HotkeyTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-    return hotkeys.TabProc(hDlg, message, wParam, lParam);
-}
-
-BOOL CALLBACK AboutTabProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-    return about.TabProc(hDlg, message, wParam, lParam);
 }

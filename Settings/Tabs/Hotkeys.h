@@ -5,8 +5,12 @@
 #include "SettingsTab.h"
 
 class Hotkeys : public SettingsTab {
-
 public:
+    Hotkeys() :
+    SettingsTab(NULL, MAKEINTRESOURCE(IDD_HOTKEYS), L"Hotkeys") {
+
+    }
+
     virtual void SaveSettings();
 
 protected:

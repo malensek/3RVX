@@ -12,38 +12,39 @@
 void Display::Initialize() {
     using std::placeholders::_1;
 
-    INIT_CONTROL(GRP_VISIBILITY, GroupBox, _visibilityGroup);
-    INIT_CONTROL(CHK_ONTOP, Checkbox, _onTop);
-    INIT_CONTROL(CHK_FULLSCREEN, Checkbox, _hideFullscreen);
-    INIT_CONTROL(CHK_DIRECTX, Checkbox, _hideDirectX);
+    _visibilityGroup = new GroupBox(GRP_VISIBILITY, *this);
+    _onTop = new Checkbox(CHK_ONTOP, *this);
+    _hideFullscreen = new Checkbox(CHK_FULLSCREEN, *this);
+    _hideDirectX = new Checkbox(CHK_DIRECTX, *this);
 
-    INIT_CONTROL(GRP_POSITION, GroupBox, _positionGroup);
-    INIT_CONTROL(CMB_POSITION, ComboBox, _position);
-    _position.OnSelectionChange
+    _positionGroup = new GroupBox(GRP_POSITION, *this);
+    _position = new ComboBox(CMB_POSITION, *this);
+    _position->OnSelectionChange
         = std::bind(&Display::OnPositionChange, this);
-    INIT_CONTROL(LBL_CUSTOMX, Label, _customX);
-    INIT_CONTROL(ED_CUSTOMX, EditBox, _positionX);
-    INIT_CONTROL(LBL_CUSTOMY, Label, _customY);
-    INIT_CONTROL(ED_CUSTOMY, EditBox, _positionY);
-    INIT_CONTROL(CHK_EDGE, Checkbox, _customDistance);
-    _customDistance.OnClick = std::bind(&Display::OnCustomCheckChange, this);
-    INIT_CONTROL(SP_EDGE, Spinner, _edgeSpinner);
-    _edgeSpinner.Buddy(ED_EDGE);
-    INIT_CONTROL(LBL_DISPLAYDEV, Label, _displayDevLabel);
-    INIT_CONTROL(CMB_MONITOR, ComboBox, _displayDevice);
+    _customX = new Label(LBL_CUSTOMX, *this);
+    _positionX = new EditBox(ED_CUSTOMX, *this);
+    _customY = new Label(LBL_CUSTOMY, *this);
+    _positionY = new EditBox(ED_CUSTOMY, *this);
 
-    INIT_CONTROL(GRP_ANIMATION, GroupBox, _animationGroup);
-    INIT_CONTROL(CMB_ANIMATION, ComboBox, _hideAnimation);
-    _hideAnimation.OnSelectionChange
+    _customDistance = new Checkbox(CHK_EDGE, *this);
+    _customDistance->OnClick = std::bind(&Display::OnCustomCheckChange, this);
+    _edgeSpinner = new Spinner(SP_EDGE, *this);
+    _edgeSpinner->Buddy(ED_EDGE);
+    _displayDevLabel = new Label(LBL_DISPLAYDEV, *this);
+    _displayDevice = new ComboBox(CMB_MONITOR, *this);
+
+    _animationGroup = new GroupBox(GRP_ANIMATION, *this);
+    _hideAnimation = new ComboBox(CMB_ANIMATION, *this);
+    _hideAnimation->OnSelectionChange
         = std::bind(&Display::OnAnimationChange, this);
-    INIT_CONTROL(LBL_HIDEDELAY, Label, _hideDelayLabel);
-    INIT_CONTROL(SP_HIDEDELAY, Spinner, _hideDelay);
-    _hideDelay.Buddy(ED_HIDEDELAY);
-    _hideDelay.OnSpin = std::bind(&Display::OnAnimationSpin, this, _1);
-    INIT_CONTROL(LBL_HIDESPEED, Label, _hideSpeedLabel);
-    INIT_CONTROL(SP_HIDESPEED, Spinner, _hideSpeed);
-    _hideSpeed.Buddy(ED_HIDESPEED);
-    _hideSpeed.OnSpin = std::bind(&Display::OnAnimationSpin, this, _1);
+    _hideDelayLabel = new Label(LBL_HIDEDELAY, *this);
+    _hideDelay = new Spinner(SP_HIDEDELAY, *this);
+    _hideDelay->Buddy(ED_HIDEDELAY);
+    _hideDelay->OnSpin = std::bind(&Display::OnAnimationSpin, this, _1);
+    _hideSpeedLabel = new Label(LBL_HIDESPEED, *this);
+    _hideSpeed = new Spinner(SP_HIDESPEED, *this);
+    _hideSpeed->Buddy(ED_HIDESPEED);
+    _hideSpeed->OnSpin = std::bind(&Display::OnAnimationSpin, this, _1);
 }
 
 void Display::LoadSettings() {
@@ -57,31 +58,31 @@ void Display::LoadSettings() {
     _noAnimStr = translator->Translate(_noAnimStr);
 
     /* Visibility Settings */
-    _onTop.Checked(settings->AlwaysOnTop());
-    _hideFullscreen.Checked(settings->HideFullscreen());
-    _hideDirectX.Checked(settings->HideDirectX());
+    _onTop->Checked(settings->AlwaysOnTop());
+    _hideFullscreen->Checked(settings->HideFullscreen());
+    _hideDirectX->Checked(settings->HideDirectX());
 
     /* Position on Screen*/
     for (std::wstring position : settings->OSDPosNames) {
-        _position.AddItem(translator->Translate(position));
+        _position->AddItem(translator->Translate(position));
     }
-    _position.Select((int) settings->OSDPosition());
+    _position->Select((int) settings->OSDPosition());
 
     /* Custom positions/offsets */
-    _positionX.Text(settings->OSDX());
-    _positionY.Text(settings->OSDY());
-    _customDistance.Checked(
+    _positionX->Text(settings->OSDX());
+    _positionY->Text(settings->OSDY());
+    _customDistance->Checked(
         settings->OSDEdgeOffset() != Settings::DefaultOSDOffset);
-    _edgeSpinner.Text(settings->OSDEdgeOffset());
-    _edgeSpinner.Range(MIN_EDGE, MAX_EDGE);
+    _edgeSpinner->Text(settings->OSDEdgeOffset());
+    _edgeSpinner->Range(MIN_EDGE, MAX_EDGE);
 
     /* Display Devices */
-    _displayDevice.AddItem(_primaryMonitorStr);
-    _displayDevice.AddItem(_allMonitorStr);
+    _displayDevice->AddItem(_primaryMonitorStr);
+    _displayDevice->AddItem(_allMonitorStr);
     std::list<DISPLAY_DEVICE> devices = DisplayManager::ListAllDevices();
     for (DISPLAY_DEVICE dev : devices) {
         std::wstring devString(dev.DeviceName);
-        _displayDevice.AddItem(devString);
+        _displayDevice->AddItem(devString);
     }
     std::wstring monitorName = settings->Monitor();
     if (monitorName == L"") {
@@ -89,17 +90,17 @@ void Display::LoadSettings() {
     } else if (monitorName == L"*") {
         monitorName = _allMonitorStr;
     }
-    _displayDevice.Select(monitorName);
+    _displayDevice->Select(monitorName);
 
     /* Animation Settings */
     for (std::wstring anim : AnimationTypes::HideAnimationNames) {
-        _hideAnimation.AddItem(translator->Translate(anim));
+        _hideAnimation->AddItem(translator->Translate(anim));
     }
-    _hideAnimation.Select((int) settings->HideAnim());
-    _hideDelay.Range(MIN_MS, MAX_MS);
-    _hideDelay.Text(settings->HideDelay());
-    _hideSpeed.Range(MIN_MS, MAX_MS);
-    _hideSpeed.Text(settings->HideSpeed());
+    _hideAnimation->Select((int) settings->HideAnim());
+    _hideDelay->Range(MIN_MS, MAX_MS);
+    _hideDelay->Text(settings->HideDelay());
+    _hideSpeed->Range(MIN_MS, MAX_MS);
+    _hideSpeed->Text(settings->HideSpeed());
 
     /* Refresh control states */
     OnPositionChange();
@@ -108,34 +109,34 @@ void Display::LoadSettings() {
 }
 
 void Display::SaveSettings() {
-    if (_hWnd == NULL) {
+    if (DialogHandle() == NULL) {
         return;
     }
 
     CLOG(L"Saving: Display");
     Settings *settings = Settings::Instance();
 
-    settings->AlwaysOnTop(_onTop.Checked());
-    settings->HideFullscreen(_hideFullscreen.Checked());
-    settings->HideDirectX(_hideDirectX.Checked());
+    settings->AlwaysOnTop(_onTop->Checked());
+    settings->HideFullscreen(_hideFullscreen->Checked());
+    settings->HideDirectX(_hideDirectX->Checked());
 
-    Settings::OSDPos pos = (Settings::OSDPos) _position.SelectionIndex();
+    Settings::OSDPos pos = (Settings::OSDPos) _position->SelectionIndex();
     settings->OSDPosition(pos);
     if (pos == Settings::OSDPos::Custom) {
-        settings->OSDX(_positionX.TextAsInt());
-        settings->OSDY(_positionY.TextAsInt());
+        settings->OSDX(_positionX->TextAsInt());
+        settings->OSDY(_positionY->TextAsInt());
     }
 
-    if (_customDistance.Checked()) {
-        settings->OSDEdgeOffset(_edgeSpinner.TextAsInt());
+    if (_customDistance->Checked()) {
+        settings->OSDEdgeOffset(_edgeSpinner->TextAsInt());
     } else {
         /* We have to write the default here, just in case somebody unchecked
          * the checkbox. */
         settings->OSDEdgeOffset(Settings::DefaultOSDOffset);
     }
 
-    std::wstring monitor = _displayDevice.Selection();
-    int monitorIdx = _displayDevice.SelectionIndex();
+    std::wstring monitor = _displayDevice->Selection();
+    int monitorIdx = _displayDevice->SelectionIndex();
     if (monitorIdx == 0) {
         monitor = L"";
     } else if (monitorIdx == 1) {
@@ -144,14 +145,14 @@ void Display::SaveSettings() {
     settings->Monitor(monitor);
 
     settings->HideAnim(
-        (AnimationTypes::HideAnimation) _hideAnimation.SelectionIndex());
+        (AnimationTypes::HideAnimation) _hideAnimation->SelectionIndex());
 
-    settings->HideDelay(_hideDelay.TextAsInt());
-    settings->HideSpeed(_hideSpeed.TextAsInt());
+    settings->HideDelay(_hideDelay->TextAsInt());
+    settings->HideSpeed(_hideSpeed->TextAsInt());
 }
 
 bool Display::OnAnimationChange() {
-    _hideSpeed.Enabled(_hideAnimation.Selection() != _noAnimStr);
+    _hideSpeed->Enabled(_hideAnimation->Selection() != _noAnimStr);
     return true;
 }
 
@@ -162,15 +163,15 @@ bool Display::OnAnimationSpin(NMUPDOWN *ud) {
 }
 
 bool Display::OnCustomCheckChange() {
-    _edgeSpinner.Enabled(_customDistance.Checked());
+    _edgeSpinner->Enabled(_customDistance->Checked());
     return true;
 }
 
 bool Display::OnPositionChange() {
-    bool isCustom = (_position.Selection() == _customPositionStr);
-    _customX.Enabled(isCustom);
-    _customY.Enabled(isCustom);
-    _positionX.Enabled(isCustom);
-    _positionY.Enabled(isCustom);
+    bool isCustom = (_position->Selection() == _customPositionStr);
+    _customX->Enabled(isCustom);
+    _customY->Enabled(isCustom);
+    _positionX->Enabled(isCustom);
+    _positionY->Enabled(isCustom);
     return true;
 }

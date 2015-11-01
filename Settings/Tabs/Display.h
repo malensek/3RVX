@@ -1,11 +1,16 @@
 #pragma once
 
-#include "Tab.h"
+#include "SettingsTab.h"
 
 #include <CommCtrl.h>
 
-class Display : public Tab {
+class Display : public SettingsTab {
 public:
+    Display() :
+    SettingsTab(NULL, MAKEINTRESOURCE(IDD_DISPLAY), L"Display") {
+
+    }
+
     virtual void SaveSettings();
 
 protected:
@@ -20,28 +25,28 @@ private:
 
 private:
     /* Controls: */
-    GroupBox _visibilityGroup;;
-    Checkbox _onTop;
-    Checkbox _hideFullscreen;
-    Checkbox _hideDirectX;
+    GroupBox *_visibilityGroup;;
+    Checkbox *_onTop;
+    Checkbox *_hideFullscreen;
+    Checkbox *_hideDirectX;
 
-    GroupBox _positionGroup;
-    ComboBox _position;
-    Label _customX;
-    EditBox _positionX;
-    Label _customY;
-    EditBox _positionY;
-    Checkbox _customDistance;
-    Spinner _edgeSpinner;
-    Label _displayDevLabel;
-    ComboBox _displayDevice;
+    GroupBox *_positionGroup;
+    ComboBox *_position;
+    Label *_customX;
+    EditBox *_positionX;
+    Label *_customY;
+    EditBox *_positionY;
+    Checkbox *_customDistance;
+    Spinner *_edgeSpinner;
+    Label *_displayDevLabel;
+    ComboBox *_displayDevice;
 
-    GroupBox _animationGroup;
-    ComboBox _hideAnimation;
-    Label _hideDelayLabel;
-    Spinner _hideDelay;
-    Label _hideSpeedLabel;
-    Spinner _hideSpeed;
+    GroupBox *_animationGroup;
+    ComboBox *_hideAnimation;
+    Label *_hideDelayLabel;
+    Spinner *_hideDelay;
+    Label *_hideSpeedLabel;
+    Spinner *_hideSpeed;
 
 private:
     /* Strings: */

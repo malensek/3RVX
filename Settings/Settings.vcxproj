@@ -252,7 +252,6 @@
     <ClInclude Include="Tabs\HotkeyPrompt.h" />
     <ClInclude Include="Tabs\KeyGrabber.h" />
     <ClInclude Include="Tabs\OSD.h" />
-    <ClInclude Include="Tabs\Tab.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Tabs\Display.h" />
     <ClInclude Include="Tabs\General.h" />
@@ -306,7 +305,6 @@
     <ClCompile Include="SettingsUI.cpp" />
     <ClCompile Include="Tabs\OSD.cpp" />
     <ClCompile Include="Tabs\SettingsTab.cpp" />
-    <ClCompile Include="Tabs\Tab.cpp" />
     <ClCompile Include="UITranslator.cpp" />
     <ClCompile Include="Controls\StatusCallback.cpp" />
     <ClCompile Include="Updater\ProgressWindow.cpp" />

@@ -150,9 +150,6 @@
     <ClInclude Include="Tabs\SettingsTab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tabs\Tab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Controls\TabPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -279,9 +276,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tabs\SettingsTab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tabs\Tab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controls\TabPage.cpp">

@@ -1,11 +1,10 @@
 #pragma once
 
-#include "Tab.h"
-
 #include "../../3RVX/HotkeyInfo.h"
 #include "../../3RVX/LanguageTranslator.h"
+#include "SettingsTab.h"
 
-class Hotkeys : public Tab {
+class Hotkeys : public SettingsTab {
 
 public:
     virtual void SaveSettings();
@@ -49,21 +48,21 @@ private:
 
 protected:
     /* Controls: */
-    ListView _keyList;
-    Button _add;
-    Button _remove;
+    ListView *_keyList;
+    Button *_add;
+    Button *_remove;
 
-    GroupBox _editorGroup;
-    Label _keysLabel;
-    Button _keys;
-    Label _actionLabel;
-    ComboBox _action;
+    GroupBox *_editorGroup;
+    Label *_keysLabel;
+    Button *_keys;
+    Label *_actionLabel;
+    ComboBox *_action;
 
-    Label _argLabel;
-    Checkbox _argCheck;
-    ComboBox _argCombo;
-    EditBox _argEdit;
-    Button _argButton;
+    Label *_argLabel;
+    Checkbox *_argCheck;
+    ComboBox *_argCombo;
+    EditBox *_argEdit;
+    Button *_argButton;
 
 protected:
     /* Strings: */

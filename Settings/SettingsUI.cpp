@@ -215,7 +215,7 @@ LRESULT SettingsUI::WndProc(
         }
     }
 
-    return DefWindowProc(hWnd, message, wParam, lParam);
+    return Window::WndProc(hWnd, message, wParam, lParam);
 }
 
 int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {

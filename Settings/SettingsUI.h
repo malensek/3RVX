@@ -45,5 +45,4 @@ private:
 };
 
 /* Forward Declarations */
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam);

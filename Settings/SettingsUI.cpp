@@ -144,16 +144,18 @@ Window(
         .Icon(LoadIcon(NULL, MAKEINTRESOURCE(IDI_SETTINGS)))
         .Build()) {
 
+}
+
+INT_PTR SettingsUI::LaunchPropertySheet() {
     Settings::Instance()->Load();
 
+    _tabs.clear();
     _tabs.push_back((_general = new General));
     _tabs.push_back((_display = new Display));
     _tabs.push_back((_osd = new OSD));
     _tabs.push_back((_hotkeys = new Hotkeys));
     _tabs.push_back((_about = new About));
-}
 
-INT_PTR SettingsUI::LaunchPropertySheet() {
     size_t numPages = _tabs.size();
     HPROPSHEETPAGE *pages = new HPROPSHEETPAGE[numPages];
     for (size_t i = 0; i < numPages; ++i) {

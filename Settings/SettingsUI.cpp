@@ -208,8 +208,8 @@ LRESULT SettingsUI::WndProc(
     return Window::WndProc(hWnd, message, wParam, lParam);
 }
 
-int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
-    switch (msg) {
+int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam) {
+    switch (uMsg) {
     case PSCB_PRECREATE:
         /* Disable the help button: */
         if (((LPDLGTEMPLATEEX) lParam)->signature == 0xFFFF) {
@@ -223,25 +223,25 @@ int CALLBACK PropSheetProc(HWND hWnd, UINT msg, LPARAM lParam) {
         break;
 
     case PSCB_INITIALIZED:
-        UITranslator::TranslateWindowText(hWnd);
+        UITranslator::TranslateWindowText(hwndDlg);
 
         if (tabWnd == NULL) {
-            tabWnd = hWnd;
+            tabWnd = hwndDlg;
         }
 
         /* These values are hard-coded in case the user has a non-english GUI
            but wants to change the program language */
         UITranslator::TranslateControlText(
-            hWnd, IDOK, std::wstring(L"OK"));
+            hwndDlg, IDOK, std::wstring(L"OK"));
         UITranslator::TranslateControlText(
-            hWnd, IDCANCEL, std::wstring(L"Cancel"));
+            hwndDlg, IDCANCEL, std::wstring(L"Cancel"));
         UITranslator::TranslateControlText(
-            hWnd, IDD_APPLYNOW, std::wstring(L"Apply"));
+            hwndDlg, IDD_APPLYNOW, std::wstring(L"Apply"));
         break;
 
     case PSCB_BUTTONPRESSED:
         if (lParam == PSBTN_OK || lParam == PSBTN_APPLYNOW) {
-            HWND hApply = GetDlgItem(hWnd, IDD_APPLYNOW);
+            HWND hApply = GetDlgItem(hwndDlg, IDD_APPLYNOW);
             if (IsWindowEnabled(hApply)) {
                 /* Save settings*/
                 CLOG(L"Saving settings...");

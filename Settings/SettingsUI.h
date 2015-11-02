@@ -18,7 +18,7 @@ class Display;
 class General;
 class Hotkeys;
 class OSD;
-class TabPage;
+class SettingsTab;
 
 class SettingsUI : public Window {
 public:
@@ -30,7 +30,7 @@ public:
         WPARAM wParam, LPARAM lParam);
 
 private:
-    std::vector<TabPage *> _tabs;
+    std::vector<SettingsTab *> _tabs;
     General *_general;
     Display *_display;
     OSD *_osd;

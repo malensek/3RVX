@@ -74,8 +74,10 @@ int APIENTRY wWinMain(
              * mutex so that the user can launch the settings app. If this
              * happens, the updater is closed to prevent settings file race
              * conditions. */
-            ReleaseMutex(mutex);
-            CloseHandle(mutex);
+            if (mutex) {
+                ReleaseMutex(mutex);
+                CloseHandle(mutex);
+            }
         }
 
         if (Updater::NewerVersionAvailable()) {

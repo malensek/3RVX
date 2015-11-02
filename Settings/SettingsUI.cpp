@@ -188,15 +188,9 @@ INT_PTR SettingsUI::LaunchPropertySheet() {
 LRESULT SettingsUI::WndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
-
-    switch (message) {
-
-    case WM_DESTROY:
+    if (message == WM_DESTROY) {
         PostQuitMessage(0);
-        break;
-    }
-
-    if (message == _3RVX::WM_3RVX_SETTINGSCTRL) {
+    } else if (message == _3RVX::WM_3RVX_SETTINGSCTRL) {
         switch (wParam) {
         case _3RVX::MSG_ACTIVATE:
             CLOG(L"Received request to activate window from external program");

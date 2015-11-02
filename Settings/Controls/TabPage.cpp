@@ -37,7 +37,7 @@ INT_PTR TabPage::StaticTabProc(
         }
     }
 
-    tab->DialogProc(hwndDlg, uMsg, wParam, lParam);
+    return tab->DialogProc(hwndDlg, uMsg, wParam, lParam);
 }
 
 

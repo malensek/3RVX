@@ -154,8 +154,9 @@ Window(
 }
 
 INT_PTR SettingsUI::LaunchPropertySheet() {
-    HPROPSHEETPAGE *pages = new HPROPSHEETPAGE[_tabs.size()];
-    for (size_t i = 0; i < _tabs.size(); ++i) {
+    size_t numPages = _tabs.size();
+    HPROPSHEETPAGE *pages = new HPROPSHEETPAGE[numPages];
+    for (size_t i = 0; i < numPages; ++i) {
         pages[i] = _tabs[i]->PageHandle();
     }
 

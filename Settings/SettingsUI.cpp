@@ -188,14 +188,8 @@ INT_PTR SettingsUI::LaunchPropertySheet() {
 LRESULT SettingsUI::WndProc(
         HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
-    PAINTSTRUCT ps;
-    HDC hdc;
 
     switch (message) {
-    case WM_PAINT:
-        hdc = BeginPaint(hWnd, &ps);
-        EndPaint(hWnd, &ps);
-        break;
 
     case WM_DESTROY:
         PostQuitMessage(0);

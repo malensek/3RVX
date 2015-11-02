@@ -90,6 +90,7 @@ public:
     static const int MSG_ACTIVATE = WM_APP + 200;
     static const int MSG_MUSTRESTART = WM_APP + 201;
     static const int MSG_UPDATEICON = WM_APP + 202;
+    static const int MSG_SAVESETTINGS = WM_APP + 203;
 
 private:
     static const int TIMER_FIRSTUPDATE = 100;

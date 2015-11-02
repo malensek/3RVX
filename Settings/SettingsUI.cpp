@@ -203,6 +203,17 @@ LRESULT SettingsUI::WndProc(
         case _3RVX::MSG_MUSTRESTART:
             relaunch = true;
             break;
+
+        case _3RVX::MSG_SAVESETTINGS:
+            CLOG(L"Saving settings...");
+            for (SettingsTab *tab : _tabs) {
+                tab->SaveSettings();
+            }
+            Settings::Instance()->Save();
+
+            CLOG(L"Notifying 3RVX process of settings change");
+            _3RVX::Message(_3RVX::MSG_LOAD, NULL, true);
+            break;
         }
     }
 
@@ -245,17 +256,11 @@ int CALLBACK PropSheetProc(HWND hwndDlg, UINT uMsg, LPARAM lParam) {
             HWND hApply = GetDlgItem(hwndDlg, IDD_APPLYNOW);
             if (IsWindowEnabled(hApply)) {
                 /* Save settings*/
-                CLOG(L"Saving settings...");
-//                for (SettingsTab *tab : _tabs) {
-//                    tab->SaveSettings();
-//                }
-                Settings::Instance()->Save();
-
-                CLOG(L"Notifying 3RVX process of settings change");
-                _3RVX::Message(_3RVX::MSG_LOAD, NULL, true);
+                _3RVX::SettingsMessage(_3RVX::MSG_SAVESETTINGS, NULL);
 
                 if (lParam == PSBTN_APPLYNOW && relaunch == true) {
-                    /* Language was changed */
+                    /* Language was changed, or some other setting that requires
+                     * a restart */
                     SendMessage(tabWnd, WM_CLOSE, NULL, NULL);
                 } else {
                     relaunch = false;

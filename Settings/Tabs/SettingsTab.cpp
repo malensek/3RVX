@@ -1,8 +1,12 @@
 #include "SettingsTab.h"
 
+#include "../../3RVX/LanguageTranslator.h"
+#include "../../3RVX/Settings.h"
+
 SettingsTab::SettingsTab(
         HINSTANCE hInstance, LPCWSTR tabTemplate, LPCWSTR title) :
-TabPage(hInstance, tabTemplate, title) {
+TabPage(hInstance, tabTemplate,
+    Settings::Instance()->Translator()->Translate(title).c_str()) {
 
 }
 

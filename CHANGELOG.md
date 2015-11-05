@@ -4,7 +4,7 @@
 Beta 11 (2.9.3)
 ---------------
 * Brightness OSD
-* Keyboard OSD
+* Keyboard OSD: Caps, Num, and Scroll lock; media keys
 
 Beta 10 (2.9.2)
 ---------------

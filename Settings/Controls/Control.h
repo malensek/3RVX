@@ -17,8 +17,6 @@ class DialogBase;
 /// </summary>
 class Control {
 public:
-    Control();
-    Control(int id, HWND parent, bool translate = true);
     Control(int id, DialogBase &parent, bool translate = true);
     ~Control();
 

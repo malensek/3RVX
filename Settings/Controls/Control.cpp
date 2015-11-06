@@ -8,20 +8,6 @@
 #include "../../3RVX/LanguageTranslator.h"
 #include "Dialog.h"
 
-Control::Control() {
-
-}
-
-Control::Control(int id, HWND parent, bool translate) :
-_id(id),
-_parent(parent) {
-    _hWnd = GetDlgItem(parent, id);
-
-    if (translate) {
-        Translate();
-    }
-}
-
 Control::Control(int id, DialogBase &parent, bool translate) :
 _id(id),
 _parentDlg(&parent) {

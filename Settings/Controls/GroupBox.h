@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <initializer_list>
+
 #include "Control.h"
 
 class GroupBox : public Control {
@@ -11,4 +13,12 @@ public:
     Control(id, parent, translate) {
 
     }
+
+    void AddChild(Control *control);
+    void AddChildren(std::initializer_list<Control *> controls);
+
+    virtual void Visible(bool visible);
+
+private:
+    std::vector<Control *> _controls;
 };

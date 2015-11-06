@@ -290,6 +290,7 @@
     <ClCompile Include="Controls\Dialog.cpp" />
     <ClCompile Include="Controls\DialogBase.cpp" />
     <ClCompile Include="Controls\EditBox.cpp" />
+    <ClCompile Include="Controls\GroupBox.cpp" />
     <ClCompile Include="Controls\ListBox.cpp" />
     <ClCompile Include="Controls\ListView.cpp" />
     <ClCompile Include="Controls\ProgressBar.cpp" />

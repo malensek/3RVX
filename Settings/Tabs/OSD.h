@@ -25,9 +25,12 @@ private:
 
     GroupBox *_volumeGroup;
     Checkbox *_monitorVolEvents;
+    Label *_audioDeviceLabel;
     ComboBox *_audioDevice;
+    Label *_audioTaperLabel;
     ComboBox *_audioTaper;
-    //Slider
+    Label *_limitLabel;
+    //Slider *_limitSlider;
     Label *_limitValue;
     Checkbox *_forceLimit;
 

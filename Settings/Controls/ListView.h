@@ -30,6 +30,7 @@ public:
 
     void RemoveItem(int index);
 
+    void Checked(int index, bool checked);
     int Selection();
     void Selection(int index);
 
@@ -44,4 +45,6 @@ protected:
 
 private:
     int _columns;
+    static const int LVIS_UNCHECKED = 0x1000;
+    static const int LVIS_CHECKED = 0x2000;
 };

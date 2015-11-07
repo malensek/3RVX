@@ -30,7 +30,9 @@ public:
 
     void RemoveItem(int index);
 
+    bool Checked(int index);
     void Checked(int index, bool checked);
+
     int Selection();
     void Selection(int index);
 

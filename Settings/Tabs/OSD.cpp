@@ -51,11 +51,22 @@ void OSD::Initialize() {
         _brightnessIcon
     });
 
+    _keyboardIcon = new Checkbox(CHK_KEYICON, *this);
+    _caps = new Checkbox(CHK_ENABLECAPS, *this);
+    _scroll = new Checkbox(CHK_ENABLESCROLL, *this);
+    _num = new Checkbox(CHK_ENABLENUM, *this);
+    _media = new Checkbox(CHK_ENABLEMK, *this);
+    _keyboardGroup = new GroupBox(GRP_KEYBOARD, *this);
+    _keyboardGroup->AddChildren({
+        _keyboardIcon,
+        _caps, _scroll, _num,
+        _media
+    });
 
     /* Move other groupboxes into position (same as volume) */
     int groupX = _volumeGroup->X();
     int groupY = _volumeGroup->Y();
-    for (GroupBox *grp : { _ejectGroup, _brightnessGroup }) {
+    for (GroupBox *grp : { _ejectGroup, _brightnessGroup, _keyboardGroup }) {
         grp->X(groupX);
         grp->Y(groupY);
         grp->Visible(false);

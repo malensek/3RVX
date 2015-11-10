@@ -40,6 +40,9 @@ private:
     Checkbox *_ejectIcon;
     Checkbox *_monitorEjectEvents;
 
+    GroupBox *_brightnessGroup;
+    Checkbox *_brightnessIcon;
+
     GroupBox *_keyboardGroup;
     Checkbox *_caps;
     Checkbox *_scroll;

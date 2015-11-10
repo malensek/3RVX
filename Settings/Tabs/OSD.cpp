@@ -48,6 +48,11 @@ void OSD::Initialize() {
 
     _ejectGroup->X(_volumeGroup->X());
     _ejectGroup->Y(_volumeGroup->Y());
+    _brightnessIcon = new Checkbox(CHK_BRIGHTICON, *this);
+    _brightnessGroup = new GroupBox(GRP_BRIGHTNESS, *this);
+    _brightnessGroup->AddChildren({
+        _brightnessIcon
+    });
 }
 
 void OSD::LoadSettings() {

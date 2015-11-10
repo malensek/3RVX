@@ -26,6 +26,7 @@ void OSD::Initialize() {
     _limitLabel = new Label(LBL_LIMITER, *this);
     _limitSlider = new Slider(SLD_LIMITER, *this);
     _limitValue = new Label(LBL_LIMITVAL, *this);
+    _limitSlider->Buddy(_limitValue);
     _forceLimit = new Checkbox(CHK_FORCELIMIT, *this);
     _volumeGroup = new GroupBox(GRP_VOLUME, *this);
     _volumeGroup->AddChildren({

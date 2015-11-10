@@ -59,8 +59,8 @@ void ListView::RemoveItem(int index) {
 }
 
 bool ListView::Checked(int index) {
-    return ListView_GetItemState(_hWnd, index, LVIS_STATEIMAGEMASK)
-        & LVIS_CHECKED;
+    return (ListView_GetItemState(_hWnd, index, LVIS_STATEIMAGEMASK)
+        & LVIS_CHECKED) > 0;
 }
 
 void ListView::Checked(int index, bool checked) {

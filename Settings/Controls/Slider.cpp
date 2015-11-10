@@ -3,9 +3,10 @@
 
 #include "Slider.h"
 
-void Slider::Buddy(int buddyId, int position) {
-    _buddyWnd = GetDlgItem(_parent, buddyId);
-    SendMessage(_hWnd, TBM_SETBUDDY, (WPARAM) 0, (LPARAM) _buddyWnd);
+void Slider::Buddy(Control *buddy, bool bottomOrRight) {
+    _buddyWnd = buddy->Handle();
+    SendMessage(_hWnd, TBM_SETBUDDY,
+        (WPARAM) bottomOrRight ? FALSE : TRUE, (LPARAM) _buddyWnd);
 }
 
 int Slider::Position() {

@@ -15,7 +15,7 @@ public:
 
     }
 
-    void Buddy(int buddyId, int position = 0);
+    void Buddy(Control *buddy, bool bottomOrRight = true);
 
     int Position();
     void Position(int position);

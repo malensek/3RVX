@@ -24,13 +24,15 @@ private:
     ListView *_osdList;
 
     GroupBox *_volumeGroup;
+    Checkbox *_volumeIcon;
     Checkbox *_monitorVolEvents;
     Label *_audioDeviceLabel;
     ComboBox *_audioDevice;
     Label *_audioTaperLabel;
+    EditBox *_audioTaperEdit;
     ComboBox *_audioTaper;
     Label *_limitLabel;
-    //Slider *_limitSlider;
+    Slider *_limitSlider;
     Label *_limitValue;
     Checkbox *_forceLimit;
 

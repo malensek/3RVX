@@ -15,10 +15,28 @@ void OSD::Initialize() {
     _osdList->AddItem(L"Brightness");
     _osdList->AddItem(L"Eject");
     _osdList->AddItem(L"Keyboard");
-    _monitorVolEvents = new Checkbox(CHK_MONITORVOL, *this);
-    _volumeGroup = new GroupBox(GRP_VOLUME, *this);
-    _volumeGroup->AddChildren({ _monitorVolEvents });
 
+    _volumeIcon = new Checkbox(CHK_VOLICON, *this);
+    _monitorVolEvents = new Checkbox(CHK_MONITORVOL, *this);
+    _audioDeviceLabel = new Label(LBL_AUDIODEV, *this);
+    _audioDevice = new ComboBox(CMB_AUDIODEV, *this);
+    _audioTaperLabel = new Label(LBL_AUDIOTAPER, *this);
+    _audioTaper = new ComboBox(CMB_AUDIOTAPER, *this);
+    _audioTaperEdit = new EditBox(ED_AUDIOTAPER, *this);
+    _limitLabel = new Label(LBL_LIMITER, *this);
+    _limitSlider = new Slider(SLD_LIMITER, *this);
+    _limitValue = new Label(LBL_LIMITVAL, *this);
+    _forceLimit = new Checkbox(CHK_FORCELIMIT, *this);
+    _volumeGroup = new GroupBox(GRP_VOLUME, *this);
+    _volumeGroup->AddChildren({
+        _volumeIcon,
+        _monitorVolEvents,
+        _audioDeviceLabel, _audioDevice,
+        _audioTaperLabel, _audioTaper, _audioTaperEdit,
+        _limitLabel, _limitSlider, _limitValue,
+        _forceLimit
+    });
+    _volumeGroup->Visible(false);
 }
 
 void OSD::LoadSettings() {

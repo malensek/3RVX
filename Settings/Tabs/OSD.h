@@ -44,6 +44,7 @@ private:
     Checkbox *_brightnessIcon;
 
     GroupBox *_keyboardGroup;
+    Checkbox *_keyboardIcon;
     Checkbox *_caps;
     Checkbox *_scroll;
     Checkbox *_num;

@@ -36,7 +36,6 @@ void OSD::Initialize() {
         _limitLabel, _limitSlider, _limitValue,
         _forceLimit
     });
-    _volumeGroup->Visible(false);
 
     _ejectIcon = new Checkbox(CHK_EJECTICON, *this);
     _monitorEjectEvents = new Checkbox(CHK_MONITOREJECT, *this);
@@ -46,13 +45,21 @@ void OSD::Initialize() {
         _monitorEjectEvents
     });
 
-    _ejectGroup->X(_volumeGroup->X());
-    _ejectGroup->Y(_volumeGroup->Y());
     _brightnessIcon = new Checkbox(CHK_BRIGHTICON, *this);
     _brightnessGroup = new GroupBox(GRP_BRIGHTNESS, *this);
     _brightnessGroup->AddChildren({
         _brightnessIcon
     });
+
+
+    /* Move other groupboxes into position (same as volume) */
+    int groupX = _volumeGroup->X();
+    int groupY = _volumeGroup->Y();
+    for (GroupBox *grp : { _ejectGroup, _brightnessGroup }) {
+        grp->X(groupX);
+        grp->Y(groupY);
+        grp->Visible(false);
+    }
 }
 
 void OSD::LoadSettings() {

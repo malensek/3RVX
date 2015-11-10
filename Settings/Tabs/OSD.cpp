@@ -37,6 +37,17 @@ void OSD::Initialize() {
         _forceLimit
     });
     _volumeGroup->Visible(false);
+
+    _ejectIcon = new Checkbox(CHK_EJECTICON, *this);
+    _monitorEjectEvents = new Checkbox(CHK_MONITOREJECT, *this);
+    _ejectGroup = new GroupBox(GRP_EJECT, *this);
+    _ejectGroup->AddChildren({
+        _ejectIcon,
+        _monitorEjectEvents
+    });
+
+    _ejectGroup->X(_volumeGroup->X());
+    _ejectGroup->Y(_volumeGroup->Y());
 }
 
 void OSD::LoadSettings() {

@@ -37,6 +37,7 @@ private:
     Checkbox *_forceLimit;
 
     GroupBox *_ejectGroup;
+    Checkbox *_ejectIcon;
     Checkbox *_monitorEjectEvents;
 
     GroupBox *_keyboardGroup;

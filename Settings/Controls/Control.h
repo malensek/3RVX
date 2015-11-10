@@ -21,6 +21,7 @@ public:
     ~Control();
 
     int ID();
+    HWND Handle();
 
     /// <summary>
     /// Retrieves the dimensions of this control's window based on screen

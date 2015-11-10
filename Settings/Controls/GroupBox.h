@@ -19,6 +19,11 @@ public:
 
     virtual void Visible(bool visible);
 
+    virtual int X();
+    virtual int Y();
+    virtual void X(int x);
+    virtual void Y(int y);
+ 
 private:
     std::vector<Control *> _controls;
 };

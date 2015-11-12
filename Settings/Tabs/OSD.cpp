@@ -67,14 +67,18 @@ void OSD::Initialize() {
         _media
     });
 
+    /* Define groupbox order */
+    GroupBox *groups[] = {
+        _volumeGroup,
+        _brightnessGroup,
+        _ejectGroup,
+        _keyboardGroup
+    };
+
     /* Move other groupboxes into position (same as volume) */
     int groupX = _volumeGroup->X();
     int groupY = _volumeGroup->Y();
-    for (GroupBox *grp : {
-            _volumeGroup,
-            _brightnessGroup,
-            _ejectGroup,
-            _keyboardGroup }) {
+    for (GroupBox *grp : groups) {
         grp->X(groupX);
         grp->Y(groupY);
         grp->Visible(false);

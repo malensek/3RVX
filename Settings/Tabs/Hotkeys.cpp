@@ -413,7 +413,6 @@ std::wstring Hotkeys::OpenFileDialog() {
 }
 
 
-
 /// --------------
 /// Event Handlers
 /// --------------
@@ -421,19 +420,15 @@ std::wstring Hotkeys::OpenFileDialog() {
 void Hotkeys::OnKeyListItemChange(NMLISTVIEW *lv) {
     if (lv->uChanged & LVIF_STATE) {
         if (lv->uNewState & LVIS_SELECTED) {
-            OnKeyListSelectionChange(lv->iItem);
+            int index = lv->iItem;
+#if ENABLE_3RVX_LOG != 0
+            HotkeyInfo *current = &_keyInfo[index];
+            CLOG(L"Selecting key combination %d:", index);
+            QCLOG(L"%s", current->ToString().c_str());
+#endif
+            LoadSelection(index);
         }
     }
-}
-
-void Hotkeys::OnKeyListSelectionChange(int index) {
-#if ENABLE_3RVX_LOG != 0
-    HotkeyInfo *current = &_keyInfo[index];
-    CLOG(L"Selecting key combination %d:", index);
-    QCLOG(L"%s", current->ToString().c_str());
-#endif
-
-    LoadSelection(index);
 }
 
 bool Hotkeys::OnAddButtonClick() {

@@ -10,6 +10,18 @@ void GroupBox::AddChildren(std::initializer_list<Control*> controls) {
     }
 }
 
+void GroupBox::Enable() {
+    for (Control *ctrl : _controls) {
+        ctrl->Enable();
+    }
+}
+
+void GroupBox::Disable() {
+    for (Control *ctrl : _controls) {
+        ctrl->Disable();
+    }
+}
+
 void GroupBox::Visible(bool visible) {
     for (Control *ctrl : _controls) {
         ctrl->Visible(visible);

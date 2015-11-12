@@ -17,6 +17,9 @@ public:
     void AddChild(Control *control);
     void AddChildren(std::initializer_list<Control *> controls);
 
+    virtual void Enable();
+    virtual void Disable();
+
     virtual void Visible(bool visible);
 
     virtual int X();

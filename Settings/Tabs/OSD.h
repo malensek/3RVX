@@ -49,4 +49,6 @@ private:
     Checkbox *_scroll;
     Checkbox *_num;
     Checkbox *_media;
+
+    std::vector<GroupBox *> _groups;
 };

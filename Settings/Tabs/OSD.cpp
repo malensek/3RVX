@@ -67,10 +67,15 @@ void OSD::Initialize() {
     /* Move other groupboxes into position (same as volume) */
     int groupX = _volumeGroup->X();
     int groupY = _volumeGroup->Y();
-    for (GroupBox *grp : { _ejectGroup, _brightnessGroup, _keyboardGroup }) {
+    for (GroupBox *grp : {
+            _volumeGroup,
+            _brightnessGroup,
+            _ejectGroup,
+            _keyboardGroup }) {
         grp->X(groupX);
         grp->Y(groupY);
         grp->Visible(false);
+        _groups.push_back(grp);
     }
 }
 

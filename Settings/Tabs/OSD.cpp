@@ -83,6 +83,19 @@ void OSD::LoadSettings() {
 
 }
 
+void OSD::ShowGroup(int group) {
+    for (GroupBox *grp : _groups) {
+        grp->Visible(false);
+    }
+
+    GroupBox *showGroup = _groups[group];
+    if (_osdList->Checked(group)) {
+        showGroup->Enable();
+    } else {
+        showGroup->Disable();
+    }
+    showGroup->Visible(true);
+}
 void OSD::SaveSettings() {
 
 }

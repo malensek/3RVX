@@ -20,6 +20,8 @@ protected:
     virtual void LoadSettings();
 
 private:
+    void ShowGroup(int group);
+
     /* Controls: */
     ListView *_osdList;
 

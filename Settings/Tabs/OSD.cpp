@@ -77,6 +77,8 @@ void OSD::Initialize() {
         grp->Visible(false);
         _groups.push_back(grp);
     }
+
+    _osdList->Selection(0);
 }
 
 void OSD::LoadSettings() {

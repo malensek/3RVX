@@ -22,6 +22,11 @@ protected:
 private:
     void ShowGroup(int group);
 
+private:
+    /* Control Event Handlers */
+    void OnOSDListItemChange(NMLISTVIEW *lv);
+
+private:
     /* Controls: */
     ListView *_osdList;
 

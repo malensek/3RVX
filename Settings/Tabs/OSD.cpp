@@ -8,6 +8,8 @@
 #include "../../3RVX/Window.h"
 
 void OSD::Initialize() {
+    using std::placeholders::_1;
+
     _osdList = new ListView(LST_OSDS, *this);
     _osdList->AddListExStyle(LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT);
     _osdList->AddColumn(L"OSD", (int) (_osdList->Width() * .97f));
@@ -15,6 +17,7 @@ void OSD::Initialize() {
     _osdList->AddItem(L"Brightness");
     _osdList->AddItem(L"Eject");
     _osdList->AddItem(L"Keyboard");
+    _osdList->OnItemChange = std::bind(&OSD::OnOSDListItemChange, this, _1);
 
     _volumeIcon = new Checkbox(CHK_VOLICON, *this);
     _monitorVolEvents = new Checkbox(CHK_MONITORVOL, *this);
@@ -98,6 +101,26 @@ void OSD::ShowGroup(int group) {
     }
     showGroup->Visible(true);
 }
+
+void OSD::OnOSDListItemChange(NMLISTVIEW *lv) {
+    if (lv->uChanged & LVIF_STATE) {
+        UINT oSimg = lv->uOldState & LVIS_STATEIMAGEMASK;
+        UINT nSimg = lv->uNewState & LVIS_STATEIMAGEMASK;
+        if (oSimg != nSimg) {
+            /* Checkbox changed */
+            if (_osdList->Selection() == lv->iItem) {
+                /* Check state at 0xF000 (1 = un, 2 = check). Shift to check: */
+                _groups[lv->iItem]->Enabled((nSimg >> 13) > 0);
+            }
+        }
+
+        if (lv->uNewState & LVIS_SELECTED) {
+            CLOG(L"selecting");
+            ShowGroup(lv->iItem);
+        }
+    }
+}
+
 void OSD::SaveSettings() {
 
 }

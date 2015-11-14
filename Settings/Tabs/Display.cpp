@@ -9,7 +9,6 @@
 #include "../../3RVX/LanguageTranslator.h"
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
-
 #include "../resource.h"
 
 void Display::Initialize() {

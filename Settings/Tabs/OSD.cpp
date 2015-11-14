@@ -3,9 +3,10 @@
 
 #include "OSD.h"
 
+#include "../../3RVX/LanguageTranslator.h"
+#include "../../3RVX/Logger.h"
+#include "../../3RVX/Settings.h"
 #include "../resource.h"
-
-#include "../../3RVX/Window.h"
 
 void OSD::Initialize() {
     using std::placeholders::_1;
@@ -89,6 +90,13 @@ void OSD::Initialize() {
 }
 
 void OSD::LoadSettings() {
+    Settings *settings = Settings::Instance();
+    LanguageTranslator *translator = settings->Translator();
+
+    _osdList->Checked(0, settings->VolumeOSDEnabled());
+    _osdList->Checked(1, settings->BrightnessOSDEnabled());
+    _osdList->Checked(2, settings->EjectOSDEnabled());
+    _osdList->Checked(3, settings->KeyboardOSDEnabled());
 
 }
 

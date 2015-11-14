@@ -298,6 +298,38 @@ void Settings::OSDY(int y) {
     SetElementValue(XML_OSD_Y, y);
 }
 
+bool Settings::BrightnessOSDEnabled() {
+    return GetEnabled(XML_ENABLE_BOSD, DefaultBrightnessOSDEnabled);
+}
+
+void Settings::BrightnessOSDEnabled(bool enable) {
+    SetEnabled(XML_ENABLE_BOSD, enable);
+}
+
+bool Settings::EjectOSDEnabled() {
+    return GetEnabled(XML_ENABLE_EOSD, DefaultEjectOSDEnabled);
+}
+
+void Settings::EjectOSDEnabled(bool enable) {
+    SetEnabled(XML_ENABLE_EOSD, enable);
+}
+
+bool Settings::KeyboardOSDEnabled() {
+    return GetEnabled(XML_ENABLE_KOSD, DefaultKeyboardOSDEnabled);
+}
+
+void Settings::KeyboardOSDEnabled(bool enable) {
+    SetEnabled(XML_ENABLE_KOSD, enable);
+}
+
+bool Settings::VolumeOSDEnabled() {
+    return GetEnabled(XML_ENABLE_VOSD, DefaultVolumeOSDEnabled);
+}
+
+void Settings::VolumeOSDEnabled(bool enable) {
+    SetEnabled(XML_ENABLE_VOSD, enable);
+}
+
 AnimationTypes::HideAnimation Settings::HideAnim() {
     std::wstring anim = GetText(XML_HIDEANIM);
     const wchar_t *animStr = anim.c_str();

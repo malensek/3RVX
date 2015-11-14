@@ -70,6 +70,15 @@ public:
     int OSDY();
     void OSDY(int y);
 
+    bool BrightnessOSDEnabled();
+    void BrightnessOSDEnabled(bool enable);
+    bool EjectOSDEnabled();
+    void EjectOSDEnabled(bool enable);
+    bool KeyboardOSDEnabled();
+    void KeyboardOSDEnabled(bool enable);
+    bool VolumeOSDEnabled();
+    void VolumeOSDEnabled(bool enable);
+
     std::wstring CurrentSkin();
     bool CurrentSkin(std::wstring skinName);
     std::wstring SkinXML();
@@ -183,6 +192,11 @@ public:
     static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
     static const bool DefaultAutoUpdate = false;
 
+    static const bool DefaultVolumeOSDEnabled = true;
+    static const bool DefaultEjectOSDEnabled = true;
+    static const bool DefaultBrightnessOSDEnabled = true;
+    static const bool DefaultKeyboardOSDEnabled = false;
+
     static constexpr const wchar_t *MAIN_APP = L"3RVX.exe";
     static constexpr const wchar_t *SETTINGS_APP = L"Settings.exe";
     static constexpr const wchar_t *SETTINGS_FILE = L"Settings.xml";
@@ -196,6 +210,10 @@ public:
     /* XML tag names */
     static constexpr const char *XML_AUDIODEV = "audioDeviceID";
     static constexpr const char *XML_CURVE_ADJUST = "curveAdjust";
+    static constexpr const char *XML_ENABLE_BOSD = "brightnessOSDEnabled";
+    static constexpr const char *XML_ENABLE_EOSD = "ejectOSDEnabled";
+    static constexpr const char *XML_ENABLE_KOSD = "keyboardOSDEnabled";
+    static constexpr const char *XML_ENABLE_VOSD = "volumeOSDEnabled";
     static constexpr const char *XML_HIDE_WHENFULL = "hideFullscreen";
     static constexpr const char *XML_HIDE_DIRECTX = "hideDirectX";
     static constexpr const char *XML_HIDEANIM = "hideAnimation";
@@ -216,4 +234,5 @@ public:
     static constexpr const char *XML_UPDATEAUTO = "automaticUpdates";
     static constexpr const char *XML_UPDATECHECKTIME = "lastUpdateCheck";
     static constexpr const char *XML_VOLUME_LIMITER = "volumeLimiter";
+
 };

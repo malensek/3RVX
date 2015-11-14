@@ -121,6 +121,9 @@ void OSD::OnOSDListItemChange(NMLISTVIEW *lv) {
         if (oSimg != nSimg) {
             /* Checkbox changed */
             if (_osdList->Selection() == lv->iItem) {
+                /* Activate the Apply button */
+                PropSheet_Changed(GetParent(SettingsTab::DialogHandle()), NULL);
+
                 /* Check state at 0xF000 (1 = un, 2 = check). Shift to check: */
                 _groups[lv->iItem]->Enabled((nSimg >> 13) > 0);
             }

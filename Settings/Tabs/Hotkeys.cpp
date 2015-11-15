@@ -96,10 +96,6 @@ void Hotkeys::LoadSettings() {
 }
 
 void Hotkeys::SaveSettings() {
-    if (DialogHandle() == NULL) {
-        return;
-    }
-
     CLOG(L"Saving: Hotkeys");
 
 

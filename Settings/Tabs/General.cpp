@@ -85,10 +85,6 @@ void General::LoadSettings() {
 }
 
 void General::SaveSettings() {
-    if (DialogHandle() == NULL) {
-        return;
-    }
-
     CLOG(L"Saving: General");
     Settings *settings = Settings::Instance();
 

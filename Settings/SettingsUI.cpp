@@ -212,7 +212,9 @@ LRESULT SettingsUI::WndProc(
         case _3RVX::MSG_SAVESETTINGS:
             CLOG(L"Saving settings...");
             for (SettingsTab *tab : _tabs) {
-                tab->SaveSettings();
+                if (tab->DialogHandle() != NULL) {
+                    tab->SaveSettings();
+                }
             }
             Settings::Instance()->Save();
 

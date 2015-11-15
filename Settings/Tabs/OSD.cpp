@@ -100,6 +100,16 @@ void OSD::LoadSettings() {
 
 }
 
+void OSD::SaveSettings() {
+    CLOG(L"Saving: OSD");
+    Settings *settings = Settings::Instance();
+    
+    settings->VolumeOSDEnabled(_osdList->Checked(0));
+    settings->BrightnessOSDEnabled(_osdList->Checked(1));
+    settings->EjectOSDEnabled(_osdList->Checked(2));
+    settings->KeyboardOSDEnabled(_osdList->Checked(3));
+}
+
 void OSD::ShowGroup(int group) {
     for (GroupBox *grp : _groups) {
         grp->Visible(false);
@@ -134,8 +144,4 @@ void OSD::OnOSDListItemChange(NMLISTVIEW *lv) {
             ShowGroup(lv->iItem);
         }
     }
-}
-
-void OSD::SaveSettings() {
-
 }

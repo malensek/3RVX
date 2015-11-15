@@ -111,10 +111,6 @@ void Display::LoadSettings() {
 }
 
 void Display::SaveSettings() {
-    if (DialogHandle() == NULL) {
-        return;
-    }
-
     CLOG(L"Saving: Display");
     Settings *settings = Settings::Instance();
 

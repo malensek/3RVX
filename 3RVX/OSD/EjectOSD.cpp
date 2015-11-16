@@ -127,7 +127,7 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR) lParam;
         if (lpdb->dbch_devicetype == DBT_DEVTYP_VOLUME) {
             PDEV_BROADCAST_VOLUME lpdbv = (PDEV_BROADCAST_VOLUME) lpdb;
-
+            
             if (lpdbv->dbcv_flags != DBTF_NET) {
                 _latestDrive = lpdbv->dbcv_unitmask;
 

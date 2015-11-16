@@ -140,7 +140,6 @@ void OSD::OnOSDListItemChange(NMLISTVIEW *lv) {
         }
 
         if (lv->uNewState & LVIS_SELECTED) {
-            CLOG(L"selecting");
             ShowGroup(lv->iItem);
         }
     }

@@ -10,7 +10,6 @@ Beta 10 (2.9.2)
 ---------------
 * Custom volume curves
 * Custom volume limits
-* Option to force volume limits (resets volume changes by other applications)
 * Detailed error messages
 * Customizable default audio device (instead of always using the system default)
 * Eject notification icon

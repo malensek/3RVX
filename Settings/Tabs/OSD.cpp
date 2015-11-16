@@ -98,6 +98,7 @@ void OSD::LoadSettings() {
     _osdList->Checked(2, settings->EjectOSDEnabled());
     _osdList->Checked(3, settings->KeyboardOSDEnabled());
 
+    _volumeIcon->Checked(settings->NotifyIconEnabled());
 }
 
 void OSD::SaveSettings() {

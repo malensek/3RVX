@@ -15,6 +15,9 @@ int Slider::Position() {
 
 void Slider::Position(int position) {
     SendMessage(_hWnd, TBM_SETPOS, (WPARAM) TRUE, (LPARAM) position);
+    if (OnSlide) {
+        OnSlide();
+    }
 }
 
 void Slider::Range(int lo, int hi) {

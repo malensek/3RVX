@@ -64,5 +64,13 @@ INT_PTR DialogBase::DialogProc(HWND hwndDlg, UINT uMsg,
         }
     }
 
+    case WM_HSCROLL:
+    case WM_VSCROLL: {
+        WORD request = LOWORD(wParam);
+        WORD position = HIWORD(wParam);
+        return FALSE;
+    }
+    }
+
     return FALSE;
 }

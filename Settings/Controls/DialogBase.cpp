@@ -54,7 +54,7 @@ INT_PTR DialogBase::DialogProc(HWND hwndDlg, UINT uMsg,
             return FALSE;
         }
 
-    case WM_NOTIFY:
+    case WM_NOTIFY: {
         NMHDR *nHdr = (NMHDR *) lParam;
         ctrlId = nHdr->idFrom;
         if (_controlMap.count(ctrlId) > 0) {
@@ -68,7 +68,15 @@ INT_PTR DialogBase::DialogProc(HWND hwndDlg, UINT uMsg,
     case WM_VSCROLL: {
         WORD request = LOWORD(wParam);
         WORD position = HIWORD(wParam);
-        return FALSE;
+        HWND scrollHandle = (HWND) lParam;
+        ctrlId = GetDlgCtrlID(scrollHandle);
+
+        if (_controlMap.count(ctrlId) > 0) {
+            return _controlMap[ctrlId]->Scroll(
+                (uMsg == WM_HSCROLL), request, position);
+        } else {
+            return FALSE;
+        }
     }
     }
 

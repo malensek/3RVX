@@ -113,6 +113,20 @@ public:
     /// <param name="nHdr">Notification header structure</param>
     virtual BOOL CALLBACK Notification(NMHDR *nHdr);
 
+    /// <summary>Handles WM_HSCROLL/WM_VSCROLL messages.</summary>
+    /// <param name="horizontal">
+    /// Set to true if this is a horizontal scroll (WM_HSCROLL) message.
+    /// </param>
+    /// <param name="request">
+    /// The scroll request. See SB_* constants defined for
+    /// WM_HSCROLL/WM_VSCROLL.
+    /// </param>
+    /// <param name="position">
+    /// The scroll position. Only valid when the scroll request is
+    /// SB_THUMBPOSITION or SB_THUMBTRACK.
+    /// </param>
+    virtual BOOL Scroll(bool horizontal, WORD request, WORD position);
+
 protected:
     int _id;
     HWND _hWnd;

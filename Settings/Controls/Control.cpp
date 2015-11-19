@@ -202,6 +202,11 @@ BOOL CALLBACK Control::Notification(NMHDR *nHdr) {
     return FALSE;
 }
 
+BOOL Control::Scroll(bool horizontal, WORD request, WORD position) {
+    /* By default, indicate that we did not process the message: */
+    return FALSE;
+}
+
 long Control::WindowAttributes(int index) {
     return GetWindowLongPtr(_hWnd, index);
 }

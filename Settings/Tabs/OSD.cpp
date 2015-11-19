@@ -31,6 +31,11 @@ void OSD::Initialize() {
     _limitSlider = new Slider(SLD_LIMITER, *this);
     _limitValue = new Label(LBL_LIMITVAL, *this);
     _limitSlider->Buddy(_limitValue);
+    _limitSlider->OnSlide = [this]() {
+        std::wstring value = std::to_wstring(_limitSlider->Position()) + L"%";
+        _limitValue->Text(value);
+        return true;
+    };
     _forceLimit = new Checkbox(CHK_FORCELIMIT, *this);
     _volumeGroup = new GroupBox(GRP_VOLUME, *this);
     _volumeGroup->AddChildren({

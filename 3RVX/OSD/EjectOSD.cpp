@@ -21,6 +21,23 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     _mWnd.Update();
 
     OSD::InitMeterWnd(_mWnd);
+
+    DWORD drives = GetLogicalDrives();
+    DWORD msb = log2(drives);
+    for (DWORD i = 0; i < msb; ++i, drives >>= 1) {
+        if (drives & 0x1) {
+            wchar_t letter = (wchar_t) i + 65;
+            CLOG(L"Drive: %c", letter);
+            wchar_t buf[256] = { 0 };
+            std::wstring name = std::wstring(1, letter) + L":\\";
+            QCLOG(L"type: %d", GetDriveType(name.c_str()));
+            int result = GetVolumeInformation(name.c_str(), buf, 256, NULL, NULL, NULL, NULL, NULL);
+            QCLOG(L"%s", buf);
+            QCLOG(L"result %d", result);
+            Logger::LogLastError();
+
+        }
+    }
 }
 
 void EjectOSD::EjectDrive(std::wstring driveLetter) {

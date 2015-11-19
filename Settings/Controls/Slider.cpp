@@ -24,14 +24,9 @@ void Slider::Range(int lo, int hi) {
     SendMessage(_hWnd, TBM_SETRANGE, (WPARAM) TRUE, MAKELPARAM(lo, hi));
 }
 
-BOOL Slider::Notification(NMHDR *nHdr) {
-    switch (nHdr->code) {
-    case TRBN_THUMBPOSCHANGING:
-        if (OnSlide) {
-            NMTRBTHUMBPOSCHANGING *pc
-                = reinterpret_cast<NMTRBTHUMBPOSCHANGING *>(nHdr);
-            OnSlide(pc);
-        }
+BOOL Slider::Scroll(bool horizontal, WORD request, WORD position) {
+    if (OnSlide) {
+        return OnSlide();
     }
 
     return FALSE;

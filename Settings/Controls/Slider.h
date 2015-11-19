@@ -25,7 +25,7 @@ public:
     /// <param name="hi">Upper bound for the slider.</param>
     void Range(int lo, int hi);
 
-    virtual BOOL CALLBACK Notification(NMHDR *nHdr);
+    virtual BOOL Scroll(bool horizontal, WORD request, WORD position);
 
 private:
     HWND _buddyWnd;

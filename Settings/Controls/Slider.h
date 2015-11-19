@@ -32,6 +32,6 @@ private:
 
 public:
     /* Event Handlers */
-    std::function<void(NMTRBTHUMBPOSCHANGING *pc)> OnSlide;
+    std::function<bool()> OnSlide;
 
 };

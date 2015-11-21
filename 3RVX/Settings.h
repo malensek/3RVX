@@ -185,6 +185,7 @@ public:
     static const bool DefaultHideDirectX = false;
     static const int DefaultHideSpeed = 765;
     static const int DefaultHideTime = 800;
+    static constexpr const float DefaultVolumeLimit = 1.0f;
     static const bool DefaultNotifyIcon = true;
     static const bool DefaultShowOnStartup = true;
     static const bool DefaultSoundsEnabled = true;

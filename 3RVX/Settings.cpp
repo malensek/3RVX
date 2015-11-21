@@ -198,7 +198,7 @@ void Settings::VolumeCurveAdjustment(int value) {
 }
 
 float Settings::VolumeLimiter() {
-    return GetFloat(XML_VOLUME_LIMITER, 1.0f);
+    return GetFloat(XML_VOLUME_LIMITER, DefaultVolumeLimit);
 }
 
 void Settings::VolumeLimiter(float limit) {

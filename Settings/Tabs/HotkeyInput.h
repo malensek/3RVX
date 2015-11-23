@@ -4,6 +4,7 @@
 #pragma once
 
 #include "../Controls/Dialog.h"
+#include "../resource.h"
 
 class HotkeyInput : public Dialog {
 public:

@@ -8,6 +8,10 @@
 
 class HotkeyInput : public Dialog {
 public:
+    HotkeyInput() :
+    Dialog(L"3RVX-HotkeyInput", MAKEINTRESOURCE(IDD_HOTKEYPROMPT)) {
+        ShowWindow(Dialog::DialogHandle(), SW_SHOWNORMAL);
+    }
 
 protected:
     virtual INT_PTR CALLBACK DialogProc(

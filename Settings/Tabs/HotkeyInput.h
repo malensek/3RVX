@@ -6,16 +6,17 @@
 #include "../Controls/Dialog.h"
 #include "../resource.h"
 
+class Button;
+
 class HotkeyInput : public Dialog {
 public:
-    HotkeyInput() :
-    Dialog(L"3RVX-HotkeyInput", MAKEINTRESOURCE(IDD_HOTKEYPROMPT)) {
-        ShowWindow(Dialog::DialogHandle(), SW_SHOWNORMAL);
-    }
+    HotkeyInput();
 
 protected:
     virtual INT_PTR CALLBACK DialogProc(
         HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 private:
+    /* Controls */
+    Button *_cancel;
 };

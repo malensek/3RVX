@@ -25,6 +25,5 @@ INT_PTR HotkeyInput::DialogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM l
         break;
     }
 
-
-    return INT_PTR();
+    return Dialog::DialogProc(hwndDlg, uMsg, wParam, lParam);
 }

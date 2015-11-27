@@ -403,4 +403,13 @@
     <original>Downloading...</original>
     <translation>XXXXXXXXXXX...</translation>
   </string>
+
+<!-- Error Messages -->
+  <string>
+    <original>File not found:\n{1}</original>
+  </string>
+  <string>
+    <original>Could not locate XML tag: {1}</original>
+  </string>
+  <string><original>An unknown error occurred: ID #{1}</original></string>
 </translation>

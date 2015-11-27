@@ -411,5 +411,7 @@
   <string>
     <original>Could not locate XML tag: {1}</original>
   </string>
-  <string><original>An unknown error occurred: ID #{1}</original></string>
+  <string>
+    <original>An unknown error occurred: ID #{1}</original>
+  </string>
 </translation>

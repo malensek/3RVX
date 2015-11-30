@@ -3,14 +3,29 @@
 
 #pragma once
 
-#include <unordered_map>
+#include <Windows.h>
 
-#include "../../3RVX/Window.h"
-#include "DialogBase.h"
+#include <unordered_map>
 
 class Control;
 
-class Dialog : public DialogBase, public Window {
+class Dialog {
 public:
-    Dialog(LPCWSTR className, LPCWSTR dlgTemplate);
+    Dialog();
+    Dialog(HWND parent, LPCWSTR dlgTemplate);
+
+    void AddControl(Control *control);
+    HWND DialogHandle();
+
+protected:
+    HWND _dlgHwnd;
+
+    /// <summary>Maps control IDs to their respective instances.</summary>
+    std::unordered_map<int, Control *> _controlMap;
+
+    static INT_PTR CALLBACK StaticDialogProc(HWND hwndDlg, UINT uMsg,
+        WPARAM wParam, LPARAM lParam);
+
+    virtual INT_PTR CALLBACK DialogProc(HWND hwndDlg, UINT uMsg,
+        WPARAM wParam, LPARAM lParam);
 };

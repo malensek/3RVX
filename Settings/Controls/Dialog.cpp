@@ -7,14 +7,99 @@
 #include "../UITranslator.h"
 #include "Control.h"
 
-Dialog::Dialog(LPCWSTR className, LPCWSTR dlgTemplate) :
-Window(className) {
+Dialog::Dialog() {
+
+}
+
+Dialog::Dialog(HWND parent, LPCWSTR dlgTemplate) {
     _dlgHwnd = CreateDialogParam(
-        Window::InstanceHandle(),
+        NULL,
         dlgTemplate,
-        Window::Handle(),
+        parent,
         StaticDialogProc,
         (LPARAM) this);
 
+    if (_dlgHwnd == NULL) {
+        Logger::LogLastError();
+    }
+
     UITranslator::TranslateWindowText(_dlgHwnd);
+}
+
+void Dialog::AddControl(Control *control) {
+    if (control == nullptr) {
+        return;
+    }
+
+    int id = control->ID();
+    _controlMap[id] = control;
+}
+
+HWND Dialog::DialogHandle() {
+    return _dlgHwnd;
+}
+
+INT_PTR Dialog::StaticDialogProc(
+        HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    Dialog *dlg;
+
+    if (uMsg == WM_INITDIALOG) {
+        dlg = (Dialog *) lParam;
+        SetWindowLongPtr(hwndDlg, DWLP_USER, (LONG_PTR) dlg);
+    } else {
+        dlg = (Dialog *) GetWindowLongPtr(hwndDlg, DWLP_USER);
+        if (!dlg) {
+            return FALSE;
+        }
+    }
+
+    return dlg->DialogProc(hwndDlg, uMsg, wParam, lParam);
+}
+
+INT_PTR Dialog::DialogProc(HWND hwndDlg, UINT uMsg,
+        WPARAM wParam, LPARAM lParam) {
+
+    unsigned short nCode, ctrlId;
+
+    switch (uMsg) {
+    case WM_INITDIALOG:
+        _dlgHwnd = hwndDlg;
+        return FALSE;
+
+    case WM_COMMAND:
+        nCode = HIWORD(wParam);
+        ctrlId = LOWORD(wParam);
+        if (_controlMap.count(ctrlId) > 0) {
+            return _controlMap[ctrlId]->Command(nCode);
+        } else {
+            return FALSE;
+        }
+
+    case WM_NOTIFY: {
+        NMHDR *nHdr = (NMHDR *) lParam;
+        ctrlId = nHdr->idFrom;
+        if (_controlMap.count(ctrlId) > 0) {
+            return _controlMap[ctrlId]->Notification(nHdr);
+        } else {
+            return FALSE;
+        }
+    }
+
+    case WM_HSCROLL:
+    case WM_VSCROLL: {
+        WORD request = LOWORD(wParam);
+        WORD position = HIWORD(wParam);
+        HWND scrollHandle = (HWND) lParam;
+        ctrlId = GetDlgCtrlID(scrollHandle);
+
+        if (_controlMap.count(ctrlId) > 0) {
+            return _controlMap[ctrlId]->Scroll(
+                (uMsg == WM_HSCROLL), request, position);
+        } else {
+            return FALSE;
+        }
+    }
+    }
+
+    return FALSE;
 }

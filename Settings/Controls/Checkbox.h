@@ -7,7 +7,7 @@
 
 class Checkbox : public Button {
 public:
-    Checkbox(int id, DialogBase &parent, bool translate = true) :
+    Checkbox(int id, Dialog &parent, bool translate = true) :
     Button(id, parent, translate) {
 
     }

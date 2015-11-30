@@ -10,7 +10,7 @@
 
 class Slider : public Control {
 public:
-    Slider(int id, DialogBase &parent) :
+    Slider(int id, Dialog &parent) :
     Control(id, parent, false) {
 
     }

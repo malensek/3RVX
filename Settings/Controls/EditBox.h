@@ -7,7 +7,7 @@
 
 class EditBox : public Control {
 public:
-    EditBox(int id, DialogBase &parent) :
+    EditBox(int id, Dialog &parent) :
     Control(id, parent, false) {
 
     }

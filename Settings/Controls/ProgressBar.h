@@ -9,7 +9,7 @@
 
 class ProgressBar : public Control, public StatusCallback {
 public:
-    ProgressBar(int id, DialogBase &parent) :
+    ProgressBar(int id, Dialog &parent) :
     Control(id, parent, false) {
 
     }

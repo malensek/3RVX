@@ -7,7 +7,7 @@
 
 class Button : public Control {
 public:
-    Button(int id, DialogBase &parent, bool translate = true) :
+    Button(int id, Dialog &parent, bool translate = true) :
     Control(id, parent, translate) {
 
     }

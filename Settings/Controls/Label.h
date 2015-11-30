@@ -8,7 +8,7 @@
 
 class Label : public Control {
 public:
-    Label(int id, DialogBase &parent, bool translate = true) :
+    Label(int id, Dialog &parent, bool translate = true) :
     Control(id, parent, translate) {
 
     }

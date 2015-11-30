@@ -9,7 +9,7 @@
 
 class ComboBox : public Control {
 public:
-    ComboBox(int id, DialogBase &parent) :
+    ComboBox(int id, Dialog &parent) :
     Control(id, parent, false) {
 
     }

@@ -7,11 +7,11 @@
 #include <string>
 #include <unordered_map>
 
-#include "DialogBase.h"
+#include "Dialog.h"
 
 class Control;
 
-class TabPage : public DialogBase {
+class TabPage : public Dialog {
 public:
     TabPage(HINSTANCE hInstance, LPCWSTR tabTemplate, LPCWSTR title = L"");
 

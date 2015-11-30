@@ -9,7 +9,7 @@
 
 class GroupBox : public Control {
 public:
-    GroupBox(int id, DialogBase &parent, bool translate = true) :
+    GroupBox(int id, Dialog &parent, bool translate = true) :
     Control(id, parent, translate) {
 
     }

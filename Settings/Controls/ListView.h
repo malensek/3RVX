@@ -10,7 +10,7 @@
 
 class ListView : public Control {
 public:
-    ListView(int id, DialogBase &parent) :
+    ListView(int id, Dialog &parent) :
     Control(id, parent, false),
     _columns(0) {
 

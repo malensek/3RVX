@@ -7,7 +7,7 @@
 
 class ListBox : public Control {
 public:
-    ListBox(int id, DialogBase &parent) :
+    ListBox(int id, Dialog &parent) :
     Control(id, parent, false) {
 
     }

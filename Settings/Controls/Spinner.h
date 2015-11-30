@@ -13,7 +13,7 @@
 /// </summary>
 class Spinner : public Control {
 public:
-    Spinner(int id, DialogBase &parent) :
+    Spinner(int id, Dialog &parent) :
     Control(id, parent, false) {
 
     }

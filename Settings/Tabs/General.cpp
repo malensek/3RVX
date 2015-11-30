@@ -238,7 +238,8 @@ bool General::CheckForUpdates() {
             MB_YESNO | MB_ICONQUESTION);
 
         if (msgResult == IDYES) {
-            ProgressWindow *pw = new ProgressWindow(vers);
+            ProgressWindow *pw = new ProgressWindow(
+                TabPage::DialogHandle(), vers);
         }
 
     } else {

@@ -45,7 +45,7 @@ void UpdaterWindow::InstallUpdate() {
     delete _notifyIcon;
     _notifyIcon = nullptr;
 
-    ProgressWindow *pw = new ProgressWindow(_version);
+    ProgressWindow *pw = new ProgressWindow(Window::Handle(), _version);
 }
 
 void UpdaterWindow::CreateMenu() {

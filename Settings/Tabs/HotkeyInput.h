@@ -10,11 +10,7 @@ class Button;
 
 class HotkeyInput : public Dialog {
 public:
-    HotkeyInput();
-
-protected:
-    virtual INT_PTR CALLBACK DialogProc(
-        HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    HotkeyInput(HWND parent);
 
 private:
     /* Controls */

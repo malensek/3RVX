@@ -11,7 +11,8 @@ Dialog::Dialog() {
 
 }
 
-Dialog::Dialog(HWND parent, LPCWSTR dlgTemplate) {
+Dialog::Dialog(HWND parent, LPCWSTR dlgTemplate) :
+_parent(parent) {
     _dlgHwnd = CreateDialogParam(
         NULL,
         dlgTemplate,
@@ -37,6 +38,10 @@ void Dialog::AddControl(Control *control) {
 
 HWND Dialog::DialogHandle() {
     return _dlgHwnd;
+}
+
+HWND Dialog::ParentHandle() {
+    return _parent;
 }
 
 INT_PTR Dialog::StaticDialogProc(

@@ -16,9 +16,11 @@ public:
 
     void AddControl(Control *control);
     HWND DialogHandle();
+    HWND ParentHandle();
 
 protected:
     HWND _dlgHwnd;
+    HWND _parent;
 
     /// <summary>Maps control IDs to their respective instances.</summary>
     std::unordered_map<int, Control *> _controlMap;

@@ -153,9 +153,6 @@
     <ClInclude Include="Controls\TabPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls\DialogBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Controls\ListBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -282,9 +279,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controls\TabPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Controls\DialogBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controls\ListBox.cpp">

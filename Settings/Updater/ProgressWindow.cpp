@@ -10,18 +10,18 @@
 #include "../Controls/Controls.h"
 #include "../resource.h"
 
-ProgressWindow::ProgressWindow(Version version) :
-Dialog(L"3RVX-UpdateProgress", MAKEINTRESOURCE(IDD_DOWNLOAD)),
+ProgressWindow::ProgressWindow(HWND parent, Version version) :
+Dialog(parent, MAKEINTRESOURCE(IDD_DOWNLOAD)),
 _version(version) {
-    ShowWindow(Dialog::DialogHandle(), SW_SHOWNORMAL);
-
     _cancel = new Button(BTN_CANCEL, *this);
     _progress = new ProgressBar(PRG_DOWNLOAD, *this);
 
     _cancel->OnClick = [this]() {
-        SendMessage(Window::Handle(), WM_CLOSE, 0, 0);
+        SendMessage(Dialog::DialogHandle(), WM_CLOSE, 0, 0);
         return true;
     };
+
+    ShowWindow(Dialog::DialogHandle(), SW_SHOWNORMAL);
 
     _dlThread = std::thread(&ProgressWindow::Download, this);
 }
@@ -49,18 +49,6 @@ void ProgressWindow::Download() {
             ShellExecute(NULL, L"open", path.c_str(), 0, 0, SW_SHOWNORMAL);
         }
 
-        SendMessage(Window::Handle(), WM_CLOSE, 0, 0);
+        SendMessage(_parent, WM_CLOSE, 0, 0);
     }
-}
-
-LRESULT ProgressWindow::WndProc(
-    HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-
-    switch (message) {
-    case WM_CLOSE:
-    case WM_DESTROY:
-        PostQuitMessage(0);
-    }
-
-    return Dialog::WndProc(hWnd, message, wParam, lParam);
 }

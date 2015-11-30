@@ -15,11 +15,7 @@ class Button;
 
 class ProgressWindow : public Dialog {
 public:
-    ProgressWindow(Version version);
-
-protected:
-    virtual LRESULT WndProc(HWND hWnd, UINT message,
-        WPARAM wParam, LPARAM lParam);
+    ProgressWindow(HWND parent, Version version);
 
 private:
     Version _version;

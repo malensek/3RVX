@@ -218,6 +218,24 @@
   </string>
 
 
+  <!-- OSD Tab -->
+  <string>
+      <original>Volume</original>
+      <translation>XXXXXX</translation>
+  </string>
+  <string>
+      <original>Brightness</original>
+      <translation>XXXXXXXXXX</translation>
+  </string>
+  <string>
+      <original>Eject</original>
+      <translation>XXXXX</translation>
+  </string>
+  <string>
+      <original>Keyboard</original>
+      <translation>XXXXXXXX</translation>
+  </string>
+
   <!-- Hotkeys Tab -->
   <string>
     <original>Action</original>

@@ -32,5 +32,5 @@ INT_PTR SettingsTab::DialogProc(
         break;
     }
 
-    return DialogBase::DialogProc(hwndDlg, uMsg, wParam, lParam);
+    return Dialog::DialogProc(hwndDlg, uMsg, wParam, lParam);
 }

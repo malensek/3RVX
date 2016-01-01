@@ -1,37 +1,51 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfWord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<translation author="changhuapeng" version="0.1">
 
-<!-- General Words -->
+  <language name="Chinese Traditional" id="zh" regions="tw"/>
+  <author name="changhuapeng" website="https://github.com/changhuapeng"/>
+
+  <!-- General Strings -->
   <string>
-    <original>Settings</original>
-    <translation>配置</translation>
+    <original>3RVX Settings</original>
+    <translation>3RVX 配置</translation>
   </string>
   <string>
-    <original>Exit</original>
-    <translation>關閉</translation>
-  </string>
-
-
-<!-- Settings Dialog Buttons -->
-  <string>
-    <original>Defaults</original>
-    <translation>默認值</translation>
+    <original>OK</original>
+    <translation>確定</translation>
   </string>
   <string>
     <original>Cancel</original>
     <translation>取消</translation>
   </string>
   <string>
-    <original>Save</original>
-    <translation>儲存</translation>
+    <original>Apply</original>
+    <translation>應用</translation>
+  </string>
+
+  <!-- Notification Icon Menu Strings -->
+  <string>
+    <original>Settings</original>
+    <translation>配置</translation>
   </string>
   <string>
-    <original>Select Key...</original>
-    <translation>指定按鍵...</translation>
+    <original>Audio Device</original>
+    <translation>音頻設備</translation>
+  </string>
+  <string>
+    <original>Mixer</original>
+    <translation>合成器</translation>
+  </string>
+  <string>
+    <original>Exit</original>
+    <translation>退出</translation>
+  </string>
+  <string>
+    <original>Muted</original>
+    <translation>已靜音</translation>
   </string>
 
 
-<!-- Settings Tabs -->
+  <!-- Tab Names -->
   <string>
     <original>General</original>
     <translation>常規</translation>
@@ -41,237 +55,363 @@
     <translation>顯示</translation>
   </string>
   <string>
-    <original>Hotkey Setup</original>
-    <translation>熱鍵設置</translation>
-  </string>
-  <string>
-    <original>Skin Chooser</original>
-    <translation>主題選擇</translation>
+    <original>Hotkeys</original>
+    <translation>快捷鍵</translation>
   </string>
   <string>
     <original>About</original>
     <translation>關於</translation>
   </string>
 
-
-<!-- General Tab -->
+  <!-- General Tab -->
   <string>
     <original>Behavior</original>
-    <translation>行爲</translation>
+		<translation>行為</translation>
   </string>
   <string>
     <original>Run on Windows startup</original>
-    <translation>登錄Windows時自動啓動</translation>
+    <translation>啟動 Windows 時自動運行</translation>
+  </string>
+    <string>
+    <original>Show volume OSD on startup</original>
+    <translation>啟動时顯示音量 OSD</translation>
   </string>
   <string>
-    <original>Play sounds</original>
-    <translation>播放聲音</translation>
+    <original>Enable volume notification icon</original>
+    <translation>在通知区域顯示音量图标</translation>
   </string>
   <string>
-    <original>Custom volume change amount:</original>
-    <translation>自定義聲音改變量</translation>
+    <original>Enable sound effects</original>
+    <translation>聲音效果</translation>
+  </string>
+    <string>
+    <original>Automatic updates</original>
+    <translation>自動更新</translation>
+  </string>
+  <string>
+    <original>Check Now</original>
+    <translation>馬上檢查更新</translation>
   </string>
 
   <string>
-    <original>Mixer</original>
-    <translation>調音器</translation>
+    <original>Skin</original>
+		<translation>皮膚</translation>
   </string>
   <string>
-    <original>Control Wave instead of Master Volume</original>
-    <translation>波形控制替代主音量控制</translation>
+    <original>Author: {1}</original>
+		<translation>作者: {1}</translation>
   </string>
   <string>
-    <original>Use custom mixer program on tray click</original>
-    <translation>使用自定義調音器</translation>
-  </string>
-  <string>
-    <original>Choose...</original>
-    <translation>選擇...</translation>
-  </string>
-  <string>
-    <original>Filename: </original>
-    <translation>文件名:</translation>
+    <original>Website</original>
+		<translation>網站</translation>
   </string>
 
   <string>
     <original>Language</original>
-    <translation>語言</translation>
-  </string>
-  <string>
-    <original>Load</original>
-    <translation>加載</translation>
+		<translation>語言</translation>
   </string>
 
 
-<!-- Display Tab -->
+  <!-- Display Tab -->
   <string>
     <original>Visibility</original>
     <translation>可見性</translation>
   </string>
   <string>
-    <original>Keep above other windows</original>
-    <translation>前端顯示</translation>
+    <original>Keep on top of other windows</original>
+    <translation>在顶端顯示</translation>
   </string>
   <string>
-    <original>Display icon in system tray</original>
-    <translation>在系統托盤顯示圖標</translation>
+    <original>Hide when other programs are fullscreen</original>
+    <translation>在其它程序全屏的情況下隱藏</translation>
   </string>
+    <string>
+    <original>Hide when DirectX applications are fullscreen</original>
+    <translation>在 DirectX 程序全屏的情況下隱藏</translation>
+  </string>
+
 
   <string>
     <original>Position</original>
     <translation>位置</translation>
   </string>
   <string>
-    <original>Display on Monitor:</original>
-    <translation>選擇顯示屏幕</translation>
+    <original>Top</original>
+    <translation>居上</translation>
   </string>
   <string>
-    <original>Default</original>
-    <translation>默認</translation>
+    <original>Left</original>
+    <translation>居左</translation>
   </string>
   <string>
-    <original>Centered</original>
+    <original>Right</original>
+    <translation>居右</translation>
+  </string>
+  <string>
+    <original>Bottom</original>
+    <translation>居下</translation>
+  </string>
+  <string>
+    <original>Center</original>
     <translation>居中</translation>
   </string>
   <string>
-    <original>Custom Location:</original>
-    <translation>自定義位置</translation>
+    <original>Top-left</original>
+    <translation>左上</translation>
+  </string>
+  <string>
+    <original>Top-right</original>
+    <translation>右上</translation>
+  </string>
+  <string>
+    <original>Bottom-left</original>
+    <translation>左下</translation>
+  </string>
+  <string>
+    <original>Bottom-right</original>
+    <translation>右下</translation>
+  </string>
+  <string>
+    <original>Custom</original>
+    <translation>自定義</translation>
+  </string>
+  <string>
+    <original>Custom distance from screen edge (px):</original>
+    <translation>自定義顯示位置 (px):</translation>
+  </string>
+  <string>
+    <original>Display Device:</original>
+    <translation>顯示設備:</translation>
+  </string>
+  <string>
+    <original>Primary Monitor</original>
+    <translation>主屏幕</translation>
+  </string>
+  <string>
+    <original>All Monitors</original>
+    <translation>所有屏幕</translation>
+  </string>
+
+  <string>
+    <original>Animation</original>
+    <translation>動畫</translation>
+  </string>
+  <string>
+    <original>None</original>
+    <translation>無</translation>
+  </string>
+  <string>
+    <original>Fade</original>
+    <translation>淡出</translation>
+  </string>
+  <string>
+    <original>Hide Delay (ms):</original>
+    <translation>隱藏延遲 (ms):</translation>
+  </string>
+  <string>
+    <original>Speed (ms):</original>
+    <translation>速度 (ms):</translation>
   </string>
 
 
-<!-- Hotkey tab -->
+  <!-- Hotkeys Tab -->
   <string>
-    <original>Function</original>
-    <translation>功能</translation>
+    <original>Action</original>
+    <translation>動作</translation>
   </string>
   <string>
-    <original>Keys</original>
-    <translation>熱鍵</translation>
-  </string>
-
-  <string>
-    <original>Add</original>
-    <translation>添加</translation>
+    <original>Hotkey Editor</original>
+    <translation>快捷鍵編輯器</translation>
   </string>
   <string>
-    <original>Delete</original>
-    <translation>刪除</translation>
+    <original>Keys:</original>
+    <translation>按鍵:</translation>
   </string>
-
+  <string>
+    <original>Hotkey Input</original>
+    <translation>快捷鍵輸入</translation>
+  </string>
+  <string>
+    <original>Enter hotkeys now...</original>
+    <translation>請輸入快捷鍵...</translation>
+  </string>
   <string>
     <original>Action:</original>
-    <translation>功能:</translation>
+    <translation>動作:</translation>
   </string>
   <string>
-    <original>Volume Up</original>
-    <translation>增大音量</translation>
+    <original>Amount:</original>
+    <translation>幅度:</translation>
   </string>
   <string>
-    <original>Volume Down</original>
-    <translation>減小音量</translation>
+    <original>Volume Units</original>
+    <translation>音量單位</translation>
+  </string>
+  <string>
+    <original>Percent</original>
+    <translation>百分比</translation>
+  </string>
+  <string>
+    <original>Drive:</original>
+    <translation>設備:</translation>
+  </string>
+  <string>
+    <original>Key:</original>
+    <translation>按鍵:</translation>
+  </string>
+  <string>
+    <original>Play/Pause</original>
+    <translation>播放/暫停</translation>
+  </string>
+  <string>
+    <original>Stop</original>
+    <translation>停止</translation>
+  </string>
+  <string>
+    <original>Next</original>
+    <translation>下一首</translation>
+  </string>
+  <string>
+    <original>Previous</original>
+    <translation>上一首</translation>
+  </string>
+  <string>
+    <original>VK Code (Hex):</original>
+    <translation>虛擬鍵碼值 (Hex):</translation>
+  </string>
+  <string>
+    <original>Path:</original>
+    <translation>路徑:</translation>
+  </string>
+
+  <!-- Hotkey Actions -->
+  <string>
+    <original>Increase Volume</original>
+    <translation>增加音量</translation>
+  </string>
+  <string>
+    <original>Increase Volume {1}%</original>
+    <translation>增加音量 {1}%</translation>
+  </string>
+  <string>
+    <original>Increase Volume {1} units</original>
+    <translation>增加音量單位 {1}</translation>
+  </string>
+  <string>
+    <original>Decrease Volume</original>
+    <translation>降低音量</translation>
+  </string>
+  <string>
+    <original>Decrease Volume {1}%</original>
+    <translation>降低音量 {1}%</translation>
+  </string>
+  <string>
+    <original>Decrease Volume {1} units</original>
+    <translation>降低音量單位 {1}</translation>
+  </string>
+  <string>
+    <original>Set Volume</original>
+    <translation>設置音量</translation>
+  </string>
+  <string>
+    <original>Set Volume: {1}%</original>
+    <translation>設置音量: {1}%</translation>
+  </string>
+  <string>
+    <original>Set Volume: {1} units</original>
+    <translation>設置音量單位: {1}</translation>
   </string>
   <string>
     <original>Mute</original>
     <translation>靜音</translation>
   </string>
   <string>
-    <original>Eject</original>
-    <translation>彈出光碟</translation>
+    <original>Show Volume Slider</original>
+    <translation>顯示音量滑塊</translation>
   </string>
   <string>
-    <original>Settings Window</original>
-    <translation>程序設置</translation>
+    <original>Eject Drive</original>
+    <translation>彈出驅動器</translation>
+  </string>
+  <string>
+    <original>Eject Drive: {1}</original>
+    <translation>彈出驅動器: {1}</translation>
+  </string>
+  <string>
+    <original>Eject Last Disk</original>
+    <translation>彈出最後一個驅動器</translation>
+  </string>
+  <string>
+    <original>Media Key</original>
+    <translation>媒體播放鍵</translation>
+  </string>
+  <string>
+    <original>Media Key: {1}</original>
+    <translation>媒體播放鍵: {1}</translation>
+  </string>
+  <string>
+    <original>Virtual Key</original>
+    <translation>虛擬鍵</translation>
+  </string>
+  <string>
+    <original>Virtual Key: 0x{1}</original>
+    <translation>虛擬鍵: 0x{1}</translation>
+  </string>
+  <string>
+    <original>Run</original>
+    <translation>運行</translation>
+  </string>
+  <string>
+    <original>Run: {1}</original>
+    <translation>運行: {1}</translation>
+  </string>
+  <string>
+    <original>Enable/Disable OSD</original>
+    <translation>啟用/禁用 OSD</translation>
+  </string>
+  <string>
+    <original>Open Settings Dialog</original>
+    <translation>打開設置窗口</translation>
+  </string>
+  <string>
+    <original>Exit 3RVX</original>
+    <translation>退出 3RVX</translation>
   </string>
 
+  <!-- Update Strings -->
   <string>
-    <original>Drive:</original>
-    <translation>驅動器</translation>
+    <original>Update Available</original>
+    <translation>有新的更新</translation>
   </string>
   <string>
-    <original>Hotkey Chooser</original>
-    <translation>熱鍵選擇</translation>
+    <original>3RVX {1}</original>
+    <translation>3RVX {1}</translation>
   </string>
   <string>
-    <original>Key Combination:</original>
-    <translation>按鍵組合:</translation>
+    <original>Install</original>
+    <translation>安裝</translation>
   </string>
   <string>
-    <original>Press a key!</original>
-    <translation>請按鍵 ...</translation>
-  </string>
-
-
-<!-- Skin tab -->
-  <string>
-    <original>Available Skins</original>
-    <translation>可用主題</translation>
+    <original>Ignore version</original>
+    <translation>忽略此版本</translation>
   </string>
   <string>
-    <original>Open Skin Folder</original>
-    <translation>打開主題文件夾</translation>
+    <original>Remind me later</original>
+    <translation>下次再提醒我</translation>
+  </string>
+  <string>
+    <original>Downloading...</original>
+    <translation>下載中...</translation>
   </string>
 
+<!-- Error Messages -->
   <string>
-    <original>Skin Information</original>
-    <translation>主題信息</translation>
+    <original>找不到相關文件:\n{1}</original>
   </string>
   <string>
-    <original>Author:</original>
-    <translation>作者:</translation>
+    <original>無法定位 XML 標籤: {1}</original>
   </string>
   <string>
-    <original>Version:</original>
-    <translation>版本:</translation>
+    <original>發生了一個未知錯誤: ID #{1}</original>
   </string>
-  <string>
-    <original>Skin Format Version:</original>
-    <translation>格式版本:</translation>
-  </string>
-  <string>
-    <original>Author's Webpage</original>
-    <translation>作者網站</translation>
-  </string>
-
-
-<!-- About tab -->
-  <string>
-    <original>Version</original>
-    <translation>版本</translation>
-  </string>
-  <string>
-    <original>lang_author</original>
-    <translation>譯者: http://Aylwin.info</translation>
-  </string>
-  <string>
-    <original>lang_module</original>
-    <translation>已加載: 中文正體</translation>
-  </string>
-
-
-<!-- Messages -->
-  <string>
-    <original>Load Defaults</original>
-    <translation>恢復默認值</translation>
-  </string>
-  <string>
-    <original>All settings will be lost.  Continue?</original>
-    <translation>當前設置將被清除. 是否繼續?</translation>
-  </string>
-  <string>
-    <original>Skin Error</original>
-    <translation>文件錯誤</translation>
-  </string>
-  <string>
-    <original>Couldn't load skin.  Try loading the default skin?</original>
-    <translation>所選主題加載失敗, 使用默認主題?</translation>
-  </string>
-  <string>
-    <original>Couldn't load skin XML.  Check the file for syntax errors.</original>
-    <translation>無法讀取主題文件XML, 請檢查語法錯誤</translation>
-  </string>
-  <string>
-    <original>Settings will be applied next time 3RVX starts.</original>
-    <translation>變更的設置將在下次3RVX啓動時啓用</translation>
-  </string>
-
-</ArrayOfWord>
+</translation>

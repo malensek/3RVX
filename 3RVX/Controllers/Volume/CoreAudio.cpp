@@ -75,6 +75,7 @@ HRESULT CoreAudio::AttachDevice() {
         }
     } else {
         CLOG(L"Failed to find audio device!");
+        _volumeControl = nullptr;
     }
 
     return hr;

@@ -55,6 +55,10 @@
     <translation>XXXXXXX</translation>
   </string>
   <string>
+    <original>OSD</original>
+    <translation>XXX</translation>
+  </string>
+  <string>
     <original>Hotkeys</original>
     <translation>XXXXXXX</translation>
   </string>
@@ -213,6 +217,28 @@
     <translation>XXXXX XXXX:</translation>
   </string>
 
+
+  <!-- OSD Tab -->
+  <string>
+      <original>Volume</original>
+      <translation>XXXXXX</translation>
+  </string>
+  <string>
+      <original>Brightness</original>
+      <translation>XXXXXXXXXX</translation>
+  </string>
+  <string>
+      <original>Eject</original>
+      <translation>XXXXX</translation>
+  </string>
+  <string>
+      <original>Keyboard</original>
+      <translation>XXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Enable notification icon</original>
+    <translation>XXXXXX XXXXXXXXXXXX XXXX</translation>
+  </string>
 
   <!-- Hotkeys Tab -->
   <string>

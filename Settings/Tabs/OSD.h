@@ -58,4 +58,12 @@ private:
     Checkbox *_media;
 
     std::vector<GroupBox *> _groups;
+
+private:
+    /* Strings: */
+    std::wstring _osdStr = L"OSD";
+    std::wstring _volumeStr = L"Volume";
+    std::wstring _brightnessStr = L"Brightness";
+    std::wstring _ejectStr = L"Eject";
+    std::wstring _keyboardStr = L"Keyboard";
 };

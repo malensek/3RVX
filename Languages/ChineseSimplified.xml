@@ -403,4 +403,15 @@
     <original>Downloading...</original>
     <translation>下载中...</translation>
   </string>
+
+<!-- Error Messages -->
+  <string>
+    <original>找不到相关文件:\n{1}</original>
+  </string>
+  <string>
+    <original>无法定位 XML 标签: {1}</original>
+  </string>
+  <string>
+    <original>发生了一个未知错误: ID #{1}</original>
+  </string>
 </translation>

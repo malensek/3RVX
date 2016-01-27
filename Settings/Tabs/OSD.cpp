@@ -12,12 +12,6 @@ void OSD::Initialize() {
     using std::placeholders::_1;
 
     _osdList = new ListView(LST_OSDS, *this);
-    _osdList->AddListExStyle(LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT);
-    _osdList->AddColumn(L"OSD", (int) (_osdList->Width() * .97f));
-    _osdList->AddItem(L"Volume");
-    _osdList->AddItem(L"Brightness");
-    _osdList->AddItem(L"Eject");
-    _osdList->AddItem(L"Keyboard");
     _osdList->OnItemChange = std::bind(&OSD::OnOSDListItemChange, this, _1);
 
     _volumeIcon = new Checkbox(CHK_VOLICON, *this);
@@ -91,12 +85,26 @@ void OSD::Initialize() {
         _groups.push_back(grp);
     }
 
-    _osdList->Selection(0);
 }
 
 void OSD::LoadSettings() {
     Settings *settings = Settings::Instance();
     LanguageTranslator *translator = settings->Translator();
+
+    /* Translations */
+    _osdStr = translator->Translate(_osdStr);
+    _volumeStr = translator->Translate(_volumeStr);
+    _brightnessStr = translator->Translate(_brightnessStr);
+    _ejectStr = translator->Translate(_ejectStr);
+    _keyboardStr = translator->Translate(_keyboardStr);
+
+    _osdList->AddListExStyle(LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT);
+    _osdList->AddColumn(_osdStr, (int) (_osdList->Width() * .97f));
+    _osdList->AddItem(_volumeStr);
+    _osdList->AddItem(_brightnessStr);
+    _osdList->AddItem(_ejectStr);
+    _osdList->AddItem(_keyboardStr);
+    _osdList->Selection(0);
 
     _osdList->Checked(0, settings->VolumeOSDEnabled());
     _osdList->Checked(1, settings->BrightnessOSDEnabled());

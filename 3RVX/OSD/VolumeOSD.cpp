@@ -237,7 +237,11 @@ void VolumeOSD::UpdateIconTip() {
     }
 
     if (_volumeCtrl->Muted()) {
-        _icon->UpdateToolTip(_selectedDesc + L": " + _iconMuteStr);
+        if (_volumeCtrl->DeviceEnabled()) {
+            _icon->UpdateToolTip(_selectedDesc + L": " + _iconMuteStr);
+        } else {
+            _icon->UpdateToolTip(L"No audio device detected");
+        }
     } else {
         float v = _volumeCtrl->Volume();
         std::wstring perc = std::to_wstring((int) (v * 100.0f));

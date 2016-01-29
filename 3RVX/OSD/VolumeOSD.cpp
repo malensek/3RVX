@@ -118,9 +118,9 @@ void VolumeOSD::UpdateDeviceMenu() {
         = _volumeCtrl->ListDevices();
     std::wstring currentDeviceId = _volumeCtrl->DeviceId();
 
-    if (devices.size() == 0) {
-        EnableMenuItem(_menu, UINT(_deviceMenu), MF_BYCOMMAND | MF_GRAYED);
-    }
+    /* Disable/enable the menu depending on whether devices are available */
+    EnableMenuItem(_menu, UINT(_deviceMenu),
+        devices.size() == 0 ? MF_GRAYED : MF_ENABLED);
 
     int menuItem = MENU_DEVICE;
     for (VolumeController::DeviceInfo device : devices) {

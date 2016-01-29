@@ -26,6 +26,8 @@ public:
         (Muted() == true) ? Muted(false) : Muted(true);
     }
 
+    virtual void Enabled() = 0;
+
     virtual void AddTransformation(VolumeTransformation *transform) = 0;
     virtual void RemoveTransformation(VolumeTransformation *transform) = 0;
 

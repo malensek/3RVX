@@ -31,6 +31,8 @@ public:
     bool Muted();
     void Muted(bool mute);
 
+    bool DeviceEnabled();
+
     virtual void AddTransformation(VolumeTransformation *transform);
     virtual void RemoveTransformation(VolumeTransformation *transform);
 

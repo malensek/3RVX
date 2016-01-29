@@ -335,6 +335,10 @@ void CoreAudio::Muted(bool muted) {
     }
 }
 
+bool CoreAudio::DeviceEnabled() {
+    return _device != nullptr && _volumeControl != nullptr;
+}
+
 void CoreAudio::AddTransformation(VolumeTransformation *transform) {
     _transforms.push_back(transform);
 }

@@ -408,8 +408,10 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     } else if (message == MSG_NOTIFYICON) {
         if (lParam == WM_LBUTTONUP) {
-            _volumeSlider->MeterLevels(_volumeCtrl->Volume());
-            _volumeSlider->Show();
+            if (_volumeCtrl->DeviceEnabled()) {
+                _volumeSlider->MeterLevels(_volumeCtrl->Volume());
+                _volumeSlider->Show();
+            }
         } else if (lParam == WM_RBUTTONUP) {
             POINT p;
             GetCursorPos(&p);

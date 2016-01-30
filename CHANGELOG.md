@@ -18,6 +18,7 @@ Beta 10 (2.9.2)
 * Bugfix: Changing the volume slider while muted now unmutes the volume
 * Bugfix: Display changes are monitored and accounted for (multi-monitor setups) [#36]
 * Bugfix: Intermittent optical disk eject failure [#37]
+* Bugfix: Null device crash [#42, #45]
 
 Beta 9 (2.9.1)
 ------

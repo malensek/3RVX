@@ -23,7 +23,10 @@ _parent(parent) {
     if (_dlgHwnd == NULL) {
         Logger::LogLastError();
     }
+}
 
+void Dialog::Show() {
+    DialogBoxParam(NULL, _template, _parent, StaticDialogProc, (LPARAM) this);
     UITranslator::TranslateWindowText(_dlgHwnd);
 }
 

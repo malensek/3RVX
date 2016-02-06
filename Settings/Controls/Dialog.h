@@ -18,6 +18,8 @@ public:
     HWND DialogHandle();
     HWND ParentHandle();
 
+    void Show();
+
 protected:
     HWND _dlgHwnd;
     HWND _parent;

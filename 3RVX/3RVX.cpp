@@ -218,7 +218,7 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     }
 
     case WM_DISPLAYCHANGE: {
-        CLOG(L"Detected display change here");
+        CLOG(L"Detected display change");
         DisplayManager::UpdateMonitorMap();
         for (OSD *osd : _osds) {
             osd->OnDisplayChange();

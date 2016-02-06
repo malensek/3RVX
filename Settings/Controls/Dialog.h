@@ -23,6 +23,7 @@ public:
 protected:
     HWND _dlgHwnd;
     HWND _parent;
+    LPCWSTR _template;
 
     /// <summary>Maps control IDs to their respective instances.</summary>
     std::unordered_map<int, Control *> _controlMap;

@@ -227,6 +227,21 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         break;
     }
 
+    case WM_INPUT: {
+        HRAWINPUT hri = (HRAWINPUT) lParam;
+        UINT pcbSz;
+        GetRawInputData((HRAWINPUT) lParam, RID_INPUT,
+            NULL, &pcbSz, sizeof(RAWINPUTHEADER));
+        LPBYTE lpb = new BYTE[pcbSz];
+        GetRawInputData((HRAWINPUT) lParam, RID_INPUT,
+            lpb, &pcbSz, sizeof(RAWINPUTHEADER));
+        RAWINPUT *raw = (RAWINPUT *) lpb;
+
+        CLOG(L"WM_INPUT: %d", raw->data.keyboard.VKey);
+        delete[] lpb;
+        break;
+    }
+
     case WM_DISPLAYCHANGE: {
         CLOG(L"Detected display change");
         DisplayManager::UpdateMonitorMap();

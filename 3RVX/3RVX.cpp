@@ -146,6 +146,16 @@ void _3RVX::Initialize() {
         int combination = it->first;
         _hkManager->Register(combination);
     }
+
+    RAWINPUTDEVICE rin[1] = { 0 };
+    rin[0].dwFlags = RIDEV_INPUTSINK | RIDEV_NOLEGACY;
+    rin[0].hwndTarget = this->Handle();
+    rin[0].usUsage = 6;
+    rin[0].usUsagePage = 1;
+    BOOL x = RegisterRawInputDevices(&rin[0], 1, sizeof(RAWINPUTDEVICE));
+    CLOG(L"result: %i", x);
+    Logger::LogLastError();
+
 }
 
 void _3RVX::ProcessHotkeys(HotkeyInfo &hki) {

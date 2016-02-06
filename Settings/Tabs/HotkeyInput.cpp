@@ -11,8 +11,8 @@ Dialog(parent, MAKEINTRESOURCE(IDD_HOTKEYPROMPT)) {
 
     _cancel = new Button(BTN_CANCELKEYS, *this);
     _cancel->OnClick = [this]() {
+        EndDialog(this->DialogHandle(), 0);
         return true;
     };
 
-    ShowWindow(_dlgHwnd, SW_SHOW);
 }

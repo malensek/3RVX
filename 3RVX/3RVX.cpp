@@ -238,6 +238,14 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         RAWINPUT *raw = (RAWINPUT *) lpb;
 
         CLOG(L"WM_INPUT: %d", raw->data.keyboard.VKey);
+        wchar_t buf[256] = {};
+        long scanCode = raw->data.keyboard.MakeCode;
+        CLOG(L"scan: %x", scanCode);
+        USHORT flags = raw->data.keyboard.Flags;
+        const bool e0 = ((flags & RI_KEY_E0) != 0);
+        const bool e1 = ((flags & RI_KEY_E1) != 0);
+        int ret = GetKeyNameText(scanCode << 16 | e0 << 24 | 0x1 << 25, buf, 256);
+        CLOG(L"key: %s | %d %d %d", buf, ret, e0, e1);
         delete[] lpb;
         break;
     }

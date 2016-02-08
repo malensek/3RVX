@@ -30,15 +30,19 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
             _icon = new NotifyIcon(Window::Handle(), L"Eject", _iconImages[0]);
         }
     }
+
+    CLOG(L"getting logical drives ********************");
     DWORD drives = GetLogicalDrives();
-    DWORD msb = log2(drives);
+    DWORD msb = (DWORD) log2(drives);
     for (DWORD i = 0; i < msb; ++i, drives >>= 1) {
         if (drives & 0x1) {
             wchar_t letter = (wchar_t) i + 65;
             CLOG(L"Drive: %c", letter);
             wchar_t buf[256] = { 0 };
             std::wstring name = std::wstring(1, letter) + L":\\";
+            CLOG(L"slow1?");
             QCLOG(L"type: %d", GetDriveType(name.c_str()));
+            CLOG(L"slow2?");
             int result = GetVolumeInformation(name.c_str(), buf, 256, NULL, NULL, NULL, NULL, NULL);
             QCLOG(L"%s", buf);
             QCLOG(L"result %d", result);

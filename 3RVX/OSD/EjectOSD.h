@@ -7,6 +7,8 @@
 
 #include "OSD.h"
 
+class NotifyIcon;
+
 class EjectOSD : public OSD {
 public:
     EjectOSD();
@@ -18,6 +20,9 @@ private:
     DWORD _ignoreDrives;
     DWORD _latestDrive;
     MeterWnd _mWnd;
+
+    NotifyIcon *_icon;
+    std::vector<HICON> _iconImages;
 
     void EjectDrive(std::wstring driveLetter);
 

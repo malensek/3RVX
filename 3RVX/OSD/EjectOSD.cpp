@@ -7,6 +7,7 @@
 
 #include "../HotkeyInfo.h"
 #include "../Monitor.h"
+#include "../NotifyIcon.h"
 #include "../Skin/OSDComponent.h"
 #include "../Skin/Skin.h"
 #include "../Skin/SkinManager.h"
@@ -22,6 +23,12 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 
     OSD::InitMeterWnd(_mWnd);
 
+    if (_settings->NotifyIconEnabled()) {
+        _iconImages = skin->VolumeIconset();
+        if (_iconImages.size() > 0) {
+            _icon = new NotifyIcon(Window::Handle(), L"Eject", _iconImages[0]);
+        }
+    }
     DWORD drives = GetLogicalDrives();
     DWORD msb = log2(drives);
     for (DWORD i = 0; i < msb; ++i, drives >>= 1) {

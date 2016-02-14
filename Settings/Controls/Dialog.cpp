@@ -56,6 +56,7 @@ INT_PTR Dialog::StaticDialogProc(
 
     if (uMsg == WM_INITDIALOG) {
         dlg = (Dialog *) lParam;
+        dlg->_dlgHwnd = hwndDlg;
         SetWindowLongPtr(hwndDlg, DWLP_USER, (LONG_PTR) dlg);
     } else {
         dlg = (Dialog *) GetWindowLongPtr(hwndDlg, DWLP_USER);
@@ -74,7 +75,6 @@ INT_PTR Dialog::DialogProc(HWND hwndDlg, UINT uMsg,
 
     switch (uMsg) {
     case WM_INITDIALOG:
-        _dlgHwnd = hwndDlg;
         return FALSE;
 
     case WM_COMMAND:

@@ -33,6 +33,10 @@ void Dialog::Show() {
     UITranslator::TranslateWindowText(_dlgHwnd);
 }
 
+void Dialog::Close(int result) {
+    EndDialog(_dlgHwnd, result);
+}
+
 void Dialog::AddControl(Control *control) {
     if (control == nullptr) {
         return;
@@ -77,7 +81,12 @@ INT_PTR Dialog::DialogProc(HWND hwndDlg, UINT uMsg,
     case WM_INITDIALOG:
         return FALSE;
 
-    case WM_COMMAND:
+    case WM_CLOSE: {
+        Close();
+        break;
+    }
+
+    case WM_COMMAND: {
         nCode = HIWORD(wParam);
         ctrlId = LOWORD(wParam);
         if (_controlMap.count(ctrlId) > 0) {
@@ -85,6 +94,7 @@ INT_PTR Dialog::DialogProc(HWND hwndDlg, UINT uMsg,
         } else {
             return FALSE;
         }
+    }
 
     case WM_NOTIFY: {
         NMHDR *nHdr = (NMHDR *) lParam;

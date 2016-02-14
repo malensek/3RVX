@@ -19,6 +19,7 @@ public:
     HWND ParentHandle();
 
     void Show();
+    virtual void Close(int result = 0);
 
 protected:
     HWND _dlgHwnd;

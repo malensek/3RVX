@@ -18,7 +18,7 @@ public:
     HWND DialogHandle();
     HWND ParentHandle();
 
-    void Show();
+    virtual void Show();
     virtual void Close(int result = 0);
 
 protected:

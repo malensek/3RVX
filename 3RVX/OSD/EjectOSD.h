@@ -5,6 +5,8 @@
 
 #include <Windows.h>
 
+#include <thread>
+
 #include "OSD.h"
 
 class NotifyIcon;
@@ -24,6 +26,7 @@ private:
     NotifyIcon *_icon;
     std::vector<HICON> _iconImages;
 
+    std::thread _menuThread;
     void EjectDrive(std::wstring driveLetter);
 
     DWORD DriveLetterToMask(wchar_t letter);

@@ -48,6 +48,8 @@ void EjectOSD::UpdateDriveMenu() {
             std::wstring name = std::wstring(1, letter) + L":\\";
             UINT type = GetDriveType(name.c_str());
             if (type == DRIVE_REMOVABLE || type == DRIVE_CDROM) {
+                //TODO: certain usb-attached disks will return DRIVE_FIXED here.
+                //need to verify with IOCTL
                 int result = GetVolumeInformation(name.c_str(), buf, 256,
                     NULL, NULL, NULL, NULL, NULL);
                 CLOG(L"Drive: %c - %s [%d]", letter, buf, result);

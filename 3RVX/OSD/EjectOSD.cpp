@@ -90,6 +90,22 @@ void EjectOSD::UpdateDriveMenu() {
                 if (sdd.RemovableMedia) {
                     CLOG(L"This is removable");
                 }
+
+                STORAGE_HOTPLUG_INFO shi = { 0 };
+                iores = DeviceIoControl(
+                    dev,
+                    IOCTL_STORAGE_GET_HOTPLUG_INFO,
+                    NULL,
+                    0,
+                    &shi,
+                    sizeof(shi),
+                    &bytesOut,
+                    NULL);
+                if (!iores) {
+                    Logger::LogLastError();
+                }
+                CLOG(L"%d %d %d %d", bytesOut, shi.DeviceHotplug, shi.MediaHotplug, shi.MediaHotplug);
+
                 CloseHandle(dev);
 
 

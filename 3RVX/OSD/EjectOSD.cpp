@@ -228,6 +228,14 @@ wchar_t EjectOSD::MaskToDriveLetter(DWORD mask) {
     return (wchar_t) (log2(mask) + 65);
 }
 
+std::wstring EjectOSD::DriveFileName(wchar_t driveLetter) {
+    return DriveFileName(std::wstring(1, driveLetter));
+}
+
+std::wstring EjectOSD::DriveFileName(std::wstring &driveLetter) {
+    return L"\\\\.\\" + driveLetter + L":";
+}
+
 void EjectOSD::OnDisplayChange() {
     InitMeterWnd(_mWnd);
 }

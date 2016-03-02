@@ -26,6 +26,7 @@ private:
     NotifyIcon *_icon;
     std::vector<HICON> _iconImages;
 
+    HMENU _menu;
     std::thread _menuThread;
     void EjectDrive(std::wstring driveLetter);
 

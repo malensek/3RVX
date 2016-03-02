@@ -32,6 +32,7 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     }
 
     CLOG(L"getting logical drives ********************");
+    _menu = CreatePopupMenu();
     DWORD drives = GetLogicalDrives();
     DWORD msb = (DWORD) log2(drives);
     for (DWORD i = 0; i < msb; ++i, drives >>= 1) {

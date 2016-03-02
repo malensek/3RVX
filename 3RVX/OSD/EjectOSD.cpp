@@ -31,8 +31,12 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
         }
     }
 
-    CLOG(L"getting logical drives ********************");
     _menu = CreatePopupMenu();
+    //_menuThread = std::thread();
+    UpdateDriveMenu();
+
+}
+
 void EjectOSD::UpdateDriveMenu() {
     DWORD drives = GetLogicalDrives();
     /* Get the most significant bit of the drive bitset */

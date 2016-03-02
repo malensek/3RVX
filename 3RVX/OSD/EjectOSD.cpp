@@ -44,16 +44,57 @@ void EjectOSD::UpdateDriveMenu() {
     for (DWORD i = 0; i < msb; ++i, drives >>= 1) {
         if (drives & 0x1) {
             wchar_t letter = (wchar_t) i + 65;
-            wchar_t buf[256] = { 0 };
-            std::wstring name = std::wstring(1, letter) + L":\\";
-            UINT type = GetDriveType(name.c_str());
-            if (type == DRIVE_REMOVABLE || type == DRIVE_CDROM) {
+            wchar_t drivePath[] = L" :\\";
+            drivePath[0] = letter;
+            UINT type = GetDriveType(drivePath);
+//            if (type != DRIVE_FIXED) {
+//                continue;
+//            }
+//            if (type == DRIVE_REMOVABLE || type == DRIVE_CDROM) {
                 //TODO: certain usb-attached disks will return DRIVE_FIXED here.
                 //need to verify with IOCTL
-                int result = GetVolumeInformation(name.c_str(), buf, 256,
+                wchar_t driveName[256] = { 0 };
+                int result = GetVolumeInformation(drivePath, driveName, 256,
                     NULL, NULL, NULL, NULL, NULL);
-                CLOG(L"Drive: %c - %s [%d]", letter, buf, result);
-            }
+                CLOG(L"Drive: %c - %s [%d]", letter, driveName, result);
+                HANDLE dev = CreateFile(
+                    DriveFileName(letter).c_str(),
+                    FILE_READ_ATTRIBUTES,
+                    FILE_SHARE_READ | FILE_SHARE_WRITE,
+                    NULL, OPEN_EXISTING, 0, NULL);
+                if (dev == INVALID_HANDLE_VALUE) {
+                    CLOG(L"Failed to get device handle");
+                }
+
+
+                STORAGE_PROPERTY_QUERY spq;
+                spq.AdditionalParameters[0] = 0;
+                spq.PropertyId = StorageDeviceProperty;
+                spq.QueryType = PropertyStandardQuery;
+                STORAGE_DEVICE_DESCRIPTOR sdd = { 0 };
+                BYTE bbuf[4096];
+                DWORD bytesOut;
+                BOOL iores = DeviceIoControl(
+                    dev,
+                    IOCTL_STORAGE_QUERY_PROPERTY,
+                    &spq,
+                    sizeof(spq),
+                    &sdd,
+                    sizeof(sdd),
+                    &bytesOut,
+                    NULL);
+                if (!iores) {
+                    Logger::LogLastError();
+                }
+                CLOG(L"out: %d", bytesOut);
+                if (sdd.RemovableMedia) {
+                    CLOG(L"This is removable");
+                }
+                CloseHandle(dev);
+
+
+
+//            }
         }
     }
 }

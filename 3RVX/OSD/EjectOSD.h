@@ -28,6 +28,9 @@ private:
 
     HMENU _menu;
     std::thread _menuThread;
+
+    void UpdateDriveMenu();
+
     void EjectDrive(std::wstring driveLetter);
 
     DWORD DriveLetterToMask(wchar_t letter);

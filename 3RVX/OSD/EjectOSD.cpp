@@ -33,22 +33,21 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 
     CLOG(L"getting logical drives ********************");
     _menu = CreatePopupMenu();
+void EjectOSD::UpdateDriveMenu() {
     DWORD drives = GetLogicalDrives();
+    /* Get the most significant bit of the drive bitset */
     DWORD msb = (DWORD) log2(drives);
     for (DWORD i = 0; i < msb; ++i, drives >>= 1) {
         if (drives & 0x1) {
             wchar_t letter = (wchar_t) i + 65;
-            CLOG(L"Drive: %c", letter);
             wchar_t buf[256] = { 0 };
             std::wstring name = std::wstring(1, letter) + L":\\";
-            CLOG(L"slow1?");
-            QCLOG(L"type: %d", GetDriveType(name.c_str()));
-            CLOG(L"slow2?");
-            int result = GetVolumeInformation(name.c_str(), buf, 256, NULL, NULL, NULL, NULL, NULL);
-            QCLOG(L"%s", buf);
-            QCLOG(L"result %d", result);
-            Logger::LogLastError();
-
+            UINT type = GetDriveType(name.c_str());
+            if (type == DRIVE_REMOVABLE || type == DRIVE_CDROM) {
+                int result = GetVolumeInformation(name.c_str(), buf, 256,
+                    NULL, NULL, NULL, NULL, NULL);
+                CLOG(L"Drive: %c - %s [%d]", letter, buf, result);
+            }
         }
     }
 }

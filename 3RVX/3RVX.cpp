@@ -146,16 +146,6 @@ void _3RVX::Initialize() {
         int combination = it->first;
         _hkManager->Register(combination);
     }
-
-    RAWINPUTDEVICE rin[1] = { 0 };
-    rin[0].dwFlags = RIDEV_INPUTSINK | RIDEV_NOLEGACY;
-    rin[0].hwndTarget = this->Handle();
-    rin[0].usUsage = 6;
-    rin[0].usUsagePage = 1;
-    BOOL x = RegisterRawInputDevices(&rin[0], 1, sizeof(RAWINPUTDEVICE));
-    CLOG(L"result: %i", x);
-    Logger::LogLastError();
-
 }
 
 void _3RVX::ProcessHotkeys(HotkeyInfo &hki) {
@@ -224,36 +214,6 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         CLOG(L"Hotkey: %d", (int) wParam);
         HotkeyInfo hki = _hotkeys[(int) wParam];
         ProcessHotkeys(hki);
-        break;
-    }
-
-    case WM_INPUT: {
-        HRAWINPUT hri = (HRAWINPUT) lParam;
-        UINT pcbSz;
-        GetRawInputData((HRAWINPUT) lParam, RID_INPUT,
-            NULL, &pcbSz, sizeof(RAWINPUTHEADER));
-        LPBYTE lpb = new BYTE[pcbSz];
-        GetRawInputData((HRAWINPUT) lParam, RID_INPUT,
-            lpb, &pcbSz, sizeof(RAWINPUTHEADER));
-        RAWINPUT *raw = (RAWINPUT *) lpb;
-
-        USHORT vk = raw->data.keyboard.VKey;
-        bool mod = HotkeyManager::IsModifier(vk);
-        if (mod) {
-            break;
-        }
-
-        CLOG(L"WM_INPUT: %d", raw->data.keyboard.VKey);
-        wchar_t buf[256] = {};
-        long scanCode = raw->data.keyboard.MakeCode;
-        CLOG(L"scan: %x", scanCode);
-        USHORT flags = raw->data.keyboard.Flags;
-        const bool e0 = ((flags & RI_KEY_E0) != 0);
-        const bool e1 = ((flags & RI_KEY_E1) != 0);
-        int ret = GetKeyNameText(scanCode << 16 | e0 << 24 | 0x1 << 25, buf, 256);
-        int mods = HotkeyManager::Modifiers();
-        CLOG(L"key: %s | %d %d %d ; %d", buf, ret, e0, e1, mods);
-        delete[] lpb;
         break;
     }
 

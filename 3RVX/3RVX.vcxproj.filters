@@ -204,7 +204,7 @@
     <ClInclude Include="Controllers\Volume\VolumeLimiter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DiskInfo.h">
+    <ClInclude Include="DriveInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -356,7 +356,7 @@
     <ClCompile Include="Skin\ErrorSkin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DiskInfo.cpp">
+    <ClCompile Include="DriveInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

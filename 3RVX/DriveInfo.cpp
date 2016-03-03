@@ -1,9 +1,9 @@
-#include "DiskInfo.h"
+#include "DriveInfo.h"
 
 #include "Logger.h"
 #include "StringUtils.h"
 
-DiskInfo::DiskInfo(wchar_t driveLetter) {
+DriveInfo::DriveInfo(wchar_t driveLetter) {
     std::wstring driveFileName = DriveFileName(driveLetter);
     _devHandle = CreateFile(
         driveFileName.c_str(),
@@ -24,7 +24,7 @@ DiskInfo::DiskInfo(wchar_t driveLetter) {
 
 }
 
-void DiskInfo::PopulateDeviceId() {
+void DriveInfo::PopulateDeviceId() {
     STORAGE_DEVICE_NUMBER sdn = { 0 };
     DWORD bytesOut;
 
@@ -46,7 +46,7 @@ void DiskInfo::PopulateDeviceId() {
     CLOG(L"-> %d", sdn.DeviceNumber);
 }
 
-void DiskInfo::PopulateDeviceInfo() {
+void DriveInfo::PopulateDeviceInfo() {
     STORAGE_PROPERTY_QUERY propertyQuery;
     propertyQuery.PropertyId = StorageDeviceProperty;
     propertyQuery.QueryType = PropertyStandardQuery;
@@ -110,7 +110,7 @@ void DiskInfo::PopulateDeviceInfo() {
     delete[] descriptorData;
 }
 
-void DiskInfo::PopulateHotplugInfo() {
+void DriveInfo::PopulateHotplugInfo() {
     STORAGE_HOTPLUG_INFO shi = { 0 };
     DWORD bytesOut;
 
@@ -133,11 +133,11 @@ void DiskInfo::PopulateHotplugInfo() {
 
 }
 
-std::wstring DiskInfo::DriveFileName(wchar_t &driveLetter) {
+std::wstring DriveInfo::DriveFileName(wchar_t &driveLetter) {
     return DriveFileName(std::wstring(1, driveLetter));
 }
 
-std::wstring DiskInfo::DriveFileName(std::wstring &driveLetter) {
+std::wstring DriveInfo::DriveFileName(std::wstring &driveLetter) {
     return L"\\\\.\\" + driveLetter + L":";
 }
 

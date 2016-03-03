@@ -4,9 +4,9 @@
 
 #include <string>
 
-class DiskInfo {
+class DriveInfo {
 public:
-    DiskInfo(wchar_t driveLetter);
+    DriveInfo(wchar_t driveLetter);
 
     static std::wstring DriveFileName(wchar_t &driveLetter);
     static std::wstring DriveFileName(std::wstring &driveLetter);

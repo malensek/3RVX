@@ -43,7 +43,7 @@ void DriveInfo::PopulateDeviceId() {
         return;
     }
 
-    CLOG(L"-> %d", sdn.DeviceNumber);
+    _devId = sdn.DeviceNumber;
 }
 
 void DriveInfo::PopulateDeviceInfo() {

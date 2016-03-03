@@ -13,6 +13,7 @@ public:
 
 private:
     HANDLE _devHandle;
+    DWORD _devId;
     std::wstring _productId;
     std::wstring _vendorId;
     bool _hasRemovableMedia;

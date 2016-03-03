@@ -15,8 +15,10 @@ private:
     HANDLE _devHandle;
     std::wstring _productId;
     std::wstring _vendorId;
+    bool _hasRemovableMedia;
 
     void PopulateDeviceId();
     void PopulateDeviceInfo();
     void PopulateHotplugInfo();
+
 };

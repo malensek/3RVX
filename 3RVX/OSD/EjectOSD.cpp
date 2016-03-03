@@ -59,7 +59,7 @@ void EjectOSD::UpdateDriveMenu() {
 }
 
 void EjectOSD::EjectDrive(std::wstring driveLetter) {
-    std::wstring name = L"\\\\.\\" + driveLetter + L":";
+    std::wstring name = DiskInfo::DriveFileName(driveLetter);
     CLOG(L"Ejecting %s", name.c_str());
 
     HANDLE dev = CreateFile(

@@ -102,7 +102,9 @@ void DriveInfo::PopulateDeviceInfo() {
             (const char *) ((unsigned char *) sdd + sdd->VendorIdOffset));
     }
 
-    _hasRemovableMedia = (sdd->RemovableMedia == TRUE);
+    if (sdd->RemovableMedia) {
+        _hasRemovableMedia = true;
+    }
 
     CLOG("ProductID: '%s'\nVendor ID: '%s'",
         _productId.c_str(), _vendorId.c_str());

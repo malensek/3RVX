@@ -15,7 +15,9 @@ DriveInfo::DriveInfo(wchar_t driveLetter) {
         NULL);
 
     if (_devHandle == INVALID_HANDLE_VALUE) {
+        // TODO perhaps this should throw an error?
         CLOG(L"Failed to get device handle");
+        return;
     }
 
     PopulateDeviceId();

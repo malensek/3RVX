@@ -22,6 +22,28 @@ DiskInfo::DiskInfo(wchar_t driveLetter) {
 
 }
 
+void DiskInfo::PopulateDeviceId() {
+    STORAGE_DEVICE_NUMBER sdn = { 0 };
+    DWORD bytesOut;
+
+    BOOL result = DeviceIoControl(
+        _devHandle,
+        IOCTL_STORAGE_GET_DEVICE_NUMBER,
+        NULL,
+        0,
+        &sdn,
+        sizeof(sdn),
+        &bytesOut,
+        NULL);
+
+    if (result == 0) {
+        Logger::LogLastError();
+        return;
+    }
+
+    CLOG(L"-> %d", sdn.DeviceNumber);
+}
+
 void DiskInfo::PopulateDeviceInfo() {
     STORAGE_PROPERTY_QUERY propertyQuery;
     propertyQuery.PropertyId = StorageDeviceProperty;

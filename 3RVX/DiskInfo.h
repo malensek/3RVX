@@ -16,6 +16,7 @@ private:
     std::wstring _productId;
     std::wstring _vendorId;
 
+    void PopulateDeviceId();
     void PopulateDeviceInfo();
     void PopulateHotplugInfo();
 };

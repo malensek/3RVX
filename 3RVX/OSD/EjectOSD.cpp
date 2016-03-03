@@ -5,6 +5,7 @@
 
 #include <Dbt.h>
 
+#include "../DiskInfo.h"
 #include "../HotkeyInfo.h"
 #include "../Monitor.h"
 #include "../NotifyIcon.h"
@@ -47,6 +48,12 @@ void EjectOSD::UpdateDriveMenu() {
             wchar_t drivePath[] = L" :\\";
             drivePath[0] = letter;
             UINT type = GetDriveType(drivePath);
+
+            DiskInfo di(letter);
+            wchar_t driveName[256] = { 0 };
+            int result = GetVolumeInformation(drivePath, driveName, 256,
+                NULL, NULL, NULL, NULL, NULL);
+            CLOG(L"Drive: %c - %s [%d]", letter, driveName, result);
         }
     }
 }

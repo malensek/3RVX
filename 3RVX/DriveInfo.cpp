@@ -137,6 +137,9 @@ void DriveInfo::PopulateHotplugInfo() {
         _isHotplug = true;
     }
 
+    if (shi.MediaRemovable) {
+        _hasRemovableMedia = true;
+    }
 }
 
 std::wstring DriveInfo::DriveFileName(wchar_t &driveLetter) {

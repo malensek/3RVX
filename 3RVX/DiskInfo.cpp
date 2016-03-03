@@ -84,6 +84,29 @@ void DiskInfo::PopulateDeviceInfo() {
     delete[] descriptorData;
 }
 
+void DiskInfo::PopulateHotplugInfo() {
+    STORAGE_HOTPLUG_INFO shi = { 0 };
+    DWORD bytesOut;
+
+    BOOL result = DeviceIoControl(
+        _devHandle,
+        IOCTL_STORAGE_GET_HOTPLUG_INFO,
+        NULL,
+        0,
+        &shi,
+        sizeof(shi),
+        &bytesOut,
+        NULL);
+
+    if (result == 0) {
+        Logger::LogLastError();
+        return;
+    }
+
+    CLOG(L"%d %d %d %d %d", result, bytesOut, shi.DeviceHotplug, shi.MediaHotplug, shi.MediaRemovable);
+
+}
+
 std::wstring DiskInfo::DriveFileName(wchar_t &driveLetter) {
     return DriveFileName(std::wstring(1, driveLetter));
 }

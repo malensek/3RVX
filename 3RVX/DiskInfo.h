@@ -17,4 +17,5 @@ private:
     std::wstring _vendorId;
 
     void PopulateDeviceInfo();
+    void PopulateHotplugInfo();
 };

@@ -15,4 +15,6 @@ private:
     HANDLE _devHandle;
     std::wstring _productId;
     std::wstring _vendorId;
+
+    void PopulateDeviceInfo();
 };

@@ -1,5 +1,7 @@
 #include "DiskInfo.h"
+
 #include "Logger.h"
+#include "StringUtils.h"
 
 DiskInfo::DiskInfo(wchar_t driveLetter) {
     std::wstring driveFileName = DriveFileName(driveLetter);
@@ -16,6 +18,70 @@ DiskInfo::DiskInfo(wchar_t driveLetter) {
         CLOG(L"Failed to get device handle");
     }
 
+    PopulateDeviceInfo();
+
+}
+
+void DiskInfo::PopulateDeviceInfo() {
+    STORAGE_PROPERTY_QUERY propertyQuery;
+    propertyQuery.PropertyId = StorageDeviceProperty;
+    propertyQuery.QueryType = PropertyStandardQuery;
+
+    STORAGE_DESCRIPTOR_HEADER storageHeader = { 0 };
+
+    DWORD bytesOut;
+    BOOL result;
+
+    result = DeviceIoControl(
+        _devHandle,
+        IOCTL_STORAGE_QUERY_PROPERTY,
+        &propertyQuery,
+        sizeof(propertyQuery),
+        &storageHeader,
+        sizeof(storageHeader),
+        &bytesOut,
+        NULL);
+
+    if (!result) {
+        Logger::LogLastError();
+        return;
+    }
+
+    unsigned char *descriptorData = new unsigned char[storageHeader.Size];
+
+    result = DeviceIoControl(
+        _devHandle,
+        IOCTL_STORAGE_QUERY_PROPERTY,
+        &propertyQuery,
+        sizeof(propertyQuery),
+        descriptorData,
+        storageHeader.Size,
+        &bytesOut,
+        NULL);
+
+    if (!result) {
+        delete[] descriptorData;
+        Logger::LogLastError();
+        return;
+    }
+
+    STORAGE_DEVICE_DESCRIPTOR *sdd
+        = (STORAGE_DEVICE_DESCRIPTOR *) descriptorData;
+
+    if (sdd->ProductIdOffset) {
+        _productId = StringUtils::Widen(
+            (const char *) ((unsigned char *) sdd + sdd->ProductIdOffset));
+    }
+
+    if (sdd->VendorIdOffset) {
+        _vendorId = StringUtils::Widen(
+            (const char *) ((unsigned char *) sdd + sdd->VendorIdOffset));
+    }
+
+    CLOG("ProductID: '%s'\nVendor ID: '%s'",
+        _productId.c_str(), _vendorId.c_str());
+
+    delete[] descriptorData;
 }
 
 std::wstring DiskInfo::DriveFileName(wchar_t &driveLetter) {
@@ -25,3 +91,4 @@ std::wstring DiskInfo::DriveFileName(wchar_t &driveLetter) {
 std::wstring DiskInfo::DriveFileName(std::wstring &driveLetter) {
     return L"\\\\.\\" + driveLetter + L":";
 }
+

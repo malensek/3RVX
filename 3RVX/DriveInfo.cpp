@@ -132,7 +132,6 @@ void DriveInfo::PopulateHotplugInfo() {
         return;
     }
 
-    CLOG(L"%d %d %d %d %d", result, bytesOut, shi.DeviceHotplug, shi.MediaHotplug, shi.MediaRemovable);
     if (shi.DeviceHotplug) {
         _isHotplug = true;
     }

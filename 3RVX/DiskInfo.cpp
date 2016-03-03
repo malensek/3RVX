@@ -18,7 +18,9 @@ DiskInfo::DiskInfo(wchar_t driveLetter) {
         CLOG(L"Failed to get device handle");
     }
 
+    PopulateDeviceId();
     PopulateDeviceInfo();
+    PopulateHotplugInfo();
 
 }
 

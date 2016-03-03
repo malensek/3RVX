@@ -35,9 +35,6 @@ private:
 
     DWORD DriveLetterToMask(wchar_t letter);
     wchar_t MaskToDriveLetter(DWORD mask);
-    std::wstring DriveFileName(wchar_t driveLetter);
-    std::wstring DriveFileName(std::wstring &driveLetter);
-
 
     virtual void OnDisplayChange();
 

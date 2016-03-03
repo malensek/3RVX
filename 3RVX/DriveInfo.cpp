@@ -22,6 +22,7 @@ DriveInfo::DriveInfo(wchar_t driveLetter) {
     PopulateDeviceInfo();
     PopulateHotplugInfo();
 
+    CloseHandle(_devHandle);
 }
 
 void DriveInfo::PopulateDeviceId() {

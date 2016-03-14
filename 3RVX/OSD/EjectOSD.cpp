@@ -5,7 +5,7 @@
 
 #include <Dbt.h>
 
-#include "../DiskInfo.h"
+#include "../DriveInfo.h"
 #include "../HotkeyInfo.h"
 #include "../Monitor.h"
 #include "../NotifyIcon.h"
@@ -49,7 +49,7 @@ void EjectOSD::UpdateDriveMenu() {
             drivePath[0] = letter;
             UINT type = GetDriveType(drivePath);
 
-            DiskInfo di(letter);
+            DriveInfo di(letter);
             wchar_t driveName[256] = { 0 };
             int result = GetVolumeInformation(drivePath, driveName, 256,
                 NULL, NULL, NULL, NULL, NULL);
@@ -59,7 +59,7 @@ void EjectOSD::UpdateDriveMenu() {
 }
 
 void EjectOSD::EjectDrive(std::wstring driveLetter) {
-    std::wstring name = DiskInfo::DriveFileName(driveLetter);
+    std::wstring name = DriveInfo::DriveFileName(driveLetter);
     CLOG(L"Ejecting %s", name.c_str());
 
     HANDLE dev = CreateFile(

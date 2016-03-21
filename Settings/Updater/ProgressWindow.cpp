@@ -24,6 +24,7 @@ _version(version) {
     ShowWindow(Dialog::DialogHandle(), SW_SHOWNORMAL);
 
     _dlThread = std::thread(&ProgressWindow::Download, this);
+    _dlThread.detach();
 }
 
 void ProgressWindow::Download() {

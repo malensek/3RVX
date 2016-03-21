@@ -117,6 +117,21 @@ std::wstring Updater::DownloadVersion(Version version, StatusCallback *cb) {
     std::wstring url = DOWNLOAD_URL + fname;
     std::wstring localFile = localDir + L"\\" + fname;
 
+    /* Make sure we can actually write to the file */
+    HANDLE fileHandle = CreateFile(
+        localFile.c_str(),
+        GENERIC_READ | GENERIC_WRITE,
+        FILE_SHARE_READ | FILE_SHARE_WRITE,
+        NULL,
+        CREATE_ALWAYS,
+        FILE_ATTRIBUTE_NORMAL,
+        NULL);
+    if (fileHandle == INVALID_HANDLE_VALUE) {
+        CLOG(L"Could not open destination file");
+        Logger::LogLastError();
+    }
+    CloseHandle(fileHandle);
+
     CLOG(L"Downloading %s to %s...", url.c_str(), localFile.c_str());
     DeleteUrlCacheEntry(url.c_str());
     HRESULT hr = URLDownloadToFile(

@@ -39,11 +39,7 @@ bool Updater::NewerVersionAvailable() {
         return false;
     }
 
-    if (remote.ToInt() > local.ToInt()) {
-        return true;
-    } else {
-        return false;
-    }
+    return remote.NewerThan(local);
 }
 
 Version Updater::MainAppVersion() {

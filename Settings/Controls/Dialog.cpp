@@ -17,7 +17,7 @@ _template(dlgTemplate) {
 
 }
 
-int Dialog::Show() {
+INT_PTR Dialog::Show() {
     return DialogBoxParam(NULL, _template, _parent, StaticDialogProc, (LPARAM) this);
 }
 

@@ -17,4 +17,6 @@ private:
     /* Controls */
     Label *_prompt;
     Button *_cancel;
+
+    void Initialize();
 };

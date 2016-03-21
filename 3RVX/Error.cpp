@@ -11,7 +11,8 @@
 std::unordered_map<int, std::wstring> Error::errorMap = {
     { GENERR_NOTFOUND, L"File not found:\n{1}" },
     { GENERR_MISSING_XML, L"Could not locate XML tag: {1}" },
-    { GENERR_UNKNOWN, L"An unknown error occurred: ID #{1}"},
+    { GENERR_UNKNOWN, L"An unknown error occurred: ID #{1}" },
+    { GENERR_UPDATEDL, L"Could not download update:\n{1}" },
     { SKINERR_INVALID_SKIN, L"Could not find specified skin:\n{1}" },
     { SKINERR_INVALID_SLIDERTYPE, L"Invalid slider type: {1}" },
     { SKINERR_MISSING_XML, L"Could not locate required skin XML tag: {1}" },

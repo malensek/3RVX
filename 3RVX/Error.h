@@ -11,6 +11,8 @@ public:
     static void ErrorMessage(unsigned int error, std::wstring detail = L"");
     static void ErrorMessageDie(unsigned int error, std::wstring detail = L"");
 
+    static std::wstring LastErrorString();
+
 private:
     static std::unordered_map<int, std::wstring> errorMap;
 

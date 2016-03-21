@@ -53,6 +53,32 @@ void Error::ErrorMessageDie(unsigned int error, std::wstring detail) {
     exit(EXIT_FAILURE);
 }
 
+std::wstring Error::LastErrorString() {
+    DWORD error = GetLastError();
+    if (error == 0) {
+        return L"";
+    }
+
+    std::wstring str;
+    LPTSTR msg;
+    DWORD msgLen = FormatMessage(
+        FORMAT_MESSAGE_ALLOCATE_BUFFER
+        | FORMAT_MESSAGE_FROM_SYSTEM
+        | FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,
+        error,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPTSTR) &msg,
+        0,
+        NULL);
+    if (msgLen > 0) {
+        str = std::wstring(msg);
+        LocalFree(msg);
+    }
+
+    return str;
+}
+
 wchar_t *Error::ErrorType(unsigned int error) {
     if (error & SKINERR) {
         return L"3RVX Skin Error";

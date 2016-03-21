@@ -33,11 +33,12 @@ void ProgressWindow::Initialize() {
 }
 
 void ProgressWindow::Download() {
+    INT_PTR result = 0;
+
     CLOG(L"Starting download thread");
     std::wstring path = Updater::DownloadVersion(_version, _progress);
     if (path == L"") {
-        CLOG(L"Error downloading file!");
-        return;
+        result = 1;
     } else {
         using namespace std::literals;
         std::this_thread::sleep_for(250ms);
@@ -56,5 +57,5 @@ void ProgressWindow::Download() {
         }
     }
 
-    Dialog::Close();
+    Dialog::Close(result);
 }

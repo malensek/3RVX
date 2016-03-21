@@ -21,7 +21,7 @@ INT_PTR Dialog::Show() {
     return DialogBoxParam(NULL, _template, _parent, StaticDialogProc, (LPARAM) this);
 }
 
-void Dialog::Close(int result) {
+void Dialog::Close(INT_PTR result) {
     EndDialog(_dlgHwnd, result);
 }
 

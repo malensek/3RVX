@@ -19,7 +19,7 @@ public:
     HWND ParentHandle();
 
     virtual INT_PTR Show();
-    virtual void Close(int result = 0);
+    virtual void Close(INT_PTR result = 0);
 
 protected:
     HWND _dlgHwnd;

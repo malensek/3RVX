@@ -238,8 +238,9 @@ bool General::CheckForUpdates() {
             MB_YESNO | MB_ICONQUESTION);
 
         if (msgResult == IDYES) {
-            ProgressWindow *pw = new ProgressWindow(
-                TabPage::DialogHandle(), vers);
+            ProgressWindow pw(TabPage::DialogHandle(), vers);
+            pw.Show();
+            SendMessage(_3RVX::MasterSettingsHwnd(), WM_CLOSE, 0, 0);
         }
 
     } else {

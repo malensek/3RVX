@@ -30,7 +30,7 @@ _template(dlgTemplate) {
 
 void Dialog::Show() {
     DialogBoxParam(NULL, _template, _parent, StaticDialogProc, (LPARAM) this);
-    UITranslator::TranslateWindowText(_dlgHwnd);
+    //UITranslator::TranslateWindowText(_dlgHwnd);
 }
 
 void Dialog::Close(int result) {

@@ -9,19 +9,24 @@
 #include "../../3RVX/StringUtils.h"
 #include "../Controls/Controls.h"
 #include "../resource.h"
+#include "../UITranslator.h"
 
 ProgressWindow::ProgressWindow(HWND parent, Version version) :
 Dialog(parent, MAKEINTRESOURCE(IDD_DOWNLOAD)),
 _version(version) {
+
+}
+
+void ProgressWindow::Initialize() {
+    UITranslator::TranslateWindowText(DialogHandle());
+
     _cancel = new Button(BTN_CANCEL, *this);
     _progress = new ProgressBar(PRG_DOWNLOAD, *this);
 
     _cancel->OnClick = [this]() {
-        SendMessage(Dialog::DialogHandle(), WM_CLOSE, 0, 0);
+        Dialog::Close();
         return true;
     };
-
-    ShowWindow(Dialog::DialogHandle(), SW_SHOWNORMAL);
 
     _dlThread = std::thread(&ProgressWindow::Download, this);
     _dlThread.detach();
@@ -49,7 +54,7 @@ void ProgressWindow::Download() {
         } else {
             ShellExecute(NULL, L"open", path.c_str(), 0, 0, SW_SHOWNORMAL);
         }
-
-        SendMessage(_parent, WM_CLOSE, 0, 0);
     }
+
+    Dialog::Close();
 }

@@ -14,18 +14,7 @@ Dialog::Dialog() {
 Dialog::Dialog(HWND parent, LPCWSTR dlgTemplate) :
 _parent(parent),
 _template(dlgTemplate) {
-//    _dlgHwnd = CreateDialogParam(
-//        NULL,
-//        dlgTemplate,
-//        parent,
-//        StaticDialogProc,
-//        (LPARAM) this);
 
-//    if (_dlgHwnd == NULL) {
-//        Logger::LogLastError();
-//    }
-
-//    UITranslator::TranslateWindowText(_dlgHwnd);
 }
 
 void Dialog::Show() {

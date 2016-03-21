@@ -79,6 +79,7 @@ INT_PTR Dialog::DialogProc(HWND hwndDlg, UINT uMsg,
 
     switch (uMsg) {
     case WM_INITDIALOG:
+        Initialize();
         return FALSE;
 
     case WM_CLOSE: {

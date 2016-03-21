@@ -12,6 +12,7 @@
 #include <WinInet.h>
 #include <sstream>
 
+#include "../../3RVX/Error.h"
 #include "../../3RVX/Settings.h"
 #include "../../3RVX/StringUtils.h"
 #include "../../3RVX/Logger.h"
@@ -105,7 +106,8 @@ std::wstring Updater::DownloadVersion(Version version, StatusCallback *cb) {
     }
 
     if (localDir == L"") {
-        CLOG(L"Could not determine local download directory");
+        Error::ErrorMessage(Error::GENERR_UPDATEDL,
+            L"Local download directory could not be found");
         return L"";
     }
 
@@ -123,8 +125,8 @@ std::wstring Updater::DownloadVersion(Version version, StatusCallback *cb) {
         FILE_ATTRIBUTE_NORMAL,
         NULL);
     if (fileHandle == INVALID_HANDLE_VALUE) {
-        CLOG(L"Could not open destination file");
-        Logger::LogLastError();
+        Error::ErrorMessage(Error::GENERR_UPDATEDL,
+            Error::LastErrorString());
     }
     CloseHandle(fileHandle);
 

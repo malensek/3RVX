@@ -6,6 +6,7 @@
 #include <shellapi.h>
 
 #include "../../3RVX/3RVX.h"
+#include "../../3RVX/Error.h"
 #include "../../3RVX/LanguageTranslator.h"
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
@@ -224,23 +225,35 @@ bool General::CheckForUpdates() {
         SetCursor(waitCursor);
     }
 
-    if (Updater::NewerVersionAvailable()) {
+    Version local = Updater::MainAppVersion();
+    Version remote = Updater::RemoteVersion();
+
+    if (remote.ToInt() == 0) {
+        /* If the remote version is 0, there must've been a connection error. */
+        Error::ErrorMessage(Error::GENERR_UPDATEDL,
+            L"Update server appears to be offline.");
+        goto cleanup;
+    }
+
+    if (remote.NewerThan(local)) {
         Settings *settings = Settings::Instance();
         LanguageTranslator *translator = settings->Translator();
-        Version vers = Updater::RemoteVersion();
 
         int msgResult = MessageBox(
             DialogHandle(),
             translator->TranslateAndReplace(
                 L"A new version of 3RVX ({1}) is available. Install now?",
-                vers.ToString()).c_str(),
+                remote.ToString()).c_str(),
             translator->Translate(L"Update Available").c_str(),
             MB_YESNO | MB_ICONQUESTION);
 
         if (msgResult == IDYES) {
-            ProgressWindow pw(TabPage::DialogHandle(), vers);
-            pw.Show();
-            SendMessage(_3RVX::MasterSettingsHwnd(), WM_CLOSE, 0, 0);
+            ProgressWindow pw(TabPage::DialogHandle(), remote);
+            INT_PTR result = pw.Show();
+            if (result == 0) {
+                /* Everything went file. Shut down the settings app. */
+                SendMessage(_3RVX::MasterSettingsHwnd(), WM_CLOSE, 0, 0);
+            }
         }
 
     } else {
@@ -251,6 +264,7 @@ bool General::CheckForUpdates() {
             MB_OK | MB_ICONINFORMATION);
     }
 
+cleanup:
     HCURSOR arrowCursor = LoadCursor(NULL, IDC_ARROW);
     if (arrowCursor) {
         SetCursor(arrowCursor);

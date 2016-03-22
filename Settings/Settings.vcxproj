@@ -249,7 +249,6 @@
     <ClInclude Include="Controls\TabPage.h" />
     <ClInclude Include="Tabs\About.h" />
     <ClInclude Include="Tabs\HotkeyInput.h" />
-    <ClInclude Include="Tabs\HotkeyPrompt.h" />
     <ClInclude Include="Tabs\KeyGrabber.h" />
     <ClInclude Include="Tabs\OSD.h" />
     <ClInclude Include="targetver.h" />
@@ -300,7 +299,6 @@
     <ClCompile Include="Tabs\Display.cpp" />
     <ClCompile Include="Tabs\General.cpp" />
     <ClCompile Include="Tabs\HotkeyInput.cpp" />
-    <ClCompile Include="Tabs\HotkeyPrompt.cpp" />
     <ClCompile Include="Tabs\Hotkeys.cpp" />
     <ClCompile Include="Tabs\KeyGrabber.cpp" />
     <ClCompile Include="SettingsUI.cpp" />

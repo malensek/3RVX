@@ -93,9 +93,6 @@
     <ClInclude Include="Tabs\General.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tabs\HotkeyPrompt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tabs\Hotkeys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -225,9 +222,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tabs\General.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tabs\HotkeyPrompt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tabs\Hotkeys.cpp">

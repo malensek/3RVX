@@ -11,10 +11,4 @@ Dialog(parent, MAKEINTRESOURCE(IDD_HOTKEYPROMPT)) {
 
 void HotkeyInput::Initialize() {
     _prompt = new Label(LBL_PROMPT, *this);
-
-    _cancel = new Button(BTN_CANCELKEYS, *this);
-    _cancel->OnClick = [this]() {
-        Dialog::Close();
-        return true;
-    };
 }

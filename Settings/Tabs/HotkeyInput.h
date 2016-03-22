@@ -6,7 +6,6 @@
 #include "../Controls/Dialog.h"
 #include "../resource.h"
 
-class Button;
 class Label;
 
 class HotkeyInput : public Dialog {
@@ -16,7 +15,6 @@ public:
 private:
     /* Controls */
     Label *_prompt;
-    Button *_cancel;
 
     void Initialize();
 };

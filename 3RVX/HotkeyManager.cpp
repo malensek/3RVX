@@ -390,6 +390,16 @@ std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
     if (_vkStringMap.find(vk) != _vkStringMap.end()) {
         return _vkStringMap[vk];
     }
+
+    if (
+        vk == 0x03 /* break */
+        || (vk >= 0x21 && vk <= 0x2f) /* arrow keys, home/insert/del, etc */
+        || (vk >= 0x5b && vk <= 0x5d) /* win, app keys (natural keyboard) */
+        || (vk == 0x90) /* num lock */
+        ) {
+        extendedKey = true;
+    }
+
     /* GetKeyNameText expects the following:
      * 16-23: scan code
      *    24: extended key flag

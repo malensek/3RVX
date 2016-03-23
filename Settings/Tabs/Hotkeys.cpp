@@ -13,7 +13,6 @@
 #include "../../3RVX/Skin/SkinInfo.h"
 
 #include "HotkeyInput.h"
-#include "HotkeyPrompt.h"
 #include "KeyGrabber.h"
 #include "../resource.h"
 
@@ -469,18 +468,16 @@ bool Hotkeys::OnRemoveButtonClick() {
 bool Hotkeys::OnKeysButtonClick() {
     HotkeyInput in(TabPage::DialogHandle());
     in.Show();
+    KeyGrabber::Instance()->Unhook();
+    int keyCombo = KeyGrabber::Instance()->KeyCombination();
+    if (keyCombo > 0) {
+        std::wstring keyStr = HotkeyManager::HotkeysToString(keyCombo);
+        _keys->Text(keyStr);
+        int sel = _keyList->Selection();
+        _keyInfo[sel].keyCombination = keyCombo;
+        LoadSelection(sel);
+    }
     return true;
-//    HotkeyPrompt::Show(DialogHandle());
-//    KeyGrabber::Instance()->Unhook();
-//    int keyCombo = KeyGrabber::Instance()->KeyCombination();
-//    if (keyCombo > 0) {
-//        std::wstring keyStr = HotkeyManager::HotkeysToString(keyCombo);
-//        _keys->Text(keyStr);
-//        int sel = _keyList->Selection();
-//        _keyInfo[sel].keyCombination = keyCombo;
-//        LoadSelection(sel);
-//    }
-//    return true;
 }
 
 bool Hotkeys::OnActionChange() {

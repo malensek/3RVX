@@ -11,4 +11,6 @@ Dialog(parent, MAKEINTRESOURCE(IDD_HOTKEYPROMPT)) {
 
 void HotkeyInput::Initialize() {
     _prompt = new Label(LBL_PROMPT, *this);
+    KeyGrabber::Instance()->SetHwnd(DialogHandle());
+    KeyGrabber::Instance()->Grab();
 }

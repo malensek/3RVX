@@ -57,6 +57,7 @@ public:
         std::wstring separator = L" + ");
     static std::wstring MouseString(int combination);
     static std::wstring VKToString(unsigned int vk, bool extendedKey = false);
+    static void VKStringTest();
 
 private:
     HotkeyManager();

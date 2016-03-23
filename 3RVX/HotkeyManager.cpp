@@ -420,3 +420,9 @@ std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
     GetKeyNameText(scanCode, buf, 256);
     return std::wstring(buf);
 }
+
+void HotkeyManager::VKStringTest() {
+    for (unsigned int i = 0; i < 0xFF; ++i) {
+        CLOG(L"%02x - %s", i, VKToString(i).c_str());
+    }
+}

@@ -19,6 +19,7 @@
 #pragma once
 
 #include <Windows.h>
+#include <unordered_map>
 #include <unordered_set>
 
 #define EXT_OFFSET 8
@@ -60,6 +61,8 @@ public:
 private:
     HotkeyManager();
     ~HotkeyManager();
+
+    static std::unordered_map<UINT, std::wstring> _vkStringMap;
 
     HWND _notifyWnd;
     int _fixWin;

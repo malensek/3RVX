@@ -8,6 +8,25 @@
 
 HotkeyManager *HotkeyManager::instance = NULL;
 
+std::unordered_map<UINT, std::wstring> HotkeyManager::_vkStringMap = {
+    { VK_SELECT, L"Select" },
+    { VK_PRINT, L"Print" },
+    { VK_EXECUTE, L"Execute" },
+    { VK_SNAPSHOT, L"Print Screen" },
+    { VK_HELP, L"Help" },
+    { VK_SLEEP, L"Sleep" },
+    { VK_BROWSER_BACK, L"Browser Back" },
+    { VK_BROWSER_FORWARD, L"Browser Forward" },
+    { VK_BROWSER_REFRESH, L"Browser Refresh" },
+    { VK_BROWSER_STOP, L"Browser Stop" },
+    { VK_BROWSER_SEARCH, L"Browser Search" },
+    { VK_BROWSER_FAVORITES, L"Browser Favorites" },
+    { VK_BROWSER_HOME, L"Browser Home" },
+    { VK_VOLUME_MUTE, L"Mute" },
+    { VK_VOLUME_DOWN, L"Volume Down" },
+    { VK_VOLUME_UP, L"Volume Up" },
+};
+
 HotkeyManager *HotkeyManager::Instance() {
     return instance;
 }

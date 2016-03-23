@@ -387,6 +387,9 @@ std::wstring HotkeyManager::MouseString(int combination) {
 }
 
 std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
+    if (_vkStringMap.find(vk) != _vkStringMap.end()) {
+        return _vkStringMap[vk];
+    }
     /* GetKeyNameText expects the following:
      * 16-23: scan code
      *    24: extended key flag

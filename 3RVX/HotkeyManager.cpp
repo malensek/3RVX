@@ -25,6 +25,14 @@ std::unordered_map<UINT, std::wstring> HotkeyManager::_vkStringMap = {
     { VK_VOLUME_MUTE, L"Mute" },
     { VK_VOLUME_DOWN, L"Volume Down" },
     { VK_VOLUME_UP, L"Volume Up" },
+    { VK_MEDIA_NEXT_TRACK, L"Next Track" },
+    { VK_MEDIA_PREV_TRACK, L"Previous Track" },
+    { VK_MEDIA_STOP, L"Stop" },
+    { VK_MEDIA_PLAY_PAUSE, L"Play/Pause" },
+    { VK_LAUNCH_MAIL, L"Mail" },
+    { VK_LAUNCH_MEDIA_SELECT, L"Select Media" },
+    { VK_LAUNCH_APP1, L"App 1" },
+    { VK_LAUNCH_APP2, L"App 2" },
 };
 
 HotkeyManager *HotkeyManager::Instance() {

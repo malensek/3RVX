@@ -33,6 +33,9 @@ std::unordered_map<UINT, std::wstring> HotkeyManager::_vkStringMap = {
     { VK_LAUNCH_MEDIA_SELECT, L"Select Media" },
     { VK_LAUNCH_APP1, L"App 1" },
     { VK_LAUNCH_APP2, L"App 2" },
+    { VK_PLAY, L"Play" },
+    { VK_ZOOM, L"Zoom" },
+    { VK_OEM_CLEAR, L"Clear" },
 };
 
 HotkeyManager *HotkeyManager::Instance() {

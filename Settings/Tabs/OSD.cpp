@@ -126,6 +126,7 @@ void OSD::SaveSettings() {
     settings->BrightnessOSDEnabled(_osdList->Checked(1));
     settings->EjectOSDEnabled(_osdList->Checked(2));
     settings->KeyboardOSDEnabled(_osdList->Checked(3));
+    settings->VolumeLimiter(((float) _limitSlider->Position()) / 100.0f);
     settings->MuteOnLock(_muteLock->Checked());
 }
 

@@ -12,8 +12,9 @@ Beta 10 (2.9.2)
 ---------------
 * Custom volume curves
 * Custom volume limits
-* Detailed error messages
 * Customizable default audio device (instead of always using the system default)
+* Option to mute the volume on session lock [#48]
+* Detailed error messages
 * Bugfix: Hotkey argument range validation
 * Bugfix: Changing the volume slider while muted now unmutes the volume
 * Bugfix: Display changes are monitored and accounted for (multi-monitor setups) [#36]

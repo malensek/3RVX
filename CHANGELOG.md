@@ -5,6 +5,8 @@ Beta 11 (2.9.3)
 ---------------
 * Brightness OSD
 * Keyboard OSD: Caps, Num, and Scroll lock; media keys
+* Eject notification icon
+* Toggles for OSDs and their respective tray icons
 
 Beta 10 (2.9.2)
 ---------------
@@ -12,8 +14,6 @@ Beta 10 (2.9.2)
 * Custom volume limits
 * Detailed error messages
 * Customizable default audio device (instead of always using the system default)
-* Eject notification icon
-* Toggles for OSDs and their respective tray icons
 * Bugfix: Hotkey argument range validation
 * Bugfix: Changing the volume slider while muted now unmutes the volume
 * Bugfix: Display changes are monitored and accounted for (multi-monitor setups) [#36]

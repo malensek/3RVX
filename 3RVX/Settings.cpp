@@ -206,7 +206,7 @@ void Settings::VolumeLimiter(float limit) {
 }
 
 bool Settings::MuteOnLock() {
-    GetEnabled(XML_MUTELOCK, DefaultMuteLock);
+    return GetEnabled(XML_MUTELOCK, DefaultMuteLock);
 }
 
 void Settings::MuteOnLock(bool enable) {

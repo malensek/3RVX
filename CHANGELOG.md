@@ -20,6 +20,7 @@ Beta 10 (2.9.2)
 * Bugfix: Display changes are monitored and accounted for (multi-monitor setups) [#36]
 * Bugfix: Intermittent optical disk eject failure [#37]
 * Bugfix: Null device crash [#42, #45]
+* Bugfix: Updates launched from settings app left 3RVX running
 
 Beta 9 (2.9.1)
 ------

@@ -39,7 +39,8 @@ void OSD::Initialize() {
         _audioDeviceLabel, _audioDevice,
         _audioTaperLabel, _audioTaper, _audioTaperEdit,
         _limitLabel, _limitSlider, _limitValue,
-        _forceLimit
+        _forceLimit,
+        _muteLock,
     });
 
     _ejectIcon = new Checkbox(CHK_EJECTICON, *this);
@@ -47,13 +48,13 @@ void OSD::Initialize() {
     _ejectGroup = new GroupBox(GRP_EJECT, *this);
     _ejectGroup->AddChildren({
         _ejectIcon,
-        _monitorEjectEvents
+        _monitorEjectEvents,
     });
 
     _brightnessIcon = new Checkbox(CHK_BRIGHTICON, *this);
     _brightnessGroup = new GroupBox(GRP_BRIGHTNESS, *this);
     _brightnessGroup->AddChildren({
-        _brightnessIcon
+        _brightnessIcon,
     });
 
     _keyboardIcon = new Checkbox(CHK_KEYICON, *this);
@@ -65,7 +66,7 @@ void OSD::Initialize() {
     _keyboardGroup->AddChildren({
         _keyboardIcon,
         _caps, _scroll, _num,
-        _media
+        _media,
     });
 
     /* Define groupbox order */

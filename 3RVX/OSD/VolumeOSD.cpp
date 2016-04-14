@@ -3,7 +3,10 @@
 
 #include "VolumeOSD.h"
 
+#pragma comment(lib, "Wtsapi32.lib")
+
 #include <string>
+#include <Wtsapi32.h>
 
 #include "../3RVX.h"
 #include "../Controllers/Volume/CurveTransformer.h"
@@ -84,6 +87,12 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     MeterLevels(v);
     _volumeSlider->MeterLevels(v);
 
+    if (_settings->MuteOnLock()) {
+        /* If muting volume on lock is enabled, register for notifications. */
+        WTSRegisterSessionNotification(
+            Window::Handle(), NOTIFY_FOR_THIS_SESSION);
+    }
+
     if (_settings->ShowOnStartup()) {
         SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG,
             NULL, (LPARAM) 1);
@@ -91,6 +100,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
 }
 
 VolumeOSD::~VolumeOSD() {
+    WTSUnRegisterSessionNotification(Window::Handle());
     DestroyMenu(_deviceMenu);
     DestroyMenu(_menu);
     delete _icon;

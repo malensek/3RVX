@@ -31,6 +31,7 @@ void OSD::Initialize() {
         return true;
     };
     _forceLimit = new Checkbox(CHK_FORCELIMIT, *this);
+    _muteLock = new Checkbox(CHK_MUTELOCK, *this);
     _volumeGroup = new GroupBox(GRP_VOLUME, *this);
     _volumeGroup->AddChildren({
         _volumeIcon,

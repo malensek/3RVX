@@ -42,6 +42,7 @@ private:
     Slider *_limitSlider;
     Label *_limitValue;
     Checkbox *_forceLimit;
+    Checkbox *_muteLock;
 
     GroupBox *_ejectGroup;
     Checkbox *_ejectIcon;

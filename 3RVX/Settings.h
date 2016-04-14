@@ -41,6 +41,8 @@ public:
     void VolumeCurveAdjustment(int value);
     float VolumeLimiter();
     void VolumeLimiter(float limit);
+    bool MuteOnLock();
+    void MuteOnLock(bool enable);
 
     AnimationTypes::HideAnimation HideAnim();
     void HideAnim(AnimationTypes::HideAnimation anim);

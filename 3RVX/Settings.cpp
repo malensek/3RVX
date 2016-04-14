@@ -205,6 +205,14 @@ void Settings::VolumeLimiter(float limit) {
     SetElementValue(XML_VOLUME_LIMITER, limit);
 }
 
+bool Settings::MuteOnLock() {
+    GetEnabled(XML_MUTELOCK, DefaultMuteLock);
+}
+
+void Settings::MuteOnLock(bool enable) {
+    SetEnabled(XML_MUTELOCK, enable);
+}
+
 std::wstring Settings::LanguageName() {
     std::wstring lang = GetText(XML_LANGUAGE);
 

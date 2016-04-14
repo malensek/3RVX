@@ -25,16 +25,18 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     OSD::InitMeterWnd(_mWnd);
 
     //TODO: this needs to be differentiated from the volume OSD.
+    /*
     if (_settings->NotifyIconEnabled()) {
         _iconImages = skin->VolumeIconset();
         if (_iconImages.size() > 0) {
             _icon = new NotifyIcon(Window::Handle(), L"Eject", _iconImages[0]);
         }
     }
+    */
 
-    _menu = CreatePopupMenu();
+    //_menu = CreatePopupMenu();
     //_menuThread = std::thread();
-    UpdateDriveMenu();
+    //UpdateDriveMenu();
 
 }
 

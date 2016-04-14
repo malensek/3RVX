@@ -464,6 +464,16 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 UpdateVolumeState();
             }
         }
+    } else if (message == WM_WTSSESSION_CHANGE && _settings->MuteOnLock()) {
+        if (wParam == WTS_SESSION_LOCK) {
+            CLOG(L"Muting on session lock");
+            _unlockUnmute = true;
+            _volumeCtrl->Muted(true);
+        } else if (wParam == WTS_SESSION_UNLOCK && _unlockUnmute) {
+            CLOG(L"Unmuting after session lock");
+            _unlockUnmute = false;
+            _volumeCtrl->Muted(false);
+        }
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);

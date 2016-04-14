@@ -192,6 +192,7 @@ public:
     static const int DefaultOSDOffset = 140;
     static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
     static const bool DefaultAutoUpdate = false;
+    static const bool DefaultMuteLock = false;
 
     static const bool DefaultVolumeOSDEnabled = true;
     static const bool DefaultEjectOSDEnabled = true;
@@ -223,6 +224,7 @@ public:
     static constexpr const char *XML_IGNOREUPDATE = "ignoreUpdateVersion";
     static constexpr const char *XML_LANGUAGE = "language";
     static constexpr const char *XML_MONITOR = "monitor";
+    static constexpr const char *XML_MUTELOCK = "muteDuringLock";
     static constexpr const char *XML_NOTIFYICON = "notifyIcon";
     static constexpr const char *XML_ONTOP = "onTop";
     static constexpr const char *XML_OSD_OFFSET = "osdEdgeOffset";

@@ -420,43 +420,47 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     } else if (message == MSG_NOTIFYICON) {
         OnNotifyIconEvent(hWnd, lParam);
     } else if (message == WM_COMMAND) {
-        int menuItem = LOWORD(wParam);
-        switch (menuItem) {
-        case MENU_SETTINGS:
-            Settings::LaunchSettingsApp();
-            break;
-
-        case MENU_MIXER: {
-            CLOG(L"Menu: Mixer");
-            HINSTANCE code = ShellExecute(NULL, L"open", L"sndvol",
-                NULL, NULL, SW_SHOWNORMAL);
-            break;
-        }
-
-        case MENU_EXIT:
-            CLOG(L"Menu: Exit: %d", (int) _masterWnd);
-            SendMessage(_masterWnd, WM_CLOSE, NULL, NULL);
-            break;
-        }
-
-        /* Device menu items */
-        if ((menuItem & MENU_DEVICE) > 0) {
-            int device = menuItem & 0x0FFF;
-            VolumeController::DeviceInfo selectedDev = _deviceList[device];
-            if (selectedDev.id != _volumeCtrl->DeviceId()) {
-                /* A different device has been selected */
-                CLOG(L"Changing to volume device: %s",
-                    selectedDev.name.c_str());
-                _volumeCtrl->SelectDevice(selectedDev.id);
-                UpdateDeviceMenu();
-                UpdateVolumeState();
-            }
-        }
+        OnMenuEvent(wParam);
     } else if (message == WM_WTSSESSION_CHANGE) {
         OnSessionChange(wParam);
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+void VolumeOSD::OnMenuEvent(WPARAM wParam) {
+    int menuItem = LOWORD(wParam);
+    switch (menuItem) {
+    case MENU_SETTINGS:
+        Settings::LaunchSettingsApp();
+        break;
+
+    case MENU_MIXER: {
+        CLOG(L"Menu: Mixer");
+        HINSTANCE code = ShellExecute(NULL, L"open", L"sndvol",
+            NULL, NULL, SW_SHOWNORMAL);
+        break;
+    }
+
+    case MENU_EXIT:
+        CLOG(L"Menu: Exit: %d", (int) _masterWnd);
+        SendMessage(_masterWnd, WM_CLOSE, NULL, NULL);
+        break;
+    }
+
+    /* Device menu items */
+    if ((menuItem & MENU_DEVICE) > 0) {
+        int device = menuItem & 0x0FFF;
+        VolumeController::DeviceInfo selectedDev = _deviceList[device];
+        if (selectedDev.id != _volumeCtrl->DeviceId()) {
+            /* A different device has been selected */
+            CLOG(L"Changing to volume device: %s",
+                selectedDev.name.c_str());
+            _volumeCtrl->SelectDevice(selectedDev.id);
+            UpdateDeviceMenu();
+            UpdateVolumeState();
+        }
+    }
 }
 
 void VolumeOSD::OnNotifyIconEvent(HWND hWnd, LPARAM lParam) {

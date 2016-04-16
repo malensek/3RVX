@@ -73,6 +73,7 @@ private:
     void UpdateVolumeState();
 
     virtual void OnDisplayChange();
+    void OnNotifyIconEvent(HWND hWnd, LPARAM lParam);
     void OnSessionChange(WPARAM wParam);
 
     virtual LRESULT

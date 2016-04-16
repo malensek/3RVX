@@ -418,20 +418,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         UpdateVolumeState();
 
     } else if (message == MSG_NOTIFYICON) {
-        if (lParam == WM_LBUTTONUP) {
-            if (_volumeCtrl->DeviceEnabled()) {
-                _volumeSlider->MeterLevels(_volumeCtrl->Volume());
-                _volumeSlider->Show();
-            }
-        } else if (lParam == WM_RBUTTONUP) {
-            POINT p;
-            GetCursorPos(&p);
-            SetForegroundWindow(hWnd);
-            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y,
-                Window::Handle(), NULL);
-            PostMessage(hWnd, WM_NULL, 0, 0);
-        }
-
+        OnNotifyIconEvent(hWnd, lParam);
     } else if (message == WM_COMMAND) {
         int menuItem = LOWORD(wParam);
         switch (menuItem) {
@@ -470,6 +457,22 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+void VolumeOSD::OnNotifyIconEvent(HWND hWnd, LPARAM lParam) {
+    if (lParam == WM_LBUTTONUP) {
+        if (_volumeCtrl->DeviceEnabled()) {
+            _volumeSlider->MeterLevels(_volumeCtrl->Volume());
+            _volumeSlider->Show();
+        }
+    } else if (lParam == WM_RBUTTONUP) {
+        POINT p;
+        GetCursorPos(&p);
+        SetForegroundWindow(hWnd);
+        TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y,
+            Window::Handle(), NULL);
+        PostMessage(hWnd, WM_NULL, 0, 0);
+    }
 }
 
 void VolumeOSD::OnSessionChange(WPARAM wParam) {

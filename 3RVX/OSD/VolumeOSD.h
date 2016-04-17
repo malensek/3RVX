@@ -72,6 +72,7 @@ private:
     /// </summary>
     void UpdateVolumeState();
 
+    void OnDeviceChange();
     virtual void OnDisplayChange();
     void OnMenuEvent(WPARAM wParam);
     void OnNotifyIconEvent(HWND hWnd, LPARAM lParam);

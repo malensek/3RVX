@@ -399,19 +399,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         }
 
     } else if (message == VolumeController::MSG_VOL_DEVCHNG) {
-        CLOG(L"Volume device change detected.");
-        if (_selectedDevice == L"") {
-            _volumeCtrl->SelectDefaultDevice();
-        } else {
-            HRESULT hr = _volumeCtrl->SelectDevice(_selectedDevice);
-            if (FAILED(hr)) {
-                _volumeCtrl->SelectDefaultDevice();
-            }
-        }
-        _selectedDesc = _volumeCtrl->DeviceDesc();
-        UpdateDeviceMenu();
-        UpdateVolumeState();
-
+        OnDeviceChange();
     } else if (message == MSG_NOTIFYICON) {
         OnNotifyIconEvent(hWnd, lParam);
     } else if (message == WM_COMMAND) {
@@ -421,6 +409,21 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+void VolumeOSD::OnDeviceChange() {
+    CLOG(L"Volume device change detected.");
+    if (_selectedDevice == L"") {
+        _volumeCtrl->SelectDefaultDevice();
+    } else {
+        HRESULT hr = _volumeCtrl->SelectDevice(_selectedDevice);
+        if (FAILED(hr)) {
+            _volumeCtrl->SelectDefaultDevice();
+        }
+    }
+    _selectedDesc = _volumeCtrl->DeviceDesc();
+    UpdateDeviceMenu();
+    UpdateVolumeState();
 }
 
 void VolumeOSD::OnDisplayChange() {

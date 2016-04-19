@@ -77,6 +77,7 @@ private:
     void OnMenuEvent(WPARAM wParam);
     void OnNotifyIconEvent(HWND hWnd, LPARAM lParam);
     void OnSessionChange(WPARAM wParam);
+    void OnVolumeChange(HWND hWnd, WPARAM wParam, LPARAM lParam);
 
     virtual LRESULT
         WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

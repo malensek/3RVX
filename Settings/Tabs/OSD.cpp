@@ -114,6 +114,7 @@ void OSD::LoadSettings() {
     _osdList->Checked(3, settings->KeyboardOSDEnabled());
 
     _volumeIcon->Checked(settings->NotifyIconEnabled());
+    _monitorVolEvents->Checked(settings->SubscribeVolumeEvents());
     _limitSlider->Position((int) (settings->VolumeLimiter() * 100.0f));
     _muteLock->Checked(settings->MuteOnLock());
 }
@@ -128,6 +129,7 @@ void OSD::SaveSettings() {
     settings->KeyboardOSDEnabled(_osdList->Checked(3));
 
     settings->NotifyIconEnabled(_volumeIcon->Checked());
+    settings->SubscribeVolumeEvents(_monitorVolEvents->Checked());
     settings->VolumeLimiter(((float) _limitSlider->Position()) / 100.0f);
     settings->MuteOnLock(_muteLock->Checked());
 }

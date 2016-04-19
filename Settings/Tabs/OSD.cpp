@@ -16,6 +16,10 @@ void OSD::Initialize() {
 
     _volumeIcon = new Checkbox(CHK_VOLICON, *this);
     _subscribeVolEvents = new Checkbox(CHK_MONITORVOL, *this);
+    _subscribeVolEvents->OnClick = [this]() {
+        _forceLimit->Enabled(_subscribeVolEvents->Checked());
+        return true;
+    };
     _audioDeviceLabel = new Label(LBL_AUDIODEV, *this);
     _audioDevice = new ComboBox(CMB_AUDIODEV, *this);
     _audioTaperLabel = new Label(LBL_AUDIOTAPER, *this);

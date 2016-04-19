@@ -89,6 +89,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
 
     if (_settings->MuteOnLock()) {
         /* If muting volume on lock is enabled, register for notifications. */
+        _monitorSession = true;
         WTSRegisterSessionNotification(
             Window::Handle(), NOTIFY_FOR_THIS_SESSION);
     }
@@ -464,7 +465,7 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 UpdateVolumeState();
             }
         }
-    } else if (message == WM_WTSSESSION_CHANGE && _settings->MuteOnLock()) {
+    } else if (message == WM_WTSSESSION_CHANGE) {
         OnSessionChange(wParam);
     }
 
@@ -472,6 +473,10 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 }
 
 void VolumeOSD::OnSessionChange(WPARAM wParam) {
+    if (_monitorSession == false) {
+        return;
+    }
+
     if (wParam == WTS_SESSION_LOCK) {
         CLOG(L"Muting on session lock");
         _unlockUnmute = true;

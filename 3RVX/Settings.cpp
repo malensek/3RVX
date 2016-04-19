@@ -213,6 +213,14 @@ void Settings::MuteOnLock(bool enable) {
     SetEnabled(XML_MUTELOCK, enable);
 }
 
+bool Settings::SubscribeVolumeEvents() {
+    return GetEnabled(XML_SUBSCRIBE_VOL, DefaultSubscribeVolumeEvents);
+}
+
+void Settings::SubscribeVolumeEvents(bool enable) {
+    SetEnabled(XML_SUBSCRIBE_VOL, enable);
+}
+
 std::wstring Settings::LanguageName() {
     std::wstring lang = GetText(XML_LANGUAGE);
 

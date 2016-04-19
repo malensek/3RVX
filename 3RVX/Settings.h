@@ -43,6 +43,8 @@ public:
     void VolumeLimiter(float limit);
     bool MuteOnLock();
     void MuteOnLock(bool enable);
+    bool SubscribeVolumeEvents();
+    void SubscribeVolumeEvents(bool enable);
 
     AnimationTypes::HideAnimation HideAnim();
     void HideAnim(AnimationTypes::HideAnimation anim);
@@ -195,6 +197,7 @@ public:
     static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
     static const bool DefaultAutoUpdate = false;
     static const bool DefaultMuteLock = false;
+    static const bool DefaultSubscribeVolumeEvents = true;
 
     static const bool DefaultVolumeOSDEnabled = true;
     static const bool DefaultEjectOSDEnabled = true;
@@ -236,6 +239,7 @@ public:
     static constexpr const char *XML_SHOWONSTART = "showOnStartup";
     static constexpr const char *XML_SKIN = "skin";
     static constexpr const char *XML_SOUNDS = "soundEffects";
+    static constexpr const char *XML_SUBSCRIBE_VOL = "subscribeVolumeEvents";
     static constexpr const char *XML_UPDATEAUTO = "automaticUpdates";
     static constexpr const char *XML_UPDATECHECKTIME = "lastUpdateCheck";
     static constexpr const char *XML_VOLUME_LIMITER = "volumeLimiter";

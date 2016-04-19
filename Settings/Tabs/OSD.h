@@ -32,7 +32,7 @@ private:
 
     GroupBox *_volumeGroup;
     Checkbox *_volumeIcon;
-    Checkbox *_monitorVolEvents;
+    Checkbox *_subscribeVolEvents;
     Label *_audioDeviceLabel;
     ComboBox *_audioDevice;
     Label *_audioTaperLabel;

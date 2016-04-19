@@ -72,6 +72,7 @@ private:
     void UpdateVolumeState();
 
     virtual void OnDisplayChange();
+    void OnSessionChange(WPARAM wParam);
 
     virtual LRESULT
         WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

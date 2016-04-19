@@ -397,15 +397,28 @@ VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             }
             HideOthers(Volume);
         }
+    }
 
-    } else if (message == VolumeController::MSG_VOL_DEVCHNG) {
+    switch (message) {
+    case VolumeController::MSG_VOL_CHNG:
+
+        break;
+
+    case VolumeController::MSG_VOL_DEVCHNG:
         OnDeviceChange();
-    } else if (message == MSG_NOTIFYICON) {
+        break;
+
+    case MSG_NOTIFYICON:
         OnNotifyIconEvent(hWnd, lParam);
-    } else if (message == WM_COMMAND) {
+        break;
+
+    case WM_COMMAND:
         OnMenuEvent(wParam);
-    } else if (message == WM_WTSSESSION_CHANGE) {
+        break;
+
+    case WM_WTSSESSION_CHANGE:
         OnSessionChange(wParam);
+        break;
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);

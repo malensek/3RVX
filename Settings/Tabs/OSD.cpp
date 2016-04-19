@@ -15,7 +15,7 @@ void OSD::Initialize() {
     _osdList->OnItemChange = std::bind(&OSD::OnOSDListItemChange, this, _1);
 
     _volumeIcon = new Checkbox(CHK_VOLICON, *this);
-    _monitorVolEvents = new Checkbox(CHK_MONITORVOL, *this);
+    _subscribeVolEvents = new Checkbox(CHK_MONITORVOL, *this);
     _audioDeviceLabel = new Label(LBL_AUDIODEV, *this);
     _audioDevice = new ComboBox(CMB_AUDIODEV, *this);
     _audioTaperLabel = new Label(LBL_AUDIOTAPER, *this);
@@ -35,7 +35,7 @@ void OSD::Initialize() {
     _volumeGroup = new GroupBox(GRP_VOLUME, *this);
     _volumeGroup->AddChildren({
         _volumeIcon,
-        _monitorVolEvents,
+        _subscribeVolEvents,
         _audioDeviceLabel, _audioDevice,
         _audioTaperLabel, _audioTaper, _audioTaperEdit,
         _limitLabel, _limitSlider, _limitValue,
@@ -114,7 +114,7 @@ void OSD::LoadSettings() {
     _osdList->Checked(3, settings->KeyboardOSDEnabled());
 
     _volumeIcon->Checked(settings->NotifyIconEnabled());
-    _monitorVolEvents->Checked(settings->SubscribeVolumeEvents());
+    _subscribeVolEvents->Checked(settings->SubscribeVolumeEvents());
     _limitSlider->Position((int) (settings->VolumeLimiter() * 100.0f));
     _muteLock->Checked(settings->MuteOnLock());
 }
@@ -129,7 +129,7 @@ void OSD::SaveSettings() {
     settings->KeyboardOSDEnabled(_osdList->Checked(3));
 
     settings->NotifyIconEnabled(_volumeIcon->Checked());
-    settings->SubscribeVolumeEvents(_monitorVolEvents->Checked());
+    settings->SubscribeVolumeEvents(_subscribeVolEvents->Checked());
     settings->VolumeLimiter(((float) _limitSlider->Position()) / 100.0f);
     settings->MuteOnLock(_muteLock->Checked());
 }

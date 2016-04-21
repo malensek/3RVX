@@ -10,6 +10,7 @@
 
 #include "../3RVX.h"
 #include "../Controllers/Volume/CurveTransformer.h"
+#include "../Controllers/Volume/VolumeLimiter.h"
 #include "../HotkeyInfo.h"
 #include "../LanguageTranslator.h"
 #include "../MeterWnd/LayeredWnd.h"
@@ -45,7 +46,9 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     float volumeLimiter = _settings->VolumeLimiter();
     if (volumeLimiter > 0.0f && volumeLimiter < 1.0f) {
         CLOG(L"Using volume limiter: %f", volumeLimiter);
-        //TODO: limiter
+        VolumeLimiter *vl = new VolumeLimiter(volumeLimiter);
+        _volumeCtrl->AddTransformation(vl);
+        _volumeTransformations.push_back(vl);
     }
 
     /* Set up volume state variables */

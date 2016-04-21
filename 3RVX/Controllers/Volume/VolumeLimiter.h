@@ -24,7 +24,12 @@ public:
     }
 
     virtual float Revert(float vol) {
-        return vol / _limit;
+        float newVal = vol / _limit;
+        if (newVal > 1.0f) {
+            newVal = 1.0f;
+        }
+
+        return newVal;
     }
 
 private:

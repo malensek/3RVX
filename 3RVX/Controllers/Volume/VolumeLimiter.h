@@ -7,7 +7,7 @@
 /// given, an input volume of 0.8 outputs 1.0, and an input of 0.4 would output
 /// 0.5 (50% of .8).
 /// </summary>
-class VolumeLimiter : VolumeTransformation {
+class VolumeLimiter : public VolumeTransformation {
 public:
     /// <summary>
     /// Creates a new VolumeLimiter, where the maximum volume level is the value

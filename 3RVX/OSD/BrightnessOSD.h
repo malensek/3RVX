@@ -5,6 +5,8 @@
 
 #include "OSD.h"
 
+class BrightnessController;
+
 class BrightnessOSD : public OSD {
 public:
     BrightnessOSD();

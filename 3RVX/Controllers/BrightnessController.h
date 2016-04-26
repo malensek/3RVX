@@ -3,7 +3,10 @@
 
 #pragma once
 
+#pragma comment(lib, "Dxva2.lib") 
+
 #include <Windows.h>
+#include <HighLevelMonitorConfigurationAPI.h>
 
 class Monitor;
 
@@ -16,4 +19,5 @@ public:
     void Brightness(float level);
 
 private:
+    bool SupportsBrightnessAPI(PHYSICAL_MONITOR &pm);
 };

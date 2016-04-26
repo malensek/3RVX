@@ -53,3 +53,14 @@ float BrightnessController::Brightness() {
 void BrightnessController::Brightness(float level) {
 
 }
+
+bool BrightnessController::SupportsBrightnessAPI(PHYSICAL_MONITOR &pm) {
+    DWORD caps, color;
+    GetMonitorCapabilities(pm.hPhysicalMonitor, &caps, &color);
+    if ((caps & MC_CAPS_BRIGHTNESS) != MC_CAPS_BRIGHTNESS) {
+        CLOG(L"Monitor does not support brightness control");
+        return false;
+    } else {
+        return true;
+    }
+}

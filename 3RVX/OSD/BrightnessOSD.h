@@ -8,6 +8,7 @@
 class BrightnessOSD : public OSD {
 public:
     BrightnessOSD();
+    ~BrightnessOSD();
 
     virtual void Hide();
     virtual void ProcessHotkeys(HotkeyInfo &hki);

@@ -22,6 +22,10 @@ _mWnd(L"3RVX-BrightnessOSD", L"3RVX-BrightnessOSD") {
     OSD::InitMeterWnd(_mWnd);
 }
 
+BrightnessOSD::~BrightnessOSD() {
+    delete _brightnessCtrl;
+}
+
 void BrightnessOSD::Hide() {
     _mWnd.Hide(false);
 }

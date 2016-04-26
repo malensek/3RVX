@@ -6,7 +6,6 @@
 #pragma comment(lib, "gdiplus.lib")
 #pragma comment(lib, "Wtsapi32.lib")
 
-#include <Windows.h>
 #include <ctime>
 #include <gdiplus.h>
 #include <iostream>

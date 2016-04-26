@@ -202,7 +202,7 @@ HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
 LRESULT CALLBACK
 HotkeyManager::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
-    if (nCode >= 0) {
+    if (nCode >= 0 && wParam != WM_MOUSEMOVE) {
         int mouseState = 0;
         MSLLHOOKSTRUCT *msInfo;
 

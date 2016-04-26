@@ -359,33 +359,6 @@ void VolumeOSD::UpdateVolumeState() {
     UpdateIcon();
 }
 
-LRESULT
-VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    switch (message) {
-    case VolumeController::MSG_VOL_CHNG:
-        OnVolumeChange(hWnd, wParam, lParam);
-        break;
-
-    case VolumeController::MSG_VOL_DEVCHNG:
-        OnDeviceChange();
-        break;
-
-    case MSG_NOTIFYICON:
-        OnNotifyIconEvent(hWnd, lParam);
-        break;
-
-    case WM_COMMAND:
-        OnMenuEvent(wParam);
-        break;
-
-    case WM_WTSSESSION_CHANGE:
-        OnSessionChange(wParam);
-        break;
-    }
-
-    return DefWindowProc(hWnd, message, wParam, lParam);
-}
-
 void VolumeOSD::OnDeviceChange() {
     CLOG(L"Volume device change detected.");
     if (_selectedDevice == L"") {
@@ -512,4 +485,31 @@ void VolumeOSD::OnVolumeChange(HWND hWnd, WPARAM wParam, LPARAM lParam) {
         }
         HideOthers(Volume);
     }
+}
+
+LRESULT
+VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+    switch (message) {
+    case VolumeController::MSG_VOL_CHNG:
+        OnVolumeChange(hWnd, wParam, lParam);
+        break;
+
+    case VolumeController::MSG_VOL_DEVCHNG:
+        OnDeviceChange();
+        break;
+
+    case MSG_NOTIFYICON:
+        OnNotifyIconEvent(hWnd, lParam);
+        break;
+
+    case WM_COMMAND:
+        OnMenuEvent(wParam);
+        break;
+
+    case WM_WTSSESSION_CHANGE:
+        OnSessionChange(wParam);
+        break;
+    }
+
+    return DefWindowProc(hWnd, message, wParam, lParam);
 }

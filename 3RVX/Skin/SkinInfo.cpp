@@ -6,6 +6,7 @@
 #include "../Error.h"
 #include "../Logger.h"
 #include "../Settings.h"
+#include "../SettingsDefaults.h"
 #include "../StringUtils.h"
 
 SkinInfo::SkinInfo(std::wstring skinFile, bool reportErrors) :
@@ -13,7 +14,7 @@ _skinFile(skinFile) {
     CLOG(L"Loading skin XML: %s", _skinFile.c_str());
 
     /* Remove the '/skin.xml' portion from the file name to get the dir name. */
-    std::wstring xmlName = std::wstring(Settings::SKIN_XML);
+    std::wstring xmlName = std::wstring(SettingsDefaults::SkinFileName);
     _skinDir = _skinFile.substr(0, _skinFile.length() - (xmlName.length() + 1));
 
     FILE *fp;

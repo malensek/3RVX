@@ -3,10 +3,10 @@
 
 #include "SkinInfo.h"
 
+#include "../DefaultSettings.h"
 #include "../Error.h"
 #include "../Logger.h"
 #include "../Settings.h"
-#include "../SettingsDefaults.h"
 #include "../StringUtils.h"
 
 SkinInfo::SkinInfo(std::wstring skinFile, bool reportErrors) :

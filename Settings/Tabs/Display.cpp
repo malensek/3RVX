@@ -5,11 +5,11 @@
 
 #include <CommCtrl.h>
 
+#include "../../3RVX/DefaultSettings.h"
 #include "../../3RVX/DisplayManager.h"
 #include "../../3RVX/LanguageTranslator.h"
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
-#include "../../3RVX/SettingsDefaults.h"
 #include "../resource.h"
 
 void Display::Initialize() {

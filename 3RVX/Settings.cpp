@@ -10,12 +10,12 @@
 #include <ShlObj.h>
 #include <Shlwapi.h>
 
+#include "DefaultSettings.h"
 #include "Error.h"
 #include "HotkeyInfo.h"
 #include "LanguageTranslator.h"
 #include "Logger.h"
 #include "Monitor.h"
-#include "SettingsDefaults.h"
 #include "Skin/Skin.h"
 #include "StringUtils.h"
 
@@ -94,7 +94,8 @@ int Settings::Save() {
 }
 
 bool Settings::Portable() {
-    std::wstring portableSettings = AppDir() + L"\\" + SETTINGS_FILE;
+    std::wstring portableSettings
+        = AppDir() + L"\\" + SettingsDefaults::SettingsFileName;
     if (PathFileExists(portableSettings.c_str()) == TRUE) {
         return true;
     }

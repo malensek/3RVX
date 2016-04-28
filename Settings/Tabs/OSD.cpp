@@ -121,6 +121,8 @@ void OSD::LoadSettings() {
     _limitSlider->Position((int) (settings->VolumeLimiter() * 100.0f));
     _forceLimit->Enabled(_subscribeVolEvents->Checked());
     _muteLock->Checked(settings->MuteOnLock());
+
+    _subscribeEjectEvents->Checked(settings->SubscribeEjectEvents());
 }
 
 void OSD::SaveSettings() {
@@ -136,6 +138,8 @@ void OSD::SaveSettings() {
     settings->SubscribeVolumeEvents(_subscribeVolEvents->Checked());
     settings->VolumeLimiter(((float) _limitSlider->Position()) / 100.0f);
     settings->MuteOnLock(_muteLock->Checked());
+
+    settings->SubscribeEjectEvents(_subscribeEjectEvents->Checked());
 }
 
 void OSD::ShowGroup(int group) {

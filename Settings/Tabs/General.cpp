@@ -6,11 +6,11 @@
 #include <shellapi.h>
 
 #include "../../3RVX/3RVX.h"
+#include "../../3RVX/DefaultSettings.h"
 #include "../../3RVX/Error.h"
 #include "../../3RVX/LanguageTranslator.h"
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
-#include "../../3RVX/SettingsDefaults.h"
 #include "../../3RVX/Skin/SkinInfo.h"
 #include "../resource.h"
 #include "../Updater/ProgressWindow.h"

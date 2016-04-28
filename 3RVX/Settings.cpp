@@ -145,7 +145,8 @@ void Settings::CreateSettingsDir() {
 }
 
 std::wstring Settings::SettingsFile() {
-    return SettingsDir() + std::wstring(L"\\") + SETTINGS_FILE;
+    return SettingsDir() + std::wstring(L"\\")
+        + SettingsDefaults::SettingsFileName;
 }
 
 std::wstring Settings::AppDir() {
@@ -160,19 +161,19 @@ std::wstring Settings::AppDir() {
 }
 
 std::wstring Settings::SkinDir() {
-    return AppDir() + L"\\" + SKIN_DIR;
+    return AppDir() + L"\\" + SettingsDefaults::SkinDirName;
 }
 
 std::wstring Settings::MainApp() {
-    return Settings::AppDir() + L"\\" + MAIN_APP;
+    return Settings::AppDir() + L"\\" + SettingsDefaults::MainAppName;
 }
 
 std::wstring Settings::SettingsApp() {
-    return Settings::AppDir() + L"\\" + SETTINGS_APP;
+    return Settings::AppDir() + L"\\" + SettingsDefaults::SettingsAppName;
 }
 
 std::wstring Settings::LanguagesDir() {
-    return AppDir() + L"\\" + LANG_DIR;
+    return AppDir() + L"\\" + SettingsDefaults::LanguageDirName;
 }
 
 void Settings::LaunchSettingsApp() {
@@ -410,8 +411,9 @@ std::wstring Settings::SkinXML() {
 }
 
 std::wstring Settings::SkinXML(std::wstring skinName) {
-    std::wstring skinXML = Settings::AppDir() + L"\\" + SKIN_DIR + L"\\"
-        + skinName + L"\\" + SKIN_XML;
+    std::wstring skinXML = Settings::AppDir() + L"\\"
+        + SettingsDefaults::SkinDirName + L"\\"
+        + skinName + L"\\" + SettingsDefaults::SkinFileName;
     return skinXML;
 }
 

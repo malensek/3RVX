@@ -227,7 +227,7 @@ std::wstring Settings::LanguageName() {
     std::wstring lang = GetText(XML_LANGUAGE);
 
     if (lang == L"") {
-        return DefaultLanguage;
+        return SettingsDefaults::Language;
     } else {
         return lang;
     }
@@ -398,7 +398,7 @@ std::wstring Settings::CurrentSkin() {
     std::wstring name = GetText("skin");
 
     if (name == L"") {
-        return DefaultSkin;
+        return SettingsDefaults::Skin;
     } else {
         return name;
     }

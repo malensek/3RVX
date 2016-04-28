@@ -10,6 +10,7 @@
 #include "../../3RVX/LanguageTranslator.h"
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
+#include "../../3RVX/SettingsDefaults.h"
 #include "../../3RVX/Skin/SkinInfo.h"
 #include "../resource.h"
 #include "../Updater/ProgressWindow.h"
@@ -66,7 +67,7 @@ void General::LoadSettings() {
     std::wstring current = settings->CurrentSkin();
     int idx = _skin->Select(current);
     if (idx == CB_ERR) {
-        _skin->Select(Settings::DefaultSkin);
+        _skin->Select(SettingsDefaults::Skin);
     }
     LoadSkinInfo(current);
 

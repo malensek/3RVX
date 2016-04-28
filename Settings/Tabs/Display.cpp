@@ -9,6 +9,7 @@
 #include "../../3RVX/LanguageTranslator.h"
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
+#include "../../3RVX/SettingsDefaults.h"
 #include "../resource.h"
 
 void Display::Initialize() {
@@ -74,7 +75,7 @@ void Display::LoadSettings() {
     _positionX->Text(settings->OSDX());
     _positionY->Text(settings->OSDY());
     _customDistance->Checked(
-        settings->OSDEdgeOffset() != Settings::DefaultOSDOffset);
+        settings->OSDEdgeOffset() != SettingsDefaults::OSDOffset);
     _edgeSpinner->Text(settings->OSDEdgeOffset());
     _edgeSpinner->Range(MIN_EDGE, MAX_EDGE);
 
@@ -130,7 +131,7 @@ void Display::SaveSettings() {
     } else {
         /* We have to write the default here, just in case somebody unchecked
          * the checkbox. */
-        settings->OSDEdgeOffset(Settings::DefaultOSDOffset);
+        settings->OSDEdgeOffset(SettingsDefaults::OSDOffset);
     }
 
     std::wstring monitor = _displayDevice->Selection();

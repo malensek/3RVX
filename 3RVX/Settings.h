@@ -191,14 +191,6 @@ private:
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 
 private:
-    static constexpr const wchar_t *MAIN_APP = L"3RVX.exe";
-    static constexpr const wchar_t *SETTINGS_APP = L"Settings.exe";
-    static constexpr const wchar_t *SETTINGS_FILE = L"Settings.xml";
-    static constexpr const wchar_t *LANG_DIR = L"Languages";
-    static constexpr const wchar_t *SKIN_DIR = L"Skins";
-    static constexpr const wchar_t *SKIN_XML = L"Skin.xml";
-
-private:
     /* XML tag names */
     static constexpr const char *XML_AUDIODEV = "audioDeviceID";
     static constexpr const char *XML_CURVE_ADJUST = "curveAdjust";

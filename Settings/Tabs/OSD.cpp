@@ -48,11 +48,11 @@ void OSD::Initialize() {
     });
 
     _ejectIcon = new Checkbox(CHK_EJECTICON, *this);
-    _monitorEjectEvents = new Checkbox(CHK_MONITOREJECT, *this);
+    _subscribeEjectEvents = new Checkbox(CHK_SUBSCRIBEEJECT, *this);
     _ejectGroup = new GroupBox(GRP_EJECT, *this);
     _ejectGroup->AddChildren({
         _ejectIcon,
-        _monitorEjectEvents,
+        _subscribeEjectEvents,
     });
 
     _brightnessIcon = new Checkbox(CHK_BRIGHTICON, *this);
@@ -90,7 +90,6 @@ void OSD::Initialize() {
         grp->Visible(false);
         _groups.push_back(grp);
     }
-
 }
 
 void OSD::LoadSettings() {

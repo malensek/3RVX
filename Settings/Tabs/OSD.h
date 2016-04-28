@@ -46,7 +46,7 @@ private:
 
     GroupBox *_ejectGroup;
     Checkbox *_ejectIcon;
-    Checkbox *_monitorEjectEvents;
+    Checkbox *_subscribeEjectEvents;
 
     GroupBox *_brightnessGroup;
     Checkbox *_brightnessIcon;

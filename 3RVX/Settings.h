@@ -191,30 +191,6 @@ private:
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 
 public:
-    /* Default settings */
-    static const bool DefaultOnTop = true;
-    static const AnimationTypes::HideAnimation DefaultHideAnim
-        = AnimationTypes::Fade;
-    static const bool DefaultHideFullscreen = false;
-    static const bool DefaultHideDirectX = false;
-    static const int DefaultHideSpeed = 765;
-    static const int DefaultHideTime = 800;
-    static constexpr const float DefaultVolumeLimit = 1.0f;
-    static const bool DefaultNotifyIcon = true;
-    static const bool DefaultShowOnStartup = true;
-    static const bool DefaultSoundsEnabled = true;
-    static const int DefaultOSDOffset = 140;
-    static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
-    static const bool DefaultAutoUpdate = false;
-    static const bool DefaultMuteLock = false;
-    static const bool DefaultSubscribeVolumeEvents = true;
-    static const bool DefaultSubscribeEjectEvents = true;
-
-    static const bool DefaultVolumeOSDEnabled = true;
-    static const bool DefaultEjectOSDEnabled = true;
-    static const bool DefaultBrightnessOSDEnabled = true;
-    static const bool DefaultKeyboardOSDEnabled = false;
-
     static constexpr const wchar_t *MAIN_APP = L"3RVX.exe";
     static constexpr const wchar_t *SETTINGS_APP = L"Settings.exe";
     static constexpr const wchar_t *SETTINGS_FILE = L"Settings.xml";

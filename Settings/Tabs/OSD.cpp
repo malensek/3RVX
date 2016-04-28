@@ -120,6 +120,7 @@ void OSD::LoadSettings() {
     _volumeIcon->Checked(settings->NotifyIconEnabled());
     _subscribeVolEvents->Checked(settings->SubscribeVolumeEvents());
     _limitSlider->Position((int) (settings->VolumeLimiter() * 100.0f));
+    _forceLimit->Enabled(_subscribeVolEvents->Checked());
     _muteLock->Checked(settings->MuteOnLock());
 }
 

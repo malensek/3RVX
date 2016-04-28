@@ -535,6 +535,14 @@ void Settings::SoundEffectsEnabled(bool enable) {
     SetEnabled(XML_SOUNDS, enable);
 }
 
+bool Settings::SubscribeEjectEvents() {
+    return GetEnabled(XML_SUBSCRIBE_EJECT, DefaultSubscribeEjectEvents);
+}
+
+void Settings::SubscribeEjectEvents(bool enable) {
+    SetEnabled(XML_SUBSCRIBE_EJECT, enable);
+}
+
 bool Settings::HasSetting(std::string elementName) {
     tinyxml2::XMLElement *el = _root->FirstChildElement(elementName.c_str());
     return (el != NULL);

@@ -207,7 +207,7 @@
     <ClInclude Include="DriveInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SettingsDefaults.h">
+    <ClInclude Include="DefaultSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -36,6 +36,60 @@ public:
     void LoadEmptySettings();
     int Save();
 
+    /* General Settings */
+    bool NotifyIconEnabled();
+    void NotifyIconEnabled(bool enable);
+    bool SoundEffectsEnabled();
+    void SoundEffectsEnabled(bool enable);
+
+    /* Skin */
+    std::wstring CurrentSkin();
+    bool CurrentSkin(std::wstring skinName);
+    std::wstring SkinXML();
+    std::wstring SkinXML(std::wstring skinName);
+
+    /* Language */
+    LanguageTranslator *Translator();
+    std::wstring LanguageName();
+    void LanguageName(std::wstring name);
+
+    /* Animation */
+    AnimationTypes::HideAnimation HideAnim();
+    void HideAnim(AnimationTypes::HideAnimation anim);
+    int HideDelay();
+    void HideDelay(int delay);
+    int HideSpeed();
+    void HideSpeed(int speed);
+
+    /* Display */
+    bool AlwaysOnTop();
+    void AlwaysOnTop(bool enable);
+    bool HideFullscreen();
+    void HideFullscreen(bool enable);
+    bool HideDirectX();
+    void HideDirectX(bool enable);
+    std::wstring Monitor();
+    void Monitor(std::wstring monitorName);
+    OSDPos OSDPosition();
+    void OSDPosition(OSDPos pos);
+    int OSDEdgeOffset();
+    void OSDEdgeOffset(int offset);
+    int OSDX();
+    void OSDX(int x);
+    int OSDY();
+    void OSDY(int y);
+
+    /* OSDs */
+    bool BrightnessOSDEnabled();
+    void BrightnessOSDEnabled(bool enable);
+    bool EjectOSDEnabled();
+    void EjectOSDEnabled(bool enable);
+    bool KeyboardOSDEnabled();
+    void KeyboardOSDEnabled(bool enable);
+    bool VolumeOSDEnabled();
+    void VolumeOSDEnabled(bool enable);
+
+    /* Volume */
     std::wstring AudioDeviceID();
     int VolumeCurveAdjustment();
     void VolumeCurveAdjustment(int value);
@@ -46,55 +100,11 @@ public:
     bool SubscribeVolumeEvents();
     void SubscribeVolumeEvents(bool enable);
 
-    AnimationTypes::HideAnimation HideAnim();
-    void HideAnim(AnimationTypes::HideAnimation anim);
-    int HideDelay();
-    void HideDelay(int delay);
-    int HideSpeed();
-    void HideSpeed(int speed);
+    /* Eject */
+    bool SubscribeEjectEvents();
+    void SubscribeEjectEvents(bool enable);
 
-    std::wstring LanguageName();
-    void LanguageName(std::wstring name);
-
-    std::wstring Monitor();
-    void Monitor(std::wstring monitorName);
-
-    bool AlwaysOnTop();
-    void AlwaysOnTop(bool enable);
-    bool HideFullscreen();
-    void HideFullscreen(bool enable);
-    bool HideDirectX();
-    void HideDirectX(bool enable);
-    OSDPos OSDPosition();
-    void OSDPosition(OSDPos pos);
-    int OSDEdgeOffset();
-    void OSDEdgeOffset(int offset);
-    int OSDX();
-    void OSDX(int x);
-    int OSDY();
-    void OSDY(int y);
-
-    bool BrightnessOSDEnabled();
-    void BrightnessOSDEnabled(bool enable);
-    bool EjectOSDEnabled();
-    void EjectOSDEnabled(bool enable);
-    bool KeyboardOSDEnabled();
-    void KeyboardOSDEnabled(bool enable);
-    bool VolumeOSDEnabled();
-    void VolumeOSDEnabled(bool enable);
-
-    std::wstring CurrentSkin();
-    bool CurrentSkin(std::wstring skinName);
-    std::wstring SkinXML();
-    std::wstring SkinXML(std::wstring skinName);
-
-    bool NotifyIconEnabled();
-    void NotifyIconEnabled(bool enable);
-    bool SoundEffectsEnabled();
-    void SoundEffectsEnabled(bool enable);
-
-    LanguageTranslator *Translator();
-
+    /* Hotkeys */
     std::unordered_map<int, HotkeyInfo> Hotkeys();
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 

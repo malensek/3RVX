@@ -75,7 +75,7 @@ void Display::LoadSettings() {
     _positionX->Text(settings->OSDX());
     _positionY->Text(settings->OSDY());
     _customDistance->Checked(
-        settings->OSDEdgeOffset() != SettingsDefaults::OSDOffset);
+        settings->OSDEdgeOffset() != DefaultSettings::OSDOffset);
     _edgeSpinner->Text(settings->OSDEdgeOffset());
     _edgeSpinner->Range(MIN_EDGE, MAX_EDGE);
 
@@ -131,7 +131,7 @@ void Display::SaveSettings() {
     } else {
         /* We have to write the default here, just in case somebody unchecked
          * the checkbox. */
-        settings->OSDEdgeOffset(SettingsDefaults::OSDOffset);
+        settings->OSDEdgeOffset(DefaultSettings::OSDOffset);
     }
 
     std::wstring monitor = _displayDevice->Selection();

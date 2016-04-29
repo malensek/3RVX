@@ -3,7 +3,7 @@
 #include "MeterWnd/Animations/AnimationTypes.h"
 #include "Settings.h"
 
-class SettingsDefaults {
+class DefaultSettings {
 public:
     /* String Constants*/
     static constexpr const wchar_t *Language = L"English";

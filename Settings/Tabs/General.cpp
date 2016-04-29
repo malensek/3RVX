@@ -67,7 +67,7 @@ void General::LoadSettings() {
     std::wstring current = settings->CurrentSkin();
     int idx = _skin->Select(current);
     if (idx == CB_ERR) {
-        _skin->Select(SettingsDefaults::Skin);
+        _skin->Select(DefaultSettings::Skin);
     }
     LoadSkinInfo(current);
 

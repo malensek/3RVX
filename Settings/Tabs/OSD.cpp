@@ -166,8 +166,12 @@ void OSD::OnOSDListItemChange(NMLISTVIEW *lv) {
                 /* Activate the Apply button */
                 PropSheet_Changed(GetParent(SettingsTab::DialogHandle()), NULL);
 
-                /* Check state at 0xF000 (1 = un, 2 = check). Shift to check: */
-                _groups[lv->iItem]->Visible((nSimg >> 13) > 0);
+                /* NOTE: Check state at 0xF000 (1 = un, 2 = check).
+                 * Shift to check:
+                 * if ((nSimg >> 13) > 0) { checked } else { unchecked }
+                 */
+
+                ShowGroup(lv->iItem);
             }
         }
 

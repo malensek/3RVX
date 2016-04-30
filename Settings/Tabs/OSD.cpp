@@ -26,6 +26,12 @@ void OSD::Initialize() {
     _audioTaperLabel = new Label(LBL_AUDIOTAPER, *this);
     _audioTaper = new ComboBox(CMB_AUDIOTAPER, *this);
     _audioTaperEdit = new EditBox(ED_AUDIOTAPER, *this);
+    _audioTaper->OnSelectionChange = [this]() {
+        _audioTaperEdit->Enabled(_volumeGroup->Enabled()
+            && _audioTaper->SelectionIndex() == _audioTaper->Count() - 1);
+        return true;
+    };
+
     _limitLabel = new Label(LBL_LIMITER, *this);
     _limitSlider = new Slider(SLD_LIMITER, *this);
     _limitValue = new Label(LBL_LIMITVAL, *this);

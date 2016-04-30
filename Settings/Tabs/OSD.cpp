@@ -110,9 +110,24 @@ void OSD::LoadSettings() {
     _ejectStr = translator->Translate(_ejectStr);
     _keyboardStr = translator->Translate(_keyboardStr);
 
-    for (std::wstring level : settings->TaperLevelNames) {
-        _audioTaper->AddItem(translator->Translate(level));
+    _taperLevels[0] = L"Disabled";
+    _taperLevels[2] = L"Low";
+    _taperLevels[4] = L"Medium";
+    _taperLevels[6] = L"High";
+    for (auto it = _taperLevels.begin(); it != _taperLevels.end(); ++it) {
+        _audioTaper->AddItem(translator->Translate(it->second));
     }
+    _audioTaper->AddItem(translator->Translate(L"Custom"));
+
+    int level = settings->VolumeCurveAdjustment();
+    if (_taperLevels.find(level) == _taperLevels.end()) {
+        /* Select the last item (custom) */
+        _audioTaper->Select(_taperLevels.size());
+    } else {
+        _audioTaper->Select(translator->Translate(_taperLevels[level]));
+    }
+    _audioTaper->OnSelectionChange();
+
     _osdList->AddListExStyle(LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT);
     _osdList->AddColumn(_osdStr, (int) (_osdList->Width() * .97f));
     _osdList->AddItem(_volumeStr);

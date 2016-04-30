@@ -14,12 +14,14 @@ void GroupBox::Enable() {
     for (Control *ctrl : _controls) {
         ctrl->Enable();
     }
+    Control::Enable();
 }
 
 void GroupBox::Disable() {
     for (Control *ctrl : _controls) {
         ctrl->Disable();
     }
+    Control::Disable();
 }
 
 void GroupBox::Visible(bool visible) {

@@ -161,6 +161,14 @@ void OSD::SaveSettings() {
 
     settings->NotifyIconEnabled(_volumeIcon->Checked());
     settings->SubscribeVolumeEvents(_subscribeVolEvents->Checked());
+    if (_audioTaper->SelectionIndex() == _audioTaper->Count() - 1) {
+        /* Custom taper */
+        settings->VolumeCurveAdjustment(_audioTaperEdit->TextAsInt());
+    } else {
+        /* NOTE: We multiply the taper index by two to get the actual taper
+         * value. For instance, low = 2, medium = 4, etc. */
+        settings->VolumeCurveAdjustment(_audioTaper->SelectionIndex() * 2);
+    }
     settings->VolumeLimiter(((float) _limitSlider->Position()) / 100.0f);
     settings->MuteOnLock(_muteLock->Checked());
 

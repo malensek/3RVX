@@ -29,14 +29,6 @@ public:
     };
     static std::vector<std::wstring> OSDPosNames;
 
-    enum TaperLevels {
-        Low,
-        Medium,
-        High,
-        CustomTaper,
-    };
-    static std::vector<std::wstring> TaperLevelNames;
-
 public:
     static Settings *Instance();
 

@@ -121,7 +121,7 @@ void Display::SaveSettings() {
 
     Settings::OSDPos pos = (Settings::OSDPos) _position->SelectionIndex();
     settings->OSDPosition(pos);
-    if (pos == Settings::OSDPos::Custom) {
+    if (pos == Settings::OSDPos::CustomPosition) {
         settings->OSDX(_positionX->TextAsInt());
         settings->OSDY(_positionY->TextAsInt());
     }

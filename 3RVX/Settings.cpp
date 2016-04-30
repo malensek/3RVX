@@ -197,6 +197,9 @@ int Settings::VolumeCurveAdjustment() {
 }
 
 void Settings::VolumeCurveAdjustment(int value) {
+    if (value < 0) {
+        value = 0;
+    }
     SetElementValue(XML_CURVE_ADJUST, value);
 }
 

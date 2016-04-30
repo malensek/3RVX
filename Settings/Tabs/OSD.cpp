@@ -152,11 +152,8 @@ void OSD::ShowGroup(int group) {
 
     GroupBox *showGroup = _groups[group];
     if (_osdList->Checked(group)) {
-        showGroup->Enable();
-    } else {
-        showGroup->Disable();
+        showGroup->Visible(true);
     }
-    showGroup->Visible(true);
 }
 
 void OSD::OnOSDListItemChange(NMLISTVIEW *lv) {
@@ -170,7 +167,7 @@ void OSD::OnOSDListItemChange(NMLISTVIEW *lv) {
                 PropSheet_Changed(GetParent(SettingsTab::DialogHandle()), NULL);
 
                 /* Check state at 0xF000 (1 = un, 2 = check). Shift to check: */
-                _groups[lv->iItem]->Enabled((nSimg >> 13) > 0);
+                _groups[lv->iItem]->Visible((nSimg >> 13) > 0);
             }
         }
 

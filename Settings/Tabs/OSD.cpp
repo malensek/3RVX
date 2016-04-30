@@ -103,6 +103,9 @@ void OSD::LoadSettings() {
     _ejectStr = translator->Translate(_ejectStr);
     _keyboardStr = translator->Translate(_keyboardStr);
 
+    for (std::wstring level : settings->TaperLevelNames) {
+        _audioTaper->AddItem(translator->Translate(level));
+    }
     _osdList->AddListExStyle(LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT);
     _osdList->AddColumn(_osdStr, (int) (_osdList->Width() * .97f));
     _osdList->AddItem(_volumeStr);

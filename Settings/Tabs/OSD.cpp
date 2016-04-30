@@ -173,9 +173,11 @@ void OSD::ShowGroup(int group) {
     }
 
     GroupBox *showGroup = _groups[group];
-    if (_osdList->Checked(group)) {
-        showGroup->Visible(true);
-    }
+    showGroup->Enabled(_osdList->Checked(group));
+    showGroup->Visible(true);
+
+    _audioTaper->OnSelectionChange();
+    _subscribeVolEvents->OnClick();
 }
 
 void OSD::OnOSDListItemChange(NMLISTVIEW *lv) {

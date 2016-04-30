@@ -35,6 +35,13 @@ std::vector<std::wstring> Settings::OSDPosNames = {
     L"Custom"
 };
 
+std::vector<std::wstring> Settings::TaperLevelNames = {
+    L"Low",
+    L"Medium",
+    L"High",
+    L"Custom",
+};
+
 Settings *Settings::Instance() {
     if (instance == NULL) {
         instance = new Settings();

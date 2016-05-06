@@ -178,6 +178,12 @@ void OSD::SaveSettings() {
 
     settings->NotifyIconEnabled(_volumeIcon->Checked());
     settings->SubscribeVolumeEvents(_subscribeVolEvents->Checked());
+    int selectedDevice = _audioDevice->SelectionIndex();
+    if (selectedDevice == 0) {
+        settings->AudioDeviceID(L"");
+    } else {
+        settings->AudioDeviceID(_audioDevices[selectedDevice - 1].id);
+    }
     if (_audioTaper->SelectionIndex() == _audioTaper->Count() - 1) {
         /* Custom taper */
         settings->VolumeCurveAdjustment(_audioTaperEdit->TextAsInt());

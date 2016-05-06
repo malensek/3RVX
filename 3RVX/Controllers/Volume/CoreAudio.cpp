@@ -133,8 +133,8 @@ HRESULT CoreAudio::SelectDefaultDevice() {
     return hr;
 }
 
-std::list<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
-    std::list<VolumeController::DeviceInfo> devList;
+std::vector<VolumeController::DeviceInfo> CoreAudio::ListDevices() {
+    std::vector<VolumeController::DeviceInfo> devList;
     IMMDeviceCollection *devices = nullptr;
 
     HRESULT hr = _devEnumerator->EnumAudioEndpoints(

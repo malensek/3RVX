@@ -99,16 +99,6 @@ void CoreAudio::DetachDevice() {
 }
 
 HRESULT CoreAudio::OnNotify(PAUDIO_VOLUME_NOTIFICATION_DATA pNotify) {
-    float vol = 0.0f;
-    if (_volumeControl) {
-        _volumeControl->GetMasterVolumeLevelScalar(&vol);
-        if (vol > .8) {
-            _volumeControl->SetMasterVolumeLevelScalar(0.8f, NULL);
-
-        }
-    }
-
-
     if (pNotify->guidEventContext == G3RVXCoreAudioEvent) {
         PostMessage(_notifyHwnd, MSG_VOL_CHNG, (WPARAM) 1, 0);
     } else {

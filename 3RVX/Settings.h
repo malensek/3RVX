@@ -90,6 +90,7 @@ public:
     void VolumeOSDEnabled(bool enable);
 
     /* Volume */
+    void AudioDeviceID(std::wstring id);
     std::wstring AudioDeviceID();
     int VolumeCurveAdjustment();
     void VolumeCurveAdjustment(int value);

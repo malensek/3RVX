@@ -12,6 +12,7 @@ Beta 10 (2.9.2)
 ---------------
 * Custom volume curves
 * Custom volume limits
+* Ability to force a volume limit on other applications
 * Customizable default audio device (instead of always using the system default)
 * Option to mute the volume on session lock [#48]
 * Detailed error messages

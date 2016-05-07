@@ -188,6 +188,11 @@ void Settings::LaunchSettingsApp() {
     }
 }
 
+void Settings::AudioDeviceID(std::wstring id) {
+    std::string idStr = StringUtils::Narrow(id);
+    return SetText(XML_AUDIODEV, idStr);
+}
+
 std::wstring Settings::AudioDeviceID() {
     return GetText(XML_AUDIODEV);
 }

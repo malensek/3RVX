@@ -219,6 +219,8 @@
   <ItemGroup>
     <ClInclude Include="..\3RVX\3RVX.h" />
     <ClInclude Include="..\3RVX\CommCtl.h" />
+    <ClInclude Include="..\3RVX\Controllers\Volume\CoreAudio.h" />
+    <ClInclude Include="..\3RVX\Controllers\Volume\VolumeController.h" />
     <ClInclude Include="..\3RVX\DisplayManager.h" />
     <ClInclude Include="..\3RVX\Error.h" />
     <ClInclude Include="..\3RVX\HotkeyInfo.h" />
@@ -268,6 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\3RVXConsts.cpp" />
+    <ClCompile Include="..\3RVX\Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="..\3RVX\DisplayManager.cpp" />
     <ClCompile Include="..\3RVX\Error.cpp" />
     <ClCompile Include="..\3RVX\HotkeyInfo.cpp" />

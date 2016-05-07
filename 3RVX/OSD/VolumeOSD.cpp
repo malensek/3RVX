@@ -128,7 +128,7 @@ void VolumeOSD::UpdateDeviceMenu() {
     }
     _deviceList.clear();
 
-    std::list<VolumeController::DeviceInfo> devices
+    std::vector<VolumeController::DeviceInfo> devices
         = _volumeCtrl->ListDevices();
     std::wstring currentDeviceId = _volumeCtrl->DeviceId();
 

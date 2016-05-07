@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "../../3RVX/Controllers/Volume/VolumeController.h"
 #include "SettingsTab.h"
 
 class OSD : public SettingsTab {
@@ -12,7 +13,6 @@ public:
 
     }
 
-
     virtual void SaveSettings();
 
 protected:
@@ -20,6 +20,8 @@ protected:
     virtual void LoadSettings();
 
 private:
+    std::list<VolumeController::DeviceInfo> _audioDevices;
+    std::unordered_map<int, std::wstring> _taperLevels;
     void ShowGroup(int group);
 
 private:

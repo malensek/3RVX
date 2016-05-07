@@ -3,6 +3,8 @@
 
 #include "OSD.h"
 
+#include "../../3RVX/Controllers/Volume/CoreAudio.h"
+#include "../../3RVX/Controllers/Volume/VolumeController.h"
 #include "../../3RVX/LanguageTranslator.h"
 #include "../../3RVX/Logger.h"
 #include "../../3RVX/Settings.h"
@@ -110,6 +112,20 @@ void OSD::LoadSettings() {
     _ejectStr = translator->Translate(_ejectStr);
     _keyboardStr = translator->Translate(_keyboardStr);
 
+    _audioDevice->AddItem(translator->Translate(L"Default"));
+    _audioDevice->Select(0);
+    std::wstring selectedId = settings->AudioDeviceID();
+    CoreAudio *volumeCtrl = new CoreAudio(NULL);
+    volumeCtrl->Init();
+    _audioDevices = volumeCtrl->ListDevices();
+    for (VolumeController::DeviceInfo dev : _audioDevices) {
+        _audioDevice->AddItem(dev.name);
+        if (dev.id == selectedId) {
+            _audioDevice->Select(dev.name);
+        }
+    }
+    volumeCtrl->Dispose();
+
     _taperLevels[0] = L"Disabled";
     _taperLevels[2] = L"Low";
     _taperLevels[4] = L"Medium";
@@ -162,6 +178,12 @@ void OSD::SaveSettings() {
 
     settings->NotifyIconEnabled(_volumeIcon->Checked());
     settings->SubscribeVolumeEvents(_subscribeVolEvents->Checked());
+    int selectedDevice = _audioDevice->SelectionIndex();
+    if (selectedDevice == 0) {
+        settings->AudioDeviceID(L"");
+    } else {
+        settings->AudioDeviceID(_audioDevices[selectedDevice - 1].id);
+    }
     if (_audioTaper->SelectionIndex() == _audioTaper->Count() - 1) {
         /* Custom taper */
         settings->VolumeCurveAdjustment(_audioTaperEdit->TextAsInt());

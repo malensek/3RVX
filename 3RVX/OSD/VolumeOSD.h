@@ -35,6 +35,7 @@ private:
     float _lastVolume;
     bool _muted;
     bool _monitorSession;
+    bool _subscribeVolEvents;
     bool _unlockUnmute;
     std::vector<VolumeTransformation *> _volumeTransformations;
 

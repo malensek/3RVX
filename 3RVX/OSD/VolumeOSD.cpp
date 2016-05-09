@@ -30,15 +30,11 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     LoadSkin();
 
     /* Start the volume controller */
-    _subscribeVolEvents = _settings->SubscribeVolumeEvents();
-    HWND monitorWnd = Window::Handle();
-    if (_subscribeVolEvents == false) {
-        monitorWnd = NULL;
-    }
-    _volumeCtrl = new CoreAudio(monitorWnd);
+    _volumeCtrl = new CoreAudio(Window::Handle());
     std::wstring device = _settings->AudioDeviceID();
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
+    _subscribeVolEvents = _settings->SubscribeVolumeEvents();
 
     int curveAdjust = _settings->VolumeCurveAdjustment();
     if (curveAdjust > 0) {

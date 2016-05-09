@@ -20,7 +20,7 @@ protected:
     virtual void LoadSettings();
 
 private:
-    std::list<VolumeController::DeviceInfo> _audioDevices;
+    std::vector<VolumeController::DeviceInfo> _audioDevices;
     std::unordered_map<int, std::wstring> _taperLevels;
     void ShowGroup(int group);
 

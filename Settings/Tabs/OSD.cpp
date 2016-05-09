@@ -18,11 +18,6 @@ void OSD::Initialize() {
 
     _volumeIcon = new Checkbox(CHK_VOLICON, *this);
     _subscribeVolEvents = new Checkbox(CHK_MONITORVOL, *this);
-    _subscribeVolEvents->OnClick = [this]() {
-        _forceLimit->Enabled(
-            _volumeGroup->Enabled() && _subscribeVolEvents->Checked());
-        return true;
-    };
     _audioDeviceLabel = new Label(LBL_AUDIODEV, *this);
     _audioDevice = new ComboBox(CMB_AUDIODEV, *this);
     _audioTaperLabel = new Label(LBL_AUDIOTAPER, *this);
@@ -161,7 +156,6 @@ void OSD::LoadSettings() {
     _volumeIcon->Checked(settings->NotifyIconEnabled());
     _subscribeVolEvents->Checked(settings->SubscribeVolumeEvents());
     _limitSlider->Position((int) (settings->VolumeLimiter() * 100.0f));
-    _forceLimit->Enabled(_subscribeVolEvents->Checked());
     _muteLock->Checked(settings->MuteOnLock());
 
     _subscribeEjectEvents->Checked(settings->SubscribeEjectEvents());
@@ -208,7 +202,6 @@ void OSD::ShowGroup(int group) {
     showGroup->Visible(true);
 
     _audioTaper->OnSelectionChange();
-    _subscribeVolEvents->OnClick();
 }
 
 void OSD::OnOSDListItemChange(NMLISTVIEW *lv) {

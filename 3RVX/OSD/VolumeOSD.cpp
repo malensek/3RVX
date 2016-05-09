@@ -454,7 +454,11 @@ void VolumeOSD::OnVolumeChange(HWND hWnd, WPARAM wParam, LPARAM lParam) {
     _volumeSlider->MeterLevels(v);
     UpdateIcon();
 
-    if (wParam > 0 && _subscribeVolEvents == true) {
+    if (_subscribeVolEvents == false && lParam == 0) {
+        return;
+    }
+
+    if (wParam > 0) {
         /* We manually post a MSG_VOL_CHNG when modifying the volume with
          * hotkeys, so this CoreAudio-generated event can be ignored
          * by the OSD. */

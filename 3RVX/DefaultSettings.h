@@ -1,3 +1,6 @@
+// Copyright (c) 2016, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
 #pragma once
 
 #include "MeterWnd/Animations/AnimationTypes.h"

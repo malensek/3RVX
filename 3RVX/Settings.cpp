@@ -533,11 +533,11 @@ LanguageTranslator *Settings::Translator() {
 }
 
 bool Settings::VolumeIconEnabled() {
-    return GetEnabled(XML_NOTIFYICON, DefaultSettings::NotifyIcon);
+    return GetEnabled(XML_VOLUMEICON, DefaultSettings::NotifyIcon);
 }
 
 void Settings::VolumeIconEnabled(bool enable) {
-    SetEnabled(XML_NOTIFYICON, enable);
+    SetEnabled(XML_VOLUMEICON, enable);
 }
 
 bool Settings::SoundEffectsEnabled() {

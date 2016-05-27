@@ -209,7 +209,10 @@ private:
     static constexpr const char *XML_LANGUAGE = "language";
     static constexpr const char *XML_MONITOR = "monitor";
     static constexpr const char *XML_MUTELOCK = "muteDuringLock";
-    static constexpr const char *XML_NOTIFYICON = "notifyIcon";
+    /* Note: the XML_VOLUMEICON tag name is 'notifyIcon' to ensure backwards
+     * compatibility with previous versions of 3RVX that didn't support multiple
+     * icon types. */
+    static constexpr const char *XML_VOLUMEICON = "notifyIcon";
     static constexpr const char *XML_ONTOP = "onTop";
     static constexpr const char *XML_OSD_OFFSET = "osdEdgeOffset";
     static constexpr const char *XML_OSD_POS = "osdPosition";

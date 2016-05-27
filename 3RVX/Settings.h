@@ -37,8 +37,7 @@ public:
     int Save();
 
     /* General Settings */
-    bool NotifyIconEnabled();
-    void NotifyIconEnabled(bool enable);
+
     bool SoundEffectsEnabled();
     void SoundEffectsEnabled(bool enable);
 
@@ -92,14 +91,16 @@ public:
     /* Volume */
     void AudioDeviceID(std::wstring id);
     std::wstring AudioDeviceID();
-    int VolumeCurveAdjustment();
-    void VolumeCurveAdjustment(int value);
-    float VolumeLimiter();
-    void VolumeLimiter(float limit);
     bool MuteOnLock();
     void MuteOnLock(bool enable);
     bool SubscribeVolumeEvents();
     void SubscribeVolumeEvents(bool enable);
+    int VolumeCurveAdjustment();
+    void VolumeCurveAdjustment(int value);
+    float VolumeLimiter();
+    void VolumeLimiter(float limit);
+    bool VolumeNotifyIconEnabled();
+    void VolumeNotifyIconEnabled(bool enable);
 
     /* Eject */
     bool SubscribeEjectEvents();

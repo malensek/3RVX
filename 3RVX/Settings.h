@@ -103,6 +103,8 @@ public:
     void VolumeNotifyIconEnabled(bool enable);
 
     /* Eject */
+    bool EjectIconEnabled();
+    void EjectIconEnabled(bool enable);
     bool SubscribeEjectEvents();
     void SubscribeEjectEvents(bool enable);
 
@@ -196,6 +198,7 @@ private:
     /* XML tag names */
     static constexpr const char *XML_AUDIODEV = "audioDeviceID";
     static constexpr const char *XML_CURVE_ADJUST = "curveAdjust";
+    static constexpr const char *XML_EJECTICON = "ejectIcon";
     static constexpr const char *XML_ENABLE_BOSD = "brightnessOSDEnabled";
     static constexpr const char *XML_ENABLE_EOSD = "ejectOSDEnabled";
     static constexpr const char *XML_ENABLE_KOSD = "keyboardOSDEnabled";

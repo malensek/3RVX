@@ -549,13 +549,11 @@ void Settings::SoundEffectsEnabled(bool enable) {
 }
 
 bool Settings::EjectIconEnabled() {
-    return GetEnabled(XML_NOTIFYICON, DefaultSettings::NotifyIcon);
-
+    return GetEnabled(XML_EJECTICON, DefaultSettings::NotifyIcon);
 }
 
 void Settings::EjectIconEnabled(bool enable) {
-    SetEnabled(XML_NOTIFYICON, enable);
-
+    SetEnabled(XML_EJECTICON, enable);
 }
 
 bool Settings::SubscribeEjectEvents() {

@@ -99,8 +99,8 @@ public:
     void VolumeCurveAdjustment(int value);
     float VolumeLimiter();
     void VolumeLimiter(float limit);
-    bool VolumeNotifyIconEnabled();
-    void VolumeNotifyIconEnabled(bool enable);
+    bool VolumeIconEnabled();
+    void VolumeIconEnabled(bool enable);
 
     /* Eject */
     bool EjectIconEnabled();

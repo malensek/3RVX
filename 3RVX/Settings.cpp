@@ -532,11 +532,11 @@ LanguageTranslator *Settings::Translator() {
     return _translator;
 }
 
-bool Settings::NotifyIconEnabled() {
+bool Settings::VolumeNotifyIconEnabled() {
     return GetEnabled(XML_NOTIFYICON, DefaultSettings::NotifyIcon);
 }
 
-void Settings::NotifyIconEnabled(bool enable) {
+void Settings::VolumeNotifyIconEnabled(bool enable) {
     SetEnabled(XML_NOTIFYICON, enable);
 }
 

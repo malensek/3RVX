@@ -60,7 +60,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     _volumeSlider = new VolumeSlider(*_volumeCtrl);
 
     /* Set up context menu */
-    if (_settings->VolumeNotifyIconEnabled()) {
+    if (_settings->VolumeIconEnabled()) {
         LanguageTranslator *translator = _settings->Translator();
         _menuSetStr = translator->Translate(_menuSetStr);
         _menuDevStr = translator->Translate(_menuDevStr);
@@ -180,7 +180,7 @@ void VolumeOSD::LoadSkin() {
     OSD::InitMeterWnd(_muteWnd);
 
     /* Set up notification icon */
-    if (_settings->VolumeNotifyIconEnabled()) {
+    if (_settings->VolumeIconEnabled()) {
         _iconImages = skin->VolumeIconset();
         if (_iconImages.size() > 0) {
             _icon = new NotifyIcon(Window::Handle(), L"3RVX", _iconImages[0]);

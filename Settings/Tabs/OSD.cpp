@@ -158,6 +158,7 @@ void OSD::LoadSettings() {
     _limitSlider->Position((int) (settings->VolumeLimiter() * 100.0f));
     _muteLock->Checked(settings->MuteOnLock());
 
+    _ejectIcon->Checked(settings->EjectIconEnabled());
     _subscribeEjectEvents->Checked(settings->SubscribeEjectEvents());
 }
 
@@ -189,6 +190,7 @@ void OSD::SaveSettings() {
     settings->VolumeLimiter(((float) _limitSlider->Position()) / 100.0f);
     settings->MuteOnLock(_muteLock->Checked());
 
+    settings->EjectIconEnabled(_ejectIcon->Checked());
     settings->SubscribeEjectEvents(_subscribeEjectEvents->Checked());
 }
 

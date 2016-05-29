@@ -43,7 +43,7 @@ OSDComponent *SkinV3::BrightnessOSD() {
     return CreateOSDComponent("brightness");
 }
 
-std::vector<HICON> SkinV3::EjectIconset() {
+HICON SkinV3::EjectIcon() {
     std::vector<HICON> iconList;
 
     XMLElement *volumeIconElem = SubElement("osds", "eject");

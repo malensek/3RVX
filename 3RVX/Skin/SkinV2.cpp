@@ -118,9 +118,9 @@ OSDComponent *SkinV2::BrightnessOSD() {
     return nullptr;
 }
 
-std::vector<HICON> SkinV2::EjectIconset() {
-    /* v2 skins didn't have eject icons; return an empty vector */
-    return std::vector<HICON>();
+HICON SkinV2::EjectIcon() {
+    /* v2 skins didn't have eject icons */
+    return nullptr;
 }
 
 std::vector<HICON> SkinV2::VolumeIconset() {

@@ -118,6 +118,11 @@ OSDComponent *SkinV2::BrightnessOSD() {
     return nullptr;
 }
 
+std::vector<HICON> SkinV2::EjectIconset() {
+    /* v2 skins didn't have eject icons; return an empty vector */
+    return std::vector<HICON>();
+}
+
 std::vector<HICON> SkinV2::VolumeIconset() {
     std::wstring iconDir = _skinDir + L"\\Notification Icons\\";
     return Skin::ReadIconDirectory(iconDir);

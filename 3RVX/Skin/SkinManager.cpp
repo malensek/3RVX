@@ -69,8 +69,8 @@ void SkinManager::LoadSkin(std::wstring skinXML) {
             _ejectOSD = skin->EjectOSD();
         }
 
-        if (_ejectIconset.size() == 0) {
-            _ejectIconset = skin->EjectIconset();
+        if (_ejectIcon == nullptr) {
+            _ejectIcon = skin->EjectIcon();
         }
 
         if (_brightnessOSD == nullptr) {
@@ -103,8 +103,8 @@ OSDComponent *SkinManager::EjectOSD() {
     return _ejectOSD;
 }
 
-std::vector<HICON> &SkinManager::EjectIconset() {
-    return _ejectIconset;
+HICON &SkinManager::EjectIcon() {
+    return _ejectIcon;
 }
 
 OSDComponent * SkinManager::BrightnessOSD() {
@@ -130,6 +130,7 @@ void SkinManager::DisposeComponents() {
 
     delete _ejectOSD;
     _ejectOSD = NULL;
+    DestroyIcon(_ejectIcon);
 
     delete _brightnessOSD;
     _brightnessOSD = NULL;

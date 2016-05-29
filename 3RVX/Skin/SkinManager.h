@@ -24,7 +24,7 @@ public:
     OSDComponent *MuteOSD();
 
     OSDComponent *EjectOSD();
-    std::vector<HICON> &EjectIconset();
+    std::vector<HICON> &EjectIcon();
 
     OSDComponent *BrightnessOSD();
 
@@ -35,7 +35,7 @@ private:
     OSDComponent *_muteOSD;
 
     OSDComponent *_ejectOSD;
-    std::vector<HICON> _ejectIconset;
+    HICON _ejectIcon;
 
     OSDComponent *_brightnessOSD;
 

@@ -8,7 +8,7 @@
 #include "../CommCtl.h"
 #include "../StringUtils.h"
 
-Gdiplus::Bitmap *Skin::LoadImg(std::wstring fileName) {
+Gdiplus::Bitmap *Skin::LoadImg(const std::wstring &fileName) {
     if (PathFileExists(fileName.c_str()) == FALSE) {
         return nullptr;
     }
@@ -17,7 +17,7 @@ Gdiplus::Bitmap *Skin::LoadImg(std::wstring fileName) {
     return bg;
 }
 
-std::vector<HICON> Skin::ReadIconDirectory(std::wstring iconDir) {
+std::vector<HICON> Skin::ReadIconDirectory(const std::wstring &iconDir) {
     std::vector<HICON> iconset;
     CLOG(L"Reading icons from: %s", iconDir.c_str());
 

@@ -32,6 +32,9 @@ public:
     /// <summary>Loads and instantiates the Eject OSD.</summary>
     virtual OSDComponent *EjectOSD() = 0;
 
+    /// <summary>Retrieves the iconset used for the eject icon.</summary>
+    virtual std::vector<HICON> EjectIconset() = 0;
+
     /// <summary>Loads and instantiates the Brightness OSD.</summary>
     virtual OSDComponent *BrightnessOSD() = 0;
 

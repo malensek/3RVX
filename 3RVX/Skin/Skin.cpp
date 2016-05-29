@@ -42,15 +42,8 @@ std::vector<HICON> Skin::ReadIconDirectory(std::wstring iconDir) {
             continue;
         }
 
-        HICON icon = NULL;
-        HRESULT hr = LoadIconMetric(
-            NULL,
-            iconPath.c_str(),
-            LIM_SMALL,
-            &icon);
-
-        if (SUCCEEDED(hr) && icon != NULL) {
-            QCLOG(L"%s", iconPath.c_str());
+        HICON icon = ReadIcon(iconPath);
+        if (icon != nullptr) {
             iconset.push_back(icon);
         }
 

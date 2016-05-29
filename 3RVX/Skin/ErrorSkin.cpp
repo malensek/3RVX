@@ -25,6 +25,11 @@ OSDComponent *ErrorSkin::BrightnessOSD() {
     return nullptr;
 }
 
+std::vector<HICON> ErrorSkin::EjectIconset() {
+    Error::ErrorMessageDie(Error::SKINERR_NO_RESOURCE, L"Eject Iconset");
+    return std::vector<HICON>();
+}
+
 std::vector<HICON> ErrorSkin::VolumeIconset() {
     Error::ErrorMessageDie(Error::SKINERR_NO_RESOURCE, L"Volume Iconset");
     return std::vector<HICON>();

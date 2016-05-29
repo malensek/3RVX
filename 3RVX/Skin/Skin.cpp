@@ -59,3 +59,19 @@ std::vector<HICON> Skin::ReadIconDirectory(std::wstring iconDir) {
  
     return iconset;
 }
+
+HICON Skin::ReadIcon(const std::wstring &iconPath) {
+    HICON icon = nullptr;
+    HRESULT hr = LoadIconMetric(
+        NULL,
+        iconPath.c_str(),
+        LIM_SMALL,
+        &icon);
+
+    if (FAILED(hr)) {
+        CLOG(L"Failed to load icon: %s", iconPath.c_str());
+    }
+
+    return icon;
+}
+

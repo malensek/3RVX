@@ -61,4 +61,12 @@ public:
     /// DestroyIcon() function).
     /// </returns>
     static std::vector<HICON> ReadIconDirectory(std::wstring iconDir);
+    /// <summary>Loads an icon into memory as an HICON.</summary>
+    /// <param name="iconPath">File location of the icon to load.</param>
+    /// <returns>
+    /// An HICON representing the loaded icon. The icon will need to be disposed
+    /// manually by calling the DestroyIcon() Win32 function. If the function
+    /// fails, it returns a nullptr.
+    /// </returns>
+    static HICON ReadIcon(const std::wstring &iconPath);
 };

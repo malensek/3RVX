@@ -31,10 +31,8 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
         }
     }
 
-    //_menu = CreatePopupMenu();
-    //_menuThread = std::thread();
-    //UpdateDriveMenu();
-
+    _menu = CreatePopupMenu();
+    UpdateDriveMenu();
 }
 
 void EjectOSD::UpdateDriveMenu() {
@@ -45,14 +43,7 @@ void EjectOSD::UpdateDriveMenu() {
         if (drives & 0x1) {
             wchar_t letter = (wchar_t) i + 65;
             wchar_t drivePath[] = L" :\\";
-            drivePath[0] = letter;
-            UINT type = GetDriveType(drivePath);
-
             DriveInfo di(letter);
-            wchar_t driveName[256] = { 0 };
-            int result = GetVolumeInformation(drivePath, driveName, 256,
-                NULL, NULL, NULL, NULL, NULL);
-            CLOG(L"Drive: %c - %s [%d]", letter, driveName, result);
         }
     }
 }

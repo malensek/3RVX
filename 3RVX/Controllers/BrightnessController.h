@@ -19,5 +19,7 @@ public:
     void Brightness(float level);
 
 private:
+    bool _useBrightnessAPI;
+
     bool SupportsBrightnessAPI(PHYSICAL_MONITOR &pm);
 };

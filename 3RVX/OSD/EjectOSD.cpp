@@ -32,6 +32,13 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     }
 
     _menu = CreatePopupMenu();
+    _menuFlags = TPM_RIGHTBUTTON;
+    if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
+        _menuFlags |= TPM_RIGHTALIGN;
+    } else {
+        _menuFlags |= TPM_LEFTALIGN;
+    }
+
     UpdateDriveMenu();
 }
 

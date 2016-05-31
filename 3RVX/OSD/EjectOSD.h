@@ -28,6 +28,7 @@ private:
     HICON _iconImage;
 
     HMENU _menu;
+    UINT _menuFlags;
     std::vector<DriveInfo> _menuItems;
     std::thread _menuThread;
 

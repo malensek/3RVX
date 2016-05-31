@@ -11,6 +11,8 @@ class DriveInfo {
 public:
     DriveInfo(wchar_t driveLetter);
 
+    bool HasRemovableMedia();
+    bool IsHotPluggable();
     const std::wstring &ProductID();
     const std::wstring &VendorID();
     /// <summary>

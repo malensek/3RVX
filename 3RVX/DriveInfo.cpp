@@ -31,6 +31,14 @@ _letter(driveLetter) {
     CloseHandle(_devHandle);
 }
 
+bool DriveInfo::HasRemovableMedia() {
+    return _hasRemovableMedia;
+}
+
+bool DriveInfo::IsHotPluggable() {
+    return _isHotplug;
+}
+
 const std::wstring &DriveInfo::ProductID() {
     return _productId;
 }

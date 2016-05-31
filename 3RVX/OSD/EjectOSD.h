@@ -24,7 +24,7 @@ private:
     MeterWnd _mWnd;
 
     NotifyIcon *_icon;
-    std::vector<HICON> _iconImages;
+    HICON _iconImage;
 
     HMENU _menu;
     std::thread _menuThread;

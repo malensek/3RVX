@@ -25,9 +25,9 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     OSD::InitMeterWnd(_mWnd);
 
     if (_settings->EjectIconEnabled()) {
-        _iconImages = skin->EjectIconset();
-        if (_iconImages.size() > 0) {
-            _icon = new NotifyIcon(Window::Handle(), L"Eject", _iconImages[0]);
+        _iconImage = skin->EjectIcon();
+        if (_iconImage != nullptr) {
+            _icon = new NotifyIcon(Window::Handle(), L"Eject", _iconImage);
         }
     }
 

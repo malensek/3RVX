@@ -31,6 +31,10 @@ _letter(driveLetter) {
     CloseHandle(_devHandle);
 }
 
+wchar_t DriveInfo::DriveLetter() {
+    return _letter;
+}
+
 bool DriveInfo::HasRemovableMedia() {
     return _hasRemovableMedia;
 }

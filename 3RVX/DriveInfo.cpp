@@ -31,7 +31,7 @@ _letter(driveLetter) {
     CloseHandle(_devHandle);
 }
 
-wchar_t DriveInfo::DriveLetter() {
+const wchar_t DriveInfo::DriveLetter() {
     return _letter;
 }
 

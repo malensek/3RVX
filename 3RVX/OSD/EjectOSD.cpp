@@ -36,6 +36,14 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 }
 
 void EjectOSD::UpdateDriveMenu() {
+    /* Remove any drives in the menu */
+    for (unsigned int i = 0; i < _menuItems.size(); ++i) {
+        RemoveMenu(_menu, 0, MF_BYPOSITION);
+    }
+    _menuItems.clear();
+
+    int menuItem = 0;
+
     DWORD drives = GetLogicalDrives();
     /* Get the most significant bit of the drive bitset */
     DWORD msb = (DWORD) log2(drives);
@@ -44,6 +52,15 @@ void EjectOSD::UpdateDriveMenu() {
             wchar_t letter = (wchar_t) i + 65;
             wchar_t drivePath[] = L" :\\";
             DriveInfo di(letter);
+            if (di.IsHotPluggable() || di.HasRemovableMedia()) {
+                CLOG(L"Removable Drive: %c %s %s",
+                    di.DriveLetter(),
+                    di.ProductID().c_str(),
+                    di.VendorID().c_str());
+
+                InsertMenu(_menu, -1, MF_ENABLED, menuItem++, di.ProductID().c_str());
+                _menuItems.push_back(di);
+            }
         }
     }
 }

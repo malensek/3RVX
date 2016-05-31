@@ -7,6 +7,7 @@
 
 #include <thread>
 
+#include "../DriveInfo.h"
 #include "OSD.h"
 
 class NotifyIcon;
@@ -27,6 +28,7 @@ private:
     HICON _iconImage;
 
     HMENU _menu;
+    std::vector<DriveInfo> _menuItems;
     std::thread _menuThread;
 
     void UpdateDriveMenu();

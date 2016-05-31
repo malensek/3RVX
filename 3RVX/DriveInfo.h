@@ -11,6 +11,8 @@ class DriveInfo {
 public:
     DriveInfo(wchar_t driveLetter);
 
+    const std::wstring &ProductID();
+    const std::wstring &VendorID();
     /// <summary>
     /// Given a drive letter, this function retrieves the drive file name
     /// (something of the form \\.\X:), useful for IOCTL operations.

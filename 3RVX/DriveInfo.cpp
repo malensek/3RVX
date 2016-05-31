@@ -31,6 +31,14 @@ _letter(driveLetter) {
     CloseHandle(_devHandle);
 }
 
+const std::wstring &DriveInfo::ProductID() {
+    return _productId;
+}
+
+const std::wstring &DriveInfo::VendorID() {
+    return _vendorId;
+}
+
 void DriveInfo::PopulateDeviceId() {
     STORAGE_DEVICE_NUMBER sdn = { 0 };
     DWORD bytesOut;

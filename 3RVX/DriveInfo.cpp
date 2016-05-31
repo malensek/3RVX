@@ -6,7 +6,8 @@
 #include "Logger.h"
 #include "StringUtils.h"
 
-DriveInfo::DriveInfo(wchar_t driveLetter) {
+DriveInfo::DriveInfo(wchar_t driveLetter) :
+_letter(driveLetter) {
     std::wstring driveFileName = DriveFileName(driveLetter);
     _devHandle = CreateFile(
         driveFileName.c_str(),

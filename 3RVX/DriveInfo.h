@@ -24,6 +24,7 @@ public:
     static std::wstring DriveFileName(std::wstring &driveLetter);
 
 private:
+    wchar_t _letter;
     HANDLE _devHandle;
     DWORD _devId;
     std::wstring _productId;

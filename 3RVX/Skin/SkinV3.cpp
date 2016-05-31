@@ -149,6 +149,20 @@ std::wstring SkinV3::ImageName(XMLElement *meterXMLElement) {
     return _skinDir + L"\\" + StringUtils::Widen(imgName);
 }
 
+HICON SkinV3::Icon(XMLElement *elem) {
+    XMLElement *icon = elem->FirstChildElement("icon");
+    if (icon == nullptr) {
+        return nullptr;
+    }
+
+    const char *file = icon->Attribute("file");
+    if (file == nullptr) {
+        return nullptr;
+    }
+
+    return Skin::ReadIcon(_skinDir + L"\\" + StringUtils::Widen(file));
+}
+
 std::vector<HICON> SkinV3::Iconset(XMLElement *elem) {
     XMLElement *set = elem->FirstChildElement("iconset");
     if (set == NULL) {

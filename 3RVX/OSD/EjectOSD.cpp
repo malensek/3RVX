@@ -172,9 +172,7 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 _latestDrive = 0;
             }
         }
-    }
-
-    if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEARRIVAL) {
+    } else if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEARRIVAL) {
         PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR) lParam;
         if (lpdb->dbch_devicetype == DBT_DEVTYP_VOLUME) {
             PDEV_BROADCAST_VOLUME lpdbv = (PDEV_BROADCAST_VOLUME) lpdb;
@@ -185,6 +183,15 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 CLOG(L"Media inserted in drive %c:",
                     MaskToDriveLetter(_latestDrive));
             }
+        }
+    } else if (message == MSG_NOTIFYICON) {
+        if (lParam == WM_LBUTTONUP || lParam == WM_RBUTTONUP) {
+            POINT p;
+            GetCursorPos(&p);
+            SetForegroundWindow(hWnd);
+            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y,
+                Window::Handle(), NULL);
+            PostMessage(hWnd, WM_NULL, 0, 0);
         }
     }
 

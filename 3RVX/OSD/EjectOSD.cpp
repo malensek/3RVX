@@ -32,6 +32,7 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     }
 
     _menu = CreatePopupMenu();
+    /* Menu accepts both left and right clicks on its items: */
     _menuFlags = TPM_RIGHTBUTTON;
     if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
         _menuFlags |= TPM_RIGHTALIGN;

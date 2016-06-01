@@ -149,6 +149,26 @@ void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
     }
 }
 
+DWORD EjectOSD::DriveLetterToMask(wchar_t letter) {
+    if (letter < 65 || letter > 90) {
+        return 0;
+    }
+
+    return (DWORD) pow(2, (letter - 65));
+}
+
+wchar_t EjectOSD::MaskToDriveLetter(DWORD mask) {
+    return (wchar_t) (log2(mask) + 65);
+}
+
+void EjectOSD::OnDisplayChange() {
+    InitMeterWnd(_mWnd);
+}
+
+void EjectOSD::OnMenuEvent(WPARAM wParam) {
+
+}
+
 LRESULT
 EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEREMOVECOMPLETE) {
@@ -193,23 +213,9 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 Window::Handle(), NULL);
             PostMessage(hWnd, WM_NULL, 0, 0);
         }
+    } else if (message = WM_COMMAND) {
+        OnMenuEvent(wParam);
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);
-}
-
-DWORD EjectOSD::DriveLetterToMask(wchar_t letter) {
-    if (letter < 65 || letter > 90) {
-        return 0;
-    }
-
-    return (DWORD) pow(2, (letter - 65));
-}
-
-wchar_t EjectOSD::MaskToDriveLetter(DWORD mask) {
-    return (wchar_t) (log2(mask) + 65);
-}
-
-void EjectOSD::OnDisplayChange() {
-    InitMeterWnd(_mWnd);
 }

@@ -76,6 +76,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
         InsertMenu(_menu, -1, MF_ENABLED, MENU_MIXER, _menuMixerStr.c_str());
         InsertMenu(_menu, -1, MF_ENABLED, MENU_EXIT, _menuExitStr.c_str());
 
+        /* Menu accepts both left and right clicks on its items: */
         _menuFlags = TPM_RIGHTBUTTON;
         if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
             _menuFlags |= TPM_RIGHTALIGN;

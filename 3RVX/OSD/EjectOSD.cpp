@@ -170,10 +170,6 @@ void EjectOSD::OnDisplayChange() {
     InitMeterWnd(_mWnd);
 }
 
-void EjectOSD::OnMenuEvent(WPARAM wParam) {
-
-}
-
 LRESULT
 EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEREMOVECOMPLETE) {
@@ -222,8 +218,13 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 Window::Handle(), NULL);
             PostMessage(hWnd, WM_NULL, 0, 0);
         }
-    } else if (message = WM_COMMAND) {
-        OnMenuEvent(wParam);
+    } else if (message == WM_COMMAND) {
+        int menuItem = LOWORD(wParam);
+        if (menuItem >= 0 && (unsigned int) menuItem < _menuItems.size()) {
+            std::wstring letter(1, _menuItems[menuItem].DriveLetter());
+            CLOG(L"Eject Menu [%d]: %s", menuItem, letter.c_str());
+            EjectDrive(letter);
+        }
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);

@@ -27,7 +27,7 @@ public:
     /// Given a drive letter, this function retrieves the drive file name
     /// (something of the form \\.\X:), useful for IOCTL operations.
     /// </summary>
-    static std::wstring DriveFileName(std::wstring &driveLetter);
+    static std::wstring DriveFileName(const std::wstring &driveLetter);
 
 private:
     wchar_t _letter;

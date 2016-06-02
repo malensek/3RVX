@@ -171,7 +171,7 @@ std::wstring DriveInfo::DriveFileName(wchar_t &driveLetter) {
     return DriveFileName(std::wstring(1, driveLetter));
 }
 
-std::wstring DriveInfo::DriveFileName(std::wstring &driveLetter) {
+std::wstring DriveInfo::DriveFileName(const std::wstring &driveLetter) {
     return L"\\\\.\\" + driveLetter + L":";
 }
 

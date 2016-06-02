@@ -43,6 +43,11 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
     UpdateDriveMenu();
 }
 
+EjectOSD::~EjectOSD() {
+    delete _icon;
+    DestroyMenu(_menu);
+}
+
 void EjectOSD::UpdateDriveMenu() {
     /* Remove any drives in the menu */
     for (unsigned int i = 0; i < _menuItems.size(); ++i) {

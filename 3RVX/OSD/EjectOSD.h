@@ -15,6 +15,7 @@ class NotifyIcon;
 class EjectOSD : public OSD {
 public:
     EjectOSD();
+    ~EjectOSD();
 
     virtual void Hide();
     virtual void ProcessHotkeys(HotkeyInfo &hki);

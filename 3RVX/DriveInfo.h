@@ -49,11 +49,15 @@ private:
     /// </summary>
     void PopulateDeviceInfo();
 
-
     /// <summary>
     /// Determines hotplug characteristics for a drive. This includes
     /// whether the drive has removable media.
     /// </summary>
     void PopulateHotplugInfo();
 
+    /// <summary>
+    /// Retrieves the name of the volume associated with this drive as well as
+    /// the device serial number.
+    /// </summary>
+    void PopulateVolumeInfo();
 };

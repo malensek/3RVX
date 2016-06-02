@@ -27,6 +27,7 @@ _letter(driveLetter) {
     PopulateDeviceId();
     PopulateDeviceInfo();
     PopulateHotplugInfo();
+    PopulateVolumeInfo();
 
     CloseHandle(_devHandle);
 }
@@ -165,6 +166,28 @@ void DriveInfo::PopulateHotplugInfo() {
     if (shi.MediaRemovable) {
         _hasRemovableMedia = true;
     }
+}
+
+void DriveInfo::PopulateVolumeInfo() {
+    wchar_t drivePath[] = L" :\\";
+    drivePath[0] = _letter;
+    wchar_t volName[MAX_PATH] = { 0 };
+    DWORD serial = 0;
+
+    BOOL result = GetVolumeInformation(
+        drivePath,
+        volName, MAX_PATH,
+        &serial,
+        NULL, NULL, NULL, NULL);
+
+    if (result == FALSE) {
+        _volumeName = L"";
+        _serial = 0;
+    }
+    CLOG(L"NAME: %s", volName);
+
+    _volumeName = std::wstring(volName);
+    _serial = serial;
 }
 
 std::wstring DriveInfo::DriveFileName(wchar_t &driveLetter) {

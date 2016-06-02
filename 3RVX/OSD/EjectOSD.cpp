@@ -79,7 +79,7 @@ void EjectOSD::UpdateDriveMenu() {
     }
 }
 
-void EjectOSD::EjectDrive(std::wstring driveLetter) {
+void EjectOSD::EjectDrive(const std::wstring &driveLetter) {
     std::wstring name = DriveInfo::DriveFileName(driveLetter);
     CLOG(L"Ejecting %s", name.c_str());
 

@@ -35,7 +35,7 @@ private:
 
     void UpdateDriveMenu();
 
-    void EjectDrive(std::wstring driveLetter);
+    void EjectDrive(const std::wstring &driveLetter);
 
     DWORD DriveLetterToMask(wchar_t letter);
     wchar_t MaskToDriveLetter(DWORD mask);

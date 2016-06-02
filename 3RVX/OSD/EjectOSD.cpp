@@ -71,7 +71,10 @@ void EjectOSD::UpdateDriveMenu() {
                     di.ProductID().c_str(),
                     di.VendorID().c_str());
 
-                std::wstring menuStr = L"[" + std::wstring(1, di.DriveLetter()) + L":] - " + di.ProductID();
+                std::wstring menuStr = L"["
+                    + std::wstring(1, di.DriveLetter())
+                    + L":] - "
+                    + di.ProductID();
                 InsertMenu(_menu, -1, MF_ENABLED, menuItem++, menuStr.c_str());
                 _menuItems.push_back(di);
             }

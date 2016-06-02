@@ -41,7 +41,6 @@ private:
     wchar_t MaskToDriveLetter(DWORD mask);
 
     virtual void OnDisplayChange();
-    void OnMenuEvent(WPARAM wParam);
 
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);

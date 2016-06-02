@@ -196,6 +196,8 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             if (_latestDrive == driveMask) {
                 _latestDrive = 0;
             }
+
+            UpdateDriveMenu();
         }
     } else if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEARRIVAL) {
         PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR) lParam;
@@ -208,6 +210,8 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 CLOG(L"Media inserted in drive %c:",
                     MaskToDriveLetter(_latestDrive));
             }
+
+            UpdateDriveMenu();
         }
     } else if (message == MSG_NOTIFYICON) {
         if (lParam == WM_LBUTTONUP || lParam == WM_RBUTTONUP) {

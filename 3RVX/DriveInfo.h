@@ -30,13 +30,15 @@ public:
     static std::wstring DriveFileName(const std::wstring &driveLetter);
 
 private:
-    wchar_t _letter;
     HANDLE _devHandle;
     DWORD _devId;
-    std::wstring _productId;
-    std::wstring _vendorId;
     bool _hasRemovableMedia;
     bool _isHotplug;
+    wchar_t _letter;
+    std::wstring _productId;
+    std::wstring _vendorId;
+    DWORD _serial;
+    std::wstring _volumeName;
 
     /// <summary>Retrieves the numeric identifier for this drive.</summary>
     void PopulateDeviceId();

@@ -15,7 +15,9 @@ public:
     bool HasRemovableMedia();
     bool IsHotPluggable();
     const std::wstring &ProductID();
+    DWORD SerialNumber();
     const std::wstring &VendorID();
+    const std::wstring &VolumeLabel();
 
     /// <summary>
     /// Given a drive letter, this function retrieves the drive file name

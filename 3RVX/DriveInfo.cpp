@@ -48,8 +48,16 @@ const std::wstring &DriveInfo::ProductID() {
     return _productId;
 }
 
+DWORD DriveInfo::SerialNumber() {
+    return _serial;
+}
+
 const std::wstring &DriveInfo::VendorID() {
     return _vendorId;
+}
+
+const std::wstring &DriveInfo::VolumeLabel() {
+    return _volumeName;
 }
 
 void DriveInfo::PopulateDeviceId() {

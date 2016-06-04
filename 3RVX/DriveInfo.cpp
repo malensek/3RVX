@@ -131,11 +131,13 @@ void DriveInfo::PopulateDeviceInfo() {
     if (sdd->ProductIdOffset) {
         _productId = StringUtils::Widen(
             (const char *) ((unsigned char *) sdd + sdd->ProductIdOffset));
+        _productId = StringUtils::Trim(_productId);
     }
 
     if (sdd->VendorIdOffset) {
         _vendorId = StringUtils::Widen(
             (const char *) ((unsigned char *) sdd + sdd->VendorIdOffset));
+        _vendorId = StringUtils::Trim(_vendorId);
     }
 
     if (sdd->RemovableMedia) {
@@ -192,9 +194,8 @@ void DriveInfo::PopulateVolumeInfo() {
         _volumeName = L"";
         _serial = 0;
     }
-    CLOG(L"NAME: %s", volName);
 
-    _volumeName = std::wstring(volName);
+    _volumeName = StringUtils::Trim(volName);
     _serial = serial;
 }
 

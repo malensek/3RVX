@@ -24,6 +24,10 @@ public:
     static const bool BrightnessOSDEnabled = true;
     static const bool KeyboardOSDEnabled = false;
 
+    /* System Event Subscriptions*/
+    static const bool SubscribeVolumeEvents = true;
+    static const bool SubscribeEjectEvents = true;
+
     /* Notification Icons */
     static const bool EjectIcon = false;
     static const bool VolumeIcon = true;
@@ -42,7 +46,4 @@ public:
     static const Settings::OSDPos OSDPosition = Settings::OSDPos::Bottom;
     static const bool AutoUpdate = false;
     static const bool MuteLock = false;
-    static const bool SubscribeVolumeEvents = true;
-    static const bool SubscribeEjectEvents = true;
-
 };

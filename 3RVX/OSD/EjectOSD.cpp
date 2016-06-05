@@ -71,10 +71,22 @@ void EjectOSD::UpdateDriveMenu() {
                     di.ProductID().c_str(),
                     di.VendorID().c_str());
 
-                std::wstring menuStr = L"["
+                std::wstring label;
+                if (di.VolumeLabel() != L"") {
+                    label = di.VolumeLabel();
+                } else if (di.ProductID() != L"") {
+                    label = di.ProductID();
+                } else if (di.VendorID() != L"") {
+                    label = di.VendorID();
+                } else {
+                    label = L"Removable Disk";
+                }
+
+                std::wstring menuStr =
+                    L"["
                     + std::wstring(1, di.DriveLetter())
                     + L":] - "
-                    + di.ProductID();
+                    + label;
                 InsertMenu(_menu, -1, MF_ENABLED, menuItem++, menuStr.c_str());
                 _menuItems.push_back(di);
             }

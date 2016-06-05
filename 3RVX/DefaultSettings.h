@@ -24,7 +24,10 @@ public:
     static const bool BrightnessOSDEnabled = true;
     static const bool KeyboardOSDEnabled = false;
 
+    /* Notification Icons */
+    static const bool EjectIcon = false;
     static const bool VolumeIcon = true;
+
     static const bool OnTop = true;
     static const bool HideFullscreen = false;
     static const bool HideDirectX = false;

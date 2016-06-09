@@ -149,6 +149,10 @@ void EjectOSD::Hide() {
     _mWnd.Hide(false);
 }
 
+void EjectOSD::HideIcon() {
+    delete _icon;
+}
+
 void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
     switch (hki.action) {
     case HotkeyInfo::EjectDrive:

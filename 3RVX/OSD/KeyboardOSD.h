@@ -10,10 +10,10 @@ public:
     KeyboardOSD();
     ~KeyboardOSD();
 
-    virtual void Hide();
+    void Hide();
     void HideIcon();
 
-    virtual void ProcessHotkeys(HotkeyInfo &hki);
+    void ProcessHotkeys(HotkeyInfo &hki);
 
 private:
     MeterWnd _mWnd;

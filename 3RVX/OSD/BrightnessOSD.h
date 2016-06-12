@@ -12,7 +12,9 @@ public:
     BrightnessOSD();
     ~BrightnessOSD();
 
-    virtual void Hide();
+    void Hide();
+    void HideIcon();
+
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 private:

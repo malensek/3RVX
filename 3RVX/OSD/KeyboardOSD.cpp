@@ -8,3 +8,7 @@ OSD(L"3RVX-KeyOSDDispatcher"),
 _mWnd(L"3RVX-KeyboardOSD", L"3RVX-KeyboardOSD") {
 
 }
+
+KeyboardOSD::~KeyboardOSD() {
+
+}

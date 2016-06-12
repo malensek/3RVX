@@ -16,6 +16,8 @@ public:
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 private:
+    MeterWnd _mWnd;
+
     virtual void OnDisplayChange();
 
     virtual LRESULT WndProc(HWND hWnd, UINT message,

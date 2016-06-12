@@ -18,6 +18,7 @@ public:
     OSD(LPCWSTR className, HINSTANCE hInstance = NULL);
 
     virtual void Hide() = 0;
+    virtual void HideIcon() = 0;
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
     bool Enabled();

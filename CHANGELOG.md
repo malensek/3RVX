@@ -6,6 +6,7 @@ Beta 11 (2.9.3)
 * Brightness OSD
 * Keyboard OSD: Caps, Num, and Scroll lock; media keys
 * Toggles for OSDs and their respective tray icons
+* New French translation by xhark (https://twitter.com/xhark)
 * Bugfix: cleanly remove eject icon on shutdown
 
 Beta 10 (2.9.2)

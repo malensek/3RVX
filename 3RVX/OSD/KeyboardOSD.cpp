@@ -12,3 +12,24 @@ _mWnd(L"3RVX-KeyboardOSD", L"3RVX-KeyboardOSD") {
 KeyboardOSD::~KeyboardOSD() {
 
 }
+
+void KeyboardOSD::Hide() {
+
+}
+
+void KeyboardOSD::HideIcon() {
+
+}
+
+void KeyboardOSD::ProcessHotkeys(HotkeyInfo &hki) {
+
+}
+
+void KeyboardOSD::OnDisplayChange() {
+    InitMeterWnd(_mWnd);
+}
+
+LRESULT
+KeyboardOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+    return OSD::WndProc(hWnd, message, wParam, lParam);
+}

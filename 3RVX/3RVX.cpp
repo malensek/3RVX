@@ -6,7 +6,6 @@
 #pragma comment(lib, "gdiplus.lib")
 #pragma comment(lib, "Wtsapi32.lib")
 
-#include <Windows.h>
 #include <ctime>
 #include <gdiplus.h>
 #include <iostream>
@@ -125,12 +124,12 @@ void _3RVX::Initialize() {
     /* OSDs */
     _eOSD = new EjectOSD();
     _vOSD = new VolumeOSD();
-    //_bOSD = new BrightnessOSD();
+    _bOSD = new BrightnessOSD();
 
     _osds.clear();
     _osds.push_back(_eOSD);
     _osds.push_back(_vOSD);
-    //_osds.push_back(_bOSD);
+    _osds.push_back(_bOSD);
 
     /* Hotkey setup */
     if (_hkManager != NULL) {
@@ -235,6 +234,7 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         CLOG(L"Shutting down");
         HotkeyManager::Instance()->Shutdown();
         _vOSD->HideIcon();
+        _eOSD->HideIcon();
         break;
     }
 

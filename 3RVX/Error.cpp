@@ -11,7 +11,8 @@
 std::unordered_map<int, std::wstring> Error::errorMap = {
     { GENERR_NOTFOUND, L"File not found:\n{1}" },
     { GENERR_MISSING_XML, L"Could not locate XML tag: {1}" },
-    { GENERR_UNKNOWN, L"An unknown error occurred: ID #{1}"},
+    { GENERR_UNKNOWN, L"An unknown error occurred: ID #{1}" },
+    { GENERR_UPDATEDL, L"Could not download update:\n{1}" },
     { SKINERR_INVALID_SKIN, L"Could not find specified skin:\n{1}" },
     { SKINERR_INVALID_SLIDERTYPE, L"Invalid slider type: {1}" },
     { SKINERR_MISSING_XML, L"Could not locate required skin XML tag: {1}" },
@@ -51,6 +52,32 @@ void Error::ErrorMessage(unsigned int error, std::wstring detail) {
 void Error::ErrorMessageDie(unsigned int error, std::wstring detail) {
     ErrorMessage(error, detail);
     exit(EXIT_FAILURE);
+}
+
+std::wstring Error::LastErrorString() {
+    DWORD error = GetLastError();
+    if (error == 0) {
+        return L"";
+    }
+
+    std::wstring str;
+    LPTSTR msg;
+    DWORD msgLen = FormatMessage(
+        FORMAT_MESSAGE_ALLOCATE_BUFFER
+        | FORMAT_MESSAGE_FROM_SYSTEM
+        | FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,
+        error,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPTSTR) &msg,
+        0,
+        NULL);
+    if (msgLen > 0) {
+        str = std::wstring(msg);
+        LocalFree(msg);
+    }
+
+    return str;
 }
 
 wchar_t *Error::ErrorType(unsigned int error) {

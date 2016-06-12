@@ -219,6 +219,8 @@
   <ItemGroup>
     <ClInclude Include="..\3RVX\3RVX.h" />
     <ClInclude Include="..\3RVX\CommCtl.h" />
+    <ClInclude Include="..\3RVX\Controllers\Volume\CoreAudio.h" />
+    <ClInclude Include="..\3RVX\Controllers\Volume\VolumeController.h" />
     <ClInclude Include="..\3RVX\DisplayManager.h" />
     <ClInclude Include="..\3RVX\Error.h" />
     <ClInclude Include="..\3RVX\HotkeyInfo.h" />
@@ -249,7 +251,6 @@
     <ClInclude Include="Controls\TabPage.h" />
     <ClInclude Include="Tabs\About.h" />
     <ClInclude Include="Tabs\HotkeyInput.h" />
-    <ClInclude Include="Tabs\HotkeyPrompt.h" />
     <ClInclude Include="Tabs\KeyGrabber.h" />
     <ClInclude Include="Tabs\OSD.h" />
     <ClInclude Include="targetver.h" />
@@ -269,6 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3RVX\3RVXConsts.cpp" />
+    <ClCompile Include="..\3RVX\Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="..\3RVX\DisplayManager.cpp" />
     <ClCompile Include="..\3RVX\Error.cpp" />
     <ClCompile Include="..\3RVX\HotkeyInfo.cpp" />
@@ -300,7 +302,6 @@
     <ClCompile Include="Tabs\Display.cpp" />
     <ClCompile Include="Tabs\General.cpp" />
     <ClCompile Include="Tabs\HotkeyInput.cpp" />
-    <ClCompile Include="Tabs\HotkeyPrompt.cpp" />
     <ClCompile Include="Tabs\Hotkeys.cpp" />
     <ClCompile Include="Tabs\KeyGrabber.cpp" />
     <ClCompile Include="SettingsUI.cpp" />

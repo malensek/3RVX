@@ -24,6 +24,15 @@ public:
     const int Revision() { return _revision; }
 
     /// <summary>
+    /// Determines whether this Version is newer than another Version (the
+    /// version number is higher than the other).
+    /// <returns>true if this version is newer than the other.</returns>
+    /// </summary>
+    bool NewerThan(Version &otherVersion) {
+        return ToInt() > otherVersion.ToInt();
+    }
+
+    /// <summary>
     /// Converts this version to a single integer that can be used for comparing
     /// versions. NOTE: This is 3RVX-specific because we assume version numbers
     /// (major, minor, revision) are 8 bits each. This is not necessarily true

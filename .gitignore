@@ -50,9 +50,11 @@ build/
 ipch/
 *.aps
 *.ncb
+*.opendb
 *.opensdf
 *.sdf
 *.cachefile
+*.vc.db
 
 # Visual Studio profiler
 *.psess
@@ -157,4 +159,6 @@ $RECYCLE.BIN/
 
 # Installer
 Installer/3RVX*.msi
+Installer/3RVX*.zip
 Installer/7za.exe
+Installer/*.wixpdb

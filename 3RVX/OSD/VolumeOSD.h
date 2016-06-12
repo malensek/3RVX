@@ -24,8 +24,8 @@ public:
     ~VolumeOSD();
 
     void Hide();
-    void Show(bool mute = false);
     void HideIcon();
+    void Show(bool mute = false);
 
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
@@ -34,6 +34,9 @@ private:
     float _defaultIncrement;
     float _lastVolume;
     bool _muted;
+    bool _monitorSession;
+    bool _subscribeVolEvents;
+    bool _unlockUnmute;
     std::vector<VolumeTransformation *> _volumeTransformations;
 
     MeterWnd _mWnd;
@@ -70,7 +73,12 @@ private:
     /// </summary>
     void UpdateVolumeState();
 
+    void OnDeviceChange();
     virtual void OnDisplayChange();
+    void OnMenuEvent(WPARAM wParam);
+    void OnNotifyIconEvent(HWND hWnd, LPARAM lParam);
+    void OnSessionChange(WPARAM wParam);
+    void OnVolumeChange(HWND hWnd, WPARAM wParam, LPARAM lParam);
 
     virtual LRESULT
         WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

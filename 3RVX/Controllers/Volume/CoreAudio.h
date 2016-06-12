@@ -4,7 +4,6 @@
 #pragma once
 
 #include <Endpointvolume.h>
-#include <list>
 #include <Mmdeviceapi.h>
 #include <string>
 #include <vector>
@@ -44,7 +43,7 @@ public:
     std::wstring DeviceDesc();
     std::wstring DeviceDesc(std::wstring deviceId);
 
-    std::list<DeviceInfo> ListDevices();
+    std::vector<DeviceInfo> ListDevices();
 
     HRESULT SelectDevice(std::wstring deviceId);
     HRESULT SelectDefaultDevice();

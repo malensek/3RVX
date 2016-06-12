@@ -14,26 +14,14 @@ Dialog::Dialog() {
 Dialog::Dialog(HWND parent, LPCWSTR dlgTemplate) :
 _parent(parent),
 _template(dlgTemplate) {
-//    _dlgHwnd = CreateDialogParam(
-//        NULL,
-//        dlgTemplate,
-//        parent,
-//        StaticDialogProc,
-//        (LPARAM) this);
 
-//    if (_dlgHwnd == NULL) {
-//        Logger::LogLastError();
-//    }
-
-//    UITranslator::TranslateWindowText(_dlgHwnd);
 }
 
-void Dialog::Show() {
-    DialogBoxParam(NULL, _template, _parent, StaticDialogProc, (LPARAM) this);
-    UITranslator::TranslateWindowText(_dlgHwnd);
+INT_PTR Dialog::Show() {
+    return DialogBoxParam(NULL, _template, _parent, StaticDialogProc, (LPARAM) this);
 }
 
-void Dialog::Close(int result) {
+void Dialog::Close(INT_PTR result) {
     EndDialog(_dlgHwnd, result);
 }
 
@@ -79,6 +67,7 @@ INT_PTR Dialog::DialogProc(HWND hwndDlg, UINT uMsg,
 
     switch (uMsg) {
     case WM_INITDIALOG:
+        Initialize();
         return FALSE;
 
     case WM_CLOSE: {

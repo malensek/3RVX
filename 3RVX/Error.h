@@ -11,6 +11,8 @@ public:
     static void ErrorMessage(unsigned int error, std::wstring detail = L"");
     static void ErrorMessageDie(unsigned int error, std::wstring detail = L"");
 
+    static std::wstring LastErrorString();
+
 private:
     static std::unordered_map<int, std::wstring> errorMap;
 
@@ -24,6 +26,7 @@ public:
     static const int GENERR_NOTFOUND    = GENERR + 1;
     static const int GENERR_MISSING_XML = GENERR + 2;
     static const int GENERR_UNKNOWN     = GENERR + 3;
+    static const int GENERR_UPDATEDL    = GENERR + 4;
 
     static const int SKINERR_NOTFOUND           = SKINERR + 1;
     static const int SKINERR_INVALID_SKIN       = SKINERR + 2;

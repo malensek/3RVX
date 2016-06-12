@@ -8,7 +8,7 @@
 #include "../CommCtl.h"
 #include "../StringUtils.h"
 
-Gdiplus::Bitmap *Skin::LoadImg(std::wstring fileName) {
+Gdiplus::Bitmap *Skin::LoadImg(const std::wstring &fileName) {
     if (PathFileExists(fileName.c_str()) == FALSE) {
         return nullptr;
     }
@@ -17,7 +17,7 @@ Gdiplus::Bitmap *Skin::LoadImg(std::wstring fileName) {
     return bg;
 }
 
-std::vector<HICON> Skin::ReadIconDirectory(std::wstring iconDir) {
+std::vector<HICON> Skin::ReadIconDirectory(const std::wstring &iconDir) {
     std::vector<HICON> iconset;
     CLOG(L"Reading icons from: %s", iconDir.c_str());
 
@@ -42,15 +42,8 @@ std::vector<HICON> Skin::ReadIconDirectory(std::wstring iconDir) {
             continue;
         }
 
-        HICON icon = NULL;
-        HRESULT hr = LoadIconMetric(
-            NULL,
-            iconPath.c_str(),
-            LIM_SMALL,
-            &icon);
-
-        if (SUCCEEDED(hr) && icon != NULL) {
-            QCLOG(L"%s", iconPath.c_str());
+        HICON icon = ReadIcon(iconPath);
+        if (icon != nullptr) {
             iconset.push_back(icon);
         }
 
@@ -59,3 +52,19 @@ std::vector<HICON> Skin::ReadIconDirectory(std::wstring iconDir) {
  
     return iconset;
 }
+
+HICON Skin::ReadIcon(const std::wstring &iconPath) {
+    HICON icon = nullptr;
+    HRESULT hr = LoadIconMetric(
+        NULL,
+        iconPath.c_str(),
+        LIM_SMALL,
+        &icon);
+
+    if (FAILED(hr)) {
+        CLOG(L"Failed to load icon: %s", iconPath.c_str());
+    }
+
+    return icon;
+}
+

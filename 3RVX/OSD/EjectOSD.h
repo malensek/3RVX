@@ -7,6 +7,7 @@
 
 #include <thread>
 
+#include "../DriveInfo.h"
 #include "OSD.h"
 
 class NotifyIcon;
@@ -14,8 +15,11 @@ class NotifyIcon;
 class EjectOSD : public OSD {
 public:
     EjectOSD();
+    ~EjectOSD();
 
-    virtual void Hide();
+    void Hide();
+    void HideIcon();
+
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 private:
@@ -24,14 +28,16 @@ private:
     MeterWnd _mWnd;
 
     NotifyIcon *_icon;
-    std::vector<HICON> _iconImages;
+    HICON _iconImage;
 
     HMENU _menu;
+    UINT _menuFlags;
+    std::vector<DriveInfo> _menuItems;
     std::thread _menuThread;
 
     void UpdateDriveMenu();
 
-    void EjectDrive(std::wstring driveLetter);
+    void EjectDrive(const std::wstring &driveLetter);
 
     DWORD DriveLetterToMask(wchar_t letter);
     wchar_t MaskToDriveLetter(DWORD mask);

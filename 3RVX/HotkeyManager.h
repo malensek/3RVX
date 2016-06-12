@@ -19,6 +19,7 @@
 #pragma once
 
 #include <Windows.h>
+#include <unordered_map>
 #include <unordered_set>
 
 #define EXT_OFFSET 8
@@ -56,10 +57,13 @@ public:
         std::wstring separator = L" + ");
     static std::wstring MouseString(int combination);
     static std::wstring VKToString(unsigned int vk, bool extendedKey = false);
+    static void VKStringTest();
 
 private:
     HotkeyManager();
     ~HotkeyManager();
+
+    static std::unordered_map<UINT, std::wstring> _vkStringMap;
 
     HWND _notifyWnd;
     int _fixWin;

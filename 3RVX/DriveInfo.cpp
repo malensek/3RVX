@@ -1,9 +1,13 @@
+// Copyright (c) 2016, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
 #include "DriveInfo.h"
 
 #include "Logger.h"
 #include "StringUtils.h"
 
-DriveInfo::DriveInfo(wchar_t driveLetter) {
+DriveInfo::DriveInfo(wchar_t driveLetter) :
+_letter(driveLetter) {
     std::wstring driveFileName = DriveFileName(driveLetter);
     _devHandle = CreateFile(
         driveFileName.c_str(),
@@ -23,8 +27,37 @@ DriveInfo::DriveInfo(wchar_t driveLetter) {
     PopulateDeviceId();
     PopulateDeviceInfo();
     PopulateHotplugInfo();
+    PopulateVolumeInfo();
 
     CloseHandle(_devHandle);
+}
+
+const wchar_t DriveInfo::DriveLetter() {
+    return _letter;
+}
+
+bool DriveInfo::HasRemovableMedia() {
+    return _hasRemovableMedia;
+}
+
+bool DriveInfo::IsHotPluggable() {
+    return _isHotplug;
+}
+
+const std::wstring &DriveInfo::ProductID() {
+    return _productId;
+}
+
+DWORD DriveInfo::SerialNumber() {
+    return _serial;
+}
+
+const std::wstring &DriveInfo::VendorID() {
+    return _vendorId;
+}
+
+const std::wstring &DriveInfo::VolumeLabel() {
+    return _volumeName;
 }
 
 void DriveInfo::PopulateDeviceId() {
@@ -98,11 +131,13 @@ void DriveInfo::PopulateDeviceInfo() {
     if (sdd->ProductIdOffset) {
         _productId = StringUtils::Widen(
             (const char *) ((unsigned char *) sdd + sdd->ProductIdOffset));
+        _productId = StringUtils::Trim(_productId);
     }
 
     if (sdd->VendorIdOffset) {
         _vendorId = StringUtils::Widen(
             (const char *) ((unsigned char *) sdd + sdd->VendorIdOffset));
+        _vendorId = StringUtils::Trim(_vendorId);
     }
 
     if (sdd->RemovableMedia) {
@@ -143,11 +178,32 @@ void DriveInfo::PopulateHotplugInfo() {
     }
 }
 
+void DriveInfo::PopulateVolumeInfo() {
+    wchar_t drivePath[] = L" :\\";
+    drivePath[0] = _letter;
+    wchar_t volName[MAX_PATH] = { 0 };
+    DWORD serial = 0;
+
+    BOOL result = GetVolumeInformation(
+        drivePath,
+        volName, MAX_PATH,
+        &serial,
+        NULL, NULL, NULL, NULL);
+
+    if (result == FALSE) {
+        _volumeName = L"";
+        _serial = 0;
+    }
+
+    _volumeName = StringUtils::Trim(volName);
+    _serial = serial;
+}
+
 std::wstring DriveInfo::DriveFileName(wchar_t &driveLetter) {
     return DriveFileName(std::wstring(1, driveLetter));
 }
 
-std::wstring DriveInfo::DriveFileName(std::wstring &driveLetter) {
+std::wstring DriveInfo::DriveFileName(const std::wstring &driveLetter) {
     return L"\\\\.\\" + driveLetter + L":";
 }
 

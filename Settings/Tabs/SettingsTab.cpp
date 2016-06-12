@@ -22,7 +22,6 @@ INT_PTR SettingsTab::DialogProc(
 
     switch (uMsg) {
     case WM_INITDIALOG:
-        _dlgHwnd = hwndDlg;
         Initialize();
         LoadSettings();
         return FALSE;

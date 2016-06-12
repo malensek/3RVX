@@ -20,10 +20,21 @@ _mWnd(L"3RVX-BrightnessOSD", L"3RVX-BrightnessOSD") {
     _mWnd.Update();
 
     OSD::InitMeterWnd(_mWnd);
+
+    _brightnessCtrl = new BrightnessController(
+        DisplayManager::Primary().Handle());
+}
+
+BrightnessOSD::~BrightnessOSD() {
+    delete _brightnessCtrl;
 }
 
 void BrightnessOSD::Hide() {
     _mWnd.Hide(false);
+}
+
+void BrightnessOSD::HideIcon() {
+
 }
 
 void BrightnessOSD::ProcessHotkeys(HotkeyInfo &hki) {

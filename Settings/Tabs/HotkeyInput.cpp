@@ -1,3 +1,6 @@
+// Copyright (c) 2016, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
 #include "HotkeyInput.h"
 
 #include "../../3RVX/Logger.h"
@@ -7,12 +10,10 @@
 HotkeyInput::HotkeyInput(HWND parent) :
 Dialog(parent, MAKEINTRESOURCE(IDD_HOTKEYPROMPT)) {
 
+}
+
+void HotkeyInput::Initialize() {
     _prompt = new Label(LBL_PROMPT, *this);
-
-    _cancel = new Button(BTN_CANCELKEYS, *this);
-    _cancel->OnClick = [this]() {
-        EndDialog(this->DialogHandle(), 0);
-        return true;
-    };
-
+    KeyGrabber::Instance()->SetHwnd(DialogHandle());
+    KeyGrabber::Instance()->Grab();
 }

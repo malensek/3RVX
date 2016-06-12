@@ -32,6 +32,7 @@ INT_PTR TabPage::StaticTabProc(
 
     if (uMsg == WM_INITDIALOG) {
         tab = (TabPage *) ((LPPROPSHEETPAGE) lParam)->lParam;
+        tab->_dlgHwnd = hwndDlg;
         SetWindowLongPtr(hwndDlg, GWLP_USERDATA, (LONG_PTR) tab);
     } else {
         tab = (TabPage *) GetWindowLongPtr(hwndDlg, GWLP_USERDATA);

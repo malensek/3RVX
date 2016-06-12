@@ -43,6 +43,11 @@ OSDComponent *SkinV3::BrightnessOSD() {
     return CreateOSDComponent("brightness");
 }
 
+HICON SkinV3::EjectIcon() {
+    XMLElement *eject = SubElement("osds", "eject");
+    return Icon(eject);
+}
+
 std::vector<HICON> SkinV3::VolumeIconset() {
     std::vector<HICON> iconList;
 
@@ -136,6 +141,20 @@ std::wstring SkinV3::ImageName(XMLElement *meterXMLElement) {
         return NULL;
     }
     return _skinDir + L"\\" + StringUtils::Widen(imgName);
+}
+
+HICON SkinV3::Icon(XMLElement *elem) {
+    XMLElement *icon = elem->FirstChildElement("icon");
+    if (icon == nullptr) {
+        return nullptr;
+    }
+
+    const char *file = icon->Attribute("file");
+    if (file == nullptr) {
+        return nullptr;
+    }
+
+    return Skin::ReadIcon(_skinDir + L"\\" + StringUtils::Widen(file));
 }
 
 std::vector<HICON> SkinV3::Iconset(XMLElement *elem) {

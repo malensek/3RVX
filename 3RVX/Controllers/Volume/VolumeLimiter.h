@@ -1,3 +1,6 @@
+// Copyright (c) 2016, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
 #pragma once
 
 #include "VolumeTransformation.h"
@@ -7,7 +10,7 @@
 /// given, an input volume of 0.8 outputs 1.0, and an input of 0.4 would output
 /// 0.5 (50% of .8).
 /// </summary>
-class VolumeLimiter : VolumeTransformation {
+class VolumeLimiter : public VolumeTransformation {
 public:
     /// <summary>
     /// Creates a new VolumeLimiter, where the maximum volume level is the value
@@ -24,7 +27,12 @@ public:
     }
 
     virtual float Revert(float vol) {
-        return vol / _limit;
+        float newVal = vol / _limit;
+        if (newVal > 1.0f) {
+            newVal = 1.0f;
+        }
+
+        return newVal;
     }
 
 private:

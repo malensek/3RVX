@@ -10,6 +10,7 @@
 #include <ShlObj.h>
 #include <Shlwapi.h>
 
+#include "DefaultSettings.h"
 #include "Error.h"
 #include "HotkeyInfo.h"
 #include "LanguageTranslator.h"
@@ -93,7 +94,8 @@ int Settings::Save() {
 }
 
 bool Settings::Portable() {
-    std::wstring portableSettings = AppDir() + L"\\" + SETTINGS_FILE;
+    std::wstring portableSettings
+        = AppDir() + L"\\" + DefaultSettings::SettingsFileName;
     if (PathFileExists(portableSettings.c_str()) == TRUE) {
         return true;
     }
@@ -143,7 +145,8 @@ void Settings::CreateSettingsDir() {
 }
 
 std::wstring Settings::SettingsFile() {
-    return SettingsDir() + std::wstring(L"\\") + SETTINGS_FILE;
+    return SettingsDir() + std::wstring(L"\\")
+        + DefaultSettings::SettingsFileName;
 }
 
 std::wstring Settings::AppDir() {
@@ -158,19 +161,19 @@ std::wstring Settings::AppDir() {
 }
 
 std::wstring Settings::SkinDir() {
-    return AppDir() + L"\\" + SKIN_DIR;
+    return AppDir() + L"\\" + DefaultSettings::SkinDirName;
 }
 
 std::wstring Settings::MainApp() {
-    return Settings::AppDir() + L"\\" + MAIN_APP;
+    return Settings::AppDir() + L"\\" + DefaultSettings::MainAppName;
 }
 
 std::wstring Settings::SettingsApp() {
-    return Settings::AppDir() + L"\\" + SETTINGS_APP;
+    return Settings::AppDir() + L"\\" + DefaultSettings::SettingsAppName;
 }
 
 std::wstring Settings::LanguagesDir() {
-    return AppDir() + L"\\" + LANG_DIR;
+    return AppDir() + L"\\" + DefaultSettings::LanguageDirName;
 }
 
 void Settings::LaunchSettingsApp() {
@@ -185,31 +188,56 @@ void Settings::LaunchSettingsApp() {
     }
 }
 
+void Settings::AudioDeviceID(std::wstring id) {
+    std::string idStr = StringUtils::Narrow(id);
+    return SetText(XML_AUDIODEV, idStr);
+}
+
 std::wstring Settings::AudioDeviceID() {
     return GetText(XML_AUDIODEV);
 }
 
 int Settings::VolumeCurveAdjustment() {
-    return GetInt(XML_CURVE_ADJUST);
+    return GetInt(XML_CURVE_ADJUST, 0);
 }
 
 void Settings::VolumeCurveAdjustment(int value) {
+    if (value < 0) {
+        value = 0;
+    }
     SetElementValue(XML_CURVE_ADJUST, value);
 }
 
 float Settings::VolumeLimiter() {
-    return GetFloat(XML_VOLUME_LIMITER, DefaultVolumeLimit);
+    return GetFloat(XML_VOLUME_LIMITER, DefaultSettings::VolumeLimit);
 }
 
 void Settings::VolumeLimiter(float limit) {
     SetElementValue(XML_VOLUME_LIMITER, limit);
 }
 
+bool Settings::MuteOnLock() {
+    return GetEnabled(XML_MUTELOCK, DefaultSettings::MuteLock);
+}
+
+void Settings::MuteOnLock(bool enable) {
+    SetEnabled(XML_MUTELOCK, enable);
+}
+
+bool Settings::SubscribeVolumeEvents() {
+    return GetEnabled(
+        XML_SUBSCRIBE_VOL, DefaultSettings::SubscribeVolumeEvents);
+}
+
+void Settings::SubscribeVolumeEvents(bool enable) {
+    SetEnabled(XML_SUBSCRIBE_VOL, enable);
+}
+
 std::wstring Settings::LanguageName() {
     std::wstring lang = GetText(XML_LANGUAGE);
 
     if (lang == L"") {
-        return DefaultLanguage;
+        return DefaultSettings::Language;
     } else {
         return lang;
     }
@@ -221,7 +249,7 @@ void Settings::LanguageName(std::wstring name) {
 }
 
 bool Settings::AlwaysOnTop() {
-    return GetEnabled(XML_ONTOP, DefaultOnTop);
+    return GetEnabled(XML_ONTOP, DefaultSettings::OnTop);
 }
 
 void Settings::AlwaysOnTop(bool enable) {
@@ -229,7 +257,7 @@ void Settings::AlwaysOnTop(bool enable) {
 }
 
 bool Settings::HideFullscreen() {
-    return GetEnabled(XML_HIDE_WHENFULL, DefaultHideFullscreen);
+    return GetEnabled(XML_HIDE_WHENFULL, DefaultSettings::HideFullscreen);
 }
 
 void Settings::HideFullscreen(bool enable) {
@@ -237,7 +265,7 @@ void Settings::HideFullscreen(bool enable) {
 }
 
 bool Settings::HideDirectX() {
-    return GetEnabled(XML_HIDE_DIRECTX, DefaultHideDirectX);
+    return GetEnabled(XML_HIDE_DIRECTX, DefaultSettings::HideDirectX);
 }
 
 void Settings::HideDirectX(bool enable) {
@@ -256,7 +284,7 @@ int Settings::OSDEdgeOffset() {
     if (HasSetting(XML_OSD_OFFSET)) {
         return GetInt(XML_OSD_OFFSET);
     } else {
-        return DefaultOSDOffset;
+        return DefaultSettings::OSDOffset;
     }
 }
 
@@ -274,7 +302,7 @@ Settings::OSDPos Settings::OSDPosition() {
         }
     }
 
-    return DefaultOSDPosition;
+    return DefaultSettings::OSDPosition;
 }
 
 void Settings::OSDPosition(OSDPos pos) {
@@ -299,7 +327,7 @@ void Settings::OSDY(int y) {
 }
 
 bool Settings::BrightnessOSDEnabled() {
-    return GetEnabled(XML_ENABLE_BOSD, DefaultBrightnessOSDEnabled);
+    return GetEnabled(XML_ENABLE_BOSD, DefaultSettings::BrightnessOSDEnabled);
 }
 
 void Settings::BrightnessOSDEnabled(bool enable) {
@@ -307,7 +335,7 @@ void Settings::BrightnessOSDEnabled(bool enable) {
 }
 
 bool Settings::EjectOSDEnabled() {
-    return GetEnabled(XML_ENABLE_EOSD, DefaultEjectOSDEnabled);
+    return GetEnabled(XML_ENABLE_EOSD, DefaultSettings::EjectOSDEnabled);
 }
 
 void Settings::EjectOSDEnabled(bool enable) {
@@ -315,7 +343,7 @@ void Settings::EjectOSDEnabled(bool enable) {
 }
 
 bool Settings::KeyboardOSDEnabled() {
-    return GetEnabled(XML_ENABLE_KOSD, DefaultKeyboardOSDEnabled);
+    return GetEnabled(XML_ENABLE_KOSD, DefaultSettings::KeyboardOSDEnabled);
 }
 
 void Settings::KeyboardOSDEnabled(bool enable) {
@@ -323,7 +351,7 @@ void Settings::KeyboardOSDEnabled(bool enable) {
 }
 
 bool Settings::VolumeOSDEnabled() {
-    return GetEnabled(XML_ENABLE_VOSD, DefaultVolumeOSDEnabled);
+    return GetEnabled(XML_ENABLE_VOSD, DefaultSettings::VolumeOSDEnabled);
 }
 
 void Settings::VolumeOSDEnabled(bool enable) {
@@ -341,7 +369,7 @@ AnimationTypes::HideAnimation Settings::HideAnim() {
         }
     }
 
-    return DefaultHideAnim;
+    return DefaultSettings::DefaultHideAnim;
 }
 
 void Settings::HideAnim(AnimationTypes::HideAnimation anim) {
@@ -350,7 +378,7 @@ void Settings::HideAnim(AnimationTypes::HideAnimation anim) {
 }
 
 int Settings::HideDelay() {
-    return GetInt(XML_HIDETIME, DefaultHideTime);
+    return GetInt(XML_HIDETIME, DefaultSettings::HideTime);
 }
 
 void Settings::HideDelay(int delay) {
@@ -358,7 +386,7 @@ void Settings::HideDelay(int delay) {
 }
 
 int Settings::HideSpeed() {
-    return GetInt(XML_HIDESPEED, DefaultHideSpeed);
+    return GetInt(XML_HIDESPEED, DefaultSettings::HideSpeed);
 }
 
 void Settings::HideSpeed(int speed) {
@@ -380,7 +408,7 @@ std::wstring Settings::CurrentSkin() {
     std::wstring name = GetText("skin");
 
     if (name == L"") {
-        return DefaultSkin;
+        return DefaultSettings::Skin;
     } else {
         return name;
     }
@@ -391,8 +419,9 @@ std::wstring Settings::SkinXML() {
 }
 
 std::wstring Settings::SkinXML(std::wstring skinName) {
-    std::wstring skinXML = Settings::AppDir() + L"\\" + SKIN_DIR + L"\\"
-        + skinName + L"\\" + SKIN_XML;
+    std::wstring skinXML = Settings::AppDir() + L"\\"
+        + DefaultSettings::SkinDirName + L"\\"
+        + skinName + L"\\" + DefaultSettings::SkinFileName;
     return skinXML;
 }
 
@@ -503,20 +532,37 @@ LanguageTranslator *Settings::Translator() {
     return _translator;
 }
 
-bool Settings::NotifyIconEnabled() {
-    return GetEnabled(XML_NOTIFYICON, DefaultNotifyIcon);
+bool Settings::VolumeIconEnabled() {
+    return GetEnabled(XML_VOLUMEICON, DefaultSettings::VolumeIcon);
 }
 
-void Settings::NotifyIconEnabled(bool enable) {
-    SetEnabled(XML_NOTIFYICON, enable);
+void Settings::VolumeIconEnabled(bool enable) {
+    SetEnabled(XML_VOLUMEICON, enable);
 }
 
 bool Settings::SoundEffectsEnabled() {
-    return GetEnabled(XML_SOUNDS, DefaultSoundsEnabled);
+    return GetEnabled(XML_SOUNDS, DefaultSettings::SoundsEnabled);
 }
 
 void Settings::SoundEffectsEnabled(bool enable) {
     SetEnabled(XML_SOUNDS, enable);
+}
+
+bool Settings::EjectIconEnabled() {
+    return GetEnabled(XML_EJECTICON, DefaultSettings::EjectIcon);
+}
+
+void Settings::EjectIconEnabled(bool enable) {
+    SetEnabled(XML_EJECTICON, enable);
+}
+
+bool Settings::SubscribeEjectEvents() {
+    return GetEnabled(
+        XML_SUBSCRIBE_EJECT, DefaultSettings::SubscribeEjectEvents);
+}
+
+void Settings::SubscribeEjectEvents(bool enable) {
+    SetEnabled(XML_SUBSCRIBE_EJECT, enable);
 }
 
 bool Settings::HasSetting(std::string elementName) {
@@ -607,7 +653,7 @@ tinyxml2::XMLElement *Settings::GetOrCreateElement(std::string elementName) {
 }
 
 bool Settings::AutomaticUpdates() {
-    return GetEnabled(XML_UPDATEAUTO, DefaultAutoUpdate);
+    return GetEnabled(XML_UPDATEAUTO, DefaultSettings::AutoUpdate);
 }
 
 void Settings::AutomaticUpdates(bool enabled) {
@@ -646,7 +692,7 @@ void Settings::IgnoreUpdate(std::wstring versionString) {
 }
 
 bool Settings::ShowOnStartup() {
-    return GetEnabled(XML_SHOWONSTART, DefaultShowOnStartup);
+    return GetEnabled(XML_SHOWONSTART, DefaultSettings::ShowOnStartup);
 }
 
 void Settings::ShowOnStartup(bool show) {

@@ -89,7 +89,7 @@ std::vector<Monitor> OSD::ActiveMonitors() {
 void OSD::PositionWindow(Monitor monitor, LayeredWnd &lWnd) {
     Settings::OSDPos pos = _settings->OSDPosition();
 
-    if (pos == Settings::OSDPos::Custom) {
+    if (pos == Settings::OSDPos::CustomPosition) {
         int customX = _settings->OSDX();
         int customY = _settings->OSDY();
         lWnd.X(customX);

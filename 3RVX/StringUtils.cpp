@@ -3,6 +3,9 @@
 
 #include "StringUtils.h"
 
+#include <algorithm>
+#include <cctype>
+
 std::wstring StringUtils::Widen(const char *str) {
     if (str == NULL) {
         return L"";
@@ -36,4 +39,15 @@ std::wstring StringUtils::FileExtension(const std::wstring &fileName) {
     }
 
     return fileName.substr(dot + 1, fileName.length());
+}
+
+std::wstring StringUtils::Trim(const std::wstring &str) {
+    auto front = std::find_if_not(str.begin(), str.end(), std::isspace);
+    auto back = std::find_if_not(str.rbegin(), str.rend(), std::isspace).base();
+    if (back <= front) {
+        /* String was entirely whitespace */
+        return L"";
+    } else {
+        return std::wstring(front, back);
+    }
 }

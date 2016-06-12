@@ -22,6 +22,9 @@ private:
     Button *_cancel;
     ProgressBar *_progress;
 
+    void Initialize();
+
     std::thread _dlThread;
     void Download();
+
 };

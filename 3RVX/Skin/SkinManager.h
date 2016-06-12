@@ -24,6 +24,7 @@ public:
     OSDComponent *MuteOSD();
 
     OSDComponent *EjectOSD();
+    HICON &EjectIcon();
 
     OSDComponent *BrightnessOSD();
 
@@ -34,6 +35,7 @@ private:
     OSDComponent *_muteOSD;
 
     OSDComponent *_ejectOSD;
+    HICON _ejectIcon;
 
     OSDComponent *_brightnessOSD;
 

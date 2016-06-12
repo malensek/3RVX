@@ -3,10 +3,14 @@
 
 #include "VolumeOSD.h"
 
+#pragma comment(lib, "Wtsapi32.lib")
+
 #include <string>
+#include <Wtsapi32.h>
 
 #include "../3RVX.h"
 #include "../Controllers/Volume/CurveTransformer.h"
+#include "../Controllers/Volume/VolumeLimiter.h"
 #include "../HotkeyInfo.h"
 #include "../LanguageTranslator.h"
 #include "../MeterWnd/LayeredWnd.h"
@@ -30,6 +34,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     std::wstring device = _settings->AudioDeviceID();
     _volumeCtrl->Init(device);
     _selectedDesc = _volumeCtrl->DeviceDesc();
+    _subscribeVolEvents = _settings->SubscribeVolumeEvents();
 
     int curveAdjust = _settings->VolumeCurveAdjustment();
     if (curveAdjust > 0) {
@@ -42,7 +47,9 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     float volumeLimiter = _settings->VolumeLimiter();
     if (volumeLimiter > 0.0f && volumeLimiter < 1.0f) {
         CLOG(L"Using volume limiter: %f", volumeLimiter);
-        //TODO: limiter
+        VolumeLimiter *vl = new VolumeLimiter(volumeLimiter);
+        _volumeCtrl->AddTransformation(vl);
+        _volumeTransformations.push_back(vl);
     }
 
     /* Set up volume state variables */
@@ -53,7 +60,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     _volumeSlider = new VolumeSlider(*_volumeCtrl);
 
     /* Set up context menu */
-    if (_settings->NotifyIconEnabled()) {
+    if (_settings->VolumeIconEnabled()) {
         LanguageTranslator *translator = _settings->Translator();
         _menuSetStr = translator->Translate(_menuSetStr);
         _menuDevStr = translator->Translate(_menuDevStr);
@@ -69,6 +76,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
         InsertMenu(_menu, -1, MF_ENABLED, MENU_MIXER, _menuMixerStr.c_str());
         InsertMenu(_menu, -1, MF_ENABLED, MENU_EXIT, _menuExitStr.c_str());
 
+        /* Menu accepts both left and right clicks on its items: */
         _menuFlags = TPM_RIGHTBUTTON;
         if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
             _menuFlags |= TPM_RIGHTALIGN;
@@ -84,6 +92,13 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     MeterLevels(v);
     _volumeSlider->MeterLevels(v);
 
+    if (_settings->MuteOnLock()) {
+        /* If muting volume on lock is enabled, register for notifications. */
+        _monitorSession = true;
+        WTSRegisterSessionNotification(
+            Window::Handle(), NOTIFY_FOR_THIS_SESSION);
+    }
+
     if (_settings->ShowOnStartup()) {
         SendMessage(Window::Handle(), VolumeController::MSG_VOL_CHNG,
             NULL, (LPARAM) 1);
@@ -91,6 +106,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
 }
 
 VolumeOSD::~VolumeOSD() {
+    WTSUnRegisterSessionNotification(Window::Handle());
     DestroyMenu(_deviceMenu);
     DestroyMenu(_menu);
     delete _icon;
@@ -114,7 +130,7 @@ void VolumeOSD::UpdateDeviceMenu() {
     }
     _deviceList.clear();
 
-    std::list<VolumeController::DeviceInfo> devices
+    std::vector<VolumeController::DeviceInfo> devices
         = _volumeCtrl->ListDevices();
     std::wstring currentDeviceId = _volumeCtrl->DeviceId();
 
@@ -165,7 +181,7 @@ void VolumeOSD::LoadSkin() {
     OSD::InitMeterWnd(_muteWnd);
 
     /* Set up notification icon */
-    if (_settings->NotifyIconEnabled()) {
+    if (_settings->VolumeIconEnabled()) {
         _iconImages = skin->VolumeIconset();
         if (_iconImages.size() > 0) {
             _icon = new NotifyIcon(Window::Handle(), L"3RVX", _iconImages[0]);
@@ -345,115 +361,160 @@ void VolumeOSD::UpdateVolumeState() {
     UpdateIcon();
 }
 
+void VolumeOSD::OnDeviceChange() {
+    CLOG(L"Volume device change detected.");
+    if (_selectedDevice == L"") {
+        _volumeCtrl->SelectDefaultDevice();
+    } else {
+        HRESULT hr = _volumeCtrl->SelectDevice(_selectedDevice);
+        if (FAILED(hr)) {
+            _volumeCtrl->SelectDefaultDevice();
+        }
+    }
+    _selectedDesc = _volumeCtrl->DeviceDesc();
+    UpdateDeviceMenu();
+    UpdateVolumeState();
+}
+
 void VolumeOSD::OnDisplayChange() {
     InitMeterWnd(_mWnd);
     InitMeterWnd(_muteWnd);
 }
 
+void VolumeOSD::OnMenuEvent(WPARAM wParam) {
+    int menuItem = LOWORD(wParam);
+    switch (menuItem) {
+    case MENU_SETTINGS:
+        Settings::LaunchSettingsApp();
+        break;
+
+    case MENU_MIXER: {
+        CLOG(L"Menu: Mixer");
+        HINSTANCE code = ShellExecute(NULL, L"open", L"sndvol",
+            NULL, NULL, SW_SHOWNORMAL);
+        break;
+    }
+
+    case MENU_EXIT:
+        CLOG(L"Menu: Exit: %d", (int) _masterWnd);
+        SendMessage(_masterWnd, WM_CLOSE, NULL, NULL);
+        break;
+    }
+
+    /* Device menu items */
+    if ((menuItem & MENU_DEVICE) > 0) {
+        int device = menuItem & 0x0FFF;
+        VolumeController::DeviceInfo selectedDev = _deviceList[device];
+        if (selectedDev.id != _volumeCtrl->DeviceId()) {
+            /* A different device has been selected */
+            CLOG(L"Changing to volume device: %s",
+                selectedDev.name.c_str());
+            _volumeCtrl->SelectDevice(selectedDev.id);
+            UpdateDeviceMenu();
+            UpdateVolumeState();
+        }
+    }
+}
+
+void VolumeOSD::OnNotifyIconEvent(HWND hWnd, LPARAM lParam) {
+    if (lParam == WM_LBUTTONUP) {
+        if (_volumeCtrl->DeviceEnabled()) {
+            _volumeSlider->MeterLevels(_volumeCtrl->Volume());
+            _volumeSlider->Show();
+        }
+    } else if (lParam == WM_RBUTTONUP) {
+        POINT p;
+        GetCursorPos(&p);
+        SetForegroundWindow(hWnd);
+        TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y,
+            Window::Handle(), NULL);
+        PostMessage(hWnd, WM_NULL, 0, 0);
+    }
+}
+
+void VolumeOSD::OnSessionChange(WPARAM wParam) {
+    if (_monitorSession == false) {
+        return;
+    }
+
+    if (wParam == WTS_SESSION_LOCK) {
+        CLOG(L"Muting on session lock");
+        _unlockUnmute = true;
+        _volumeCtrl->Muted(true);
+    } else if (wParam == WTS_SESSION_UNLOCK && _unlockUnmute) {
+        CLOG(L"Unmuting after session lock");
+        _unlockUnmute = false;
+        _volumeCtrl->Muted(false);
+    }
+}
+
+void VolumeOSD::OnVolumeChange(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+    float v = _volumeCtrl->Volume();
+    bool muteState = _volumeCtrl->Muted();
+
+    _volumeSlider->MeterLevels(v);
+    UpdateIcon();
+
+    if (_subscribeVolEvents == false && lParam == 0) {
+        return;
+    }
+
+    if (wParam > 0) {
+        /* We manually post a MSG_VOL_CHNG when modifying the volume with
+         * hotkeys, so this CoreAudio-generated event can be ignored
+         * by the OSD. */
+        CLOG(L"Ignoring volume change notification generated by 3RVX");
+        return;
+    }
+
+    CLOG(L"Volume change notification:\nNew level: %f\nPrevious: %f",
+        v, _lastVolume);
+    if (lParam == 0 && (muteState == _muted)) {
+        if (abs(v - _lastVolume) < 0.0001f) {
+            CLOG(L"No change in volume detected; ignoring event.");
+            return;
+        }
+    }
+    _lastVolume = v;
+    _muted = muteState;
+
+    if (_volumeSlider->Visible() == false) {
+        if (_volumeCtrl->Muted() || v == 0.0f) {
+            Show(true);
+        } else {
+            MeterLevels(v);
+            Show();
+
+            if (_soundPlayer) {
+                _soundPlayer->Play();
+            }
+        }
+        HideOthers(Volume);
+    }
+}
+
 LRESULT
 VolumeOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    if (message == VolumeController::MSG_VOL_CHNG) {
-        float v = _volumeCtrl->Volume();
-        bool muteState = _volumeCtrl->Muted();
+    switch (message) {
+    case VolumeController::MSG_VOL_CHNG:
+        OnVolumeChange(hWnd, wParam, lParam);
+        break;
 
-        _volumeSlider->MeterLevels(v);
-        UpdateIcon();
+    case VolumeController::MSG_VOL_DEVCHNG:
+        OnDeviceChange();
+        break;
 
-        if (wParam > 0) {
-            /* We manually post a MSG_VOL_CHNG when modifying the volume with
-             * hotkeys, so this CoreAudio-generated event can be ignored
-             * by the OSD. */
-            CLOG(L"Ignoring volume change notification generated by 3RVX");
-            return DefWindowProc(hWnd, message, wParam, lParam);
-        }
+    case MSG_NOTIFYICON:
+        OnNotifyIconEvent(hWnd, lParam);
+        break;
 
-        CLOG(L"Volume change notification:\nNew level: %f\nPrevious: %f",
-            v, _lastVolume);
-        if (lParam == 0 && (muteState == _muted)) {
-            if (abs(v - _lastVolume) < 0.0001f) {
-                CLOG(L"No change in volume detected; ignoring event.");
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
-        }
-        _lastVolume = v;
-        _muted = muteState;
+    case WM_COMMAND:
+        OnMenuEvent(wParam);
+        break;
 
-        if (_volumeSlider->Visible() == false) {
-            if (_volumeCtrl->Muted() || v == 0.0f) {
-                Show(true);
-            } else {
-                MeterLevels(v);
-                Show();
-
-                if (_soundPlayer) {
-                    _soundPlayer->Play();
-                }
-            }
-            HideOthers(Volume);
-        }
-
-    } else if (message == VolumeController::MSG_VOL_DEVCHNG) {
-        CLOG(L"Volume device change detected.");
-        if (_selectedDevice == L"") {
-            _volumeCtrl->SelectDefaultDevice();
-        } else {
-            HRESULT hr = _volumeCtrl->SelectDevice(_selectedDevice);
-            if (FAILED(hr)) {
-                _volumeCtrl->SelectDefaultDevice();
-            }
-        }
-        _selectedDesc = _volumeCtrl->DeviceDesc();
-        UpdateDeviceMenu();
-        UpdateVolumeState();
-
-    } else if (message == MSG_NOTIFYICON) {
-        if (lParam == WM_LBUTTONUP) {
-            if (_volumeCtrl->DeviceEnabled()) {
-                _volumeSlider->MeterLevels(_volumeCtrl->Volume());
-                _volumeSlider->Show();
-            }
-        } else if (lParam == WM_RBUTTONUP) {
-            POINT p;
-            GetCursorPos(&p);
-            SetForegroundWindow(hWnd);
-            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y,
-                Window::Handle(), NULL);
-            PostMessage(hWnd, WM_NULL, 0, 0);
-        }
-
-    } else if (message == WM_COMMAND) {
-        int menuItem = LOWORD(wParam);
-        switch (menuItem) {
-        case MENU_SETTINGS:
-            Settings::LaunchSettingsApp();
-            break;
-
-        case MENU_MIXER: {
-            CLOG(L"Menu: Mixer");
-            HINSTANCE code = ShellExecute(NULL, L"open", L"sndvol",
-                NULL, NULL, SW_SHOWNORMAL);
-            break;
-        }
-
-        case MENU_EXIT:
-            CLOG(L"Menu: Exit: %d", (int) _masterWnd);
-            SendMessage(_masterWnd, WM_CLOSE, NULL, NULL);
-            break;
-        }
-
-        /* Device menu items */
-        if ((menuItem & MENU_DEVICE) > 0) {
-            int device = menuItem & 0x0FFF;
-            VolumeController::DeviceInfo selectedDev = _deviceList[device];
-            if (selectedDev.id != _volumeCtrl->DeviceId()) {
-                /* A different device has been selected */
-                CLOG(L"Changing to volume device: %s",
-                    selectedDev.name.c_str());
-                _volumeCtrl->SelectDevice(selectedDev.id);
-                UpdateDeviceMenu();
-                UpdateVolumeState();
-            }
-        }
+    case WM_WTSSESSION_CHANGE:
+        OnSessionChange(wParam);
+        break;
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);

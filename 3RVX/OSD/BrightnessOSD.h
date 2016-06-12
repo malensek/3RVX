@@ -5,15 +5,21 @@
 
 #include "OSD.h"
 
+class BrightnessController;
+
 class BrightnessOSD : public OSD {
 public:
     BrightnessOSD();
+    ~BrightnessOSD();
 
-    virtual void Hide();
+    void Hide();
+    void HideIcon();
+
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 
 private:
     MeterWnd _mWnd;
+    BrightnessController *_brightnessCtrl;
 
     virtual void OnDisplayChange();
 

@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "../../3RVX/Controllers/Volume/VolumeController.h"
 #include "SettingsTab.h"
 
 class OSD : public SettingsTab {
@@ -12,7 +13,6 @@ public:
 
     }
 
-
     virtual void SaveSettings();
 
 protected:
@@ -20,6 +20,8 @@ protected:
     virtual void LoadSettings();
 
 private:
+    std::vector<VolumeController::DeviceInfo> _audioDevices;
+    std::unordered_map<int, std::wstring> _taperLevels;
     void ShowGroup(int group);
 
 private:
@@ -32,7 +34,7 @@ private:
 
     GroupBox *_volumeGroup;
     Checkbox *_volumeIcon;
-    Checkbox *_monitorVolEvents;
+    Checkbox *_subscribeVolEvents;
     Label *_audioDeviceLabel;
     ComboBox *_audioDevice;
     Label *_audioTaperLabel;
@@ -42,10 +44,11 @@ private:
     Slider *_limitSlider;
     Label *_limitValue;
     Checkbox *_forceLimit;
+    Checkbox *_muteLock;
 
     GroupBox *_ejectGroup;
     Checkbox *_ejectIcon;
-    Checkbox *_monitorEjectEvents;
+    Checkbox *_subscribeEjectEvents;
 
     GroupBox *_brightnessGroup;
     Checkbox *_brightnessIcon;

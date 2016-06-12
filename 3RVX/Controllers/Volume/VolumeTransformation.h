@@ -1,3 +1,6 @@
+// Copyright (c) 2016, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
 #pragma once
 
 class VolumeTransformation {
@@ -11,7 +14,7 @@ public:
     /// <summary>
     /// Given a transformed ("virtual") volume value, this function reverts it 
     /// back to its original value (assuming the given value was produced
-    /// by the ToVirtual() function).
+    /// by the Apply() function).
     /// </summary>
     virtual float Revert(float vol) = 0;
 

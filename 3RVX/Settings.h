@@ -25,7 +25,7 @@ public:
         TopRight,
         BottomLeft,
         BottomRight,
-        Custom
+        CustomPosition,
     };
     static std::vector<std::wstring> OSDPosNames;
 
@@ -36,12 +36,23 @@ public:
     void LoadEmptySettings();
     int Save();
 
-    std::wstring AudioDeviceID();
-    int VolumeCurveAdjustment();
-    void VolumeCurveAdjustment(int value);
-    float VolumeLimiter();
-    void VolumeLimiter(float limit);
+    /* General Settings */
 
+    bool SoundEffectsEnabled();
+    void SoundEffectsEnabled(bool enable);
+
+    /* Skin */
+    std::wstring CurrentSkin();
+    bool CurrentSkin(std::wstring skinName);
+    std::wstring SkinXML();
+    std::wstring SkinXML(std::wstring skinName);
+
+    /* Language */
+    LanguageTranslator *Translator();
+    std::wstring LanguageName();
+    void LanguageName(std::wstring name);
+
+    /* Animation */
     AnimationTypes::HideAnimation HideAnim();
     void HideAnim(AnimationTypes::HideAnimation anim);
     int HideDelay();
@@ -49,18 +60,15 @@ public:
     int HideSpeed();
     void HideSpeed(int speed);
 
-    std::wstring LanguageName();
-    void LanguageName(std::wstring name);
-
-    std::wstring Monitor();
-    void Monitor(std::wstring monitorName);
-
+    /* Display */
     bool AlwaysOnTop();
     void AlwaysOnTop(bool enable);
     bool HideFullscreen();
     void HideFullscreen(bool enable);
     bool HideDirectX();
     void HideDirectX(bool enable);
+    std::wstring Monitor();
+    void Monitor(std::wstring monitorName);
     OSDPos OSDPosition();
     void OSDPosition(OSDPos pos);
     int OSDEdgeOffset();
@@ -70,6 +78,7 @@ public:
     int OSDY();
     void OSDY(int y);
 
+    /* OSDs */
     bool BrightnessOSDEnabled();
     void BrightnessOSDEnabled(bool enable);
     bool EjectOSDEnabled();
@@ -79,18 +88,27 @@ public:
     bool VolumeOSDEnabled();
     void VolumeOSDEnabled(bool enable);
 
-    std::wstring CurrentSkin();
-    bool CurrentSkin(std::wstring skinName);
-    std::wstring SkinXML();
-    std::wstring SkinXML(std::wstring skinName);
+    /* Volume */
+    void AudioDeviceID(std::wstring id);
+    std::wstring AudioDeviceID();
+    bool MuteOnLock();
+    void MuteOnLock(bool enable);
+    bool SubscribeVolumeEvents();
+    void SubscribeVolumeEvents(bool enable);
+    int VolumeCurveAdjustment();
+    void VolumeCurveAdjustment(int value);
+    float VolumeLimiter();
+    void VolumeLimiter(float limit);
+    bool VolumeIconEnabled();
+    void VolumeIconEnabled(bool enable);
 
-    bool NotifyIconEnabled();
-    void NotifyIconEnabled(bool enable);
-    bool SoundEffectsEnabled();
-    void SoundEffectsEnabled(bool enable);
+    /* Eject */
+    bool EjectIconEnabled();
+    void EjectIconEnabled(bool enable);
+    bool SubscribeEjectEvents();
+    void SubscribeEjectEvents(bool enable);
 
-    LanguageTranslator *Translator();
-
+    /* Hotkeys */
     std::unordered_map<int, HotkeyInfo> Hotkeys();
     void Hotkeys(std::vector<HotkeyInfo> hotkeys);
 
@@ -176,41 +194,11 @@ private:
 
     tinyxml2::XMLElement *GetOrCreateElement(std::string elementName);
 
-public:
-    /* Default settings */
-    static const bool DefaultOnTop = true;
-    static const AnimationTypes::HideAnimation DefaultHideAnim
-        = AnimationTypes::Fade;
-    static const bool DefaultHideFullscreen = false;
-    static const bool DefaultHideDirectX = false;
-    static const int DefaultHideSpeed = 765;
-    static const int DefaultHideTime = 800;
-    static constexpr const float DefaultVolumeLimit = 1.0f;
-    static const bool DefaultNotifyIcon = true;
-    static const bool DefaultShowOnStartup = true;
-    static const bool DefaultSoundsEnabled = true;
-    static const int DefaultOSDOffset = 140;
-    static const Settings::OSDPos DefaultOSDPosition = OSDPos::Bottom;
-    static const bool DefaultAutoUpdate = false;
-
-    static const bool DefaultVolumeOSDEnabled = true;
-    static const bool DefaultEjectOSDEnabled = true;
-    static const bool DefaultBrightnessOSDEnabled = true;
-    static const bool DefaultKeyboardOSDEnabled = false;
-
-    static constexpr const wchar_t *MAIN_APP = L"3RVX.exe";
-    static constexpr const wchar_t *SETTINGS_APP = L"Settings.exe";
-    static constexpr const wchar_t *SETTINGS_FILE = L"Settings.xml";
-    static constexpr const wchar_t *LANG_DIR = L"Languages";
-    static constexpr const wchar_t *SKIN_DIR = L"Skins";
-    static constexpr const wchar_t *SKIN_XML = L"Skin.xml";
-
-    static constexpr const wchar_t *DefaultLanguage = L"English";
-    static constexpr const wchar_t *DefaultSkin = L"Classic";
-
+private:
     /* XML tag names */
     static constexpr const char *XML_AUDIODEV = "audioDeviceID";
     static constexpr const char *XML_CURVE_ADJUST = "curveAdjust";
+    static constexpr const char *XML_EJECTICON = "ejectIcon";
     static constexpr const char *XML_ENABLE_BOSD = "brightnessOSDEnabled";
     static constexpr const char *XML_ENABLE_EOSD = "ejectOSDEnabled";
     static constexpr const char *XML_ENABLE_KOSD = "keyboardOSDEnabled";
@@ -223,7 +211,11 @@ public:
     static constexpr const char *XML_IGNOREUPDATE = "ignoreUpdateVersion";
     static constexpr const char *XML_LANGUAGE = "language";
     static constexpr const char *XML_MONITOR = "monitor";
-    static constexpr const char *XML_NOTIFYICON = "notifyIcon";
+    static constexpr const char *XML_MUTELOCK = "muteDuringLock";
+    /* Note: the XML_VOLUMEICON tag name is 'notifyIcon' to ensure backwards
+     * compatibility with previous versions of 3RVX that didn't support multiple
+     * icon types. */
+    static constexpr const char *XML_VOLUMEICON = "notifyIcon";
     static constexpr const char *XML_ONTOP = "onTop";
     static constexpr const char *XML_OSD_OFFSET = "osdEdgeOffset";
     static constexpr const char *XML_OSD_POS = "osdPosition";
@@ -232,8 +224,9 @@ public:
     static constexpr const char *XML_SHOWONSTART = "showOnStartup";
     static constexpr const char *XML_SKIN = "skin";
     static constexpr const char *XML_SOUNDS = "soundEffects";
+    static constexpr const char *XML_SUBSCRIBE_EJECT = "subscribeEjectEvents";
+    static constexpr const char *XML_SUBSCRIBE_VOL = "subscribeVolumeEvents";
     static constexpr const char *XML_UPDATEAUTO = "automaticUpdates";
     static constexpr const char *XML_UPDATECHECKTIME = "lastUpdateCheck";
     static constexpr const char *XML_VOLUME_LIMITER = "volumeLimiter";
-
 };

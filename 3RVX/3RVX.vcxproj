@@ -226,6 +226,7 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="OSD\BrightnessOSD.h" />
     <ClInclude Include="OSD\KeyboardOSD.h" />
+    <ClInclude Include="DefaultSettings.h" />
     <ClInclude Include="Skin\ErrorSkin.h" />
     <ClInclude Include="Skin\MultiSkin.h" />
     <ClInclude Include="Skin\OSDComponent.h" />

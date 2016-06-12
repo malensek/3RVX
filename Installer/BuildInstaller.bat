@@ -26,6 +26,8 @@ ECHO.
 ECHO Setting PATH...
 ECHO ON
 
+del "../Release/Settings.xml"
+
 set PATH=%PATH%;%WIX%\bin
 heat dir ../Release -gg -srd -cg 3RVXComponents -dr INSTALLFOLDER -out 3RVXComponents.wxs
 candle -pedantic -dProductVersion=%version%.0 ./3RVX.wxs ./3RVXComponents.wxs

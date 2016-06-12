@@ -31,6 +31,10 @@ bool KeyGrabber::Unhook() {
     return unMouse && unKey;
 }
 
+void KeyGrabber::Clear() {
+    _keyCombination = 0;
+}
+
 void KeyGrabber::Grab() {
     _keyCombination = 0;
     _modifierState = 0;

@@ -1,3 +1,6 @@
+// Copyright (c) 2016, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
 #include "ErrorSkin.h"
 
 #include "../Error.h"
@@ -19,6 +22,11 @@ OSDComponent *ErrorSkin::EjectOSD() {
 
 OSDComponent *ErrorSkin::BrightnessOSD() {
     Error::ErrorMessageDie(Error::SKINERR_NO_RESOURCE, L"Brightness OSD");
+    return nullptr;
+}
+
+HICON ErrorSkin::EjectIcon() {
+    Error::ErrorMessageDie(Error::SKINERR_NO_RESOURCE, L"Eject Icon");
     return nullptr;
 }
 

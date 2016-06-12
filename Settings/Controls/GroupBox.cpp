@@ -1,3 +1,6 @@
+// Copyright (c) 2016, Matthew Malensek.
+// Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
+
 #include "GroupBox.h"
 
 void GroupBox::AddChild(Control *control) {
@@ -14,12 +17,14 @@ void GroupBox::Enable() {
     for (Control *ctrl : _controls) {
         ctrl->Enable();
     }
+    Control::Enable();
 }
 
 void GroupBox::Disable() {
     for (Control *ctrl : _controls) {
         ctrl->Disable();
     }
+    Control::Disable();
 }
 
 void GroupBox::Visible(bool visible) {

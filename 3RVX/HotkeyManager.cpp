@@ -8,6 +8,36 @@
 
 HotkeyManager *HotkeyManager::instance = NULL;
 
+std::unordered_map<UINT, std::wstring> HotkeyManager::_vkStringMap = {
+    { VK_SELECT, L"Select" },
+    { VK_PRINT, L"Print" },
+    { VK_EXECUTE, L"Execute" },
+    { VK_SNAPSHOT, L"Print Screen" },
+    { VK_HELP, L"Help" },
+    { VK_SLEEP, L"Sleep" },
+    { VK_BROWSER_BACK, L"Browser Back" },
+    { VK_BROWSER_FORWARD, L"Browser Forward" },
+    { VK_BROWSER_REFRESH, L"Browser Refresh" },
+    { VK_BROWSER_STOP, L"Browser Stop" },
+    { VK_BROWSER_SEARCH, L"Browser Search" },
+    { VK_BROWSER_FAVORITES, L"Browser Favorites" },
+    { VK_BROWSER_HOME, L"Browser Home" },
+    { VK_VOLUME_MUTE, L"Mute" },
+    { VK_VOLUME_DOWN, L"Volume Down" },
+    { VK_VOLUME_UP, L"Volume Up" },
+    { VK_MEDIA_NEXT_TRACK, L"Next Track" },
+    { VK_MEDIA_PREV_TRACK, L"Previous Track" },
+    { VK_MEDIA_STOP, L"Stop" },
+    { VK_MEDIA_PLAY_PAUSE, L"Play/Pause" },
+    { VK_LAUNCH_MAIL, L"Mail" },
+    { VK_LAUNCH_MEDIA_SELECT, L"Select Media" },
+    { VK_LAUNCH_APP1, L"App 1" },
+    { VK_LAUNCH_APP2, L"App 2" },
+    { VK_PLAY, L"Play" },
+    { VK_ZOOM, L"Zoom" },
+    { VK_OEM_CLEAR, L"Clear" },
+};
+
 HotkeyManager *HotkeyManager::Instance() {
     return instance;
 }
@@ -172,7 +202,7 @@ HotkeyManager::KeyProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
 LRESULT CALLBACK
 HotkeyManager::MouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
-    if (nCode >= 0) {
+    if (nCode >= 0 && wParam != WM_MOUSEMOVE) {
         int mouseState = 0;
         MSLLHOOKSTRUCT *msInfo;
 
@@ -368,6 +398,19 @@ std::wstring HotkeyManager::MouseString(int combination) {
 }
 
 std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
+    if (_vkStringMap.find(vk) != _vkStringMap.end()) {
+        return _vkStringMap[vk];
+    }
+
+    if (
+        vk == 0x03 /* break */
+        || (vk >= 0x21 && vk <= 0x2f) /* arrow keys, home/insert/del, etc */
+        || (vk >= 0x5b && vk <= 0x5d) /* win, app keys (natural keyboard) */
+        || (vk == 0x90) /* num lock */
+        ) {
+        extendedKey = true;
+    }
+
     /* GetKeyNameText expects the following:
      * 16-23: scan code
      *    24: extended key flag
@@ -387,4 +430,10 @@ std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
     wchar_t buf[256] = {};
     GetKeyNameText(scanCode, buf, 256);
     return std::wstring(buf);
+}
+
+void HotkeyManager::VKStringTest() {
+    for (unsigned int i = 0; i < 0xFF; ++i) {
+        CLOG(L"%02x - %s", i, VKToString(i).c_str());
+    }
 }

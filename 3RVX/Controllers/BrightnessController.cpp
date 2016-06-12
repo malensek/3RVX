@@ -3,41 +3,39 @@
 
 #include "BrightnessController.h"
 
-#pragma comment(lib, "Dxva2.lib") 
-
-#include <HighLevelMonitorConfigurationAPI.h>
-
 #include "../Monitor.h"
 #include "../Logger.h"
 
 BrightnessController::BrightnessController(HMONITOR monitor) {
     BOOL result;
-    DWORD physicalMonitors = 0;
+    DWORD numPhysicalMonitors = 0;
     result = GetNumberOfPhysicalMonitorsFromHMONITOR(
-        monitor, &physicalMonitors);
+        monitor, &numPhysicalMonitors);
 
-    if (result == FALSE || physicalMonitors <= 0) {
-
+    if (result == FALSE || numPhysicalMonitors <= 0) {
+        CLOG(L"Could not get physical monitors");
+        return;
     }
-    CLOG(L"Number of physical monitors detected: %d", physicalMonitors);
 
-    PHYSICAL_MONITOR *pm = new PHYSICAL_MONITOR[physicalMonitors];
-    result = GetPhysicalMonitorsFromHMONITOR(monitor, physicalMonitors, pm);
-    //CLOG(L"phys handle: %d", pm[0].hPhysicalMonitor);
-    CLOG(L"monitor: %s", pm[0].szPhysicalMonitorDescription);
-
-    DWORD cap;
-    DWORD color;
-    GetMonitorCapabilities(pm[0].hPhysicalMonitor, &cap, &color);
-
-    DWORD min = 0, cur = 0, max = 0;
-    result = GetMonitorBrightness(pm[0].hPhysicalMonitor, &min, &cur, &max);
-    CLOG(L"result: %d", result);
-    if (result == 0) {
-        DWORD z = GetLastError();
-        CLOG(L"err: %d", z);
+    CLOG(L"Number of physical monitors detected: %d", numPhysicalMonitors);
+    PHYSICAL_MONITOR *monitors = new PHYSICAL_MONITOR[numPhysicalMonitors];
+    result = GetPhysicalMonitorsFromHMONITOR(
+        monitor, numPhysicalMonitors, monitors);
+    for (unsigned int i = 0; i < numPhysicalMonitors; ++i) {
+        CLOG(L"Monitor: %s", monitors[i].szPhysicalMonitorDescription);
+        bool supportsAPI = SupportsBrightnessAPI(monitors[i]);
+        QCLOG(L"Supports *MonitorBrightness APIs: %s",
+            supportsAPI ? L"YES" : L"NO");
     }
-    CLOG(L"Got brightness: %d, %d, %d", min, cur, max);
+    delete[] monitors;
+
+//    DWORD min = 0, cur = 0, max = 0;
+//    result = GetMonitorBrightness(pm[0].hPhysicalMonitor, &min, &cur, &max);
+//    CLOG(L"result: %d", result);
+//    if (result == 0) {
+//        Logger::LogLastError();
+//    }
+//    CLOG(L"Got brightness: %d, %d, %d", min, cur, max);
  
 }
 
@@ -52,4 +50,10 @@ float BrightnessController::Brightness() {
 
 void BrightnessController::Brightness(float level) {
 
+}
+
+bool BrightnessController::SupportsBrightnessAPI(PHYSICAL_MONITOR &pm) {
+    DWORD caps, color;
+    GetMonitorCapabilities(pm.hPhysicalMonitor, &caps, &color);
+    return ((caps & MC_CAPS_BRIGHTNESS) == MC_CAPS_BRIGHTNESS);
 }

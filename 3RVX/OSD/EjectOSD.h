@@ -17,7 +17,7 @@ public:
     EjectOSD();
     ~EjectOSD();
 
-    virtual void Hide();
+    void Hide();
     void HideIcon();
 
     virtual void ProcessHotkeys(HotkeyInfo &hki);

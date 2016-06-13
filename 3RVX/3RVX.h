@@ -13,6 +13,7 @@
 class OSD;
 class BrightnessOSD;
 class EjectOSD;
+class KeyboardOSD;
 class VolumeOSD;
 
 class HotkeyManager;
@@ -23,9 +24,10 @@ public:
 
 private:
     std::vector<OSD *> _osds;
-    VolumeOSD *_vOSD;
-    EjectOSD *_eOSD;
     BrightnessOSD *_bOSD;
+    EjectOSD *_eOSD;
+    KeyboardOSD *_kOSD;
+    VolumeOSD *_vOSD;
 
     HotkeyManager *_hkManager;
     KeyboardHotkeyProcessor _kbHotkeyProcessor;

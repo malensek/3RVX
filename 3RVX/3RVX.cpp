@@ -17,6 +17,7 @@
 #include "OSD/OSD.h"
 #include "OSD/BrightnessOSD.h"
 #include "OSD/EjectOSD.h"
+#include "OSD/KeyboardOSD.h"
 #include "OSD/VolumeOSD.h"
 #include "Settings.h"
 #include "Skin/SkinManager.h"
@@ -100,9 +101,11 @@ void _3RVX::Initialize() {
     delete _vOSD;
     delete _eOSD;
     delete _bOSD;
+    delete _kOSD;
     _vOSD = nullptr;
     _eOSD = nullptr;
     _bOSD = nullptr;
+    _kOSD = nullptr;
 
     Settings *settings = Settings::Instance();
     settings->Load();
@@ -125,11 +128,13 @@ void _3RVX::Initialize() {
     _eOSD = new EjectOSD();
     _vOSD = new VolumeOSD();
     _bOSD = new BrightnessOSD();
+    _kOSD = new KeyboardOSD();
 
     _osds.clear();
     _osds.push_back(_eOSD);
     _osds.push_back(_vOSD);
     _osds.push_back(_bOSD);
+    _osds.push_back(_kOSD);
 
     /* Hotkey setup */
     if (_hkManager != NULL) {

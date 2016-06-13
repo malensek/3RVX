@@ -6,7 +6,15 @@
 KeyboardOSD::KeyboardOSD() :
 OSD(L"3RVX-KeyOSDDispatcher"),
 _mWnd(L"3RVX-KeyboardOSD", L"3RVX-KeyboardOSD") {
-
+    RAWINPUTDEVICE rin[1] = { 0 };
+    rin[0].dwFlags = RIDEV_INPUTSINK | RIDEV_NOLEGACY;
+    rin[0].hwndTarget = this->Handle();
+    rin[0].usUsage = 6;
+    rin[0].usUsagePage = 1;
+    BOOL x = RegisterRawInputDevices(&rin[0], 1, sizeof(RAWINPUTDEVICE));
+    if (x == FALSE) {
+        Logger::LogLastError();
+    }
 }
 
 KeyboardOSD::~KeyboardOSD() {
@@ -31,5 +39,31 @@ void KeyboardOSD::OnDisplayChange() {
 
 LRESULT
 KeyboardOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+    switch (message) {
+    case WM_INPUT: {
+        HRAWINPUT hri = (HRAWINPUT) lParam;
+        UINT pcbSz;
+
+        /* Determine the size of the RAWINPUT structure */
+        GetRawInputData((HRAWINPUT) lParam, RID_INPUT,
+            NULL, &pcbSz, sizeof(RAWINPUTHEADER));
+        LPBYTE lpb = new BYTE[pcbSz];
+
+        /* Retrieve raw input data */
+        GetRawInputData((HRAWINPUT) lParam, RID_INPUT,
+            lpb, &pcbSz, sizeof(RAWINPUTHEADER));
+        RAWINPUT *raw = (RAWINPUT *) lpb;
+
+        USHORT vk = raw->data.keyboard.VKey;
+        if (vk == VK_CAPITAL && (raw->data.keyboard.Flags & 0x1)) {
+            bool locked = ((GetKeyState(VK_CAPITAL) & 0x0001) != 0);
+            CLOG(L"lock state: %s", locked ? L"ON" : L"OFF");
+        }
+        delete[] lpb;
+
+        break;
+    }
+    }
+
     return OSD::WndProc(hWnd, message, wParam, lParam);
 }

@@ -55,12 +55,13 @@ KeyboardOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         RAWINPUT *raw = (RAWINPUT *) lpb;
 
         USHORT vk = raw->data.keyboard.VKey;
-        if (vk == VK_CAPITAL && (raw->data.keyboard.Flags & 0x1)) {
-            bool locked = ((GetKeyState(VK_CAPITAL) & 0x0001) != 0);
+        USHORT flags = raw->data.keyboard.Flags;
+        if (vk == VK_CAPITAL && (flags & 0x1)) {
+            bool locked = ((GetKeyState(VK_CAPITAL) & 0x1) != 0);
             CLOG(L"lock state: %s", locked ? L"ON" : L"OFF");
         }
-        delete[] lpb;
 
+        delete[] lpb;
         break;
     }
     }

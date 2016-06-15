@@ -61,6 +61,11 @@ KeyboardOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             CLOG(L"lock state: %s", locked ? L"ON" : L"OFF");
         }
 
+		if (vk == VK_NUMLOCK && (flags & 0x1)) {
+			bool locked = ((GetKeyState(VK_NUMLOCK) & 0x1) != 0);
+			CLOG(L"numlock state: %s", locked ? L"ON" : L"OFF");
+		}
+
         delete[] lpb;
         break;
     }

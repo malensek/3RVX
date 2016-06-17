@@ -153,11 +153,12 @@ void OSD::LoadSettings() {
     _osdList->Checked(2, settings->EjectOSDEnabled());
     _osdList->Checked(3, settings->KeyboardOSDEnabled());
 
-    _volumeIcon->Checked(settings->NotifyIconEnabled());
+    _volumeIcon->Checked(settings->VolumeIconEnabled());
     _subscribeVolEvents->Checked(settings->SubscribeVolumeEvents());
     _limitSlider->Position((int) (settings->VolumeLimiter() * 100.0f));
     _muteLock->Checked(settings->MuteOnLock());
 
+    _ejectIcon->Checked(settings->EjectIconEnabled());
     _subscribeEjectEvents->Checked(settings->SubscribeEjectEvents());
 }
 
@@ -170,7 +171,7 @@ void OSD::SaveSettings() {
     settings->EjectOSDEnabled(_osdList->Checked(2));
     settings->KeyboardOSDEnabled(_osdList->Checked(3));
 
-    settings->NotifyIconEnabled(_volumeIcon->Checked());
+    settings->VolumeIconEnabled(_volumeIcon->Checked());
     settings->SubscribeVolumeEvents(_subscribeVolEvents->Checked());
     int selectedDevice = _audioDevice->SelectionIndex();
     if (selectedDevice == 0) {
@@ -189,6 +190,7 @@ void OSD::SaveSettings() {
     settings->VolumeLimiter(((float) _limitSlider->Position()) / 100.0f);
     settings->MuteOnLock(_muteLock->Checked());
 
+    settings->EjectIconEnabled(_ejectIcon->Checked());
     settings->SubscribeEjectEvents(_subscribeEjectEvents->Checked());
 }
 

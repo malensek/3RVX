@@ -532,12 +532,12 @@ LanguageTranslator *Settings::Translator() {
     return _translator;
 }
 
-bool Settings::NotifyIconEnabled() {
-    return GetEnabled(XML_NOTIFYICON, DefaultSettings::NotifyIcon);
+bool Settings::VolumeIconEnabled() {
+    return GetEnabled(XML_VOLUMEICON, DefaultSettings::VolumeIcon);
 }
 
-void Settings::NotifyIconEnabled(bool enable) {
-    SetEnabled(XML_NOTIFYICON, enable);
+void Settings::VolumeIconEnabled(bool enable) {
+    SetEnabled(XML_VOLUMEICON, enable);
 }
 
 bool Settings::SoundEffectsEnabled() {
@@ -546,6 +546,14 @@ bool Settings::SoundEffectsEnabled() {
 
 void Settings::SoundEffectsEnabled(bool enable) {
     SetEnabled(XML_SOUNDS, enable);
+}
+
+bool Settings::EjectIconEnabled() {
+    return GetEnabled(XML_EJECTICON, DefaultSettings::EjectIcon);
+}
+
+void Settings::EjectIconEnabled(bool enable) {
+    SetEnabled(XML_EJECTICON, enable);
 }
 
 bool Settings::SubscribeEjectEvents() {

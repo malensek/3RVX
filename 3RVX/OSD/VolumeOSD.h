@@ -24,8 +24,8 @@ public:
     ~VolumeOSD();
 
     void Hide();
-    void Show(bool mute = false);
     void HideIcon();
+    void Show(bool mute = false);
 
     virtual void ProcessHotkeys(HotkeyInfo &hki);
 

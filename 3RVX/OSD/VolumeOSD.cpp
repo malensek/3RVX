@@ -60,7 +60,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
     _volumeSlider = new VolumeSlider(*_volumeCtrl);
 
     /* Set up context menu */
-    if (_settings->NotifyIconEnabled()) {
+    if (_settings->VolumeIconEnabled()) {
         LanguageTranslator *translator = _settings->Translator();
         _menuSetStr = translator->Translate(_menuSetStr);
         _menuDevStr = translator->Translate(_menuDevStr);
@@ -76,6 +76,7 @@ _muteWnd(L"3RVX-MuteOSD", L"3RVX-MuteOSD") {
         InsertMenu(_menu, -1, MF_ENABLED, MENU_MIXER, _menuMixerStr.c_str());
         InsertMenu(_menu, -1, MF_ENABLED, MENU_EXIT, _menuExitStr.c_str());
 
+        /* Menu accepts both left and right clicks on its items: */
         _menuFlags = TPM_RIGHTBUTTON;
         if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
             _menuFlags |= TPM_RIGHTALIGN;
@@ -180,7 +181,7 @@ void VolumeOSD::LoadSkin() {
     OSD::InitMeterWnd(_muteWnd);
 
     /* Set up notification icon */
-    if (_settings->NotifyIconEnabled()) {
+    if (_settings->VolumeIconEnabled()) {
         _iconImages = skin->VolumeIconset();
         if (_iconImages.size() > 0) {
             _icon = new NotifyIcon(Window::Handle(), L"3RVX", _iconImages[0]);

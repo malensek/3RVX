@@ -36,4 +36,12 @@ public:
     /// character is not included in the string returned by this function.
     /// </summary>
     static std::wstring FileExtension(const std::wstring &fileName);
+
+    /// <summary>
+    /// Given a string, this function removes any preceding or trailing
+    /// whitespace (as defined by the current locale) and returns a new, trimmed
+    /// string.
+    /// </summary>
+    /// <param name="str">The string to trim</param>
+    static std::wstring Trim(const std::wstring &str);
 };

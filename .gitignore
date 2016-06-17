@@ -159,4 +159,6 @@ $RECYCLE.BIN/
 
 # Installer
 Installer/3RVX*.msi
+Installer/3RVX*.zip
 Installer/7za.exe
+Installer/*.wixpdb

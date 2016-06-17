@@ -33,6 +33,10 @@ void BrightnessOSD::Hide() {
     _mWnd.Hide(false);
 }
 
+void BrightnessOSD::HideIcon() {
+
+}
+
 void BrightnessOSD::ProcessHotkeys(HotkeyInfo &hki) {
     switch (hki.action) {
     case HotkeyInfo::IncreaseBrightness:

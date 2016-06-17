@@ -27,6 +27,7 @@ public:
     virtual OSDComponent *EjectOSD();
     virtual OSDComponent *BrightnessOSD();
 
+    virtual HICON EjectIcon();
     virtual std::vector<HICON> VolumeIconset();
 
     virtual SliderComponent *VolumeSlider();
@@ -40,6 +41,7 @@ private:
     Gdiplus::Bitmap *Image(XMLElement *element, char *attrName);
     std::wstring ImageName(XMLElement *elem);
 
+    HICON Icon(XMLElement *elem);
     std::vector<HICON> Iconset(XMLElement *elem);
     SliderKnob *Knob(XMLElement *elem);
     SoundPlayer *Sound(XMLElement *elem);

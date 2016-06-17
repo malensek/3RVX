@@ -5,8 +5,9 @@ Beta 11 (2.9.3)
 ---------------
 * Brightness OSD
 * Keyboard OSD: Caps, Num, and Scroll lock; media keys
-* Eject notification icon
 * Toggles for OSDs and their respective tray icons
+* New French translation by xhark (https://twitter.com/xhark)
+* Bugfix: cleanly remove eject icon on shutdown
 
 Beta 10 (2.9.2)
 ---------------
@@ -15,6 +16,7 @@ Beta 10 (2.9.2)
 * Ability to force a volume limit on other applications
 * Customizable default audio device (instead of always using the system default)
 * Option to mute the volume on session lock [#48]
+* Eject notification icon
 * Detailed error messages
 * Bugfix: Hotkey argument range validation
 * Bugfix: Changing the volume slider while muted now unmutes the volume

@@ -24,23 +24,39 @@ _mWnd(L"3RVX-EjectOSD", L"3RVX-EjectOSD") {
 
     OSD::InitMeterWnd(_mWnd);
 
-    //TODO: this needs to be differentiated from the volume OSD.
-    /*
-    if (_settings->NotifyIconEnabled()) {
-        _iconImages = skin->VolumeIconset();
-        if (_iconImages.size() > 0) {
-            _icon = new NotifyIcon(Window::Handle(), L"Eject", _iconImages[0]);
+    if (_settings->EjectIconEnabled()) {
+        _iconImage = skin->EjectIcon();
+        if (_iconImage != nullptr) {
+            _icon = new NotifyIcon(Window::Handle(), L"Eject", _iconImage);
         }
     }
-    */
 
-    //_menu = CreatePopupMenu();
-    //_menuThread = std::thread();
-    //UpdateDriveMenu();
+    _menu = CreatePopupMenu();
+    /* Menu accepts both left and right clicks on its items: */
+    _menuFlags = TPM_RIGHTBUTTON;
+    if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
+        _menuFlags |= TPM_RIGHTALIGN;
+    } else {
+        _menuFlags |= TPM_LEFTALIGN;
+    }
 
+    UpdateDriveMenu();
+}
+
+EjectOSD::~EjectOSD() {
+    delete _icon;
+    DestroyMenu(_menu);
 }
 
 void EjectOSD::UpdateDriveMenu() {
+    /* Remove any drives in the menu */
+    for (unsigned int i = 0; i < _menuItems.size(); ++i) {
+        RemoveMenu(_menu, 0, MF_BYPOSITION);
+    }
+    _menuItems.clear();
+
+    int menuItem = 0;
+
     DWORD drives = GetLogicalDrives();
     /* Get the most significant bit of the drive bitset */
     DWORD msb = (DWORD) log2(drives);
@@ -48,19 +64,37 @@ void EjectOSD::UpdateDriveMenu() {
         if (drives & 0x1) {
             wchar_t letter = (wchar_t) i + 65;
             wchar_t drivePath[] = L" :\\";
-            drivePath[0] = letter;
-            UINT type = GetDriveType(drivePath);
-
             DriveInfo di(letter);
-            wchar_t driveName[256] = { 0 };
-            int result = GetVolumeInformation(drivePath, driveName, 256,
-                NULL, NULL, NULL, NULL, NULL);
-            CLOG(L"Drive: %c - %s [%d]", letter, driveName, result);
+            if (di.IsHotPluggable() || di.HasRemovableMedia()) {
+                CLOG(L"Removable Drive: %c %s %s",
+                    di.DriveLetter(),
+                    di.ProductID().c_str(),
+                    di.VendorID().c_str());
+
+                std::wstring label;
+                if (di.VolumeLabel() != L"") {
+                    label = di.VolumeLabel();
+                } else if (di.ProductID() != L"") {
+                    label = di.ProductID();
+                } else if (di.VendorID() != L"") {
+                    label = di.VendorID();
+                } else {
+                    label = L"Removable Disk";
+                }
+
+                std::wstring menuStr =
+                    L"["
+                    + std::wstring(1, di.DriveLetter())
+                    + L":] - "
+                    + label;
+                InsertMenu(_menu, -1, MF_ENABLED, menuItem++, menuStr.c_str());
+                _menuItems.push_back(di);
+            }
         }
     }
 }
 
-void EjectOSD::EjectDrive(std::wstring driveLetter) {
+void EjectOSD::EjectDrive(const std::wstring &driveLetter) {
     std::wstring name = DriveInfo::DriveFileName(driveLetter);
     CLOG(L"Ejecting %s", name.c_str());
 
@@ -115,6 +149,10 @@ void EjectOSD::Hide() {
     _mWnd.Hide(false);
 }
 
+void EjectOSD::HideIcon() {
+    delete _icon;
+}
+
 void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
     switch (hki.action) {
     case HotkeyInfo::EjectDrive:
@@ -133,6 +171,22 @@ void EjectOSD::ProcessHotkeys(HotkeyInfo &hki) {
 
         break;
     }
+}
+
+DWORD EjectOSD::DriveLetterToMask(wchar_t letter) {
+    if (letter < 65 || letter > 90) {
+        return 0;
+    }
+
+    return (DWORD) pow(2, (letter - 65));
+}
+
+wchar_t EjectOSD::MaskToDriveLetter(DWORD mask) {
+    return (wchar_t) (log2(mask) + 65);
+}
+
+void EjectOSD::OnDisplayChange() {
+    InitMeterWnd(_mWnd);
 }
 
 LRESULT
@@ -157,10 +211,10 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
             if (_latestDrive == driveMask) {
                 _latestDrive = 0;
             }
-        }
-    }
 
-    if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEARRIVAL) {
+            UpdateDriveMenu();
+        }
+    } else if (message == WM_DEVICECHANGE && wParam == DBT_DEVICEARRIVAL) {
         PDEV_BROADCAST_HDR lpdb = (PDEV_BROADCAST_HDR) lParam;
         if (lpdb->dbch_devicetype == DBT_DEVTYP_VOLUME) {
             PDEV_BROADCAST_VOLUME lpdbv = (PDEV_BROADCAST_VOLUME) lpdb;
@@ -171,24 +225,26 @@ EjectOSD::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
                 CLOG(L"Media inserted in drive %c:",
                     MaskToDriveLetter(_latestDrive));
             }
+
+            UpdateDriveMenu();
+        }
+    } else if (message == MSG_NOTIFYICON) {
+        if (lParam == WM_LBUTTONUP || lParam == WM_RBUTTONUP) {
+            POINT p;
+            GetCursorPos(&p);
+            SetForegroundWindow(hWnd);
+            TrackPopupMenuEx(_menu, _menuFlags, p.x, p.y,
+                Window::Handle(), NULL);
+            PostMessage(hWnd, WM_NULL, 0, 0);
+        }
+    } else if (message == WM_COMMAND) {
+        int menuItem = LOWORD(wParam);
+        if (menuItem >= 0 && (unsigned int) menuItem < _menuItems.size()) {
+            std::wstring letter(1, _menuItems[menuItem].DriveLetter());
+            CLOG(L"Eject Menu [%d]: %s", menuItem, letter.c_str());
+            EjectDrive(letter);
         }
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);
-}
-
-DWORD EjectOSD::DriveLetterToMask(wchar_t letter) {
-    if (letter < 65 || letter > 90) {
-        return 0;
-    }
-
-    return (DWORD) pow(2, (letter - 65));
-}
-
-wchar_t EjectOSD::MaskToDriveLetter(DWORD mask) {
-    return (wchar_t) (log2(mask) + 65);
-}
-
-void EjectOSD::OnDisplayChange() {
-    InitMeterWnd(_mWnd);
 }

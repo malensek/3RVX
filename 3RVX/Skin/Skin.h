@@ -32,6 +32,9 @@ public:
     /// <summary>Loads and instantiates the Eject OSD.</summary>
     virtual OSDComponent *EjectOSD() = 0;
 
+    /// <summary>Retrieves the icon used for the eject icon.</summary>
+    virtual HICON EjectIcon() = 0;
+
     /// <summary>Loads and instantiates the Brightness OSD.</summary>
     virtual OSDComponent *BrightnessOSD() = 0;
 
@@ -44,7 +47,7 @@ public:
     /// loaded. Users of this method are responsible for deleting the bitmap
     /// instance when finished with it.
     /// </returns>
-    static Gdiplus::Bitmap *LoadImg(std::wstring fileName);
+    static Gdiplus::Bitmap *LoadImg(const std::wstring &fileName);
 
     /// <summary>
     /// Loads an iconset (represented as a vector of HICONs) from a directory.
@@ -57,5 +60,14 @@ public:
     /// icons will have to be cleaned up when they are no longer needed (use the
     /// DestroyIcon() function).
     /// </returns>
-    static std::vector<HICON> ReadIconDirectory(std::wstring iconDir);
+    static std::vector<HICON> ReadIconDirectory(const std::wstring &iconDir);
+
+    /// <summary>Loads an icon into memory as an HICON.</summary>
+    /// <param name="iconPath">File location of the icon to load.</param>
+    /// <returns>
+    /// An HICON representing the loaded icon. The icon will need to be disposed
+    /// manually by calling the DestroyIcon() Win32 function. If the function
+    /// fails, it returns a nullptr.
+    /// </returns>
+    static HICON ReadIcon(const std::wstring &iconPath);
 };

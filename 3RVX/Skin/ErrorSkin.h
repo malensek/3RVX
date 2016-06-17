@@ -27,6 +27,7 @@ public:
     virtual OSDComponent *EjectOSD();
     virtual OSDComponent *BrightnessOSD();
 
+    virtual HICON EjectIcon();
     virtual std::vector<HICON> VolumeIconset();
 
     virtual SliderComponent *VolumeSlider();

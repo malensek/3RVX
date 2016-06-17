@@ -37,8 +37,7 @@ public:
     int Save();
 
     /* General Settings */
-    bool NotifyIconEnabled();
-    void NotifyIconEnabled(bool enable);
+
     bool SoundEffectsEnabled();
     void SoundEffectsEnabled(bool enable);
 
@@ -92,16 +91,20 @@ public:
     /* Volume */
     void AudioDeviceID(std::wstring id);
     std::wstring AudioDeviceID();
-    int VolumeCurveAdjustment();
-    void VolumeCurveAdjustment(int value);
-    float VolumeLimiter();
-    void VolumeLimiter(float limit);
     bool MuteOnLock();
     void MuteOnLock(bool enable);
     bool SubscribeVolumeEvents();
     void SubscribeVolumeEvents(bool enable);
+    int VolumeCurveAdjustment();
+    void VolumeCurveAdjustment(int value);
+    float VolumeLimiter();
+    void VolumeLimiter(float limit);
+    bool VolumeIconEnabled();
+    void VolumeIconEnabled(bool enable);
 
     /* Eject */
+    bool EjectIconEnabled();
+    void EjectIconEnabled(bool enable);
     bool SubscribeEjectEvents();
     void SubscribeEjectEvents(bool enable);
 
@@ -195,6 +198,7 @@ private:
     /* XML tag names */
     static constexpr const char *XML_AUDIODEV = "audioDeviceID";
     static constexpr const char *XML_CURVE_ADJUST = "curveAdjust";
+    static constexpr const char *XML_EJECTICON = "ejectIcon";
     static constexpr const char *XML_ENABLE_BOSD = "brightnessOSDEnabled";
     static constexpr const char *XML_ENABLE_EOSD = "ejectOSDEnabled";
     static constexpr const char *XML_ENABLE_KOSD = "keyboardOSDEnabled";
@@ -208,7 +212,10 @@ private:
     static constexpr const char *XML_LANGUAGE = "language";
     static constexpr const char *XML_MONITOR = "monitor";
     static constexpr const char *XML_MUTELOCK = "muteDuringLock";
-    static constexpr const char *XML_NOTIFYICON = "notifyIcon";
+    /* Note: the XML_VOLUMEICON tag name is 'notifyIcon' to ensure backwards
+     * compatibility with previous versions of 3RVX that didn't support multiple
+     * icon types. */
+    static constexpr const char *XML_VOLUMEICON = "notifyIcon";
     static constexpr const char *XML_ONTOP = "onTop";
     static constexpr const char *XML_OSD_OFFSET = "osdEdgeOffset";
     static constexpr const char *XML_OSD_POS = "osdPosition";

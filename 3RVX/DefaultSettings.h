@@ -24,6 +24,14 @@ public:
     static const bool BrightnessOSDEnabled = true;
     static const bool KeyboardOSDEnabled = false;
 
+    /* System Event Subscriptions*/
+    static const bool SubscribeVolumeEvents = true;
+    static const bool SubscribeEjectEvents = true;
+
+    /* Notification Icons */
+    static const bool EjectIcon = false;
+    static const bool VolumeIcon = true;
+
     static const bool OnTop = true;
     static const bool HideFullscreen = false;
     static const bool HideDirectX = false;
@@ -32,14 +40,10 @@ public:
     static const int HideSpeed = 765;
     static const int HideTime = 800;
     static constexpr const float VolumeLimit = 1.0f;
-    static const bool NotifyIcon = true;
     static const bool ShowOnStartup = true;
     static const bool SoundsEnabled = true;
     static const int OSDOffset = 140;
     static const Settings::OSDPos OSDPosition = Settings::OSDPos::Bottom;
     static const bool AutoUpdate = false;
     static const bool MuteLock = false;
-    static const bool SubscribeVolumeEvents = true;
-    static const bool SubscribeEjectEvents = true;
-
 };

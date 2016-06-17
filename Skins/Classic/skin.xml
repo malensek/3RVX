@@ -12,9 +12,11 @@
       <iconset location="Icons\Volume"/>
       <sound file="sound.wav"/>
     </volume>
-
     <mute background="OSD\mute.png"/>
-    <eject background="OSD\eject.png"/>
+
+    <eject background="OSD\eject.png">
+      <icon file="Icons\Eject.ico"/>
+    </eject>
 
     <brightness background="OSD\brightness.png" defaultUnits="16">
     <meter type ="HorizontalBar" image="OSD\meter.png"

@@ -177,14 +177,14 @@ bool HotkeyInfo::Valid() {
             return false;
         }
 
-        int amount = ArgToInt(0);
-        if (amount < 0 || amount > 100) {
+        double amount = ArgToDouble(0);
+        if (amount < 0.0 || amount > 100.0) {
             /* Amounts of 0 - 100 units or % are allowed */
             LogInvalid(L"Argument amount out of range");
             return false;
         }
 
-        if (amount == 0) {
+        if (amount == 0.0) {
             if (action != HotkeyInfo::SetVolume
                 && action != HotkeyInfo::SetBrightness) {
 

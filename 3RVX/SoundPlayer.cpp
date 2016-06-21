@@ -95,7 +95,6 @@ void SoundPlayer::PlayerThread() {
             _cv.wait(lock);
         }
     }
-    CLOG(L"thread exiting");
 }
 
 bool SoundPlayer::Ready() {

@@ -131,6 +131,7 @@ void SkinManager::DisposeComponents() {
     delete _ejectOSD;
     _ejectOSD = NULL;
     DestroyIcon(_ejectIcon);
+    _ejectIcon = nullptr;
 
     delete _brightnessOSD;
     _brightnessOSD = NULL;

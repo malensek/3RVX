@@ -11,8 +11,8 @@ _mWnd(L"3RVX-KeyboardOSD", L"3RVX-KeyboardOSD") {
     rin[0].hwndTarget = this->Handle();
     rin[0].usUsage = 6;
     rin[0].usUsagePage = 1;
-    BOOL x = RegisterRawInputDevices(&rin[0], 1, sizeof(RAWINPUTDEVICE));
-    if (x == FALSE) {
+    BOOL result = RegisterRawInputDevices(&rin[0], 1, sizeof(RAWINPUTDEVICE));
+    if (result == FALSE) {
         Logger::LogLastError();
     }
 }

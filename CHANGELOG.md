@@ -10,6 +10,7 @@ Beta 11 (2.9.3)
 * Bugfix: cleanly remove eject icon on shutdown
 * Bugfix: thread hang on settings reload
 * Bugfix: allow volume increments less than 1 [#55]
+* Bugfix: invisible eject icon after settings reload
 
 Beta 10 (2.9.2)
 ---------------

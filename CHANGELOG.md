@@ -8,6 +8,8 @@ Beta 11 (2.9.3)
 * Toggles for OSDs and their respective tray icons
 * New French translation by xhark (https://twitter.com/xhark)
 * Bugfix: cleanly remove eject icon on shutdown
+* Bugfix: thread hang on settings reload
+* Bugfix: allow volume increments less than 1 [#55]
 
 Beta 10 (2.9.2)
 ---------------

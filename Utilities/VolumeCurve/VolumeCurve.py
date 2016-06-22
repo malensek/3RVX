@@ -1,16 +1,19 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-curve1 = np.loadtxt(fname='parallels-curve.txt')
-curve4 = np.loadtxt(fname='4.txt')
-curve16 = np.loadtxt(fname='16.txt')
-curve64 = np.loadtxt(fname='64.txt')
-curve256 = np.loadtxt(fname='256.txt')
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+
+curve1 = np.loadtxt(fname='default.txt')
+curve4 = np.loadtxt(fname='low.txt')
+curve16 = np.loadtxt(fname='high.txt')
+curve64 = np.loadtxt(fname='medium.txt')
+curve256 = np.loadtxt(fname='custom-8.txt')
 
 plt.ion()
 plt.clf()
 
-plt.suptitle('Volume Curve Transformation', fontsize=14)
+plt.suptitle('Audio Taper: Volume Curve Transformation', fontsize=14)
 plt.xlabel('Volume Level (%)')
 plt.ylabel('Output Level (dB)')
 plt.plot(curve1[:, 1], lw=1.5, dashes=(10, 2), label='Default Curve')

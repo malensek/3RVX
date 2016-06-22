@@ -56,9 +56,7 @@ _repeatLimit(repeatLimit) {
 SoundPlayer::~SoundPlayer() {
     _ready = false;
     _cv.notify_all();
-    if (_thread.joinable()) {
-        _thread.join();
-    }
+    _thread.join();
 
     SafeRelease(_mediaSeek);
     SafeRelease(_mediaEv);
@@ -72,11 +70,9 @@ void SoundPlayer::Play() {
         return;
     }
 
-    _repeatMutex.lock();
     if (_repeat < _repeatLimit) {
         ++_repeat;
     }
-    _repeatMutex.unlock();
     _cv.notify_all();
 }
 
@@ -86,25 +82,18 @@ void SoundPlayer::PlayerThread() {
     std::unique_lock<std::mutex> lock(_mutex);
 
     while (_ready == true) {
-        _repeatMutex.lock();
-        if (_repeat == 0) {
-            _repeatMutex.unlock();
+        if (_repeat > 0) {
+            _mediaCtrl->Run();
+            _mediaEv->WaitForCompletion(INFINITE, &evCode);
+            _mediaCtrl->Pause();
+            _mediaSeek->SetPositions(
+                &start, AM_SEEKING_AbsolutePositioning,
+                NULL, AM_SEEKING_NoPositioning);
+
+            --_repeat;
+        } else {
             _cv.wait(lock);
-            /* To handle spurious wakeups, re-do the repeat check: */
-            continue;
         }
-        _repeatMutex.unlock();
-
-        _mediaCtrl->Run();
-        _mediaEv->WaitForCompletion(INFINITE, &evCode);
-        _mediaCtrl->Pause();
-        _mediaSeek->SetPositions(
-            &start, AM_SEEKING_AbsolutePositioning,
-            NULL, AM_SEEKING_NoPositioning);
-
-        _repeatMutex.lock();
-        --_repeat;
-        _repeatMutex.unlock();
     }
 }
 

@@ -331,22 +331,33 @@ void VolumeOSD::ProcessVolumeHotkeys(HotkeyInfo &hki) {
         _volumeCtrl->Volume(currentVol + amount);
     } else {
         /* Unit-based amounts */
-        int unitIncrement = 1;
+        double unitIncrement = 1.0;
         int currentUnit = _callbackMeter->CalcUnits();
         if (currentVol <= 0.000001f) {
             currentUnit = 0;
         }
 
         if (hki.action == HotkeyInfo::DecreaseVolume) {
-            unitIncrement = -1;
+            unitIncrement = -1.0;
         }
 
+        /* We assume that if no arg type is set, then a unit-based change of 1
+         * is applied. Here, we check for other cases: */
         if (type == HotkeyInfo::VolumeKeyArgTypes::Units) {
-            unitIncrement *= hki.ArgToInt(0);
+            unitIncrement *= hki.ArgToDouble(0);
         }
 
-        _volumeCtrl->Volume(
-            (float) (currentUnit + unitIncrement) * _defaultIncrement);
+        if (unitIncrement - (int) unitIncrement < 0.0001) {
+            /* The specified unit increment is an integer, so we "snap" the
+             * volume to the nearest unit */
+            _volumeCtrl->Volume(
+                (float) (currentUnit + unitIncrement) * _defaultIncrement);
+        } else {
+            /* The user specified a partial unit value (e.g., 1.3) so we don't
+             * "snap" the volume to the nearest unit. */
+            _volumeCtrl->Volume(_volumeCtrl->Volume()
+                + ((float) (unitIncrement * _defaultIncrement)));
+        }
     }
 
     /* Tell 3RVX that we changed the volume */

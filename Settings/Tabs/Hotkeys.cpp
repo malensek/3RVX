@@ -98,7 +98,6 @@ void Hotkeys::LoadSettings() {
 void Hotkeys::SaveSettings() {
     CLOG(L"Saving: Hotkeys");
 
-
     Settings *settings = Settings::Instance();
     settings->Hotkeys(_keyInfo);
 }

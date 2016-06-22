@@ -117,21 +117,22 @@ SkinManager::~SkinManager() {
 
 void SkinManager::DisposeComponents() {
     delete _volumeOSD;
-    _volumeOSD = NULL;
+    _volumeOSD = nullptr;
     for (HICON icon : _volumeIconset) {
         DestroyIcon(icon);
     }
     _volumeIconset.clear();
     delete _volumeSlider;
-    _volumeSlider = NULL;
+    _volumeSlider = nullptr;
 
     delete _muteOSD;
-    _muteOSD = NULL;
+    _muteOSD = nullptr;
 
     delete _ejectOSD;
-    _ejectOSD = NULL;
+    _ejectOSD = nullptr;
     DestroyIcon(_ejectIcon);
+    _ejectIcon = nullptr;
 
     delete _brightnessOSD;
-    _brightnessOSD = NULL;
+    _brightnessOSD = nullptr;
 }

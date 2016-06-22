@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <atomic>
 #include <condition_variable>
 #include <mutex>
 #include <string>
@@ -47,11 +48,10 @@ private:
     IMediaEventEx *_mediaEv;
     IMediaSeeking *_mediaSeek;
 
-    bool _ready;
+    std::atomic<bool> _ready;
 
-    int _repeat;
+    std::atomic<int> _repeat;
     int _repeatLimit;
-    std::mutex _repeatMutex;
 
     std::thread _thread;
     std::condition_variable _cv;

@@ -22,6 +22,6 @@ plt.plot(curve16[:, 1], lw=1.5, label='Medium (4)')
 plt.plot(curve64[:, 1], lw=1.5, label='High (6)')
 plt.plot(curve256[:, 1], lw=1.5, label='Custom (8)')
 
-plt.legend(fancybox=True, shadow=True, ncol=2, loc=4)
+plt.legend(fancybox=True, shadow=True, ncol=2, loc=4, fontsize=12)
 
 plt.savefig('curve.pdf', bbox_inches='tight')

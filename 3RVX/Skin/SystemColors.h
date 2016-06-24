@@ -9,7 +9,7 @@
 
 class SystemColors {
 
-    struct DWMColorizationParams {
+    struct DwmColorizationParams {
         UINT ColorizationColor;
         UINT ColorizationAfterglow;
         UINT ColorizationColorBalance;
@@ -24,7 +24,7 @@ public:
         HMODULE dwm = LoadLibrary(L"dwmapi.dll");
         HRESULT(WINAPI *DwmGetColorizationParameters) (DWMColorizationParams *colorparam);
         *(FARPROC *) &DwmGetColorizationParameters = GetProcAddress(dwm, (LPCSTR) 127);
-        DWMColorizationParams params;
+        DwmColorizationParams params = { 0 };
         HRESULT hr = DwmGetColorizationParameters(&params);
         if (FAILED(hr)) {
             CLOG(L"couldn't get dwm params");

@@ -22,7 +22,6 @@ class SystemColors {
 public:
     SystemColors() {
         HMODULE dwm = LoadLibrary(L"dwmapi.dll");
-        HRESULT(WINAPI *DwmGetColorizationParameters) (DWMColorizationParams *colorparam);
         *(FARPROC *) &DwmGetColorizationParameters = GetProcAddress(dwm, (LPCSTR) 127);
         DwmColorizationParams params = { 0 };
         HRESULT hr = DwmGetColorizationParameters(&params);
@@ -47,6 +46,10 @@ public:
         CLOG(L"=> %x", val);
 
     }
+
+private:
+    HRESULT(WINAPI *DwmGetColorizationParameters)
+        (DwmColorizationParams *colorParams);
 
 
 };

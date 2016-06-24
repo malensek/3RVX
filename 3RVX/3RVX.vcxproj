@@ -234,6 +234,7 @@
     <ClInclude Include="Skin\SkinV2.h" />
     <ClInclude Include="Skin\SkinV3.h" />
     <ClInclude Include="Skin\SliderComponent.h" />
+    <ClInclude Include="Skin\SystemColors.h" />
     <ClInclude Include="SyntheticKeyboard.h" />
     <ClInclude Include="HotkeyInfo.h" />
     <ClInclude Include="HotkeyProcessor.h" />

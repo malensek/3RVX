@@ -210,6 +210,9 @@
     <ClInclude Include="DefaultSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Skin\SystemColors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">

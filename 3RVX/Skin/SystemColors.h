@@ -26,7 +26,10 @@ public:
         HRESULT(WINAPI *DwmGetColorizationParameters) (DWMColorizationParams *colorparam);
         *(FARPROC *) &DwmGetColorizationParameters = GetProcAddress(dwm, (LPCSTR) 127);
         DWMColorizationParams params;
-        DwmGetColorizationParameters(&params);
+        HRESULT hr = DwmGetColorizationParameters(&params);
+        if (FAILED(hr)) {
+            CLOG(L"couldn't get dwm params");
+        }
 
         CLOG(L"-> %x", params.ColorizationColor);
         CLOG(L"-> %x", params.ColorizationAfterglow);

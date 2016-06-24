@@ -37,14 +37,11 @@ public:
         CLOG(L"-> %x", params.ColorizationGlassReflectionIntensity);
         CLOG(L"-> %x", params.ColorizationOpaqueBlend);
 
-        COLORREF base = RGB(217, 217, 217);
-
         DWORD val;
         BOOL opaque;
         DwmGetColorizationColor(&val, &opaque);
 
         CLOG(L"=> %x", val);
-
     }
 
 private:

@@ -6,7 +6,6 @@
 #include <algorithm>
 
 #include <dwmapi.h>
-#pragma comment(lib, "Dwmapi.lib")
 
 class SystemColors {
 

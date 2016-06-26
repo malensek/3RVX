@@ -28,6 +28,7 @@ public:
 
     /// <summary>Retrieves the meter's current value (0 - 1.0)</summary>
     virtual float Value() const;
+
     /// <summary>Sets the meter value (0 - 1.0)</summary>
     virtual void Value(float value);
 
@@ -39,6 +40,13 @@ public:
     /// Calculates the current number of units the meter should display.
     /// </summary>
     virtual int CalcUnits();
+
+    int X() const;
+    int Y() const;
+    void X(int x);
+    void Y(int y);
+    int Width() const;
+    int Height() const;
 
     /// <summary>
     /// Retrieves the current meter state as a string. This includes

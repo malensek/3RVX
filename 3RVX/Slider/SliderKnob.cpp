@@ -15,7 +15,6 @@ _vertical(vertical) {
     } else {
         _units = _track.Width - _rect.Width;
     }
-
 }
 
 void SliderKnob::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
@@ -58,30 +57,6 @@ int SliderKnob::TrackWidth() const {
 
 int SliderKnob::TrackHeight() const {
     return _track.Height;
-}
-
-int SliderKnob::X() const {
-    return _rect.X;
-}
-
-int SliderKnob::Y() const {
-    return _rect.Y;
-}
-
-void SliderKnob::X(int x) {
-    _rect.X = x;
-}
-
-void SliderKnob::Y(int y) {
-    _rect.Y = y;
-}
-
-int SliderKnob::Width() const {
-    return _rect.Width;
-}
-
-int SliderKnob::Height() const {
-    return _rect.Height;
 }
 
 bool SliderKnob::Vertical() const {

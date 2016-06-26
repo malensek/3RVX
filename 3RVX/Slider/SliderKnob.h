@@ -17,13 +17,6 @@ public:
 
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics);
 
-    int X() const;
-    int Y() const;
-    void X(int x);
-    void Y(int y);
-    int Width() const;
-    int Height() const;
-
     int TrackX() const;
     int TrackY() const;
     int TrackWidth() const;

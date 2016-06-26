@@ -76,6 +76,30 @@ int Meter::CalcUnits() {
     return (int) round(_value * _units - 0.00001f);
 }
 
+int Meter::X() const {
+    return _rect.X;
+}
+
+int Meter::Y() const {
+    return _rect.Y;
+}
+
+void Meter::X(int x) {
+    _rect.X = x;
+}
+
+void Meter::Y(int y) {
+    _rect.Y = y;
+}
+
+int Meter::Width() const {
+    return _rect.Width;
+}
+
+int Meter::Height() const {
+    return _rect.Height;
+}
+
 std::wstring Meter::ToString() {
     std::wstringstream ss;
     ss << L"Geometry: (" << _rect.X << L", " << _rect.Y << "); ";

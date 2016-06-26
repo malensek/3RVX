@@ -224,6 +224,7 @@
     <ClInclude Include="DriveInfo.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="MeterWnd\Meters\HorizontalSlider.h" />
     <ClInclude Include="OSD\BrightnessOSD.h" />
     <ClInclude Include="OSD\KeyboardOSD.h" />
     <ClInclude Include="DefaultSettings.h" />
@@ -288,6 +289,7 @@
     <ClCompile Include="DriveInfo.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />
+    <ClCompile Include="MeterWnd\Meters\HorizontalSlider.cpp" />
     <ClCompile Include="OSD\BrightnessOSD.cpp" />
     <ClCompile Include="OSD\KeyboardOSD.cpp" />
     <ClCompile Include="Skin\ErrorSkin.cpp" />

@@ -20,6 +20,7 @@ public:
     /// Draws the current meter state onto the specified buffer.
     /// </summary>
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) = 0;
+
     /// <summary>
     /// Reports whether or not the meter's state has changed since the last
     /// time it was drawn. If a meter is dirty, it should be redrawn.

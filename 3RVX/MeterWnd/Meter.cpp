@@ -15,8 +15,8 @@ _drawnUnits(-1) {
 
     Gdiplus::Bitmap *bmp = Gdiplus::Bitmap::FromFile(
         bitmapName.c_str(), false);
-    CLOG(L"Loading meter bitmap: %s\nStatus: %d",
-        bitmapName.c_str(), bmp->GetLastStatus());
+    CLOG(L"Loading meter bitmap [%d]: %s",
+        bmp->GetLastStatus(), bitmapName.c_str());
     _bitmap = bmp;
 
     _rect.Width = bmp->GetWidth();

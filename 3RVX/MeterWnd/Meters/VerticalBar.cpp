@@ -15,9 +15,7 @@ void VerticalBar::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     int height = _pixelsPerUnit * CalcUnits();
     int yOffset = _rect.Y + _rect.Height - height;
 
-/*    if (_reversed) {
-        width = _rect.Width - width;
-    }*/
+    //TODO: reversed?
 
     Gdiplus::Rect drawRect(_rect.X, yOffset, _rect.Width, height);
 

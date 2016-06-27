@@ -216,6 +216,9 @@
     <ClInclude Include="MeterWnd\Meters\HorizontalSlider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MeterWnd\Meters\SliderKnob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -369,6 +372,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\HorizontalSlider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeterWnd\Meters\SliderKnob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

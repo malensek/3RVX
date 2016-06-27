@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Meter.h"
+#include "SliderKnob.h"
 
-class HorizontalSlider : Meter {
+class HorizontalSlider : public SliderKnob {
 public:
     HorizontalSlider(std::wstring bitmapName,
         int x, int y, int width, int height);

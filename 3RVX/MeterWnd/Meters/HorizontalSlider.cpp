@@ -22,3 +22,14 @@ int HorizontalSlider::TrackWidth() const {
 int HorizontalSlider::TrackHeight() const {
     return _track.Height;
 }
+
+float HorizontalSlider::Value() const {
+    int xPos = X() - TrackX();
+    int xMax = TrackWidth() - _rect.Width;
+    return (float) xPos / (float) xMax;
+}
+
+void HorizontalSlider::Value(float value) {
+    Meter::Value(value);
+    X(TrackX() + CalcUnits());
+}

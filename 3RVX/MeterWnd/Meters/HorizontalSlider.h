@@ -13,6 +13,10 @@ public:
     int TrackY() const;
     int TrackWidth() const;
     int TrackHeight() const;
+
+    virtual float Value() const;
+    virtual void Value(float value);
+
 protected:
     Gdiplus::Rect _track;
 };

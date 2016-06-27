@@ -6,6 +6,10 @@ SliderKnob(bitmapName, x, y, width, height) {
     _units = _track.Width - _rect.Width;
 }
 
+void HorizontalSlider::Draw(
+        Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
+    graphics->DrawImage(_bitmap, _rect,
+        0, 0, _rect.Width, _rect.Height, Gdiplus::UnitPixel);
 }
 
 float HorizontalSlider::Value() const {

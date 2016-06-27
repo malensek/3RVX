@@ -33,3 +33,7 @@ void HorizontalSlider::Value(float value) {
     Meter::Value(value);
     X(TrackX() + CalcUnits());
 }
+
+bool HorizontalSlider::Vertical() const {
+    return false;
+}

@@ -16,6 +16,7 @@ public:
 
     virtual float Value() const;
     virtual void Value(float value);
+    virtual bool Vertical() const;
 
 protected:
     Gdiplus::Rect _track;

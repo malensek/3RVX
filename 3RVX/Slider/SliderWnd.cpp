@@ -5,7 +5,7 @@
 
 #include <windowsx.h>
 
-#include "SliderKnob.h"
+#include "../MeterWnd/Meters/SliderKnob.h"
 
 #define TIMER_IGNORE_INPUT 50
 #define IGNORE_DURATION 100

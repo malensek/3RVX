@@ -9,7 +9,6 @@
 #include "../Skin/Skin.h"
 #include "../Skin/SkinManager.h"
 #include "../Skin/SliderComponent.h"
-#include "SliderKnob.h"
 
 VolumeSlider::VolumeSlider(CoreAudio &volumeCtrl) :
 SliderWnd(L"3RVX-VolumeSlider", L"3RVX Volume Slider"),

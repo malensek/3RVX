@@ -289,9 +289,16 @@ SliderKnob *SkinV2::CreateKnob() {
         ht->QueryIntText(&h);
     }
 
-    SliderKnob *knob = new SliderKnob(
-        _skinDir + L"\\Control\\knob.png",
-        x, y, w, h,
-        vertical);
+    SliderKnob *knob;
+    if (vertical == true) {
+        knob = new VerticalSliderKnob(
+            _skinDir + L"\\Control\\knob.png",
+            x, y, w, h);
+    } else {
+        knob = new HorizontalSlider(
+            _skinDir + L"\\Control\\knob.png",
+            x, y, w, h);
+    }
+
     return knob;
 }

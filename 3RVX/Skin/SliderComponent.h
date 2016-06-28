@@ -5,7 +5,7 @@
 
 #include "MeterComponent.h"
 
-#include "../Slider/SliderKnob.h"
+#include "../MeterWnd/Meters/SliderKnob.h"
 
 struct SliderComponent : public MeterComponent {
     SliderKnob *knob;

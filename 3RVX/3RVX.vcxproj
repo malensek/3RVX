@@ -226,6 +226,7 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="MeterWnd\Meters\HorizontalSlider.h" />
     <ClInclude Include="MeterWnd\Meters\SliderKnob.h" />
+    <ClInclude Include="MeterWnd\Meters\VerticalSliderKnob.h" />
     <ClInclude Include="OSD\BrightnessOSD.h" />
     <ClInclude Include="OSD\KeyboardOSD.h" />
     <ClInclude Include="DefaultSettings.h" />
@@ -292,6 +293,7 @@
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="MeterWnd\Meters\HorizontalSlider.cpp" />
     <ClCompile Include="MeterWnd\Meters\SliderKnob.cpp" />
+    <ClCompile Include="MeterWnd\Meters\VerticalSliderKnob.cpp" />
     <ClCompile Include="OSD\BrightnessOSD.cpp" />
     <ClCompile Include="OSD\KeyboardOSD.cpp" />
     <ClCompile Include="Skin\ErrorSkin.cpp" />

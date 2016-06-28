@@ -1,9 +1,9 @@
 // Copyright (c) 2015, Matthew Malensek.
 // Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
 
-#include "SliderKnob.h"
+#include "OldSliderKnob.h"
 
-SliderKnob::SliderKnob(std::wstring bitmapName,
+OldSliderKnob::OldSliderKnob(std::wstring bitmapName,
     int x, int y, int width, int height, bool vertical) :
 Meter(bitmapName, x, y, 1),
 _track(x, y, width, height),
@@ -17,12 +17,12 @@ _vertical(vertical) {
     }
 }
 
-void SliderKnob::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
+void OldSliderKnob::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     graphics->DrawImage(_bitmap, _rect,
         0, 0, _rect.Width, _rect.Height, Gdiplus::UnitPixel);
 }
 
-float SliderKnob::Value() const {
+float OldSliderKnob::Value() const {
     if (_vertical) {
         int yPos = Y() - TrackY();
         int yMax = TrackHeight() - _rect.Height;
@@ -34,7 +34,7 @@ float SliderKnob::Value() const {
     }
 }
 
-void SliderKnob::Value(float value) {
+void OldSliderKnob::Value(float value) {
     Meter::Value(value);
     if (_vertical) {
         Y(TrackY() + _units - CalcUnits());
@@ -43,22 +43,22 @@ void SliderKnob::Value(float value) {
     }
 }
 
-int SliderKnob::TrackX() const {
+int OldSliderKnob::TrackX() const {
     return _track.X;
 }
 
-int SliderKnob::TrackY() const {
+int OldSliderKnob::TrackY() const {
     return _track.Y;
 }
 
-int SliderKnob::TrackWidth() const {
+int OldSliderKnob::TrackWidth() const {
     return _track.Width;
 }
 
-int SliderKnob::TrackHeight() const {
+int OldSliderKnob::TrackHeight() const {
     return _track.Height;
 }
 
-bool SliderKnob::Vertical() const {
+bool OldSliderKnob::Vertical() const {
     return _vertical;
 }

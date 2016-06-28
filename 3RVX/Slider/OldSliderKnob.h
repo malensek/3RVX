@@ -9,9 +9,9 @@
 
 #include "..\MeterWnd\Meter.h"
 
-class SliderKnob : public Meter {
+class OldSliderKnob : public Meter {
 public:
-    SliderKnob(std::wstring bitmapName,
+    OldSliderKnob(std::wstring bitmapName,
         int x, int y, int width, int height,
         bool vertical);
 

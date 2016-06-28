@@ -102,9 +102,6 @@
     <ClInclude Include="Slider\SliderWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Slider\SliderKnob.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Slider\VolumeSlider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -219,6 +216,9 @@
     <ClInclude Include="MeterWnd\Meters\SliderKnob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Slider\OldSliderKnob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -291,9 +291,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Slider\VolumeSlider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Slider\SliderKnob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\VerticalBar.cpp">
@@ -375,6 +372,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\SliderKnob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider\OldSliderKnob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

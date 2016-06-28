@@ -272,7 +272,7 @@
     <ClInclude Include="Skin\Skin.h" />
     <ClInclude Include="Skin\SkinInfo.h" />
     <ClInclude Include="Skin\SkinManager.h" />
-    <ClInclude Include="Slider\SliderKnob.h" />
+    <ClInclude Include="Slider\OldSliderKnob.h" />
     <ClInclude Include="Slider\SliderWnd.h" />
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="StringUtils.h" />
@@ -326,7 +326,7 @@
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Skin\SkinInfo.cpp" />
     <ClCompile Include="Skin\SkinManager.cpp" />
-    <ClCompile Include="Slider\SliderKnob.cpp" />
+    <ClCompile Include="Slider\OldSliderKnob.cpp" />
     <ClCompile Include="Slider\SliderWnd.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="StringUtils.cpp" />

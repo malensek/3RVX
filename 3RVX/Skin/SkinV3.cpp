@@ -12,7 +12,6 @@
 #include "../Error.h"
 #include "../MeterWnd/Meters/MeterTypes.h"
 #include "../StringUtils.h"
-#include "../Slider/SliderKnob.h"
 #include "../SoundPlayer.h"
 #include "OSDComponent.h"
 #include "MeterComponent.h"
@@ -408,6 +407,11 @@ SliderKnob *SkinV3::Knob(XMLElement *elem) {
     int w = slider->IntAttribute("width");
     int h = slider->IntAttribute("height");
 
-    SliderKnob *knob = new SliderKnob(img, x, y, w, h, vertical);
+    SliderKnob *knob;
+    if (vertical == true) {
+        knob = new VerticalSliderKnob(img, x, y, w, h);
+    } else {
+        knob = new HorizontalSlider(img, x, y, w, h);
+    }
     return knob;
 }

@@ -411,7 +411,7 @@ SliderKnob *SkinV3::Knob(XMLElement *elem) {
     if (vertical == true) {
         knob = new VerticalSliderKnob(img, x, y, w, h);
     } else {
-        knob = new HorizontalSlider(img, x, y, w, h);
+        knob = new HorizontalSliderKnob(img, x, y, w, h);
     }
     return knob;
 }

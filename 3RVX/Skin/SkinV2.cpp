@@ -295,7 +295,7 @@ SliderKnob *SkinV2::CreateKnob() {
             _skinDir + L"\\Control\\knob.png",
             x, y, w, h);
     } else {
-        knob = new HorizontalSlider(
+        knob = new HorizontalSliderKnob(
             _skinDir + L"\\Control\\knob.png",
             x, y, w, h);
     }

@@ -1,3 +1,6 @@
+# This script demonstrates how to plot volume curve data.
+# Requires numpy and matplotlib
+
 import numpy as np
 import matplotlib.pyplot as plt
 

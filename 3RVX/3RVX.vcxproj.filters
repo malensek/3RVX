@@ -216,9 +216,6 @@
     <ClInclude Include="MeterWnd\Meters\SliderKnob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Slider\OldSliderKnob.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeterWnd\Meters\VerticalSliderKnob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -375,9 +372,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\SliderKnob.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Slider\OldSliderKnob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeterWnd\Meters\VerticalSliderKnob.cpp">

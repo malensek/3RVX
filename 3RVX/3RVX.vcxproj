@@ -224,7 +224,7 @@
     <ClInclude Include="DriveInfo.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
-    <ClInclude Include="MeterWnd\Meters\HorizontalSlider.h" />
+    <ClInclude Include="MeterWnd\Meters\HorizontalSliderKnob.h" />
     <ClInclude Include="MeterWnd\Meters\SliderKnob.h" />
     <ClInclude Include="MeterWnd\Meters\VerticalSliderKnob.h" />
     <ClInclude Include="OSD\BrightnessOSD.h" />
@@ -290,7 +290,7 @@
     <ClCompile Include="DriveInfo.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />
-    <ClCompile Include="MeterWnd\Meters\HorizontalSlider.cpp" />
+    <ClCompile Include="MeterWnd\Meters\HorizontalSliderKnob.cpp" />
     <ClCompile Include="MeterWnd\Meters\SliderKnob.cpp" />
     <ClCompile Include="MeterWnd\Meters\VerticalSliderKnob.cpp" />
     <ClCompile Include="OSD\BrightnessOSD.cpp" />

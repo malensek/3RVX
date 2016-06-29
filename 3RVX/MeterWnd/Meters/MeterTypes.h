@@ -6,7 +6,7 @@
 #include "Bitstrip.h"
 #include "HorizontalBar.h"
 #include "HorizontalEndcap.h"
-#include "HorizontalSlider.h"
+#include "HorizontalSliderKnob.h"
 #include "HorizontalTile.h"
 #include "NumberStrip.h"
 #include "StaticImage.h"

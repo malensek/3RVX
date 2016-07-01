@@ -300,6 +300,7 @@
     <ClCompile Include="Skin\Skin.cpp" />
     <ClCompile Include="Skin\SkinV2.cpp" />
     <ClCompile Include="Skin\SkinV3.cpp" />
+    <ClCompile Include="Skin\SystemColors.cpp" />
     <ClCompile Include="SyntheticKeyboard.cpp" />
     <ClCompile Include="HotkeyInfo.cpp" />
     <ClCompile Include="KeyboardHotkeyProcessor.cpp" />

@@ -377,6 +377,9 @@
     <ClCompile Include="MeterWnd\Meters\HorizontalSliderKnob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Skin\SystemColors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3RVX.rc">

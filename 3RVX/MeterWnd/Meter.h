@@ -37,16 +37,28 @@ public:
     /// Retrieves the maximum number of units shown by this meter.
     /// </summary>
     virtual int Units() const;
+
     /// <summary>
     /// Calculates the current number of units the meter should display.
     /// </summary>
     virtual int CalcUnits();
 
+    /// <summary>Retrieves the X-coordinate of the Meter</summary>
     int X() const;
+
+    /// <summary>Retrieves the Y-coordinate of the Meter</summary>
     int Y() const;
+
+    /// <summary>Sets the X-coordinate of the Meter</summary>
     void X(int x);
+
+    /// <summary>Sets the Y-coordinate of the Meter</summary>
     void Y(int y);
+
+    /// <summary>Retrieves the width of the Meter</summary>
     int Width() const;
+
+    /// <summary>Retrieves the height of the Meter</summary>
     int Height() const;
 
     /// <summary>

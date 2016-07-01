@@ -296,6 +296,10 @@ Meter *SkinV3::LoadMeter(XMLElement *meterXMLElement) {
 
     } else if (type == "verticalbar") {
         m = new VerticalBar(img, x, y, units, inverted);
+    } else if (type == "verticalsliderknob") {
+        int width = meterXMLElement->IntAttribute("width");
+        int height = meterXMLElement->IntAttribute("height");
+        m = new VerticalSliderKnob(img, x, y, width, height);
     } else {
         CLOG(L"Unknown meter type: %s", StringUtils::Widen(type).c_str());
         return NULL;

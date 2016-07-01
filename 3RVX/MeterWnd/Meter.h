@@ -71,6 +71,8 @@ public:
 protected:
     int _units;
     Gdiplus::Bitmap *_bitmap;
+    Gdiplus::ColorMap _colorMap;
+    Gdiplus::ImageAttributes _imageAttributes;
     Gdiplus::Rect _rect;
 
     /// <summary>

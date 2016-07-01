@@ -39,6 +39,17 @@ public:
     virtual int Units() const;
 
     /// <summary>
+    /// Applies a color transformation on this meter. When applied, a color
+    /// transformation searches for a specified color and replaces with another.
+    /// </summary>
+    /// <param name="from">The color to replace</param>
+    /// <param name="to">The replacement color</param>
+    void ApplyColorTransform(Gdiplus::Color from, Gdiplus::Color to);
+
+    /// <summary>Removes color transformations from this Meter.</summary>
+    void ClearColorTransform();
+
+    /// <summary>
     /// Calculates the current number of units the meter should display.
     /// </summary>
     virtual int CalcUnits();

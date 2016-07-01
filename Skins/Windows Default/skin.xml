@@ -6,7 +6,7 @@
   </info>
 
   <osds>
-    <volume background="OSD/background.png" defaultUnits="100">
+    <volume background="OSD/background.png" defaultUnits="50">
       <meter type="Text" format="[[PERC]]"
              font="Segoe UI" size="10" style="Bold" color="FFFFFF"
              transparency="255" align="center" x="8" y="107"

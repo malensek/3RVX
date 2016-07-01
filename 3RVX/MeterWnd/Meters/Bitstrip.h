@@ -8,16 +8,17 @@
 /// <summary>
 /// A bitstrip meter allows for full customizability of each meter state and
 /// resembles a strip of film; each successive state image is placed after the
-/// previous and then divided into discrete image "tiles." This allows full
-/// control of the display for cases where the other meter types are not
-/// flexible enough. For example, a bitstrip could be used to make a slideshow
-/// where each change in volume, brightness, etc. shows a completely different
-/// image.
-/// <p>
+/// previous and then divided into discrete image "tiles."
+/// <para>
+/// This allows full control of the display for cases where the other meter
+/// types are not flexible enough. For example, a bitstrip could be used to make
+/// a slideshow where each change in volume, brightness, etc. shows a completely
+/// different image.
+/// </para>
+/// <para>
 /// For a live sample, see the "Ignition" skin.
+/// </para>
 /// </summary>
-/// <author>malensek</author>
-///
 class Bitstrip : public Meter {
 public:
     Bitstrip(std::wstring bitmapName, int x, int y, int units);

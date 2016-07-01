@@ -44,7 +44,8 @@ public:
     /// </summary>
     /// <param name="from">The color to replace</param>
     /// <param name="to">The replacement color</param>
-    void ApplyColorTransform(Gdiplus::Color from, Gdiplus::Color to);
+    void ApplyColorTransform(
+        const Gdiplus::Color &from, const Gdiplus::Color &to);
 
     /// <summary>Removes color transformations from this Meter.</summary>
     void ClearColorTransform();

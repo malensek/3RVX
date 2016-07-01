@@ -76,7 +76,8 @@ int Meter::CalcUnits() {
     return (int) round(_value * _units - 0.00001f);
 }
 
-void Meter::ApplyColorTransform(Gdiplus::Color from, Gdiplus::Color to) {
+void Meter::ApplyColorTransform(
+        const Gdiplus::Color &from, const Gdiplus::Color &to) {
     _colorMap.oldColor = from;
     _colorMap.newColor = to;
 }

@@ -30,7 +30,8 @@ void KeyboardOSD::HideIcon() {
 }
 
 void KeyboardOSD::ProcessHotkeys(HotkeyInfo &hki) {
-
+    /* The keyboard OSD does not support any hotkeys. */
+    return;
 }
 
 void KeyboardOSD::OnDisplayChange() {

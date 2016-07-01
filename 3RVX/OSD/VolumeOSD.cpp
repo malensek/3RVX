@@ -174,6 +174,10 @@ void VolumeOSD::LoadSkin() {
     /* Mute OSD */
     _muteWnd.BackgroundImage(skin->MuteOSD()->background);
     _muteWnd.EnableGlass(skin->MuteOSD()->mask);
+    for (Meter *m : skin->MuteOSD()->meters) {
+        _muteWnd.AddMeter(m);
+    }
+    _muteWnd.MeterLevels(0);
     _muteWnd.Update();
 
     /* Now that everything is set up, initialize the meter windows. */

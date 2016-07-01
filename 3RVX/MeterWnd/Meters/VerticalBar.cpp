@@ -20,8 +20,15 @@ void VerticalBar::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
         drawRect.Y = _rect.Y;
     }
 
+    Gdiplus::ImageAttributes ia;
+    Gdiplus::ColorMap blackToRed;
+    blackToRed.oldColor = Gdiplus::Color(255, 255, 0, 255);  // black
+    blackToRed.newColor = Gdiplus::Color(255, 255, 0, 0);// red
+    ia.SetRemapTable(1, &blackToRed);
+
+
     graphics->DrawImage(_bitmap, drawRect,
-        0, 0, _rect.Width, height, Gdiplus::UnitPixel);
+        0, 0, _rect.Width, height, Gdiplus::UnitPixel, &ia, NULL, NULL);
 
     UpdateDrawnValues();
 }

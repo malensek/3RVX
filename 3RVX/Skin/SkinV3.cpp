@@ -260,6 +260,10 @@ Meter *SkinV3::LoadMeter(XMLElement *meterXMLElement) {
         m = new HorizontalBar(img, x, y, units);
     } else if (type == "horizontalendcap") {
         m = new HorizontalEndcap(img, x, y, units);
+    } else if (type == "horizontalsliderknob") {
+        int width = meterXMLElement->IntAttribute("width");
+        int height = meterXMLElement->IntAttribute("height");
+        m = new HorizontalSliderKnob(img, x, y, width, height);
     } else if (type == "horizontaltile") {
         m = new HorizontalTile(img, x, y, units, inverted);
     } else if (type == "image") {

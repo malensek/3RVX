@@ -2,10 +2,10 @@
 
 #include <Windows.h>
 
-class SystemColors {
+class AccentColor {
 
 public:
-    SystemColors();
+    AccentColor();
 
     UINT ColorizationColor() const;
 

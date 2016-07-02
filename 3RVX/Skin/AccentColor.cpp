@@ -4,7 +4,7 @@
 
 #include "../Logger.h"
 
-SystemColors::SystemColors() {
+AccentColor::SystemColors() {
     HMODULE dwm = LoadLibrary(L"dwmapi.dll");
     if (dwm == NULL) {
         _useUndocumented = false;
@@ -37,6 +37,6 @@ SystemColors::SystemColors() {
     CLOG(L"=> %x", val);
 }
 
-UINT SystemColors::ColorizationColor() const {
+UINT AccentColor::ColorizationColor() const {
     return 0;
 }

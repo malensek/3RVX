@@ -17,6 +17,7 @@ struct MeterComponent;
 
 using tinyxml2::XMLElement;
 
+/// <summary>Defines the version 3.0 skinning format.</summary>
 class SkinV3 : public Skin, public SkinInfo {
 public:
     SkinV3(std::wstring skinXML);

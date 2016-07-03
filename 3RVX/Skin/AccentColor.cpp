@@ -30,7 +30,7 @@ void AccentColor::Refresh() {
         if (_useUndocumented == true) {
             INT64 color = ColorizationParamColor();
             if (color >= 0) {
-                _color = color;
+                _color = (UINT32) color & 0x00FFFFFF;
                 return;
             }
             /* If an error occurs (-1), fall through to the next technique. */
@@ -40,7 +40,7 @@ void AccentColor::Refresh() {
         BOOL opaque;
         HRESULT hr = DwmGetColorizationColor(&color, &opaque);
         if (SUCCEEDED(hr)) {
-            color = _color;
+            _color = color & 0x00FFFFFF;
             return;
         }
     }

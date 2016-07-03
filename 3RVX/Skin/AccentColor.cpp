@@ -3,8 +3,6 @@
 #include <dwmapi.h>
 #include <VersionHelpers.h>
 
-#include "../Logger.h"
-
 AccentColor::AccentColor() {
     Refresh();
 }

@@ -13,10 +13,11 @@ AccentColor::AccentColor() {
 
     CLOG(L"=> %x", val);
 
+}
 
-    }
-    DWORD dw = GetSysColor(COLOR_ACTIVECAPTION);
-    CLOG(L"-=-> %x", dw);
+void AccentColor::Color(UINT32 color) {
+    _color = color;
+    _override = true;
 }
 
 UINT32 AccentColor::Color() const {

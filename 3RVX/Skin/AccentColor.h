@@ -9,6 +9,7 @@ public:
     UINT32 Color() const;
     bool HasColor() const;
     UINT32 FallbackColor() const;
+    void Color(UINT32 color);
     void Refresh();
 
 private:

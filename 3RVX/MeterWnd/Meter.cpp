@@ -80,6 +80,7 @@ void Meter::ApplyColorTransform(
         const Gdiplus::Color &from, const Gdiplus::Color &to) {
     _colorMap.oldColor = from;
     _colorMap.newColor = to;
+    _imageAttributes.SetRemapTable(1, &_colorMap);
 }
 
 void Meter::ClearColorTransform() {

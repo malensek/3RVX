@@ -62,10 +62,13 @@ INT64 AccentColor::ColorizationParamColor() {
         UINT ColorizationOpaqueBlend;
     };
 
-    HMODULE dwm = LoadLibrary(L"dwmapi.dll");
-    if (dwm == NULL) {
-        CLOG(L"Could not load DWM library");
-        return -1;
+    if (_dwmLib == NULL) {
+        /* May be the first time executing this method */
+        _dwmLib = LoadLibrary(L"dwmapi.dll");
+        if (_dwmLib == NULL) {
+            CLOG(L"Could not load DWM library");
+            return -1;
+        }
     }
 
     HRESULT(WINAPI *DwmGetColorizationParameters)
@@ -73,7 +76,7 @@ INT64 AccentColor::ColorizationParamColor() {
     const int ColorizationParamOrd = 127;
 
     *(FARPROC *) &DwmGetColorizationParameters
-        = GetProcAddress(dwm, (LPCSTR) ColorizationParamOrd);
+        = GetProcAddress(_dwmLib, (LPCSTR) ColorizationParamOrd);
     if (DwmGetColorizationParameters == nullptr) {
         CLOG(L"Could not retrieve DwmGetColorizationParameters address");
         return -1;

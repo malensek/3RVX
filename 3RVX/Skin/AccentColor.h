@@ -47,6 +47,12 @@ private:
     bool _useUndocumented = false;
 
     /// <summary>
+    /// If undocumented DWM functions are used, the module handle is cached
+    /// here for future use.
+    /// </summary>
+    HMODULE _dwmLib;
+
+    /// <summary>
     /// Retrieves system colorization parameters, which includes the raw
     /// colorization color used by DWM for titlebars and other accents. This 
     /// method returns a different color than the DwmGetColorizationColor()

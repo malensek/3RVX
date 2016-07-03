@@ -6,13 +6,11 @@
 #include "../Logger.h"
 
 AccentColor::AccentColor() {
-    if (IsWindows7OrGreater()) {
-    DWORD val;
-    BOOL opaque;
-    DwmGetColorizationColor(&val, &opaque);
+    Refresh();
+}
 
-    CLOG(L"=> %x", val);
-
+UINT32 AccentColor::Color() const {
+    return _color;
 }
 
 void AccentColor::Color(UINT32 color) {

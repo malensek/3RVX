@@ -7,15 +7,11 @@ class AccentColor {
 public:
     AccentColor();
     UINT32 Color() const;
-    bool HasColor() const;
-    UINT32 FallbackColor() const;
     void Color(UINT32 color);
     void Refresh();
     void UseSystemColor(bool enable = true);
 
 private:
-    bool _hasColor;
-    bool _useUndocumented;
     UINT32 _color;
     bool _override = false;
     bool _useUndocumented = false;
@@ -36,5 +32,4 @@ private:
     /// An integer representing the DWM accent color, or -1 if a failure occurs.
     /// </returns>
     INT64 ColorizationParamColor();
-
 };

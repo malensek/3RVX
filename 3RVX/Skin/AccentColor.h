@@ -9,10 +9,14 @@ public:
     UINT32 Color() const;
     bool HasColor() const;
     UINT32 FallbackColor() const;
+    void Refresh();
 
 private:
     bool _hasColor;
     bool _useUndocumented;
+    UINT32 _color;
+    bool _override = false;
+    bool _useUndocumented = false;
 
     /// <summary>
     /// Retrieves system colorization parameters, which includes the raw

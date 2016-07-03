@@ -25,6 +25,33 @@ UINT32 AccentColor::Color() const {
 
 bool AccentColor::HasColor() const {
     return _hasColor;
+void AccentColor::Refresh() {
+    if (_override == true) {
+        return;
+    }
+
+    if (IsWindows7OrGreater()) {
+        if (_useUndocumented == true) {
+            INT64 color = ColorizationParamColor();
+            if (color >= 0) {
+                _color = color;
+                return;
+            }
+            /* If an error occurs (-1), fall through to the next technique. */
+        }
+
+        DWORD color;
+        BOOL opaque;
+        HRESULT hr = DwmGetColorizationColor(&color, &opaque);
+        if (SUCCEEDED(hr)) {
+            color = _color;
+            return;
+        }
+    }
+
+    /* Our last hope if both methods above failed: */
+    DWORD caption = GetSysColor(COLOR_ACTIVECAPTION);
+    _color = caption;
 }
 
 /* WARNING: This method uses an undocumented API. May crash in the future. */

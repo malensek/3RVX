@@ -28,7 +28,6 @@ public:
     static const int GENERR_UNKNOWN     = GENERR + 3;
     static const int GENERR_UPDATEDL    = GENERR + 4;
 
-    static const int SKINERR_NOTFOUND           = SKINERR + 1;
     static const int SKINERR_INVALID_SKIN       = SKINERR + 2;
     static const int SKINERR_INVALID_SLIDERTYPE = SKINERR + 3;
     static const int SKINERR_MISSING_XML        = SKINERR + 4;

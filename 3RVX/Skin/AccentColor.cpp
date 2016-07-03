@@ -4,7 +4,7 @@
 
 #include "../Logger.h"
 
-AccentColor::SystemColors() {
+AccentColor::AccentColor() {
     HMODULE dwm = LoadLibrary(L"dwmapi.dll");
     if (dwm == NULL) {
         _useUndocumented = false;

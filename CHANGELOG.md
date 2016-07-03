@@ -7,6 +7,10 @@ Beta 11 (2.9.3)
 * Keyboard OSD: Caps, Num, and Scroll lock; media keys
 * Toggles for OSDs and their respective tray icons
 * New French translation by xhark (https://twitter.com/xhark)
+* Mute OSD now supports volume meters (text, bars, etc; level will be 0)
+* New meter for OSDs: Slider knob (similar to volume slider)
+* Skin color transformations (change #FF00FF to a user-defined accent color)
+* New skin: Windows 8/10 OSD
 * Bugfix: cleanly remove eject icon on shutdown
 * Bugfix: thread hang on settings reload
 * Bugfix: allow volume increments less than 1 [#55]

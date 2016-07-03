@@ -127,7 +127,7 @@ Gdiplus::Bitmap *SkinV3::Image(XMLElement *elem, char *attName) {
 
     std::wstring wImgFile = _skinDir + L"\\" + StringUtils::Widen(imgFile);
     if (PathFileExists(wImgFile.c_str()) == FALSE) {
-        Error::ErrorMessageDie(Error::SKINERR_NOTFOUND, wImgFile);
+        Error::ErrorMessageDie(Error::GENERR_NOTFOUND, wImgFile);
     }
 
     Gdiplus::Bitmap *bg = Gdiplus::Bitmap::FromFile(wImgFile.c_str());
@@ -186,7 +186,7 @@ SoundPlayer *SkinV3::Sound(XMLElement *elem) {
 
     std::wstring wFileName = _skinDir + L"\\" + StringUtils::Widen(fileName);
     if (PathFileExists(wFileName.c_str()) == FALSE) {
-        Error::ErrorMessage(Error::SKINERR_NOTFOUND, wFileName);
+        Error::ErrorMessage(Error::GENERR_NOTFOUND, wFileName);
     }
 
     SoundPlayer *player = new SoundPlayer(wFileName);
@@ -249,7 +249,7 @@ Meter *SkinV3::LoadMeter(XMLElement *meterXMLElement) {
     if (type != "text") {
         img = ImageName(meterXMLElement);
         if (PathFileExists(img.c_str()) == FALSE) {
-            Error::ErrorMessageDie(Error::SKINERR_NOTFOUND, img);
+            Error::ErrorMessageDie(Error::GENERR_NOTFOUND, img);
         }
     }
 
@@ -387,7 +387,7 @@ SliderKnob *SkinV3::Knob(XMLElement *elem) {
 
     std::wstring img = ImageName(slider);
     if (PathFileExists(img.c_str()) == FALSE) {
-        Error::ErrorMessageDie(Error::SKINERR_NOTFOUND, img);
+        Error::ErrorMessageDie(Error::GENERR_NOTFOUND, img);
     }
 
     const char *type = slider->Attribute("type");

@@ -11,6 +11,7 @@ public:
     UINT32 FallbackColor() const;
     void Color(UINT32 color);
     void Refresh();
+    void UseSystemColor(bool enable = true);
 
 private:
     bool _hasColor;

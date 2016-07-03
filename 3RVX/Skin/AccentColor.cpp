@@ -20,12 +20,11 @@ void AccentColor::Color(UINT32 color) {
     _override = true;
 }
 
-UINT32 AccentColor::Color() const {
-    return 0;
+void AccentColor::UseSystemColor(bool enable) {
+    _override = !enable;
+    Refresh();
 }
 
-bool AccentColor::HasColor() const {
-    return _hasColor;
 void AccentColor::Refresh() {
     if (_override == true) {
         return;

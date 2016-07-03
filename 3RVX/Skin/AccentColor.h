@@ -5,7 +5,8 @@
 class AccentColor {
 
 public:
-    AccentColor();
+    /// <summary>Retrieves the instance of the AccentColor singleton.</summary>
+    static AccentColor *Instance();
 
     /// <summary>Retrieves the accent color.</summary>
     UINT32 Color() const;
@@ -34,6 +35,10 @@ public:
     void UseSystemColor(bool enable = true);
 
 private:
+    AccentColor();
+    ~AccentColor();
+    static AccentColor *instance;
+
     /// <summary>Cached accent color</summary>
     UINT32 _color;
 

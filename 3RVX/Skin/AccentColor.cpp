@@ -3,8 +3,24 @@
 #include <dwmapi.h>
 #include <VersionHelpers.h>
 
+#include "../Logger.h"
+
+AccentColor *AccentColor::instance = nullptr;
+
 AccentColor::AccentColor() {
     Refresh();
+}
+
+AccentColor::~AccentColor() {
+    FreeModule(_dwmLib);
+}
+
+AccentColor *AccentColor::Instance() {
+    if (instance == nullptr) {
+        instance = new AccentColor();
+    }
+
+    return instance;
 }
 
 UINT32 AccentColor::Color() const {

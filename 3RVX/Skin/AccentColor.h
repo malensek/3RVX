@@ -16,6 +16,9 @@ public:
     /// <summary>
     /// Sets the accent color manually. This will override system accent colors.
     /// </summary>
+    /// <param name="color">
+    /// Manual accent color in ARGB format (0xAARRGGBB).
+    /// </param>
     void Color(UINT32 color);
 
     /// <summary>

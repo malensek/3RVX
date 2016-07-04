@@ -8,7 +8,9 @@ public:
     /// <summary>Retrieves the instance of the AccentColor singleton.</summary>
     static AccentColor *Instance();
 
-    /// <summary>Retrieves the accent color.</summary>
+    /// <summary>
+    /// Retrieves the accent color in ARGB format (0xAARRGGBB).
+    /// </summary>
     UINT32 Color() const;
 
     /// <summary>

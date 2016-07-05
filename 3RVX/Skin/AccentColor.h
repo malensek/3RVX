@@ -26,6 +26,10 @@ public:
     /// calling this method will produce no result. This is helpful when the
     /// system color scheme changes (either automatically from a wallpaper
     /// slideshow or from a user preference change).
+    /// <para>
+    /// The WM_DWMCOLORIZATIONCOLORCHANGED windows message notifies applications
+    /// of a DWM color change, which can be used to trigger this method.
+    /// </para>
     /// </summary>
     void Refresh();
 

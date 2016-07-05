@@ -310,8 +310,13 @@ Meter *SkinV3::LoadMeter(XMLElement *meterXMLElement) {
         return NULL;
     }
 
-    m->ApplyColorTransform(
-        Gdiplus::Color(0xFFFF00FF), Gdiplus::Color(AccentColor::Instance()->Color()));
+    bool colorTransform = false;
+    meterXMLElement->QueryBoolAttribute("colorTransform", &colorTransform);
+    if (colorTransform == true) {
+        m->ApplyColorTransform(
+            Gdiplus::Color(0xFFFF00FF),
+            Gdiplus::Color(AccentColor::Instance()->Color()));
+    }
 
     CLOG(L"Created meter [%s]:\n%s",
         StringUtils::Widen(type).c_str(), m->ToString().c_str());

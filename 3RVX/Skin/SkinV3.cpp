@@ -13,6 +13,7 @@
 #include "../MeterWnd/Meters/MeterTypes.h"
 #include "../StringUtils.h"
 #include "../SoundPlayer.h"
+#include "AccentColor.h"
 #include "OSDComponent.h"
 #include "MeterComponent.h"
 #include "SliderComponent.h"
@@ -308,6 +309,9 @@ Meter *SkinV3::LoadMeter(XMLElement *meterXMLElement) {
         CLOG(L"Unknown meter type: %s", StringUtils::Widen(type).c_str());
         return NULL;
     }
+
+    m->ApplyColorTransform(
+        Gdiplus::Color(0xFFFF00FF), Gdiplus::Color(AccentColor::Instance()->Color()));
 
     CLOG(L"Created meter [%s]:\n%s",
         StringUtils::Widen(type).c_str(), m->ToString().c_str());

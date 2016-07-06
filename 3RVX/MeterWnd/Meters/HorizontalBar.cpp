@@ -20,8 +20,8 @@ void HorizontalBar::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
 
     Gdiplus::Rect drawRect(_rect.X, _rect.Y, width, _rect.Height);
 
-    graphics->DrawImage(_bitmap, drawRect,
-        0, 0, width, _rect.Height, Gdiplus::UnitPixel);
+    graphics->DrawImage(_bitmap, drawRect, 0, 0, width, _rect.Height,
+        Gdiplus::UnitPixel, &_imageAttributes, NULL, NULL);
 
     UpdateDrawnValues();
 }

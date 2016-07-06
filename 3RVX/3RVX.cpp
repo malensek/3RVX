@@ -230,6 +230,13 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         break;
     }
 
+    case WM_DWMCOLORIZATIONCOLORCHANGED: {
+        /* While this message contains the colorization color, we need to
+         * refresh here to handle situations where the user has requested a
+         * different color (undocumented colorization color, for example). */
+        AccentColor::Instance()->Refresh();
+    }
+
     case WM_WTSSESSION_CHANGE: {
         CLOG(L"Detected session change");
         break;

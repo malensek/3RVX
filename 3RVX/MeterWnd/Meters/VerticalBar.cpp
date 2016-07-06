@@ -21,7 +21,7 @@ void VerticalBar::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
     }
 
     graphics->DrawImage(_bitmap, drawRect, 0, 0, _rect.Width, height,
-        Gdiplus::UnitPixel, &_imageAttributes,NULL, NULL);
+        Gdiplus::UnitPixel, &_imageAttributes, NULL, NULL);
 
     UpdateDrawnValues();
 }

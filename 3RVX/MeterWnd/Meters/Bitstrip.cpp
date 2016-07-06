@@ -18,8 +18,8 @@ void Bitstrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
         stripY = 0;
     }
 
-    graphics->DrawImage(_bitmap, _rect,
-        0, stripY, _rect.Width, _rect.Height, Gdiplus::UnitPixel);
+    graphics->DrawImage(_bitmap, _rect, 0, stripY, _rect.Width, _rect.Height,
+        Gdiplus::UnitPixel, &_imageAttributes, NULL, NULL);
 
     UpdateDrawnValues();
 }

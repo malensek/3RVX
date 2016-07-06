@@ -36,7 +36,7 @@ void NumberStrip::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
         Gdiplus::Rect destRect(_rect.X + x, _rect.Y, _charWidth, _rect.Height);
         graphics->DrawImage(_bitmap, destRect,
             0, digit * _rect.Height, _charWidth, _rect.Height,
-            Gdiplus::UnitPixel, NULL, NULL, NULL);
+            Gdiplus::UnitPixel, &_imageAttributes, NULL, NULL);
     }
 
     UpdateDrawnValues();

@@ -315,7 +315,7 @@ Meter *SkinV3::LoadMeter(XMLElement *meterXMLElement) {
     if (colorTransform == true) {
         m->ApplyColorTransform(
             Gdiplus::Color(0xFFFF00FF),
-            Gdiplus::Color(AccentColor::Instance()->Color()));
+            Gdiplus::Color(AccentColor::Instance()->Color() | 0xFF000000));
     }
 
     CLOG(L"Created meter [%s]:\n%s",

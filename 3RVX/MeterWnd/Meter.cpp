@@ -3,6 +3,7 @@
 
 #include "Meter.h"
 #include <math.h>
+#include <iomanip>
 #include <sstream>
 
 Meter::Meter(std::wstring bitmapName, int x, int y, int units) :
@@ -117,5 +118,11 @@ std::wstring Meter::ToString() {
     ss << _rect.Width << L"x" << _rect.Height << std::endl;
     ss << L"Units: " << Units() << std::endl;
     ss << L"Current Value: " << Value() << L" (" << CalcUnits() << L" units)";
+    if (_colorMap.oldColor.GetValue() != 0xFF000000
+        && _colorMap.newColor.GetValue() != 0xFF000000) {
+        ss << std::endl << L"Color transform: 0x"
+            << std::setfill(L'0') << std::setw(8)
+            << std::hex << _colorMap.newColor.GetValue();
+    }
     return ss.str();
 }

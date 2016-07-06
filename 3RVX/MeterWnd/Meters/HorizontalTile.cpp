@@ -17,7 +17,6 @@ _reverse(reverse) {
     _texture->SetTransform(_shiftMat);
 }
 
-
 HorizontalTile::~HorizontalTile() {
     delete _texture;
     delete _shiftMat;

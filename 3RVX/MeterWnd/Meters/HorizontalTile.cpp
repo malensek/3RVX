@@ -23,8 +23,9 @@ HorizontalTile::~HorizontalTile() {
     delete _shiftMat;
 }
 
-void HorizontalTile::Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics)
-{
+void HorizontalTile::Draw(
+        Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics) {
+
     int width = _rect.Width * CalcUnits();
 
     if (_reverse == false) {

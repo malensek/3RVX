@@ -9,9 +9,9 @@ class HorizontalTile : public Meter {
 public:
     HorizontalTile(std::wstring bitmapName,
         int x, int y, int units, bool reverse = false);
+    ~HorizontalTile();
 
     virtual void Draw(Gdiplus::Bitmap *buffer, Gdiplus::Graphics *graphics);
-    ~HorizontalTile();
 
 protected:
     Gdiplus::TextureBrush *_texture;

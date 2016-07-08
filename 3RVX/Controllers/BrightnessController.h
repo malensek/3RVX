@@ -19,6 +19,9 @@ public:
     void Brightness(float level);
 
 private:
+    HANDLE _monitorHandle;
+    DWORD _minBrightness;
+    DWORD _maxBrightness;
     bool _useBrightnessAPI;
 
     bool SupportsBrightnessAPI(PHYSICAL_MONITOR &pm);

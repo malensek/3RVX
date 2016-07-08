@@ -34,14 +34,14 @@ BrightnessController::BrightnessController(HMONITOR monitor) {
     }
     delete[] monitors;
 
-//    DWORD min = 0, cur = 0, max = 0;
-//    result = GetMonitorBrightness(pm[0].hPhysicalMonitor, &min, &cur, &max);
-//    CLOG(L"result: %d", result);
-//    if (result == 0) {
-//        Logger::LogLastError();
-//    }
-//    CLOG(L"Got brightness: %d, %d, %d", min, cur, max);
- 
+    DWORD min, cur, max;
+    result = GetMonitorBrightness(_monitorHandle, &min, &cur, &max);
+    if (result == 0) {
+        Logger::LogLastError();
+    }
+    _minBrightness = min;
+    _maxBrightness = max;
+    CLOG(L"Got brightness: %d, %d, %d %f", min, cur, max, Brightness());
 }
 
 BrightnessController::BrightnessController(Monitor &monitor) :

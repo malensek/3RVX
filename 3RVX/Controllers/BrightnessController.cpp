@@ -26,6 +26,11 @@ BrightnessController::BrightnessController(HMONITOR monitor) {
         bool supportsAPI = SupportsBrightnessAPI(monitors[i]);
         QCLOG(L"Supports *MonitorBrightness APIs: %s",
             supportsAPI ? L"YES" : L"NO");
+        if (supportsAPI) {
+            /* For now, we use the first compatible monitor found. */
+            _monitorHandle = monitors[i].hPhysicalMonitor;
+            break;
+        }
     }
     delete[] monitors;
 

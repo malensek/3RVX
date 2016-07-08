@@ -50,7 +50,9 @@ BrightnessController(monitor.Handle()) {
 }
 
 float BrightnessController::Brightness() {
-    return 0;
+    DWORD cur;
+    GetMonitorBrightness(_monitorHandle, NULL, &cur, NULL);
+    return (float) (cur - _minBrightness) / (_maxBrightness - _minBrightness);
 }
 
 void BrightnessController::Brightness(float level) {

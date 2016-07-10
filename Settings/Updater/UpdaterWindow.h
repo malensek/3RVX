@@ -44,7 +44,8 @@ private:
     std::wstring _menuRemindStr = L"Remind me later";
 
     static const int MENU_INSTALL = 0;
-    static const int MENU_IGNORE = 1;
-    static const int MENU_REMIND = 2;
+    static const int MENU_NOTES = 1;
+    static const int MENU_IGNORE = 2;
+    static const int MENU_REMIND = 3;
 
 };

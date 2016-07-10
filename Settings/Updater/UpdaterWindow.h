@@ -39,6 +39,7 @@ private:
     std::wstring _availableStr = L"Update Available";
     std::wstring _updateVersStr = L"3RVX {1}";
     std::wstring _menuInstallStr = L"Install";
+    std::wstring _menuNotesStr = L"Release Notes";
     std::wstring _menuIgnoreStr = L"Ignore version";
     std::wstring _menuRemindStr = L"Remind me later";
 

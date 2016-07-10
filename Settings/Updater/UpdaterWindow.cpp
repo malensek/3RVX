@@ -55,10 +55,12 @@ void UpdaterWindow::CreateMenu() {
 
     LanguageTranslator *translator = _settings->Translator();
     _menuInstallStr = translator->Translate(_menuInstallStr);
+    _menuNotesStr = translator->Translate(_menuNotesStr);
     _menuIgnoreStr = translator->Translate(_menuIgnoreStr);
     _menuRemindStr = translator->Translate(_menuRemindStr);
 
     InsertMenu(_menu, -1, MF_ENABLED, MENU_INSTALL, _menuInstallStr.c_str());
+    InsertMenu(_menu, -1, MF_ENABLED, MENU_NOTES, _menuNotesStr.c_str());
     InsertMenu(_menu, -1, MF_ENABLED, MENU_IGNORE, _menuIgnoreStr.c_str());
     InsertMenu(_menu, -1, MF_ENABLED, MENU_REMIND, _menuRemindStr.c_str());
 

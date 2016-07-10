@@ -47,5 +47,4 @@ private:
     static const int MENU_NOTES = 1;
     static const int MENU_IGNORE = 2;
     static const int MENU_REMIND = 3;
-
 };

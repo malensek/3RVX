@@ -128,7 +128,7 @@ LRESULT UpdaterWindow::WndProc(
             break;
 
         case MENU_NOTES: {
-            std::wstring url = L"https://3rvx.com/release-notes/"
+            std::wstring url = Updater::RELEASE_NOTES_URL
                 + _version.ToString() + L".html";
             HINSTANCE ret = ShellExecute(NULL, L"open", url.c_str(),
                 NULL, NULL, SW_SHOWNORMAL);

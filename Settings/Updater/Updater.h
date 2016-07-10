@@ -72,6 +72,10 @@ public:
     /// </summary>
     static const std::wstring DOWNLOAD_URL;
 
+    /// <summary>
+    /// Specifies the base URL of version release notes. The notes are located
+    /// at RELEASE_NOTES_URL/X.X.X.html.
+    /// </summary>
     static const std::wstring RELEASE_NOTES_URL;
 
 private:

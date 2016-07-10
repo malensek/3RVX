@@ -127,6 +127,14 @@ LRESULT UpdaterWindow::WndProc(
             InstallUpdate();
             break;
 
+        case MENU_NOTES: {
+            std::wstring url = L"https://3rvx.com/release-notes/"
+                + _version.ToString() + L".html";
+            HINSTANCE ret = ShellExecute(NULL, L"open", url.c_str(),
+                NULL, NULL, SW_SHOWNORMAL);
+            break;
+        }
+
         case MENU_IGNORE:
             _settings->IgnoreUpdate(_version.ToString());
             _settings->Save();

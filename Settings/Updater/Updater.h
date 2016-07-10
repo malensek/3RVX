@@ -58,15 +58,7 @@ public:
     /// </returns>
     static std::wstring DownloadVersion(
         Version version, StatusCallback *cb = nullptr);
-
-private:
-    /// <summary>
-    /// Retrieves the file name of the specified version of the program stored
-    /// on the remote server (example: 3RVX-3.4.msi).
-    /// </summary>
-    static std::wstring DownloadFileName(Version version);
-
-private:
+    
     /// <summary>
     /// Specifies the URL to check to determine the latest version online. The
     /// file at this address is a plain text file that contains a single line
@@ -79,4 +71,14 @@ private:
     /// program.
     /// </summary>
     static const std::wstring DOWNLOAD_URL;
+
+    static const std::wstring RELEASE_NOTES_URL;
+
+private:
+    /// <summary>
+    /// Retrieves the file name of the specified version of the program stored
+    /// on the remote server (example: 3RVX-3.4.msi).
+    /// </summary>
+    static std::wstring DownloadFileName(Version version);
+
 };

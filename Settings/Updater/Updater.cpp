@@ -26,6 +26,9 @@ const std::wstring Updater::DOWNLOAD_URL
 const std::wstring Updater::LATEST_URL
     = Updater::DOWNLOAD_URL + L"latest_version";
 
+const std::wstring Updater::RELEASE_NOTES_URL
+    = L"https://3rvx.com/release-notes/";
+
 bool Updater::NewerVersionAvailable() {
     Version remote = RemoteVersion();
     Version local = MainAppVersion();

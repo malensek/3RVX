@@ -11,6 +11,7 @@ Beta 11 (2.9.3)
 * New meter for OSDs: Slider knob (similar to volume slider)
 * Skin color transformations (change #FF00FF to a user-defined accent color)
 * New skin: Windows 8/10 OSD
+* Option to view release notes in updater menu
 * Bugfix: cleanly remove eject icon on shutdown
 * Bugfix: thread hang on settings reload
 * Bugfix: allow volume increments less than 1 [#55]

@@ -61,6 +61,10 @@ void BrightnessController::Brightness(float level) {
 
 bool BrightnessController::SupportsBrightnessAPI(PHYSICAL_MONITOR &pm) {
     DWORD caps, color;
-    GetMonitorCapabilities(pm.hPhysicalMonitor, &caps, &color);
+    BOOL result = GetMonitorCapabilities(pm.hPhysicalMonitor, &caps, &color);
+    if (result == FALSE) {
+        QCLOG(L"Monitor does not support DDC/CI");
+        return false;
+    }
     return ((caps & MC_CAPS_BRIGHTNESS) == MC_CAPS_BRIGHTNESS);
 }

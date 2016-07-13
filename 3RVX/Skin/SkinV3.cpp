@@ -310,12 +310,24 @@ Meter *SkinV3::LoadMeter(XMLElement *meterXMLElement) {
         return NULL;
     }
 
-    bool colorTransform = false;
-    meterXMLElement->QueryBoolAttribute("colorTransform", &colorTransform);
-    if (colorTransform == true) {
+    const char *colorTransform = meterXMLElement->Attribute("colorTransform");
+    if (colorTransform != NULL) {
+        unsigned long searchColor = strtoul(colorTransform, NULL, 16);
+        UINT32 accentColor = AccentColor::Instance()->Color();
+
+        int trans = 0;
+        meterXMLElement->QueryIntAttribute(
+            "colorTransformTransparency", &trans);
+        if (trans > 0) {
+            /* Remove default alpha level */
+            accentColor = accentColor & 0x00FFFFFF;
+            /* Apply requested alpha level */
+            accentColor = accentColor | (trans << 24);
+        }
+
         m->ApplyColorTransform(
-            Gdiplus::Color(0xFFFF00FF),
-            Gdiplus::Color(AccentColor::Instance()->Color() | 0xFF000000));
+            Gdiplus::Color(searchColor | 0xFF000000),
+            Gdiplus::Color(accentColor));
     }
 
     CLOG(L"Created meter [%s]:\n%s",

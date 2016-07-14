@@ -6,6 +6,8 @@ Beta 11 (2.9.3)
 * Brightness OSD
 * Keyboard OSD: Caps, Num, and Scroll lock; media keys
 * Toggles for OSDs and their respective tray icons
+* First-run setup prompt
+* Default hotkey settings
 * New French translation by xhark (https://twitter.com/xhark)
 * Mute OSD now supports volume meters (text, bars, etc; level will be 0)
 * New meter for OSDs: Slider knob (similar to volume slider)

@@ -29,11 +29,12 @@
     <eject background="OSD/eject.png">
       <icon file="Icons/Eject.ico"/>
     </eject>
-
+<!--
     <brightness background="OSD/background.png" defaultUnits="50">
       <meter type="HorizontalBar" image="OSD/meter.png"
              x="33" y="165" units="16"/>
     </brightness>
+-->
   </osds>
 
   <sliders>

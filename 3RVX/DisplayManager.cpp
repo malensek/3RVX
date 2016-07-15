@@ -117,7 +117,12 @@ bool DisplayManager::Direct3DOccluded(HWND hWnd) {
         &pDeviceEx);
 
     hr = pDeviceEx->CheckDeviceState(NULL);
-    return (hr == S_PRESENT_OCCLUDED);
+    bool occluded = (hr == S_PRESENT_OCCLUDED);
+
+    pDeviceEx->Release();
+    pDirect3DEx->Release();
+
+    return occluded;
 }
 
 MONITORINFO DisplayManager::Info(HMONITOR monitor) {

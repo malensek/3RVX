@@ -1,5 +1,8 @@
 #pragma once
 
+#include <Windows.h>
+#include <d3d9.h>
+
 class D3DDevice {
 public:
     D3DDevice(HWND hWnd);

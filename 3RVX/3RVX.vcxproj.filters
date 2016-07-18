@@ -219,6 +219,9 @@
     <ClInclude Include="Skin\AccentColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="D3DDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -378,6 +381,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Skin\AccentColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

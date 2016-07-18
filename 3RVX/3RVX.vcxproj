@@ -221,6 +221,7 @@
     <ClInclude Include="Controllers\Volume\VolumeLimiter.h" />
     <ClInclude Include="Controllers\Volume\VolumeTransformation.h" />
     <ClInclude Include="Controllers\Volume\VolumeController.h" />
+    <ClInclude Include="D3DDevice.h" />
     <ClInclude Include="DriveInfo.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
@@ -287,6 +288,7 @@
     <ClCompile Include="3RVXConsts.cpp" />
     <ClCompile Include="Controllers\BrightnessController.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
+    <ClCompile Include="D3DDevice.cpp" />
     <ClCompile Include="DriveInfo.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />

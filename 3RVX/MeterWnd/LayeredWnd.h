@@ -15,6 +15,7 @@ class LayeredWnd : public Window {
 public:
     LayeredWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL,
         Gdiplus::Bitmap *bitmap = NULL, DWORD exStyles = NULL);
+    ~LayeredWnd();
 
     virtual bool AlwaysOnTop();
     virtual void AlwaysOnTop(bool onTop);

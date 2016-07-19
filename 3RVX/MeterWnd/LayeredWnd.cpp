@@ -22,6 +22,10 @@ _visible(false) {
     Bitmap(bitmap);
 }
 
+LayeredWnd::~LayeredWnd() {
+    delete _d3dDevice;
+}
+
 void LayeredWnd::UpdateWindow(RECT *dirtyRect) {
     BLENDFUNCTION bFunc;
     bFunc.AlphaFormat = AC_SRC_ALPHA;

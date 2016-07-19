@@ -36,31 +36,6 @@ public:
     void HideAnimation(AnimationTypes::HideAnimation anim, int speed);
     void VisibleDuration(int duration);
 
-    /// <summary>
-    /// Reports whether this meter window displays when a full-screen
-    /// application is focused.
-    /// </summary>
-    bool DisableFullscreen();
-
-    /// <summary>
-    /// Sets whether this meter window should display when a full-screen
-    /// application is focused.
-    /// </summary>
-    void DisableFullscreen(bool disable);
-
-    /// <summary>
-    /// Reports whether this meter window displays when a DirectX application
-    /// is focused and is occluding the screen. Basically, when a game or
-    /// application has exclusive control of the display.
-    /// </summary>
-    bool DisableDirectX();
-
-    /// <summary>
-    /// Sets whether this meter window should display when a DirectX application
-    /// application is occluding the screen.
-    /// </summary>
-    void DisableDirectX(bool disable);
-
     void BackgroundImage(Gdiplus::Bitmap *background);
     bool EnableGlass(Gdiplus::Bitmap *mask);
 

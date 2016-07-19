@@ -9,6 +9,8 @@
 
 #include "../Window.h"
 
+class D3DDevice;
+
 class LayeredWnd : public Window {
 public:
     LayeredWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance = NULL,
@@ -35,6 +37,11 @@ public:
     /// <summary>Disables the blurred glass effect.</summary>
     virtual bool DisableGlass();
 
+    bool NoShowFullscreen();
+    void NoShowFullscreen(bool enable);
+    bool NoShowD3DOccluded();
+    void NoShowD3DOccluded(bool enable);
+
     virtual byte Transparency();
     virtual void Transparency(byte transparency);
 
@@ -60,6 +67,10 @@ protected:
 
     Gdiplus::Bitmap *_bitmap;
     Gdiplus::Bitmap *_glassMask;
+
+    bool _noShowFull;
+    bool _noShowD3D;
+    D3DDevice *_d3dDevice;
 
     /// <summary>
     /// Updates layered window properties. Called after the window bitmap

@@ -7,7 +7,9 @@
 #pragma comment(lib, "dwmapi.lib")
 #include <VersionHelpers.h>
 
-#include "..\Error.h"
+#include "../D3DDevice.h"
+#include "../DisplayManager.h"
+#include "../Error.h"
 
 LayeredWnd::LayeredWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance,
     Gdiplus::Bitmap *bitmap, DWORD exStyles) :
@@ -154,6 +156,31 @@ bool LayeredWnd::DisableGlass() {
     return SUCCEEDED(hr);
 }
 
+bool LayeredWnd::NoShowFullscreen() {
+    return _noShowFull;
+}
+
+void LayeredWnd::NoShowFullscreen(bool enable) {
+    _noShowFull = enable;
+}
+
+bool LayeredWnd::NoShowD3DOccluded() {
+    return _noShowD3D;
+}
+
+void LayeredWnd::NoShowD3DOccluded(bool enable) {
+    if (enable == true) {
+        if (_d3dDevice == nullptr) {
+            _d3dDevice = new D3DDevice(Window::Handle());
+        }
+    } else {
+        if (_d3dDevice != nullptr) {
+            delete _d3dDevice;
+        }
+    }
+    _noShowD3D = enable;
+}
+
 void LayeredWnd::UpdateWindowPosition() {
     MoveWindow(Window::Handle(),
         _location.x, _location.y, _size.cx, _size.cy, FALSE);
@@ -161,6 +188,14 @@ void LayeredWnd::UpdateWindowPosition() {
 
 void LayeredWnd::Show() {
     if (_visible == true) {
+        return;
+    }
+
+    if (_noShowFull == true && DisplayManager::IsFullscreen(Window::Handle())) {
+        return;
+    }
+
+    if (_noShowD3D == true && _d3dDevice->Occluded() == true) {
         return;
     }
 

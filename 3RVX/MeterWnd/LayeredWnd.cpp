@@ -10,6 +10,7 @@
 #include "../D3DDevice.h"
 #include "../DisplayManager.h"
 #include "../Error.h"
+#include "../Logger.h"
 
 LayeredWnd::LayeredWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance,
     Gdiplus::Bitmap *bitmap, DWORD exStyles) :
@@ -196,10 +197,12 @@ void LayeredWnd::Show() {
     }
 
     if (_noShowFull == true && DisplayManager::IsFullscreen(Window::Handle())) {
+        CLOG(L"Not showing; fullscreen detected");
         return;
     }
 
     if (_noShowD3D == true && _d3dDevice->Occluded() == true) {
+        CLOG(L"Not showing; D3D occlusion detected");
         return;
     }
 

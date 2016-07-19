@@ -40,6 +40,7 @@ public:
     /// application is focused.
     /// </summary>
     bool DisableFullscreen();
+
     /// <summary>
     /// Sets whether this meter window should display when a full-screen
     /// application is focused.
@@ -52,6 +53,7 @@ public:
     /// application has exclusive control of the display.
     /// </summary>
     bool DisableDirectX();
+
     /// <summary>
     /// Sets whether this meter window should display when a DirectX application
     /// application is occluding the screen.

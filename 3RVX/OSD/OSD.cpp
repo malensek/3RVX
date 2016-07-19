@@ -35,8 +35,8 @@ void OSD::InitMeterWnd(MeterWnd &mWnd) {
     mWnd.HideAnimation(_settings->HideAnim(), _settings->HideSpeed());
     mWnd.VisibleDuration(_settings->HideDelay());
 
-    mWnd.DisableFullscreen(_settings->HideFullscreen());
-    mWnd.DisableDirectX(_settings->HideDirectX());
+    mWnd.NoShowFullscreen(_settings->HideFullscreen());
+    mWnd.NoShowD3DOccluded(_settings->HideDirectX());
 
     mWnd.DeleteClones();
     std::vector<Monitor> monitors = ActiveMonitors();

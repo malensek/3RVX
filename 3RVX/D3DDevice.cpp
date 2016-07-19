@@ -33,6 +33,5 @@ D3DDevice::~D3DDevice() {
 
 bool D3DDevice::Occluded() {
     HRESULT hr = _pDeviceEx->CheckDeviceState(NULL);
-    CLOG(L"occluded: %s", (hr == S_PRESENT_OCCLUDED) ? L"Y" : L"N");
     return (hr == S_PRESENT_OCCLUDED);
 }

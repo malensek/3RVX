@@ -3,6 +3,8 @@
 #include <d3d9.h>
 #pragma comment(lib, "d3d9.lib")
 
+#include "Logger.h"
+
 D3DDevice::D3DDevice(HWND hWnd) {
     DWORD behaviorFlags = D3DCREATE_HARDWARE_VERTEXPROCESSING;
     D3DPRESENT_PARAMETERS d3dpp = { 0 };
@@ -31,5 +33,6 @@ D3DDevice::~D3DDevice() {
 
 bool D3DDevice::Occluded() {
     HRESULT hr = _pDeviceEx->CheckDeviceState(NULL);
+    CLOG(L"occluded: %s", (hr == S_PRESENT_OCCLUDED) ? L"Y" : L"N");
     return (hr == S_PRESENT_OCCLUDED);
 }

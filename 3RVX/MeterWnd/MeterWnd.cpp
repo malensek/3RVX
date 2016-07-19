@@ -75,25 +75,6 @@ void MeterWnd::VisibleDuration(int duration) {
     _visibleDuration = duration;
 }
 
-bool MeterWnd::DisableFullscreen() {
-    return _disableFullscreen;
-}
-
-void MeterWnd::DisableFullscreen(bool disable) {
-    _disableFullscreen = disable;
-}
-
-bool MeterWnd::DisableDirectX() {
-    return _disableDirectX;
-}
-
-void MeterWnd::DisableDirectX(bool disable) {
-    _disableDirectX = disable;
-    if (disable == true) {
-        _d3dDevice = new D3DDevice(Window::Handle());
-    }
-}
-
 void MeterWnd::BackgroundImage(Gdiplus::Bitmap *background) {
     _background = background;
 }

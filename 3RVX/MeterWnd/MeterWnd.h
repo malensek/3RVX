@@ -5,6 +5,7 @@
 
 #include <list>
 
+#include "../D3DDevice.h"
 #include "Animations\AnimationTypes.h"
 #include "LayeredWnd.h"
 #include "Meter.h"
@@ -82,6 +83,7 @@ protected:
 
     bool _disableFullscreen;
     bool _disableDirectX;
+    D3DDevice *_d3dDevice;
 
     void UpdateLocation();
     void UpdateTransparency();

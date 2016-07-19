@@ -89,6 +89,9 @@ bool MeterWnd::DisableDirectX() {
 
 void MeterWnd::DisableDirectX(bool disable) {
     _disableDirectX = disable;
+    if (disable == true) {
+        _d3dDevice = new D3DDevice(Window::Handle());
+    }
 }
 
 void MeterWnd::BackgroundImage(Gdiplus::Bitmap *background) {
@@ -108,11 +111,13 @@ void MeterWnd::Show(bool animate) {
         bool disabled = false;
         if (_disableFullscreen
                 && DisplayManager::IsFullscreen(Window::Handle())) {
+            CLOG(L"not showing (fs)");
             disabled = true;
         }
 
         if (_disableDirectX
-                && DisplayManager::Direct3DOccluded(Window::Handle())) {
+                && _d3dDevice->Occluded()) {
+            CLOG(L"not showing (occluded)");
             disabled = true;
         }
 

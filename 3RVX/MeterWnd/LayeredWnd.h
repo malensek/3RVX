@@ -38,9 +38,29 @@ public:
     /// <summary>Disables the blurred glass effect.</summary>
     virtual bool DisableGlass();
 
+    /// <summary>
+    /// Reports whether this window displays when a full-screen application is
+    /// focused.
+    /// </summary>
     bool NoShowFullscreen();
+
+    /// <summary>
+    /// Sets whether this window should display when a full-screen application
+    /// is focused.
+    /// </summary>
     void NoShowFullscreen(bool enable);
+
+    /// <summary>
+    /// Reports whether this window displays when a DirectX application is
+    /// focused and is occluding the screen. Basically, when a game or
+    /// application has exclusive control of the display.
+    /// </summary>
     bool NoShowD3DOccluded();
+
+    /// <summary>
+    /// Sets whether this window should display when a DirectX application
+    /// is occluding the screen.
+    /// </summary>
     void NoShowD3DOccluded(bool enable);
 
     virtual byte Transparency();

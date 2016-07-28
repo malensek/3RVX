@@ -18,6 +18,7 @@ Beta 11 (2.9.3)
 * Bugfix: thread hang on settings reload
 * Bugfix: allow volume increments less than 1 [#55]
 * Bugfix: invisible eject icon after settings reload
+* Bugfix: COM object memory leak [#60, #59]
 
 Beta 10 (2.9.2)
 ---------------

@@ -78,6 +78,7 @@ int Meter::CalcUnits() {
 }
 
 void Meter::ApplyColorTransform(UINT32 from, UINT32 to, UINT8 alphaOverride) {
+    _transformAlpha = false;
     if (alphaOverride > 0) {
         /* Remove existing alpha level */
         to = to & 0x00FFFFFF;

@@ -88,6 +88,11 @@ void Meter::ClearColorTransform() {
     _imageAttributes.ClearRemapTable();
 }
 
+void Meter::UpdateColorTransform(const Gdiplus::Color &to) {
+    _colorMap.newColor = to;
+    _imageAttributes.SetRemapTable(1, &_colorMap);
+}
+
 int Meter::X() const {
     return _rect.X;
 }

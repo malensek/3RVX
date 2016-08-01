@@ -235,6 +235,7 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         /* While this message contains the colorization color, we need to
          * refresh here to handle situations where the user has requested a
          * different color (undocumented colorization color, for example). */
+        CLOG(L"Received DWM colorization change notification: %x", wParam);
         AccentColor::Instance()->Refresh();
     }
 

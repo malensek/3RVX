@@ -30,6 +30,7 @@ public:
     void Transparency(byte transparency);
 
     void AddMeter(Meter *meter);
+    const std::list<Meter *> &Meters();
     void MeterLevels(float value);
     float MeterLevels();
 

@@ -60,6 +60,10 @@ void MeterWnd::AddMeter(Meter *meter) {
     _meters.push_back(meter);
 }
 
+const std::list<Meter*>& MeterWnd::Meters() {
+    return _meters;
+}
+
 void MeterWnd::MeterLevels(float value) {
     for (Meter *meter : _meters) {
         meter->Value(value);

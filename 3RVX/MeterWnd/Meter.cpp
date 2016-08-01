@@ -100,6 +100,15 @@ void Meter::ClearColorTransform() {
 
 void Meter::UpdateColorTransform(const Gdiplus::Color &to) {
     _colorMap.newColor = to;
+void Meter::UpdateColorTransform(UINT32 to) {
+    if (_transformAlpha) {
+        /* Get the alpha override value */
+        UINT8 alpha = (_colorMap.newColor.GetValue() & 0xFF000000) >> 24;
+        /* Apply the override */
+        to = (to & 0x00FFFFFF) | (alpha << 24);
+    }
+
+    _colorMap.newColor = Gdiplus::Color(to);
     _imageAttributes.SetRemapTable(1, &_colorMap);
 }
 

@@ -57,7 +57,9 @@ public:
     /// <summary>
     /// Updates an existing color transformation with a new replacement color.
     /// </summary>
-    void UpdateColorTransform(const Gdiplus::Color &to);
+    void UpdateColorTransform(UINT32 to);
+
+    /// <summary>
     /// Calculates the current number of units the meter should display.
     /// </summary>
     virtual int CalcUnits();

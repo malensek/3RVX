@@ -7,9 +7,10 @@
 #include <VersionHelpers.h>
 #include <sstream>
 
+#include "../DisplayManager.h"
+#include "../Skin/AccentColor.h"
 #include "Animation.h"
 #include "AnimationFactory.h"
-#include "../DisplayManager.h"
 
 MeterWnd::MeterWnd(LPCWSTR className, LPCWSTR title, HINSTANCE hInstance) :
 LayeredWnd(className, title, hInstance, NULL, WINDOW_STYLES) {
@@ -252,6 +253,15 @@ LRESULT MeterWnd::WndProc(
         case TIMER_OUT:
             AnimateOut();
             break;
+        }
+    } else if (message == WM_DWMCOLORIZATIONCOLORCHANGED) {
+        CLOG(L"updating meter color maps");
+        AccentColor::Instance()->Refresh();
+        UINT32 color = AccentColor::Instance()->Color();
+        for (Meter *m : _meters) {
+            if (m->HasColorTransform()) {
+                m->UpdateColorTransform(color);
+            }
         }
     }
 

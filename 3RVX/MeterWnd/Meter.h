@@ -95,6 +95,7 @@ protected:
     Gdiplus::ColorMap _colorMap;
     Gdiplus::ImageAttributes _imageAttributes;
     Gdiplus::Rect _rect;
+    bool _transformAlpha;
 
     /// <summary>
     /// Updates state variables after a draw operation. This helps distinguish

@@ -54,6 +54,10 @@ public:
     void ClearColorTransform();
 
     /// <summary>
+    /// Retrieves whether or not this Meter has a color transformation active.
+    /// </summary>
+    bool HasColorTransform();
+
     /// <summary>
     /// Updates an existing color transformation with a new replacement color.
     /// </summary>

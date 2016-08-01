@@ -77,10 +77,20 @@ int Meter::CalcUnits() {
     return (int) round(_value * _units - 0.00001f);
 }
 
-void Meter::ApplyColorTransform(
-        const Gdiplus::Color &from, const Gdiplus::Color &to) {
-    _colorMap.oldColor = from;
-    _colorMap.newColor = to;
+void Meter::ApplyColorTransform(UINT32 from, UINT32 to, UINT8 alphaOverride) {
+    if (alphaOverride > 0) {
+        /* Remove existing alpha level */
+        to = to & 0x00FFFFFF;
+        /* Apply requested alpha level */
+        to = to | (alphaOverride << 24);
+        _transformAlpha = true;
+    }
+
+    CLOG(L"Applying color transformation: %x -> %x", from, to);
+
+    _colorMap.oldColor = Gdiplus::Color(from);
+    _colorMap.newColor = Gdiplus::Color(to);
+
     _imageAttributes.SetRemapTable(1, &_colorMap);
 }
 

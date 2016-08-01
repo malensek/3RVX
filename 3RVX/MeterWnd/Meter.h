@@ -44,8 +44,11 @@ public:
     /// </summary>
     /// <param name="from">The color to replace</param>
     /// <param name="to">The replacement color</param>
-    void ApplyColorTransform(
-        const Gdiplus::Color &from, const Gdiplus::Color &to);
+    /// <param name="alphaOverride">
+    /// When set to a value greater than 0, the alpha channel in the replacement
+    /// color will be overridden with the provided value.
+    /// </param>
+    void ApplyColorTransform(UINT32 from, UINT32 to, UINT8 alphaOverride = 0);
 
     /// <summary>Removes color transformations from this Meter.</summary>
     void ClearColorTransform();

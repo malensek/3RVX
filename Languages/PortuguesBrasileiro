@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<translation author="LeanZo" version="1">
+
+  <language name="Português Brasileiro" id="pt-BR" regions="br"/>
+  <author name="LeanZo" website="https://twitter.com/Lean_Zo"/>
+
+  <!-- General Strings -->
+  <string>
+    <original>3RVX Settings</original>
+    <translation>3RVX - Configurações</translation>
+  </string>
+  <string>
+    <original>OK</original>
+    <translation>OK</translation>
+  </string>
+  <string>
+    <original>Cancel</original>
+    <translation>Cancelar</translation>
+  </string>
+  <string>
+    <original>Apply</original>
+    <translation>Aplicar</translation>
+  </string>
+
+  <!-- Notification Icon Menu Strings -->
+  <string>
+    <original>Settings</original>
+    <translation>Configurações</translation>
+  </string>
+  <string>
+    <original>Audio Device</original>
+    <translation>Dispositivo de Áudio</translation>
+  </string>
+  <string>
+    <original>Mixer</original>
+    <translation>Mixer</translation>
+  </string>
+  <string>
+    <original>Exit</original>
+    <translation>Sair</translation>
+  </string>
+  <string>
+    <original>Muted</original>
+    <translation>Mudo</translation>
+  </string>
+
+
+  <!-- Tab Names -->
+  <string>
+    <original>General</original>
+    <translation>Geral</translation>
+  </string>
+  <string>
+    <original>Display</original>
+    <translation>Exibição</translation>
+  </string>
+  <string>
+    <original>OSD</original>
+    <translation>OSD</translation>
+  </string>
+  <string>
+    <original>Hotkeys</original>
+    <translation>Atalhos</translation>
+  </string>
+  <string>
+    <original>About</original>
+    <translation>Sobre</translation>
+  </string>
+
+  <!-- General Tab -->
+  <string>
+    <original>Behavior</original>
+		<translation>Funcionamento</translation>
+  </string>
+  <string>
+    <original>Run on Windows startup</original>
+    <translation>Iniciar ao ligar o computador</translation>
+  </string>
+    <string>
+    <original>Show volume OSD on startup</original>
+    <translation>Mostrar volume ao ligar o computador</translation>
+  </string>
+  <string>
+    <original>Enable notification icon</original>
+    <translation>Habilitar icone de notificações</translation>
+  </string>
+  <string>
+    <original>Enable sound effects</original>
+    <translation>Habilitar efeitos sonoros</translation>
+  </string>
+    <string>
+    <original>Automatic updates</original>
+    <translation>Atualizações Automaticas</translation>
+  </string>
+  <string>
+    <original>Check Now</original>
+    <translation>Verificar</translation>
+  </string>
+
+  <string>
+    <original>Skin</original>
+		<translation>Tema</translation>
+  </string>
+  <string>
+    <original>Author: {1}</original>
+		<translation>Autor: {1}</translation>
+  </string>
+  <string>
+    <original>Website</original>
+		<translation>Website</translation>
+  </string>
+
+  <string>
+    <original>Language</original>
+		<translation>Idioma</translation>
+  </string>
+
+  
+  <!-- Display Tab -->
+  <string>
+    <original>Visibility</original>
+    <translation>Visibilidade</translation>
+  </string>
+  <string>
+    <original>Keep on top of other windows</original>
+    <translation>Manter sobre outras janelas</translation>
+  </string>
+  <string>
+    <original>Hide when other programs are fullscreen</original>
+    <translation>Esconder quando outros programas estiverem em tela cheia</translation>
+  </string>
+    <string>
+    <original>Hide when DirectX applications are fullscreen</original>
+    <translation>Esconder quando aplicações DirectX estiverem em tela cheia</translation>
+  </string>
+
+
+  <string>
+    <original>Position</original>
+    <translation>Posição</translation>
+  </string>
+  <string>
+    <original>Top</original>
+    <translation>Cima</translation>
+  </string>
+  <string>
+    <original>Left</original>
+    <translation>Esquerda</translation>
+  </string>
+  <string>
+    <original>Right</original>
+    <translation>Direita</translation>
+  </string>
+  <string>
+    <original>Bottom</original>
+    <translation>Baixo</translation>
+  </string>
+  <string>
+    <original>Center</original>
+    <translation>Centro</translation>
+  </string>
+  <string>
+    <original>Top-left</original>
+    <translation>Superior esquerdo</translation>
+  </string>
+  <string>
+    <original>Top-right</original>
+    <translation>Superior direito</translation>
+  </string>
+  <string>
+    <original>Bottom-left</original>
+    <translation>Inferior esquerdo</translation>
+  </string>
+  <string>
+    <original>Bottom-right</original>
+    <translation>Inferior direito</translation>
+  </string>
+  <string>
+    <original>Custom</original>
+    <translation>Customizado</translation>
+  </string>
+  <string>
+    <original>Custom distance from screen edge (px):</original>
+    <translation>Customizar distância da borda da tela (px):</translation>
+  </string>
+  <string>
+    <original>Display Device:</original>
+    <translation>Dispositivo de Exibição:</translation>
+  </string>
+  <string>
+    <original>Primary Monitor</original>
+    <translation>Monitor Primário</translation>
+  </string>
+  <string>
+    <original>All Monitors</original>
+    <translation>Todos Monitores</translation>
+  </string>
+
+  <string>
+    <original>Animation</original>
+    <translation>Animação</translation>
+  </string>
+  <string>
+    <original>None</original>
+    <translation>Nenhuma</translation>
+  </string>
+  <string>
+    <original>Fade</original>
+    <translation>Desaparecer</translation>
+  </string>
+  <string>
+    <original>Hide Delay (ms):</original>
+    <translation>Atraso de esconder (ms):</translation>
+  </string>
+  <string>
+    <original>Speed (ms):</original>
+    <translation>Velocidade (ms):</translation>
+  </string>
+
+  
+  <!-- OSD Tab -->
+  <string>
+    <original>Volume</original>
+    <translation>Volume</translation>
+  </string>
+  <string>
+    <original>Brightness</original>
+    <translation>Brilho</translation>
+  </string>
+  <string>
+    <original>Eject</original>
+    <translation>Ejetar</translation>
+  </string>
+  <string>
+    <original>Keyboard</original>
+    <translation>Teclado</translation>
+  </string>
+  <string>
+    <original>Subscribe to system volume events</original>
+    <translation>Ingressar nos eventos de volume do sistema</translation>
+  </string>
+  <string>
+    <original>Device:</original>
+    <translation>Dispositivo:</translation>
+  </string>
+  <string>
+    <original>Default</original>
+    <translation>Padrão</translation>
+  </string>
+  <string>
+    <original>Disabled</original>
+    <translation>Desabilitado</translation>
+  </string>
+  <string>
+    <original>Low</original>
+    <translation>Baixo</translation>
+  </string>
+  <string>
+    <original>Medium</original>
+    <translation>Médio</translation>
+  </string>
+  <string>
+    <original>High</original>
+    <translation>Alto</translation>
+  </string>
+  <string>
+    <original>Volume Limiter:</original>
+    <translation>Limitador de Volume:</translation>
+  </string>
+  <string>
+    <original>Force volume limit</original>
+    <translation>Forçar limitador de volume</translation>
+  </string>
+  <string>
+    <original>Mute volume during session lock</original>
+    <translation>Silenciar o volume enquanto estiver bloqueado</translation>
+  </string>
+    
+  <!-- Hotkeys Tab -->
+  <string>
+    <original>Action</original>
+    <translation>Ação</translation>
+  </string>
+  <string>
+    <original>Hotkey Editor</original>
+    <translation>Editor de atalho</translation>
+  </string>
+  <string>
+    <original>Keys:</original>
+    <translation>Teclas:</translation>
+  </string>
+  <string>
+    <original>Hotkey Input</original>
+    <translation>Definir Atalho</translation>
+  </string>
+  <string>
+    <original>Enter hotkeys now...</original>
+    <translation>Digite as teclas de atalho...</translation>
+  </string>
+  <string>
+    <original>Action:</original>
+    <translation>Ação:</translation>
+  </string>
+  <string>
+    <original>Amount:</original>
+    <translation>Quantidade:</translation>
+  </string>
+  <string>
+    <original>Volume Units</original>
+    <translation>Unidades de Volume</translation>
+  </string>
+  <string>
+    <original>Percent</original>
+    <translation>Porcento</translation>
+  </string>
+  <string>
+    <original>Drive:</original>
+    <translation>Disco:</translation>
+  </string>
+  <string>
+    <original>Key:</original>
+    <translation>Função:</translation>
+  </string>
+  <string>
+    <original>Play/Pause</original>
+    <translation>Play/Pausar</translation>
+  </string>
+  <string>
+    <original>Stop</original>
+    <translation>Parar</translation>
+  </string>
+  <string>
+    <original>Next</original>
+    <translation>Próximo</translation>
+  </string>
+  <string>
+    <original>Previous</original>
+    <translation>Anterior</translation>
+  </string>
+  <string>
+    <original>VK Code (Hex):</original>
+    <translation>Código VK (Hex):</translation>
+  </string>
+  <string>
+    <original>Path:</original>
+    <translation>Diretório:</translation>
+  </string>
+
+  <!-- Hotkey Actions -->
+  <string>
+    <original>Increase Volume</original>
+    <translation>Aumentar Volume</translation>
+  </string>
+  <string>
+    <original>Increase Volume {1}%</original>
+    <translation>Aumentar Volume {1}%</translation>
+  </string>
+  <string>
+    <original>Increase Volume {1} units</original>
+    <translation>Aumentar Volume {1}</translation>
+  </string>
+  <string>
+    <original>Decrease Volume</original>
+    <translation>Diminuir Volume</translation>
+  </string>
+  <string>
+    <original>Decrease Volume {1}%</original>
+    <translation>Diminuir Volume {1}%</translation>
+  </string>
+  <string>
+    <original>Decrease Volume {1} units</original>
+    <translation>Diminuir Volume {1}</translation>
+  </string>
+  <string>
+    <original>Set Volume</original>
+    <translation>Definir Volume</translation>
+  </string>
+  <string>
+    <original>Set Volume: {1}%</original>
+    <translation>Definir Volume: {1}%</translation>
+  </string>
+  <string>
+    <original>Set Volume: {1} units</original>
+    <translation>Definir Volume: {1}</translation>
+  </string>
+  <string>
+    <original>Mute</original>
+    <translation>Mudo</translation>
+  </string>
+  <string>
+    <original>Show Volume Slider</original>
+    <translation>Mostrar Barra de Volume</translation>
+  </string>
+  <string>
+    <original>Eject Drive</original>
+    <translation>Ejetar Disco</translation>
+  </string>
+  <string>
+    <original>Eject Drive: {1}</original>
+    <translation>Ejetar Disco: {1}</translation>
+  </string>
+  <string>
+    <original>Eject Last Disk</original>
+    <translation>Ejetar Último Disco</translation>
+  </string>
+  <string>
+    <original>Media Key</original>
+    <translation>Tecla de Mídia</translation>
+  </string>
+  <string>
+    <original>Media Key: {1}</original>
+    <translation>Tecla: {1}</translation>
+  </string>
+  <string>
+    <original>Virtual Key</original>
+    <translation>Tecla Virtual</translation>
+  </string>
+  <string>
+    <original>Virtual Key: 0x{1}</original>
+    <translation>Tecla Virtual: 0x{1}</translation>
+  </string>
+  <string>
+    <original>Run</original>
+    <translation>Iniciar</translation>
+  </string>
+  <string>
+    <original>Run: {1}</original>
+    <translation>Iniciar: {1}</translation>
+  </string>
+  <string>
+    <original>Enable/Disable OSD</original>
+    <translation>Ativar/Desativar OSD</translation>
+  </string>
+  <string>
+    <original>Open Settings Dialog</original>
+    <translation>Abrir Configurações</translation>
+  </string>
+  <string>
+    <original>Exit 3RVX</original>
+    <translation>Sair do 3RVX</translation>
+  </string>
+
+  <!-- Update Strings -->
+  <string>
+    <original>Update Available</original>
+    <translation>Atualização Disponível</translation>
+  </string>
+  <string>
+    <original>3RVX {1}</original>
+    <translation>3RVX {1}</translation>
+  </string>
+  <string>
+    <original>Install</original>
+    <translation>Instalar</translation>
+  </string>
+  <string>
+    <original>Ignore version</original>
+    <translation>Ignorar atualização</translation>
+  </string>
+  <string>
+    <original>Remind me later</original>
+    <translation>Lembre-me depois</translation>
+  </string>
+  <string>
+    <original>Downloading...</original>
+    <translation>Baixando...</translation>
+  </string>
+</translation>

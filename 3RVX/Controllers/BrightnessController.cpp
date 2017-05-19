@@ -56,7 +56,8 @@ float BrightnessController::Brightness() {
 }
 
 void BrightnessController::Brightness(float level) {
-
+    DWORD setLevel = (DWORD) ((_maxBrightness - _minBrightness) * level);
+    SetMonitorBrightness(_monitorHandle, setLevel);
 }
 
 bool BrightnessController::SupportsBrightnessAPI(PHYSICAL_MONITOR &pm) {

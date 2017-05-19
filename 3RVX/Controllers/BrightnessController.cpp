@@ -41,7 +41,7 @@ BrightnessController::BrightnessController(HMONITOR monitor) {
     }
     _minBrightness = min;
     _maxBrightness = max;
-    CLOG(L"Got brightness: %d, %d, %d %f", min, cur, max, Brightness());
+    CLOG(L"Got brightness: [%d, %d] %f", min, max, Brightness());
 }
 
 BrightnessController::BrightnessController(Monitor &monitor) :

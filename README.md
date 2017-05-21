@@ -9,7 +9,7 @@ Homepage: [3RVX.com](https://3RVX.com)
 
 Building
 --------
-You can build 3RVX with [Visual Studio 2015](https://www.visualstudio.com/) community edition or higher. There are no external dependencies; clone and compile.
+You can build 3RVX with [Visual Studio](https://www.visualstudio.com/) community edition or higher. There are no external dependencies; clone and compile.
 
 
 Contributing

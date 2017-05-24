@@ -3,8 +3,8 @@
 
 #include "BrightnessController.h"
 
-#include "../Monitor.h"
-#include "../Logger.h"
+#include "../../Monitor.h"
+#include "../../Logger.h"
 
 BrightnessController::BrightnessController(HMONITOR monitor) {
     BOOL result;
@@ -29,7 +29,7 @@ BrightnessController::BrightnessController(HMONITOR monitor) {
         if (supportsAPI) {
             /* For now, we use the first compatible monitor found. */
             _monitorHandle = monitors[i].hPhysicalMonitor;
-            break;
+            //break;
         }
     }
     delete[] monitors;
@@ -42,6 +42,8 @@ BrightnessController::BrightnessController(HMONITOR monitor) {
     _minBrightness = min;
     _maxBrightness = max;
     CLOG(L"Got brightness: [%d, %d] %f", min, max, Brightness());
+
+    Brightness(.75);
 }
 
 BrightnessController::BrightnessController(Monitor &monitor) :

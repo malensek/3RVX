@@ -3,7 +3,7 @@
 
 #include "BrightnessOSD.h"
 
-#include "../Controllers/BrightnessController.h"
+#include "../Controllers/Brightness/BrightnessController.h"
 #include "../DisplayManager.h"
 #include "../HotkeyInfo.h"
 #include "../Skin/OSDComponent.h"

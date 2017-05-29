@@ -1,6 +1,7 @@
 #include "WMIBrightnessController.h"
 
 #include <Windows.h>
+#include <comutil.h>
 #include <Wbemidl.h>
 
 #pragma comment(lib, "wbemuuid.lib")
@@ -21,11 +22,25 @@ WMIBrightnessController::WMIBrightnessController() {
 
     if (FAILED(hr)) {
         CLOG(L"Failed to create WMI locator");
-        Logger::LogLastError();
+        return;
+    }
+
+    IWbemServices *pSvc = 0;
+    hr = pLoc->ConnectServer(
+        _bstr_t(L"ROOT\\WMI"),
+        NULL,
+        NULL,
+        NULL,
+        0,
+        NULL,
+        NULL,
+        &pSvc);
+
+    if (FAILED(hr)) {
+        CLOG(L"Failed to connect to WMI namespace");
         if (pLoc) {
             pLoc->Release();
         }
         return;
     }
-
 }

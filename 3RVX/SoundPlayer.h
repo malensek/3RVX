@@ -58,5 +58,4 @@ private:
     std::mutex _mutex;
 
     void PlayerThread();
-    void SafeRelease(IUnknown *p);
 };

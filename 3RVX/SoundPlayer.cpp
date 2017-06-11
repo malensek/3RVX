@@ -6,6 +6,7 @@
 #pragma comment(lib, "Strmiids.lib") 
 
 #include "Logger.h" // <-- Has to be included here because DirectShow says so...
+#include "COMUtil.h"
 
 #include <Windows.h>
 #include <dshow.h>
@@ -58,10 +59,10 @@ SoundPlayer::~SoundPlayer() {
     _cv.notify_all();
     _thread.join();
 
-    SafeRelease(_mediaSeek);
-    SafeRelease(_mediaEv);
-    SafeRelease(_mediaCtrl);
-    SafeRelease(_graphBuilder);
+    COMUtil::SafeRelease(_mediaSeek);
+    COMUtil::SafeRelease(_mediaEv);
+    COMUtil::SafeRelease(_mediaCtrl);
+    COMUtil::SafeRelease(_graphBuilder);
 }
 
 void SoundPlayer::Play() {
@@ -99,11 +100,4 @@ void SoundPlayer::PlayerThread() {
 
 bool SoundPlayer::Ready() {
     return _ready;
-}
-
-void SoundPlayer::SafeRelease(IUnknown *p) {
-    if (p) {
-        p->Release();
-        p = NULL;
-    }
 }

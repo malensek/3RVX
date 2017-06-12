@@ -6,6 +6,7 @@
 
 #pragma comment(lib, "wbemuuid.lib")
 
+#include "../../COMUtil.h"
 #include "../../Logger.h"
 
 WMIBrightnessController::WMIBrightnessController() {

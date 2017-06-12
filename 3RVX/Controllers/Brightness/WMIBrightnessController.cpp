@@ -67,7 +67,7 @@ WMIBrightnessController::WMIBrightnessController() {
     IEnumWbemClassObject* pEnumerator = NULL;
     hr = pSvc->ExecQuery(
         bstr_t("WQL"),
-        bstr_t("SELECT * FROM WmiMonitorID"),
+        bstr_t("SELECT * FROM WmiMonitorBrightness"),
         WBEM_FLAG_RETURN_IMMEDIATELY,
         NULL,
         &pEnumerator);

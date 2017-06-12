@@ -1,28 +1,10 @@
-// Copyright (c) 2015, Matthew Malensek.
+// Copyright (c) 2017, Matthew Malensek.
 // Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
 
 #pragma once
 
-#pragma comment(lib, "Dxva2.lib") 
-
-#include <Windows.h>
-#include <HighLevelMonitorConfigurationAPI.h>
-
-class Monitor;
-
 class BrightnessController {
 public:
-    BrightnessController(HMONITOR monitor);
-    BrightnessController(Monitor &monitor);
-
-    float Brightness();
-    void Brightness(float level);
-
-private:
-    HANDLE _monitorHandle;
-    DWORD _minBrightness;
-    DWORD _maxBrightness;
-    bool _useBrightnessAPI;
-
-    bool SupportsBrightnessAPI(PHYSICAL_MONITOR &pm);
+    virtual float Brightness() = 0;
+    virtual void Brightness(float level) = 0;
 };

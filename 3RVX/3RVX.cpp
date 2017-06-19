@@ -2,6 +2,7 @@
 // Distributed under the BSD 2-Clause License (see LICENSE.txt for details)
 
 #include "3RVX.h"
+#include "HideWin10VolumeOSD.h"
 
 #pragma comment(lib, "gdiplus.lib")
 #pragma comment(lib, "Wtsapi32.lib")
@@ -246,6 +247,7 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 
     case WM_CLOSE: {
         CLOG(L"Shutting down");
+        HideWin10VolumeOSD::ShowOSD();
         HotkeyManager::Instance()->Shutdown();
         _vOSD->HideIcon();
         _eOSD->HideIcon();
@@ -288,6 +290,7 @@ LRESULT _3RVX::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
         switch (wParam) {
         case _3RVX::MSG_LOAD:
             Initialize();
+            HideWin10VolumeOSD::Init();
             break;
 
         case _3RVX::MSG_SETTINGS:

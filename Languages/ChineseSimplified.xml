@@ -54,6 +54,10 @@
     <original>Display</original>
     <translation>显示</translation>
   </string>
+    <string>
+    <original>OSD</original>
+    <translation>OSD</translation>
+  </string>
   <string>
     <original>Hotkeys</original>
     <translation>快捷键</translation>
@@ -213,6 +217,28 @@
     <translation>速度 (ms):</translation>
   </string>
 
+
+  <!-- OSD Tab -->
+  <string>
+      <original>Volume</original>
+      <translation>音量</translation>
+  </string>
+  <string>
+      <original>Brightness</original>
+      <translation>亮度</translation>
+  </string>
+  <string>
+      <original>Eject</original>
+      <translation>弹出</translation>
+  </string>
+  <string>
+      <original>Keyboard</original>
+      <translation>键盘</translation>
+  </string>
+  <string>
+    <original>Enable notification icon</original>
+    <translation>显示通知图标</translation>
+  </string>
   
   <!-- Hotkeys Tab -->
   <string>

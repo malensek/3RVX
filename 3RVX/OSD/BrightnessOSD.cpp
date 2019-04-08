@@ -4,6 +4,7 @@
 #include "BrightnessOSD.h"
 
 #include "../Controllers/Brightness/BrightnessController.h"
+#include "../Controllers/Brightness/DDCBrightnessController.h"
 #include "../DisplayManager.h"
 #include "../HotkeyInfo.h"
 #include "../Skin/OSDComponent.h"
@@ -21,7 +22,7 @@ _mWnd(L"3RVX-BrightnessOSD", L"3RVX-BrightnessOSD") {
 
     OSD::InitMeterWnd(_mWnd);
 
-    _brightnessCtrl = new BrightnessController(
+    _brightnessCtrl = new DDCBrightnessController(
         DisplayManager::Primary().Handle());
 }
 
@@ -39,13 +40,17 @@ void BrightnessOSD::HideIcon() {
 
 void BrightnessOSD::ProcessHotkeys(HotkeyInfo &hki) {
     switch (hki.action) {
-    case HotkeyInfo::IncreaseBrightness:
+	case HotkeyInfo::IncreaseBrightness: {
+		float newval = _brightnessCtrl->Brightness() + _stepsize;
+		if (newval > 1.0) break;
+		_brightnessCtrl->Brightness(newval);
+		}break;
 
-        break;
-
-    case HotkeyInfo::DecreaseBrightness:
-
-        break;
+    case HotkeyInfo::DecreaseBrightness: {
+		float newval = _brightnessCtrl->Brightness() - _stepsize;
+		if (newval < 0.0) break;
+		_brightnessCtrl->Brightness(newval);
+        }break;
 
     case HotkeyInfo::SetBrightness:
 

@@ -166,3 +166,4 @@ Installer/*.wixpdb
 
 # Generated Documentation
 /Documentation/API
+/.vs/

@@ -7,16 +7,17 @@
 
 #include <Windows.h>
 #include <HighLevelMonitorConfigurationAPI.h>
+#include "BrightnessController.h"
 
 class Monitor;
 
-class DDCBrightnessController {
+class DDCBrightnessController : public BrightnessController{
 public:
     DDCBrightnessController(HMONITOR monitor);
     DDCBrightnessController(Monitor &monitor);
 
-    float Brightness();
-    void Brightness(float level);
+    float Brightness() override;
+    void Brightness(float level) override;
 
 private:
     HANDLE _monitorHandle;

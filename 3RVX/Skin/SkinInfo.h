@@ -5,6 +5,7 @@
 
 #include <Windows.h>
 #include <list>
+#include <string>
 #include "../TinyXml2/tinyxml2.h"
 
 class SkinInfo {

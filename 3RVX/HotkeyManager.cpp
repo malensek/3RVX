@@ -415,7 +415,11 @@ std::wstring HotkeyManager::VKToString(unsigned int vk, bool extendedKey) {
      * 16-23: scan code
      *    24: extended key flag
      *    25: 'do not care' bit (don't distinguish between L/R keys) */
-    unsigned int scanCode = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
+    unsigned int scanCode;
+    if (vk == VK_PAUSE)
+        scanCode = 0x45; /* MapVirtualKey is unable to map VK_PAUSE (this is a known bug), hence we map that by hand. */
+    else
+        scanCode = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
     scanCode = scanCode << 16;
 
     if (vk == VK_RSHIFT) {

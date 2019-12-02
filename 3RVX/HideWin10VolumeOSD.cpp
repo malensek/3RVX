@@ -1,27 +1,15 @@
-﻿#include "HideWin10VolumeOSD.h"
+#include "HideWin10VolumeOSD.h"
 
 static HWND hWndInject = 0;
 
 bool HideWin10VolumeOSD::Init()
 {
-  hWndInject = FindOSDWindow(true);
-
-  int count = 0;
-
-  while (hWndInject == 0 && count < 5)
+  if (hWndInject != 0)
   {
-    keybd_event(VK_VOLUME_UP, 0, 0, 0);
-    keybd_event(VK_VOLUME_DOWN, 0, 0, 0);
-
-    hWndInject = FindOSDWindow(true);
-
-    Sleep(1000);
-    count++;
+      return true;
   }
 
-  // final try
-
-  hWndInject = FindOSDWindow(false);
+  hWndInject = FindOSDWindow(true);
 
   if (hWndInject == 0)
   {

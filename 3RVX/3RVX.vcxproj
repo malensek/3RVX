@@ -227,6 +227,7 @@
     <ClInclude Include="DriveInfo.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="HideWin10VolumeOSD.h" />
     <ClInclude Include="MeterWnd\Meters\HorizontalSliderKnob.h" />
     <ClInclude Include="MeterWnd\Meters\SliderKnob.h" />
     <ClInclude Include="MeterWnd\Meters\VerticalSliderKnob.h" />

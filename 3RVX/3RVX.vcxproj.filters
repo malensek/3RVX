@@ -228,6 +228,9 @@
     <ClInclude Include="Controllers\Brightness\WMIBrightnessController.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="HideWin10VolumeOSD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">

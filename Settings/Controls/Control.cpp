@@ -207,22 +207,22 @@ BOOL Control::Scroll(bool horizontal, WORD request, WORD position) {
     return FALSE;
 }
 
-long Control::WindowAttributes(int index) {
+LONG_PTR Control::WindowAttributes(int index) {
     return GetWindowLongPtr(_hWnd, index);
 }
 
-void Control::WindowAttributes(int index, long value) {
+void Control::WindowAttributes(int index, LONG_PTR value) {
     SetWindowLongPtr(_hWnd, index, value);
 }
 
 void Control::AddWindowAttribute(int index, long attribute) {
-    long attr = WindowAttributes(index);
+	LONG_PTR attr = WindowAttributes(index);
     attr |= attribute;
     WindowAttributes(index, attr);
 }
 
 void Control::RemoveWindowAttribute(int index, long attribute) {
-    long attr = WindowAttributes(index);
+	LONG_PTR attr = WindowAttributes(index);
     attr &= ~attribute;
     WindowAttributes(index, attr);
 }

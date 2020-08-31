@@ -25,4 +25,6 @@ private:
 
     virtual LRESULT WndProc(HWND hWnd, UINT message,
         WPARAM wParam, LPARAM lParam);
+
+	float _stepsize = 0.1f;
 };

@@ -29,44 +29,44 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC4D05DB-E255-4F26-B71C-455CC100ED54}</ProjectGuid>
     <RootNamespace>My3RVX</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (64)|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (64)|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -107,7 +107,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comsuppw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || mklink /j "$(TargetDir)\Languages" "$(ProjectDir)\..\Languages" || exit /B 0</Command>
@@ -127,7 +127,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comsuppw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || mklink /j "$(TargetDir)\Languages" "$(ProjectDir)\..\Languages" || exit /B 0</Command>
@@ -148,7 +148,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comsuppw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || mklink /j "$(TargetDir)\Languages" "$(ProjectDir)\..\Languages" || exit /B 0</Command>
@@ -168,7 +168,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comsuppw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || mklink /j "$(TargetDir)\Languages" "$(ProjectDir)\..\Languages" || exit /B 0</Command>
@@ -187,7 +187,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comsuppw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || mklink /j "$(TargetDir)\Languages" "$(ProjectDir)\..\Languages" || exit /B 0</Command>
@@ -206,7 +206,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comsuppw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mklink /j "$(TargetDir)\Skins" "$(ProjectDir)\..\Skins" || mklink /j "$(TargetDir)\Languages" "$(ProjectDir)\..\Languages" || exit /B 0</Command>
@@ -216,6 +216,8 @@
     <ClInclude Include="3RVX.h" />
     <ClInclude Include="CommCtl.h" />
     <ClInclude Include="Controllers\BrightnessController.h" />
+    <ClInclude Include="Controllers\Brightness\DDCBrightnessController.h" />
+    <ClInclude Include="Controllers\Brightness\WMIBrightnessController.h" />
     <ClInclude Include="Controllers\Volume\CoreAudio.h" />
     <ClInclude Include="Controllers\Volume\CurveTransformer.h" />
     <ClInclude Include="Controllers\Volume\VolumeLimiter.h" />
@@ -225,6 +227,7 @@
     <ClInclude Include="DriveInfo.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="HideWin10VolumeOSD.h" />
     <ClInclude Include="MeterWnd\Meters\HorizontalSliderKnob.h" />
     <ClInclude Include="MeterWnd\Meters\SliderKnob.h" />
     <ClInclude Include="MeterWnd\Meters\VerticalSliderKnob.h" />
@@ -286,12 +289,14 @@
   <ItemGroup>
     <ClCompile Include="3RVX.cpp" />
     <ClCompile Include="3RVXConsts.cpp" />
-    <ClCompile Include="Controllers\BrightnessController.cpp" />
+    <ClCompile Include="Controllers\Brightness\DDCBrightnessController.cpp" />
+    <ClCompile Include="Controllers\Brightness\WMIBrightnessController.cpp" />
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp" />
     <ClCompile Include="D3DDevice.cpp" />
     <ClCompile Include="DriveInfo.cpp" />
     <ClCompile Include="DisplayManager.cpp" />
     <ClCompile Include="Error.cpp" />
+    <ClCompile Include="HideWin10VolumeOSD.cpp" />
     <ClCompile Include="MeterWnd\Meters\HorizontalSliderKnob.cpp" />
     <ClCompile Include="MeterWnd\Meters\SliderKnob.cpp" />
     <ClCompile Include="MeterWnd\Meters\VerticalSliderKnob.cpp" />

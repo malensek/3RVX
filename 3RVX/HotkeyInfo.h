@@ -5,6 +5,7 @@
 
 #include <map>
 #include <vector>
+#include <string>
 
 /* HOW TO ADD NEW HOTKEY ACTIONS
  * -----------------------------

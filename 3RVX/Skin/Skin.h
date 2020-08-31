@@ -10,6 +10,7 @@
 
 #include <list>
 #include <vector>
+#include <string>
 
 struct OSDComponent;
 struct SkinComponent;

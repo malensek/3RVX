@@ -78,7 +78,7 @@ public:
     /// The index of the attribute to retrieve. Common indexes include
     /// GWL_STYLE, GWL_EXSTYLE, etc.
     /// </param>
-    long WindowAttributes(int index);
+	LONG_PTR WindowAttributes(int index);
 
     /// <summary>
     /// Sets the window attributes of this control. See the SetWindowLongPtr
@@ -89,7 +89,7 @@ public:
     /// GWL_STYLE, GWL_EXSTYLE, etc.
     /// </param>
     /// <param name="value">New value of the attribute</param>
-    void WindowAttributes(int index, long value);
+    void WindowAttributes(int index, LONG_PTR value);
 
     /// <summary>
     /// Adds a window attribute to this control; same as retrieving the window

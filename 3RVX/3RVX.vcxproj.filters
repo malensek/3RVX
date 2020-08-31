@@ -222,6 +222,15 @@
     <ClInclude Include="D3DDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Controllers\Brightness\DDCBrightnessController.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\Brightness\WMIBrightnessController.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HideWin10VolumeOSD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controllers\Volume\CoreAudio.cpp">
@@ -362,9 +371,6 @@
     <ClCompile Include="OSD\BrightnessOSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\BrightnessController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Skin\ErrorSkin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -384,6 +390,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D3DDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\Brightness\DDCBrightnessController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\Brightness\WMIBrightnessController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HideWin10VolumeOSD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

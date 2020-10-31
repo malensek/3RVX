@@ -81,7 +81,7 @@
     <translation>XXXX XXXXXX XXX XX XXXXXXX</translation>
   </string>
   <string>
-    <original>Enable volume notification icon</original>
+    <original>Enable notification icon</original>
     <translation>XXXXXX XXXXXX XXXXXXXXXXXX XXXX</translation>
   </string>
   <string>
@@ -234,10 +234,50 @@
   <string>
       <original>Keyboard</original>
       <translation>XXXXXXXX</translation>
+  </string> 
+  <string>
+    <original>Subscribe to system volume events</original>
+    <translation>XXXXXXXXXX</translation>
   </string>
   <string>
-    <original>Enable notification icon</original>
-    <translation>XXXXXX XXXXXXXXXXXX XXXX</translation>
+    <original>Device:</original>
+    <translation>XXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Default</original>
+    <translation>XXXXX</translation>
+  </string>
+  <string>
+    <original>Audio Taper:</original>
+    <translation>XXXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Volume Limiter:</original>
+    <translation>XXXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Force volume limit</original>
+    <translation>XXXXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Mute volume during session lock</original>
+    <translation>XXXXXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Disabled</original>
+    <translation>XXXXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Low</original>
+    <translation>XXXXXX</translation>
+  </string>
+  <string>
+    <original>Medium</original>
+    <translation>XXXX</translation>
+  </string>
+  <string>
+    <original>High</original>
+    <translation>XXXXX</translation>
   </string>
 
   <!-- Hotkeys Tab -->
@@ -366,6 +406,22 @@
   <string>
     <original>Eject Last Disk</original>
     <translation>XXXXX XXXX XXXX</translation>
+  </string>
+  <string>
+    <original>Increase Brightness</original>
+    <translation>XXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Decrease Brightness</original>
+    <translation>XXXXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Set Brightness</original>
+    <translation>XXXXXXXXXXXX</translation>
+  </string>
+  <string>
+    <original>Brightness Slider</original>
+    <translation>XXXXXXXXXX</translation>
   </string>
   <string>
     <original>Media Key</original>

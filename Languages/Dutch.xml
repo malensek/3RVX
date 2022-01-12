@@ -37,8 +37,8 @@
    <translation>Algemeen</translation>
  </word>
  <word>
-   <key>Weergave</key>
-   <translation>Display</translation>
+   <key>Display</key>
+   <translation>Weergave</translation>
  </word>
  <word>
    <key>Hotkey Setup</key>
@@ -78,7 +78,7 @@
  </word>
  <word>
    <key>Control Wave instead of Master Volume</key>
-   <translation>Control Wave ipv Mastervolume regelen</translation>
+   <translation>Control Wave i.p.v. Mastervolume regelen</translation>
  </word>
  <word>
    <key>Use custom mixer program on tray click</key>
@@ -122,11 +122,11 @@
  </word>
  <word>
      <key>Fade Delay:</key>
-     <translation>Fade-vertraging:</translation>
+     <translation>Vervaag-vertraging:</translation>
  </word>
  <word>
      <key>Fade Speed:</key>
-     <translation>Fade-snelheid:</translation>
+     <translation>Vervaag-snelheid:</translation>
  </word>
  <word>
    <key>Position</key>
@@ -191,12 +191,12 @@
  </word>
  <word>
    <key>Settings Window</key>
-   <translation>Instellingsvenster</translation>
+   <translation>Instellingenvenster</translation>
  </word>
 
  <word>
    <key>Drive:</key>
-   <translation>Drive:</translation>
+   <translation>Schijf:</translation>
  </word>
  <word>
    <key>Hotkey Chooser</key>
@@ -204,7 +204,7 @@
  </word>
  <word>
    <key>Key Combination:</key>
-   <translation>Toetscombinatie:</translation>
+   <translation>Toetsencombinatie:</translation>
  </word>
  <word>
    <key>Press a key!</key>
@@ -215,7 +215,7 @@
 <!-- Skin tab -->
  <word>
    <key>Available Skins</key>
-   <translation>Beschikbare Skins</translation>
+   <translation>Beschikbare skins</translation>
  </word>
  <word>
    <key>Open Skin Folder</key>
@@ -240,7 +240,7 @@
  </word>
  <word>
    <key>Author's Webpage</key>
-   <translation>Website van de Auteur:</translation>
+   <translation>Website van de auteur:</translation>
  </word>
 
 
@@ -251,7 +251,7 @@
  </word>
  <word>
    <key>lang_author</key>
-   <translation>Vertaald door: Tim Tyteca - 2014</translation>
+   <translation>Vertaald door: Tim Tyteca - 2014 en Hielke Morsink - 2022</translation>
  </word>
  <word>
    <key>lang_module</key>
@@ -282,7 +282,7 @@
  </word>
  <word>
    <key>Settings will be applied next time 3RVX starts.</key>
-   <translation>Instellingen worden toegepast bij de volgende start van 3RVX.</translation>
+   <translation>De instellingen worden toegepast bij de volgende keer dat 3RVX wordt gestart.</translation>
  </word>
 
 </ArrayOfWord>

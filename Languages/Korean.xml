@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <translation version="1">
 
   <language name="한국어" id="ko" regions="kr"/>
-  <author name="VenusGirl (비너스걸)" email="https://venusgirls.tistory.com"/>
+  <author name="VenusGirl" email="https://venusgirls.tistory.com"/>
 
   <!-- General Strings -->
   <string>
@@ -25,7 +25,7 @@
   <!-- Notification Icon Menu Strings -->
   <string>
     <original>Settings</original>
-        <translation>설정</translation>
+    <translation>설정</translation>
   </string>
   <string>
     <original>Audio Device</original>
@@ -81,7 +81,7 @@
     <translation>시작 시 볼륨 OSD 표시</translation>
   </string>
   <string>
-    <original>Enable volume notification icon</original>
+    <original>Enable notification icon</original>
     <translation>볼륨 알림 아이콘 사용</translation>
   </string>
   <string>
@@ -103,7 +103,7 @@
   </string>
   <string>
     <original>Author: {1}</original>
-    <translation>제작자: {1}</translation>
+    <translation>제작자: {1}, 한국어 번역: 비너스걸</translation> 
   </string>
   <string>
     <original>Website</original>
@@ -181,7 +181,7 @@
   </string>
   <string>
     <original>Custom distance from screen edge (px):</original>
-    <translation>화면 가장자리로부터의 사용자 지정 거리 (px):</translation>
+    <translation>화면 가장자리로부터 사용자 지정 거리(픽셀):</translation>
   </string>
   <string>
     <original>Display Device:</original>
@@ -210,11 +210,11 @@
   </string>
   <string>
     <original>Hide Delay (ms):</original>
-    <translation>숨기기 지연 (ms):</translation>
+    <translation>숨기기 지연 (밀리초):</translation>
   </string>
   <string>
     <original>Speed (ms):</original>
-    <translation>속도 (ms):</translation>
+    <translation>속도 (밀리초):</translation>
   </string>
 
 
@@ -234,20 +234,51 @@
   <string>
       <original>Keyboard</original>
       <translation>키보드</translation>
+  </string> 
+  <string>
+    <original>Subscribe to system volume events</original>
+    <translation>시스템 볼륨 이벤트 동의</translation>
   </string>
   <string>
-    <original>Enable notification icon</original>
-    <translation>알림 아이콘 사용</translation>
-  </string>
-    <string>
-      <original>Subscrbe to volume events</original>
-    <translation>볼륨 이벤트 동의</translation>
-    </string>
-        <string>
-      <original>Device</original>
+    <original>Device:</original>
     <translation>장치</translation>
-    </string>
-
+  </string>
+  <string>
+    <original>Default</original>
+    <translation> 기본값</translation>
+  </string>
+  <string>
+    <original>Audio Taper:</original>
+    <translation>오디오 점점 줄이기:</translation>
+  </string>
+  <string>
+    <original>Volume Limiter:</original>
+    <translation>볼륨 제한:</translation>
+  </string>
+  <string>
+    <original>Force volume limit</original>
+    <translation>강제 볼륨 제한</translation>
+  </string>
+  <string>
+    <original>Mute volume during session lock</original>
+    <translation>세션 잠금 중 음소거 볼륨</translation>
+  </string>
+  <string>
+    <original>Disabled</original>
+    <translation>사용 안 함</translation>
+  </string>
+  <string>
+    <original>Low</original>
+    <translation>낮음</translation>
+  </string>
+  <string>
+    <original>Medium</original>
+    <translation>중간</translation>
+  </string>
+  <string>
+    <original>High</original>
+    <translation>높음</translation>
+  </string>
 
   <!-- Hotkeys Tab -->
   <string>
@@ -326,11 +357,11 @@
   </string>
   <string>
     <original>Increase Volume {1}%</original>
-    <translation>볼륨 증가 {1}%</translation>
+    <translation>볼륨 {1}% 증가</translation>
   </string>
   <string>
     <original>Increase Volume {1} units</original>
-    <translation>볼륨 증가 {1} 단위</translation>
+    <translation>볼륨 {1} 증가</translation>
   </string>
   <string>
     <original>Decrease Volume</original>
@@ -338,11 +369,11 @@
   </string>
   <string>
     <original>Decrease Volume {1}%</original>
-    <translation>볼륨 감소 {1}%</translation>
+    <translation>볼륨 {1}% 감소 </translation>
   </string>
   <string>
     <original>Decrease Volume {1} units</original>
-    <translation>볼륨 감소 {1} 단위</translation>
+    <translation>볼륨 {1} 감소</translation>
   </string>
   <string>
     <original>Set Volume</original>
@@ -375,6 +406,22 @@
   <string>
     <original>Eject Last Disk</original>
     <translation>마지막 드라이브 꺼내기</translation>
+  </string>
+  <string>
+    <original>Increase Brightness</original>
+    <translation>밝기 증가</translation>
+  </string>
+  <string>
+    <original>Decrease Brightness</original>
+    <translation>밝기 감소</translation>
+  </string>
+  <string>
+    <original>Set Brightness</original>
+    <translation>밝기 설정</translation>
+  </string>
+  <string>
+    <original>Brightness Slider</original>
+    <translation>밝기 슬라이더</translation>
   </string>
   <string>
     <original>Media Key</original>
@@ -437,6 +484,10 @@
   <string>
     <original>Downloading...</original>
     <translation>다운로드 중...</translation>
+  </string>
+  <string>
+    <original>Subscribe to system eject events</original>
+    <translation>시스템 꺼내기 이벤트 동의</translation>
   </string>
 
 <!-- Error Messages -->

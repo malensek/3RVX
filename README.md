@@ -6,6 +6,9 @@
 
 Homepage: [3RVX.com](https://3RVX.com)
 
+<span style="color: red; font-weight: bold;">Unmaintained:</span> I unfortunately do not have a Windows machine handy,
+so I'm unable to maintain this going forward. If anyone would like to take over maintainership, please let me know!
+
 
 Building
 --------
